@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="es">
+<!--<![endif]-->
+<head>
+	<meta charset="utf-8" />
+	<title>{% block titulo %}Información{% endblock %}</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+	<meta content="" name="description" />
+	<meta content="" name="author" />
+	
+	<!-- ================== BEGIN BASE CSS STYLE ================== -->
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+	<link href="static/plugins/jquery-ui-1.10.4/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
+	<link href="static/plugins/bootstrap-3.1.1/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="static/plugins/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" />
+	<link href="static/css/animate.min.css" rel="stylesheet" />
+	<link href="static/css/style.min.css" rel="stylesheet" />
+	<link href="static/css/style-responsive.min.css" rel="stylesheet" />
+	<!-- ================== END BASE CSS STYLE ================== -->
+
+	<!-- Bloque de estilos para las plantillas que heredan -->
+	{% block css %}
+		<style type="text/css">
+			.espacio{
+				margin-top:10px;
+			}
+		</style>
+	{% endblock %}
+	<!-- Fin Bloque estilos -->
+</head>
+<body>
+	<!-- begin #page-loader -->
+	<div id="page-loader" class="fade in"><span class="spinner"></span></div>
+	<!-- end #page-loader -->
+	
+	<!-- begin #page-container -->
+	<div id="page-container" class="fade page-without-sidebar">
+		<!-- begin #header -->
+		<div id="header" class="header navbar navbar-default navbar-fixed-top">
+			<!-- begin container-fluid -->
+			<div class="container-fluid">
+				<!-- begin mobile sidebar expand / collapse button -->
+				<div class="navbar-header">
+					<a href="index.html" class="navbar-brand"><span class="navbar-logo"></span> TITA</a>
+					<button type="button" class="navbar-toggle" data-click="sidebar-toggled">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				<!-- end mobile sidebar expand / collapse button -->
+				
+				<!-- begin header navigation right -->
+				<ul class="nav navbar-nav navbar-right">
+					<!--<li>
+						<form class="navbar-form full-width">
+							<div class="form-group">
+								<input type="text" class="form-control" placeholder="Enter keyword" />
+								<button type="submit" class="btn btn-search"><i class="fa fa-search"></i></button>
+							</div>
+						</form>
+					</li>
+					<li class="dropdown">
+						<a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle f-s-14">
+							<i class="fa fa-bell-o"></i>
+							<span class="label">5</span>
+						</a>
+						<ul class="dropdown-menu media-list pull-right animated fadeInDown">
+                            <li class="dropdown-header">Notifications (5)</li>
+                            <li class="media">
+                                <a href="javascript:;">
+                                    <div class="pull-left media-object bg-red"><i class="fa fa-bug"></i></div>
+                                    <div class="media-body">
+                                        <h6 class="media-heading">Server Error Reports</h6>
+                                        <div class="text-muted">3 minutes ago</div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="media">
+                                <a href="javascript:;">
+                                    <div class="pull-left"><img src="static/img/user-1.jpg" class="media-object" alt="" /></div>
+                                    <div class="media-body">
+                                        <h6 class="media-heading">John Smith</h6>
+                                        <p>Quisque pulvinar tellus sit amet sem scelerisque tincidunt.</p>
+                                        <div class="text-muted">25 minutes ago</div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="media">
+                                <a href="javascript:;">
+                                    <div class="pull-left"><img src="static/img/user-2.jpg" class="media-object" alt="" /></div>
+                                    <div class="media-body">
+                                        <h6 class="media-heading">Olivia</h6>
+                                        <p>Quisque pulvinar tellus sit amet sem scelerisque tincidunt.</p>
+                                        <div class="text-muted">35 minutes ago</div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="media">
+                                <a href="javascript:;">
+                                    <div class="pull-left media-object bg-green"><i class="fa fa-plus"></i></div>
+                                    <div class="media-body">
+                                        <h6 class="media-heading"> New User Registered</h6>
+                                        <div class="text-muted">1 hour ago</div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="media">
+                                <a href="javascript:;">
+                                    <div class="pull-left media-object bg-blue"><i class="fa fa-envelope"></i></div>
+                                    <div class="media-body">
+                                        <h6 class="media-heading"> New Email From John</h6>
+                                        <div class="text-muted">2 hour ago</div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="dropdown-footer text-center">
+                                <a href="javascript:;">View more</a>
+                            </li>
+						</ul>
+					</li>-->
+					<li class="dropdown navbar-user">
+						<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+							<img src="static/img/desconocido.jpg" alt="" /> 
+							<span class="hidden-xs">
+								{% block nombre_usuario %}Público{% endblock %}
+							</span> <!--<b class="caret"></b>-->
+						</a>
+						<!--<ul class="dropdown-menu animated fadeInLeft">
+							<li class="arrow"></li>
+							<li><a href="javascript:;">Editar Pérfil</a></li>
+							<!--<li><a href="javascript:;"><span class="badge badge-danger pull-right">2</span> Inbox</a></li>
+							<li><a href="javascript:;">Calendar</a></li>
+							<li><a href="javascript:;">Setting</a></li>-->
+							<!--<li class="divider"></li>
+							<li><a href="javascript:;">Cerrar Sesión</a></li>
+						</ul>-->
+					</li>
+				</ul>
+				<!-- end header navigation right -->
+			</div>
+			<!-- end container-fluid -->
+		</div>
+		<!-- end #header -->
+		
+		<!-- begin #content -->
+		<div id="content" class="content">
+			<!-- begin breadcrumb -->
+			<ol class="breadcrumb pull-right">
+				{% block miga_pan %}
+					<li><a href="javascript:;">Inicio</a></li>
+					<li class="active">Información Convocatoria</li>
+				{% endblock %}
+			</ol>
+			<!-- end breadcrumb -->
+			<!-- begin page-header -->
+			<h1 class="page-header">
+				{% block titulo_contenido %}
+					CONVOCATORIA A FORMADORES ETAPA PRESENCIAL Y VIRTUAL <small></small>
+				{% endblock %}
+			</h1>
+			<!-- end page-header -->
+
+			{% block contenido %}
+				<div class="panel panel-inverse">
+				    <div class="panel-heading">
+				        <div class="panel-heading-btn">
+				            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+				            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+				        </div>
+				        <h4 class="panel-title">{% block titulo_panel %}CONVOCATORIA A FORMADORES ETAPA PRESENCIAL Y VIRTUAL{% endblock %}</h4>
+				    </div>
+				    <div class="panel-body">
+				    	{% block contenido_panel %}
+				        	<div class="row">
+				        		<div class="col-xs-12">
+				        			<p>El Proyecto Educación digital para todos, convoca a los interesados(as) en postular su nombre como Maestro(a)  Formador(a)  dentro del   “Programa de  formación docente en pedagogía mediada con TIC”,  como una estrategia pedagógica con énfasis en el desarrollo de competencias Siglo XXI, realizado mediante contrato interadministrativo entre la  UNIVERSIDAD DEL VALE y la SEM.</p>
+				        		</div>
+				        	</div>
+
+				        	<div class="panel-group espacio" id="accordion">
+								<div class="panel panel-inverse">
+									<div class="panel-heading">
+										<h3 class="panel-title">
+											<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+											    <i class="fa fa-plus-circle pull-right"></i> 
+												Objetivo General de la Formación
+											</a>
+										</h3>
+									</div>
+									<div id="collapseOne" class="panel-collapse collapse in">
+										<div class="panel-body">
+											<p>Cualificar el proceso de formación pedagógica para integrar las Tecnologías de la Información y la Comunicación (TIC) en la práctica de los docentes de instituciones educativas de  Santiago de Cali, Yumbo, Dagua, La Cumbre y Vijes.</p>
+										</div>
+									</div>
+								</div>
+								<div class="panel panel-inverse">
+									<div class="panel-heading">
+										<h3 class="panel-title">
+											<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+											    <i class="fa fa-plus-circle pull-right"></i> 
+												Objetivos Específicos de la Formación
+											</a>
+										</h3>
+									</div>
+									<div id="collapseTwo" class="panel-collapse collapse">
+										<div class="panel-body">
+											<ul>
+												<li>
+													<p>
+														Apropiar elementos conceptuales y metodológicos relativos a la organización y la gestión del ejercicio profesional, para el desarrollo de las competencias del Siglo XXI.
+													</p>
+												</li>
+												<li>
+													<p>
+														Propiciar el uso de conceptos e instrumentos de análisis para la integración de las TIC en el ejercicio profesional.
+													</p>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="panel panel-inverse">
+									<div class="panel-heading">
+										<h3 class="panel-title">
+											<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+											    <i class="fa fa-plus-circle pull-right"></i> 
+												Funciones de los maestros(as) formadores se encuentran
+											</a>
+										</h3>
+									</div>
+									<div id="collapseThree" class="panel-collapse collapse">
+										<div class="panel-body">
+											<ol>
+												<li>
+													<p>
+														Desarrollar el Programa de formación docente en uso  y apropiación de TIC con énfasis en competencias S XXI a los  Docentes Participantes.
+													</p>
+												</li>
+												<li>
+													<p>
+														Implementar el acompañamiento “in situ” durante el proceso.
+													</p>
+												</li>
+											</ol>
+										</div>
+									</div>
+								</div>
+								<div class="panel panel-inverse">
+									<div class="panel-heading">
+										<h3 class="panel-title">
+											<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+											    <i class="fa fa-plus-circle pull-right"></i> 
+												Requisitos para Concursar
+											</a>
+										</h3>
+									</div>
+									<div id="collapseFour" class="panel-collapse collapse">
+										<div class="panel-body">
+											<div class="row">
+												<div class="col-xs-12">
+													<p><b>Formación Académica</b></p>
+												</div>
+												<div class="col-xs-12">
+													<p>OBLIGATORIO</p>
+													<ul>
+														<li>
+															Licenciados en educación preescolar, básica primaria, ciencias naturales, lengua castellana, matemáticas, ciencias sociales, tecnología, educación artística (y áreas relacionadas según acuerdo 098 de 2009) o profesionales no licenciados con título de pregrado afín (según acuerdo 098 de 2009) a las ciencias naturales, las matemáticas o la lengua castellana. (Da puntaje de partida)
+														</li>
+														<li>
+															Cursos de formación en TIC  (Da puntaje de partida)
+														</li>
+													</ul>
+												</div>
+												<div class="col-xs-12">
+													<p>PREFERIBLE</p>
+													<ul>
+														<li>
+															Título de posgrado en áreas afines a TIC o educación  (suma puntos) 
+														</li>
+														<li>
+															Cursos de formación a formadores TIC (suma puntos)
+														</li>
+													</ul>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-xs-12">
+													<p><b>Experiencia laboral</b></p>
+												</div>
+												<div class="col-xs-12">
+													<p>OBLIGATORIO</p>
+													<ul>
+														<li>
+															Experiencia certificada de mínimo 2 años como docente de básica o media. (Da puntaje de partida)
+														</li>
+														<li>
+															Uso de TIC en la enseñanza de alguna de las áreas básicas del saber (ciencias, matemáticas, informática, artes, humanidades) o experiencia en el uso de plataformas e-learning o en el desarrollo de recursos educativos digitales  (Da puntaje de partida)
+														</li>
+													</ul>
+												</div>
+												<div class="col-xs-12">
+													<p>PREFERIBLE</p>
+													<ul>
+														<li>
+															Experiencia certificada de mínimo 2 años en procesos de formación de docentes.  (suma puntos)
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+				        {% endblock %}
+				    </div>
+				</div>
+			{% endblock %}
+		</div>
+		<!-- end #content -->
+		
+		<!-- begin scroll to top btn -->
+		<a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+		<!-- end scroll to top btn -->
+	</div>
+	<!-- end page container -->
+	
+	<!-- ================== BEGIN BASE JS ================== -->
+	<script src="static/plugins/jquery-1.8.2/jquery-1.8.2.min.js"></script>
+	<script src="static/plugins/jquery-ui-1.10.4/ui/minified/jquery-ui.min.js"></script>
+	<script src="static/plugins/bootstrap-3.1.1/js/bootstrap.min.js"></script>
+	<!--[if lt IE 9]>
+		<script src="static/crossbrowserjs/html5shiv.js"></script>
+		<script src="static/crossbrowserjs/respond.min.js"></script>
+		<script src="static/crossbrowserjs/excanvas.min.js"></script>
+	<![endif]-->
+	<script src="static/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+	<!-- ================== END BASE JS ================== -->
+	
+	<!-- ================== BEGIN PAGE LEVEL JS ================== -->
+	<script src="static/js/apps.min.js"></script>
+	<!-- ================== END PAGE LEVEL JS ================== -->
+	<!-- Bloque de javascript para las plantillas que heredan -->
+	{% block js %}
+	{% endblock %}
+	<!-- Fin Bloque javascript -->
+	<script>
+		$(document).ready(function() {
+			App.init();
+		});
+	</script>
+</body>
+</html>
