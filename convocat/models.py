@@ -1,3 +1,4 @@
+#encoding:utf-8
 from django.db import models
 
 # Create your models here.
@@ -32,13 +33,13 @@ class RangoTiempo(TipoSimple):
 
 class Aspirante(models.Model):    
     tipo_documento = models.ForeignKey(TipoDocumento, null=True, blank=True, verbose_name='tipo de documento')
-    numero_documento = models.CharField( max_length=128, blank=True, null=True, unique=True, verbose_name=u'número documento')
-    nombre1 = models.CharField( max_length=255, verbose_name=u'Primer Nombre')
-    nombre2 = models.CharField( max_length=255, blank=True, null=True, verbose_name=u'segundo nombre')
-    apellido1 = models.CharField( max_length=255, verbose_name=u'Primer Apellido')
-    apellido2 = models.CharField( max_length=255, blank=True, null=True, verbose_name=u'segundo apellido')
+    numero_documento = models.CharField( max_length=128, blank=True, null=True, unique=True, verbose_name='número documento')
+    nombre1 = models.CharField( max_length=255, verbose_name='Primer Nombre')
+    nombre2 = models.CharField( max_length=255, blank=True, null=True, verbose_name='segundo nombre')
+    apellido1 = models.CharField( max_length=255, verbose_name='Primer Apellido')
+    apellido2 = models.CharField( max_length=255, blank=True, null=True, verbose_name='segundo apellido')
     genero = models.CharField( choices=[('M','Hombre'), ('F', 'Mujer')], max_length=1, verbose_name='sexo')
-    nacionalidad = models.CharField( max_length=255, null=True, blank=True, verbose_name=u'nacionalidad')
+    nacionalidad = models.CharField( max_length=255, null=True, blank=True, verbose_name='nacionalidad')
     fecha_nacimiento = models.DateField( null=True, verbose_name='fecha de nacimiento')
     puntuacion_hv = models.IntegerField()
 
@@ -47,8 +48,8 @@ class Aspirante(models.Model):
 
 class FormacionAcademica(models.Model):
     aspirante = models.ForeignKey(Aspirante)
-    titulo = models.ForeignKey(TipoTitulo, null=True, verbose_name=u'título obtenido')
-    fecha_terminacion = models.DateField(verbose_name=u'fecha de finalización')
+    titulo = models.ForeignKey(TipoTitulo, null=True, verbose_name='título obtenido')
+    fecha_terminacion = models.DateField(verbose_name='fecha de finalización')
 
     def __unicode__(self):
         return self.titulo
@@ -63,15 +64,15 @@ class FormacionTics(models.Model):
         ('141', 'Cursos TIC mas 140 horas')
     )
     aspirante = models.OneToOneField(Aspirante)
-    curso = models.CharField(max_length=3, null=True, blank=True, verbose_name=u'duración del curso', choices=CURSOS_FORMACION_TICS)
+    curso = models.CharField(max_length=3, null=True, blank=True, verbose_name='duración del curso', choices=CURSOS_FORMACION_TICS)
 
     def __unicode__(self):
         return self.curso
 
 class ConocimientosEspecificos(models.Model):
     aspirante = models.ForeignKey(Aspirante)
-    conocimiento = models.ForeignKey(TipoConocimiento, verbose_name=u'conocimiento específico')
-    calificacion = models.CharField(max_length=50, verbose_name=u'calificación')
+    conocimiento = models.ForeignKey(TipoConocimiento, verbose_name='conocimiento específico')
+    calificacion = models.CharField(max_length=50, verbose_name='calificación')
 
     def __unicode__(self):
         return self.conocimiento
@@ -79,18 +80,18 @@ class ConocimientosEspecificos(models.Model):
 
 class IdiomasManejados(models.Model):
     aspirante = models.OneToOneField(Aspirante)
-    idioma = models.ForeignKey(TipoIdioma, verbose_name=u'idioma', help_text=u"Sólo se pueden ingresar un idioma diferente al español.")
-    habla = models.CharField(max_length=50, verbose_name=u'habilidad hablando')
-    lee = models.CharField(max_length=50, verbose_name=u'habilidad leyendo')
-    escribe = models.CharField(max_length=50, verbose_name=u'habilidad escribiendo')
+    idioma = models.ForeignKey(TipoIdioma, verbose_name='idioma', help_text=u"Sólo se pueden ingresar un idioma diferente al español.")
+    habla = models.CharField(max_length=50, verbose_name='habilidad hablando')
+    lee = models.CharField(max_length=50, verbose_name='habilidad leyendo')
+    escribe = models.CharField(max_length=50, verbose_name='habilidad escribiendo')
 
     def __unicode__():
         return self.idioma
 
 class ExperienciaFormadorTics(models.Model):
     aspirante = models.ForeignKey(Aspirante)
-    formador = models.ForeignKey(TipoFormador, verbose_name=u'formador de')
-    rango = models.ForeignKey(RangoTiempo, verbose_name=u'rango de formación')
+    formador = models.ForeignKey(TipoFormador, verbose_name='formador de')
+    rango = models.ForeignKey(RangoTiempo, verbose_name='rango de formación')
 
     def __unicode__():
         return self.formador
