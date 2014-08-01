@@ -12,12 +12,12 @@
 	
 	<!-- ================== BEGIN BASE CSS STYLE ================== -->
 	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
-	<link href="static/plugins/jquery-ui-1.10.4/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
-	<link href="static/plugins/bootstrap-3.1.1/css/bootstrap.min.css" rel="stylesheet" />
-	<link href="static/plugins/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" />
-	<link href="static/css/animate.min.css" rel="stylesheet" />
-	<link href="static/css/style.min.css" rel="stylesheet" />
-	<link href="static/css/style-responsive.min.css" rel="stylesheet" />
+	<link href="{{STATIC_URL}}plugins/jquery-ui-1.10.4/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
+	<link href="{{STATIC_URL}}plugins/bootstrap-3.1.1/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="{{STATIC_URL}}plugins/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" />
+	<link href="{{STATIC_URL}}css/animate.min.css" rel="stylesheet" />
+	<link href="{{STATIC_URL}}css/style.min.css" rel="stylesheet" />
+	<link href="{{STATIC_URL}}css/style-responsive.min.css" rel="stylesheet" />
 	<!-- ================== END BASE CSS STYLE ================== -->
 
 	<!-- Bloque de estilos para las plantillas que heredan -->
@@ -38,7 +38,7 @@
 			<div class="container-fluid">
 				<!-- begin mobile sidebar expand / collapse button -->
 				<div class="navbar-header">
-					<a href="index.html" class="navbar-brand"><span class="navbar-logo"></span> Color Admin</a>
+					<a href="index.html" class="navbar-brand"><span class="navbar-logo"></span> <b><label style="color:blue;font-weight:10px">Tit@</label></b></a>
 					<button type="button" class="navbar-toggle" data-click="sidebar-toggled">
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
@@ -49,88 +49,21 @@
 				
 				<!-- begin header navigation right -->
 				<ul class="nav navbar-nav navbar-right">
-					<!--<li>
-						<form class="navbar-form full-width">
-							<div class="form-group">
-								<input type="text" class="form-control" placeholder="Enter keyword" />
-								<button type="submit" class="btn btn-search"><i class="fa fa-search"></i></button>
-							</div>
-						</form>
-					</li>
-					<li class="dropdown">
-						<a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle f-s-14">
-							<i class="fa fa-bell-o"></i>
-							<span class="label">5</span>
-						</a>
-						<ul class="dropdown-menu media-list pull-right animated fadeInDown">
-                            <li class="dropdown-header">Notifications (5)</li>
-                            <li class="media">
-                                <a href="javascript:;">
-                                    <div class="pull-left media-object bg-red"><i class="fa fa-bug"></i></div>
-                                    <div class="media-body">
-                                        <h6 class="media-heading">Server Error Reports</h6>
-                                        <div class="text-muted">3 minutes ago</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="media">
-                                <a href="javascript:;">
-                                    <div class="pull-left"><img src="static/img/user-1.jpg" class="media-object" alt="" /></div>
-                                    <div class="media-body">
-                                        <h6 class="media-heading">John Smith</h6>
-                                        <p>Quisque pulvinar tellus sit amet sem scelerisque tincidunt.</p>
-                                        <div class="text-muted">25 minutes ago</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="media">
-                                <a href="javascript:;">
-                                    <div class="pull-left"><img src="static/img/user-2.jpg" class="media-object" alt="" /></div>
-                                    <div class="media-body">
-                                        <h6 class="media-heading">Olivia</h6>
-                                        <p>Quisque pulvinar tellus sit amet sem scelerisque tincidunt.</p>
-                                        <div class="text-muted">35 minutes ago</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="media">
-                                <a href="javascript:;">
-                                    <div class="pull-left media-object bg-green"><i class="fa fa-plus"></i></div>
-                                    <div class="media-body">
-                                        <h6 class="media-heading"> New User Registered</h6>
-                                        <div class="text-muted">1 hour ago</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="media">
-                                <a href="javascript:;">
-                                    <div class="pull-left media-object bg-blue"><i class="fa fa-envelope"></i></div>
-                                    <div class="media-body">
-                                        <h6 class="media-heading"> New Email From John</h6>
-                                        <div class="text-muted">2 hour ago</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="dropdown-footer text-center">
-                                <a href="javascript:;">View more</a>
-                            </li>
-						</ul>
-					</li>-->
 					<li class="dropdown navbar-user">
 						<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-							<img src="static/img/user-11.jpg" alt="" /> 
+							<img src="{{STATIC_URL}}img/desconocido.jpg" alt="" /> 
 							<span class="hidden-xs">
-								{% block nombre_usuario %}Adam Schwartz{% endblock %}
+								{% block nombre_usuario %}Público{% endblock %}
 							</span> <b class="caret"></b>
 						</a>
 						<ul class="dropdown-menu animated fadeInLeft">
 							<li class="arrow"></li>
-							<li><a href="javascript:;">Editar Pérfil</a></li>
+							<li><a href="javascript:;">Ingresar al Sistema</a></li>
 							<!--<li><a href="javascript:;"><span class="badge badge-danger pull-right">2</span> Inbox</a></li>
 							<li><a href="javascript:;">Calendar</a></li>
-							<li><a href="javascript:;">Setting</a></li>-->
+							<li><a href="javascript:;">Setting</a></li>
 							<li class="divider"></li>
-							<li><a href="javascript:;">Cerrar Sesión</a></li>
+							<li><a href="javascript:;">Cerrar Sesión</a></li>-->
 						</ul>
 					</li>
 				</ul>
@@ -147,12 +80,8 @@
 				<!-- begin sidebar user -->
 				<ul class="nav">
 					<li class="nav-profile">
-						<div class="image">
-							<a href="javascript:;"><img src="static/img/user-11.jpg" alt="" /></a>
-						</div>
 						<div class="info">
-							Sean Ngu
-							<small>Front end developer</small>
+							<img src="{{STATIC_URL}}img/tita.png" alt="" style="width:100%" />
 						</div>
 					</li>	
 				</ul>
@@ -160,7 +89,9 @@
 				<!-- begin sidebar nav -->
 				<ul class="nav">
 					<li class="nav-header">Navegación</li>
-					{% include "menus/admin.html" %}
+					{% block menu %}
+						{% include "menus/admin.html" %}
+					{% endblock %}
 			        <!-- begin sidebar minify button -->
 					<li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
 			        <!-- end sidebar minify button -->
@@ -189,17 +120,17 @@
 			<!-- end page-header -->
 
 			{% block contenido %}
-				<div class="panel panel-inverse">
+				<div class="panel panel-primary">
 				    <div class="panel-heading">
 				        <div class="panel-heading-btn">
-				            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+				            <!--<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
 				            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
 				            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-				            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+				            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>-->
 				        </div>
 				        <h4 class="panel-title">{% block titulo_panel %}Título Panel{% endblock %}</h4>
 				    </div>
-				    <div class="panel-body">
+				    <div class="panel-body" align="justify">
 				    	{% block contenido_panel %}
 				        	Contenido del Panel
 				        {% endblock %}
@@ -216,19 +147,19 @@
 	<!-- end page container -->
 	
 	<!-- ================== BEGIN BASE JS ================== -->
-	<script src="static/plugins/jquery-1.8.2/jquery-1.8.2.min.js"></script>
-	<script src="static/plugins/jquery-ui-1.10.4/ui/minified/jquery-ui.min.js"></script>
-	<script src="static/plugins/bootstrap-3.1.1/js/bootstrap.min.js"></script>
+	<script src="{{STATIC_URL}}plugins/jquery-1.8.2/jquery-1.8.2.min.js"></script>
+	<script src="{{STATIC_URL}}plugins/jquery-ui-1.10.4/ui/minified/jquery-ui.min.js"></script>
+	<script src="{{STATIC_URL}}plugins/bootstrap-3.1.1/js/bootstrap.min.js"></script>
 	<!--[if lt IE 9]>
-		<script src="static/crossbrowserjs/html5shiv.js"></script>
-		<script src="static/crossbrowserjs/respond.min.js"></script>
-		<script src="static/crossbrowserjs/excanvas.min.js"></script>
+		<script src="{{STATIC_URL}}crossbrowserjs/html5shiv.js"></script>
+		<script src="{{STATIC_URL}}crossbrowserjs/respond.min.js"></script>
+		<script src="{{STATIC_URL}}crossbrowserjs/excanvas.min.js"></script>
 	<![endif]-->
-	<script src="static/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+	<script src="{{STATIC_URL}}plugins/slimscroll/jquery.slimscroll.min.js"></script>
 	<!-- ================== END BASE JS ================== -->
 	
 	<!-- ================== BEGIN PAGE LEVEL JS ================== -->
-	<script src="static/js/apps.min.js"></script>
+	<script src="{{STATIC_URL}}js/apps.min.js"></script>
 	<!-- ================== END PAGE LEVEL JS ================== -->
 	<!-- Bloque de javascript para las plantillas que heredan -->
 	{% block js %}
