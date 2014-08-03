@@ -28,5 +28,9 @@ def registrarse(request):
     return render(request, 'publico/registrarse.html', {
         'opcion_menu': 5
     })
+def formulario(request):
+    return render(request, 'publico/formulario_aspirante.html', {
+        'opcion_menu': 6
+    })
 
 # fin vistas de la parte PUBLICA
