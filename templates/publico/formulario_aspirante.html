@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block titulo %}
-	Formualario Aspirante
+	Formulario Aspirante
 {% endblock %}
 
 {% block menu %}
@@ -9,16 +9,39 @@
 {% endblock %}
 
 {% block css %}
+	<link href="{{STATIC_URL}}css/select2.css" rel="stylesheet" />
 	<link href="{{STATIC_URL}}plugins/bootstrap-wizard/css/bwizard.min.css" rel="stylesheet" />
+	<style type="text/css">
+		.espacio{
+			margin-top: 10px;
+		}
+	</style>
 {% endblock %}
 
 {% block js %}
+	<script src="{{STATIC_URL}}js/select2.js"></script>
 	<script src="{{STATIC_URL}}plugins/bootstrap-wizard/js/bwizard.js"></script>
 	<script src="{{STATIC_URL}}js/form-wizards.demo.min.js"></script>
 	<script>
 		$(document).ready(function() {
 			FormWizard.init();
 		});
+
+		function iniciarMunicipios(){
+			//$.post("{% url 'obtenerMunicipios' %}", function(data){
+			$.get("/obtenerMunicipios", function(data){
+				var municipios = Array();
+				for(i in data){
+					var aux = data[i];
+					municipios.push({id:aux.pk, text: aux.fields.nombre});
+				}
+				$("#municipio_nacimiento").select2({data: municipios});
+				$("#municipio_actual").select2({data: municipios});
+			});
+		}
+		iniciarMunicipios();
+		/*var m = {{municipios}};
+		console.log(m);*/
 	</script>
 {% endblock %}
 
@@ -37,173 +60,253 @@
 
 {% block contenido_panel %}
 	<form action="/" method="POST">
-								<div id="wizard">
-									<ol>
-										<li>
-										    Datos Personales 
-										</li>
-										<li>
-										    Formación Académica
-										</li>
-										<li>
-										    Formación en TIC's
-										</li>
-										<li>
-										    Conocimientos Específicos
-										</li>
-										<li>
-										    Idiomas
-										</li>
-										<li>
-										    Experiencia como Formador en TIC's
-										</li>
-										<li>
-										    Firma del Servidor Público
-										</li>
-										<li>
-										    Observaciones
-										</li>
-									</ol>
-									<!-- begin wizard step-1 -->
-									<div>
-                                        <fieldset>
-                                            <legend class="pull-left width-full">Identification</legend>
-                                            <!-- begin row -->
-                                            <div class="row">
-                                                <!-- begin col-4 -->
-                                                <div class="col-md-4">
-													<div class="form-group">
-														<label>First Name</label>
-														<input type="text" name="firstname" placeholder="John" class="form-control" />
-													</div>
-                                                </div>
-                                                <!-- end col-4 -->
-                                                <!-- begin col-4 -->
-                                                <div class="col-md-4">
-													<div class="form-group">
-														<label>Middle Initial</label>
-														<input type="text" name="middle" placeholder="A" class="form-control" />
-													</div>
-                                                </div>
-                                                <!-- end col-4 -->
-                                                <!-- begin col-4 -->
-                                                <div class="col-md-4">
-													<div class="form-group">
-														<label>Last Name</label>
-														<input type="text" name="lastname" placeholder="Smith" class="form-control" />
-													</div>
-                                                </div>
-                                                <!-- end col-4 -->
-                                            </div>
-                                            <!-- end row -->
-										</fieldset>
-									</div>
-									<!-- end wizard step-1 -->
-									<!-- begin wizard step-2 -->
-									<div>
-										<fieldset>
-											<legend class="pull-left width-full">Contact Information</legend>
-                                            <!-- begin row -->
-                                            <div class="row">
-                                                <!-- begin col-6 -->
-                                                <div class="col-md-6">
-													<div class="form-group">
-														<label>Phone Number</label>
-														<input type="text" name="phone" placeholder="123-456-7890" class="form-control" />
-													</div>
-                                                </div>
-                                                <!-- end col-6 -->
-                                                <!-- begin col-6 -->
-                                                <div class="col-md-6">
-													<div class="form-group">
-														<label>Email Address</label>
-														<input type="text" name="email" placeholder="someone@example.com" class="form-control" />
-													</div>
-                                                </div>
-                                                <!-- end col-6 -->
-                                            </div>
-                                            <!-- end row -->
-										</fieldset>
-									</div>
-									<!-- end wizard step-2 -->
-									<!-- begin wizard step-3 -->
-									<div>
-										<fieldset>
-											<legend class="pull-left width-full">Login</legend>
-                                            <!-- begin row -->
-                                            <div class="row">
-                                                <!-- begin col-4 -->
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <label>Username</label>
-                                                        <div class="controls">
-                                                            <input type="text" name="username" placeholder="johnsmithy" class="form-control" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- end col-4 -->
-                                                <!-- begin col-4 -->
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <label>Pasword</label>
-                                                        <div class="controls">
-                                                            <input type="password" name="password" placeholder="Your password" class="form-control" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- end col-4 -->
-                                                <!-- begin col-4 -->
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <label>Confirm Pasword</label>
-                                                        <div class="controls">
-                                                            <input type="password" name="password2" placeholder="Confirmed password" class="form-control" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- end col-6 -->
-                                            </div>
-                                            <!-- end row -->
-                                        </fieldset>
-									</div>
-									<!-- end wizard step-3 -->
-									<!-- begin wizard step-4 -->
-									<div>
-									    <div class="jumbotron m-b-0">
-                                            <h1>Login Successfully</h1>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris consequat commodo porttitor. Vivamus eleifend, arcu in tincidunt semper, lorem odio molestie lacus, sed malesuada est lacus ac ligula. Aliquam bibendum felis id purus ullamcorper, quis luctus leo sollicitudin. </p>
-                                            <p><a class="btn btn-success btn-lg" role="button">Proceed to User Profile</a></p>
-                                        </div>
-									</div>
-									<!-- end wizard step-4 -->
-									<div>
-									    <div class="jumbotron m-b-0">
-                                            <h1>Login Successfully</h1>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris consequat commodo porttitor. Vivamus eleifend, arcu in tincidunt semper, lorem odio molestie lacus, sed malesuada est lacus ac ligula. Aliquam bibendum felis id purus ullamcorper, quis luctus leo sollicitudin. </p>
-                                            <p><a class="btn btn-success btn-lg" role="button">Proceed to User Profile</a></p>
-                                        </div>
-									</div>
-									<div>
-									    <div class="jumbotron m-b-0">
-                                            <h1>Login Successfully</h1>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris consequat commodo porttitor. Vivamus eleifend, arcu in tincidunt semper, lorem odio molestie lacus, sed malesuada est lacus ac ligula. Aliquam bibendum felis id purus ullamcorper, quis luctus leo sollicitudin. </p>
-                                            <p><a class="btn btn-success btn-lg" role="button">Proceed to User Profile</a></p>
-                                        </div>
-									</div>
-									<div>
-									    <div class="jumbotron m-b-0">
-                                            <h1>Login Successfully</h1>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris consequat commodo porttitor. Vivamus eleifend, arcu in tincidunt semper, lorem odio molestie lacus, sed malesuada est lacus ac ligula. Aliquam bibendum felis id purus ullamcorper, quis luctus leo sollicitudin. </p>
-                                            <p><a class="btn btn-success btn-lg" role="button">Proceed to User Profile</a></p>
-                                        </div>
-									</div>
-									<div>
-									    <div class="jumbotron m-b-0">
-                                            <h1>Logiaaan Successfully</h1>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris consequat commodo porttitor. Vivamus eleifend, arcu in tincidunt semper, lorem odio molestie lacus, sed malesuada est lacus ac ligula. Aliquam bibendum felis id purus ullamcorper, quis luctus leo sollicitudin. </p>
-                                            <p><a class="btn btn-success btn-lg" role="button">Proceed to User Profile</a></p>
-                                        </div>
-									</div>
-								</div>
-							</form>
+		<div id="wizard">
+			<ol>
+				<li>
+				    Datos Personales 
+				</li>
+				<li>
+				    Formación Académica
+				</li>
+				<li>
+				    Formación en TIC's
+				</li>
+				<li>
+				    Conocimientos Específicos
+				</li>
+				<li>
+				    Idiomas
+				</li>
+				<li>
+				    Experiencia Formador en TIC's
+				</li>
+				<li>
+				    Firma Servidor Público
+				</li>
+				<li>
+				    Observaciones
+				</li>
+			</ol>
+			<!-- begin wizard step-1 -->
+			<div>
+                <div class="row" align="center">
+                	<div class="col-sm-3">
+                		<b>Apellido 1</b>
+                		<input class="form-control" name="apellido1" type="text" />
+                	</div>
+                	<div class="col-sm-3">
+                		<b>Apellido 2</b>
+                		<input class="form-control" name="apellido2" type="text" />
+                	</div>
+                	<div class="col-sm-3">
+                		<b>Nombre 1</b>
+                		<input class="form-control" name="nombre1" type="text" />
+                	</div>
+                	<div class="col-sm-3">
+                		<b>Nombre 2</b>
+                		<input class="form-control" name="nombre2" type="text" />
+                	</div>
+                </div>
+
+                <div class="row espacio" align="center">
+                	<div class="col-sm-3">
+                		<b>Tipo de Documento</b>
+                		<select class="form-control" name="tipo_documento">
+                			<option value="CC">Cédula</option>
+                			<option value="CE">Cédula Extranjera</option>
+                			<option value="NP">Número de Pasaporte</option>
+                		</select>
+                	</div>
+                	<div class="col-sm-3">
+                		<b>Número de Documento</b>
+                		<input class="form-control" name="apellido2" type="text" />
+                	</div>
+                	<div class="col-sm-3">
+                		<b>Género</b>
+                		<select class="form-control" name="tipo_documento">
+                			<option value="M">Masculino</option>
+                			<option value="F">Femenino</option>
+                		</select>
+                	</div>
+                	<div class="col-sm-3">
+                		<b>Nacionalidad</b>
+                		<select class="form-control" name="nacionalidad">
+                			<option value="CO">Colombiano</option>
+                		</select>
+                	</div>
+                </div>
+
+                <div class="row espacio" align="center">
+                	<div class="col-sm-3">
+                		<b>Fecha de Nacimiento</b>
+                		<input class="form-control datepicker" name="fecha_nacimiento" type="text" />
+                	</div>
+                	<div class="col-sm-3">
+                		<b>Municipio de Nacimiento</b>
+                		<input id="municipio_nacimiento" name="municipio_nacimiento" type="hidden" style="width:100%" />
+                	</div>
+                	<div class="col-sm-3">
+                		<b>Teléfono Fijo</b>
+                		<input class="form-control" name="fijo" type="text" />
+                	</div>
+                	<div class="col-sm-3">
+                		<b>Municipio Actual</b>
+                		<input id="municipio_actual" name="municipio_actual" type="hidden" style="width:100%" />
+                	</div>
+                </div>
+                <div class="row espacio" align="center">
+                	<div class="col-sm-5">
+                		<b>Dirección</b>
+                		<input class="form-control" name="direccion" type="text" />
+                	</div>
+                	
+                	<div class="col-sm-2">
+                		<b>Celular</b>
+                		<input class="form-control" name="celular" type="text" />
+                	</div>
+                	<div class="col-sm-5">
+                		<b>Email</b>
+                		<input class="form-control" name="email" type="email" />
+                	</div>
+                </div>
+			</div>
+			<!-- end wizard step-1 -->
+			<!-- begin wizard step-2 -->
+			<div>
+				<div class="row" align="center">
+					<div class="col-sm-12">
+						<label style="font-size:16px"><b>Educación superior (pregrado y postgrado)</b></label>
+						<div class="row">
+							<div class="col-sm-12 espacio" align="justify" style="font-size:15px">
+								<b>Señalar la modalidad académica de más alto nivel que usted finalizó.</b>
+							</div>
+						</div>
+						<div class="row espacio">
+							<div class="col-sm-6" style="font-size:14px">
+								<b>Modalidad</b>
+							</div>
+							<div class="col-sm-6">
+								<select class="form-control" name="modalidad">
+									{% for titulo in titulos %}
+										<option value="{{titulo.id}}">{{titulo.nombre}}</option>
+									{% endfor %}
+								</select>
+							</div>
+						</div>
+						<div class="row espacio">
+							<div class="col-sm-6">
+								<b>No. de semestres aprobados</b>
+							</div>
+							<div class="col-sm-6">
+								<input class="form-control" name="semestres_aprobados" type="number" />
+							</div>
+						</div>
+						<div class="row espacio">
+							<div class="col-sm-6">
+								<b>Título Obtenido</b>
+							</div>
+							<div class="col-sm-6">
+								<input class="form-control" name="titulo_obtenido" type="text" />
+							</div>
+						</div>
+						<div class="row espacio">
+							<div class="col-sm-6">
+								<b>Fecha de Terminación</b>
+							</div>
+							<div class="col-sm-6">
+								<input class="form-control datepicker" name="fecha_terminacion" type="text" />
+							</div>
+						</div>
+						<div class="row espacio">
+							<div class="col-sm-6">
+								<b>No. Tarjeta Profesional si ésta ha sido prevista en una ley</b>
+							</div>
+							<div class="col-sm-6">
+								<input class="form-control" name="tarjeta_prof" type="text" />
+							</div>
+						</div>
+						<div class="row espacio">
+							<div class="col-sm-6">
+								<b>Soportes</b>
+							</div>
+							<div class="col-sm-6">
+								<input class="form-control" name="soportes_formacion_academica" type="file" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- end wizard step-2 -->
+			<!-- begin wizard step-3 -->
+			<div>
+				<div class="row" align="center">
+					<div class="col-xs-12">
+						<div class="row">
+							<div class="col-sm-12 espacio" align="justify" style="font-size:15px">
+								<b>Seleccione la formación en TIC's que ha tenido mayor duración y a la cual usted asistió.</b>
+							</div>
+						</div>
+						<div class="row espacio">
+							<div class="col-xs-12" style="font-size:14px">
+								<b>Cursos</b>
+								<select class="form-control" name="curso_tic" size="5">
+									<option value="0">Ninguna</option>
+									<option value="1">Curso TIC mínimo 40 horas</option>
+									<option value="2">Curso TIC hasta 90 horas</option>
+									<option value="3">Curso TIC hasta 140 horas certificadas o en proceso de certificación</option>
+									<option value="4">Curso TIC más de 140 horas</option>
+								</select>
+							</div>
+						</div>
+						<div class="row espacio">
+							<div class="col-sm-6">
+								<b>Soportes</b>
+							</div>
+							<div class="col-sm-6">
+								<input class="form-control" name="soportes_tic" type="file" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- end wizard step-3 -->
+			<!-- begin wizard step-4 -->
+			<div>
+			    <div class="jumbotron m-b-0">
+                    <h1>Login Successfully</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris consequat commodo porttitor. Vivamus eleifend, arcu in tincidunt semper, lorem odio molestie lacus, sed malesuada est lacus ac ligula. Aliquam bibendum felis id purus ullamcorper, quis luctus leo sollicitudin. </p>
+                    <p><a class="btn btn-success btn-lg" role="button">Proceed to User Profile</a></p>
+                </div>
+			</div>
+			<!-- end wizard step-4 -->
+			<div>
+			    <div class="jumbotron m-b-0">
+                    <h1>Login Successfully</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris consequat commodo porttitor. Vivamus eleifend, arcu in tincidunt semper, lorem odio molestie lacus, sed malesuada est lacus ac ligula. Aliquam bibendum felis id purus ullamcorper, quis luctus leo sollicitudin. </p>
+                    <p><a class="btn btn-success btn-lg" role="button">Proceed to User Profile</a></p>
+                </div>
+			</div>
+			<div>
+			    <div class="jumbotron m-b-0">
+                    <h1>Login Successfully</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris consequat commodo porttitor. Vivamus eleifend, arcu in tincidunt semper, lorem odio molestie lacus, sed malesuada est lacus ac ligula. Aliquam bibendum felis id purus ullamcorper, quis luctus leo sollicitudin. </p>
+                    <p><a class="btn btn-success btn-lg" role="button">Proceed to User Profile</a></p>
+                </div>
+			</div>
+			<div>
+			    <div class="jumbotron m-b-0">
+                    <h1>Login Successfully</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris consequat commodo porttitor. Vivamus eleifend, arcu in tincidunt semper, lorem odio molestie lacus, sed malesuada est lacus ac ligula. Aliquam bibendum felis id purus ullamcorper, quis luctus leo sollicitudin. </p>
+                    <p><a class="btn btn-success btn-lg" role="button">Proceed to User Profile</a></p>
+                </div>
+			</div>
+			<div>
+			    <div class="jumbotron m-b-0">
+                    <h1>Logiaaan Successfully</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris consequat commodo porttitor. Vivamus eleifend, arcu in tincidunt semper, lorem odio molestie lacus, sed malesuada est lacus ac ligula. Aliquam bibendum felis id purus ullamcorper, quis luctus leo sollicitudin. </p>
+                    <p><a class="btn btn-success btn-lg" role="button">Proceed to User Profile</a></p>
+                </div>
+			</div>
+		</div>
+	</form>
 {% endblock %}

@@ -15,5 +15,6 @@ urlpatterns = patterns('',
     url(r'^requisitos/$', 'convocat.views.requisitos', name="publico_requisitos"),
     url(r'^registrarse/$', 'convocat.views.registrarse', name="publico_registrarse"),
     url(r'^formulario/$', 'convocat.views.formulario', name="formulario"),
+    url(r'^obtenerMunicipios/$', 'convocat.views.obtenerMunicipios', name="obtenerMunicipios"),
 
 )

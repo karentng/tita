@@ -31,6 +31,25 @@ class TipoFormador(TipoSimple):
 class RangoTiempo(TipoSimple):
     pass
 
+class Departamento(models.Model):
+    nombre = models.CharField( max_length=255, verbose_name='Nombre')
+    codigo = models.CharField( max_length=10, null=True, verbose_name='Código')
+    latitud = models.FloatField(null=True)
+    longitud = models.FloatField(null=True)
+
+    def __unicode__(self):
+        return self.nombre
+
+class Municipio(models.Model):
+    nombre = models.CharField( max_length=255, verbose_name='Nombre')
+    departamento = models.ForeignKey(Departamento, verbose_name='Departamento')
+    codigo = models.CharField( max_length=10, null=True, verbose_name='Código')
+    latitud = models.FloatField(null=True)
+    longitud = models.FloatField(null=True)
+
+    def __unicode__(self):
+        return self.nombre
+
 class Aspirante(models.Model):    
     tipo_documento = models.ForeignKey(TipoDocumento, null=True, blank=True, verbose_name='tipo de documento')
     numero_documento = models.CharField( max_length=128, blank=True, null=True, unique=True, verbose_name='número documento')
@@ -41,6 +60,12 @@ class Aspirante(models.Model):
     genero = models.CharField( choices=[('M','Hombre'), ('F', 'Mujer')], max_length=1, verbose_name='sexo')
     nacionalidad = models.CharField( max_length=255, null=True, blank=True, verbose_name='nacionalidad')
     fecha_nacimiento = models.DateField( null=True, verbose_name='fecha de nacimiento')
+    municipio_nacimiento = models.ForeignKey(Municipio, verbose_name='municipio de nacimiento', related_name='municipio_n')
+    direccion = models.CharField( max_length=100, verbose_name='Dirección')
+    municipio = models.ForeignKey(Municipio, verbose_name='municipio')
+    telefono = models.IntegerField(null=True)
+    celular = models.IntegerField(null=True)
+    email = models.EmailField(null=True)
     puntuacion_hv = models.IntegerField()
 
     def __unicode__(self):

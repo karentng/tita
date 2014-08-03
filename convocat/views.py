@@ -1,4 +1,7 @@
 from django.shortcuts import render
+from .models import Municipio, TipoTitulo
+from django.core import serializers
+from django.http import HttpResponse
 
 # Create your views here.
 
@@ -29,8 +32,16 @@ def registrarse(request):
         'opcion_menu': 5
     })
 def formulario(request):
+
+    titulos = TipoTitulo.objects.all()
+
     return render(request, 'publico/formulario_aspirante.html', {
-        'opcion_menu': 6
+        'opcion_menu': 6,
+        'titulos': titulos
     })
+
+def obtenerMunicipios(request):
+    municipios = serializers.serialize('json', Municipio.objects.all())
+    return HttpResponse(municipios, mimetype='application/json')
 
 # fin vistas de la parte PUBLICA
