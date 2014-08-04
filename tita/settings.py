@@ -20,11 +20,19 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = 'lkl1m_!x$2^5@9l7d1^g2ck18ocu17n7s_o#jha-&au+_0!*ud'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+
 DEBUG = True
 
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
+
+#para login
+
+from django.core.urlresolvers import reverse_lazy
+LOGIN_URL = reverse_lazy('publico_login')
+LOGIN_REDIRECT_URL = reverse_lazy('publico')
+LOGOUT_URL = reverse_lazy('logout')
 
 
 # Application definition

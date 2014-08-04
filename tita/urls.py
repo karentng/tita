@@ -16,5 +16,8 @@ urlpatterns = patterns('',
     url(r'^registrarse/$', 'convocat.views.registrarse', name="publico_registrarse"),
     url(r'^formulario/$', 'convocat.views.formulario', name="formulario"),
     url(r'^obtenerMunicipios/$', 'convocat.views.obtenerMunicipios', name="obtenerMunicipios"),
+     url(r'^registrarse/$', 'convocat.views.registrarse', name="publico_registrarse"),   
+    url(r'^login/$', 'django.contrib.auth.views.login', {'template_name':'publico/login.html'}, name= 'publico_login'),
+    url(r'^cerrar/$', 'django.contrib.auth.views.logout', {'template_name':'info.html'}, name= 'logout'),
 
 )

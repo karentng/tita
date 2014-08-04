@@ -2,6 +2,10 @@ from django.shortcuts import render
 from .models import Municipio, TipoTitulo
 from django.core import serializers
 from django.http import HttpResponse
+from django.shortcuts import render_to_response
+from django.template import RequestContext
+from django.core.context_processors import csrf
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -44,4 +48,40 @@ def obtenerMunicipios(request):
     municipios = serializers.serialize('json', Municipio.objects.all())
     return HttpResponse(municipios, mimetype='application/json')
 
-# fin vistas de la parte PUBLICA
+def login(request):
+    
+    if request.POST:
+
+        log = request.POST['username']
+        contr = request.POST['password']
+ 
+    return render_to_response('publico/registrarse.html', RequestContext(request, {'opcion_menu': 5}))
+
+def registrarse(request):
+    
+    if request.POST:
+        user = request.POST['correoe']
+        passw = request.POST['contrasena']
+        passwver = request.POST['verificarcontra']
+
+        try:
+            usuario = User.objects.get(username=user)
+        except User.DoesNotExist:
+            usuario = None
+
+        if usuario != None:
+            print "El usuario "+ usuario.username+ " ya existe"
+            return render_to_response('publico/registrarse.html', RequestContext(request, {'log': 1, 'usuario': usuario.username}))
+        
+        elif passw == passwver:
+            usuario = User()
+            usuario.username = user
+            usuario.password = passw
+            usuario.save()
+            return render_to_response('publico/registrarse.html', RequestContext(request, {'log': 2, 'usuario': usuario.username}))
+
+        else:
+            print "las contrasenas no coinciden" 
+            return render_to_response('publico/registrarse.html', RequestContext(request, {'log': 3}))
+
+    return render_to_response('publico/registrarse.html', RequestContext(request, {'log': 4}))
