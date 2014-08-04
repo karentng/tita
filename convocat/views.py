@@ -6,6 +6,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.core.context_processors import csrf
 from django.contrib.auth.models import User
+from convocat.models import Aspirante, TipoDocumento, Municipio
 
 # Create your views here.
 
@@ -85,3 +86,52 @@ def registrarse(request):
             return render_to_response('publico/registrarse.html', RequestContext(request, {'log': 3}))
 
     return render_to_response('publico/registrarse.html', RequestContext(request, {'log': 4}))
+
+def guardarHV(request):
+    if request.POST:
+
+        # obtencion de datos
+        apellido1 = request.POST['apellido1']
+        apellido2 = request.POST['apellido2']
+        nombre1 = request.POST['nombre1']
+        nombre2 = request.POST['nombre2']
+        tipo_documento = request.POST['tipo_documento']
+        num_doc = request.POST['num_documento']
+        genero = request.POST['genero']
+        nacionalidad = request.POST['nacionalidad']
+        fecha_nacimiento = request.POST['fecha_nacimiento']
+        municipio_nacimiento = request.POST['municipio_nacimiento']
+        fijo = request.POST['fijo']
+        municipio_actual = request.POST['municipio_actual']
+        direccion = request.POST['direccion']
+        celular = request.POST['celular']
+        email = request.POST['email']
+
+        try:
+            aspirante = Aspirante.objects.get(numero_documento=num_doc)
+        except Aspirante.DoesNotExist:
+            aspirante = Aspirante()
+        
+        #asignacion
+        aspirante.tipo_documento = TipoDocumento.objects.get(nombre=tipo_documento)
+        aspirante.numero_documento = num_doc
+        aspirante.apellido1 = apellido1
+        aspirante.apellido2 = apellido2
+        aspirante.nombre1 = nombre1
+        aspirante.nombre2 = nombre2
+        aspirante.genero = genero
+        aspirante.nacionalidad = nacionalidad
+        aspirante.fecha_nacimiento = fecha_nacimiento
+        aspirante.municipio_nacimiento = Municipio.objects.get(id=municipio_nacimiento)
+        aspirante.direccion = direccion
+        aspirante.municipio = Municipio.objects.get(id=municipio_actual)
+        aspirante.telefono = 222
+        aspirante.celular = 111
+        aspirante.email = email
+        aspirante.direccion = direccion
+        aspirante.puntuacion_hv = 100
+        #guardado de aspirante
+        aspirante.save()
+
+        return render_to_response('publico/objetivos.html', RequestContext(request, {'opcion_menu': 1}))
+    return render_to_response('publico/index.html', RequestContext(request, {'opcion_menu': 1}))

@@ -23,6 +23,7 @@
 	<script src="{{STATIC_URL}}plugins/bootstrap-wizard/js/bwizard.js"></script>
 	<script src="{{STATIC_URL}}js/form-wizards.demo.min.js"></script>
 	<script>
+		var numForm = 1;
 		$(document).ready(function() {
 			FormWizard.init();
 		});
@@ -40,8 +41,10 @@
 			});
 		}
 		iniciarMunicipios();
-		/*var m = {{municipios}};
-		console.log(m);*/
+
+		function guardarForm(){
+			$("#guardar").click();
+		}
 	</script>
 {% endblock %}
 
@@ -58,7 +61,8 @@
 	Registro de Aspirantes
 {% endblock %}
 
-{% block contenido_panel %}
+{% block contenido_panel %}<form id="formulario" class="form-horizontal" action="../guardarHV/" method="POST" enctype="multipart/form-data">{% csrf_token %}
+<button type="submit" id="guardar" style="visibility:hidden">g</button>
 	<form action="/" method="POST">
 		<div id="wizard">
 			<ol>
@@ -83,11 +87,10 @@
 				<li>
 				    Firma Servidor Público
 				</li>
-				<li>
-				    Observaciones
-				</li>
 			</ol>
 			<!-- begin wizard step-1 -->
+			
+			
 			<div>
                 <div class="row" align="center">
                 	<div class="col-sm-3">
@@ -119,11 +122,12 @@
                 	</div>
                 	<div class="col-sm-3">
                 		<b>Número de Documento</b>
-                		<input class="form-control" name="apellido2" type="text" />
+                		<input class="form-control" name="num_documento" type="number" />
                 	</div>
                 	<div class="col-sm-3">
                 		<b>Género</b>
-                		<select class="form-control" name="tipo_documento">
+                		<select class="form-control" name="genero">
+                			<option value="-">Seleccione su género</option>
                 			<option value="M">Masculino</option>
                 			<option value="F">Femenino</option>
                 		</select>
@@ -182,7 +186,7 @@
 							</div>
 						</div>
 						<div class="row espacio">
-							<div class="col-sm-6" style="font-size:14px">
+							<div class="col-sm-6" style="font-size:14px" align="right">
 								<b>Modalidad</b>
 							</div>
 							<div class="col-sm-6">
@@ -194,7 +198,7 @@
 							</div>
 						</div>
 						<div class="row espacio">
-							<div class="col-sm-6">
+							<div class="col-sm-6" align="right">
 								<b>No. de semestres aprobados</b>
 							</div>
 							<div class="col-sm-6">
@@ -202,7 +206,7 @@
 							</div>
 						</div>
 						<div class="row espacio">
-							<div class="col-sm-6">
+							<div class="col-sm-6" align="right">
 								<b>Título Obtenido</b>
 							</div>
 							<div class="col-sm-6">
@@ -210,7 +214,7 @@
 							</div>
 						</div>
 						<div class="row espacio">
-							<div class="col-sm-6">
+							<div class="col-sm-6" align="right">
 								<b>Fecha de Terminación</b>
 							</div>
 							<div class="col-sm-6">
@@ -218,7 +222,7 @@
 							</div>
 						</div>
 						<div class="row espacio">
-							<div class="col-sm-6">
+							<div class="col-sm-6" align="right">
 								<b>No. Tarjeta Profesional si ésta ha sido prevista en una ley</b>
 							</div>
 							<div class="col-sm-6">
@@ -226,7 +230,7 @@
 							</div>
 						</div>
 						<div class="row espacio">
-							<div class="col-sm-6">
+							<div class="col-sm-6" align="right">
 								<b>Soportes</b>
 							</div>
 							<div class="col-sm-6">
@@ -300,13 +304,8 @@
                     <p><a class="btn btn-success btn-lg" role="button">Proceed to User Profile</a></p>
                 </div>
 			</div>
-			<div>
-			    <div class="jumbotron m-b-0">
-                    <h1>Logiaaan Successfully</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris consequat commodo porttitor. Vivamus eleifend, arcu in tincidunt semper, lorem odio molestie lacus, sed malesuada est lacus ac ligula. Aliquam bibendum felis id purus ullamcorper, quis luctus leo sollicitudin. </p>
-                    <p><a class="btn btn-success btn-lg" role="button">Proceed to User Profile</a></p>
-                </div>
-			</div>
+			
 		</div>
+	</form>
 	</form>
 {% endblock %}

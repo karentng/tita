@@ -179,7 +179,7 @@
 		$(document).ready(function() {
 			App.init();
 		});
-		$('.datepicker').datepicker({setDate: new Date()});
+		$('.datepicker').datepicker({format: 'yyyy-mm-dd',});
 		function mensaje(titulo, mensaje){
 			$.gritter.add({
 				title: titulo,

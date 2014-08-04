@@ -245,7 +245,10 @@ $.widget("bootstrap.bwizard", {
 						nextBtnText + "</a>")
 					.appendTo(this.buttons).bind({
 						'click': function () {
-							self.next();
+							var bien = guardarForm();
+							if(bien){
+								self.next();
+							}
 							return false;
 						}
 					}).attr("role", "button");
