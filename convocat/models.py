@@ -64,21 +64,22 @@ class Municipio(models.Model):
 
 class Aspirante(models.Model):    
     tipo_documento = models.ForeignKey(TipoDocumento, verbose_name='tipo de documento')
-    numero_documento = models.CharField( max_length=128, unique=True, verbose_name='número documento')
-    nombre1 = models.CharField( max_length=255, verbose_name='Primer Nombre')
+    numero_documento = models.BigIntegerField(unique=True, verbose_name='número documento')
+
+    nombre1 = models.CharField( max_length=255, verbose_name='primer nombre')
     nombre2 = models.CharField( max_length=255, blank=True, null=True, verbose_name='segundo nombre')
-    apellido1 = models.CharField( max_length=255, verbose_name='Primer Apellido')
+    apellido1 = models.CharField( max_length=255, verbose_name='primer apellido')
     apellido2 = models.CharField( max_length=255, blank=True, null=True, verbose_name='segundo apellido')
-    genero = models.CharField( choices=[('M','Hombre'), ('F', 'Mujer')], max_length=1, verbose_name='sexo')
+    sexo = models.CharField( choices=[('M','Hombre'), ('F', 'Mujer')], max_length=1, verbose_name='sexo')
     nacionalidad = models.CharField( max_length=255, null=True, blank=True, verbose_name='nacionalidad')
     fecha_nacimiento = models.DateField(verbose_name='fecha de nacimiento')
-    municipio_nacimiento = models.ForeignKey(Municipio, verbose_name='municipio de nacimiento', related_name='municipio_n')
+    municipio_nacimiento = models.ForeignKey(Municipio, verbose_name='municipio de nacimiento', related_name='municipio_nacimiento')
     direccion = models.CharField( max_length=100, verbose_name='Dirección')
     municipio = models.ForeignKey(Municipio, verbose_name='municipio', null=True)
-    telefono = models.IntegerField()
-    celular = models.IntegerField(null=True)
+    telefono = models.BigIntegerField(null=True)
+    celular = models.BigIntegerField(null=True)
     email = models.EmailField(null=True)
-    puntuacion_hv = models.IntegerField()
+    puntuacion_hv = models.IntegerField(null=True)
 
     def __unicode__(self):
         return (u"%s %s %s %s"%(self.nombre1,self.nombre2 or '', self.apellido1, self.apellido2 or '')).strip() or "-"

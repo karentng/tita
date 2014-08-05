@@ -7,7 +7,7 @@ from django.forms.models import inlineformset_factory
 class DatosPersonalesForm(forms.ModelForm):
     class Meta:
         model = Aspirante
-        fields = ('tipo_documento', 'numero_documento', 'nombre1', 'nombre2', 'apellido1', 'apellido2', 'genero', 'nacionalidad', 'fecha_nacimiento', 'municipio_nacimiento', 'direccion', 'municipio', 'telefono', 'celular', 'email')
+        fields = ('tipo_documento', 'numero_documento', 'nombre1', 'nombre2', 'apellido1', 'apellido2', 'sexo', 'nacionalidad', 'fecha_nacimiento', 'municipio_nacimiento', 'direccion', 'municipio', 'telefono', 'celular', 'email')
         widgets = {
             'fecha_nacimiento': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
         }
