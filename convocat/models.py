@@ -16,8 +16,20 @@ class TipoSimple(models.Model):
 class TipoDocumento(TipoSimple):
     pass
 
-class TipoTitulo(TipoSimple):
-    pass
+class TipoTitulo(models.Model):
+    nombre = models.CharField(max_length=100)
+    puntaje = models.IntegerField()
+
+    def __unicode__(self):
+        return self.nombre
+
+class TipoFormacion(models.Model):
+    nombre = models.CharField(max_length=100)
+    puntaje = models.IntegerField()
+
+    def __unicode__(self):
+        return self.nombre
+
 
 class TipoConocimiento(TipoSimple):
     pass
@@ -72,19 +84,8 @@ class Aspirante(models.Model):
         return (u"%s %s %s %s"%(self.nombre1,self.nombre2 or '', self.apellido1, self.apellido2 or '')).strip() or "-"
 
 class FormacionAcademica(models.Model):
-
-    MODALIDADES = (
-        ('TC', 'Técnica'),
-        ('TL', 'Tecnológica'),
-        ('TE', 'Tecnológica Especializada'),
-        ('UN', 'Universitaria'),
-        ('ES', 'Especialización'),
-        ('MG', 'Maestría o Magister'),
-        ('DOC', 'Doctorado o PHD'),
-    )
-
     aspirante = models.ForeignKey(Aspirante)
-    modalidad = models.CharField(max_length=3, verbose_name='modalidad', choices=MODALIDADES)
+    modalidad = models.ForeignKey(TipoTitulo, verbose_name='título obtenido')
     numero_semestres = models.IntegerField()
     titulo = models.CharField(max_length=255, verbose_name='título')
     fecha_terminacion = models.DateField(verbose_name='fecha de finalización')
@@ -103,7 +104,7 @@ class FormacionTics(models.Model):
         ('141', 'Cursos TIC mas 140 horas')
     )
     aspirante = models.OneToOneField(Aspirante)
-    curso = models.CharField(max_length=3, null=True, blank=True, verbose_name='duración del curso', choices=CURSOS_FORMACION_TICS)
+    curso = models.ForeignKey(TipoFormacion, verbose_name='título obtenido')
 
     def __unicode__(self):
         return self.curso
