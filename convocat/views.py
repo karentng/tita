@@ -7,6 +7,7 @@ from django.template import RequestContext
 from django.core.context_processors import csrf
 from django.contrib.auth.models import User
 from convocat.models import Aspirante, TipoDocumento, Municipio
+from django.shortcuts import redirect
 
 from convocat.forms import DatosPersonalesForm, FormacionAcademicaForm, FormacionTicsForm
 
@@ -53,9 +54,56 @@ def formulario(request):
         'formacionTics': formacionTics,
     })
 
-def obtenerMunicipios(request):
-    municipios = serializers.serialize('json', Municipio.objects.all())
-    return HttpResponse(municipios, mimetype='application/json')
+def datosPersonales(request):
+    if request.method == 'POST':
+        form = DatosPersonalesForm(request.POST)
+        if form.is_valid():
+            #form = form.cleaned_data
+            objeto = form.save(commit=False)
+            objeto.puntuacion_hv = 0
+            objeto.save()
+            return redirect('formacionAcademica', objeto.id)
+    
+    datosBasicos = DatosPersonalesForm()
+
+    return render(request, 'formularioHV/datosPersonales.html', {
+        'opcion_menu': 6,
+        'datosBasicos': datosBasicos,
+    })
+
+def formacionAcademica(request, idnt):
+    if request.method == 'POST':
+        form = FormacionAcademicaForm(request.POST)
+        if form.is_valid():
+            #form = form.cleaned_data
+            objeto = form.save(commit=False)
+            objeto.aspirante_id = idnt
+            objeto.save()
+            return redirect('formacionTics', idnt)
+
+    formacionAcademica = FormacionAcademicaForm()
+
+    return render(request, 'formularioHV/formacionAcademica.html', {
+        'opcion_menu': 6,
+        'formacionAcademica': formacionAcademica,
+    })
+
+def formacionTics(request, idnt):
+    if request.method == 'POST':
+        form = FormacionTicsForm(request.POST)
+        if form.is_valid():
+            #form = form.cleaned_data
+            objeto = form.save(commit=False)
+            objeto.aspirante_id = idnt
+            objeto.save()
+            return redirect('publico') # cambiar al que sigue
+
+    formacionTics = FormacionTicsForm()
+
+    return render(request, 'formularioHV/formacionTics.html', {
+        'opcion_menu': 6,
+        'formacionTics': formacionTics,
+    })
 
 def login(request):
     
