@@ -110,8 +110,23 @@ class FormacionTics(models.Model):
         return self.curso
 
 class ConocimientosEspecificos(models.Model):
+
+    HABILIDAD_CONOCIMIENTO = (
+        ('1', 'Regular'),
+        ('2', 'Bueno'),
+        ('3', 'Muy bueno'),
+    ) 
+
     aspirante = models.ForeignKey(Aspirante)
-    conocimiento = models.ForeignKey(TipoConocimiento, verbose_name='conocimiento específico')
+
+    conocimiento1 = models.CharField(max_length=50, verbose_name='Conocimiento y manejo de herramientas ofimáticas', choices=HABILIDAD_CONOCIMIENTO)
+    conocimiento2 = models.CharField(max_length=50, verbose_name='Conocimiento y manejo de herramientas  Web 2', choices=HABILIDAD_CONOCIMIENTO)
+    conocimiento3 = models.CharField(max_length=50, verbose_name='Conocimiento herramientas de edición multimedia', choices=HABILIDAD_CONOCIMIENTO)
+    conocimiento4 = models.CharField(max_length=50, verbose_name='Experiencia en desarrollo de contenidos educativos digitales', choices=HABILIDAD_CONOCIMIENTO)
+    conocimiento5 = models.CharField(max_length=50, verbose_name='Experiencia en desarrollo de libros de texto digital', choices=HABILIDAD_CONOCIMIENTO)
+    conocimiento6 = models.CharField(max_length=50, verbose_name='Experiencia en procesos de e-learning', choices=HABILIDAD_CONOCIMIENTO)
+    conocimiento7 = models.CharField(max_length=50, verbose_name='Experiencia en gestión de proyectos educativos TIC', choices=HABILIDAD_CONOCIMIENTO)
+    conocimiento8 = models.CharField(max_length=50, verbose_name='Experiencia en desarrollo de elementos de evaluación de competencias.', choices=HABILIDAD_CONOCIMIENTO)
     calificacion = models.CharField(max_length=50, verbose_name='calificación')
 
     def __unicode__(self):
@@ -119,19 +134,45 @@ class ConocimientosEspecificos(models.Model):
 
 
 class IdiomasManejados(models.Model):
+
+    HABILIDAD_IDIOMA = (
+        ('1', 'Regular'),
+        ('2', 'Bueno'),
+        ('3', 'Muy bueno'),
+    )
+
     aspirante = models.OneToOneField(Aspirante)
     idioma = models.ForeignKey(TipoIdioma, verbose_name='idioma', help_text=u"Sólo se pueden ingresar un idioma diferente al español.")
-    habla = models.CharField(max_length=50, verbose_name='habilidad hablando')
-    lee = models.CharField(max_length=50, verbose_name='habilidad leyendo')
-    escribe = models.CharField(max_length=50, verbose_name='habilidad escribiendo')
+    habla = models.CharField(max_length=50, verbose_name='habilidad hablando', choices=HABILIDAD_IDIOMA)
+    lee = models.CharField(max_length=50, verbose_name='habilidad leyendo', choices=HABILIDAD_IDIOMA)
+    escribe = models.CharField(max_length=50, verbose_name='habilidad escribiendo', choices=HABILIDAD_IDIOMA)
+    calificacion = models.CharField(max_length=50, verbose_name='calificación')
 
     def __unicode__():
         return self.idioma
 
 class ExperienciaFormadorTics(models.Model):
+    EXP_EST = (
+        ('1', 'De 1 a 2 años'),
+        ('2', 'De 2 a 3  años '),
+        ('3', 'De 3 a 5 años'),
+        ('4', 'Más de 5 años'),
+    )
+    EXP_DOC = (
+        ('1', 'De 80 a 200 horas'),
+        ('2', 'De 200 a 300 horas'),
+        ('3', 'De 300 a 450 horas'),
+        ('4', 'Más de 450 horas'),
+    )
+    EXP_FOR = (
+        ('1', 'De 80 a 120 horas'),
+        ('2', 'Más de 120 horas'),
+    )
     aspirante = models.ForeignKey(Aspirante)
-    formador = models.ForeignKey(TipoFormador, verbose_name='formador de')
-    rango = models.ForeignKey(RangoTiempo, verbose_name='rango de formación')
+    formador_est = models.CharField(max_length=50, verbose_name='formación tic a estudiantes', choices=EXP_EST)
+    formador_doc = models.CharField(max_length=50, verbose_name='formación tic a docentes', choices=EXP_DOC)
+    formador_for = models.CharField(max_length=50, verbose_name='formación tic a profesores', choices=EXP_FOR)
+    calificacion = models.CharField(max_length=50, verbose_name='calificación')
 
     def __unicode__():
         return self.formador

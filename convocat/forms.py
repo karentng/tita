@@ -2,6 +2,7 @@ from django import forms
 from convocat.models import *
 from bootstrap3_datetime.widgets import DateTimePicker
 from django.forms import ModelForm, Textarea, HiddenInput, TextInput, Select
+from django.forms.models import inlineformset_factory
 
 class DatosPersonalesForm(forms.ModelForm):
     class Meta:
@@ -26,3 +27,31 @@ class FormacionTicsForm(forms.ModelForm):
         widgets = {
             'curso': Select({'size': 5})
         }
+
+class ConocimientosEspecificosForm(forms.ModelForm):
+    class Meta:
+        model = ConocimientosEspecificos
+        fields = ('conocimiento1', 'conocimiento2', 'conocimiento3', 'conocimiento4', 'conocimiento5', 'conocimiento6', 'conocimiento7', 'conocimiento8')
+        widgets = {
+            #'manejo': Select({'size':3})
+        }
+
+class IdiomasManejadosForm(forms.ModelForm):
+    class Meta:
+        model = IdiomasManejados
+        fields = ('idioma','habla','lee','escribe',)
+        widgets = {
+            'idioma': Select({'size':4}),
+        }
+
+class ExperienciaFormadorTicsForm(forms.ModelForm):
+    class Meta:
+        model = ExperienciaFormadorTics
+        fields = ('formador_est','formador_doc','formador_for',)
+        widgets = {
+            'formador_est': Select({'size':4}),
+            'formador_doc': Select({'size':4}),
+            'formador_for': Select({'size':2}),
+        }
+
+

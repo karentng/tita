@@ -6,10 +6,10 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.core.context_processors import csrf
 from django.contrib.auth.models import User
-from convocat.models import Aspirante, TipoDocumento, Municipio
+from convocat.models import Aspirante, TipoDocumento, Municipio, ConocimientosEspecificos, TipoConocimiento
 from django.shortcuts import redirect
+from convocat.forms import DatosPersonalesForm, FormacionAcademicaForm, FormacionTicsForm, ConocimientosEspecificosForm, IdiomasManejadosForm, ExperienciaFormadorTicsForm
 
-from convocat.forms import DatosPersonalesForm, FormacionAcademicaForm, FormacionTicsForm
 
 # Create your views here.
 
@@ -96,13 +96,72 @@ def formacionTics(request, idnt):
             objeto = form.save(commit=False)
             objeto.aspirante_id = idnt
             objeto.save()
-            return redirect('publico') # cambiar al que sigue
+            return redirect('conocimientosEspecificos', idnt) 
 
     formacionTics = FormacionTicsForm()
 
     return render(request, 'formularioHV/formacionTics.html', {
         'opcion_menu': 6,
         'formacionTics': formacionTics,
+    })
+
+def conocimientosEspecificos(request, idnt):
+    if request.method == 'POST':
+        form = ConocimientosEspecificosForm(request.POST)
+        if form.is_valid():
+            #form = form.cleaned_data
+            objeto = ConocimientosEspecificos()
+            #conocimiento = TipoConocimiento.objects.get(id = 8)
+            objeto = form.save(commit=False)
+            #objeto.conocimiento = conocimiento
+            objeto.aspirante_id = idnt
+            objeto.save()
+            return redirect('idiomasManejados', idnt) 
+
+    conocimientosEspecificos = ConocimientosEspecificosForm()
+
+    return render(request, 'formularioHV/conocimientosEspecificos.html', {
+        'opcion_menu': 6,
+        'conocimientosEspecificos': conocimientosEspecificos, 
+    })
+
+def idiomasManejados(request, idnt):
+    if request.method == 'POST':
+        form = IdiomasManejadosForm(request.POST)
+        if form.is_valid():
+                #form = form.cleaned_data
+            objeto = form.save(commit=False)
+            objeto.aspirante_id = idnt
+            objeto.save()
+            return redirect('experienciaFormadorTics', idnt) 
+    idiomasManejados = IdiomasManejadosForm()
+
+    return render(request, 'formularioHV/idiomasManejados.html', {
+            'opcion_menu': 6,
+            'idiomasManejados': idiomasManejados,
+    })
+
+def experienciaFormadorTics(request, idnt):
+    if request.method == 'POST':
+        form = ExperienciaFormadorTicsForm(request.POST)
+        if form.is_valid():
+                #form = form.cleaned_data
+            objeto = form.save(commit=False)
+            objeto.aspirante_id = idnt
+            objeto.save()
+            return redirect('publico') # cambiar al que sigue
+
+    experienciaFormadorTics = ExperienciaFormadorTicsForm()
+
+    return render(request, 'formularioHV/experienciaFormadorTics.html', {
+            'opcion_menu': 6,
+            'experienciaFormadorTics': experienciaFormadorTics,
+    })
+
+def firmaServidorPublico(request, idnt):
+
+    return render(request, 'formularioHV/firmaServidorPublico.html', {
+            'opcion_menu': 6,
     })
 
 def login(request):
