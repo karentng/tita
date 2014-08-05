@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load bootstrap3 %}
+
 {% block titulo %}
 	Formulario Aspirante
 {% endblock %}
@@ -27,24 +29,6 @@
 		$(document).ready(function() {
 			FormWizard.init();
 		});
-
-		function iniciarMunicipios(){
-			//$.post("{% url 'obtenerMunicipios' %}", function(data){
-			$.get("/obtenerMunicipios", function(data){
-				var municipios = Array();
-				for(i in data){
-					var aux = data[i];
-					municipios.push({id:aux.pk, text: aux.fields.nombre});
-				}
-				$("#municipio_nacimiento").select2({data: municipios});
-				$("#municipio_actual").select2({data: municipios});
-			});
-		}
-		iniciarMunicipios();
-
-		function guardarForm(){
-			$("#guardar").click();
-		}
 	</script>
 {% endblock %}
 
@@ -90,186 +74,35 @@
 			</ol>
 			<!-- begin wizard step-1 -->
 			
-			
 			<div>
-                <div class="row" align="center">
-                	<div class="col-sm-3">
-                		<b>Apellido 1</b>
-                		<input class="form-control" name="apellido1" type="text" />
-                	</div>
-                	<div class="col-sm-3">
-                		<b>Apellido 2</b>
-                		<input class="form-control" name="apellido2" type="text" />
-                	</div>
-                	<div class="col-sm-3">
-                		<b>Nombre 1</b>
-                		<input class="form-control" name="nombre1" type="text" />
-                	</div>
-                	<div class="col-sm-3">
-                		<b>Nombre 2</b>
-                		<input class="form-control" name="nombre2" type="text" />
-                	</div>
-                </div>
-
-                <div class="row espacio" align="center">
-                	<div class="col-sm-3">
-                		<b>Tipo de Documento</b>
-                		<select class="form-control" name="tipo_documento">
-                			<option value="CC">Cédula</option>
-                			<option value="CE">Cédula Extranjera</option>
-                			<option value="NP">Número de Pasaporte</option>
-                		</select>
-                	</div>
-                	<div class="col-sm-3">
-                		<b>Número de Documento</b>
-                		<input class="form-control" name="num_documento" type="number" />
-                	</div>
-                	<div class="col-sm-3">
-                		<b>Género</b>
-                		<select class="form-control" name="genero">
-                			<option value="-">Seleccione su género</option>
-                			<option value="M">Masculino</option>
-                			<option value="F">Femenino</option>
-                		</select>
-                	</div>
-                	<div class="col-sm-3">
-                		<b>Nacionalidad</b>
-                		<select class="form-control" name="nacionalidad">
-                			<option value="CO">Colombiano</option>
-                		</select>
-                	</div>
-                </div>
-
-                <div class="row espacio" align="center">
-                	<div class="col-sm-3">
-                		<b>Fecha de Nacimiento</b>
-                		<input class="form-control datepicker" name="fecha_nacimiento" type="text" />
-                	</div>
-                	<div class="col-sm-3">
-                		<b>Municipio de Nacimiento</b>
-                		<input id="municipio_nacimiento" name="municipio_nacimiento" type="hidden" style="width:100%" />
-                	</div>
-                	<div class="col-sm-3">
-                		<b>Teléfono Fijo</b>
-                		<input class="form-control" name="fijo" type="text" />
-                	</div>
-                	<div class="col-sm-3">
-                		<b>Municipio Actual</b>
-                		<input id="municipio_actual" name="municipio_actual" type="hidden" style="width:100%" />
-                	</div>
-                </div>
-                <div class="row espacio" align="center">
-                	<div class="col-sm-5">
-                		<b>Dirección</b>
-                		<input class="form-control" name="direccion" type="text" />
-                	</div>
-                	
-                	<div class="col-sm-2">
-                		<b>Celular</b>
-                		<input class="form-control" name="celular" type="text" />
-                	</div>
-                	<div class="col-sm-5">
-                		<b>Email</b>
-                		<input class="form-control" name="email" type="email" />
-                	</div>
-                </div>
+				<div class="row">
+					<div class="col-xs-12">
+						{% bootstrap_form datosBasicos %}	
+					</div>
+				</div>
 			</div>
 			<!-- end wizard step-1 -->
 			<!-- begin wizard step-2 -->
 			<div>
-				<div class="row" align="center">
+				<div class="row">
 					<div class="col-sm-12">
 						<label style="font-size:16px"><b>Educación superior (pregrado y postgrado)</b></label>
-						<div class="row">
-							<div class="col-sm-12 espacio" align="justify" style="font-size:15px">
-								<b>Señalar la modalidad académica de más alto nivel que usted finalizó.</b>
-							</div>
-						</div>
-						<div class="row espacio">
-							<div class="col-sm-6" style="font-size:14px" align="right">
-								<b>Modalidad</b>
-							</div>
-							<div class="col-sm-6">
-								<select class="form-control" name="modalidad">
-									{% for titulo in titulos %}
-										<option value="{{titulo.id}}">{{titulo.nombre}}</option>
-									{% endfor %}
-								</select>
-							</div>
-						</div>
-						<div class="row espacio">
-							<div class="col-sm-6" align="right">
-								<b>No. de semestres aprobados</b>
-							</div>
-							<div class="col-sm-6">
-								<input class="form-control" name="semestres_aprobados" type="number" />
-							</div>
-						</div>
-						<div class="row espacio">
-							<div class="col-sm-6" align="right">
-								<b>Título Obtenido</b>
-							</div>
-							<div class="col-sm-6">
-								<input class="form-control" name="titulo_obtenido" type="text" />
-							</div>
-						</div>
-						<div class="row espacio">
-							<div class="col-sm-6" align="right">
-								<b>Fecha de Terminación</b>
-							</div>
-							<div class="col-sm-6">
-								<input class="form-control datepicker" name="fecha_terminacion" type="text" />
-							</div>
-						</div>
-						<div class="row espacio">
-							<div class="col-sm-6" align="right">
-								<b>No. Tarjeta Profesional si ésta ha sido prevista en una ley</b>
-							</div>
-							<div class="col-sm-6">
-								<input class="form-control" name="tarjeta_prof" type="text" />
-							</div>
-						</div>
-						<div class="row espacio">
-							<div class="col-sm-6" align="right">
-								<b>Soportes</b>
-							</div>
-							<div class="col-sm-6">
-								<input class="form-control" name="soportes_formacion_academica" type="file" />
-							</div>
-						</div>
+						<p><b>Señalar la modalidad académica de más alto nivel que usted finalizó.</b></p>
+					</div>
+					<div class="col-xs-12">
+						{% bootstrap_form formacionAcademica %}	
 					</div>
 				</div>
 			</div>
 			<!-- end wizard step-2 -->
 			<!-- begin wizard step-3 -->
 			<div>
-				<div class="row" align="center">
+				<div class="row">
+					<div class="col-xs-12" align="center">
+						<b>Seleccione la formación en TIC's que ha tenido mayor duración y a la cual usted asistió.</b>
+					</div>
 					<div class="col-xs-12">
-						<div class="row">
-							<div class="col-sm-12 espacio" align="justify" style="font-size:15px">
-								<b>Seleccione la formación en TIC's que ha tenido mayor duración y a la cual usted asistió.</b>
-							</div>
-						</div>
-						<div class="row espacio">
-							<div class="col-xs-12" style="font-size:14px">
-								<b>Cursos</b>
-								<select class="form-control" name="curso_tic" size="5">
-									<option value="0">Ninguna</option>
-									<option value="1">Curso TIC mínimo 40 horas</option>
-									<option value="2">Curso TIC hasta 90 horas</option>
-									<option value="3">Curso TIC hasta 140 horas certificadas o en proceso de certificación</option>
-									<option value="4">Curso TIC más de 140 horas</option>
-								</select>
-							</div>
-						</div>
-						<div class="row espacio">
-							<div class="col-sm-6">
-								<b>Soportes</b>
-							</div>
-							<div class="col-sm-6">
-								<input class="form-control" name="soportes_tic" type="file" />
-							</div>
-						</div>
+						{% bootstrap_form formacionTics %}	
 					</div>
 				</div>
 			</div>

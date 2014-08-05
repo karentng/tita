@@ -51,19 +51,19 @@ class Municipio(models.Model):
         return self.nombre
 
 class Aspirante(models.Model):    
-    tipo_documento = models.ForeignKey(TipoDocumento, null=True, blank=True, verbose_name='tipo de documento')
-    numero_documento = models.CharField( max_length=128, blank=True, null=True, unique=True, verbose_name='número documento')
+    tipo_documento = models.ForeignKey(TipoDocumento, verbose_name='tipo de documento')
+    numero_documento = models.CharField( max_length=128, unique=True, verbose_name='número documento')
     nombre1 = models.CharField( max_length=255, verbose_name='Primer Nombre')
     nombre2 = models.CharField( max_length=255, blank=True, null=True, verbose_name='segundo nombre')
     apellido1 = models.CharField( max_length=255, verbose_name='Primer Apellido')
     apellido2 = models.CharField( max_length=255, blank=True, null=True, verbose_name='segundo apellido')
     genero = models.CharField( choices=[('M','Hombre'), ('F', 'Mujer')], max_length=1, verbose_name='sexo')
     nacionalidad = models.CharField( max_length=255, null=True, blank=True, verbose_name='nacionalidad')
-    fecha_nacimiento = models.DateField( null=True, verbose_name='fecha de nacimiento')
-    municipio_nacimiento = models.ForeignKey(Municipio, verbose_name='municipio de nacimiento', related_name='municipio_n', null=True)
-    direccion = models.CharField( max_length=100, verbose_name='Dirección', null=True)
+    fecha_nacimiento = models.DateField(verbose_name='fecha de nacimiento')
+    municipio_nacimiento = models.ForeignKey(Municipio, verbose_name='municipio de nacimiento', related_name='municipio_n')
+    direccion = models.CharField( max_length=100, verbose_name='Dirección')
     municipio = models.ForeignKey(Municipio, verbose_name='municipio', null=True)
-    telefono = models.IntegerField(null=True)
+    telefono = models.IntegerField()
     celular = models.IntegerField(null=True)
     email = models.EmailField(null=True)
     puntuacion_hv = models.IntegerField()
@@ -72,9 +72,23 @@ class Aspirante(models.Model):
         return (u"%s %s %s %s"%(self.nombre1,self.nombre2 or '', self.apellido1, self.apellido2 or '')).strip() or "-"
 
 class FormacionAcademica(models.Model):
+
+    MODALIDADES = (
+        ('TC', 'Técnica'),
+        ('TL', 'Tecnológica'),
+        ('TE', 'Tecnológica Especializada'),
+        ('UN', 'Universitaria'),
+        ('ES', 'Especialización'),
+        ('MG', 'Maestría o Magister'),
+        ('DOC', 'Doctorado o PHD'),
+    )
+
     aspirante = models.ForeignKey(Aspirante)
-    titulo = models.ForeignKey(TipoTitulo, null=True, verbose_name='título obtenido')
+    modalidad = models.CharField(max_length=3, verbose_name='modalidad', choices=MODALIDADES)
+    numero_semestres = models.IntegerField()
+    titulo = models.CharField(max_length=255, verbose_name='título')
     fecha_terminacion = models.DateField(verbose_name='fecha de finalización')
+    tarjeta_profesional = models.CharField(max_length=255)
 
     def __unicode__(self):
         return self.titulo

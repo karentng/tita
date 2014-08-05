@@ -8,6 +8,8 @@ from django.core.context_processors import csrf
 from django.contrib.auth.models import User
 from convocat.models import Aspirante, TipoDocumento, Municipio
 
+from convocat.forms import DatosPersonalesForm, FormacionAcademicaForm, FormacionTicsForm
+
 # Create your views here.
 
 # vistas de la parte PUBLICA
@@ -39,10 +41,16 @@ def registrarse(request):
 def formulario(request):
 
     titulos = TipoTitulo.objects.all()
+    datosBasicos = DatosPersonalesForm()
+    formacionAcademica = FormacionAcademicaForm()
+    formacionTics = FormacionTicsForm()
 
     return render(request, 'publico/formulario_aspirante.html', {
         'opcion_menu': 6,
-        'titulos': titulos
+        'titulos': titulos,
+        'datosBasicos': datosBasicos,
+        'formacionAcademica': formacionAcademica,
+        'formacionTics': formacionTics,
     })
 
 def obtenerMunicipios(request):
