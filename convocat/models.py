@@ -84,6 +84,8 @@ class FormacionTics(models.Model):
     fecha_terminacion = models.DateField(verbose_name='fecha de finalización')
     institucion = models.CharField(max_length=255, verbose_name=u'institución formadora')
 
+    def __unicode__(self):
+        return self.titulo
 
 
 class ConocimientosEspecificos(models.Model):

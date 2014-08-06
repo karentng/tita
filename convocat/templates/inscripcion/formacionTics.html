@@ -25,16 +25,52 @@
 {% block titulo_contenido %}Formulario de Registro de Aspirantes{% endblock %}
 
 {% block previo_contenido_panel %}
-    {% include "inscripcion/_wizard.html" with wizard_stage=1 %}
+    {% include "inscripcion/_wizard.html" with wizard_stage=3 %}
 {% endblock %}
 
 {% block titulo_panel %}Formacion en TIC's{% endblock %}
 {% block contenido_panel %}
-    <div class="col-xs-12" align="center">
-        <b>Seleccione la formación en TIC's que ha tenido mayor duración y a la cual usted asistió.</b>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Duración</th>
+            <th>Título</th>
+            <th>Institución</th>
+            <th>Inicio</th>
+            <th>Terminación</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for est in estudios_tics %}
+            <tr>
+                <td>{{est.get_duracion_display}}</td>
+                <td>{{est.titulo}}</td>
+                <td>{{est.institucion}}</td>
+                <td>{{est.fecha_inicio}}</td>
+                <td>{{est.fecha_terminacion}}</td>                
+                <td>
+                    <a href="#" onclick="return confirm('Seguro que desea eliminar esta entrada?')" class="text-danger">Eliminar</a>
+                </td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="6">No se ha agregado ningún curso de formación TIC's.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="well well-sm">
+        <h4>Agregar Formación TIC's</h4>
+        <form class="form-horizontal" method="post">{% csrf_token %}
+            {% bootstrap_form form layout="horizontal" horizontal_label_class='col-md-5' horizontal_field_class='col-md-5' %}
+            <div class="row">
+                <div class="col-md-3 col-md-offset-2">
+                    <button class="btn btn-sm btn-primary" type="submit">Agregar</button>
+                </div>
+            </div>
+        </form>
     </div>
-    <form class="form-horizontal" method="post">{% csrf_token %}
-        {% bootstrap_form form layout="horizontal" %}
-        <button class="btn btn-lg btn-primary pull-right" type="submit">Siguiente</button>
-    </form>
+
+    <a href="{% url 'formacionTics' %}" class="btn btn-lg btn-primary pull-right">Siguiente</a>
 {% endblock %}
