@@ -62,7 +62,7 @@ def formacionAcademica(request):
             objeto = form.save(commit=False)
             objeto.aspirante_id = aspirante.id
             objeto.save()
-            redirect('formacionAcademica') #Para evitar que al recargar la pagina cree nuevamente los datos
+            return redirect('formacionAcademica') #Para evitar que al recargar la pagina cree nuevamente los datos
     else:
         form = FormacionAcademicaForm()
 
@@ -94,8 +94,7 @@ def formacionTics(request):
             objeto = form.save(commit=False)
             objeto.aspirante_id = aspirante.id
             objeto.save()
-            print "estoy redireccionando"
-            redirect('formacionTics')
+            return redirect('formacionTics')
     else:
         form = FormacionTicsForm()
 
