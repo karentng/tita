@@ -66,24 +66,27 @@ def datosPersonales(request):
     })
 
 
-"""
-def formacionAcademica(request, idnt):
+
+def formacionAcademica(request):
+    aspirante = aspirante_sesion(request)
+    if not aspirante : redirect('datosPersonales')
     if request.method == 'POST':
-        form = FormacionAcademicaForm(request.POST)
+        form = FormacionAcademicaForm(request.POST, instance=aspirante)
         if form.is_valid():
-            #form = form.cleaned_data
             objeto = form.save(commit=False)
             objeto.aspirante_id = idnt
             objeto.save()
-            return redirect('formacionTics', idnt)
+            #return redirect('formacionTics', idnt)
+    else:
+        form = FormacionAcademicaForm(instance=aspirante)
 
-    formacionAcademica = FormacionAcademicaForm()
-
-    return render(request, 'formularioHV/formacionAcademica.html', {
+    return render(request, 'inscripcion/formacionAcademica.html', {
         'opcion_menu': 6,
-        'formacionAcademica': formacionAcademica,
+        'form': form,
     })
 
+
+"""
 def formacionTics(request, idnt):
     if request.method == 'POST':
         form = FormacionTicsForm(request.POST)

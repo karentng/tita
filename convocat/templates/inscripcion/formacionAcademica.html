@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block titulo %} Formulario Aspirante {% endblock %}
+
+{% block menu %}
+	{#% include "menus/publico.html" %#}
+{% endblock %}
+
+{% block css %}
+	<link href="{{STATIC_URL}}css/select2.css" rel="stylesheet" />
+	<link href="{{STATIC_URL}}plugins/bootstrap-wizard/css/bwizard.min.css" rel="stylesheet" />
+	{% comment %}
+	<style type="text/css">
+		.espacio{
+			margin-top: 10px;
+		}
+	</style>
+	{% endcomment %}
+{% endblock %}
+
+{% block js %}
+	<script src="{{STATIC_URL}}js/select2.js"></script>
+{% endblock %}
+
+{% block miga_pan %}
+	<li><a href="javascript:;">Inicio</a></li>
+	<li class="active">Formulario de Registro</li>
+{% endblock %}
+
+{% block titulo_contenido %}
+	Formulario de Registro de Aspirantes
+{% endblock %}
+
+{% block titulo_panel %}
+	Registro de Aspirantes
+{% endblock %}
+
+{% block contenido_panel %}
+
+	{% include "inscripcion/_wizard.html" with wizard_stage=2 %}
+		
+	<div>	
+		<form class="form-horizontal" method="post">{% csrf_token %}
+			{% bootstrap_form form layout="horizontal" %}
+			<button class="btn btn-lg btn-primary pull-right" type="submit">Siguiente</button>
+		</form>
+	</div>		
+{% endblock %}
