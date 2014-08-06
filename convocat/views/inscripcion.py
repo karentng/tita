@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render, render_to_response
+from django.shortcuts import redirect, render, render_to_response, get_object_or_404
 from django.core import serializers
 from django.http import HttpResponse
 from convocat.models import * 
@@ -72,6 +72,15 @@ def formacionAcademica(request):
         'form': form,
         'estudios': estudios,
     })
+
+def eliminarFormacionAcademica(request, formAcadId):
+    aspirante = aspirante_sesion(request)
+    if not aspirante : redirect('datosPersonales')
+
+    formAcad = get_object_or_404(FormacionAcademica.objects, aspirante_id=aspirante.id, id=formAcadId)
+    formAcad.delete()
+
+    return redirect('formacionAcademica')
 
 
 
