@@ -5,23 +5,6 @@ from convocat.models import *
 from convocat.forms import *
 
 
-def formulario(request):
-
-    titulos = TipoTitulo.objects.all()
-    datosBasicos = DatosPersonalesForm()
-    formacionAcademica = FormacionAcademicaForm()
-    formacionTics = FormacionTicsForm()
-
-    return render(request, 'publico/formulario_aspirante.html', {
-        'opcion_menu': 6,
-        'titulos': titulos,
-        'datosBasicos': datosBasicos,
-        'formacionAcademica': formacionAcademica,
-        'formacionTics': formacionTics,
-    })
-
-
-
 def aspirante_sesion(request):
     valor = request.session.get('clave_aspirante')
     print "valor encontrado en session=",valor
@@ -72,30 +55,37 @@ def datosPersonales(request):
 def formacionAcademica(request):
     aspirante = aspirante_sesion(request)
     if not aspirante : redirect('datosPersonales')
+    
     if request.method == 'POST':
-        form = FormacionAcademicaForm(request.POST) # formacion academica siempre es para agregar, nunca para editar
+        form = FormacionAcademicaForm(request.POST)
         if form.is_valid():
             objeto = form.save(commit=False)
-            objeto.aspirante_id = idnt
+            objeto.aspirante_id = aspirante.id
             objeto.save()
-            return redirect('formacionTics')
+            # proveer de nuevo un formulario en blanco para agregar otro estudio
+            form = FormacionAcademicaForm()
     else:
-        form = FormacionAcademicaForm(instance=aspirante)
+        form = FormacionAcademicaForm()
+
+    estudios = aspirante.formacionacademica_set.all().order_by('fecha_terminacion')
 
     return render(request, 'inscripcion/formacionAcademica.html', {
-        'opcion_menu': 6,
         'form': form,
+        'estudios': estudios,
     })
 
 
-"""
-def formacionTics(request, idnt):
+
+def formacionTics(request):
+    aspirante = aspirante_sesion(request)
+    if not aspirante : redirect('datosPersonales')
+
     if request.method == 'POST':
         form = FormacionTicsForm(request.POST)
         if form.is_valid():
             #form = form.cleaned_data
             objeto = form.save(commit=False)
-            objeto.aspirante_id = idnt
+            objeto.aspirante_id = aspirante.id
             objeto.save()
             return redirect('conocimientosEspecificos', idnt) 
 
@@ -106,6 +96,8 @@ def formacionTics(request, idnt):
         'formacionTics': formacionTics,
     })
 
+
+"""
 def conocimientosEspecificos(request, idnt):
     if request.method == 'POST':
         form = ConocimientosEspecificosForm(request.POST)
