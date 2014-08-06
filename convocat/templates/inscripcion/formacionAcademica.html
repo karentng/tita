@@ -33,10 +33,51 @@
 
 {% block titulo_panel %} Formación Académica {% endblock %}
 {% block contenido_panel %}
-	<div>	
+	<table class="table">
+		<thead>
+		<tr>
+			<th>Nivel</th>
+			<th>Titulo</th>
+			<th>Institución</th>
+			<th>Inicio</th>
+			<th>Terminación</th>
+			<th></th>
+			<th></th>
+		</tr>
+		</thead>
+		<tbody>
+		{% for est in estudios %}
+			<tr>
+				<td>{{est.get_nivel_display}}</td>
+				<td>{{est.titulo}}</td>
+				<td>{{est.institucion}}</td>
+				<td>{{est.fecha_inicio}}</td>
+				<td>{{est.fecha_terminacion}}</td>
+				<td>
+					{% if est.relacionado_pedagogia %}<span class="label label-info">Pedagogía</span>{% endif %}
+					{% if est.relacionado_tics %}<span class="label label-info">TICs</span>{% endif %}
+				</td>
+				<td>
+					<a href="#" onclick="return confirm('Seguro que desea eliminar esta entrada?')" class="text-danger">Eliminar</a>
+				</td>
+			</tr>
+		{% empty %}
+			changos
+		{% endfor %}
+		</tbody>
+	</table>
+
+	<div class="well well-sm">
+		<h4>Agregar Estudio</h4>
 		<form class="form-horizontal" method="post">{% csrf_token %}
-			{% bootstrap_form form layout="horizontal" %}
-			<button class="btn btn-lg btn-primary pull-right" type="submit">Siguiente</button>
+			{% bootstrap_form form layout="horizontal" horizontal_label_class='col-md-5' horizontal_field_class='col-md-5' %}
+			<div class="row">
+				<div class="col-md-3 col-md-offset-2">
+					<button class="btn btn-sm btn-primary" type="submit">Agregar</button>
+				</div>
+			</div>
 		</form>
-	</div>		
+	</div>
+
+	<a href="{% url 'formacionTics' %}" class="btn btn-lg btn-primary pull-right">Siguiente</a>
 {% endblock %}

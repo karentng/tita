@@ -15,19 +15,21 @@ class DatosPersonalesForm(forms.ModelForm):
 class FormacionAcademicaForm(forms.ModelForm):
     class Meta:
         model = FormacionAcademica
-        fields = ('nivel', 'titulo', 'fecha_inicio', 'fecha_terminacion', 'institucion','relacionado_pedagogia', 'relacionado_tics')
+        fields = ('nivel', 'titulo',  'institucion', 'fecha_inicio', 'fecha_terminacion','relacionado_pedagogia', 'relacionado_tics')
         widgets = {
+            'fecha_inicio': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
             'fecha_terminacion': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
         }
-"""
+
 class FormacionTicsForm(forms.ModelForm):
     class Meta:
         model = FormacionTics
-        fields = ('curso',)
-        widgets = {
-            'curso': Select({'size': 5})
-        }
+        #fields = ('curso',)
+        #widgets = {
+        #    'curso': Select({'size': 5})
+        #}
 
+"""
 class ConocimientosEspecificosForm(forms.ModelForm):
     class Meta:
         model = ConocimientosEspecificos
