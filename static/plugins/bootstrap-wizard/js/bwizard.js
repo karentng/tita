@@ -291,7 +291,8 @@ $.widget("bootstrap.bwizard", {
 					});
 					$(this).contents().wrap('<a href="#step' + (i+1) + '" class="hidden-phone"/>');
 				} else {
-					$(this).contents().wrap('<span class="hidden-phone"/>');
+					//$(this).contents().wrap('<a class="hidden-phone"/>');
+					//$(this).contents().wrap('<a href="#step" class="hidden-phone"/>');
 				}
 				$(this).attr("role", "tab")
 				$(this).css('z-index',self.lis.length-i);
