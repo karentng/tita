@@ -3,8 +3,14 @@ from convocat.models import *
 from bootstrap3_datetime.widgets import DateTimePicker
 from django.forms import ModelForm, Textarea, HiddenInput, TextInput, Select
 from django.forms.models import inlineformset_factory
+from django_select2 import AutoModelSelect2Field
+
+class MunicipioChoice(AutoModelSelect2Field):
+    queryset = Municipio.objects
+    search_fields = ['nombre__icontains']
 
 class DatosPersonalesForm(forms.ModelForm):
+    municipio_nacimiento = MunicipioChoice()
     class Meta:
         model = Aspirante
         fields = ('numero_documento', 'nombre1', 'nombre2', 'apellido1', 'apellido2', 'sexo', 'nacionalidad', 'fecha_nacimiento', 'municipio_nacimiento', 'direccion', 'municipio', 'telefono', 'celular', 'email')
