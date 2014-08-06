@@ -46,6 +46,8 @@ def generar_clave(aspirante):
     clave = "%d-%d"%(aspirante.id, mihash)
     return clave
 
+
+
 def datosPersonales(request):
     aspirante = aspirante_sesion(request)
     print "aspirante actual=", aspirante

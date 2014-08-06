@@ -46,6 +46,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'convocat',
     'bootstrap3',
+    'bootstrap3_datetime',
 )
 
 MIDDLEWARE_CLASSES = (
