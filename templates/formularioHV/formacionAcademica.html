@@ -25,6 +25,8 @@
 	<script>
 		$(document).ready(function() {
 			FormWizard.init();
+
+			$( "#form_acad" ).click();
 		});
 	</script>
 {% endblock %}
@@ -51,10 +53,10 @@
 				<li>
 				    Datos Personales 
 				</li>
-				<li>
+				<li id="form_acad">
 				    Formación Académica
 				</li>
-				<li>
+				<li >
 				    Formación en TIC's
 				</li>
 				<li>
@@ -82,7 +84,7 @@
 						<label style="font-size:16px"><b>Educación superior (pregrado y postgrado)</b></label>
 						<p><b>Señalar la modalidad académica de más alto nivel que usted finalizó.</b></p>
 					</div>
-					<div class="col-xs-12">
+					<div  class="col-xs-12">
 						<form action="" method="post">{% csrf_token %}
 							{% bootstrap_form formacionAcademica %}	
 							<button class="btn btn-sm btn-primary" type="submit">Guardar</button>

@@ -85,10 +85,10 @@ class Aspirante(models.Model):
 
 class FormacionAcademica(models.Model):
     aspirante = models.ForeignKey(Aspirante)
-    modalidad = models.ForeignKey(TipoTitulo, verbose_name='título obtenido')
+    modalidad = models.ForeignKey(TipoTitulo, verbose_name='modalidad')
     numero_semestres = models.IntegerField()
     titulo = models.CharField(max_length=255, verbose_name='título')
-    fecha_terminacion = models.DateField(verbose_name='fecha de finalización')
+    fecha_terminacion = models.DateField(verbose_name='fecha de finalización', help_text='dd/mm/aa')
     tarjeta_profesional = models.CharField(max_length=255)
 
     def __unicode__(self):
@@ -104,7 +104,7 @@ class FormacionTics(models.Model):
         ('141', 'Cursos TIC mas 140 horas')
     )
     aspirante = models.OneToOneField(Aspirante)
-    curso = models.ForeignKey(TipoFormacion, verbose_name='título obtenido')
+    curso = models.CharField(max_length="10", verbose_name='duración curso', choices=CURSOS_FORMACION_TICS)
 
     def __unicode__(self):
         return self.curso
