@@ -4,19 +4,13 @@
 {% block titulo %} Formulario Aspirante {% endblock %}
 
 {% block menu %}
-	{#% include "menus/publico.html" %#}
+	{% include "menus/publico.html" %}
 {% endblock %}
 
 {% block css %}
 	<link href="{{STATIC_URL}}css/select2.css" rel="stylesheet" />
 	<link href="{{STATIC_URL}}plugins/bootstrap-wizard/css/bwizard.min.css" rel="stylesheet" />
-	{% comment %}
-	<style type="text/css">
-		.espacio{
-			margin-top: 10px;
-		}
-	</style>
-	{% endcomment %}
+	{{form.media}} {# agrega los js y css necesarios para el bootstrap3 datetimepicker #}
 {% endblock %}
 
 {% block js %}
@@ -28,18 +22,17 @@
 	<li class="active">Formulario de Registro</li>
 {% endblock %}
 
-{% block titulo_contenido %}
-	Formulario de Registro de Aspirantes
-{% endblock %}
+{% block titulo_contenido %}Formulario de Registro de Aspirantes{% endblock %}
 
-{% block titulo_panel %}
-	Registro de Aspirantes
-{% endblock %}
 
-{% block contenido_panel %}
 
+{% block previo_contenido_panel %}
 	{% include "inscripcion/_wizard.html" with wizard_stage=2 %}
-		
+{% endblock %}
+
+
+{% block titulo_panel %} Formación Académica {% endblock %}
+{% block contenido_panel %}
 	<div>	
 		<form class="form-horizontal" method="post">{% csrf_token %}
 			{% bootstrap_form form layout="horizontal" %}

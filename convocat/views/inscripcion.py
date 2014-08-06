@@ -58,7 +58,7 @@ def datosPersonales(request):
             clave = generar_clave(objeto)
             request.session['clave_aspirante'] = clave
             print "clave=",clave
-            #return redirect('formacionAcademica', objeto.id)
+            return redirect('formacionAcademica')
     else :
         form = DatosPersonalesForm(instance=aspirante)
 
@@ -73,12 +73,12 @@ def formacionAcademica(request):
     aspirante = aspirante_sesion(request)
     if not aspirante : redirect('datosPersonales')
     if request.method == 'POST':
-        form = FormacionAcademicaForm(request.POST, instance=aspirante)
+        form = FormacionAcademicaForm(request.POST) # formacion academica siempre es para agregar, nunca para editar
         if form.is_valid():
             objeto = form.save(commit=False)
             objeto.aspirante_id = idnt
             objeto.save()
-            #return redirect('formacionTics', idnt)
+            return redirect('formacionTics')
     else:
         form = FormacionAcademicaForm(instance=aspirante)
 
