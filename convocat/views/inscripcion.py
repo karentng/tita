@@ -62,8 +62,7 @@ def formacionAcademica(request):
             objeto = form.save(commit=False)
             objeto.aspirante_id = aspirante.id
             objeto.save()
-            # proveer de nuevo un formulario en blanco para agregar otro estudio
-            form = FormacionAcademicaForm()
+            redirect('formacionAcademica') #Para evitar que al recargar la pagina cree nuevamente los datos
     else:
         form = FormacionAcademicaForm()
 
@@ -87,22 +86,24 @@ def eliminarFormacionAcademica(request, formAcadId):
 
 def formacionTics(request):
     aspirante = aspirante_sesion(request)
-    if not aspirante : redirect('datosPersonales')
+    if not aspirante : redirect('formacionTics')
 
     if request.method == 'POST':
         form = FormacionTicsForm(request.POST)
         if form.is_valid():
-            #form = form.cleaned_data
             objeto = form.save(commit=False)
             objeto.aspirante_id = aspirante.id
             objeto.save()
-            return redirect('conocimientosEspecificos', idnt) 
 
-    formacionTics = FormacionTicsForm()
+            redirect('formacionTics')
+    else:
+        form = FormacionTicsForm()
 
-    return render(request, 'formularioHV/formacionTics.html', {
-        'opcion_menu': 6,
-        'formacionTics': formacionTics,
+    estudios_tics = aspirante.formaciontics_set.all().order_by('fecha_terminacion')
+
+    return render(request, 'inscripcion/formacionTics.html', {
+        'estudios_tics': estudios_tics,
+        'form': form,
     })
 
 

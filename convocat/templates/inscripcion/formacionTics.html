@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block titulo %} Formulario Aspirante {% endblock %}
+
+{% block menu %}
+    {% include "menus/publico.html" %}
+{% endblock %}
+
+{% block css %}
+    <link href="{{STATIC_URL}}css/select2.css" rel="stylesheet" />
+    <link href="{{STATIC_URL}}plugins/bootstrap-wizard/css/bwizard.min.css" rel="stylesheet" />
+    {{form.media}} {# agrega los js y css necesarios para el bootstrap3 datetimepicker #}
+{% endblock %}
+
+{% block js %}
+    <script src="{{STATIC_URL}}js/select2.js"></script>
+{% endblock %}
+
+{% block miga_pan %}
+    <li><a href="javascript:;">Inicio</a></li>
+    <li class="active">Formulario de Registro</li>
+{% endblock %}
+
+{% block titulo_contenido %}Formulario de Registro de Aspirantes{% endblock %}
+
+{% block previo_contenido_panel %}
+    {% include "inscripcion/_wizard.html" with wizard_stage=3 %}
+{% endblock %}
+
+{% block titulo_panel %}Formacion en TIC's{% endblock %}
+{% block contenido_panel %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Duración</th>
+            <th>Título</th>
+            <th>Institución</th>
+            <th>Inicio</th>
+            <th>Terminación</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for est in estudios_tics %}
+            <tr>
+                <td>{{est.get_duracion_display}}</td>
+                <td>{{est.titulo}}</td>
+                <td>{{est.institucion}}</td>
+                <td>{{est.fecha_inicio}}</td>
+                <td>{{est.fecha_terminacion}}</td>                
+                <td>
+                    <a href="#" onclick="return confirm('Seguro que desea eliminar esta entrada?')" class="text-danger">Eliminar</a>
+                </td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="6">No se ha agregado ningún curso de formación TIC's.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="well well-sm">
+        <h4>Agregar Formación TIC's</h4>
+        <form class="form-horizontal" method="post">{% csrf_token %}
+            {% bootstrap_form form layout="horizontal" horizontal_label_class='col-md-5' horizontal_field_class='col-md-5' %}
+            <div class="row">
+                <div class="col-md-3 col-md-offset-2">
+                    <button class="btn btn-sm btn-primary" type="submit">Agregar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <a href="{% url 'formacionTics' %}" class="btn btn-lg btn-primary pull-right">Siguiente</a>
+{% endblock %}

@@ -30,10 +30,11 @@ class FormacionAcademicaForm(forms.ModelForm):
 class FormacionTicsForm(forms.ModelForm):
     class Meta:
         model = FormacionTics
-        #fields = ('curso',)
-        #widgets = {
-        #    'curso': Select({'size': 5})
-        #}
+        fields = ('duracion', 'titulo', 'fecha_inicio', 'fecha_terminacion', 'institucion')
+        widgets = {
+            'fecha_inicio': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
+            'fecha_terminacion': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
+        }
 
 """
 class ConocimientosEspecificosForm(forms.ModelForm):
