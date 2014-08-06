@@ -28,8 +28,11 @@
     {% include "inscripcion/_wizard.html" with wizard_stage=1 %}
 {% endblock %}
 
-{% block titulo_panel %}Datos Personales{% endblock %}
+{% block titulo_panel %}Formacion en TIC's{% endblock %}
 {% block contenido_panel %}
+    <div class="col-xs-12" align="center">
+        <b>Seleccione la formación en TIC's que ha tenido mayor duración y a la cual usted asistió.</b>
+    </div>
     <form class="form-horizontal" method="post">{% csrf_token %}
         {% bootstrap_form form layout="horizontal" %}
         <button class="btn btn-lg btn-primary pull-right" type="submit">Siguiente</button>
