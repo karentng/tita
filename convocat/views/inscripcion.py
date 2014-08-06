@@ -105,6 +105,15 @@ def formacionTics(request):
         'form': form,
     })
 
+def eliminarFormacionTics(request, formTicsId):
+    aspirante = aspirante_sesion(request)
+    if not aspirante : redirect('formacionAcademica')
+
+    formTics = get_object_or_404(FormacionTics.objects, aspirante_id=aspirante.id, id=formTicsId)
+    formTics.delete()
+
+    return redirect('formacionTics')
+
 
 """
 def conocimientosEspecificos(request, idnt):

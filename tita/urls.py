@@ -31,6 +31,8 @@ urlpatterns += patterns('convocat.views.inscripcion',
     url(r'^inscripcion/formacion-academica/eliminar/(\d+)$', 'eliminarFormacionAcademica', name="eliminarFormacionAcademica"),
 
     url(r'^inscripcion/formacion-tics$',        'formacionTics', name="formacionTics"),
+    url(r'^inscripcion/formacion-tics/eliminar/(\d+)$', 'eliminarFormacionTics', name="eliminarFormacionTics"),
+
     #url(r'^inscripcion/conocimientos$',         'conocimientosEspecificos', name="conocimientosEspecificos"),
     #url(r'^inscripcion/idiomas$',               'idiomasManejados', name="idiomasManejados"),
     #url(r'^experiencia-ensenanza$',             'experienciaEnsenanza', name="experienciaFormadorTics"),

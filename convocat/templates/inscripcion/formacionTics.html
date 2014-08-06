@@ -50,7 +50,7 @@
                 <td>{{est.fecha_inicio}}</td>
                 <td>{{est.fecha_terminacion}}</td>                
                 <td>
-                    <a href="#" onclick="return confirm('Seguro que desea eliminar esta entrada?')" class="text-danger">Eliminar</a>
+                    <a href="{% url 'eliminarFormacionTics' est.id %}" onclick="return confirm('Seguro que desea eliminar esta entrada?')" class="text-danger">Eliminar</a>
                 </td>
             </tr>
         {% empty %}
