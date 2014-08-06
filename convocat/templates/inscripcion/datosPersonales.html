@@ -32,6 +32,6 @@
 {% block contenido_panel %}
     <form class="form-horizontal" method="post">{% csrf_token %}
         {% bootstrap_form form layout="horizontal" %}
-        <button class="btn btn-lg btn-primary pull-right" type="submit">Siguiente</button>
+        <button class="btn btn-lg btn-primary pull-right" type="submit">Siguiente <i class="fa fa-arrow-right"></i></button>
     </form>
 {% endblock %}

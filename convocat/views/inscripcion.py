@@ -94,7 +94,7 @@ def formacionTics(request):
             objeto = form.save(commit=False)
             objeto.aspirante_id = aspirante.id
             objeto.save()
-
+            print "estoy redireccionando"
             redirect('formacionTics')
     else:
         form = FormacionTicsForm()
