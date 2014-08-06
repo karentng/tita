@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block menu %}
-	{% include "menus/publico.html" %}
+	{% include "menus/publico.html" with opcion_menu=1 %}
 {% endblock %}
 
 {% block miga_pan %}
@@ -21,10 +21,22 @@
 	Información General
 {% endblock %}
 
-{% block contenido_panel %}
-	<div class="row" style="font-size:15px">
-		<div class="col-xs-12">
-			<p>El Proyecto Educación digital para todos, convoca a los interesados(as) en postular su nombre como Maestro(a)  Formador(a)  dentro del   “Programa de  formación docente en pedagogía mediada con TIC”,  como una estrategia pedagógica con énfasis en el desarrollo de competencias Siglo XXI, realizado mediante contrato interadministrativo entre la  UNIVERSIDAD DEL VALLE y la SEM.</p>
+{% block contenido %}
+	<div class="col-md-8">
+		<div class="panel panel-primary">
+		    <div class="panel-heading">
+		        <h4 class="panel-title" style="font-size:15px">Información General</h4>
+			</div>
+			<div class="panel-body" align="justify">
+					    	
+				<p style="font-size:20px; font-family:times">
+				El Proyecto Educación digital para todos, convoca a los interesados(as) en postular su nombre como Maestro(a)  Formador(a)  dentro del   <b><i>Programa de  formación docente en pedagogía mediada con TIC</i></b>,  como una estrategia pedagógica con énfasis en el desarrollo de competencias Siglo XXI, realizado mediante contrato interadministrativo entre la  UNIVERSIDAD DEL VALLE y la SEM.
+				</p>
+			</div>
 		</div>
+	</div>
+	<div class="col-md-4">
+		<br>
+		<img style="border-radius:10px; height:200px" src="/static/img/info/lead.jpg">
 	</div>
 {% endblock %}

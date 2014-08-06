@@ -10,9 +10,11 @@
 <li {% if opcion_menu == 4 %} class="active" {% endif %}>
 	<a href="{% url 'info_requisitos' %}"><i class="fa fa-list-ol"></i> <span>Requisitos</span></a>
 </li>
+{% comment %}
 <li {% if opcion_menu == 5 %} class="active" {% endif %}>
 	<a href="{% url 'info_registrarse' %}"><i class="fa fa-pencil-square-o"></i> <span>Registrarse</span></a>
 </li>
+{% endcomment %}
 <li {% if opcion_menu == 6 %} class="active" {% endif %}>
 	<a href="{% url 'datosPersonales' %}"><i class="fa fa-pencil-square-o"></i> <span>Formulario</span></a>
 </li>
