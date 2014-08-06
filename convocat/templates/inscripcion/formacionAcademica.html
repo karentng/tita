@@ -58,7 +58,7 @@
 					{% if est.relacionado_tics %}<span class="label label-info">TICs</span>{% endif %}
 				</td>
 				<td>
-					<a href="#" onclick="return confirm('Seguro que desea eliminar esta entrada?')" class="text-danger">Eliminar</a>
+					<a href="{% url 'eliminarFormacionAcademica' est.id %}" onclick="return confirm('Seguro que desea eliminar esta entrada?')" class="text-danger">Eliminar</a>
 				</td>
 			</tr>
 		{% empty %}
