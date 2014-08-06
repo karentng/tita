@@ -1,18 +1,20 @@
 <li {% if opcion_menu == 1 %} class="active" {% endif %}>
-	<a href="{% url 'publico' %}"><i class="fa fa-info"></i> <span>Información General</span></a>
+	<a href="{% url 'home' %}"><i class="fa fa-info"></i> <span>Información General</span></a>
 </li>
 <li {% if opcion_menu == 2 %} class="active" {% endif %}>
-	<a href="{% url 'publico_objetivos' %}"><i class="fa fa-check"></i> <span>Objetivos</span></a>
+	<a href="{% url 'info_objetivos' %}"><i class="fa fa-check"></i> <span>Objetivos</span></a>
 </li>
 <li {% if opcion_menu == 3 %} class="active" {% endif %}>
-	<a href="{% url 'publico_funciones' %}"><i class="fa fa-users"></i> <span>Funciones de Maestros</span></a>
+	<a href="{% url 'info_funciones' %}"><i class="fa fa-users"></i> <span>Funciones de Maestros</span></a>
 </li>
 <li {% if opcion_menu == 4 %} class="active" {% endif %}>
-	<a href="{% url 'publico_requisitos' %}"><i class="fa fa-list-ol"></i> <span>Requisitos</span></a>
+	<a href="{% url 'info_requisitos' %}"><i class="fa fa-list-ol"></i> <span>Requisitos</span></a>
 </li>
+{% comment %}
 <li {% if opcion_menu == 5 %} class="active" {% endif %}>
-	<a href="{% url 'publico_registrarse' %}"><i class="fa fa-pencil-square-o"></i> <span>Registrarse</span></a>
+	<a href="{% url 'info_registrarse' %}"><i class="fa fa-pencil-square-o"></i> <span>Registrarse</span></a>
 </li>
+{% endcomment %}
 <li {% if opcion_menu == 6 %} class="active" {% endif %}>
 	<a href="{% url 'datosPersonales' %}"><i class="fa fa-pencil-square-o"></i> <span>Formulario</span></a>
 </li>
