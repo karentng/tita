@@ -65,28 +65,43 @@ WSGI_APPLICATION = 'tita.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'tita',                      
-        'USER': 'tita',
-        'PASSWORD': 'tita',
-        'HOST': '',
+import socket
+PRODUCTION_SERVER = socket.gethostname()=='www.titaedpt.com.co'
+
+if PRODUCTION_SERVER:
+    DATABASES = {  # NO CAMBIAR!!!
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'titadb',                      
+            'USER': 'titausr',
+            'PASSWORD': 'A893hj9d#ls',
+            'HOST': '10.28.132.1',
+        }
     }
-}
+else:    # Configuracion desarrollo:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'tita',                      
+            'USER': 'tita',
+            'PASSWORD': 'tita',
+            'HOST': '',
+        }
+    }
+
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
 LANGUAGE_CODE = 'es-ES'
 
-TIME_ZONE = 'America/Lima'
+TIME_ZONE = 'America/Bogota'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
