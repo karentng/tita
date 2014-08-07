@@ -62,7 +62,7 @@ def formacionAcademica(request):
             objeto = form.save(commit=False)
             objeto.aspirante_id = aspirante.id
             objeto.save()
-            redirect('formacionAcademica') #Para evitar que al recargar la pagina cree nuevamente los datos
+            return redirect('formacionAcademica') #Para evitar que al recargar la pagina cree nuevamente los datos
     else:
         form = FormacionAcademicaForm()
 
@@ -94,8 +94,7 @@ def formacionTics(request):
             objeto = form.save(commit=False)
             objeto.aspirante_id = aspirante.id
             objeto.save()
-
-            redirect('formacionTics')
+            return redirect('formacionTics')
     else:
         form = FormacionTicsForm()
 
@@ -105,6 +104,15 @@ def formacionTics(request):
         'estudios_tics': estudios_tics,
         'form': form,
     })
+
+def eliminarFormacionTics(request, formTicsId):
+    aspirante = aspirante_sesion(request)
+    if not aspirante : redirect('formacionAcademica')
+
+    formTics = get_object_or_404(FormacionTics.objects, aspirante_id=aspirante.id, id=formTicsId)
+    formTics.delete()
+
+    return redirect('formacionTics')
 
 
 """

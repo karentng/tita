@@ -50,7 +50,7 @@
                 <td>{{est.fecha_inicio}}</td>
                 <td>{{est.fecha_terminacion}}</td>                
                 <td>
-                    <a href="#" onclick="return confirm('Seguro que desea eliminar esta entrada?')" class="text-danger">Eliminar</a>
+                    <a href="{% url 'eliminarFormacionTics' est.id %}" onclick="return confirm('Seguro que desea eliminar esta entrada?')" class="text-danger">Eliminar</a>
                 </td>
             </tr>
         {% empty %}
@@ -66,11 +66,11 @@
             {% bootstrap_form form layout="horizontal" horizontal_label_class='col-md-5' horizontal_field_class='col-md-5' %}
             <div class="row">
                 <div class="col-md-3 col-md-offset-2">
-                    <button class="btn btn-sm btn-primary" type="submit">Agregar</button>
+                    <button class="btn btn-sm btn-primary" type="submit"><i class="fa fa-plus"></i>  Agregar</button>
                 </div>
             </div>
         </form>
     </div>
 
-    <a href="{% url 'formacionTics' %}" class="btn btn-lg btn-primary pull-right">Siguiente</a>
+    <a href="{% url 'formacionTics' %}" class="btn btn-lg btn-primary pull-right">Siguiente <i class="fa fa-arrow-right"></i></a>
 {% endblock %}
