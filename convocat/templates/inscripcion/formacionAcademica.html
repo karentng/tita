@@ -62,11 +62,10 @@
                 </td>
             </tr>
         {% empty %}
-            changos
+            <tr><td>No se han agregado estudios de formación académica.</td></tr>
         {% endfor %}
         </tbody>
     </table>
-
     <div class="well well-sm">
         <h4>Agregar Estudio</h4>
         <form class="form-horizontal" method="post">{% csrf_token %}

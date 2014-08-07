@@ -47,6 +47,7 @@ INSTALLED_APPS = (
     'convocat',
     'bootstrap3',
     'bootstrap3_datetime',
+    'django_select2',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -118,3 +119,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
+
+
+# configuraciones del django_select2
+AUTO_RENDER_SELECT2_STATICS = False
+SELECT2_BOOTSTRAP = True

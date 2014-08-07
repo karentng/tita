@@ -1,13 +1,25 @@
+# -*- coding: utf-8 -*-
 from django import forms
 from convocat.models import *
 from bootstrap3_datetime.widgets import DateTimePicker
 from django.forms import ModelForm, Textarea, HiddenInput, TextInput, Select
 from django.forms.models import inlineformset_factory
+from django_select2 import AutoModelSelect2Field
+
+class MunicipioChoice(AutoModelSelect2Field):
+    queryset = Municipio.objects.select_related('departamento')
+    search_fields = ['nombre__icontains']
+
+    def label_from_instance(self, obj):
+        return u"%s (%s)"%(obj.nombre, obj.departamento.nombre)
 
 class DatosPersonalesForm(forms.ModelForm):
+    municipio_nacimiento = MunicipioChoice(help_text=u'Deje en blanco si nació fuera de Colombia', required=False)
+    municipio = MunicipioChoice(label = "Municipio de residencia")
     class Meta:
         model = Aspirante
-        fields = ('numero_documento', 'nombre1', 'nombre2', 'apellido1', 'apellido2', 'sexo', 'nacionalidad', 'fecha_nacimiento', 'municipio_nacimiento', 'direccion', 'municipio', 'telefono', 'celular', 'email')
+        fields = ('numero_documento', 'nombre1', 'nombre2', 'apellido1', 'apellido2', 'nacionalidad', 'municipio_nacimiento', 'fecha_nacimiento', 'sexo', 'municipio', 'direccion', 'telefono', 'celular', 'email')
+        #fields = ('numero_documento', 'nombre1', 'nombre2', 'apellido1', 'apellido2', 'sexo', 'nacionalidad', 'municipio_nacimiento', 'direccion', 'municipio', 'telefono', 'celular', 'email')
         widgets = {
             'fecha_nacimiento': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
         }

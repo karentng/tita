@@ -1,4 +1,4 @@
-#encoding:utf-8
+# encoding:utf-8
 from django.db import models
 
 class Departamento(models.Model):
@@ -32,7 +32,7 @@ class Aspirante(models.Model):
     sexo = models.CharField( choices=[('M','Hombre'), ('F', 'Mujer')], max_length=1, verbose_name='sexo')
     nacionalidad = models.CharField( max_length=255, blank=True, verbose_name='nacionalidad')
     fecha_nacimiento = models.DateField(verbose_name='fecha de nacimiento')
-    municipio_nacimiento = models.ForeignKey(Municipio, verbose_name='municipio de nacimiento', related_name='municipio_nacimiento')
+    municipio_nacimiento = models.ForeignKey(Municipio, null=True, blank=True, verbose_name='municipio de nacimiento', related_name='municipio_nacimiento')
     
     direccion = models.CharField( max_length=100, verbose_name='dirección')
     municipio = models.ForeignKey(Municipio, verbose_name='municipio de residencia', null=True)
