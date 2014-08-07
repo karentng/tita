@@ -46,7 +46,6 @@ def datosPersonales(request):
         form = DatosPersonalesForm(instance=aspirante)
 
     return render(request, 'inscripcion/datosPersonales.html', {
-        'opcion_menu': 6,
         'form': form,
     })
 
@@ -115,43 +114,65 @@ def eliminarFormacionTics(request, formTicsId):
     return redirect('formacionTics')
 
 
-"""
-def conocimientosEspecificos(request, idnt):
+
+def conocimientosEspecificos(request):
+    aspirante = aspirante_sesion(request)
+    if not aspirante : redirect('formacionTics')
+
+    try:
+        conocimiento = aspirante.conocimientosespecificos
+
+    except:
+        conocimiento = None
+
     if request.method == 'POST':
-        form = ConocimientosEspecificosForm(request.POST)
+        form = ConocimientosEspecificosForm(request.POST, instance=conocimiento)
         if form.is_valid():
-            #form = form.cleaned_data
-            objeto = ConocimientosEspecificos()
-            #conocimiento = TipoConocimiento.objects.get(id = 8)
             objeto = form.save(commit=False)
-            #objeto.conocimiento = conocimiento
-            objeto.aspirante_id = idnt
+            objeto.aspirante_id = aspirante.id
             objeto.save()
-            return redirect('idiomasManejados', idnt) 
+            return redirect('idiomasManejados')
+    else:
+        form = ConocimientosEspecificosForm(instance=conocimiento)
 
-    conocimientosEspecificos = ConocimientosEspecificosForm()
-
-    return render(request, 'formularioHV/conocimientosEspecificos.html', {
-        'opcion_menu': 6,
-        'conocimientosEspecificos': conocimientosEspecificos, 
+    return render(request, 'inscripcion/conocimientosEspecificos.html', {
+        'form': form, 
     })
 
-def idiomasManejados(request, idnt):
+
+
+def idiomasManejados(request):
+    aspirante = aspirante_sesion(request)
+    if not aspirante : redirect('conocimientosEspecificos')
+
     if request.method == 'POST':
         form = IdiomasManejadosForm(request.POST)
         if form.is_valid():
-                #form = form.cleaned_data
             objeto = form.save(commit=False)
-            objeto.aspirante_id = idnt
+            objeto.aspirante_id = aspirante.id
             objeto.save()
-            return redirect('experienciaFormadorTics', idnt) 
-    idiomasManejados = IdiomasManejadosForm()
+            #return redirect('experienciaFormadorTics') 
 
-    return render(request, 'formularioHV/idiomasManejados.html', {
-            'opcion_menu': 6,
-            'idiomasManejados': idiomasManejados,
+    else:
+        form = IdiomasManejadosForm()
+    idiomas = aspirante.idioma_set.all()
+
+    return render(request, 'inscripcion/idiomasManejados.html', {
+            'form': form,
+            'idiomas':idiomas,
     })
 
+def eliminarIdioma(request, formIdiomasId):
+    aspirante = aspirante_sesion(request)
+    if not aspirante : redirect('conocimientosEspecificos')
+
+    formIdiomas = get_object_or_404(Idioma.objects, aspirante_id=aspirante.id, id=formIdiomasId)
+    formIdiomas.delete()
+
+    return redirect('idiomasManejados')
+
+
+"""
 def experienciaFormadorTics(request, idnt):
     if request.method == 'POST':
         form = ExperienciaFormadorTicsForm(request.POST)

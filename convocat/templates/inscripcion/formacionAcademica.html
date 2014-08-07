@@ -4,22 +4,22 @@
 {% block titulo %} Formulario Aspirante {% endblock %}
 
 {% block menu %}
-	{% include "menus/publico.html" %}
+    {% include "menus/publico.html" with opcion_menu=6 %}
 {% endblock %}
 
 {% block css %}
-	<link href="{{STATIC_URL}}css/select2.css" rel="stylesheet" />
-	<link href="{{STATIC_URL}}plugins/bootstrap-wizard/css/bwizard.min.css" rel="stylesheet" />
-	{{form.media}} {# agrega los js y css necesarios para el bootstrap3 datetimepicker #}
+    <link href="{{STATIC_URL}}css/select2.css" rel="stylesheet" />
+    <link href="{{STATIC_URL}}plugins/bootstrap-wizard/css/bwizard.min.css" rel="stylesheet" />
+    {{form.media}} {# agrega los js y css necesarios para el bootstrap3 datetimepicker #}
 {% endblock %}
 
 {% block js %}
-	<script src="{{STATIC_URL}}js/select2.js"></script>
+    <script src="{{STATIC_URL}}js/select2.js"></script>
 {% endblock %}
 
 {% block miga_pan %}
-	<li><a href="javascript:;">Inicio</a></li>
-	<li class="active">Formulario de Registro</li>
+    <li><a href="javascript:;">Inicio</a></li>
+    <li class="active">Formulario de Registro</li>
 {% endblock %}
 
 {% block titulo_contenido %}Formulario de Registro de Aspirantes{% endblock %}
@@ -27,57 +27,57 @@
 
 
 {% block previo_contenido_panel %}
-	{% include "inscripcion/_wizard.html" with wizard_stage=2 %}
+    {% include "inscripcion/_wizard.html" with wizard_stage=2 %}
 {% endblock %}
 
 
 {% block titulo_panel %} Formación Académica {% endblock %}
 {% block contenido_panel %}
-	<table class="table">
-		<thead>
-		<tr>
-			<th>Nivel</th>
-			<th>Titulo</th>
-			<th>Institución</th>
-			<th>Inicio</th>
-			<th>Terminación</th>
-			<th></th>
-			<th></th>
-		</tr>
-		</thead>
-		<tbody>
-		{% for est in estudios %}
-			<tr>
-				<td>{{est.get_nivel_display}}</td>
-				<td>{{est.titulo}}</td>
-				<td>{{est.institucion}}</td>
-				<td>{{est.fecha_inicio}}</td>
-				<td>{{est.fecha_terminacion}}</td>
-				<td>
-					{% if est.relacionado_pedagogia %}<span class="label label-info">Pedagogía</span>{% endif %}
-					{% if est.relacionado_tics %}<span class="label label-info">TICs</span>{% endif %}
-				</td>
-				<td>
-					<a href="{% url 'eliminarFormacionAcademica' est.id %}" onclick="return confirm('Seguro que desea eliminar esta entrada?')" class="text-danger">Eliminar</a>
-				</td>
-			</tr>
-		{% empty %}
-			changos
-		{% endfor %}
-		</tbody>
-	</table>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Nivel</th>
+            <th>Titulo</th>
+            <th>Institución</th>
+            <th>Inicio</th>
+            <th>Terminación</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for est in estudios %}
+            <tr>
+                <td>{{est.get_nivel_display}}</td>
+                <td>{{est.titulo}}</td>
+                <td>{{est.institucion}}</td>
+                <td>{{est.fecha_inicio}}</td>
+                <td>{{est.fecha_terminacion}}</td>
+                <td>
+                    {% if est.relacionado_pedagogia %}<span class="label label-info">Pedagogía</span>{% endif %}
+                    {% if est.relacionado_tics %}<span class="label label-info">TICs</span>{% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'eliminarFormacionAcademica' est.id %}" onclick="return confirm('Seguro que desea eliminar esta entrada?')" class="text-danger">Eliminar</a>
+                </td>
+            </tr>
+        {% empty %}
+            changos
+        {% endfor %}
+        </tbody>
+    </table>
 
-	<div class="well well-sm">
-		<h4>Agregar Estudio</h4>
-		<form class="form-horizontal" method="post">{% csrf_token %}
-			{% bootstrap_form form layout="horizontal" horizontal_label_class='col-md-5' horizontal_field_class='col-md-5' %}
-			<div class="row">
-				<div class="col-md-3 col-md-offset-2">
-					<button class="btn btn-sm btn-primary" type="submit"><i class="fa fa-plus"></i>  Agregar</button>
-				</div>
-			</div>
-		</form>
-	</div>
+    <div class="well well-sm">
+        <h4>Agregar Estudio</h4>
+        <form class="form-horizontal" method="post">{% csrf_token %}
+            {% bootstrap_form form layout="horizontal" horizontal_label_class='col-md-5' horizontal_field_class='col-md-5' %}
+            <div class="row">
+                <div class="col-md-3 col-md-offset-2">
+                    <button class="btn btn-sm btn-primary" type="submit"><i class="fa fa-plus"></i>  Agregar</button>
+                </div>
+            </div>
+        </form>
+    </div>
 
-	<a href="{% url 'formacionTics' %}" class="btn btn-lg btn-primary pull-right">Siguiente <i class="fa fa-arrow-right"></i></a>
+    <a href="{% url 'formacionTics' %}" class="btn btn-lg btn-primary pull-right">Siguiente <i class="fa fa-arrow-right"></i></a>
 {% endblock %}

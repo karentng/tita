@@ -30,7 +30,7 @@ class FormacionTicsForm(forms.ModelForm):
             'fecha_terminacion': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
         }
 
-"""
+
 class ConocimientosEspecificosForm(forms.ModelForm):
     class Meta:
         model = ConocimientosEspecificos
@@ -39,14 +39,15 @@ class ConocimientosEspecificosForm(forms.ModelForm):
             #'manejo': Select({'size':3})
         }
 
+
 class IdiomasManejadosForm(forms.ModelForm):
     class Meta:
-        model = IdiomasManejados
+        model = Idioma
         fields = ('idioma','habla','lee','escribe',)
-        widgets = {
-            'idioma': Select({'size':4}),
-        }
+        
 
+
+"""
 class ExperienciaFormadorTicsForm(forms.ModelForm):
     class Meta:
         model = ExperienciaFormadorTics

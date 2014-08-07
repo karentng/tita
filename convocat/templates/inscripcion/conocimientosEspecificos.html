@@ -25,11 +25,14 @@
 {% block titulo_contenido %}Formulario de Registro de Aspirantes{% endblock %}
 
 {% block previo_contenido_panel %}
-    {% include "inscripcion/_wizard.html" with wizard_stage=1 %}
+    {% include "inscripcion/_wizard.html" with wizard_stage=4 %}
 {% endblock %}
 
-{% block titulo_panel %}Datos Personales{% endblock %}
+{% block titulo_panel %}Conocimientos Específicos{% endblock %}
 {% block contenido_panel %}
+    <div class="col-xs-12">
+        <h5>Seleccione el grado de conocimiento para cada item.</h5>
+    </div>
     <form class="form-horizontal" method="post">{% csrf_token %}
         {% bootstrap_form form layout="horizontal" %}
         <button class="btn btn-lg btn-primary pull-right" type="submit">Siguiente <i class="fa fa-arrow-right"></i></button>

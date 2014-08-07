@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block titulo %} Formulario Aspirante {% endblock %}
+
+{% block menu %}
+    {% include "menus/publico.html" with opcion_menu=6 %}
+{% endblock %}
+
+{% block css %}
+    <link href="{{STATIC_URL}}css/select2.css" rel="stylesheet" />
+    <link href="{{STATIC_URL}}plugins/bootstrap-wizard/css/bwizard.min.css" rel="stylesheet" />
+    {{form.media}} {# agrega los js y css necesarios para el bootstrap3 datetimepicker #}
+{% endblock %}
+
+{% block js %}
+    <script src="{{STATIC_URL}}js/select2.js"></script>
+{% endblock %}
+
+{% block miga_pan %}
+    <li><a href="javascript:;">Inicio</a></li>
+    <li class="active">Formulario de Registro</li>
+{% endblock %}
+
+{% block titulo_contenido %}Formulario de Registro de Aspirantes{% endblock %}
+
+{% block previo_contenido_panel %}
+    {% include "inscripcion/_wizard.html" with wizard_stage=5 %}
+{% endblock %}
+
+{% block titulo_panel %}Conocimientos Específicos{% endblock %}
+{% block contenido_panel %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Idioma</th>
+            <th>Habla</th>
+            <th>Lee</th>
+            <th>Escribe</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for idm in idiomas %}
+            <tr>
+                <td>{{idm.get_idioma_display}}</td>
+                <td>{{idm.get_habla_display}}</td>
+                <td>{{idm.get_lee_display}}</td>
+                <td>{{idm.get_escribe_display}}</td>            
+                <td>
+                    <a href="{% url 'eliminarIdioma' idm.id %}" onclick="return confirm('Seguro que desea eliminar esta entrada?')" class="text-danger">Eliminar</a>
+                </td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="6">No se ha agregado ningún idioma.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="col-xs-12">
+        <h5>Seleccione los idiomas extranjeros que maneje y califique sus habilidades.</h5>
+    </div>
+    <form class="form-horizontal" method="post">{% csrf_token %}
+        {% bootstrap_form form layout="horizontal" %}
+        <div class="row">
+            <div class="col-md-3 col-md-offset-2">
+                <button class="btn btn-sm btn-primary" type="submit"><i class="fa fa-plus"></i>  Agregar</button>
+            </div>
+        </div>
+    </form>
+
+    <a href="{% url 'formacionTics' %}" class="btn btn-lg btn-primary pull-right">Siguiente <i class="fa fa-arrow-right"></i></a>
+{% endblock %}

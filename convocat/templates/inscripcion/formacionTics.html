@@ -4,7 +4,7 @@
 {% block titulo %} Formulario Aspirante {% endblock %}
 
 {% block menu %}
-    {% include "menus/publico.html" %}
+    {% include "menus/publico.html" with opcion_menu=6 %}
 {% endblock %}
 
 {% block css %}
@@ -72,5 +72,5 @@
         </form>
     </div>
 
-    <a href="{% url 'formacionTics' %}" class="btn btn-lg btn-primary pull-right">Siguiente <i class="fa fa-arrow-right"></i></a>
+    <a href="{% url 'conocimientosEspecificos' %}" class="btn btn-lg btn-primary pull-right">Siguiente <i class="fa fa-arrow-right"></i></a>
 {% endblock %}
