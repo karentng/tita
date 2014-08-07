@@ -29,7 +29,7 @@ urlpatterns = patterns('',
 urlpatterns += patterns('convocat.views.inscripcion',
     url(r'^inscripcion/datos-personales$',      'datosPersonales', name="datosPersonales"),
 
-    url(r'^inscripcion/info-clave$',      'informarClave', name="informarClave"),
+    url(r'^inscripcion/finalizar$',      'finalizar', name="finalizar"),
 
     url(r'^inscripcion/formacion-academica$',   'formacionAcademica', name="formacionAcademica"),
     url(r'^inscripcion/formacion-academica/eliminar/(\d+)$', 'eliminarFormacionAcademica', name="eliminarFormacionAcademica"),
@@ -41,10 +41,10 @@ urlpatterns += patterns('convocat.views.inscripcion',
     url(r'^inscripcion/idiomas$',               'idiomasManejados', name="idiomasManejados"),
     url(r'^inscripcion/idiomas/eliminar/(\d+)$', 'eliminarIdioma', name="eliminarIdioma"),
 
-    url(r'^experiencia-ensenanza$',             'experienciaEnsenanza', name="experienciaEnsenanza"),
+    url(r'^inscripcion/experiencia-ensenanza$',             'experienciaEnsenanza', name="experienciaEnsenanza"),
     url(r'^inscripcion/experiencia-ensenanza/eliminar/(\d+)$', 'eliminarExperienciaEnsenanza', name="eliminarExperienciaEnsenanza"),
 
-    url(r'^experiencia-otra$',                  'experienciaOtra', name="experienciaOtra"),
+    url(r'^inscripcion/experiencia-otra$',                  'experienciaOtra', name="experienciaOtra"),
     url(r'^inscripcion/experiencia-otra/eliminar/(\d+)$', 'eliminarExperienciaOtra', name="eliminarExperienciaOtra"),
 
 )

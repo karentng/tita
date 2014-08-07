@@ -53,7 +53,7 @@ def datosPersonales(request):
 
 def formacionAcademica(request):
     aspirante = aspirante_sesion(request)
-    if not aspirante : redirect('datosPersonales')
+    if not aspirante : return redirect('home')
     
     if request.method == 'POST':
         form = FormacionAcademicaForm(request.POST)
@@ -74,7 +74,7 @@ def formacionAcademica(request):
 
 def eliminarFormacionAcademica(request, formAcadId):
     aspirante = aspirante_sesion(request)
-    if not aspirante : redirect('datosPersonales')
+    if not aspirante : return redirect('home')
 
     formAcad = get_object_or_404(FormacionAcademica.objects, aspirante_id=aspirante.id, id=formAcadId)
     formAcad.delete()
@@ -85,7 +85,7 @@ def eliminarFormacionAcademica(request, formAcadId):
 
 def formacionTics(request):
     aspirante = aspirante_sesion(request)
-    if not aspirante : redirect('formacionTics')
+    if not aspirante : return redirect('home')
 
     if request.method == 'POST':
         form = FormacionTicsForm(request.POST)
@@ -106,7 +106,7 @@ def formacionTics(request):
 
 def eliminarFormacionTics(request, formTicsId):
     aspirante = aspirante_sesion(request)
-    if not aspirante : redirect('formacionAcademica')
+    if not aspirante : return redirect('home')
 
     formTics = get_object_or_404(FormacionTics.objects, aspirante_id=aspirante.id, id=formTicsId)
     formTics.delete()
@@ -117,7 +117,7 @@ def eliminarFormacionTics(request, formTicsId):
 
 def conocimientosEspecificos(request):
     aspirante = aspirante_sesion(request)
-    if not aspirante : redirect('formacionTics')
+    if not aspirante : return redirect('home')
 
     try:
         conocimiento = aspirante.conocimientosespecificos
@@ -143,7 +143,7 @@ def conocimientosEspecificos(request):
 
 def idiomasManejados(request):
     aspirante = aspirante_sesion(request)
-    if not aspirante : redirect('conocimientosEspecificos')
+    if not aspirante : return redirect('home')
 
     if request.method == 'POST':
         form = IdiomasManejadosForm(request.POST)
@@ -164,7 +164,7 @@ def idiomasManejados(request):
 
 def eliminarIdioma(request, formIdiomasId):
     aspirante = aspirante_sesion(request)
-    if not aspirante : redirect('conocimientosEspecificos')
+    if not aspirante : return redirect('home')
 
     formIdiomas = get_object_or_404(Idioma.objects, aspirante_id=aspirante.id, id=formIdiomasId)
     formIdiomas.delete()
@@ -173,7 +173,7 @@ def eliminarIdioma(request, formIdiomasId):
 
 def experienciaEnsenanza(request):
     aspirante = aspirante_sesion(request)
-    if not aspirante : redirect('idiomasManejados')
+    if not aspirante : return redirect('home')
     
     if request.method == 'POST':
         form = ExperienciaEnsenanzaForm(request.POST)
@@ -194,7 +194,7 @@ def experienciaEnsenanza(request):
 
 def eliminarExperienciaEnsenanza(request, ExpeId):
     aspirante = aspirante_sesion(request)
-    if not aspirante : redirect('experienciaEnsenanza')
+    if not aspirante : return redirect('home')
 
     formExperienciaEns = get_object_or_404(ExperienciaEnsenanza.objects, aspirante_id=aspirante.id, id=ExpeId)
     formExperienciaEns.delete()
@@ -203,7 +203,7 @@ def eliminarExperienciaEnsenanza(request, ExpeId):
 
 def experienciaOtra(request):
     aspirante = aspirante_sesion(request)
-    if not aspirante : redirect('experienciaEnsenanza')
+    if not aspirante : return redirect('home')
     
     if request.method == 'POST':
         form = ExperienciaOtraForm(request.POST)
@@ -224,7 +224,7 @@ def experienciaOtra(request):
 
 def eliminarExperienciaOtra(request, ExpeId):
     aspirante = aspirante_sesion(request)
-    if not aspirante : redirect('experienciaOtra')
+    if not aspirante : return redirect('home')
 
     formExperienciaOtra = get_object_or_404(ExperienciaOtra.objects, aspirante_id=aspirante.id, id=ExpeId)
     formExperienciaOtra.delete()
@@ -232,95 +232,12 @@ def eliminarExperienciaOtra(request, ExpeId):
     return redirect('experienciaOtra')
 
 
-def informarClave(request):
+def finalizar(request):
+    aspirante = aspirante_sesion(request)
+    if not aspirante : return redirect('home')
 
-    return render(request, 'inscripcion/informacionClave.html')
-
-"""
-def login(request):
-    
-    if request.POST:
-
-        log = request.POST['username']
-        contr = request.POST['password']
- 
-    return render_to_response('publico/registrarse.html', RequestContext(request, {'opcion_menu': 5}))
-
-def registrarse(request):
-    
-    if request.POST:
-        user = request.POST['correoe']
-        passw = request.POST['contrasena']
-        passwver = request.POST['verificarcontra']
-
-        try:
-            usuario = User.objects.get(username=user)
-        except User.DoesNotExist:
-            usuario = None
-
-        if usuario != None:
-            print "El usuario "+ usuario.username+ " ya existe"
-            return render_to_response('publico/registrarse.html', RequestContext(request, {'log': 1, 'usuario': usuario.username}))
-        
-        elif passw == passwver:
-            usuario = User()
-            usuario.username = user
-            usuario.password = passw
-            usuario.save()
-            return render_to_response('publico/registrarse.html', RequestContext(request, {'log': 2, 'usuario': usuario.username}))
-
-        else:
-            print "las contrasenas no coinciden" 
-            return render_to_response('publico/registrarse.html', RequestContext(request, {'log': 3}))
-
-    return render_to_response('publico/registrarse.html', RequestContext(request, {'log': 4}))
-
-def guardarHV(request):
-    if request.POST:
-
-        # obtencion de datos
-        apellido1 = request.POST['apellido1']
-        apellido2 = request.POST['apellido2']
-        nombre1 = request.POST['nombre1']
-        nombre2 = request.POST['nombre2']
-        tipo_documento = request.POST['tipo_documento']
-        num_doc = request.POST['num_documento']
-        genero = request.POST['genero']
-        nacionalidad = request.POST['nacionalidad']
-        fecha_nacimiento = request.POST['fecha_nacimiento']
-        municipio_nacimiento = request.POST['municipio_nacimiento']
-        fijo = request.POST['fijo']
-        municipio_actual = request.POST['municipio_actual']
-        direccion = request.POST['direccion']
-        celular = request.POST['celular']
-        email = request.POST['email']
-
-        try:
-            aspirante = Aspirante.objects.get(numero_documento=num_doc)
-        except Aspirante.DoesNotExist:
-            aspirante = Aspirante()
-        
-        #asignacion
-        aspirante.tipo_documento = TipoDocumento.objects.get(nombre=tipo_documento)
-        aspirante.numero_documento = num_doc
-        aspirante.apellido1 = apellido1
-        aspirante.apellido2 = apellido2
-        aspirante.nombre1 = nombre1
-        aspirante.nombre2 = nombre2
-        aspirante.genero = genero
-        aspirante.nacionalidad = nacionalidad
-        aspirante.fecha_nacimiento = fecha_nacimiento
-        aspirante.municipio_nacimiento = Municipio.objects.get(id=municipio_nacimiento)
-        aspirante.direccion = direccion
-        aspirante.municipio = Municipio.objects.get(id=municipio_actual)
-        aspirante.telefono = 222
-        aspirante.celular = 111
-        aspirante.email = email
-        aspirante.direccion = direccion
-        aspirante.puntuacion_hv = 100
-        #guardado de aspirante
-        aspirante.save()
-
-        return render_to_response('publico/objetivos.html', RequestContext(request, {'opcion_menu': 1}))
-    return render_to_response('publico/index.html', RequestContext(request, {'opcion_menu': 1}))
-"""
+    numero_registro = request.session['clave_aspirante']
+    del request.session['clave_aspirante']
+    return render(request, 'inscripcion/finalizar.html', {
+        'numero_registro' : numero_registro,
+        })
