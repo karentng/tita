@@ -143,17 +143,18 @@ class ExperienciaEnsenanza(models.Model):
 
 class AreaExperiencia(models.Model):
     AREAS = ( (x,x) for x in (
-        'Educación Física',
-        'Música y Artes Plásticas',
+        'Educación física, recreación y deporte',
+        'Educación artística',
         'Matemáticas',
-        'Lengua (Español)',
+        'Humanidades, lengua castellana e idiomas extranjeros',
         'Idioma Extranjero',
-        'Ciencias Naturales',
-        'Ciencias Sociales y Humanidades',
+        'Ciencias Naturales y educación ambiental',
+        'Ciencias Sociales, historia, geografía, constitución política y democracia',
+        'Educación religiosa',
         'Física',
         'Química',
-        'Sistemas',
-        'Ética / Religión'
+        'Tecnología e informática',
+        'Educación ética y en valores humanos'
     ))
     experiencia = models.ForeignKey(ExperienciaEnsenanza)
     area = models.CharField(max_length=100, choices=AREAS, verbose_name=u'área de enseñanza')
