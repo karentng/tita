@@ -22,19 +22,13 @@
 
 {% block titulo_contenido %}Formulario de Registro de Aspirantes{% endblock %}
 
-{% block previo_contenido_panel %}
-    {% include "inscripcion/_wizard.html" with wizard_stage=8 %}
-{% endblock %}
-
-{% block titulo_panel %}<i class="fa fa-pencil"></i> Firma del Servidor Público{% endblock %}
+{% block titulo_panel %}<i class="fa fa-key"></i> Clave Reanudación{% endblock %}
 {% block contenido_panel %}
-    <div class="row">
-        <div class="col-xs-12" align="center">
-            <b>Términos y condiciguachuonessdkjhksdksdkwsd</b>
-            <br>
-            <p>sldjslkdjksldjkl</p>
-        </div>
+    <div>
+        <h4 align="center"><b>Sus datos han sido guardados satisfactoriamente!</b></h4>
+        <br>
+        <h5> No olvide que ésta es su clave de reanudación o verificación del formulario: </h5>
     </div>
-
     
+    <!--a href="{% url 'formacionAcademica' %}" class="btn btn-lg btn-primary pull-right">Siguiente <i class="fa fa-angle-right"></i></a-->
 {% endblock %}

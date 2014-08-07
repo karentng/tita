@@ -231,9 +231,10 @@ def eliminarExperienciaOtra(request, ExpeId):
 
     return redirect('experienciaOtra')
 
-def firmaServidorPublico(request):
 
-    return render(request, 'inscripcion/firmaServidorPublico.html')
+def informarClave(request):
+
+    return render(request, 'inscripcion/informacionClave.html')
 
 """
 def login(request):

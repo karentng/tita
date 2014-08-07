@@ -28,6 +28,9 @@ urlpatterns = patterns('',
 
 urlpatterns += patterns('convocat.views.inscripcion',
     url(r'^inscripcion/datos-personales$',      'datosPersonales', name="datosPersonales"),
+
+    url(r'^inscripcion/info-clave$',      'informarClave', name="informarClave"),
+
     url(r'^inscripcion/formacion-academica$',   'formacionAcademica', name="formacionAcademica"),
     url(r'^inscripcion/formacion-academica/eliminar/(\d+)$', 'eliminarFormacionAcademica', name="eliminarFormacionAcademica"),
 
@@ -43,7 +46,5 @@ urlpatterns += patterns('convocat.views.inscripcion',
 
     url(r'^experiencia-otra$',                  'experienciaOtra', name="experienciaOtra"),
     url(r'^inscripcion/experiencia-otra/eliminar/(\d+)$', 'eliminarExperienciaOtra', name="eliminarExperienciaOtra"),
-
-    url(r'^firma-servidor$',                  'firmaServidorPublico', name="firmaServidorPublico"),
 
 )
