@@ -120,6 +120,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
 
+STATIC_ROOT = os.path.join(BASE_DIR, '..', 'static_collected') 
 
 # configuraciones del django_select2
 AUTO_RENDER_SELECT2_STATICS = False
