@@ -63,7 +63,7 @@ class IdiomasManejadosForm(forms.ModelForm):
 class ExperienciaEnsenanzaForm(forms.ModelForm):
     class Meta:
         model = ExperienciaEnsenanza
-        fields = ('institucion','tipo_institucion','telefono', 'email', 'fecha_inicio', 'fecha_fin')
+        fields = ('institucion', 'jornada', 'tipo_institucion','telefono', 'email', 'fecha_inicio', 'fecha_fin')
         widgets = {
             'fecha_inicio': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
             'fecha_fin': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),

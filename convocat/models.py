@@ -138,6 +138,7 @@ class ExperienciaEnsenanza(models.Model):
     email = models.EmailField(blank=True, verbose_name=u'correo electrónico')
     fecha_inicio = models.DateField(verbose_name=u'fecha de inicio')
     fecha_fin = models.DateField(null=True, blank=True, verbose_name=u'fecha de finalización', help_text='Deje en blanco si actualmente labora allí')
+    jornada = models.CharField(max_length=50, choices=[('M', 'Mañana'), ('T', 'Tarde'), ('N','Noche')], verbose_name='jornada de trabajo')
 
 
 
