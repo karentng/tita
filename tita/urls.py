@@ -7,7 +7,8 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'tita.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
-
+    url(r'^select2/', include('django_select2.urls')),
+    
     url(r'^admin/', include(admin.site.urls)),
     #url(r'^$', 'convocat.views.inscripcion.index', name="publico"),
     url(r'^$', TemplateView.as_view(template_name='info/index.html'), name='home'),
