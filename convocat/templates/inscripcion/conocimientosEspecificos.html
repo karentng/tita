@@ -27,13 +27,15 @@
     {% include "inscripcion/_wizard.html" with wizard_stage=4 %}
 {% endblock %}
 
-{% block titulo_panel %}Conocimientos Específicos{% endblock %}
+{% block titulo_panel %}<i class="fa fa-lightbulb-o"></i> Conocimientos Específicos{% endblock %}
 {% block contenido_panel %}
     <div class="col-xs-12">
         <h5>Seleccione el grado de conocimiento para cada item.</h5>
     </div>
     <form class="form-horizontal" method="post">{% csrf_token %}
         {% bootstrap_form form layout="horizontal" %}
-        <button class="btn btn-lg btn-primary pull-right" type="submit">Siguiente <i class="fa fa-arrow-right"></i></button>
+        <a href="{% url 'formacionTics' %}" class="btn btn-lg btn-default pull-left"> <i class="fa fa-angle-left"></i> Anterior</a>
+
+        <button class="btn btn-lg btn-primary pull-right" type="submit">Siguiente <i class="fa fa-angle-right"></i></button>
     </form>
 {% endblock %}

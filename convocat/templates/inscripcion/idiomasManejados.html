@@ -27,7 +27,7 @@
     {% include "inscripcion/_wizard.html" with wizard_stage=5 %}
 {% endblock %}
 
-{% block titulo_panel %}Conocimientos Específicos{% endblock %}
+{% block titulo_panel %}<i class="fa fa-language"></i> Idiomas Extranjeros Manejados{% endblock %}
 {% block contenido_panel %}
     <table class="table">
         <thead>
@@ -57,17 +57,18 @@
         {% endfor %}
         </tbody>
     </table>
-    <div class="col-xs-12">
-        <h5>Seleccione los idiomas extranjeros que maneje y califique sus habilidades.</h5>
-    </div>
-    <form class="form-horizontal" method="post">{% csrf_token %}
-        {% bootstrap_form form layout="horizontal" %}
-        <div class="row">
-            <div class="col-md-3 col-md-offset-2">
-                <button class="btn btn-sm btn-primary" type="submit"><i class="fa fa-plus"></i>  Agregar</button>
+    <div class="well well-sm">
+        <h4>Agregar Idiomas Extranjeros</h4>
+        <form class="form-horizontal" method="post">{% csrf_token %}
+            {% bootstrap_form form layout="horizontal" %}
+            <div class="row">
+                <div class="col-md-3 col-md-offset-2">
+                    <button class="btn btn-sm btn-primary" type="submit"><i class="fa fa-plus"></i>  Agregar</button>
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
 
-    <a href="{% url 'formacionTics' %}" class="btn btn-lg btn-primary pull-right">Siguiente <i class="fa fa-arrow-right"></i></a>
+    <a href="{% url 'conocimientosEspecificos' %}" class="btn btn-lg btn-default pull-left"> <i class="fa fa-angle-left"></i> Anterior</a>
+    <a href="{% url 'experienciaEnsenanza' %}" class="btn btn-lg btn-primary pull-right">Siguiente <i class="fa fa-angle-right"></i></a>
 {% endblock %}

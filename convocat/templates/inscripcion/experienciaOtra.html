@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block css %}
-
+    
     <link href="{{STATIC_URL}}plugins/bootstrap-wizard/css/bwizard.min.css" rel="stylesheet" />
     {{form.media}} {# agrega los js y css necesarios para el bootstrap3 datetimepicker #}
 {% endblock %}
@@ -24,44 +24,49 @@
 
 {% block titulo_contenido %}Formulario de Registro de Aspirantes{% endblock %}
 
+
+
 {% block previo_contenido_panel %}
-    {% include "inscripcion/_wizard.html" with wizard_stage=3 %}
+    {% include "inscripcion/_wizard.html" with wizard_stage=7 %}
 {% endblock %}
 
-{% block titulo_panel %}<i class="fa fa-laptop"></i> Formacion en TIC's{% endblock %}
+
+{% block titulo_panel %}<i class="fa fa-institution alias"></i> Otra Experiencia Laboral{% endblock %}
 {% block contenido_panel %}
     <table class="table">
         <thead>
         <tr>
-            <th>Duración</th>
-            <th>Título</th>
-            <th>Institución</th>
+            <th>Entidad</th>
+            <th>Tipo de Entidad</th>
+            <th>Teléfono</th>
+            <th>Email</th>
+            <th>Cargo</th>
             <th>Inicio</th>
             <th>Terminación</th>
             <th></th>
         </tr>
         </thead>
         <tbody>
-        {% for est in estudios_tics %}
+        {% for exp in experiencias %}
             <tr>
-                <td>{{est.get_duracion_display}}</td>
-                <td>{{est.titulo}}</td>
-                <td>{{est.institucion}}</td>
-                <td>{{est.fecha_inicio}}</td>
-                <td>{{est.fecha_terminacion}}</td>                
+                <td>{{exp.entidad}}</td>
+                <td>{{exp.get_tipo_entidad_display}}</td>
+                <td>{{exp.telefono}}</td>
+                <td>{{exp.email}}</td>
+                <td>{{exp.cargo}}</td>
+                <td>{{exp.fecha_inicio}}</td>
+                <td>{{exp.fecha_fin}}</td>
                 <td>
-                    <a href="{% url 'eliminarFormacionTics' est.id %}" onclick="return confirm('Seguro que desea eliminar esta entrada?')" class="text-danger">Eliminar</a>
+                    <a href="{% url 'eliminarExperienciaOtra' exp.id %}" onclick="return confirm('Seguro que desea eliminar esta entrada?')" class="text-danger">Eliminar</a>
                 </td>
             </tr>
         {% empty %}
-            <tr>
-                <td colspan="6">No se ha agregado ningún curso de formación TIC's.</td>
-            </tr>
+            <tr><td>No se han agregado ninguna otra experiencia laboral.</td></tr>
         {% endfor %}
         </tbody>
     </table>
     <div class="well well-sm">
-        <h4>Agregar Formación TIC's</h4>
+        <h4>Agregar Otras Experiencias Laborales</h4>
         <form class="form-horizontal" method="post">{% csrf_token %}
             {% bootstrap_form form layout="horizontal" horizontal_label_class='col-md-5' horizontal_field_class='col-md-5' %}
             <div class="row">
@@ -71,7 +76,6 @@
             </div>
         </form>
     </div>
-    <a href="{% url 'formacionAcademica' %}" class="btn btn-lg btn-default pull-left"> <i class="fa fa-angle-left"></i> Anterior</a>
-
-    <a href="{% url 'conocimientosEspecificos' %}" class="btn btn-lg btn-primary pull-right">Siguiente <i class="fa fa-angle-right"></i></a>
+    <a href="{% url 'experienciaEnsenanza' %}" class="btn btn-lg btn-default pull-left"> <i class="fa fa-angle-left"></i> Anterior</a>
+    <a href="{% url 'firmaServidorPublico' %}" class="btn btn-lg btn-primary pull-right">Siguiente <i class="fa fa-angle-right"></i></a>
 {% endblock %}

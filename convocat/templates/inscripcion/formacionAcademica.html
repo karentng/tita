@@ -31,7 +31,7 @@
 {% endblock %}
 
 
-{% block titulo_panel %} Formación Académica {% endblock %}
+{% block titulo_panel %}<i class="fa fa-mortar-board"></i> Formación Académica {% endblock %}
 {% block contenido_panel %}
     <table class="table">
         <thead>
@@ -77,6 +77,7 @@
             </div>
         </form>
     </div>
+    <a href="{% url 'datosPersonales' %}" class="btn btn-lg btn-default pull-left"> <i class="fa fa-angle-left"></i> Anterior</a>
 
-    <a href="{% url 'formacionTics' %}" class="btn btn-lg btn-primary pull-right">Siguiente <i class="fa fa-arrow-right"></i></a>
+    <a href="{% url 'formacionTics' %}" class="btn btn-lg btn-primary pull-right">Siguiente <i class="fa fa-angle-right"></i></a>
 {% endblock %}

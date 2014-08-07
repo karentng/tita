@@ -37,7 +37,13 @@ urlpatterns += patterns('convocat.views.inscripcion',
     url(r'^inscripcion/conocimientos$',         'conocimientosEspecificos', name="conocimientosEspecificos"),
     url(r'^inscripcion/idiomas$',               'idiomasManejados', name="idiomasManejados"),
     url(r'^inscripcion/idiomas/eliminar/(\d+)$', 'eliminarIdioma', name="eliminarIdioma"),
-    #url(r'^experiencia-ensenanza$',             'experienciaEnsenanza', name="experienciaFormadorTics"),
-    #url(r'^experiencia-otra$',                  'experienciaOtra', name="firmaServidorPublico"),
+
+    url(r'^experiencia-ensenanza$',             'experienciaEnsenanza', name="experienciaEnsenanza"),
+    url(r'^inscripcion/experiencia-ensenanza/eliminar/(\d+)$', 'eliminarExperienciaEnsenanza', name="eliminarExperienciaEnsenanza"),
+
+    url(r'^experiencia-otra$',                  'experienciaOtra', name="experienciaOtra"),
+    url(r'^inscripcion/experiencia-otra/eliminar/(\d+)$', 'eliminarExperienciaOtra', name="eliminarExperienciaOtra"),
+
+    url(r'^firma-servidor$',                  'firmaServidorPublico', name="firmaServidorPublico"),
 
 )

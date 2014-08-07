@@ -59,16 +59,23 @@ class IdiomasManejadosForm(forms.ModelForm):
         
 
 
-"""
-class ExperienciaFormadorTicsForm(forms.ModelForm):
+
+class ExperienciaEnsenanzaForm(forms.ModelForm):
     class Meta:
-        model = ExperienciaFormadorTics
-        fields = ('formador_est','formador_doc','formador_for',)
+        model = ExperienciaEnsenanza
+        fields = ('institucion','tipo_institucion','telefono', 'email', 'fecha_inicio', 'fecha_fin')
         widgets = {
-            'formador_est': Select({'size':4}),
-            'formador_doc': Select({'size':4}),
-            'formador_for': Select({'size':2}),
+            'fecha_inicio': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
+            'fecha_fin': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
         }
 
 
-"""
+
+class ExperienciaOtraForm(forms.ModelForm):
+    class Meta:
+        model = ExperienciaOtra
+        fields = ('entidad', 'tipo_entidad', 'telefono', 'email', 'fecha_inicio', 'fecha_fin', 'cargo')
+        widgets = {
+            'fecha_inicio': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
+            'fecha_fin': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
+        }

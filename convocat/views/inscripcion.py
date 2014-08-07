@@ -171,31 +171,71 @@ def eliminarIdioma(request, formIdiomasId):
 
     return redirect('idiomasManejados')
 
+def experienciaEnsenanza(request):
+    aspirante = aspirante_sesion(request)
+    if not aspirante : redirect('idiomasManejados')
+    
+    if request.method == 'POST':
+        form = ExperienciaEnsenanzaForm(request.POST)
+        if form.is_valid():
+            objeto = form.save(commit=False)
+            objeto.aspirante_id = aspirante.id
+            objeto.save()
+            return redirect('experienciaEnsenanza') #Para evitar que al recargar la pagina cree nuevamente los datos
+    else:
+        form = ExperienciaEnsenanzaForm()
+
+    experiencia_ens = aspirante.experienciaensenanza_set.all().order_by('fecha_fin')
+
+    return render(request, 'inscripcion/experienciaEnsenanza.html', {
+        'form': form,
+        'experiencia_ens': experiencia_ens,
+    })
+
+def eliminarExperienciaEnsenanza(request, ExpeId):
+    aspirante = aspirante_sesion(request)
+    if not aspirante : redirect('experienciaEnsenanza')
+
+    formExperienciaEns = get_object_or_404(ExperienciaEnsenanza.objects, aspirante_id=aspirante.id, id=ExpeId)
+    formExperienciaEns.delete()
+
+    return redirect('experienciaEnsenanza')
+
+def experienciaOtra(request):
+    aspirante = aspirante_sesion(request)
+    if not aspirante : redirect('experienciaEnsenanza')
+    
+    if request.method == 'POST':
+        form = ExperienciaOtraForm(request.POST)
+        if form.is_valid():
+            objeto = form.save(commit=False)
+            objeto.aspirante_id = aspirante.id
+            objeto.save()
+            return redirect('experienciaOtra') #Para evitar que al recargar la pagina cree nuevamente los datos
+    else:
+        form = ExperienciaOtraForm()
+
+    experiencias = aspirante.experienciaotra_set.all().order_by('fecha_fin')
+
+    return render(request, 'inscripcion/experienciaOtra.html', {
+        'form': form,
+        'experiencias': experiencias,
+    })
+
+def eliminarExperienciaOtra(request, ExpeId):
+    aspirante = aspirante_sesion(request)
+    if not aspirante : redirect('experienciaOtra')
+
+    formExperienciaOtra = get_object_or_404(ExperienciaOtra.objects, aspirante_id=aspirante.id, id=ExpeId)
+    formExperienciaOtra.delete()
+
+    return redirect('experienciaOtra')
+
+def firmaServidorPublico(request):
+
+    return render(request, 'inscripcion/firmaServidorPublico.html')
 
 """
-def experienciaFormadorTics(request, idnt):
-    if request.method == 'POST':
-        form = ExperienciaFormadorTicsForm(request.POST)
-        if form.is_valid():
-                #form = form.cleaned_data
-            objeto = form.save(commit=False)
-            objeto.aspirante_id = idnt
-            objeto.save()
-            return redirect('publico') # cambiar al que sigue
-
-    experienciaFormadorTics = ExperienciaFormadorTicsForm()
-
-    return render(request, 'formularioHV/experienciaFormadorTics.html', {
-            'opcion_menu': 6,
-            'experienciaFormadorTics': experienciaFormadorTics,
-    })
-
-def firmaServidorPublico(request, idnt):
-
-    return render(request, 'formularioHV/firmaServidorPublico.html', {
-            'opcion_menu': 6,
-    })
-
 def login(request):
     
     if request.POST:
