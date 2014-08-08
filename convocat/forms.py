@@ -80,3 +80,6 @@ class ExperienciaOtraForm(forms.ModelForm):
             'fecha_inicio': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
             'fecha_fin': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
         }
+
+class ContinuarRegistroForm(forms.Form):
+        registro = forms.CharField(label='',max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Escriba su numero registro'}))

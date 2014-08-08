@@ -27,6 +27,8 @@ urlpatterns = patterns('',
 
 
 urlpatterns += patterns('convocat.views.inscripcion',
+    url(r'^inscripcion/iniciar-inscripcion$',      'iniciarInscripcion', name="iniciarInscripcion"),
+
     url(r'^inscripcion/datos-personales$',      'datosPersonales', name="datosPersonales"),
 
     url(r'^inscripcion/finalizar$',      'finalizar', name="finalizar"),

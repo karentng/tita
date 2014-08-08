@@ -5,12 +5,12 @@
 {% endblock %}
 
 {% block menu %}
-	{% include "menus/publico.html" %}
+	{% include "menus/publico.html" with opcion_menu=4 %}
 {% endblock %}
 
 {% block miga_pan %}
 	<li><a href="javascript:;">Inicio</a></li>
-	<li class="active">Requisitos</li>
+	<li class="active">Calendario</li>
 {% endblock %}
 
 {% block titulo_contenido %}
@@ -18,59 +18,39 @@
 {% endblock %}
 
 {% block titulo_panel %}
-	Requisitos para Concursar
+	Requisitos
 {% endblock %}
 
-{% block contenido_panel %}
-	<div class="row" style="font-size:15px">
-		<div class="col-xs-12">
-			<b>Formación Académica</b>
-			<ul>
-				<li>
-					<b>OBLIGATORIO</b>
-					<ul>
-						<li>
-							Licenciados en educación preescolar, básica primaria, ciencias naturales, lengua castellana, matemáticas, ciencias sociales, tecnología, educación artística (y áreas relacionadas según acuerdo 098 de 2009) o profesionales no licenciados con título de pregrado afín (según acuerdo 098 de 2009) a las ciencias naturales, las matemáticas o la lengua castellana. (Da puntaje de partida)
-						</li>
-						<li>
-							Cursos de formación en TIC  (Da puntaje de partida)
-						</li>
-					</ul>
-				</li>
-				<li>
-					<b>PREFERIBLE</b>
-					<ul>
-						<li>
-							Título de posgrado en áreas afines a TIC o educación  (suma puntos) 
-						</li>
-						<li>
-							Cursos de formación a formadores TIC (suma puntos)
-						</li>
-					</ul>
-				</li>
-			</ul>
-			<b>Experiencia laboral</b>
-			<ul>
-				<li>
-					<b>OBLIGATORIO</b>
-					<ul>
-						<li>
-							Experiencia certificada de mínimo 2 años como docente de básica o media. (Da puntaje de partida)
-						</li>
-						<li>
-							Uso de TIC en la enseñanza de alguna de las áreas básicas del saber (ciencias, matemáticas, informática, artes, humanidades) o experiencia en el uso de plataformas e-learning o en el desarrollo de recursos educativos digitales  (Da puntaje de partida)
-						</li>
-					</ul>
-				</li>
-				<li>
-					<b>PREFERIBLE</b>
-					<ul>
-						<li>
-							Experiencia certificada de mínimo 2 años en procesos de formación de docentes.  (suma puntos)
-						</li>
-					</ul>
-				</li>
-			</ul>
+{% block contenido %}
+	<div class="col-md-8">
+		<div class="panel panel-primary">
+		    <div class="panel-heading">
+		        <h4 class="panel-title" style="font-size:15px">Requisitos</h4>
+			</div>
+			<div class="panel-body" align="justify">
+					    	
+				<p style="font-size:20px; font-family:times">
+					<ol>
+					</ol>
+					Formación Académica: <br><br>
+
+					OBLIGAGORIO:  <br>
+					- Licenciados en educación preescolar, básica primaria, ciencias naturales, lengua castellana, matemáticas, ciencias sociales, tecnología, educación artística (y áreas relacionadas según acuerdo 098 de 2009) o profesionales no licenciados con título de pregrado afín (según acuerdo 098 de 2009) a las ciencias naturales, las matemáticas o la lengua castellana.<br>
+					- Cursos de formación en TIC<br><br><br>
+
+
+					Experiencia laboral: <br><br>
+
+					OBLIGATORIO: <br>
+					- Experiencia certificada de mínimo 2 años como docente de básica o media.  <br>
+					- Uso de TIC en la enseñanza de alguna de las áreas básicas del saber (ciencias, matemáticas, informática, artes, humanidades) o experiencia en el uso de plataformas e-learning o en el desarrollo de recursos educativos digitales 
+				
+				</p>
+			</div>
 		</div>
+	</div>
+	<div class="col-md-4">
+		<br>
+		<img style="border-radius:10px; height:200px" src="/static/img/info/imagen3.jpg">
 	</div>
 {% endblock %}
