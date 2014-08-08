@@ -22,16 +22,22 @@
 
 {% block titulo_contenido %}Formulario de Registro de Aspirantes{% endblock %}
 
-{% block titulo_panel %}<i class="fa fa-key"></i> Clave Reanudación{% endblock %}
+{% block titulo_panel %}<i class="fa fa-key"></i> Número de Registro{% endblock %}
 {% block contenido_panel %}
     <div class="row" style="font-size:15px">
         <h4 align="center"><b>Sus datos han sido registrados exitosamente!</b></h4>
         <br>
-        <p style= "font-family:times"> 
+        <p style= "font-size:15px; margin-left: 200px; margin-right: 200px; "> 
             No olvide que este es su número de registro: <b>{{numero_registro}}</b> 
             Con este dato podrá recibir información acerca de sus proceso dentro de la conovocatoria.
-            Gracias por su tiempo.
+            <br>
+            <br>
+            <center>Gracias por su tiempo.</center>
         </p>
+        <center>
+           <a href="{% url 'home' %}" class="btn btn-lg btn-success">Aceptar</a> 
+        </center>
+        
     </div>
     
     <!--a href="{% url 'formacionAcademica' %}" class="btn btn-lg btn-primary pull-right">Siguiente <i class="fa fa-angle-right"></i></a-->
