@@ -1,0 +1,86 @@
+[
+{
+  "pk": 1, 
+  "model": "convocat.areaensenanza", 
+  "fields": {
+    "nombre": "Educaci\u00f3n f\u00edsica, recreaci\u00f3n y deporte"
+  }
+},
+{
+  "pk": 2, 
+  "model": "convocat.areaensenanza", 
+  "fields": {
+    "nombre": "Educaci\u00f3n art\u00edstica"
+  }
+},
+{
+  "pk": 3, 
+  "model": "convocat.areaensenanza", 
+  "fields": {
+    "nombre": "Matem\u00e1ticas"
+  }
+},
+{
+  "pk": 4, 
+  "model": "convocat.areaensenanza", 
+  "fields": {
+    "nombre": "Humanidades, lengua castellana e idiomas extranjeros"
+  }
+},
+{
+  "pk": 5, 
+  "model": "convocat.areaensenanza", 
+  "fields": {
+    "nombre": "Idioma Extranjero"
+  }
+},
+{
+  "pk": 6, 
+  "model": "convocat.areaensenanza", 
+  "fields": {
+    "nombre": "Ciencias Naturales y educaci\u00f3n ambiental"
+  }
+},
+{
+  "pk": 7, 
+  "model": "convocat.areaensenanza", 
+  "fields": {
+    "nombre": "Ciencias Sociales, historia, geograf\u00eda, constituci\u00f3n pol\u00edtica y democracia"
+  }
+},
+{
+  "pk": 8, 
+  "model": "convocat.areaensenanza", 
+  "fields": {
+    "nombre": "Educaci\u00f3n religiosa"
+  }
+},
+{
+  "pk": 9, 
+  "model": "convocat.areaensenanza", 
+  "fields": {
+    "nombre": "F\u00edsica"
+  }
+},
+{
+  "pk": 10, 
+  "model": "convocat.areaensenanza", 
+  "fields": {
+    "nombre": "Qu\u00edmica"
+  }
+},
+{
+  "pk": 11, 
+  "model": "convocat.areaensenanza", 
+  "fields": {
+    "nombre": "Tecnolog\u00eda e inform\u00e1tica"
+  }
+},
+{
+  "pk": 12, 
+  "model": "convocat.areaensenanza", 
+  "fields": {
+    "nombre": "Educaci\u00f3n \u00e9tica y en valores humanos"
+  }
+}
+]

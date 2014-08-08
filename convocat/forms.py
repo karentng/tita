@@ -2,9 +2,9 @@
 from django import forms
 from convocat.models import *
 from bootstrap3_datetime.widgets import DateTimePicker
-from django.forms import ModelForm, Textarea, HiddenInput, TextInput, Select
+from django.forms import ModelForm, Textarea, HiddenInput, TextInput, Select, CheckboxSelectMultiple
 from django.forms.models import inlineformset_factory
-from django_select2 import AutoModelSelect2Field
+from django_select2 import AutoModelSelect2Field, Select2MultipleWidget
 
 class MunicipioChoice(AutoModelSelect2Field):
     queryset = Municipio.objects.select_related('departamento')
@@ -63,10 +63,11 @@ class IdiomasManejadosForm(forms.ModelForm):
 class ExperienciaEnsenanzaForm(forms.ModelForm):
     class Meta:
         model = ExperienciaEnsenanza
-        fields = ('institucion', 'jornada', 'tipo_institucion','telefono', 'email', 'fecha_inicio', 'fecha_fin')
+        fields = ('institucion', 'jornada', 'tipo_institucion','telefono', 'email', 'fecha_inicio', 'fecha_fin', 'areas')
         widgets = {
             'fecha_inicio': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
             'fecha_fin': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
+            'areas' : Select2MultipleWidget()
         }
 
 

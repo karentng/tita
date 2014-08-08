@@ -33,29 +33,39 @@
 
 {% block titulo_panel %}<i class="fa fa-puzzle-piece"></i> Experiencia Laboral en Enseñanza {% endblock %}
 {% block contenido_panel %}
-    <table class="table">
+    <table class="table table-hover">
         <thead>
         <tr>
             <th>Institución</th>
-            <th>Tipo de Institución</th>
-            <th>Jornada Laboral</th>
-            <th>Teléfono</th>
-            <th>Email</th>
-            <th>Inicio</th>
-            <th>Terminación</th>
+            <th>Contacto</th>
+            <th>Rango de Tiempo</th>
+            <th>Áreas</th>
             <th></th>
         </tr>
         </thead>
         <tbody>
         {% for ens in experiencia_ens %}
             <tr>
-                <td>{{ens.institucion}}</td>
-                <td>{{ens.get_tipo_institucion_display}}</td>
-                <td>{{ens.get_jornada_display}}</td>
-                <td>{{ens.telefono}}</td>
-                <td>{{ens.email}}</td>
-                <td>{{ens.fecha_inicio}}</td>
-                <td>{{ens.fecha_fin}}</td>
+                <td>
+                    <b>{{ens.institucion}}</b><br>
+                    <small><i>{{ens.get_tipo_institucion_display}}</i></small>
+                    {% if ens.jornada %}
+                        <br>
+                        <small>{{ens.get_jornada_display}}</small>
+                    {% endif %}
+                </td>
+                <td>{{ens.telefono|default:''}} 
+                    {% if ens.telefono and ens.email %} <br> {% endif %}
+                    {{ens.email}}
+                </td>                
+                <td>{{ens.fecha_inicio|date:"Y-m-d"}} ~ {{ens.fecha_fin|date:"Y-m-d"|default:'Presente'}}</td>
+                <td>
+                    <ul class="list-unstyled">
+                    {%for area in ens.areas.all %}
+                    <li>{{area}}</li>
+                    {% endfor %}
+                    </ul>
+                </td>
                 <td>
                     <a href="{% url 'eliminarExperienciaEnsenanza' ens.id %}" onclick="return confirm('Seguro que desea eliminar esta entrada?')" class="text-danger">Eliminar</a>
                 </td>

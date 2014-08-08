@@ -130,6 +130,13 @@ class Idioma(models.Model):
     escribe = models.IntegerField(choices=HABILIDAD_IDIOMA, verbose_name='habilidad escribiendo')
 
 
+class AreaEnsenanza(models.Model):
+    nombre = models.CharField(max_length=100)
+
+    def __unicode__(self):
+        return self.nombre
+
+
 class ExperienciaEnsenanza(models.Model):
     aspirante = models.ForeignKey(Aspirante)
     institucion = models.CharField(max_length=255, verbose_name=u'institución')
@@ -138,28 +145,9 @@ class ExperienciaEnsenanza(models.Model):
     email = models.EmailField(blank=True, verbose_name=u'correo electrónico')
     fecha_inicio = models.DateField(verbose_name=u'fecha de inicio')
     fecha_fin = models.DateField(null=True, blank=True, verbose_name=u'fecha de finalización', help_text='Deje en blanco si actualmente labora allí')
-    jornada = models.CharField(max_length=50, choices=[('M', 'Mañana'), ('T', 'Tarde'), ('N','Noche')], verbose_name='jornada de trabajo')
-
-
-
-class AreaExperiencia(models.Model):
-    AREAS = ( (x,x) for x in (
-        'Educación física, recreación y deporte',
-        'Educación artística',
-        'Matemáticas',
-        'Humanidades, lengua castellana e idiomas extranjeros',
-        'Idioma Extranjero',
-        'Ciencias Naturales y educación ambiental',
-        'Ciencias Sociales, historia, geografía, constitución política y democracia',
-        'Educación religiosa',
-        'Física',
-        'Química',
-        'Tecnología e informática',
-        'Educación ética y en valores humanos'
-    ))
-    experiencia = models.ForeignKey(ExperienciaEnsenanza)
-    area = models.CharField(max_length=100, choices=AREAS, verbose_name=u'área de enseñanza')
-
+    jornada = models.CharField(max_length=5, null=True, blank=True, choices=[('M', 'Mañana'), ('T', 'Tarde'), ('MT', 'Mañana y tarde'), ('N','Noche')], verbose_name='jornada de trabajo')
+    areas = models.ManyToManyField(AreaEnsenanza, blank=True, verbose_name=u'Areas que enseñó o enseña en esta institución')
+    
 
 class ExperienciaOtra(models.Model):
     aspirante = models.ForeignKey(Aspirante)

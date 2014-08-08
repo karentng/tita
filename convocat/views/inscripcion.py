@@ -108,8 +108,8 @@ def eliminarFormacionTics(request, formTicsId):
     aspirante = aspirante_sesion(request)
     if not aspirante : return redirect('home')
 
-    formTics = get_object_or_404(FormacionTics.objects, aspirante_id=aspirante.id, id=formTicsId)
-    formTics.delete()
+    tics = get_object_or_404(FormacionTics.objects, aspirante_id=aspirante.id, id=formTicsId)
+    tics.delete()
 
     return redirect('formacionTics')
 
@@ -166,8 +166,8 @@ def eliminarIdioma(request, formIdiomasId):
     aspirante = aspirante_sesion(request)
     if not aspirante : return redirect('home')
 
-    formIdiomas = get_object_or_404(Idioma.objects, aspirante_id=aspirante.id, id=formIdiomasId)
-    formIdiomas.delete()
+    idioma = get_object_or_404(Idioma.objects, aspirante_id=aspirante.id, id=formIdiomasId)
+    idioma.delete()
 
     return redirect('idiomasManejados')
 
@@ -181,6 +181,7 @@ def experienciaEnsenanza(request):
             objeto = form.save(commit=False)
             objeto.aspirante_id = aspirante.id
             objeto.save()
+            form.save_m2m() # para guardar las areas (many-to-many)
             return redirect('experienciaEnsenanza') #Para evitar que al recargar la pagina cree nuevamente los datos
     else:
         form = ExperienciaEnsenanzaForm()
@@ -196,8 +197,8 @@ def eliminarExperienciaEnsenanza(request, ExpeId):
     aspirante = aspirante_sesion(request)
     if not aspirante : return redirect('home')
 
-    formExperienciaEns = get_object_or_404(ExperienciaEnsenanza.objects, aspirante_id=aspirante.id, id=ExpeId)
-    formExperienciaEns.delete()
+    experienciaEns = get_object_or_404(ExperienciaEnsenanza.objects, aspirante_id=aspirante.id, id=ExpeId)
+    experienciaEns.delete()
 
     return redirect('experienciaEnsenanza')
 
@@ -226,8 +227,8 @@ def eliminarExperienciaOtra(request, ExpeId):
     aspirante = aspirante_sesion(request)
     if not aspirante : return redirect('home')
 
-    formExperienciaOtra = get_object_or_404(ExperienciaOtra.objects, aspirante_id=aspirante.id, id=ExpeId)
-    formExperienciaOtra.delete()
+    experienciaOtra = get_object_or_404(ExperienciaOtra.objects, aspirante_id=aspirante.id, id=ExpeId)
+    experienciaOtra.delete()
 
     return redirect('experienciaOtra')
 
@@ -240,4 +241,4 @@ def finalizar(request):
     del request.session['clave_aspirante']
     return render(request, 'inscripcion/finalizar.html', {
         'numero_registro' : numero_registro,
-        })
+    })
