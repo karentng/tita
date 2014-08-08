@@ -105,9 +105,9 @@
 					{% block menu %}
 						{% include "menus/admin.html" %}
 					{% endblock %}
-			        <!-- begin sidebar minify button -->
+					<!-- begin sidebar minify button -->
 					<li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
-			        <!-- end sidebar minify button -->
+					<!-- end sidebar minify button -->
 				</ul>
 				<!-- end sidebar nav -->
 			</div>
@@ -135,14 +135,14 @@
 			{% block contenido %}
 				{% block previo_contenido_panel %} {% endblock %}
 				<div class="panel panel-primary">
-				    <div class="panel-heading">
-				        <h4 class="panel-title" style="font-size:15px">{% block titulo_panel %}Título Panel{% endblock %}</h4>
-				    </div>
-				    <div class="panel-body" align="justify">
-				    	{% block contenido_panel %}
-				        	Contenido del Panel
-				        {% endblock %}
-				    </div>
+					<div class="panel-heading">
+						<h4 class="panel-title" style="font-size:15px">{% block titulo_panel %}Título Panel{% endblock %}</h4>
+					</div>
+					<div class="panel-body" align="justify">
+						{% block contenido_panel %}
+							Contenido del Panel
+						{% endblock %}
+					</div>
 				</div>
 			{% endblock %}
 			{% block footer %}
@@ -196,8 +196,8 @@
 				time: ''
 			});
 			return false;
-        }
-        {% endcomment %}
+		}
+		{% endcomment %}
 	</script>
 </body>
 </html>

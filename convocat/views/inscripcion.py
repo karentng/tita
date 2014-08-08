@@ -4,6 +4,16 @@ from django.http import HttpResponse
 from convocat.models import * 
 from convocat.forms import *
 
+def buscar_aspirante_por_clave(valor):
+    try :
+        miid, mihash = map(int,valor.split("-"))
+        asp = Aspirante.objects.get(id=miid)
+        if generar_clave(asp)==valor:
+            return asp
+        else :
+            return None
+    except Exception as ex:
+        return None
 
 def aspirante_sesion(request):
     valor = request.session.get('clave_aspirante')
@@ -11,18 +21,9 @@ def aspirante_sesion(request):
 
     if not valor :
         return None
-    try :
-        miid, mihash = map(int,valor.split("-"))
-        asp = Aspirante.objects.get(id=miid)
-        print "aspirante con ese id =>", asp
-        print "clava de ese aspirante", generar_clave(asp)
-        if generar_clave(asp)==valor:
-            return asp
-        else :
-            return None
-    except Exception as ex:
-        print "excepcion->", ex
-        return None
+    
+    return buscar_aspirante_por_clave(valor)
+
 
 def generar_clave(aspirante):
     mihash = (aspirante.numero_documento*44383)%1000000007
@@ -241,3 +242,27 @@ def finalizar(request):
     return render(request, 'inscripcion/finalizar.html', {
         'numero_registro' : numero_registro,
         })
+
+
+def iniciarInscripcion(request):
+    if 'clave_aspirante' in request.session:
+        del request.session['clave_aspirante']
+
+    mensaje = ""
+    if request.method == 'POST':
+        form = ContinuarRegistroForm(request.POST)
+        if form.is_valid():
+            clave = form.cleaned_data['registro']
+            asp = buscar_aspirante_por_clave(clave)
+            if asp:
+                request.session['clave_aspirante']=clave
+                return redirect('datosPersonales')
+            else :
+                mensaje = "Numero de registro invalido"
+    else:
+        form = ContinuarRegistroForm()
+
+    return render(request, 'inscripcion/iniciarInscripcion.html', {
+        'mensaje':mensaje,
+        'form' : form
+    })
