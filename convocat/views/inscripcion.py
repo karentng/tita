@@ -152,10 +152,10 @@ def idiomasManejados(request):
             objeto = form.save(commit=False)
             objeto.aspirante_id = aspirante.id
             objeto.save()
-            #return redirect('experienciaFormadorTics') 
-
+            return redirect('idiomasManejados') 
     else:
         form = IdiomasManejadosForm()
+        
     idiomas = aspirante.idioma_set.all()
 
     return render(request, 'inscripcion/idiomasManejados.html', {
