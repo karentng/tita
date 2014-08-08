@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 
 {% block titulo %}
-	Tit@ - Funciones
+	Tit@ - Calendario
 {% endblock %}
 
 {% block menu %}
-	{% include "menus/publico.html" %}
+	{% include "menus/publico.html" with opcion_menu=3 %}
 {% endblock %}
 
 {% block miga_pan %}
 	<li><a href="javascript:;">Inicio</a></li>
-	<li class="active">Funciones de Maestros</li>
+	<li class="active">Calendario del proceso</li>
 {% endblock %}
 
 {% block titulo_contenido %}
@@ -18,21 +18,133 @@
 {% endblock %}
 
 {% block titulo_panel %}
-	Funciones de los Maestros
+	Calendario del proceso
 {% endblock %}
 
-{% block contenido_panel %}
-	<div class="row" style="font-size:15px">
-		<div class="col-xs-12">
-			<center><b><h4>Funciones de los maestros(as) formadores se encuentran</h4></b></center>
-			<ol>
-				<li>
-					Desarrollar el Programa de formación docente en uso  y apropiación de TIC con énfasis en competencias S XXI a los  Docentes Participantes.
-				</li>
-				<li>
-					Implementar el acompañamiento “in situ” durante el proceso.
-				</li>
-			</ol>
+{% block contenido %}
+<style>
+table, th, td
+{
+	border-collapse:collapse;
+	border:1px solid black;
+}
+
+th, td
+{
+	padding:15px;
+}
+
+</style>
+	<div class="col-md-8">
+		<div class="panel panel-primary">
+		    <div class="panel-heading">
+		        <h4 class="panel-title" style="font-size:15px">Calendario del proceso</h4>
+			</div>
+			<div class="panel-body" align="justify">
+				<table style="width:600px"; class = "table">
+					<tr>
+						<td colspan="2">
+							<p style="font-size:20px; font-family:times; text-align: center;" >
+							Cronograma selección de formadores
+							</p>
+						</td>
+					</tr>
+					<tr>
+					  	<td><p style="font-size:15px; font-family:times; text-align: center;" >
+							Inscripción de postulantes a formadores
+							</p>
+						</td>
+					  	<td><p style="font-size:15px; font-family:times; text-align: center;" >
+							Desde Agosto 8  Hasta Agosto 18 de 2014
+							</p>
+						</td>
+					</tr>
+					<tr>
+					  	<td colspan="2"><p style="font-size:20px; font-family:times; text-align: center;" >
+							Primer paso: preselección por puntaje de formulario en línea	
+							</p>
+						</td>
+					</tr>
+					<tr>
+					  	<td><p style="font-size:15px; font-family:times; text-align: center;" >
+							Notificación a pre-seleccionados
+							</p>
+						</td>
+					  	<td><p style="font-size:15px; font-family:times; text-align: center;" >
+							Agosto 22 de 2014
+							</p>
+						</td>
+					</tr>
+					<tr>
+					  	<td colspan="2"><p style="font-size:20px; font-family:times; text-align: center;" >
+							Segundo paso: preselección por prueba técnica
+							</p>
+						</td>
+					</tr>
+					<tr>
+					  	<td><p style="font-size:15px; font-family:times; text-align: center;" >
+							Carga de soportes al sistema a pre-seleccionados
+							</p>
+						</td>
+					  	<td><p style="font-size:15px; font-family:times; text-align: center;" >
+							Hasta agosto 25
+							</p>
+						</td>
+					</tr>
+					<tr>
+					  	<td><p style="font-size:20px; font-family:times; text-align: center;" >
+							Realización de prueba técnica 
+							</p>
+						</td>
+					  	<td><p style="font-size:20px; font-family:times; text-align: center;" >
+							Entre Agosto 25 y 27
+							</p>
+						</td>
+					</tr>
+					<tr>
+					  	<td><p style="font-size:20px; font-family:times; text-align: center;" >
+							Notificación a pre-seleccionados
+							</p>
+						</td>
+					  	<td><p style="font-size:20px; font-family:times; text-align: center;" >
+							Agosto 28
+							</p>
+						</td>
+					</tr>
+					<tr>
+					  	<td colspan="2"><p style="font-size:20px; font-family:times; text-align: center;" >
+							Tercer paso: preselección por entrevista
+							</p>
+						</td>
+					</tr>
+					<tr>
+					  	<td><p style="font-size:20px; font-family:times; text-align: center;" >
+							Realización de entrevista
+							</p>
+						</td>
+					  	<td><p style="font-size:20px; font-family:times; text-align: center;" >
+							Entre Agosto 29 y Septiembre  2
+							</p>
+						</td>
+					</tr>
+					<tr>
+					  	<td colspan="2"><p style="font-size:20px; font-family:times; text-align: center;" >
+							Notificación a seleccionados Septiembre 5 de 2014
+							</p>
+						</td>
+					</tr>
+					<tr>
+					  	<td colspan="2"><p style="font-size:20px; font-family:times; text-align: center;" >
+							Realización curso de formación a formadores desde Septiembre 15 hasta Octubre 17 de 2014
+							</p></td>
+					</tr>
+
+				</table>
+			</div>
 		</div>
+	</div>
+	<div class="col-md-4">
+		<br>
+		<img style="border-radius:10px; height:200px" src="/static/img/info/imagen6.jpg">
 	</div>
 {% endblock %}
