@@ -1,6 +1,7 @@
 # encoding:utf-8
 from django.db import models
 from dateutil.relativedelta import relativedelta
+from datetime import date
 
 class Departamento(models.Model):
     nombre = models.CharField( max_length=255, verbose_name='nombre')
@@ -44,6 +45,7 @@ class Aspirante(models.Model):
     email = models.EmailField()
     
     puntuacion_hv = models.IntegerField(null=True)
+    aceptado = models.NullBooleanField()
 
     def __unicode__(self):
         return (u"%s %s %s %s"%(self.nombre1,self.nombre2 or '', self.apellido1, self.apellido2 or '')).strip() or "-"
@@ -52,16 +54,16 @@ class Aspirante(models.Model):
         def maximo_puntaje(objetos):
             lista = list(objetos)
             if not lista : return 0
-            return max(x.puntaje for x in lista)
+            return max(x.puntaje() for x in lista)
 
         punt_academica = maximo_puntaje(self.formacionacademica_set.all())
         punt_tic = maximo_puntaje(self.formaciontics_set.all())
         punt_conocimientos = self.conocimientosespecificos.puntaje()
         punt_idioma = maximo_puntaje(self.idioma_set.all())
-        punt_ensenanza = sum(x.puntaje for x in self.experienciaensenanza_set.all())
-        return punt_academica+punt_tic+punt_conocimientos+punt_idioma+punt_ensenanza
+        punt_ensenanza = sum(x.puntaje() for x in self.experienciaensenanza_set.all())
+        return int(round(punt_academica+punt_tic+punt_conocimientos+punt_idioma+punt_ensenanza))
 
-    def finalizado(self):
+    def inscripcion_finalizada(self):
         return self.puntuacion_hv!=None
 
 
@@ -138,7 +140,7 @@ class ConocimientosEspecificos(models.Model):
     conocimiento7 = models.IntegerField(choices=HABILIDAD_CONOCIMIENTO, verbose_name='Experiencia en gestión de proyectos educativos TIC')
     conocimiento8 = models.IntegerField(choices=HABILIDAD_CONOCIMIENTO, verbose_name='Experiencia en desarrollo de elementos de evaluación de competencias.')
 
-    def puntuaje(self):
+    def puntaje(self):
         total = 0
         for i in xrange(1,9):
             p = getattr(self, "conocimiento%d"%i)
@@ -202,7 +204,7 @@ class ExperienciaEnsenanza(models.Model):
     
     def puntaje(self):
         ID_AREA_SISTEMAS = 11
-        if areas.filter(id=ID_AREA_SISTEMAS).exists(): 
+        if self.areas.filter(id=ID_AREA_SISTEMAS).exists(): 
             return 0 # si en esta experiencia no enseña sistemas
 
         anios = relativedelta(self.fecha_fin or date.today(), self.fecha_inicio).years

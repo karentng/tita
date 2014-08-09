@@ -48,7 +48,7 @@ def datosPersonales(request):
 
     return render(request, 'inscripcion/datosPersonales.html', {
         'form': form,
-        'solo_lectura':True,
+        'solo_lectura':aspirante.inscripcion_finalizada(),
     })
 
 
@@ -72,7 +72,7 @@ def formacionAcademica(request):
     return render(request, 'inscripcion/formacionAcademica.html', {
         'form': form,
         'estudios': estudios,
-        'solo_lectura':True,
+        'solo_lectura':aspirante.inscripcion_finalizada(),
     })
 
 def eliminarFormacionAcademica(request, formAcadId):
@@ -105,7 +105,7 @@ def formacionTics(request):
     return render(request, 'inscripcion/formacionTics.html', {
         'estudios_tics': estudios_tics,
         'form': form,
-        'solo_lectura': True,
+        'solo_lectura': aspirante.inscripcion_finalizada(),
     })
 
 def eliminarFormacionTics(request, formTicsId):
@@ -141,7 +141,7 @@ def conocimientosEspecificos(request):
 
     return render(request, 'inscripcion/conocimientosEspecificos.html', {
         'form': form,
-        'solo_lectura':True, 
+        'solo_lectura':aspirante.inscripcion_finalizada(), 
     })
 
 
@@ -165,7 +165,7 @@ def idiomasManejados(request):
     return render(request, 'inscripcion/idiomasManejados.html', {
             'form': form,
             'idiomas':idiomas,
-            'solo_lectura':True,
+            'solo_lectura':aspirante.inscripcion_finalizada(),
     })
 
 def eliminarIdioma(request, formIdiomasId):
@@ -197,7 +197,7 @@ def experienciaEnsenanza(request):
     return render(request, 'inscripcion/experienciaEnsenanza.html', {
         'form': form,
         'experiencia_ens': experiencia_ens,
-        'solo_lectura': True,
+        'solo_lectura': aspirante.inscripcion_finalizada(),
     })
 
 def eliminarExperienciaEnsenanza(request, ExpeId):
@@ -228,7 +228,7 @@ def experienciaOtra(request):
     return render(request, 'inscripcion/experienciaOtra.html', {
         'form': form,
         'experiencias': experiencias,
-        'solo_lectura':False
+        'solo_lectura': aspirante.inscripcion_finalizada()
     })
 
 def eliminarExperienciaOtra(request, ExpeId):
@@ -247,9 +247,25 @@ def finalizar(request):
 
     numero_registro = request.session['clave_aspirante']
     #del request.session['clave_aspirante']
+    if request.method=='POST': # presionaron finalizar
+        aspirante.puntuacion_hv = aspirante.calcular_puntaje()
+        aspirante.save()
+        #del request.session['clave_aspirante']
+        #return render(request, 'inscripcion/mostrarPuntaje.html', {'puntaje':aspirante.puntuacion_hv})
+        return redirect('finalizada')
+
+
     return render(request, 'inscripcion/finalizar.html', {
         'numero_registro' : numero_registro,
     })
+
+def finalizada(request):
+    aspirante = aspirante_sesion(request)
+    if not aspirante : return redirect('home')
+
+    del request.session['clave_aspirante']
+    return render(request, 'inscripcion/mostrarPuntaje.html', {'puntaje':aspirante.puntuacion_hv})
+
 
 
 def iniciarInscripcion(request):
