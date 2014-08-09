@@ -1,5 +1,6 @@
 # encoding:utf-8
 from django.db import models
+from dateutil.relativedelta import relativedelta
 
 class Departamento(models.Model):
     nombre = models.CharField( max_length=255, verbose_name='nombre')
@@ -20,6 +21,8 @@ class Municipio(models.Model):
 
     def __unicode__(self):
         return self.nombre
+
+
 
 
 class Aspirante(models.Model):    
@@ -45,12 +48,29 @@ class Aspirante(models.Model):
     def __unicode__(self):
         return (u"%s %s %s %s"%(self.nombre1,self.nombre2 or '', self.apellido1, self.apellido2 or '')).strip() or "-"
 
+    def calcular_puntaje(self):
+        def maximo_puntaje(objetos):
+            lista = list(objetos)
+            if not lista : return 0
+            return max(x.puntaje for x in lista)
+
+        punt_academica = maximo_puntaje(self.formacionacademica_set.all())
+        punt_tic = maximo_puntaje(self.formaciontics_set.all())
+        punt_conocimientos = self.conocimientosespecificos.puntaje()
+        punt_idioma = maximo_puntaje(self.idioma_set.all())
+        punt_ensenanza = sum(x.puntaje for x in self.experienciaensenanza_set.all())
+        return punt_academica+punt_tic+punt_conocimientos+punt_idioma+punt_ensenanza
+
+    def finalizado(self):
+        return self.puntuacion_hv!=None
+
+
 class FormacionAcademica(models.Model):
     NIVELES = (
         (10, 'Técnica'),
         (20, 'Tecnológica'),
         (30, 'Profesional'),
-        (40, 'Especializada'),
+        (40, 'Especialización'),
         (50, 'Maestría'),
         (60, 'Doctorado')
     )
@@ -68,6 +88,16 @@ class FormacionAcademica(models.Model):
 
     def __unicode__(self):
         return self.titulo
+
+    def puntaje(self):
+        if self.nivel==60 and self.relacionado_tics : return 30 # doctorado areas afines a TIC
+        if self.nivel==60 : return 28 # doctorado
+        if self.nivel==50 and self.relacionado_tics : return 26 # maestria areas afines a TIC
+        if self.nivel==50 : return 24 # maestria
+        if self.nivel==40 and self.relacionado_tics : return 20 # especialicacion TIC
+        if self.nivel==40 : return 15
+        if self.nivel==30 and self.relacionado_pedagogia : return 10 # licenciatura en educacion o areas afines
+        return 0
 
 
 class FormacionTics(models.Model):
@@ -87,6 +117,9 @@ class FormacionTics(models.Model):
     def __unicode__(self):
         return self.titulo
 
+    def puntaje(self):
+        return self.duracion
+
 
 class ConocimientosEspecificos(models.Model):
     HABILIDAD_CONOCIMIENTO = (
@@ -105,6 +138,12 @@ class ConocimientosEspecificos(models.Model):
     conocimiento7 = models.IntegerField(choices=HABILIDAD_CONOCIMIENTO, verbose_name='Experiencia en gestión de proyectos educativos TIC')
     conocimiento8 = models.IntegerField(choices=HABILIDAD_CONOCIMIENTO, verbose_name='Experiencia en desarrollo de elementos de evaluación de competencias.')
 
+    def puntuaje(self):
+        total = 0
+        for i in xrange(1,9):
+            p = getattr(self, "conocimiento%d"%i)
+            total += [0.0, 0.7, 1.3, 2.5][p]
+        return total
 
 
 class Idioma(models.Model):
@@ -128,6 +167,12 @@ class Idioma(models.Model):
     habla   = models.IntegerField(choices=HABILIDAD_IDIOMA, verbose_name='habilidad hablando')
     lee     = models.IntegerField(choices=HABILIDAD_IDIOMA, verbose_name='habilidad leyendo')
     escribe = models.IntegerField(choices=HABILIDAD_IDIOMA, verbose_name='habilidad escribiendo')
+
+    def puntaje(self):
+        punt_lee     = [0.0, 0.8, 1.5, 3][self.lee]
+        punt_escribe = [0.0, 0.8, 1.5, 3][self.escribe]
+        punt_habla   = [0.0, 1.0, 2.0, 4][self.habla]
+        return punt_lee+punt_escribe+punt_habla
 
 
 class AreaEnsenanza(models.Model):
@@ -155,6 +200,25 @@ class ExperienciaEnsenanza(models.Model):
     jornada = models.CharField(max_length=5, null=True, blank=True, choices=[('M', 'Mañana'), ('T', 'Tarde'), ('MT', 'Mañana y tarde'), ('N','Noche')], verbose_name='jornada de trabajo')
     areas = models.ManyToManyField(AreaEnsenanza, blank=True, verbose_name=u'Areas que enseñó o enseña en esta institución')
     
+    def puntaje(self):
+        ID_AREA_SISTEMAS = 11
+        if areas.filter(id=ID_AREA_SISTEMAS).exists(): 
+            return 0 # si en esta experiencia no enseña sistemas
+
+        anios = relativedelta(self.fecha_fin or date.today(), self.fecha_inicio).years
+        if self.nivel in ('PRI', 'BCH'):
+            if anios >= 5 : return 5
+            if anios >= 3 : return 4
+            if anios >= 2 : return 3
+            if anios >= 1 : return 2
+            return 0 # menos de 1 año
+        elif self.nivel in ('TEC','UNI'):
+            if anios >= 5 : return 20
+            if anios >= 3 : return 15
+            if anios >= 2 : return 10
+            if anios >= 1 : return 5
+            return 0 # menos de 1 año
+
 
 class ExperienciaOtra(models.Model):
     aspirante = models.ForeignKey(Aspirante)
