@@ -1,20 +1,21 @@
 <li {% if opcion_menu == 1 %} class="active" {% endif %}>
-	<a href="{% url 'home' %}"><i class="fa fa-info"></i> <span>Antecedentes</span></a>
+	<a href="{% url 'home' %}"><i class="fa fa-info"></i> <span>Inicio</span></a>
 </li>
 <li {% if opcion_menu == 2 %} class="active" {% endif %}>
-	<a href="{% url 'info_objetivos' %}"><i class="fa fa-check"></i> <span>Información general</span></a>
+	<a href="{% url 'info_antecedentes' %}"><i class="fa fa-users"></i> <span>Antecedentes</span></a>
 </li>
 <li {% if opcion_menu == 3 %} class="active" {% endif %}>
-	<a href="{% url 'info_funciones' %}"><i class="fa fa-users"></i> <span>Calendario</span></a>
+	<a href="{% url 'info_general' %}"><i class="fa fa-check"></i> <span>Información general</span></a>
 </li>
 <li {% if opcion_menu == 4 %} class="active" {% endif %}>
+	<a href="{% url 'info_calendario' %}"><i class="fa fa-2x fa-calendar"></i> <span>Calendario</span></a>
+</li>
+<li {% if opcion_menu == 5 %} class="active" {% endif %}>
 	<a href="{% url 'info_requisitos' %}"><i class="fa fa-list-ol"></i> <span>Requisitos</span></a>
 </li>
-{% comment %}
-<li {% if opcion_menu == 5 %} class="active" {% endif %}>
-	<a href="{% url 'info_registrarse' %}"><i class="fa fa-pencil-square-o"></i> <span>Registrarse</span></a>
-</li>
-{% endcomment %}
-<li {% if opcion_menu == 6 %} class="active" {% endif %}>
+<li {% if opcion_menu == 7 %} class="active" {% endif %}>
 	<a href="{% url 'iniciarInscripcion' %}"><i class="fa fa-pencil-square-o"></i> <span>Formulario Convocatoria</span></a>
+</li>
+<li {% if opcion_menu == 8 %} class="active" {% endif %}>
+	<a href="{% url 'info_contactenos' %}"><i class="fa fa-2x fa-question-circle"></i> <span>Contactenos</span></a>
 </li>

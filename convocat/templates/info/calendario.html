@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+	Tit@ - Calendario
+{% endblock %}
+
+{% block menu %}
+	{% include "menus/publico.html" with opcion_menu=4 %}
+{% endblock %}
+
+{% block miga_pan %}
+	<li><a href="javascript:;">Inicio</a></li>
+	<li class="active">Calendario del proceso</li>
+{% endblock %}
+
+{% block titulo_contenido %}
+	Convocatoria a Formadores Etapa Presencial y Virtual
+{% endblock %}
+
+{% block titulo_panel %}
+	Calendario del proceso
+{% endblock %}
+
+{% block contenido %}
+<style>
+table, th, td
+{
+	border-collapse:collapse;
+	border:1px solid black;
+}
+
+th, td
+{
+	padding:15px;
+}
+
+</style>
+	<div class="col-md-8">
+		<div class="panel panel-primary">
+		    <div class="panel-heading">
+		        <h4 class="panel-title" style="font-size:15px">Calendario del proceso</h4>
+			</div>
+			<div class="panel-body" align="justify">
+				<table style="width:600px"; class = "table">
+					<tr>
+						<thead>
+						<td colspan="2">
+							<center>
+							<b>Cronograma selección de formadores</b>
+							</center>
+						</td>
+					</thead>
+					</tr>
+					<tbody>
+					<tr>
+					  	<td>
+							Inscripción de postulantes a formadores
+							
+						</td>
+					  	<td>
+							Desde Agosto 8  Hasta Agosto 18 de 2014
+							
+						</td>
+					</tr>
+					</tbody>
+				</table><br>
+				<table style="width:600px"; class = "table">
+					<thead>
+					<tr>
+					  	<td colspan="2">
+					  		<center>
+							<b>Primer paso: preselección por puntaje de formulario en línea	</b>
+							</center>
+						</td>
+					</tr>
+					</thead>
+					<tbody>
+					<tr>
+					  	<td>
+							Notificación a pre-seleccionados
+							
+						</td>
+					  	<td>
+							Agosto 22 de 2014
+							
+						</td>
+					</tr>
+					</tbody>
+				</table><br>
+				<table style="width:600px"; class = "table">
+					<thead>
+					<tr>
+					  	<td colspan="2">
+					  		<center>
+							<b>Segundo paso: preselección por prueba técnica</b>
+							</center>							
+						</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+					  	<td>
+							Carga de soportes al sistema a pre-seleccionados
+						</td>
+					  	<td>
+							Hasta agosto 25
+							
+						</td>
+					</tr>
+					<tr>
+					  	<td>
+							Realización de prueba técnica 
+						</td>
+					  	<td>
+							Entre Agosto 25 y 27
+							
+						</td>
+					</tr>
+					<tr>
+					  	<td>
+							Notificación a pre-seleccionados
+							
+						</td>
+					  	<td>
+							Agosto 28
+							
+						</td>
+					</tr>
+				</tbody>
+			</table><br>
+			<table style="width:600px"; class = "table">
+				<thead>
+					<tr>
+					
+					
+					  	<td colspan="2">
+					  		<center>
+							<b>Tercer paso: preselección por entrevista</b>
+							</center>
+						</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+					  	<td>
+							Realización de entrevista
+							
+						</td>
+					  	<td>
+							Entre Agosto 29 y Septiembre  2
+							
+						</td>
+					</tr>
+				</tbody>
+			</table><br>
+				
+					  	<center><b>
+							Notificación a seleccionados Septiembre 5 de 2014<br><br>						
+						
+							Realización curso de formación a formadores desde Septiembre de 2014</b>
+						</center>
+							
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<br>
+		<img style="border-radius:10px; height:200px" src="/static/img/info/imagen7.jpg">
+	</div>
+{% endblock %}

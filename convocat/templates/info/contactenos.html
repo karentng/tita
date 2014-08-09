@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+	Tit@ - Contactenos
+{% endblock %}
+
+{% block menu %}
+	{% include "menus/publico.html" with opcion_menu=8 %}
+{% endblock %}
+
+{% block miga_pan %}
+	<li><a href="javascript:;">Inicio</a></li>
+	<li class="active">Contactenos</li>
+	
+{% endblock %}
+
+{% block titulo_contenido %}
+	Convocatoria a Formadores Etapa Presencial y Virtual
+{% endblock %}
+
+{% block titulo_panel %}
+	Contactenos
+{% endblock %}
+
+{% block contenido %}
+	<div class="col-md-8">
+		<div class="panel panel-primary">
+		    <div class="panel-heading">
+		        <h4 class="panel-title" style="font-size:20px">Contactenos</h4>
+			</div>
+			<div class="panel-body" align="center">
+				<br>
+				Si tiene algún problema <b>al llenar el formulario</b> por favor contacte al correo <u>titaedpt@gmail.com</u><br><br>
+				Si tiene alguna <b>duda de información acerca de la convocatoria</b> por favor contate al correo <u>pavel.dussan@correounivalle.edu.co </u>  	
+				<br><br><br><br><br><br>
+				
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<br>
+		<img style="border-radius:10px; height:200px" src="/static/img/info/imagen9.jpg"><br><br>
+
+	</div>
+{% endblock %}
