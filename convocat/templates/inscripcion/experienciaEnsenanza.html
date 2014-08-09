@@ -27,6 +27,11 @@
                 return res;
             }
         });
+
+        {% if solo_lectura %}
+            $("select").attr("disabled", "disabled");
+            $("input").attr("readonly", "readonly");
+        {% endif %}
     });
     </script>
 {% endblock %}
@@ -84,18 +89,24 @@
                     {% endfor %}
                     </ul>
                 </td>
+                {% if solo_lectura %}
+                <td></td>
+                {% else %}                
                 <td>
                     <a href="{% url 'eliminarExperienciaEnsenanza' ens.id %}" onclick="return confirm('Seguro que desea eliminar esta entrada?')" class="text-danger">Eliminar</a>
                 </td>
+                {% endif %}
             </tr>
         {% empty %}
             <tr><td>No se ha agregado alguna experiencia en enseñanza.</td></tr>
         {% endfor %}
         </tbody>
     </table>
+    {% if solo_lectura %}
+    {% else %}
     <div class="well well-sm">
         <h4>Agregar Experiencias en Enseñanza</h4>
-        <form class="form-horizontal" method="post">{% csrf_token %}
+        <form class="form-horizontal" method="post">{% if solo_lectura %}{% else %}{% csrf_token %}{% endif %}
             {% bootstrap_form form layout="horizontal" horizontal_label_class='col-md-5' horizontal_field_class='col-md-5' %}
             <div class="row">
                 <div class="col-md-3 col-md-offset-2">
@@ -104,6 +115,7 @@
             </div>
         </form>
     </div>
+    {% endif %}
 
     <a href="{% url 'idiomasManejados' %}" class="btn btn-lg btn-default pull-left"> <i class="fa fa-angle-left"></i> Anterior</a>
     <a id="siguiente" href="{% url 'experienciaOtra' %}" class="btn btn-lg btn-primary pull-right">Siguiente <i class="fa fa-angle-right"></i></a>

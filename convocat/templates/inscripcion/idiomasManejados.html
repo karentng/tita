@@ -26,6 +26,11 @@
                 return res;
             }
         });
+
+        {% if solo_lectura %}
+            $("select").attr("disabled", "disabled");
+            $("input").attr("readonly", "readonly");
+        {% endif %}
     });
     </script>
 {% endblock %}
@@ -59,10 +64,14 @@
                 <td>{{idm.get_idioma_display}}</td>
                 <td>{{idm.get_habla_display}}</td>
                 <td>{{idm.get_lee_display}}</td>
-                <td>{{idm.get_escribe_display}}</td>            
+                <td>{{idm.get_escribe_display}}</td> 
+                {% if solo_lectura %}
+                <td></td>
+                {% else %}            
                 <td>
                     <a href="{% url 'eliminarIdioma' idm.id %}" onclick="return confirm('Seguro que desea eliminar esta entrada?')" class="text-danger">Eliminar</a>
                 </td>
+                {% endif %}
             </tr>
         {% empty %}
             <tr>
@@ -71,9 +80,11 @@
         {% endfor %}
         </tbody>
     </table>
+    {% if solo_lectura %}
+    {% else %}
     <div class="well well-sm">
         <h4>Agregar Idiomas Extranjeros</h4>
-        <form class="form-horizontal" method="post">{% csrf_token %}
+        <form class="form-horizontal" method="post">{% if solo_lectura %}{% else %}{% csrf_token %}{% endif %}
             {% bootstrap_form form layout="horizontal" %}
             <div class="row">
                 <div class="col-md-3 col-md-offset-2">
@@ -82,7 +93,7 @@
             </div>
         </form>
     </div>
-
+    {% endif %}
     <a href="{% url 'conocimientosEspecificos' %}" class="btn btn-lg btn-default pull-left"> <i class="fa fa-angle-left"></i> Anterior</a>
     <a id="siguiente" href="{% url 'experienciaEnsenanza' %}" class="btn btn-lg btn-primary pull-right">Siguiente <i class="fa fa-angle-right"></i></a>
 {% endblock %}

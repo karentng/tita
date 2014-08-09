@@ -14,6 +14,17 @@
     <!--- :D -->
 {% endblock %}
 
+{% block js %}
+    {% if solo_lectura%}
+    <script>
+        $(function(){
+            $("select").attr("disabled", "disabled");
+            $("input").attr("readonly", "readonly");
+        });
+    </script>
+
+    {% endif %}
+{% endblock %}
 
 {% block miga_pan %}
     <li><a href="javascript:;">Inicio</a></li>
@@ -28,8 +39,14 @@
 
 {% block titulo_panel %}<i class="fa fa-user"></i> Datos Personales{% endblock %}
 {% block contenido_panel %}
-    <form class="form-horizontal" method="post">{% csrf_token %}
+    <form class="form-horizontal" method="post">{% if solo_lectura %} {% else %} {% csrf_token %} {% endif %}
         {% bootstrap_form form layout="horizontal" %}
-        <button class="btn btn-lg btn-primary pull-right" type="submit">Siguiente <i class="fa fa-angle-right"></i></button>
+
+        {% if solo_lectura %}
+            <a id="siguiente" href="{% url 'formacionAcademica' %}" class="btn btn-lg btn-primary pull-right">Siguiente <i class="fa fa-angle-right"></i></a>
+        {% else %}
+            <button class="btn btn-lg btn-primary pull-right" type="submit">Siguiente <i class="fa fa-angle-right"></i></button>
+        {% endif %}
     </form>
 {% endblock %}
+
