@@ -228,7 +228,7 @@ def experienciaOtra(request):
     return render(request, 'inscripcion/experienciaOtra.html', {
         'form': form,
         'experiencias': experiencias,
-        'solo_lectura':True
+        'solo_lectura':False
     })
 
 def eliminarExperienciaOtra(request, ExpeId):
@@ -246,7 +246,7 @@ def finalizar(request):
     if not aspirante : return redirect('home')
 
     numero_registro = request.session['clave_aspirante']
-    del request.session['clave_aspirante']
+    #del request.session['clave_aspirante']
     return render(request, 'inscripcion/finalizar.html', {
         'numero_registro' : numero_registro,
     })

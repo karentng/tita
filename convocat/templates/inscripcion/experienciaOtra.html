@@ -103,6 +103,9 @@
     </div>
     {% endif %}
     <a href="{% url 'experienciaEnsenanza' %}" class="btn btn-lg btn-default pull-left"> <i class="fa fa-angle-left"></i> Anterior</a>
-    <a id="siguiente" href="{% url 'finalizar' %}" class="btn btn-lg btn-primary pull-right"><i class="fa fa-check-square-o"></i> Finalizar</a>
+    {% if solo_lectura %}
+        <a id="siguiente" href="{% url 'home' %}" class="btn btn-lg btn-primary pull-right">Siguiente  <i class="fa fa-angle-right"></i></a>
+    {% else %}
+        <a id="siguiente" href="{% url 'finalizar' %}" class="btn btn-lg btn-primary pull-right">Siguiente <i class="fa fa-angle-right"></i></a>
+    {% endif %}
 {% endblock %}
-
