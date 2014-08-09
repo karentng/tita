@@ -48,7 +48,7 @@ def datosPersonales(request):
 
     return render(request, 'inscripcion/datosPersonales.html', {
         'form': form,
-        'solo_lectura':aspirante.inscripcion_finalizada(),
+        'solo_lectura': aspirante.inscripcion_finalizada() if aspirante else False,
     })
 
 
