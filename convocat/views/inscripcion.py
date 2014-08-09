@@ -48,6 +48,7 @@ def datosPersonales(request):
 
     return render(request, 'inscripcion/datosPersonales.html', {
         'form': form,
+        'solo_lectura':True,
     })
 
 
@@ -71,6 +72,7 @@ def formacionAcademica(request):
     return render(request, 'inscripcion/formacionAcademica.html', {
         'form': form,
         'estudios': estudios,
+        'solo_lectura':True,
     })
 
 def eliminarFormacionAcademica(request, formAcadId):
@@ -103,6 +105,7 @@ def formacionTics(request):
     return render(request, 'inscripcion/formacionTics.html', {
         'estudios_tics': estudios_tics,
         'form': form,
+        'solo_lectura': True,
     })
 
 def eliminarFormacionTics(request, formTicsId):
@@ -137,7 +140,8 @@ def conocimientosEspecificos(request):
         form = ConocimientosEspecificosForm(instance=conocimiento)
 
     return render(request, 'inscripcion/conocimientosEspecificos.html', {
-        'form': form, 
+        'form': form,
+        'solo_lectura':True, 
     })
 
 
@@ -161,6 +165,7 @@ def idiomasManejados(request):
     return render(request, 'inscripcion/idiomasManejados.html', {
             'form': form,
             'idiomas':idiomas,
+            'solo_lectura':True,
     })
 
 def eliminarIdioma(request, formIdiomasId):
@@ -192,6 +197,7 @@ def experienciaEnsenanza(request):
     return render(request, 'inscripcion/experienciaEnsenanza.html', {
         'form': form,
         'experiencia_ens': experiencia_ens,
+        'solo_lectura': True,
     })
 
 def eliminarExperienciaEnsenanza(request, ExpeId):
@@ -222,6 +228,7 @@ def experienciaOtra(request):
     return render(request, 'inscripcion/experienciaOtra.html', {
         'form': form,
         'experiencias': experiencias,
+        'solo_lectura':True
     })
 
 def eliminarExperienciaOtra(request, ExpeId):
