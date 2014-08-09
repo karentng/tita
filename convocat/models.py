@@ -31,14 +31,14 @@ class Aspirante(models.Model):
 
     sexo = models.CharField( choices=[('M','Hombre'), ('F', 'Mujer')], max_length=1, verbose_name='sexo')
     nacionalidad = models.CharField( max_length=255, blank=True, verbose_name='nacionalidad')
-    fecha_nacimiento = models.DateField(verbose_name='fecha de nacimiento')
+    fecha_nacimiento = models.DateField(verbose_name='fecha de nacimiento', help_text='Formato año-mes-día (ej: 1988-04-30)')
     municipio_nacimiento = models.ForeignKey(Municipio, null=True, blank=True, verbose_name='municipio de nacimiento', related_name='municipio_nacimiento')
     
     direccion = models.CharField( max_length=100, verbose_name='dirección')
     municipio = models.ForeignKey(Municipio, verbose_name='municipio de residencia', null=True)
-    telefono = models.BigIntegerField(null=True, verbose_name=u'teléfono fijo')
+    telefono = models.BigIntegerField(null=True, blank=True, verbose_name=u'teléfono fijo')
     celular = models.BigIntegerField(null=True, blank=True, verbose_name=u'número de celular')
-    email = models.EmailField(null=True, blank=True)
+    email = models.EmailField()
     
     puntuacion_hv = models.IntegerField(null=True)
 
@@ -58,7 +58,7 @@ class FormacionAcademica(models.Model):
 
     nivel = models.IntegerField(choices=NIVELES, verbose_name='Nivel')
     titulo = models.CharField(max_length=255, verbose_name='título obtenido')
-    fecha_inicio = models.DateField(verbose_name=u'fecha de inicio')
+    fecha_inicio = models.DateField(verbose_name=u'fecha de inicio', help_text='Formato año-mes-día (ej: 1988-04-30)')
     fecha_terminacion = models.DateField(verbose_name='fecha de finalización')
     institucion = models.CharField(max_length=255, verbose_name=u'institución formadora')
     relacionado_pedagogia = models.BooleanField(verbose_name=u'este estudio está relacionado con la pedagogía')
@@ -80,8 +80,8 @@ class FormacionTics(models.Model):
     aspirante = models.ForeignKey(Aspirante)
     duracion = models.IntegerField(choices=DURACION_CURSO, verbose_name=u'duración del curso')
     titulo = models.CharField(max_length=255, verbose_name='título obtenido')
-    fecha_inicio = models.DateField(verbose_name=u'fecha de inicio')
-    fecha_terminacion = models.DateField(verbose_name='fecha de finalización')
+    fecha_inicio = models.DateField(verbose_name=u'fecha de inicio', help_text='Formato año-mes-día (ej: 1988-04-30)')
+    fecha_terminacion = models.DateField(verbose_name='fecha de finalización', help_text='Formato año-mes-día (ej: 1988-04-30)')
     institucion = models.CharField(max_length=255, verbose_name=u'institución formadora')
 
     def __unicode__(self):
@@ -138,12 +138,19 @@ class AreaEnsenanza(models.Model):
 
 
 class ExperienciaEnsenanza(models.Model):
+    NIVELES_ENSENANZA = (
+        ('PRI', 'Primaria'),
+        ('BCH', 'Bachillerato'),
+        ('TEC', 'Técnico'),
+        ('UNI', 'Universitario'),
+    )
     aspirante = models.ForeignKey(Aspirante)
     institucion = models.CharField(max_length=255, verbose_name=u'institución')
     tipo_institucion = models.CharField(max_length=3, choices=[('PUB','Pública'), ('PRI', 'Privada')], verbose_name=u'tipo de institución')
+    nivel = models.CharField(max_length=3, choices = NIVELES_ENSENANZA)
     telefono = models.BigIntegerField(null=True, blank=True, verbose_name=u'teléfono de contacto')
     email = models.EmailField(blank=True, verbose_name=u'correo electrónico')
-    fecha_inicio = models.DateField(verbose_name=u'fecha de inicio')
+    fecha_inicio = models.DateField(verbose_name=u'fecha de inicio', help_text='Formato año-mes-día (ej: 1988-04-30)')
     fecha_fin = models.DateField(null=True, blank=True, verbose_name=u'fecha de finalización', help_text='Deje en blanco si actualmente labora allí')
     jornada = models.CharField(max_length=5, null=True, blank=True, choices=[('M', 'Mañana'), ('T', 'Tarde'), ('MT', 'Mañana y tarde'), ('N','Noche')], verbose_name='jornada de trabajo')
     areas = models.ManyToManyField(AreaEnsenanza, blank=True, verbose_name=u'Areas que enseñó o enseña en esta institución')
@@ -155,6 +162,6 @@ class ExperienciaOtra(models.Model):
     tipo_entidad = models.CharField(max_length=3, choices=[('PUB','Pública'), ('PRI', 'Privada')], verbose_name=u'tipo de entidad')
     telefono = models.BigIntegerField(null=True, blank=True, verbose_name=u'teléfono')
     email = models.EmailField(blank=True, verbose_name=u'correo electrónico')
-    fecha_inicio = models.DateField(verbose_name=u'fecha de inicio')
+    fecha_inicio = models.DateField(verbose_name=u'fecha de inicio', help_text='Formato año-mes-día (ej: 1988-04-30)')
     fecha_fin = models.DateField(null=True, blank=True, verbose_name=u'fecha de finalización', help_text='Deje en blanco si actualmente labora allí')
     cargo = models.CharField(max_length=100, verbose_name=u'cargo ejercidos')

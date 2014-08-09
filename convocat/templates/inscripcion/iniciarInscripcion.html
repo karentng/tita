@@ -26,23 +26,18 @@
 
 
 {% block contenido %}
+<div class="well well-lg text-center ">
+    <br><br>
+    <h4>Si cumple todos los requisitos y desea participar en la convocatoria inicie aquí</h4>
+    <br>
+    <a href="{% url 'datosPersonales' %}" class="btn btn-lg btn-primary">Iniciar Inscripción</a> 
+    <br><br>
+</div> 
+
+<br>
+
 <div class="row">
-    <div class="col-md-6">    
-        <div class="well well-lg text-center ">
-            <br><br>
-                <h4>
-                    Si cumple todos los requisitos y desea participar en la convocatoria inicie aquí
-                </h4>
-
-                <br>
-                <a href="{% url 'datosPersonales' %}" class="btn btn-lg btn-primary">Iniciar Inscripción</a> 
-            <br><br>
-        </div> 
-    </div>
-
-
-    <div class="col-md-5 col-md-offset-1">
-        <br>
+    <div class="col-md-6 col-md-offset-6">
         <div class="panel panel-inverse">
             <div class="panel-heading">
                 <h5 class="panel-title">Ya estoy inscrito!</h5>
@@ -59,5 +54,6 @@
         </div>
     </div>
 </div>
+
     <!--a href="{% url 'formacionAcademica' %}" class="btn btn-lg btn-primary pull-right">Siguiente <i class="fa fa-angle-right"></i></a-->
 {% endblock %}

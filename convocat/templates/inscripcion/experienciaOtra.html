@@ -14,7 +14,21 @@
 {% endblock %}
 
 {% block js %}
-    <script src="{{STATIC_URL}}js/select2.js"></script>
+    <script>
+    $(function() {
+        window.modificado = false;
+        $('input, select').change(function() {
+            window.modificado = true;
+        });
+        $('a#siguiente').click(function() {
+            if(window.modificado) {
+                var res = confirm("No ha hecho click en el botón agregar.\nSi continúa perderá los datos del formulario."+
+                    "\n\nPresione Cancelar para volver al formulario y Agregar los datos");
+                return res;
+            }
+        });
+    });
+    </script>
 {% endblock %}
 
 {% block miga_pan %}
@@ -77,6 +91,6 @@
         </form>
     </div>
     <a href="{% url 'experienciaEnsenanza' %}" class="btn btn-lg btn-default pull-left"> <i class="fa fa-angle-left"></i> Anterior</a>
-    <a href="{% url 'finalizar' %}" class="btn btn-lg btn-primary pull-right"><i class="fa fa-check-square-o"></i> Finalizar</a>
+    <a id="siguiente" href="{% url 'finalizar' %}" class="btn btn-lg btn-primary pull-right"><i class="fa fa-check-square-o"></i> Finalizar</a>
 {% endblock %}
 

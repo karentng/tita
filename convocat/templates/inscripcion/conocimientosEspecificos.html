@@ -12,9 +12,6 @@
     {{form.media}} {# agrega los js y css necesarios para el bootstrap3 datetimepicker #}
 {% endblock %}
 
-{% block js %}
-    <script src="{{STATIC_URL}}js/select2.js"></script>
-{% endblock %}
 
 {% block miga_pan %}
     <li><a href="javascript:;">Inicio</a></li>
@@ -33,7 +30,7 @@
         <h5>Seleccione el grado de conocimiento para cada item.</h5>
     </div>
     <form class="form-horizontal" method="post">{% csrf_token %}
-        {% bootstrap_form form layout="horizontal" %}
+        {% bootstrap_form form layout="horizontal" label_class="col-md-6" %}
         <a href="{% url 'formacionTics' %}" class="btn btn-lg btn-default pull-left"> <i class="fa fa-angle-left"></i> Anterior</a>
 
         <button class="btn btn-lg btn-primary pull-right" type="submit">Siguiente <i class="fa fa-angle-right"></i></button>
