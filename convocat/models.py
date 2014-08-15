@@ -44,7 +44,7 @@ class Aspirante(models.Model):
     celular = models.BigIntegerField(null=True, blank=True, verbose_name=u'número de celular')
     email = models.EmailField()
     
-    puntuacion_hv = models.IntegerField(null=True)
+    puntuacion_hv = models.IntegerField(null=True, blank=True)
     aceptado = models.NullBooleanField()
 
     def __unicode__(self):
