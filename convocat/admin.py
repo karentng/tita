@@ -16,6 +16,14 @@ def readonly(self, request, obj=None):
             [field.name for field in self.opts.local_many_to_many]
         )
 
+def recalcular_puntaje(modeladmin, request, queryset):
+    for aspirante in queryset:
+        if aspirante.puntuacion_hv is not None:
+            aspirante.puntuacion_hv = aspirante.calcular_puntaje()
+            aspirante.save()
+
+
+
 class AcademicaInline(admin.TabularInline):
     model = FormacionAcademica
     get_readonly_fields = readonly
@@ -44,7 +52,7 @@ class ConocimientoInline(admin.StackedInline):
 class AspiranteAdmin(admin.ModelAdmin):
     list_display = ('nombre_completo', 'puntuacion_hv')
     inlines = [AcademicaInline, FormacionTicsAdmin, ConocimientoInline, IdiomaInline, ExperienciaEnsenanzaInline, ExperienciaOtraAdmin]
-
+    actions = [recalcular_puntaje]
     get_readonly_fields = readonly
 
     def nombre_completo(self, obj):

@@ -56,12 +56,15 @@ class Aspirante(models.Model):
             if not lista : return 0
             return max(x.puntaje() for x in lista)
 
+        ID_CALI = 152
+        punt_municipio = 0 if self.municipio_id==ID_CALI else 10 
+
         punt_academica = maximo_puntaje(self.formacionacademica_set.all())
         punt_tic = maximo_puntaje(self.formaciontics_set.all())
         punt_conocimientos = self.conocimientosespecificos.puntaje()
         punt_idioma = maximo_puntaje(self.idioma_set.all())
         punt_ensenanza = sum(x.puntaje() for x in self.experienciaensenanza_set.all())
-        return int(round(punt_academica+punt_tic+punt_conocimientos+punt_idioma+punt_ensenanza))
+        return int(round(punt_municipio+punt_academica+punt_tic+punt_conocimientos+punt_idioma+punt_ensenanza))
 
     def inscripcion_finalizada(self):
         return self.puntuacion_hv!=None
