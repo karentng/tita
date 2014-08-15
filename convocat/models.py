@@ -69,6 +69,12 @@ class Aspirante(models.Model):
     def inscripcion_finalizada(self):
         return self.puntuacion_hv!=None
 
+    def numero_inscripcion(self):
+        mihash = (self.numero_documento*44383)%1000000007
+        clave = "%d-%d"%(self.id, mihash)
+        return clave
+
+
 
 class FormacionAcademica(models.Model):
     NIVELES = (

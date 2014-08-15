@@ -8,7 +8,7 @@ def buscar_aspirante_por_clave(valor):
     try :
         miid, mihash = map(int,valor.split("-"))
         asp = Aspirante.objects.get(id=miid)
-        if generar_clave(asp)==valor:
+        if asp.numero_inscripcion()==valor:
             return asp
         else :
             return None
@@ -25,10 +25,10 @@ def aspirante_sesion(request):
     return buscar_aspirante_por_clave(valor)
 
 
-def generar_clave(aspirante):
-    mihash = (aspirante.numero_documento*44383)%1000000007
-    clave = "%d-%d"%(aspirante.id, mihash)
-    return clave
+#def generar_clave(aspirante):
+#    mihash = (aspirante.numero_documento*44383)%1000000007
+#    clave = "%d-%d"%(aspirante.id, mihash)
+#    return clave
 
 
 
@@ -39,7 +39,7 @@ def datosPersonales(request):
         form = DatosPersonalesForm(request.POST, instance=aspirante)
         if form.is_valid():
             objeto = form.save()
-            clave = generar_clave(objeto)
+            clave = objeto.numero_inscripcion()
             request.session['clave_aspirante'] = clave
             print "clave=",clave
             return redirect('formacionAcademica')

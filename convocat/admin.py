@@ -50,7 +50,7 @@ class ConocimientoInline(admin.StackedInline):
     get_readonly_fields = readonly
 
 class AspiranteAdmin(admin.ModelAdmin):
-    list_display = ('nombre_completo', 'puntuacion_hv')
+    list_display = ('id', 'nombre_completo', 'puntuacion_hv', 'numero_inscripcion')
     inlines = [AcademicaInline, FormacionTicsAdmin, ConocimientoInline, IdiomaInline, ExperienciaEnsenanzaInline, ExperienciaOtraAdmin]
     actions = [recalcular_puntaje]
     get_readonly_fields = readonly
