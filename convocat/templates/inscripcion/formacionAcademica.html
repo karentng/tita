@@ -51,11 +51,12 @@
     {% include "inscripcion/_wizard.html" with wizard_stage=2 %}
     {% if solo_lectura %}
     {% else %}
-    <div class="alert alert-warning alert-dismissible" role="alert">
+    <div style="font-size:18px" class="alert alert-warning alert-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <strong>Importante!</strong>  Este es su número de registro: <b>{{request.session.clave_aspirante}}</b> 
         <p>
-            Con este dato podrá continuar llenando el formulario sin perder datos que ya ha ingresado. Por favor <b>CONSERVELO</b>, le será útil después.
+            Con este dato podrá continuar llenando el formulario sin perder datos que ya ha ingresado. <br>
+            Por favor <b>CONSERVELO</b>, le será útil después.
         </p>
     </div>
     {% endif %}
