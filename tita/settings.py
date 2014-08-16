@@ -46,7 +46,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'convocat',
     'bootstrap3',
-    'bootstrap3_datetime',
+    #'bootstrap3_datetime',
+    'datetimewidget',
     'django_select2',
     'django_extensions', # para sqldiff
 )

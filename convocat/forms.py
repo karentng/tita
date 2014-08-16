@@ -1,10 +1,14 @@
 # -*- coding: utf-8 -*-
 from django import forms
 from convocat.models import *
-from bootstrap3_datetime.widgets import DateTimePicker
+#from bootstrap3_datetime.widgets import DateTimePicker
+from datetimewidget.widgets import DateWidget
 from django.forms import ModelForm, Textarea, HiddenInput, TextInput, Select, CheckboxSelectMultiple
 from django.forms.models import inlineformset_factory
 from django_select2 import AutoModelSelect2Field, Select2MultipleWidget
+
+def MyDateWidget():
+    return DateWidget(usel10n=False, bootstrap_version=3, attrs={}, options={'format': 'yyyy-mm-dd', 'startView':4, 'language':'es'})
 
 class MunicipioChoice(AutoModelSelect2Field):
     queryset = Municipio.objects.select_related('departamento')
@@ -21,7 +25,8 @@ class DatosPersonalesForm(forms.ModelForm):
         fields = ('numero_documento', 'nombre1', 'nombre2', 'apellido1', 'apellido2', 'nacionalidad', 'municipio_nacimiento', 'fecha_nacimiento', 'sexo', 'municipio', 'direccion', 'telefono', 'celular', 'email')
         #fields = ('numero_documento', 'nombre1', 'nombre2', 'apellido1', 'apellido2', 'sexo', 'nacionalidad', 'municipio_nacimiento', 'direccion', 'municipio', 'telefono', 'celular', 'email')
         widgets = {
-            'fecha_nacimiento': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
+            # 'fecha_nacimiento': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
+            'fecha_nacimiento' : MyDateWidget()
         }
 
 class FormacionAcademicaForm(forms.ModelForm):
@@ -29,8 +34,9 @@ class FormacionAcademicaForm(forms.ModelForm):
         model = FormacionAcademica
         fields = ('nivel', 'titulo',  'institucion', 'fecha_inicio', 'fecha_terminacion','relacionado_pedagogia', 'relacionado_tics')
         widgets = {
-            'fecha_inicio': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
-            'fecha_terminacion': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
+            #'fecha_inicio': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
+            #'fecha_terminacion': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
+            'fecha_inicio': MyDateWidget(), 'fecha_terminacion': MyDateWidget()
         }
 
 class FormacionTicsForm(forms.ModelForm):
@@ -38,8 +44,9 @@ class FormacionTicsForm(forms.ModelForm):
         model = FormacionTics
         fields = ('duracion', 'titulo', 'fecha_inicio', 'fecha_terminacion', 'institucion')
         widgets = {
-            'fecha_inicio': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
-            'fecha_terminacion': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
+            #'fecha_inicio': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
+            #'fecha_terminacion': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
+            'fecha_inicio': MyDateWidget(), 'fecha_terminacion': MyDateWidget()
         }
 
 
@@ -65,8 +72,9 @@ class ExperienciaEnsenanzaForm(forms.ModelForm):
         model = ExperienciaEnsenanza
         fields = ('institucion', 'tipo_institucion', 'jornada', 'nivel', 'areas', 'fecha_inicio', 'fecha_fin', 'telefono', 'email')
         widgets = {
-            'fecha_inicio': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
-            'fecha_fin': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
+            #'fecha_inicio': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
+            #'fecha_fin': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
+            'fecha_fin': MyDateWidget(), 'fecha_fin': MyDateWidget(),
             'areas' : Select2MultipleWidget()
         }
 
@@ -77,8 +85,9 @@ class ExperienciaOtraForm(forms.ModelForm):
         model = ExperienciaOtra
         fields = ('entidad', 'tipo_entidad', 'telefono', 'email', 'fecha_inicio', 'fecha_fin', 'cargo')
         widgets = {
-            'fecha_inicio': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
-            'fecha_fin': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
+            #'fecha_inicio': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
+            #'fecha_fin': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
+            'fecha_inicio': MyDateWidget(), 'fecha_fin': MyDateWidget(),
         }
 
 class ContinuarRegistroForm(forms.Form):
