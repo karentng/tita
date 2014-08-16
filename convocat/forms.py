@@ -91,4 +91,9 @@ class ExperienciaOtraForm(forms.ModelForm):
         }
 
 class ContinuarRegistroForm(forms.Form):
-        registro = forms.CharField(label='',max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Escriba su numero registro'}))
+    registro = forms.CharField(label='',max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Escriba su numero registro'}))
+
+class AdjuntoForm(forms.ModelForm):
+    class Meta:
+        model = Adjunto
+        fields = ('tipo', 'descripcion', 'archivo')

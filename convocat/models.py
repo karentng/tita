@@ -1,4 +1,5 @@
 # encoding:utf-8
+import random, string, os
 from django.db import models
 from dateutil.relativedelta import relativedelta
 from datetime import date
@@ -240,3 +241,28 @@ class ExperienciaOtra(models.Model):
     fecha_inicio = models.DateField(verbose_name=u'fecha de inicio', help_text='Formato año-mes-día (ej: 1988-04-30)')
     fecha_fin = models.DateField(null=True, blank=True, verbose_name=u'fecha de finalización', help_text='Deje en blanco si actualmente labora allí')
     cargo = models.CharField(max_length=100, verbose_name=u'cargo ejercidos')
+
+
+def crear_ruta_archivo(instance, filename):
+    randomstr = instance.aspirante.numero_documento*99251
+    return "convocat_adjuntos/%s-%s/%s"%(instance.aspirante_id, randomstr, filename)
+
+
+class Adjunto(models.Model):
+    TIPOS_ADJUNTO = (
+        ('DI', 'Documento de Identificación'),
+        ('EST','Certificado de Estudio'),
+        ('LAB','Certificado Laboral'),
+        ('OTRO','Otro'),
+    )
+    aspirante = models.ForeignKey(Aspirante)
+    tipo = models.CharField(max_length=6, choices=TIPOS_ADJUNTO)
+    descripcion = models.CharField(max_length=200, blank=True)
+    archivo = models.FileField(upload_to=crear_ruta_archivo) 
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+
+    def filename(self):
+        return os.path.basename(self.archivo.name)
+
+    def __unicode__(self):
+        return u"%s - %s - %s"%(self.aspirante_id, self.tipo, self.archivo)

@@ -25,13 +25,6 @@ def aspirante_sesion(request):
     return buscar_aspirante_por_clave(valor)
 
 
-#def generar_clave(aspirante):
-#    mihash = (aspirante.numero_documento*44383)%1000000007
-#    clave = "%d-%d"%(aspirante.id, mihash)
-#    return clave
-
-
-
 def datosPersonales(request):
     aspirante = aspirante_sesion(request)
     print "aspirante actual=", aspirante
@@ -289,4 +282,26 @@ def iniciarInscripcion(request):
     return render(request, 'inscripcion/iniciarInscripcion.html', {
         'mensaje':mensaje,
         'form' : form
+    })
+
+
+def adjuntos(request):
+    aspirante = aspirante_sesion(request)
+    if not aspirante : return redirect('home')
+
+    if request.method == 'POST':
+        form = AdjuntoForm(request.POST, request.FILES)
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.aspirante = aspirante
+            obj.save()
+            return redirect('adjuntos')
+    else:
+        form = AdjuntoForm()
+
+    adjuntos = aspirante.adjunto_set.order_by('tipo', 'fecha_creacion')
+
+    return render(request, 'inscripcion/adjuntos.html', {
+        'form': form,
+        'adjuntos': adjuntos
     })

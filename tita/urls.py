@@ -53,4 +53,8 @@ urlpatterns += patterns('convocat.views.inscripcion',
 
     url(r'^inscripcion/finalizar$',      'finalizar', name="finalizar"),
     url(r'^inscripcion/finalizada$',      'finalizada', name="finalizada"),
+    
+    url(r'^inscripcion/adjuntos$',      'adjuntos', name="adjuntos"),
+
+
 )

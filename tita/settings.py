@@ -137,6 +137,10 @@ STATICFILES_DIRS = (
 
 STATIC_ROOT = os.path.join(BASE_DIR, '..', 'static_collected') 
 
+
+MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'media')
+MEDIA_URL = '/media/'
+
 # configuraciones del django_select2
 AUTO_RENDER_SELECT2_STATICS = False
 SELECT2_BOOTSTRAP = True

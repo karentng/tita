@@ -62,4 +62,4 @@ class AspiranteAdmin(admin.ModelAdmin):
 
 admin.site.register(AreaEnsenanza)
 admin.site.register(Aspirante, AspiranteAdmin)
-
+admin.site.register(Adjunto)
