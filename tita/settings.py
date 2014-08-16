@@ -97,7 +97,7 @@ else:    # Configuracion desarrollo:
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
-LANGUAGE_CODE = 'es-ES'
+LANGUAGE_CODE = 'es'
 
 TIME_ZONE = 'America/Bogota'
 
