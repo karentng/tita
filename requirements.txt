@@ -1,7 +1,7 @@
 Django==1.6.5
 django-bootstrap3==4.7.0
 django-extensions
-django-bootstrap3-datetimepicker==2.2.3
+https://github.com/nkunihiko/django-bootstrap3-datetimepicker/archive/master.zip
 psycopg2==2.5.3
 https://github.com/applegrew/django-select2/archive/master.zip
 python-dateutil==2.2
