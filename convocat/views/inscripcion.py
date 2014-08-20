@@ -175,7 +175,7 @@ def experienciaEnsenanza(request):
     if not aspirante : return redirect('home')
     
     if request.method == 'POST':
-        form = ExperienciaEnsenanzaForm(request.POST)
+        form = ExperienciaFormadorForm(request.POST)
         if form.is_valid():
             objeto = form.save(commit=False)
             objeto.aspirante_id = aspirante.id
@@ -183,13 +183,13 @@ def experienciaEnsenanza(request):
             form.save_m2m() # para guardar las areas (many-to-many)
             return redirect('experienciaEnsenanza') #Para evitar que al recargar la pagina cree nuevamente los datos
     else:
-        form = ExperienciaEnsenanzaForm()
+        form = ExperienciaFormadorForm()
 
-    experiencia_ens = aspirante.experienciaensenanza_set.all().order_by('fecha_fin')
+    experiencias = aspirante.experienciaformador_set.all().order_by('fecha_fin')
 
     return render(request, 'inscripcion/experienciaEnsenanza.html', {
         'form': form,
-        'experiencia_ens': experiencia_ens,
+        'experiencias': experiencias,
         'solo_lectura': aspirante.inscripcion_finalizada(),
     })
 
@@ -197,11 +197,12 @@ def eliminarExperienciaEnsenanza(request, ExpeId):
     aspirante = aspirante_sesion(request)
     if not aspirante : return redirect('home')
 
-    experienciaEns = get_object_or_404(ExperienciaEnsenanza.objects, aspirante_id=aspirante.id, id=ExpeId)
-    experienciaEns.delete()
+    experiencia = get_object_or_404(ExperienciaFormador.objects, aspirante_id=aspirante.id, id=ExpeId)
+    experiencia.delete()
 
     return redirect('experienciaEnsenanza')
 
+"""
 def experienciaOtra(request):
     aspirante = aspirante_sesion(request)
     if not aspirante : return redirect('home')
@@ -232,7 +233,7 @@ def eliminarExperienciaOtra(request, ExpeId):
     experienciaOtra.delete()
 
     return redirect('experienciaOtra')
-
+"""
 
 def finalizar(request):
     aspirante = aspirante_sesion(request)
@@ -285,23 +286,23 @@ def iniciarInscripcion(request):
     })
 
 
-def adjuntos(request):
+def soportes(request):
+
     aspirante = aspirante_sesion(request)
     if not aspirante : return redirect('home')
 
     if request.method == 'POST':
-        form = AdjuntoForm(request.POST, request.FILES)
+        form = DocumentosSoporteForm(request.POST, request.FILES, instance = aspirante.documentossoporte)
         if form.is_valid():
             obj = form.save(commit=False)
             obj.aspirante = aspirante
             obj.save()
-            return redirect('adjuntos')
+            return redirect('soportes')
     else:
-        form = AdjuntoForm()
+        form = DocumentosSoporteForm(instance = aspirante.documentossoporte)
 
-    adjuntos = aspirante.adjunto_set.order_by('tipo', 'fecha_creacion')
-
-    return render(request, 'inscripcion/adjuntos.html', {
+    return render(request, 'inscripcion/soportes.html', {
         'form': form,
-        'adjuntos': adjuntos
+        
     })
+    

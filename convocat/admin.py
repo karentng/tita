@@ -33,25 +33,30 @@ class FormacionTicsAdmin(admin.TabularInline):
     get_readonly_fields = readonly
 
 class ExperienciaEnsenanzaInline(admin.TabularInline):
-    model = ExperienciaEnsenanza
+    model = ExperienciaFormador
     get_readonly_fields = readonly
 
 class IdiomaInline(admin.TabularInline):
     model = Idioma
     get_readonly_fields = readonly
 
-
+"""
 class ExperienciaOtraAdmin(admin.TabularInline):
     model = ExperienciaOtra
     get_readonly_fields = readonly
+"""
 
 class ConocimientoInline(admin.StackedInline):
     model = ConocimientosEspecificos
     get_readonly_fields = readonly
 
+class DocumentosSoporteInline(admin.StackedInline):
+    model = DocumentosSoporte
+    get_readonly_fields = readonly
+
 class AspiranteAdmin(admin.ModelAdmin):
     list_display = ('id', 'nombre_completo', 'puntuacion_hv', 'numero_inscripcion')
-    inlines = [AcademicaInline, FormacionTicsAdmin, ConocimientoInline, IdiomaInline, ExperienciaEnsenanzaInline, ExperienciaOtraAdmin]
+    inlines = [AcademicaInline, FormacionTicsAdmin, ConocimientoInline, IdiomaInline, ExperienciaEnsenanzaInline, DocumentosSoporteInline]
     actions = [recalcular_puntaje]
     get_readonly_fields = readonly
 
@@ -60,6 +65,6 @@ class AspiranteAdmin(admin.ModelAdmin):
 
 
 
-admin.site.register(AreaEnsenanza)
+#admin.site.register(AreaEnsenanza)
 admin.site.register(Aspirante, AspiranteAdmin)
-admin.site.register(Adjunto)
+#admin.site.register(Adjunto)

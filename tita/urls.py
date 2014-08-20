@@ -1,6 +1,9 @@
 from django.conf.urls import patterns, include, url
 from django.views.generic.base import TemplateView
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -48,13 +51,13 @@ urlpatterns += patterns('convocat.views.inscripcion',
     url(r'^inscripcion/experiencia-ensenanza$',             'experienciaEnsenanza', name="experienciaEnsenanza"),
     url(r'^inscripcion/experiencia-ensenanza/eliminar/(\d+)$', 'eliminarExperienciaEnsenanza', name="eliminarExperienciaEnsenanza"),
 
-    url(r'^inscripcion/experiencia-otra$',                  'experienciaOtra', name="experienciaOtra"),
-    url(r'^inscripcion/experiencia-otra/eliminar/(\d+)$', 'eliminarExperienciaOtra', name="eliminarExperienciaOtra"),
+    #url(r'^inscripcion/experiencia-otra$',                  'experienciaOtra', name="experienciaOtra"),
+    #url(r'^inscripcion/experiencia-otra/eliminar/(\d+)$', 'eliminarExperienciaOtra', name="eliminarExperienciaOtra"),
 
     url(r'^inscripcion/finalizar$',      'finalizar', name="finalizar"),
     url(r'^inscripcion/finalizada$',      'finalizada', name="finalizada"),
     
-    url(r'^inscripcion/adjuntos$',      'adjuntos', name="adjuntos"),
+    url(r'^inscripcion/soportes$',      'soportes', name="soportes"),
 
 
-)
+) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

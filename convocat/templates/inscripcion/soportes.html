@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block titulo %} Formulario Aspirante {% endblock %}
+
+{% block menu %}
+    {% include "menus/publico.html" with opcion_menu=6 %}
+{% endblock %}
+
+{% block css %}
+    
+    {#<link href="{{STATIC_URL}}plugins/bootstrap-wizard/css/bwizard.min.css" rel="stylesheet" />#}
+    {{form.media}} {# agrega los js y css necesarios para el bootstrap3 datetimepicker #}
+
+    <style>
+    input[type=file] {
+        display: inline-block !important;
+    }
+    </style>
+{% endblock %}
+
+
+
+
+{% block miga_pan %}
+    <li><a href="javascript:;">Inicio</a></li>
+    <li class="active">Formulario de Registro</li>
+    <li class="active">Adjuntar Documentos</li>
+{% endblock %}
+
+{% block titulo_contenido %}Formulario de Registro de Aspirantes{% endblock %}
+
+
+
+
+
+{% block titulo_panel %}<i class="fa fa-file-text"></i> Adjuntar Documentos {% endblock %}
+{% block contenido_panel %}
+    <h5>Para los items en los cuales tenga soporte, adjunte el archivo haciendo click en el boton examinar para buscar el archivo en su equipo y luego presionando el botón <b>Subir Archivo</b> respectivo</h5>
+    <br>
+    <form class="form-horizontal"  enctype="multipart/form-data" method="post">{% csrf_token %}
+
+        {# perdoname bootstrap por hacer esto en tablas, pero es lo mejor para los dos :-( #}
+        <table class="table table-hover">
+            <tr>
+                <td style="width:300px; padding-right:30px;">
+                    <strong>Formación Académica</strong><br>
+                    Adjunte la certificación del grado de estudio más alto que haya alcanzado
+                </td>
+                <td style="width:400px">{{form.formacion_academica }}</td>
+                <td style="width:60px"><button class="btn btn-sm btn-primary" type="submit"><i class="fa fa-upload"></i>  Subir Archivo</button></td>
+            </tr>
+
+            <tr>
+                <td style="width:300px; padding-right:30px;">
+                    <strong>Formación TIC</strong><br>
+                    Adjunte la certificación del curso TIC de mayor duración
+                </td>
+                <td style="width:400px">{{form.formacion_tics }}</td>
+                <td style="width:60px"><button class="btn btn-sm btn-primary" type="submit"><i class="fa fa-upload"></i>  Subir Archivo</button></td>
+            </tr>
+
+            <tr>
+                <td style="width:300px; padding-right:30px;">
+                    <strong>Idiomas</strong><br>
+                    Adjunte la certificación del idioma extranjero que mejor domina
+                </td>
+                <td style="width:400px">{{form.idiomas}}</td>
+                <td style="width:60px"><button class="btn btn-sm btn-primary" type="submit"><i class="fa fa-upload"></i>  Subir Archivo</button></td>
+            </tr>
+
+            <tr>
+                <td style="width:300px; padding-right:30px;">
+                    <strong>Enseñanza TIC a Estudiantes</strong><br>
+                    Adjunte la certificación de la experiencia de enseñanza TIC a estudiantes con mayor duración
+                </td>
+                <td style="width:400px">{{form.ensenanza_tic_estudiantes}}</td>
+                <td style="width:60px"><button class="btn btn-sm btn-primary" type="submit"><i class="fa fa-upload"></i>  Subir Archivo</button></td>
+            </tr>
+
+            <tr>
+                <td style="width:300px; padding-right:30px;">
+                    <strong>Enseñanza TIC a Profesores</strong><br>
+                    Adjunte la certificación de la experiencia de enseñanza TIC a profesores con mayor duración
+                </td>
+                <td style="width:400px">{{form.ensenanza_tic_profesores}}</td>
+                <td style="width:60px"><button class="btn btn-sm btn-primary" type="submit"><i class="fa fa-upload"></i>  Subir Archivo</button></td>
+            </tr>
+
+            <tr>
+                <td style="width:300px; padding-right:30px;">
+                    <strong>Enseñanza TIC a Formadores TIC</strong><br>
+                    Adjunte la certificación de la experiencia de enseñeanza TIC a formadores TIC con mayor duración
+                </td>
+                <td style="width:400px">{{form.ensenanza_tic_formadores}}</td>
+                <td style="width:60px"><button class="btn btn-sm btn-primary" type="submit"><i class="fa fa-upload"></i>  Subir Archivo</button></td>
+            </tr>
+        </table>
+
+
+    </form>
+    
+    
+    <a href="{% url 'home' %}" class="btn btn-lg btn-success pull-right"><i class="fa fa-gavel"></i> Terminar</a>
+{% endblock %}
