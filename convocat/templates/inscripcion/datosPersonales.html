@@ -39,6 +39,13 @@
 
 {% block titulo_panel %}<i class="fa fa-user"></i> Datos Personales{% endblock %}
 {% block contenido_panel %}
+    <div class="col-xs-12">
+        <h5>Antes de dar siguiente en esta página por favor asegúrese que están totalmente diligenciadas todas casillas.
+        <br><br>
+        Asegurese de registrar la institución, el munipio y la jornada  donde usted es docente.</h5>
+        <br><br>
+    </div>
+
     <form class="form-horizontal" method="post">{% if solo_lectura %} {% else %} {% csrf_token %} {% endif %}
         {% bootstrap_form form layout="horizontal" %}
 
