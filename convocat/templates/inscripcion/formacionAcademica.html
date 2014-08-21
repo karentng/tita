@@ -49,8 +49,8 @@
 
 {% block previo_contenido_panel %}
     {% include "inscripcion/_wizard.html" with wizard_stage=2 %}
-    {% if solo_lectura %}
-    {% else %}
+    {% if not solo_lectura %}
+    
     <div style="font-size:18px" class="alert alert-warning alert-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <strong>Importante!</strong>  Este es su número de registro: <b>{{request.session.clave_aspirante}}</b> 
@@ -64,13 +64,14 @@
 
 {% block titulo_panel %}<i class="fa fa-mortar-board"></i> Formación Académica {% endblock %}
 {% block contenido_panel %}
-    <div class="col-xs-12">
-        <h5>
-            Guarde el número de registro que le acaba de asignar el sistema, lo va a necesitar durante el proceso.
-            <br><br>
-            Al llenar la información, asegúrese  de escribir el nivel más alto de escolaridad que tenga y de marcar en la casilla donde se indica el tipo de formación.
-        </h5>
-    </div>
+    
+    <h5>
+        Guarde el número de registro que le acaba de asignar el sistema, lo va a necesitar durante el proceso.
+        <br><br>
+        Al llenar la información, asegúrese  de escribir el nivel más alto de escolaridad que tenga y de marcar en la casilla donde se indica el tipo de formación.
+    </h5>
+    <br>
+
     <table class="table">
         <thead>
         <tr>
