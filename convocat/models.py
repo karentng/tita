@@ -49,6 +49,10 @@ class Aspirante(models.Model):
     puntuacion_hv = models.IntegerField(null=True, blank=True)
     aceptado = models.NullBooleanField()
 
+    institucion_actual = models.CharField(max_length=100, null=True, verbose_name=u'Institución donde labora actualmente')
+    municipio_institucion = models.ForeignKey(Municipio, null=True, verbose_name=u'Municipio de la institución donde labora', related_name='institucionaspirante')
+    jornada = models.CharField(max_length=5, null=True, choices=[('M', 'Mañana'), ('T', 'Tarde'), ('MT', 'Mañana y tarde')], verbose_name='jornada de trabajo')
+
 
     def save(self, *args, **kwargs):
         debeCrearDocumentosSoporte = self.id is None
@@ -224,8 +228,8 @@ class ExperienciaFormador(models.Model):
     tipo = models.CharField(max_length=5, choices = TIPOS)
     institucion = models.CharField(max_length=255, verbose_name=u'institución')
     fecha_inicio = models.DateField(verbose_name=u'fecha de inicio', help_text='Formato año-mes-día (ej: 1988-04-30)')
-    fecha_fin = models.DateField(null=True, blank=True, verbose_name=u'fecha de finalización', help_text='Deje en blanco si actualmente labora allí')
-    jornada = models.CharField(max_length=5, null=True, blank=True, choices=[('M', 'Mañana'), ('T', 'Tarde'), ('MT', 'Mañana y tarde'), ('N','Noche')], verbose_name='jornada de trabajo')
+    fecha_fin = models.DateField(null=True, verbose_name=u'fecha de finalización')
+    #jornada = models.CharField(max_length=5, null=True, blank=True, choices=[('M', 'Mañana'), ('T', 'Tarde'), ('MT', 'Mañana y tarde'), ('N','Noche')], verbose_name='jornada de trabajo')
     descripcion = models.CharField(max_length=200, blank=True, help_text='Ingrese el área o el nombre del proyecto en el cual fue formador')
 
     def puntaje(self):
