@@ -241,7 +241,7 @@ class ExperienciaFormador(models.Model):
 
 def crear_ruta_archivo(instance, filename):
     randomstr = instance.aspirante.numero_documento*99251
-    return "convocat_soportes/%s-%s/%s"%(instance.aspirante_id, randomstr, filename)
+    return "convocat_soportes/%s-%s/%s"%(instance.aspirante_id, randomstr, filename.encode('ascii','ignore'))
 
 class DocumentosSoporte(models.Model):
     aspirante = models.OneToOneField(Aspirante)
