@@ -4,202 +4,199 @@
 <html lang="es">
 <!--<![endif]-->
 <head>
-	<meta charset="utf-8" />
-	<title>{% block titulo %}TIT@{% endblock %}</title>
-	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
-	<meta content="Proyecto TITA - Formación docente en pedagogía mediada con tecnologías de la información y la comunicación" name="description" />
-	<meta content="Cedesoft" name="author" />
-	
-	<link rel="icon" type="image/png" href="{{STATIC_URL}}img/favicon.png">
+    <meta charset="utf-8" />
+    <title>{% block titulo %}TIT@{% endblock %}</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="Proyecto TITA - Formación docente en pedagogía mediada con tecnologías de la información y la comunicación" name="description" />
+    <meta content="Cedesoft" name="author" />
+    
+    <link rel="icon" type="image/png" href="{{STATIC_URL}}img/favicon.png">
 
-	<script src="{{STATIC_URL}}plugins/jquery-1.8.2/jquery-1.8.2.min.js"></script> {# jquery aqui porque algunos plugins lo usan directamente #}
-	<!-- ================== BEGIN BASE CSS STYLE ================== -->
-	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
-	<link href="{{STATIC_URL}}plugins/jquery-ui-1.10.4/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
-	<link href="{{STATIC_URL}}plugins/bootstrap-3.1.1/css/bootstrap.min.css" rel="stylesheet" />
-	<link href="{{STATIC_URL}}plugins/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" />
-	<link href="{{STATIC_URL}}css/animate.min.css" rel="stylesheet" />
-	<link href="{{STATIC_URL}}css/style.css?v=1" rel="stylesheet" />
-	<link href="{{STATIC_URL}}css/style-responsive.min.css" rel="stylesheet" />
-	<style>
-		.bootstrap-datetimepicker-widget {
-			width: auto !important; {# arreglo para el plugin datetimepicker que con encaja con el tema #}
-		}
-	</style>
-	<!-- ================== END BASE CSS STYLE ================== -->
-	<!-- Calendario -->
-	{#<link href="{{STATIC_URL}}plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" />#}
-	<!-- Mensajes -->
-	<link href="{{STATIC_URL}}plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />
-	<!-- Bloque de estilos para las plantillas que heredan -->
+    <script src="{{STATIC_URL}}plugins/jquery-1.8.2/jquery-1.8.2.min.js"></script> {# jquery aqui porque algunos plugins lo usan directamente #}
+    <!-- ================== BEGIN BASE CSS STYLE ================== -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link href="{{STATIC_URL}}plugins/jquery-ui-1.10.4/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
+    <link href="{{STATIC_URL}}plugins/bootstrap-3.1.1/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="{{STATIC_URL}}plugins/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="{{STATIC_URL}}css/animate.min.css" rel="stylesheet" />
+    <link href="{{STATIC_URL}}css/style.css?v=1" rel="stylesheet" />
+    <link href="{{STATIC_URL}}css/style-responsive.min.css" rel="stylesheet" />
+    <style>
+        .bootstrap-datetimepicker-widget {
+            width: auto !important; {# arreglo para el plugin datetimepicker que con encaja con el tema #}
+        }
+    </style>
+    <!-- ================== END BASE CSS STYLE ================== -->
+    <!-- Calendario -->
+    {#<link href="{{STATIC_URL}}plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" />#}
+    <!-- Mensajes -->
+    <link href="{{STATIC_URL}}plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />
+    <!-- Bloque de estilos para las plantillas que heredan -->
 
-	{% block css %}
-	{% endblock %}
-	<!-- Fin Bloque estilos -->
+    {% block css %}
+    {% endblock %}
+    <!-- Fin Bloque estilos -->
 </head>
 <body>
-	<!-- begin #page-loader -->
-	<div id="page-loader" class="fade in"><span class="spinner"></span></div>
-	<!-- end #page-loader -->
-	
-	<!-- begin #page-container -->
-	<div id="page-container" class="fade">
-		<!-- begin #header -->
-		<div id="header" class="header navbar navbar-default navbar-fixed-top">
-			<!-- begin container-fluid -->
-			<div class="container-fluid">
-				<!-- begin mobile sidebar expand / collapse button -->
-				<div class="navbar-header">
-					<b><center><label style="color:rgb(30,85,146);font-weight:900;font-size:25px; margin-top:15px">TITA@ EDUCACIÓN DIGITAL PARA TODOS - Sistema general de regalías</label></center></b>
-					<!--<a href="index.html" class="navbar-brand"><span class="navbar-logo"></span> <b><label style="color:blue;font-weight:10px">Tit@</label></b></a>-->
-					<button type="button" class="navbar-toggle" data-click="sidebar-toggled">
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-				</div>
-				<!-- end mobile sidebar expand / collapse button -->
-				
-				{% comment %}
-				<!-- begin header navigation right -->
-				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown navbar-user">
-						<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-							<img src="{{STATIC_URL}}img/desconocido.jpg" alt="" /> 
-							<span class="hidden-xs">
-								{% block nombre_usuario %}Público{% endblock %}
-							</span> <b class="caret"></b>
-						</a>
-						<ul class="dropdown-menu animated fadeInLeft">
-							<li class="arrow"></li>
-							<li><a href="javascript:;">Ingresar al Sistema</a></li>
-							<!--<li><a href="javascript:;"><span class="badge badge-danger pull-right">2</span> Inbox</a></li>
-							<li><a href="javascript:;">Calendar</a></li>
-							<li><a href="javascript:;">Setting</a></li>
-							<li class="divider"></li>
-							<li><a href="javascript:;">Cerrar Sesión</a></li>-->
-						</ul>
-					</li>
-				</ul>
-				<!-- end header navigation right -->
-				{% endcomment %}
-			</div>
-			<!-- end container-fluid -->
-		</div>
-		<!-- end #header -->
-		
-		<!-- begin #sidebar -->
-		<div id="sidebar" class="sidebar">
-			<!-- begin sidebar scrollbar -->
-			<div data-scrollbar="true" data-height="100%">
-				<!-- begin sidebar user -->
-				<ul class="nav">
-					<li class="nav-profile">
-						<div class="info">
-							<img src="{{STATIC_URL}}img/tita.png" alt="" style="width:100%" />
-						</div>
-					</li>	
-				</ul>
-				<!-- end sidebar user -->
-				<!-- begin sidebar nav -->
-				<ul class="nav">
-					<li class="nav-header">Navegación</li>
-					{% block menu %}
-						{% include "menus/admin.html" %}
-					{% endblock %}
-					<!-- begin sidebar minify button -->
-					<li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
-					<!-- end sidebar minify button -->
-				</ul>
-				<!-- end sidebar nav -->
-			</div>
-			<!-- end sidebar scrollbar -->
-		</div>
-		<!-- end #sidebar -->
-		<!-- begin #content -->
-		<div id="content" class="content">
-			<!-- begin breadcrumb -->
-			<ol class="breadcrumb pull-right">
-				{% block miga_pan %}
-					<li><a href="javascript:;">Inicio</a></li>
-					<li class="active">Página en Blanco</li>
-				{% endblock %}
-			</ol>
-			<!-- end breadcrumb -->
-			<!-- begin page-header -->
-			<h1 class="page-header">
-				{% block titulo_contenido %}
-					Página en Blanco <small>Descripción</small>
-				{% endblock %}
-			</h1>
-			<!-- end page-header -->
+    <!-- begin #page-loader -->
+    <div id="page-loader" class="fade in"><span class="spinner"></span></div>
+    <!-- end #page-loader -->
+    
+    <!-- begin #page-container -->
+    <div id="page-container" class="fade">
+        <!-- begin #header -->
+        <div id="header" class="header navbar navbar-default navbar-fixed-top">
+            <!-- begin container-fluid -->
+            <div class="container-fluid">
+                <!-- begin mobile sidebar expand / collapse button -->
+                <div class="navbar-header">
+                    <b><center><label style="color:rgb(30,85,146);font-weight:900;font-size:25px; margin-top:15px">TITA@ EDUCACIÓN DIGITAL PARA TODOS - Sistema general de regalías</label></center></b>
+                    <!--<a href="index.html" class="navbar-brand"><span class="navbar-logo"></span> <b><label style="color:blue;font-weight:10px">Tit@</label></b></a>-->
+                    <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <!-- end mobile sidebar expand / collapse button -->
+                
+                {% comment %}
+                <!-- begin header navigation right -->
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown navbar-user">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="{{STATIC_URL}}img/desconocido.jpg" alt="" /> 
+                            <span class="hidden-xs">
+                                {% block nombre_usuario %}Público{% endblock %}
+                            </span> <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu animated fadeInLeft">
+                            <li class="arrow"></li>
+                            <li><a href="javascript:;">Ingresar al Sistema</a></li>
+                            <!--<li><a href="javascript:;"><span class="badge badge-danger pull-right">2</span> Inbox</a></li>
+                            <li><a href="javascript:;">Calendar</a></li>
+                            <li><a href="javascript:;">Setting</a></li>
+                            <li class="divider"></li>
+                            <li><a href="javascript:;">Cerrar Sesión</a></li>-->
+                        </ul>
+                    </li>
+                </ul>
+                <!-- end header navigation right -->
+                {% endcomment %}
+            </div>
+            <!-- end container-fluid -->
+        </div>
+        <!-- end #header -->
+        
+        <!-- begin #sidebar -->
+        <div id="sidebar" class="sidebar">
+            <!-- begin sidebar scrollbar -->
+            <div data-scrollbar="true" data-height="100%">
+                <!-- begin sidebar user -->
+                <ul class="nav">
+                    <li class="nav-profile">
+                        <div class="info">
+                            <img src="{{STATIC_URL}}img/tita.png" alt="" style="width:100%" />
+                        </div>
+                    </li>   
+                </ul>
+                <!-- end sidebar user -->
+                <!-- begin sidebar nav -->
+                <ul class="nav">
+                    <li class="nav-header">Navegación</li>
+                    {% block menu %}
+                        {% include "menus/admin.html" %}
+                    {% endblock %}
+                    <!-- begin sidebar minify button -->
+                    <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
+                    <!-- end sidebar minify button -->
+                </ul>
+                <!-- end sidebar nav -->
+            </div>
+            <!-- end sidebar scrollbar -->
+        </div>
+        <!-- end #sidebar -->
+        <!-- begin #content -->
+        <div id="content" class="content">
+            <!-- begin breadcrumb -->
+            <ol class="breadcrumb pull-right">
+                {% block miga_pan %}
+                    <li><a href="javascript:;">Inicio</a></li>
+                    <li class="active">Página en Blanco</li>
+                {% endblock %}
+            </ol>
+            <!-- end breadcrumb -->
+            <!-- begin page-header -->
+            <h1 class="page-header">
+                {% block titulo_contenido %}
+                    Página en Blanco <small>Descripción</small>
+                {% endblock %}
+            </h1>
+            <!-- end page-header -->
 
-			{% block contenido %}
-				{% block previo_contenido_panel %} {% endblock %}
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-						<h4 class="panel-title" style="font-size:15px">{% block titulo_panel %}Título Panel{% endblock %}</h4>
-					</div>
-					<div class="panel-body" align="justify">
-						{% block contenido_panel %}
-							Contenido del Panel
-						{% endblock %}
-					</div>
-				</div>
-			{% endblock %}
-			{% block footer %}
-				
-				<div style="position: relative; top: 100%; margin-top: 100px; ">
-					<hr>
-					<img src="{{STATIC_URL}}img/footer.png?v=2"  style="border-radius:10px; margin-left: 13%;" >
-				</div>
-				<h6 class="text-center">Contacto: <a href="mailto:titaedpt@gmail.com">titaedpt@gmail.com</a></h6>
-			{% endblock %}
-			
-		</div>
-		
-		<!-- end #content -->
-		
-		<!-- begin scroll to top btn -->
-		<a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
-		<!-- end scroll to top btn -->
-	</div>
-	<!-- end page container -->
-	
-	<!-- ================== BEGIN BASE JS ================== -->
-	
-	<script src="{{STATIC_URL}}plugins/jquery-ui-1.10.4/ui/minified/jquery-ui.min.js"></script>
-	<script src="{{STATIC_URL}}plugins/bootstrap-3.1.1/js/bootstrap.min.js"></script>
-	<!--[if lt IE 9]>
-		<script src="{{STATIC_URL}}crossbrowserjs/html5shiv.js"></script>
-		<script src="{{STATIC_URL}}crossbrowserjs/respond.min.js"></script>
-		<script src="{{STATIC_URL}}crossbrowserjs/excanvas.min.js"></script>
-	<![endif]-->
-	<script src="{{STATIC_URL}}plugins/slimscroll/jquery.slimscroll.min.js"></script>
-	<!-- ================== END BASE JS ================== -->
-	
-	<!-- ================== BEGIN PAGE LEVEL JS ================== -->
-	<script src="{{STATIC_URL}}js/apps.min.js"></script>
-	<!-- ================== END PAGE LEVEL JS ================== -->
-		<!-- Bloque de javascript para las plantillas que heredan -->
-	{% block js %}
-	{% endblock %}
-	<!-- Fin Bloque javascript -->
-	<script>
-		$(document).ready(function() {
-			App.init();
-		});
-		{% comment %}
-		function mensaje(titulo, mensaje){
-			$.gritter.add({
-				title: titulo,
-				text: mensaje,
-				sticky: false,
-				time: ''
-			});
-			return false;
-		}
-		{% endcomment %}
-	</script>
+            {% block contenido %}
+                {% block previo_contenido_panel %} {% endblock %}
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="panel-title" style="font-size:15px">{% block titulo_panel %}Título Panel{% endblock %}</h4>
+                    </div>
+                    <div class="panel-body" align="justify">
+                        {% block contenido_panel %}
+                            Contenido del Panel
+                        {% endblock %}
+                    </div>
+                </div>
+            {% endblock %}
+            {% block footer %}
+                <hr>
+                <img class="img-responsive" src="{{STATIC_URL}}img/footer.png?v=2"  style="border-radius:10px; margin-left: 13%;" >
+                <h6 class="text-center">Contacto: <a href="mailto:titaedpt@gmail.com">titaedpt@gmail.com</a></h6>
+            {% endblock %}
+            
+        </div>
+        
+        <!-- end #content -->
+        
+        <!-- begin scroll to top btn -->
+        <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+        <!-- end scroll to top btn -->
+    </div>
+    <!-- end page container -->
+    
+    <!-- ================== BEGIN BASE JS ================== -->
+    
+    <script src="{{STATIC_URL}}plugins/jquery-ui-1.10.4/ui/minified/jquery-ui.min.js"></script>
+    <script src="{{STATIC_URL}}plugins/bootstrap-3.1.1/js/bootstrap.min.js"></script>
+    <!--[if lt IE 9]>
+        <script src="{{STATIC_URL}}crossbrowserjs/html5shiv.js"></script>
+        <script src="{{STATIC_URL}}crossbrowserjs/respond.min.js"></script>
+        <script src="{{STATIC_URL}}crossbrowserjs/excanvas.min.js"></script>
+    <![endif]-->
+    <script src="{{STATIC_URL}}plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- ================== END BASE JS ================== -->
+    
+    <!-- ================== BEGIN PAGE LEVEL JS ================== -->
+    <script src="{{STATIC_URL}}js/apps.min.js"></script>
+    <!-- ================== END PAGE LEVEL JS ================== -->
+        <!-- Bloque de javascript para las plantillas que heredan -->
+    {% block js %}
+    {% endblock %}
+    <!-- Fin Bloque javascript -->
+    <script>
+        $(document).ready(function() {
+            App.init();
+        });
+        {% comment %}
+        function mensaje(titulo, mensaje){
+            $.gritter.add({
+                title: titulo,
+                text: mensaje,
+                sticky: false,
+                time: ''
+            });
+            return false;
+        }
+        {% endcomment %}
+    </script>
 </body>
 </html>

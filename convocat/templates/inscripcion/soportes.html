@@ -39,8 +39,13 @@
 
 {% block titulo_panel %}<i class="fa fa-file-text"></i> Adjuntar Documentos {% endblock %}
 {% block contenido_panel %}
-    <h5>Para los items en los cuales tenga soporte, adjunte el archivo haciendo click en el boton examinar para buscar el archivo en su equipo y luego presionando el botón <b>Subir Archivo</b> respectivo</h5>
-    <br>
+    <div class="col-xs-12">
+        <h5>Debe subir soporte de la información de mayor nivel o duración que ha ingresado en el formulario en cada uno de los pasos.<b>Si no lo hace no será tenido en cuenta como candidato</b>. Adjunte el archivo haciendo click en el botón examinar para buscar el archivo en su equipo y luego presionando el botón <b>Subir Archivo</b> respectivo.
+        <br><br>
+        Si tiene más de un archivo a subir para alguna categoría se recomienda que comprima todos los archivos en una carpeta <b>ZIP</b>, o si un documento tiene más de una hoja se recomienda subirlo en formato <b>PDF</b>.
+        </h5>
+        <br>
+    </div>
     <form class="form-horizontal"  enctype="multipart/form-data" method="post">{% csrf_token %}
 
         {# perdoname bootstrap por hacer esto en tablas, pero es lo mejor para los dos :-( #}
