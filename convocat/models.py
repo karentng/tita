@@ -53,6 +53,7 @@ class Aspirante(models.Model):
     municipio_institucion = models.ForeignKey(Municipio, null=True, verbose_name=u'Municipio de la institución donde labora', related_name='institucionaspirante')
     jornada = models.CharField(max_length=5, null=True, choices=[('M', 'Mañana'), ('T', 'Tarde'), ('MT', 'Mañana y tarde')], verbose_name='jornada de trabajo')
 
+    modificado = models.DateTimeField(null=True, auto_now=True)
 
     def save(self, *args, **kwargs):
         debeCrearDocumentosSoporte = self.id is None
