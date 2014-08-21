@@ -55,19 +55,21 @@ Equipo de Desarrollo
 Proyecto TIT@
 """
 
+lista_negra = set([])
 
-
-
+#print sorted(lista_negra)
+#exit();
 class Command(BaseCommand):
     def handle(self, *args, **options):
         template = Template(EMAIL_TEMPLATE)
         self.stdout.write("args es "+str(args))
         id_ini, id_fin = args
-        aspirantes = Aspirante.objects.filter(id__gte=id_ini, id__lte=id_fin)
+        aspirantes = Aspirante.objects.filter(id__gte=id_ini, id__lte=id_fin).order_by('id')
 
         self.abrir_email()
 
         for asp in aspirantes:
+            if asp.id in lista_negra: continue
             self.stdout.write("Procesando %d"%(asp.id))
             if not asp.email:
                 self.stdout.write("ASPIRANTE SIN EMAIL:  %d - %s"%(asp.id, unicode(asp), asp.email))
@@ -96,7 +98,7 @@ class Command(BaseCommand):
         self.server.login('titaedpt@gmail.com', 'titaedpt@2014')
 
     def enviar_email(self, direccion, contenido):
-        direccion = "vector9x@gmail.com"
+        #direccion = "vector9x@gmail.com"
         msg = MIMEText(contenido.encode('iso-8859-1'))
         msg['From'] = 'titaedpt@gmail.com'
         msg['To'] = direccion
