@@ -52,17 +52,19 @@ class ConocimientoInline(admin.StackedInline):
 
 class DocumentosSoporteInline(admin.StackedInline):
     model = DocumentosSoporte
-    get_readonly_fields = readonly
+    #get_readonly_fields = readonly
 
 class AspiranteAdmin(admin.ModelAdmin):
-    list_display = ('id', 'nombre_completo', 'puntuacion_hv', 'numero_inscripcion')
+    list_display = ('id', 'nombre_completo', 'puntuacion_hv', 'numero_inscripcion', 'modificado')
     inlines = [AcademicaInline, FormacionTicsAdmin, ConocimientoInline, IdiomaInline, ExperienciaEnsenanzaInline, DocumentosSoporteInline]
     actions = [recalcular_puntaje]
     get_readonly_fields = readonly
+    search_fields = ('nombre1','apellido1')
 
     def nombre_completo(self, obj):
         return unicode(obj)
 
+    
 
 
 #admin.site.register(AreaEnsenanza)

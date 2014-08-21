@@ -5,7 +5,22 @@ import smtplib
 from email.mime.text import MIMEText
 from convocat.models import Aspirante
 
-EMAIL_TEMPLATE= u"""
+EMAIL_TEMPLATE = u"""
+Hola {{nombre}}
+
+Sólo queremos recordarle que el sistema de inscripción y subida de soportes cerrará el próximo viernes 22 de agosto a la 1PM.
+
+Asegúrese de actualizar su hoja de vida y subir los soportes necesarios antes de la fecha y hora mencionada.
+
+Cordialmente,
+
+--
+Equipo de Desarrollo
+Proyecto TIT@
+"""
+
+
+EMAIL_TEMPLATE_OLD= u"""
 {{calificativo}} {{nombre}}
 
 A partir de este momento en la aplicación  se encuentra habilitado el módulo de subir documentos soporte.
@@ -102,7 +117,7 @@ class Command(BaseCommand):
         msg = MIMEText(contenido.encode('iso-8859-1'))
         msg['From'] = 'titaedpt@gmail.com'
         msg['To'] = direccion
-        msg['Subject'] = "Convocatoria TITA - Subir soportes"
+        msg['Subject'] = "Convocatoria TITA - Fecha y hora de cierre"
         self.server.sendmail('titaedpt@gmail.com', [direccion], msg.as_string())
 
     def cerrar_email(self):
