@@ -74,7 +74,7 @@ class Aspirante(models.Model):
         punt_tic = maximo_puntaje(self.formaciontics_set.all())
         punt_conocimientos = self.conocimientosespecificos.puntaje()
         punt_idioma = maximo_puntaje(self.idioma_set.all())
-        punt_ensenanza = sum(x.puntaje() for x in self.experienciaensenanza_set.all())
+        punt_ensenanza = sum(x.puntaje() for x in self.experienciaformador_set.all())
         return int(round(punt_municipio+punt_academica+punt_tic+punt_conocimientos+punt_idioma+punt_ensenanza))
 
     def inscripcion_finalizada(self):
