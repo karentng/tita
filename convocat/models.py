@@ -69,8 +69,8 @@ class Aspirante(models.Model):
             if not lista : return 0
             return max(x.puntaje() for x in lista)
 
-        ID_CALI = 152
-        punt_municipio = 10 if self.municipio_institucion_id!=ID_CALI else 0
+        MUNICIPIOS_ESPECIALES = (1089, 1057, 462, 279)
+        punt_municipio = 10 if self.municipio_institucion_id in MUNICIPIOS_ESPECIALES else 0
 
         punt_academica = maximo_puntaje(self.formacionacademica_set.all())
         punt_tic = maximo_puntaje(self.formaciontics_set.all())
