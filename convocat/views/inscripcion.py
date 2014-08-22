@@ -27,6 +27,7 @@ def aspirante_sesion(request):
 
 def datosPersonales(request):
     aspirante = aspirante_sesion(request)
+    if not aspirante : return redirect('home')
     print "aspirante actual=", aspirante
     if request.method == 'POST':
         form = DatosPersonalesForm(request.POST, instance=aspirante)
