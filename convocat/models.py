@@ -25,9 +25,6 @@ class Municipio(models.Model):
         return self.nombre
 
 
-
-
-
 class Aspirante(models.Model):    
     numero_documento = models.BigIntegerField(unique=True, verbose_name='número documento')
     nombre1 = models.CharField( max_length=255, verbose_name='primer nombre')
@@ -49,6 +46,11 @@ class Aspirante(models.Model):
     puntuacion_hv = models.IntegerField(null=True, blank=True)
     aceptado = models.NullBooleanField()
 
+    institucion_actual = models.CharField(max_length=100, null=True, verbose_name=u'Institución donde labora actualmente')
+    municipio_institucion = models.ForeignKey(Municipio, null=True, verbose_name=u'Municipio de la institución donde labora', related_name='institucionaspirante')
+    jornada = models.CharField(max_length=5, null=True, choices=[('M', 'Mañana'), ('T', 'Tarde'), ('MT', 'Mañana y tarde')], verbose_name='jornada de trabajo')
+
+    modificado = models.DateTimeField(null=True, auto_now=True)
 
     def save(self, *args, **kwargs):
         debeCrearDocumentosSoporte = self.id is None
@@ -68,14 +70,19 @@ class Aspirante(models.Model):
             return max(x.puntaje() for x in lista)
 
         ID_CALI = 152
-        punt_municipio = 0 if self.municipio_id==ID_CALI else 10 
+        punt_municipio = 10 if self.municipio_institucion_id!=ID_CALI else 0
 
         punt_academica = maximo_puntaje(self.formacionacademica_set.all())
         punt_tic = maximo_puntaje(self.formaciontics_set.all())
         punt_conocimientos = self.conocimientosespecificos.puntaje()
         punt_idioma = maximo_puntaje(self.idioma_set.all())
-        punt_ensenanza = sum(x.puntaje() for x in self.experienciaformador_set.all())
-        return int(round(punt_municipio+punt_academica+punt_tic+punt_conocimientos+punt_idioma+punt_ensenanza))
+
+        punt_formador_estudiantes = maximo_puntaje(self.experienciaformador_set.filter(tipo__startswith='E'))
+        punt_formador_profesores = maximo_puntaje(self.experienciaformador_set.filter(tipo__startswith='P'))
+        punt_formador_formadores = maximo_puntaje(self.experienciaformador_set.filter(tipo__startswith='F'))
+
+        return int(round(punt_municipio+punt_academica+punt_tic+punt_conocimientos+punt_idioma+
+                punt_formador_estudiantes+punt_formador_profesores+punt_formador_formadores))
 
     def inscripcion_finalizada(self):
         return self.puntuacion_hv!=None
@@ -106,8 +113,6 @@ class FormacionAcademica(models.Model):
     relacionado_pedagogia = models.BooleanField(verbose_name=u'este estudio está relacionado con la pedagogía')
     relacionado_tics = models.BooleanField(verbose_name=u'este estudio está relacionado con las TICs')
     
-    #tarjeta_profesional = models.CharField(max_length=255)
-
     def __unicode__(self):
         return self.titulo
 
@@ -209,7 +214,8 @@ class ExperienciaFormador(models.Model):
         ('Formador TIC a Estudiantes',
             (('E2', 'TIC a Estudiantes - De 1 a 2 años'),
             ('E3',  'TIC a Estudiantes - De 2 a 3 años'),
-            ('E4',  'TIC a Estudiantes - De 3 a 5 años'))),
+            ('E4',  'TIC a Estudiantes - De 3 a 5 años'),
+            ('E5',  'TIC a Estudiantes - Más de 5 años'))),
         ('Formador TIC a Profesores',
             (('P5', 'TIC a Profesores - De 80 a 200 horas'),
             ('P10', 'TIC a Profesores - De 200 a 300 horas'),
@@ -224,73 +230,19 @@ class ExperienciaFormador(models.Model):
     tipo = models.CharField(max_length=5, choices = TIPOS)
     institucion = models.CharField(max_length=255, verbose_name=u'institución')
     fecha_inicio = models.DateField(verbose_name=u'fecha de inicio', help_text='Formato año-mes-día (ej: 1988-04-30)')
-    fecha_fin = models.DateField(null=True, blank=True, verbose_name=u'fecha de finalización', help_text='Deje en blanco si actualmente labora allí')
-    jornada = models.CharField(max_length=5, null=True, blank=True, choices=[('M', 'Mañana'), ('T', 'Tarde'), ('MT', 'Mañana y tarde'), ('N','Noche')], verbose_name='jornada de trabajo')
+    fecha_fin = models.DateField(null=True, verbose_name=u'fecha de finalización')
+    #jornada = models.CharField(max_length=5, null=True, blank=True, choices=[('M', 'Mañana'), ('T', 'Tarde'), ('MT', 'Mañana y tarde'), ('N','Noche')], verbose_name='jornada de trabajo')
     descripcion = models.CharField(max_length=200, blank=True, help_text='Ingrese el área o el nombre del proyecto en el cual fue formador')
 
     def puntaje(self):
         return int(self.tipo[1:]) # P10 -> 10;  F3 -> 3; etc
 
-"""
-class ExperienciaEnsenanza(models.Model):
-    NIVELES_ENSENANZA = (
-        ('PRI', 'Primaria'),
-        ('BCH', 'Bachillerato'),
-        ('TEC', 'Técnico'),
-        ('UNI', 'Universitario'),
-    )
-    aspirante = models.ForeignKey(Aspirante)
-    institucion = models.CharField(max_length=255, verbose_name=u'institución')
-    tipo_institucion = models.CharField(max_length=3, choices=[('PUB','Pública'), ('PRI', 'Privada')], verbose_name=u'tipo de institución')
-    nivel = models.CharField(max_length=3, choices = NIVELES_ENSENANZA)
-    telefono = models.BigIntegerField(null=True, blank=True, verbose_name=u'teléfono de contacto')
-    email = models.EmailField(blank=True, verbose_name=u'correo electrónico')
-    fecha_inicio = models.DateField(verbose_name=u'fecha de inicio', help_text='Formato año-mes-día (ej: 1988-04-30)')
-    fecha_fin = models.DateField(null=True, blank=True, verbose_name=u'fecha de finalización', help_text='Deje en blanco si actualmente labora allí')
-    jornada = models.CharField(max_length=5, null=True, blank=True, choices=[('M', 'Mañana'), ('T', 'Tarde'), ('MT', 'Mañana y tarde'), ('N','Noche')], verbose_name='jornada de trabajo')
-    areas = models.ManyToManyField(AreaEnsenanza, blank=True, verbose_name=u'Areas que enseñó o enseña en esta institución')
-    
-    def puntaje(self):
-        ID_AREA_SISTEMAS = 11
-        if self.areas.filter(id=ID_AREA_SISTEMAS).exists(): 
-            return 0 # si en esta experiencia no enseña sistemas
-
-        anios = relativedelta(self.fecha_fin or date.today(), self.fecha_inicio).years
-        if self.nivel in ('PRI', 'BCH'):
-            if anios >= 5 : return 5
-            if anios >= 3 : return 4
-            if anios >= 2 : return 3
-            if anios >= 1 : return 2
-            return 0 # menos de 1 año
-        elif self.nivel in ('TEC','UNI'):
-            if anios >= 5 : return 20
-            if anios >= 3 : return 15
-            if anios >= 2 : return 10
-            if anios >= 1 : return 5
-            return 0 # menos de 1 año
-
-
-class ExperienciaOtra(models.Model):
-    aspirante = models.ForeignKey(Aspirante)
-    entidad = models.CharField(max_length=255, verbose_name=u'entidad')
-    tipo_entidad = models.CharField(max_length=3, choices=[('PUB','Pública'), ('PRI', 'Privada')], verbose_name=u'tipo de entidad')
-    telefono = models.BigIntegerField(null=True, blank=True, verbose_name=u'teléfono')
-    email = models.EmailField(blank=True, verbose_name=u'correo electrónico')
-    fecha_inicio = models.DateField(verbose_name=u'fecha de inicio', help_text='Formato año-mes-día (ej: 1988-04-30)')
-    fecha_fin = models.DateField(null=True, blank=True, verbose_name=u'fecha de finalización', help_text='Deje en blanco si actualmente labora allí')
-    cargo = models.CharField(max_length=100, verbose_name=u'cargo ejercidos')
-"""
 
 
 def crear_ruta_archivo(instance, filename):
     randomstr = instance.aspirante.numero_documento*99251
-    return "convocat_soportes/%s-%s/%s"%(instance.aspirante_id, randomstr, filename)
+    return "convocat_soportes/%s-%s/%s"%(instance.aspirante_id, randomstr, filename.encode('ascii','ignore'))
 
-
-
-#models.fields.files.FieldFile.__unicode__ = lambda self : os.path.basename(self.name)
-
-# insert into convocat_documentossoporte(aspirante_id) (select id from convocat_aspirante where id not in (select aspirante_id from convocat_documentossoporte));
 class DocumentosSoporte(models.Model):
     aspirante = models.OneToOneField(Aspirante)
     formacion_academica = models.FileField(upload_to=crear_ruta_archivo, blank=True, null=True)
@@ -300,19 +252,3 @@ class DocumentosSoporte(models.Model):
     ensenanza_tic_profesores = models.FileField(upload_to=crear_ruta_archivo, blank=True, null=True)
     ensenanza_tic_formadores = models.FileField(upload_to=crear_ruta_archivo, blank=True, null=True)
 
-
-"""
-class Adjunto(models.Model):
-    
-    aspirante = models.ForeignKey(Aspirante)
-    tipo = models.CharField(max_length=6, choices=TIPOS_ADJUNTO)
-    descripcion = models.CharField(max_length=200, blank=True)
-    archivo = models.FileField(upload_to=crear_ruta_archivo) 
-    fecha_creacion = models.DateTimeField(auto_now_add=True)
-
-    def filename(self):
-        return os.path.basename(self.archivo.name)
-
-    def __unicode__(self):
-        return u"%s - %s - %s"%(self.aspirante_id, self.tipo, self.archivo)
-"""

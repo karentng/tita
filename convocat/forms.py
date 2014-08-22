@@ -19,10 +19,11 @@ class MunicipioChoice(AutoModelSelect2Field):
 
 class DatosPersonalesForm(forms.ModelForm):
     municipio_nacimiento = MunicipioChoice(help_text=u'Deje en blanco si nació fuera de Colombia', required=False)
-    municipio = MunicipioChoice(label = "Municipio de residencia")
+    municipio = MunicipioChoice(label = u"Municipio de residencia")
+    municipio_institucion = MunicipioChoice(label=u'Municipio de la institución donde labora')
     class Meta:
         model = Aspirante
-        fields = ('numero_documento', 'nombre1', 'nombre2', 'apellido1', 'apellido2', 'nacionalidad', 'municipio_nacimiento', 'fecha_nacimiento', 'sexo', 'municipio', 'direccion', 'telefono', 'celular', 'email')
+        fields = ('numero_documento', 'nombre1', 'nombre2', 'apellido1', 'apellido2', 'nacionalidad', 'municipio_nacimiento', 'fecha_nacimiento', 'sexo', 'municipio', 'direccion', 'telefono', 'celular', 'email', 'institucion_actual', 'municipio_institucion', 'jornada')
         #fields = ('numero_documento', 'nombre1', 'nombre2', 'apellido1', 'apellido2', 'sexo', 'nacionalidad', 'municipio_nacimiento', 'direccion', 'municipio', 'telefono', 'celular', 'email')
         widgets = {
             # 'fecha_nacimiento': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),

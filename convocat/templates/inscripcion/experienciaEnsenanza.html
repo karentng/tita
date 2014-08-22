@@ -54,15 +54,15 @@
 
 {% block titulo_panel %}<i class="fa fa-puzzle-piece"></i> Experiencia en Enseñanza de TIC {% endblock %}
 {% block contenido_panel %}
-    <div class="col-xs-12">
-        <h5>
-            Al llenar la información, asegurese de seleccionar el mayor número de horas que posee como formador TIC a estudiantes.
-            <br><br>  
-            Al llenar la información, asegurese de seleccionar el mayor número de horas que posee como formador TIC a docentes.  Si la mayor experiencia en número de horas que posee como formador a docentes es como formador TIT@ en ejercicio, no es necesario que cargue el soporte.
-            <br><br>
-            Al llenar la información, asegurese de seleccionar el mayor número de horas que posee como formador de formadores.
-        </h5>
-    </div>
+    
+    <h5>
+        Al llenar la información, asegurese de seleccionar el mayor número de horas que posee como formador TIC a estudiantes.
+        <br><br>  
+        Al llenar la información, asegurese de seleccionar el mayor número de horas que posee como formador TIC a docentes.  Si la mayor experiencia en número de horas que posee como formador a docentes es como formador TIT@ en ejercicio, no es necesario que cargue el soporte.
+        <br><br>
+        Al llenar la información, asegurese de seleccionar el mayor número de horas que posee como formador de formadores.
+    </h5>
+    <br>
     <table class="table table-hover">
         <thead>
         <tr>
@@ -94,7 +94,7 @@
     {% if solo_lectura %}
     {% else %}
     <div class="well well-sm">
-        <h4>Agregar Experiencias en Enseñanza</h4>
+        <h4>Agregar Experiencias en Enseñanza de TIC</h4>
         <form class="form-horizontal" method="post">{% if solo_lectura %}{% else %}{% csrf_token %}{% endif %}
             {% bootstrap_form form layout="horizontal" horizontal_label_class='col-md-5' horizontal_field_class='col-md-5' %}
             <div class="row">
