@@ -26,15 +26,21 @@
 
 
 {% block contenido %}
+
 <div class="well well-lg text-center ">
     <br><br>
+    <h4>La convocatoria ha cerrado.</h4>
+{% comment %}
     <h4>Si cumple todos los requisitos y desea participar en la convocatoria inicie aquí. </h4> <h6>(Al iniciar la inscripción se aceptará automáticamente la politica de tratamiento de datos personales y los términos de privacidad del proyecto)</h6>
     <br>
     <a href="{% url 'datosPersonales' %}" class="btn btn-lg btn-primary">Iniciar Inscripción</a> 
+{% endcomment %}
     <br><br>
     <a class="pull-left" href="{{STATIC_URL}}documents/politica_tratamiento_datos_personales.pdf" target="_blank"><b>Política de Tratamiento de Datos Personales</b></a>
     <br>
     <a class="pull-left" href="{{STATIC_URL}}documents/terminos_proyecto_tita.pdf" target="_blank"><b>Términos de Privacidad Proyecto Tita</b></a>
+    <br>
+    
 </div> 
 
 <br>

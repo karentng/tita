@@ -39,6 +39,21 @@
 
 {% block titulo_panel %}<i class="fa fa-user"></i> Datos Personales{% endblock %}
 {% block contenido_panel %}
+
+    {% if request.POST %}
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            Faltan algunos campos por ingresar correctamente. Verifique los campos en color Rojo
+        </div>
+    {% endif %}
+
+    
+    <h5>Antes de dar siguiente en esta página por favor asegúrese que están totalmente diligenciadas todas casillas.
+    <br><br>
+    Asegurese de registrar la institución, el munipio y la jornada  donde usted es docente.</h5>
+    <br><br>
+
+
     <form class="form-horizontal" method="post">{% if solo_lectura %} {% else %} {% csrf_token %} {% endif %}
         {% bootstrap_form form layout="horizontal" %}
 

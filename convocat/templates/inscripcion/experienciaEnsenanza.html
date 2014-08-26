@@ -52,65 +52,54 @@
 {% endblock %}
 
 
-{% block titulo_panel %}<i class="fa fa-puzzle-piece"></i> Experiencia Laboral en Enseñanza {% endblock %}
+{% block titulo_panel %}<i class="fa fa-puzzle-piece"></i> Experiencia en Enseñanza de TIC {% endblock %}
 {% block contenido_panel %}
+    
+    <h5>
+        Al llenar la información, asegurese de seleccionar el mayor número de horas que posee como formador TIC a estudiantes.
+        <br><br>  
+        Al llenar la información, asegurese de seleccionar el mayor número de horas que posee como formador TIC a docentes.  Si la mayor experiencia en número de horas que posee como formador a docentes es como formador TIT@ en ejercicio, no es necesario que cargue el soporte.
+        <br><br>
+        Al llenar la información, asegurese de seleccionar el mayor número de horas que posee como formador de formadores.
+    </h5>
+    <br>
     <table class="table table-hover">
         <thead>
         <tr>
+            <th>Tipo</th>
             <th>Institución</th>
-            <th>Contacto</th>
             <th>Rango de Tiempo</th>
-            <th>Áreas</th>
+            <th>Descripción</th>
             <th></th>
         </tr>
         </thead>
         <tbody>
-        {% for ens in experiencia_ens %}
+        {% for exp in experiencias %}
             <tr>
+                <td>{{exp.get_tipo_display}}</td>
+                <td>{{exp.institucion}}</td>
+                <td>{{exp.fecha_inicio|date:"Y-m-d"}} ~ {{exp.fecha_fin|date:"Y-m-d"|default:'Presente'}}</td>
+                <td>{{exp.descripcion}}</td>
                 <td>
-                    <b>{{ens.institucion}}</b><br>
-                    <small><i>{{ens.get_tipo_institucion_display}}</i></small><br>
-                    <small><i>{{ens.get_nivel_display}}</i></small>
-
-                    {% if ens.jornada %}
-                        -
-                        <small>{{ens.get_jornada_display}}</small>
-                    {% endif %}
-                </td>
-                <td>{{ens.telefono|default:''}} 
-                    {% if ens.telefono and ens.email %} <br> {% endif %}
-                    {{ens.email}}
-                </td>                
-                <td>{{ens.fecha_inicio|date:"Y-m-d"}} ~ {{ens.fecha_fin|date:"Y-m-d"|default:'Presente'}}</td>
-                <td>
-                    <ul class="list-unstyled">
-                    {%for area in ens.areas.all %}
-                    <li>{{area}}</li>
-                    {% endfor %}
-                    </ul>
-                </td>
-                {% if solo_lectura %}
-                <td></td>
-                {% else %}                
-                <td>
-                    <a href="{% url 'eliminarExperienciaEnsenanza' ens.id %}" onclick="return confirm('Seguro que desea eliminar esta entrada?')" class="text-danger">Eliminar</a>
-                </td>
+                {% if not solo_lectura %}
+                    <a href="{% url 'eliminarExperienciaEnsenanza' exp.id %}" onclick="return confirm('Seguro que desea eliminar esta entrada?')" class="text-danger">Eliminar</a>
                 {% endif %}
+                </td>
             </tr>
         {% empty %}
-            <tr><td>No se ha agregado alguna experiencia en enseñanza.</td></tr>
+            <tr><td>No se ha agregado alguna experiencia de enseñanza en TIC.</td></tr>
         {% endfor %}
         </tbody>
     </table>
     {% if solo_lectura %}
     {% else %}
     <div class="well well-sm">
-        <h4>Agregar Experiencias en Enseñanza</h4>
+        <h4>Agregar Experiencias en Enseñanza de TIC</h4>
         <form class="form-horizontal" method="post">{% if solo_lectura %}{% else %}{% csrf_token %}{% endif %}
             {% bootstrap_form form layout="horizontal" horizontal_label_class='col-md-5' horizontal_field_class='col-md-5' %}
             <div class="row">
                 <div class="col-md-3 col-md-offset-2">
-                    <button class="btn btn-sm btn-primary" type="submit"><i class="fa fa-plus"></i>  Agregar</button>
+                    <button class="btn btn-primary" type="submit"><i class="fa fa-plus"></i>  Agregar</button>
                 </div>
             </div>
         </form>
@@ -118,5 +107,5 @@
     {% endif %}
 
     <a href="{% url 'idiomasManejados' %}" class="btn btn-lg btn-default pull-left"> <i class="fa fa-angle-left"></i> Anterior</a>
-    <a id="siguiente" href="{% url 'experienciaOtra' %}" class="btn btn-lg btn-primary pull-right">Siguiente <i class="fa fa-angle-right"></i></a>
+    <a id="siguiente" href="{% url 'soportes' %}" class="btn btn-lg btn-primary pull-right">Siguiente <i class="fa fa-angle-right"></i></a>
 {% endblock %}

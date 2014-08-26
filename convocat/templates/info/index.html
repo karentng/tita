@@ -1,66 +1,90 @@
 {% extends "base.html" %}
+{% load bootstrap3 %}
 
-{% block titulo %}
-	Tit@ - Inicio
-{% endblock %}
+{% block titulo %} Tit@ - Inicio {% endblock %}
 
 {% block menu %}
-	{% include "menus/publico.html" with opcion_menu=1 %}
+    {% include "menus/publico.html" with opcion_menu=1 %}
 {% endblock %}
 
 {% block miga_pan %}
-	<li><a href="javascript:;">Inicio</a></li>
-	
+    <li><a href="javascript:;">Inicio</a></li>
+    
 {% endblock %}
 
 {% block titulo_contenido %}
-	Convocatoria a Formadores Etapa Presencial y Virtual
+    Convocatoria a Formadores Etapa Presencial y Virtual
 {% endblock %}
 
 {% block titulo_panel %}
-	Inicio
+    Inicio
 {% endblock %}
 
 {% block contenido %}
-	<div class="col-md-8">
-		<div class="panel panel-primary">
-		    <div class="panel-heading">
-		        <h4 class="panel-title" style="font-size:15px">Inicio</h4>
-			</div>
-			<div class="panel-body" align="justify">
-				<img style="border-radius:10px; height:200px" class="img-responsive" src="/static/img/ampliacion_plazo.jpg">
-				<p style="font-size:20px; font-family:times">					
-					<center><b><h3>¿Qué es TIT@?</h3></b></center>
+    <div class="col-md-8">
+        <div class="panel ">
+            <div class="widget widget-state bg-purple">
+                <div class="panel-heading-btn">
+                    <a class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                </div>
+                <h4 class="panel-title" style="font-size:15px; font-color: FFFFFF;"><i class="fa fa-bullhorn"></i> Noticias Importantes</h4>
+            </div>
+            <div class="panel-body">
+                <img style="border-radius:10px; height:100px;" class="img-responsive pull-right" src="{{STATIC_URL}}img/ampliacion_plazo.jpg">
+                <h4>Actualización:</h4>
+                <p style="font-size:13px">
+                    <b>A partir de este momento en la aplicación  se encuentra habilitado el módulo de subir documentos soporte.</b>
+                    <br><br>
+                    Dado que se han detectado errores en el diligenciamiento del formulario de inscripción, se han añadido campos en algunas secciones para precisar la información. Por ello se ha habilitado nuevamente la edición para que se complete la información.
+                    <br><br>
+                    No olvide guardar el número del registro que aparece en la segunda pestaña de esta inscripción para editar o subir los soportes.
+                    <br><br>
+                    <h4>Recuerde que:</h4>
+                    <h5><b>LA CONVOCATORIA CIERRA EL VIERNES 22 DE AGOSTO A LA 1:00 PM.</b></h5>
 
-					“TIT@ EDUCACION DIGITAL PARA TODOS” tiene como propósito integrar las nuevas tecnologías de la información y la comunicación (TIC) a los procesos pedagógicos, por una educación con calidad.<br>
+                </p>
+                <a href="{{STATIC_URL}}documents/adenda.pdf" target="_blank" style="font-size:13px" type="button" class="btn btn-link m-b-5 text-warning"> 
+                    <i class="fa fa-file-pdf-o"></i><b> Adenda</b>
+                </a>
+            </div>
+        </div>  
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4 class="panel-title" style="font-size:15px">Inicio</h4>
+            </div>
+            <div class="panel-body" align="justify">
+                <p style="font-size:20px; font-family:times">                   
+                    <center><b><h3>¿Qué es TIT@?</h3></b></center>
+
+                    “TIT@ EDUCACION DIGITAL PARA TODOS” tiene como propósito integrar las nuevas tecnologías de la información y la comunicación (TIC) a los procesos pedagógicos, por una educación con calidad.<br>
  
-					Esta ambiciosa apuesta social y educativa de la Alcaldía de Santiago de Cali y la Secretaria de educación del Valle del Cauca y de Cali, suma en una alianza a los municipios de Yumbo, Dagua, La Cumbre y Vijes, obteniendo del Sistema Nacional de Regalías recursos orientados al desarrollo de competencias siglo XXI, con el fin de aportar a la reducción de la brecha escolar, y a la disminución de los índices de deserción escolar.<br><br>
+                    Esta ambiciosa apuesta social y educativa de la Alcaldía de Santiago de Cali y la Secretaria de educación del Valle del Cauca y de Cali, suma en una alianza a los municipios de Yumbo, Dagua, La Cumbre y Vijes, obteniendo del Sistema Nacional de Regalías recursos orientados al desarrollo de competencias siglo XXI, con el fin de aportar a la reducción de la brecha escolar, y a la disminución de los índices de deserción escolar.<br><br>
 
 
-					<center><b><h3>¿Quiénes pueden participar?</h3></b></center>
+                    <center><b><h3>¿Quiénes pueden participar?</h3></b></center>
 
-					Se invita a docentes nombrados de las diferentes Instituciones Educativas Oficiales de estos municipios, a participar de la convocatoria para la  selección de sesenta (60) docentes interesados en recibir el curso de Formación en pedagogía integrando TIC.<br><br>
+                    Se invita a docentes nombrados de las diferentes Instituciones Educativas Oficiales de estos municipios, a participar de la convocatoria para la  selección de sesenta (60) docentes interesados en recibir el curso de Formación en pedagogía integrando TIC.<br><br>
 
-					Los docentes se comprometen a cumplir con los objetivos indicados en el programa de formación, al igual que con el tiempo de participación de ciento sesenta (160) horas presenciales y sesenta y nueve (69) horas virtuales durante cinco (5) semanas, contando con el aval de las Secretarias de Educación.<br><br>
-					
-					Al finalizar el curso la Universidad del Valle dará una certificación que les habilita para concursar y actuar posteriormente como “Maestros Formadores”.<br><br>
+                    Los docentes se comprometen a cumplir con los objetivos indicados en el programa de formación, al igual que con el tiempo de participación de ciento sesenta (160) horas presenciales y sesenta y nueve (69) horas virtuales durante cinco (5) semanas, contando con el aval de las Secretarias de Educación.<br><br>
+                    
+                    Al finalizar el curso la Universidad del Valle dará una certificación que les habilita para concursar y actuar posteriormente como “Maestros Formadores”.<br><br>
 
-					De los docentes certificados, se seleccionarán aquellos que serán contratados como docentes formadores para el desarrollo del Programa de Formación en Pedagogía integrando TIC en las instituciones que participan en el proyecto, durante los ocho meses (8) del proceso.<br><br>
+                    De los docentes certificados, se seleccionarán aquellos que serán contratados como docentes formadores para el desarrollo del Programa de Formación en Pedagogía integrando TIC en las instituciones que participan en el proyecto, durante los ocho meses (8) del proceso.<br><br>
 
 
-					<center><b><h3>Cómo inscribirse</h3></b></center>
+                    <center><b><h3>Cómo inscribirse</h3></b></center>
 
-					Las inscripciones para los docentes interesados en hacer parte de este proceso, están abiertas desde el 9 al 22 de Agosto 2014 llenando el formulario de la convocatoria.
+                    Las inscripciones para los docentes interesados en hacer parte de este proceso, están abiertas desde el 9 al 22 de Agosto 2014 llenando el formulario de la convocatoria.
 
-				</p>
-			</div>
-		</div>
-	</div>
-	<div class="col-md-4">
-		<br>
-		<img style="border-radius:10px; height:200px" src="/static/img/info/imagen6.jpg"><br><br>
-		<img style="border-radius:10px; height:200px" src="/static/img/info/imagen2.jpg"><br><br>
-		<img style="border-radius:10px; height:200px" src="/static/img/info/imagen3.jpg">
-	</div>
-		
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <br>
+        <img style="border-radius:10px; height:200px" src="{{STATIC_URL}}img/info/imagen6.jpg"><br><br>
+        <img style="border-radius:10px; height:200px" src="{{STATIC_URL}}img/info/imagen2.jpg"><br><br>
+        <img style="border-radius:10px; height:200px" src="{{STATIC_URL}}img/info/imagen3.jpg">
+    </div>
+        
 {% endblock %}

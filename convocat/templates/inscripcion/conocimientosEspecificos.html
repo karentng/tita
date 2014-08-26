@@ -37,9 +37,12 @@
 
 {% block titulo_panel %}<i class="fa fa-lightbulb-o"></i> Conocimientos Específicos{% endblock %}
 {% block contenido_panel %}
-    <div class="col-xs-12">
-        <h5>Seleccione el grado de conocimiento para cada item.</h5>
-    </div>
+    
+    <h5>Seleccione el grado de conocimiento para cada item.
+    <br>
+    Antes de dar en siguiente asegúrese que ha calificado cada uno de los ítems de esta sección.</h5>
+    <br><br>
+
     <form class="form-horizontal" method="post">{% if solo_lectura %} {% else %} {% csrf_token %} {% endif %}
         {% bootstrap_form form layout="horizontal" label_class="col-md-6" %}
         <a href="{% url 'formacionTics' %}" class="btn btn-lg btn-default pull-left"> <i class="fa fa-angle-left"></i> Anterior</a>

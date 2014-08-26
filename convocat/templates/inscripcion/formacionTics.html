@@ -49,8 +49,12 @@
     {% include "inscripcion/_wizard.html" with wizard_stage=3 %}
 {% endblock %}
 
-{% block titulo_panel %}<i class="fa fa-laptop"></i> Formacion en TIC's{% endblock %}
+{% block titulo_panel %}<i class="fa fa-laptop"></i> Formacion en TIC{% endblock %}
 {% block contenido_panel %}
+    
+    <h5>Al llenar la información, verifique antes de dar click en siguiente que ha ingresado el curso donde haya recibido el mayor número de horas de duración.</h5>
+    <br><br>
+
     <table class="table">
         <thead>
         <tr>
@@ -80,7 +84,7 @@
             </tr>
         {% empty %}
             <tr>
-                <td colspan="6">No se ha agregado ningún curso de formación TIC's.</td>
+                <td colspan="6">No se ha agregado ningún curso de formación TIC.</td>
             </tr>
         {% endfor %}
         </tbody>
@@ -88,12 +92,12 @@
     {% if solo_lectura %}
     {% else %}
     <div class="well well-sm">
-        <h4>Agregar Formación TIC's</h4>
+        <h4>Agregar Formación TIC</h4>
         <form class="form-horizontal" method="post">{% if solo_lectura %}{% else %}{% csrf_token %}{% endif %}
             {% bootstrap_form form layout="horizontal" horizontal_label_class='col-md-5' horizontal_field_class='col-md-5' %}
             <div class="row">
                 <div class="col-md-3 col-md-offset-2">
-                    <button class="btn btn-sm btn-primary" type="submit"><i class="fa fa-plus"></i>  Agregar</button>
+                    <button class="btn btn-primary" type="submit"><i class="fa fa-plus"></i>  Agregar</button>
                 </div>
             </div>
         </form>
