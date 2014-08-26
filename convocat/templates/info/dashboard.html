@@ -14,7 +14,7 @@
 {% endblock %}
 
 {% block titulo_contenido %}
-	Cuadro de Control <small>Control de la Aplicación</small>
+	Resultados Convocatoria
 {% endblock %}
 
 {% block contenido %}
@@ -98,11 +98,7 @@
 									<tr>
 										<td>{{aspirante}}</td>
 										<td>
-											{% if aspirante.sexo = 'M' %}
-												Masculino
-											{% else %}
-												Femenino
-											{% endif %}
+											{{aspirante.sexo}}
 										</td>
 										<td>{{aspirante.municipio}}</td>
 									</tr>
