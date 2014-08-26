@@ -305,3 +305,22 @@ def adjuntos(request):
         'form': form,
         'adjuntos': adjuntos
     })
+
+# parte del cuadro de control
+def dashboard(request):
+    aspirantes = Aspirante.objects.order_by('-id')[:10]
+        
+    mejores = Aspirante.objects.order_by('-puntuacion_hv')[:3]
+    total_inscritos = Aspirante.objects.count()
+    total_aprobados = Aspirante.objects.filter(puntuacion_hv__gt= 50).count()
+    maximo = mejores[0].puntuacion_hv
+
+    return render(request, 'info/dashboard.html', {
+        'aspirantes':aspirantes,
+        'mejores':mejores,
+
+        'inscritos':total_inscritos,
+        'aprobados':total_aprobados,
+        'rechazados':total_inscritos - total_aprobados,
+        'maximo':maximo,
+    })

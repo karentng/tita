@@ -19,3 +19,24 @@
 <li {% if opcion_menu == 8 %} class="active" {% endif %}>
 	<a href="{% url 'info_contactenos' %}"><i class="fa fa-2x fa-question-circle"></i> <span>Contáctenos</span></a>
 </li>
+
+{% comment %}
+Diseño de DashBoard y Reportes
+{% endcomment %}
+<li {% if opcion_menu == 9 %} class="active" {% endif %}>
+	<a href="{% url 'dashboard' %}"><i class="fa fa-2x fa-laptop"></i> <span>Cuadro de Control</span></a>
+</li>
+
+<li class="has-sub">
+	<a href="javascript:;">
+	    <i class="fa fa-folder-open-o"></i> 
+	    <b class="caret pull-right"></b>
+	    <span>Reportes</span> 
+	</a>
+	<ul class="sub-menu">
+		<li><a href="javascript:;">General</a></li>
+		<li><a href="javascript:;">Inscritos</a></li>
+		<li><a href="javascript:;">Aprobados</a></li>
+		<li><a href="javascript:;">Mejores Puntajes</a></li>
+	</ul>
+</li>

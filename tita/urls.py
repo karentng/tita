@@ -17,7 +17,7 @@ urlpatterns = patterns('',
     url(r'^calendario/$', TemplateView.as_view(template_name='info/calendario.html'), name="info_calendario"),
     url(r'^requisitos/$',TemplateView.as_view(template_name='info/requisitos.html'), name="info_requisitos"),
     url(r'^registrarse/$',TemplateView.as_view(template_name='info/registrarse.html'), name="info_registrarse"),
-     url(r'^contactenos/$',TemplateView.as_view(template_name='info/contactenos.html'), name="info_contactenos"),
+    url(r'^contactenos/$',TemplateView.as_view(template_name='info/contactenos.html'), name="info_contactenos"),
 
 
     #url(r'^formulario/$', 'convocat.views.inscripcion.formulario', name="formulario"),#
@@ -25,10 +25,14 @@ urlpatterns = patterns('',
     #url(r'^login/$', 'django.contrib.auth.views.login', {'template_name':'publico/login.html'}, name= 'publico_login'),
     #url(r'^cerrar/$', 'django.contrib.auth.views.logout', {'template_name':'info.html'}, name= 'logout'),
     #url(r'^guardarHV/$', 'convocat.views.guardarHV', name= 'guardarHV'),
+
+    # dashboard interfaz
+    
 )
 
 
 urlpatterns += patterns('convocat.views.inscripcion',
+    url(r'^cuadro-control$',      'dashboard', name="dashboard"),
     url(r'^inscripcion/iniciar-inscripcion$',      'iniciarInscripcion', name="iniciarInscripcion"),
 
     url(r'^inscripcion/datos-personales$',      'datosPersonales', name="datosPersonales"),
