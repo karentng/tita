@@ -25,20 +25,16 @@
 {% comment %}
 Diseño de DashBoard y Reportes
 {% endcomment %}
-<li {% if opcion_menu == 9 %} class="active" {% endif %}>
-	<a href="{% url 'dashboard' %}"><i class="fa fa-2x fa-laptop"></i> <span>Cuadro de Control</span></a>
-</li>
 
-<li class="has-sub">
+<li class="has-sub {% if opcion_menu == 9 %} active {% endif %}">
 	<a href="javascript:;">
 	    <i class="fa fa-folder-open-o"></i> 
 	    <b class="caret pull-right"></b>
 	    <span>Reportes</span> 
 	</a>
-	<ul class="sub-menu">
-		<li><a href="javascript:;">General</a></li>
-		<li><a href="javascript:;">Inscritos</a></li>
-		<li><a href="javascript:;">Aprobados</a></li>
-		<li><a href="javascript:;">Mejores Puntajes</a></li>
+	<ul class="sub-menu" {% if opcion_menu == 9 %} class="active" {% endif %}>
+		<li {% if opcion_menu == 9 %} class="active" {% endif %}><a href="{% url 'dashboard' %}">Resultado Convocatoria</a></li>
+		<li><a href="javascript:;">Inscripcion de Docentes-Estudiantes</a></li>
+		<li><a href="javascript:;">Conformación de Grupos</a></li>
 	</ul>
 </li>
