@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from convocat.models import * 
 from convocat.forms import *
 from django.db.models import Count
+import json
 
 def buscar_aspirante_por_clave(valor):
     try :
@@ -317,10 +318,12 @@ def dashboard(request):
     total_aprobados = Aspirante.objects.filter(puntuacion_hv__gt= 50).count()
     maximo = mejores[0].puntuacion_hv
 
+    munis = []
     municipios = Aspirante.objects.values('municipio').annotate(dcount=Count('municipio'))
     for i in municipios:
-        i['nombre'] = unicode(Municipio.objects.get(id=i['municipio']).nombre)
-
+        nombre = unicode(Municipio.objects.get(id=i['municipio']).nombre)
+        munis.append({'nombre': nombre, 'dcount': i['dcount']})
+        
     return render(request, 'info/dashboard.html', {
         'mejores':mejores,
 
@@ -329,5 +332,5 @@ def dashboard(request):
         'rechazados':total_inscritos - total_aprobados,
         'maximo':maximo,
 
-        'municipios': municipios
+        'municipios':json.dumps(munis),
     })
