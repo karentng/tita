@@ -83,7 +83,10 @@ class AspiranteAdmin(admin.ModelAdmin):
         return unicode(obj)
 
     def tiene_soportes(self, obj):
+        #from django.db import connection
+        #print "total consultas====>", len(connection.queries)
         return u"✓" if obj.documentossoporte.tiene_soportes() else ''
+
 
     def recalcular_puntaje(self, request, queryset):
         for aspirante in queryset:
@@ -91,7 +94,9 @@ class AspiranteAdmin(admin.ModelAdmin):
                 aspirante.puntuacion_hv = aspirante.calcular_puntaje()
                 aspirante.save()
 
-
+    def get_queryset(self, request):
+        qs = super(AspiranteAdmin, self).get_queryset(request)
+        return qs.select_related('documentossoporte')
     
 
 
