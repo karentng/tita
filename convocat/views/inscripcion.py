@@ -319,7 +319,7 @@ def dashboard(request):
 
     municipios = Aspirante.objects.values('municipio').annotate(dcount=Count('municipio'))
     for i in municipios:
-        i['nombre'] = str(Municipio.objects.get(id=i['municipio']).nombre)
+        i['nombre'] = unicode(Municipio.objects.get(id=i['municipio']).nombre)
 
     return render(request, 'info/dashboard.html', {
         'mejores':mejores,

@@ -184,6 +184,22 @@
                         </div>
                         <div class="panel-body">
                             <div id="donut-chart" class="height-sm"></div>
+                            <table class="table table-valign-middle m-b-0">
+								<thead>
+									<tr>	
+										<th>Ciudad</th>
+										<th>Cantidad</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for municipio in municipios %}
+									<tr>
+										<td>{{municipio.nombre}}</td>
+										<td>{{municipio.dcount}}</td>
+									</tr>
+									{% endfor %}
+								</tbody>
+							</table>
                         </div>
                     </div>
 		        </div>
