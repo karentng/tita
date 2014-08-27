@@ -252,3 +252,5 @@ class DocumentosSoporte(models.Model):
     ensenanza_tic_profesores = models.FileField(upload_to=crear_ruta_archivo, blank=True, null=True)
     ensenanza_tic_formadores = models.FileField(upload_to=crear_ruta_archivo, blank=True, null=True)
 
+    def tiene_soportes(self):
+        return bool(self.formacion_academica or self.formacion_tics or self.idiomas or self.ensenanza_tic_estudiantes or self.ensenanza_tic_profesores or self.ensenanza_tic_formadores)
