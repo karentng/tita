@@ -71,13 +71,28 @@ class PuntajeFilter(admin.SimpleListFilter):
             return queryset.filter(puntuacion_hv__gte=50)
         return queryset
 
+
+class MunicipioInstitucionFilter(admin.SimpleListFilter):
+    title = "Municipio donde labora"
+    parameter_name='mun'
+
+    def lookups(self, request, model_admin):
+        return list(Municipio.objects.filter(id__in=set(Aspirante.objects.values_list('municipio_institucion_id', flat=True))).values_list('id','nombre'))
+
+    def queryset(self, request, queryset):
+        print "value es", self.value()
+        if self.value() is not None:
+            
+            queryset =  queryset.filter(municipio_institucion_id=self.value())
+        return queryset
+
 class AspiranteAdmin(admin.ModelAdmin):
     list_display = ('id', 'nombre_completo', 'puntuacion_hv', 'tiene_soportes','numero_inscripcion', 'modificado')
     inlines = [AcademicaInline, FormacionTicsAdmin, ConocimientoInline, IdiomaInline, ExperienciaEnsenanzaInline, DocumentosSoporteInline]
     actions = ['recalcular_puntaje']
     get_readonly_fields = readonly
     search_fields = ('nombre1','apellido1')
-    list_filter = (PuntajeFilter,)
+    list_filter = (PuntajeFilter,MunicipioInstitucionFilter)
 
     def nombre_completo(self, obj):
         return unicode(obj)
@@ -100,6 +115,6 @@ class AspiranteAdmin(admin.ModelAdmin):
     
 
 
-#admin.site.register(AreaEnsenanza)
+
 admin.site.register(Aspirante, AspiranteAdmin)
-#admin.site.register(Adjunto)
+
