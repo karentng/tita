@@ -8,6 +8,71 @@
 	{% include "menus/publico.html" with opcion_menu=9 %}
 {% endblock %}
 
+{% block js %}
+<script src="{{STATIC_URL}}plugins/flot/jquery.flot.min.js"></script>
+<script src="{{STATIC_URL}}plugins/flot/jquery.flot.pie.min.js"></script>
+<script src="{{STATIC_URL}}plugins/flot/jquery.flot.categories.js"></script>
+<script type="text/javascript">
+	var blue		= '#348fe2',
+    blueLight	= '#5da5e8',
+    blueDark	= '#1993E4',
+    aqua		= '#49b6d6',
+    aquaLight	= '#6dc5de',
+    aquaDark	= '#3a92ab',
+	green		= '#00acac',
+	greenLight	= '#33bdbd',
+	greenDark	= '#008a8a',
+	orange		= '#f59c1a',
+	orangeLight	= '#f7b048',
+	orangeDark	= '#c47d15',
+    dark		= '#2d353c',
+    grey		= '#b6c2c9',
+    purple		= '#727cb6',
+    purpleLight	= '#8e96c5',
+    purpleDark	= '#5b6392',
+    red         = '#ff5b57';
+
+	if ($('#donut-chart').length !== 0) {
+        var data = [];
+        var series = 3;
+        var colorArray = [dark, green, purple];
+        var municipios = {{municipios|safe}};
+        
+        for (i in municipios){
+        	var aux = municipios[i];
+        	console.log(aux);
+
+        	data[i] = {label: aux.nombre, data: aux.dcount, color: colorArray[i]}
+        }
+
+        var nameArray = ['Unique Visitor', 'Bounce Rate', 'Total Page Views', 'Avg Time On Site', '% New Visits'];
+        var dataArray = [20,14,12,31,23];
+        for( var i = 0; i<series; i++)
+        {
+            //data[i] = { label: nameArray[i], data: dataArray[i], color: colorArray[i] };
+        }
+        
+        $.plot($("#donut-chart"), data, 
+        {
+            series: {
+                pie: { 
+                    innerRadius: 0.5,
+                    show: true,
+                    combine: {
+                        color: '#999',
+                        threshold: 0.1
+                    }
+                }
+            },
+            grid:{borderWidth:0, hoverable: true, clickable: true},
+            legend: {
+                show: false
+            }
+        });
+    }	
+</script>
+{% endblock %}
+
 {% block miga_pan %}
 	<li><a href="javascript:;">Cuadro de Control</a></li>
 	
@@ -77,12 +142,9 @@
 					<div class="panel panel-inverse">
 						<div class="panel-heading">
 							<div class="panel-heading-btn">
-								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
-								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
 							</div>
-							<h4 class="panel-title">Últimas Personas Inscritas</h4>
+							<h4 class="panel-title">Admitidos</h4>
 						</div>
 						<div class="panel-body">
 							<table class="table table-valign-middle m-b-0">
@@ -91,16 +153,18 @@
 										<th>Nombre</th>
 										<th>Sexo</th>
 										<th>Municipio</th>
+										<th>Puntuación</th>
 									</tr>
 								</thead>
 								<tbody>
-									{% for aspirante in aspirantes %}
+									{% for aspirante in mejores %}
 									<tr>
 										<td>{{aspirante}}</td>
 										<td>
 											{{aspirante.sexo}}
 										</td>
 										<td>{{aspirante.municipio}}</td>
+										<td>{{aspirante.puntuacion_hv}}</td>
 									</tr>
 									{% endfor %}
 								</tbody>
@@ -111,38 +175,18 @@
 				<!-- end col-8 -->
 				<!-- begin col-4 -->
 				<div class="col-md-4">
-					<div class="panel panel-inverse">
-						<div class="panel-heading">
-							<div class="panel-heading-btn">
-								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
-								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
-							</div>
-							<h4 class="panel-title">Mejores Aspirantes</h4>
-						</div>
-						<div class="panel-body p-t-0">
-							<table class="table table-valign-middle m-b-0">
-								<thead>
-									<tr>	
-										<th>Nombre</th>
-										<th>Puntaje</th>
-										<th>Municipio</th>
-									</tr>
-								</thead>
-								<tbody>
-									{% for mejor in mejores %}
-									<tr>
-										<td>{{mejor}}</td>
-										<td><label class="label label-danger">{{mejor.puntuacion_hv}}</label></td>
-										<td>{{mejor.municipio}}</td>
-									</tr>
-									{% endfor %}
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
+                    <div class="panel panel-inverse">
+                        <div class="panel-heading">
+                            <div class="panel-heading-btn">
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                            </div>
+                            <h4 class="panel-title">Inscritos por Ciudades</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div id="donut-chart" class="height-sm"></div>
+                        </div>
+                    </div>
+		        </div>
 				<!-- end col-4 -->
 			</div>
 			<!-- end row -->

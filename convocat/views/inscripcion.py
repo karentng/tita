@@ -3,6 +3,7 @@ from django.core import serializers
 from django.http import HttpResponse
 from convocat.models import * 
 from convocat.forms import *
+from django.db.models import Count
 
 def buscar_aspirante_por_clave(valor):
     try :
@@ -304,30 +305,29 @@ def soportes(request):
 
     return render(request, 'inscripcion/soportes.html', {
         'form': form,
-#<<<<<<< HEAD
-        #'adjuntos': adjuntos
     })
 
 # parte del cuadro de control
 def dashboard(request):
-    aspirantes = Aspirante.objects.order_by('-id')[:10]
-        
-    mejores = Aspirante.objects.order_by('-puntuacion_hv')[:3]
+    mejores = Aspirante.objects.order_by('-puntuacion_hv')
+    if len(mejores) > 60:
+        mejores = mejores[:60]
+
     total_inscritos = Aspirante.objects.count()
     total_aprobados = Aspirante.objects.filter(puntuacion_hv__gt= 50).count()
     maximo = mejores[0].puntuacion_hv
 
+    municipios = Aspirante.objects.values('municipio').annotate(dcount=Count('municipio'))
+    for i in municipios:
+        i['nombre'] = str(Municipio.objects.get(id=i['municipio']).nombre)
+
     return render(request, 'info/dashboard.html', {
-        'aspirantes':aspirantes,
         'mejores':mejores,
 
         'inscritos':total_inscritos,
         'aprobados':total_aprobados,
         'rechazados':total_inscritos - total_aprobados,
         'maximo':maximo,
+
+        'municipios': municipios
     })
-#=======
-        
-    #})
-    
-#>>>>>>> c6aed44f130640ce0077c7590008bf8cf208c252
