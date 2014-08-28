@@ -10,8 +10,11 @@ def dashboard(request):
     if len(mejores) > 60:
         mejores = mejores[:60]
 
-    total_inscritos = Aspirante.objects.count()
-    total_aprobados = Aspirante.objects.filter(puntuacion_hv__gt= 50).count()
+    inscritos = Aspirante.objects.all()
+    total_inscritos = inscritos.count()
+    aprobados = Aspirante.objects.filter(puntuacion_hv__gte= 50)
+    total_aprobados = aprobados.count()
+    rechazados = Aspirante.objects.filter(puntuacion_hv__lt= 50)
     maximo = mejores[0].puntuacion_hv
 
     munis = []
@@ -23,9 +26,12 @@ def dashboard(request):
     return render(request, 'dashboard/dashboard.html', {
         'mejores':mejores,
 
-        'inscritos':total_inscritos,
-        'aprobados':total_aprobados,
-        'rechazados':total_inscritos - total_aprobados,
+        'inscritos': inscritos,
+        'aprobados': aprobados,
+        'rechazados': rechazados,
+        'total_inscritos':total_inscritos,
+        'total_aprobados':total_aprobados,
+        'total_rechazados':total_inscritos - total_aprobados,
         'maximo':maximo,
 
         'municipios':json.dumps(munis),

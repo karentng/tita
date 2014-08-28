@@ -36,20 +36,23 @@
         var data = [];
         var series = 3;
         var colorArray = [dark, green, purple];
-        var municipios = {{municipios}};
+        var municipios = "{{municipios}}";
+        //console.log(JSON.stringify(eval("(" + municipios + ")")));
+
+        var municipios = (("{{municipios}}").replace(/&(l|g|quo)t;/g, function(a,b){
+                return {
+                    l   : '<',
+                    g   : '>',
+                    quo : '"'
+                }[b];
+            }));
+
+		municipios = JSON.parse( municipios );
+		//console.log(municipios);
         
         for (i in municipios){
         	var aux = municipios[i];
-        	console.log(aux);
-
         	data[i] = {label: aux.nombre, data: aux.dcount, color: colorArray[i]}
-        }
-
-        var nameArray = ['Unique Visitor', 'Bounce Rate', 'Total Page Views', 'Avg Time On Site', '% New Visits'];
-        var dataArray = [20,14,12,31,23];
-        for( var i = 0; i<series; i++)
-        {
-            //data[i] = { label: nameArray[i], data: dataArray[i], color: colorArray[i] };
         }
         
         $.plot($("#donut-chart"), data, 
@@ -69,7 +72,15 @@
                 show: false
             }
         });
-    }	
+    }
+
+    function mostrar(num){
+    	var paneles = ["#inscritos", "#aprobados", "#rechazados", "#mejores"];
+    	for(i in paneles){
+    		$(paneles[i]).hide();
+    	}
+    	$(paneles[num]).show();
+    }
 </script>
 {% endblock %}
 
@@ -90,10 +101,10 @@
 						<div class="state-icon"><i class="fa fa-users"></i></div>
 						<div class="state-info">
 							<h4>TOTAL DE INSCRITOS</h4>
-							<p>{{inscritos}}</p>	
+							<p>{{total_inscritos}}</p>	
 						</div>
 						<div class="state-link">
-							<a href="javascript:;">Ver Reporte <i class="fa fa-arrow-circle-o-right"></i></a>
+							<a href="javascript:;" onclick="mostrar(0)">Ver Reporte <i class="fa fa-arrow-circle-o-right"></i></a>
 						</div>
 					</div>
 				</div>
@@ -102,10 +113,10 @@
 						<div class="state-icon"><i class="fa fa-check"></i></div>
 						<div class="state-info">
 							<h4>TOTAL DE APROBADOS</h4>
-							<p>{{aprobados}}</p>	
+							<p>{{total_aprobados}}</p>	
 						</div>
 						<div class="state-link">
-							<a href="javascript:;">Ver Reporte <i class="fa fa-arrow-circle-o-right"></i></a>
+							<a href="javascript:;" onclick="mostrar(1)">Ver Reporte <i class="fa fa-arrow-circle-o-right"></i></a>
 						</div>
 					</div>
 				</div>
@@ -114,10 +125,10 @@
 						<div class="state-icon"><i class="fa fa-frown-o"></i></div>
 						<div class="state-info">
 							<h4>NO APROBADOS</h4>
-							<p>{{rechazados}}</p>	
+							<p>{{total_rechazados}}</p>	
 						</div>
 						<div class="state-link">
-							<a href="javascript:;">Ver Reporte <i class="fa fa-arrow-circle-o-right"></i></a>
+							<a href="javascript:;" onclick="mostrar(2)">Ver Reporte <i class="fa fa-arrow-circle-o-right"></i></a>
 						</div>
 					</div>
 				</div>	
@@ -129,7 +140,7 @@
 							<p>{{maximo}}</p>	
 						</div>
 						<div class="state-link">
-							<a href="javascript:;">Ver Reporte <i class="fa fa-arrow-circle-o-right"></i></a>
+							<a href="javascript:;" onclick="mostrar(3)">Ver Reporte <i class="fa fa-arrow-circle-o-right"></i></a>
 						</div>
 					</div>
 				</div>
@@ -139,12 +150,108 @@
 			<div class="row">
 				<!-- begin col-8 -->
 				<div class="col-md-8">
-					<div class="panel panel-inverse">
+					<div class="panel panel-inverse" id="inscritos">
 						<div class="panel-heading">
 							<div class="panel-heading-btn">
 								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
 							</div>
-							<h4 class="panel-title">Admitidos</h4>
+							<h4 class="panel-title">Inscritos</h4>
+						</div>
+						<div class="panel-body">
+							<table class="table table-valign-middle m-b-0">
+								<thead>
+									<tr>	
+										<th>Nombre</th>
+										<th>Sexo</th>
+										<th>Municipio</th>
+										<th>Puntuación</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for aspirante in inscritos %}
+									<tr>
+										<td>{{aspirante}}</td>
+										<td>
+											{{aspirante.sexo}}
+										</td>
+										<td>{{aspirante.municipio}}</td>
+										<td>{{aspirante.puntuacion_hv}}</td>
+									</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="panel panel-inverse" id="aprobados" style="display: none;">
+						<div class="panel-heading">
+							<div class="panel-heading-btn">
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+							</div>
+							<h4 class="panel-title">Aprobados</h4>
+						</div>
+						<div class="panel-body">
+							<table class="table table-valign-middle m-b-0">
+								<thead>
+									<tr>	
+										<th>Nombre</th>
+										<th>Sexo</th>
+										<th>Municipio</th>
+										<th>Puntuación</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for aspirante in aprobados %}
+									<tr>
+										<td>{{aspirante}}</td>
+										<td>
+											{{aspirante.sexo}}
+										</td>
+										<td>{{aspirante.municipio}}</td>
+										<td>{{aspirante.puntuacion_hv}}</td>
+									</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="panel panel-inverse" id="rechazados" style="display: none;">
+						<div class="panel-heading">
+							<div class="panel-heading-btn">
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+							</div>
+							<h4 class="panel-title">No Aprobados</h4>
+						</div>
+						<div class="panel-body">
+							<table class="table table-valign-middle m-b-0">
+								<thead>
+									<tr>	
+										<th>Nombre</th>
+										<th>Sexo</th>
+										<th>Municipio</th>
+										<th>Puntuación</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for aspirante in rechazados %}
+									<tr>
+										<td>{{aspirante}}</td>
+										<td>
+											{{aspirante.sexo}}
+										</td>
+										<td>{{aspirante.municipio}}</td>
+										<td>{{aspirante.puntuacion_hv}}</td>
+									</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="panel panel-inverse" id="mejores" style="display: none;">
+						<div class="panel-heading">
+							<div class="panel-heading-btn">
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+							</div>
+							<h4 class="panel-title">Mejores Puntajes</h4>
 						</div>
 						<div class="panel-body">
 							<table class="table table-valign-middle m-b-0">
@@ -184,22 +291,6 @@
                         </div>
                         <div class="panel-body">
                             <div id="donut-chart" class="height-sm"></div>
-                            <table class="table table-valign-middle m-b-0">
-								<thead>
-									<tr>	
-										<th>Ciudad</th>
-										<th>Cantidad</th>
-									</tr>
-								</thead>
-								<tbody>
-									{% for municipio in municipios %}
-									<tr>
-										<td>{{municipio.nombre}}</td>
-										<td>{{municipio.dcount}}</td>
-									</tr>
-									{% endfor %}
-								</tbody>
-							</table>
                         </div>
                     </div>
 		        </div>
