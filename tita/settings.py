@@ -30,8 +30,8 @@ ALLOWED_HOSTS = []
 #para login
 
 from django.core.urlresolvers import reverse_lazy
-LOGIN_URL = reverse_lazy('publico_login')
-LOGIN_REDIRECT_URL = reverse_lazy('publico')
+LOGIN_URL = reverse_lazy('login')
+LOGIN_REDIRECT_URL = reverse_lazy('home')
 LOGOUT_URL = reverse_lazy('logout')
 
 

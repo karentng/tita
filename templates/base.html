@@ -39,18 +39,19 @@
 </head>
 <body>
     <!-- begin #page-loader -->
-    <div id="page-loader" class="fade in"><span class="spinner"></span></div>
+    {#<div id="page-loader" class="fade in"><span class="spinner"></span></div>#}
     <!-- end #page-loader -->
     
     <!-- begin #page-container -->
-    <div id="page-container" class="fade">
+    <div id="page-container" {# class="fade" #} >
+        {% block pagina_blanca %}
         <!-- begin #header -->
         <div id="header" class="header navbar navbar-default navbar-fixed-top">
             <!-- begin container-fluid -->
             <div class="container-fluid">
                 <!-- begin mobile sidebar expand / collapse button -->
                 <div class="navbar-header">
-                    <b><center><label style="color:rgb(30,85,146);font-weight:900;font-size:25px; margin-top:15px">TITA@ EDUCACIÓN DIGITAL PARA TODOS - Sistema general de regalías</label></center></b>
+                    <b><center><label style="color:rgb(30,85,146);font-weight:900;font-size:25px; margin-top:15px">TITA@ EDUCACIÓN DIGITAL PARA TODOS <small> | Sistema general de regalías</small></label></center></b>
                     <!--<a href="index.html" class="navbar-brand"><span class="navbar-logo"></span> <b><label style="color:blue;font-weight:10px">Tit@</label></b></a>-->
                     <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
                         <span class="icon-bar"></span>
@@ -60,19 +61,34 @@
                 </div>
                 <!-- end mobile sidebar expand / collapse button -->
                 
-                {% comment %}
+
                 <!-- begin header navigation right -->
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown navbar-user">
+                    {% if request.user.is_authenticated %}
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="{{STATIC_URL}}img/desconocido.jpg" alt="" /> 
+                            <img src="{{STATIC_URL}}img/desconocido.jpg" alt="">
                             <span class="hidden-xs">
-                                {% block nombre_usuario %}Público{% endblock %}
+                                {{user.username}}
                             </span> <b class="caret"></b>
                         </a>
-                        <ul class="dropdown-menu animated fadeInLeft">
-                            <li class="arrow"></li>
-                            <li><a href="javascript:;">Ingresar al Sistema</a></li>
+                        <ul class="dropdown-menu animated fadeInRight">
+                            
+                            <li><a href="{% url 'cambiar_pass' %}"><i class="fa fa-unlock-alt"></i> Cambiar Contraseña</a></li>
+                            <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Cerrar Sesión</a></li>
+                        </ul>
+                    </li>
+                    {% else %}
+
+                    <li class="dropdown navbar-user">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                            {#<img src="{{STATIC_URL}}img/desconocido.jpg" alt="" /> #}
+                            <span class="hidden-xs">
+                                Ingresar
+                            </span> <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu animated fadeInRight">
+                            <li><a href="{% url 'login' %}"><i class="fa fa-briefcase"></i> Acceso para Funcionarios</a></li>
                             <!--<li><a href="javascript:;"><span class="badge badge-danger pull-right">2</span> Inbox</a></li>
                             <li><a href="javascript:;">Calendar</a></li>
                             <li><a href="javascript:;">Setting</a></li>
@@ -80,9 +96,10 @@
                             <li><a href="javascript:;">Cerrar Sesión</a></li>-->
                         </ul>
                     </li>
+                    {% endif %}
                 </ul>
                 <!-- end header navigation right -->
-                {% endcomment %}
+                
             </div>
             <!-- end container-fluid -->
         </div>
@@ -96,7 +113,7 @@
                 <ul class="nav">
                     <li class="nav-profile">
                         <div class="info">
-                            <img src="{{STATIC_URL}}img/tita.png" alt="" style="width:100%" />
+                            <img src="{{STATIC_URL}}img/tita.png?v=1" alt="" style="width:100%" />
                         </div>
                     </li>   
                 </ul>
@@ -160,6 +177,8 @@
         <!-- begin scroll to top btn -->
         <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
         <!-- end scroll to top btn -->
+
+        {% endblock pagina_blanca %}
     </div>
     <!-- end page container -->
     

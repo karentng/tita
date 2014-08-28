@@ -12,6 +12,10 @@ urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # so
 
 urlpatterns += patterns('',
     url(r'^select2/', include('django_select2.urls')),
+
+    url(r'^login/$', 'django.contrib.auth.views.login', {'template_name':'login.html'}, name='login'),
+    url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page':'home'}, name='logout'),
+    url(r'^cambiar-pass/$', 'django.contrib.auth.views.password_change', {'template_name':'cambiar-pass.html', 'post_change_redirect':'home'}, name='cambiar_pass'),
     
     url(r'^admin/', include(admin.site.urls)),
     #url(r'^$', 'convocat.views.inscripcion.index', name="publico"),
