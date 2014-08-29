@@ -112,7 +112,7 @@
 					<div class="widget widget-state bg-blue">
 						<div class="state-icon"><i class="fa fa-check"></i></div>
 						<div class="state-info">
-							<h4>TOTAL DE APROBADOS</h4>
+							<h4>TOTAL SELECCIONADOS</h4>
 							<p>{{total_aprobados}}</p>	
 						</div>
 						<div class="state-link">
@@ -124,7 +124,7 @@
 					<div class="widget widget-state bg-red">
 						<div class="state-icon"><i class="fa fa-frown-o"></i></div>
 						<div class="state-info">
-							<h4>NO APROBADOS</h4>
+							<h4>NO SELECCIONADOS</h4>
 							<p>{{total_rechazados}}</p>	
 						</div>
 						<div class="state-link">
@@ -161,21 +161,15 @@
 							<table class="table table-valign-middle m-b-0">
 								<thead>
 									<tr>	
-										<th>Nombre</th>
-										<th>Sexo</th>
+										<th>Cédula</th>
 										<th>Municipio</th>
-										<th>Puntuación</th>
 									</tr>
 								</thead>
 								<tbody>
 									{% for aspirante in inscritos %}
 									<tr>
-										<td>{{aspirante}}</td>
-										<td>
-											{{aspirante.sexo}}
-										</td>
+										<td>{{aspirante.numero_documento}}</td>
 										<td>{{aspirante.municipio}}</td>
-										<td>{{aspirante.puntuacion_hv}}</td>
 									</tr>
 									{% endfor %}
 								</tbody>
@@ -187,27 +181,21 @@
 							<div class="panel-heading-btn">
 								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
 							</div>
-							<h4 class="panel-title">Aprobados</h4>
+							<h4 class="panel-title">Seleccionados</h4>
 						</div>
 						<div class="panel-body">
 							<table class="table table-valign-middle m-b-0">
 								<thead>
 									<tr>	
-										<th>Nombre</th>
-										<th>Sexo</th>
+										<th>Cédula</th>
 										<th>Municipio</th>
-										<th>Puntuación</th>
 									</tr>
 								</thead>
 								<tbody>
 									{% for aspirante in aprobados %}
 									<tr>
-										<td>{{aspirante}}</td>
-										<td>
-											{{aspirante.sexo}}
-										</td>
+										<td>{{aspirante.numero_documento}}</td>
 										<td>{{aspirante.municipio}}</td>
-										<td>{{aspirante.puntuacion_hv}}</td>
 									</tr>
 									{% endfor %}
 								</tbody>
@@ -219,27 +207,21 @@
 							<div class="panel-heading-btn">
 								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
 							</div>
-							<h4 class="panel-title">No Aprobados</h4>
+							<h4 class="panel-title">No Seleccionados</h4>
 						</div>
 						<div class="panel-body">
 							<table class="table table-valign-middle m-b-0">
 								<thead>
 									<tr>	
-										<th>Nombre</th>
-										<th>Sexo</th>
+										<th>Cédula</th>
 										<th>Municipio</th>
-										<th>Puntuación</th>
 									</tr>
 								</thead>
 								<tbody>
 									{% for aspirante in rechazados %}
 									<tr>
-										<td>{{aspirante}}</td>
-										<td>
-											{{aspirante.sexo}}
-										</td>
+										<td>{{aspirante.numero_documento}}</td>
 										<td>{{aspirante.municipio}}</td>
-										<td>{{aspirante.puntuacion_hv}}</td>
 									</tr>
 									{% endfor %}
 								</tbody>
@@ -257,21 +239,15 @@
 							<table class="table table-valign-middle m-b-0">
 								<thead>
 									<tr>	
-										<th>Nombre</th>
-										<th>Sexo</th>
+										<th>Cédula</th>
 										<th>Municipio</th>
-										<th>Puntuación</th>
 									</tr>
 								</thead>
 								<tbody>
 									{% for aspirante in mejores %}
 									<tr>
-										<td>{{aspirante}}</td>
-										<td>
-											{{aspirante.sexo}}
-										</td>
+										<td>{{aspirante.numero_documento}}</td>
 										<td>{{aspirante.municipio}}</td>
-										<td>{{aspirante.puntuacion_hv}}</td>
 									</tr>
 									{% endfor %}
 								</tbody>

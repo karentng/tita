@@ -58,3 +58,7 @@ urlpatterns += patterns('convocat.views.dashboard',
     url(r'^dashboard$',      'dashboard', name="dashboard"),
 )
 
+urlpatterns += patterns('docente_estudiante.views.inscripcion',
+    url(r'^docente_estudiante/inscripcion$',      'inscripcion', name="inscripcion_docente_estudiante"),
+)
+
