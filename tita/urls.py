@@ -27,36 +27,10 @@ urlpatterns += patterns('',
     url(r'^registrarse/$',TemplateView.as_view(template_name='info/registrarse.html'), name="info_registrarse"),
     url(r'^contactenos/$',TemplateView.as_view(template_name='info/contactenos.html'), name="info_contactenos"),
     
+    url('', include('convocat.urls')),
 )
 
 
-urlpatterns += patterns('convocat.views.inscripcion',
-    
-    url(r'^inscripcion/iniciar-inscripcion$',      'iniciarInscripcion', name="iniciarInscripcion"),
-    url(r'^inscripcion/datos-personales$',      'datosPersonales', name="datosPersonales"),
-    url(r'^inscripcion/formacion-academica$',   'formacionAcademica', name="formacionAcademica"),
-    url(r'^inscripcion/formacion-academica/eliminar/(\d+)$', 'eliminarFormacionAcademica', name="eliminarFormacionAcademica"),
-
-    url(r'^inscripcion/formacion-tics$',        'formacionTics', name="formacionTics"),
-    url(r'^inscripcion/formacion-tics/eliminar/(\d+)$', 'eliminarFormacionTics', name="eliminarFormacionTics"),
-
-    url(r'^inscripcion/conocimientos$',         'conocimientosEspecificos', name="conocimientosEspecificos"),
-    url(r'^inscripcion/idiomas$',               'idiomasManejados', name="idiomasManejados"),
-    url(r'^inscripcion/idiomas/eliminar/(\d+)$', 'eliminarIdioma', name="eliminarIdioma"),
-
-    url(r'^inscripcion/experiencia-ensenanza$',             'experienciaEnsenanza', name="experienciaEnsenanza"),
-    url(r'^inscripcion/experiencia-ensenanza/eliminar/(\d+)$', 'eliminarExperienciaEnsenanza', name="eliminarExperienciaEnsenanza"),
-
-    url(r'^inscripcion/finalizar$',      'finalizar', name="finalizar"),
-    url(r'^inscripcion/finalizada$',      'finalizada', name="finalizada"),
-    
-    url(r'^inscripcion/soportes$',      'soportes', name="soportes"),
-
-) 
-
-urlpatterns += patterns('convocat.views.dashboard',
-    url(r'^dashboard$',      'dashboard', name="dashboard"),
-)
 
 urlpatterns += patterns('docente_estudiante.views.inscripcion',
     url(r'^docente_estudiante/inscripcion$',      'inscripcion', name="inscripcion_docente_estudiante"),
