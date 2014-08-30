@@ -28,6 +28,7 @@ urlpatterns += patterns('',
     url(r'^contactenos/$',TemplateView.as_view(template_name='info/contactenos.html'), name="info_contactenos"),
     
     url('', include('convocat.urls')),
+    url('', include('campus.urls')),
     url('', include('estudiante.urls')),
 )
 

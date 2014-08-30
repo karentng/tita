@@ -46,6 +46,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'convocat',
     'estudiante',
+    'campus',
     'bootstrap3',
     #'bootstrap3_datetime',
     'datetimewidget',
