@@ -37,7 +37,7 @@ OPCIONES_OCUPACION = (
 
 
 class EncuestaPadreFamilia(Model):
-    fecha = DateField()
+    fecha = DateTimeField(auto_now_add=True)
     numero = IntegerField()
     jornada = CharField(max_length=1, choices=OPCIONES_JORNADA, help_text='Jornada en la que estudia su hijo')
     nombre = CharField(max_length=300, help_text='Nombres y Apellidos')
