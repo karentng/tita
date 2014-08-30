@@ -28,11 +28,9 @@ urlpatterns += patterns('',
     url(r'^contactenos/$',TemplateView.as_view(template_name='info/contactenos.html'), name="info_contactenos"),
     
     url('', include('convocat.urls')),
+    url('', include('estudiante.urls')),
 )
 
 
 
-urlpatterns += patterns('docente_estudiante.views.inscripcion',
-    url(r'^docente_estudiante/inscripcion$',      'inscripcion', name="inscripcion_docente_estudiante"),
-)
 
