@@ -3,11 +3,26 @@
 
 {% block css %}
     {{form.media}}
+    <style>
+        label.control-label {
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .form-group {
+            border-style: dotted;
+            border-width: 1px;
+            padding: 3px;
+            border-radius: 3px;
+            border-color: gray;
+        }
+    </style>
 {% endblock %}
 
 {% block contenido_panel %}
 <form method="POST"> {% csrf_token %}
     {% bootstrap_form form %}
+    <button type="submit">
 </form>
 
 {% endblock %}

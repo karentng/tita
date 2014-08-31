@@ -4,7 +4,12 @@ from .models import EncuestaPadreFamilia
 from .forms import EncuestaPadreForm
 
 def encuesta_padre(request):
-    form = EncuestaPadreForm()
+
+    if request.method == 'POST':
+        form = EncuestaPadreForm(request.POST)
+    else:
+        form = EncuestaPadreForm()
+        
     return render(request, 'encuesta_padre.html', {
         'form': form,
     }) 
