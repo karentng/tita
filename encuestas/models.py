@@ -1,7 +1,7 @@
 #encoding: utf-8
 from django.db.models import *
 from convocat.models import Municipio
-from campus.models import InstitucionEducativa, OPCIONES_GRADO
+from campus.models import InstitucionEducativa, GRADOS
 # Create your models here.
 
 OPCIONES_JORNADA = (('M', u'Mañana'), ('T', u'Tarde'))
@@ -46,7 +46,7 @@ class EncuestaPadreFamilia(Model):
     fecha_nacimiento = DateField()
     barrio = CharField(max_length=100, verbose_name=u'Barrio donde reside actualmente')
     institucion = ForeignKey(InstitucionEducativa, verbose_name=u'Institución educativa en la que estudia su hijo(a)')
-    grado = IntegerField(choices=OPCIONES_GRADO)
+    grado = IntegerField(choices=GRADOS)
     nivel_educativo = CharField(max_length=5, choices=OPCIONES_NIVEL_EDUCATIVO)
     titulo = CharField(max_length=100, blank=True, verbose_name=u'título obtenido')
     ocupacion = CharField(max_length=5, choices=OPCIONES_OCUPACION)

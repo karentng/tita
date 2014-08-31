@@ -33,5 +33,10 @@
 
 {% block titulo_panel %}<i class="fa fa-lightbulb-o"></i> Inscripción{% endblock %}
 {% block contenido_panel %}
-    
+    <form class="form-horizontal" method="post">{% csrf_token %}
+        {% bootstrap_form form layout="horizontal" %}
+
+        <button class="btn btn-lg btn-primary pull-right" type="submit">Registrar <i class="fa fa-check"></i></button>
+        
+    </form>
 {% endblock %}
