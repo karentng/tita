@@ -5,9 +5,6 @@ from convocat.models import Municipio
 from campus.models import InstitucionEducativa, OPCIONES_GRADO
 
 
-
-
-
 OPCIONES_JORNADA = (('M', u'Mañana'), ('T', u'Tarde'))
 
 OPCIONES_NIVEL_EDUCATIVO = (
