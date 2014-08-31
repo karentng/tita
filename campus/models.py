@@ -1,4 +1,5 @@
-from django.db import models
+#encoding: utf-8
+from django.db.models import *
 from convocat.models import Municipio
 
 

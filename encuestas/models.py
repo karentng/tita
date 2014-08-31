@@ -1,8 +1,12 @@
 #encoding: utf-8
 from django.db.models import *
+from multiselect import MultiSelectField
 from convocat.models import Municipio
-from estudiante.models import InstitucionEducativa, OPCIONES_GRADO
-# Create your models here.
+from campus.models import InstitucionEducativa, OPCIONES_GRADO
+
+
+
+
 
 OPCIONES_JORNADA = (('M', u'Mañana'), ('T', u'Tarde'))
 
@@ -35,6 +39,29 @@ OPCIONES_OCUPACION = (
     ('DESEM', u'Desempleado'),
 )
 
+OPCIONES_FRECUENCIA_USO = (
+    ('4', u'De 4 a 7 días a la semana'),
+    ('3', u'3 días a la semana'),
+    ('2', u'2 días a la semana'),
+    ('1', u'1 día a la semana'),
+    ('CN', u'Casi nunca'),
+    ('N', u'Nunca'),
+)
+
+OPCIONES_AYUDA_INTERNET = (
+    ('FAC', u'Es más fácil para él/ella'),
+    ('IGU', u'Da lo mismo'),
+    ('DIF', u'Es más dificil para él/ella')
+)
+
+OPCIONES_CLASE_CON_INTERNET = (
+    (1, u'Serían más interesantes'),
+    (2, u'Le entendería más al profesor'),
+    (3, u'Daría lo mismo'),
+    (4, u'Sería más facil aprender'),
+    (5, u'Se distraería con más facilidad'),
+)
+# ('', u''),
 
 class EncuestaPadreFamilia(Model):
     fecha = DateTimeField(auto_now_add=True)
@@ -47,6 +74,12 @@ class EncuestaPadreFamilia(Model):
     barrio = CharField(max_length=100, verbose_name=u'Barrio donde reside actualmente')
     institucion = ForeignKey(InstitucionEducativa, verbose_name=u'Institución educativa en la que estudia su hijo(a)')
     grado = IntegerField(choices=OPCIONES_GRADO)
-    nivel_educativo = CharField(max_length=5, choices=OPCIONES_NIVEL_EDUCATIVO)
+    nivel_educativo = CharField(max_length=5, choices=OPCIONES_NIVEL_EDUCATIVO, default='x')
     titulo = CharField(max_length=100, blank=True, verbose_name=u'título obtenido')
-    ocupacion = CharField(max_length=5, choices=OPCIONES_OCUPACION)
+    ocupacion = CharField(max_length=5, choices=OPCIONES_OCUPACION, default='x')
+
+    frecuencia_uso_computador = CharField(max_length=5, choices=OPCIONES_FRECUENCIA_USO, verbose_name=u'¿Actualmente usa computador? ¿Con qué frecuencia lo usa?', default='x')
+    frecuencia_uso_internet = CharField(max_length=5, choices=OPCIONES_FRECUENCIA_USO, verbose_name=u'¿Actualmente usa internet? ¿Con qué frecuencia lo usa?', default='x')
+
+    ayuda_internet = CharField(max_length=5, choices=OPCIONES_AYUDA_INTERNET, verbose_name=u'¿Qué opina sobre que su hijo(a) haga las tareas con ayuda de Internet?')
+    cualidades_clase_internet = MultiSelectField(max_length=50, choices=OPCIONES_CLASE_CON_INTERNET, verbose_name=u'¿Cómo cree que serían las clases que recibe su hijo si utilizara internet?', help_text="Puede marcar varias opciones")
