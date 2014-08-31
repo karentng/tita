@@ -1,5 +1,4 @@
 #encoding: utf-8
-<<<<<<< HEAD
 
 from django.db import models
 from convocat.models import Municipio, Aspirante
