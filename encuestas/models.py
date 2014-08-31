@@ -1,7 +1,7 @@
 #encoding: utf-8
 from django.db.models import *
 from convocat.models import Municipio
-from estudiante.models import InstitucionEducativa, OPCIONES_GRADO
+from campus.models import InstitucionEducativa, OPCIONES_GRADO
 # Create your models here.
 
 OPCIONES_JORNADA = (('M', u'Mañana'), ('T', u'Tarde'))

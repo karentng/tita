@@ -9,12 +9,13 @@ OPCIONES_GRADO = (  # son enteros, crear campo como IntegerField(choices=OPCIONE
     ( 4, u'Cuarto'),
     ( 5, u'Quinto'),
     ( 6, u'Sexto'),
-    ( 7, u'Séptimo'),
+    ( 7, u'Septimo'),
     ( 8, u'Octavo'),
     ( 9, u'Noveno'),
-    (10, u'Décimo'),
+    (10, u'Decimo'),
     (11, u'Once'),
 )
+
 
 class InstitucionEducativa(Model):
     municipio = ForeignKey(Municipio)
