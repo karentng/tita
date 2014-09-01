@@ -49,6 +49,7 @@ INSTALLED_APPS = (
     'estudiante',
     'campus',
     'bootstrap3',
+    'cronograma',
     #'bootstrap3_datetime',
     'datetimewidget',
     'django_select2',
