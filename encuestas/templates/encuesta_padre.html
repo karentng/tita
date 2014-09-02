@@ -2,27 +2,47 @@
 {% load bootstrap3 %}
 
 {% block css %}
-    {{form.media}}
+    {{datosBasicosForm.media}}
     <style>
-        label.control-label {
+        label.bold {
             font-weight: bold;
             font-size: 15px;
         }
 
-        .form-group {
+        .bordered {
             border-style: dotted;
             border-width: 1px;
             padding: 3px;
             border-radius: 3px;
             border-color: gray;
         }
+
+
     </style>
 {% endblock %}
 
 {% block contenido_panel %}
 <form method="POST"> {% csrf_token %}
-    {% bootstrap_form form %}
-    <button type="submit">
+    {% bootstrap_form datosBasicosForm label_class='bold' form_group_class='form-group bordered' %}
+    {% bootstrap_form frecuenciaUsoForm label_class='bold' form_group_class='form-group bordered' %}
+
+    <div class="form-horizontal bordered">
+        <label class="bold">
+            Califique de 1 a 3 las siguientes materias según qué tanto le serviría a su hijo(a) utilizar Internet
+            en cada una de ellas. Si cree que le servirían mucho marque 3; si cree que servirían un poco marque 2 y si cree que le servirían
+            muy poquito o nada marque 1.
+        </label>
+        {{mejoraFormset.management_form}}
+        {% for f in mejoraFormset %}
+            {% bootstrap_form f layout='horizontal' label_class='col-md-4'  field_class='btn-group'%}
+        {% endfor %}
+    </div>
+
+    <br>
+    <center><button type="submit" class="btn btn-success btn-lg">Enviar Encuesta</button></center>
+    
 </form>
+
+
 
 {% endblock %}

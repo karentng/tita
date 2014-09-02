@@ -60,9 +60,22 @@ OPCIONES_CLASE_CON_INTERNET = (
 )
 # ('', u''),
 
+class Materia(Model):
+    nombre = CharField(max_length=100)
+
+    def __unicode__(self):
+        return self.nombre
+        
+
+class MejoraMateriaPadre(Model):
+    encuesta = ForeignKey('EncuestaPadreFamilia')
+    materia = ForeignKey(Materia)
+    puntos = IntegerField(choices=((1,1),(2,2),(3,3)))
+
+
 class EncuestaPadreFamilia(Model):
     fecha = DateTimeField(auto_now_add=True)
-    numero = IntegerField()
+    #numero = IntegerField()
     jornada = CharField(max_length=1, choices=OPCIONES_JORNADA, help_text='Jornada en la que estudia su hijo')
     nombre = CharField(max_length=300, help_text='Nombres y Apellidos')
     parentesco = CharField(max_length=100, blank=True, help_text='Si usted no es el padre o la madre del estudiante, indique el parentesco que tiene con él/ella')
@@ -80,3 +93,4 @@ class EncuestaPadreFamilia(Model):
 
     ayuda_internet = CharField(max_length=5, choices=OPCIONES_AYUDA_INTERNET, verbose_name=u'¿Qué opina sobre que su hijo(a) haga las tareas con ayuda de Internet?')
     cualidades_clase_internet = MultiSelectField(max_length=50, choices=OPCIONES_CLASE_CON_INTERNET, verbose_name=u'¿Cómo cree que serían las clases que recibe su hijo si utilizara internet?', help_text="Puede marcar varias opciones")
+
