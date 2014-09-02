@@ -152,7 +152,6 @@ class Estudiante(models.Model):
     direccion = models.CharField(verbose_name="dirección", max_length=100)
     nivel_educativo = models.IntegerField(choices=NIVEL_EDUCATIVO, verbose_name="último nivel educativo aprobado")
 
-    formador = models.ForeignKey(Formador, verbose_name='formador', null=True)
     curso = models.ForeignKey(Curso, verbose_name='curso', null=True)
 
     aprobo = models.NullBooleanField()
@@ -221,8 +220,12 @@ class Horario(models.Model):
 class Clase(models.Model):
     fecha_programada = models.DateTimeField(verbose_name=u'fecha de realización')
     curso = models.ForeignKey(Curso)
+
+    def __unicode__(self):
+        return self.fecha_programada
     
 class Asistencia(models.Model):
+    clase = models.ForeignKey(Clase)
     formador = models.ForeignKey(Formador)
     estudiante = models.ForeignKey(Estudiante)
     asistio = models.BooleanField(verbose_name=u'¿Asistió?')
