@@ -60,6 +60,14 @@ OPCIONES_CLASE_CON_INTERNET = (
 )
 # ('', u''),
 
+
+OPCIONES_ACUERDO = (
+    ('ACU', u'De acuerdo'),
+    ('DESAC', u'Ni de acuerdo ni en desacuerdo'),
+    ('NEUTR', u'En desacuerdo'),
+)
+
+
 class Materia(Model):
     nombre = CharField(max_length=100)
 
@@ -91,6 +99,12 @@ class EncuestaPadreFamilia(Model):
     frecuencia_uso_computador = CharField(max_length=5, choices=OPCIONES_FRECUENCIA_USO, verbose_name=u'¿Actualmente usa computador? ¿Con qué frecuencia lo usa?', default='x')
     frecuencia_uso_internet = CharField(max_length=5, choices=OPCIONES_FRECUENCIA_USO, verbose_name=u'¿Actualmente usa internet? ¿Con qué frecuencia lo usa?', default='x')
 
-    ayuda_internet = CharField(max_length=5, choices=OPCIONES_AYUDA_INTERNET, verbose_name=u'¿Qué opina sobre que su hijo(a) haga las tareas con ayuda de Internet?')
+    ayuda_internet = CharField(max_length=5, choices=OPCIONES_AYUDA_INTERNET, verbose_name=u'¿Qué opina sobre que su hijo(a) haga las tareas con ayuda de Internet?', default='x')
     cualidades_clase_internet = MultiSelectField(max_length=50, choices=OPCIONES_CLASE_CON_INTERNET, verbose_name=u'¿Cómo cree que serían las clases que recibe su hijo si utilizara internet?', help_text="Puede marcar varias opciones")
+
+    angustia_evolucion = CharField(max_length=5, choices=OPCIONES_ACUERDO, verbose_name=u'Me genera angustia la evolución que han tenido los computadores y la Internet', default='x')
+    dispersan_atencion = CharField(max_length=5, choices=OPCIONES_ACUERDO, verbose_name=u'El computador y la Internet dispersan la atención de los estudiantes', default='x')
+    limitan_capacidad = CharField(max_length=5, choices=OPCIONES_ACUERDO, verbose_name=u'El computador y la Internet limitan la capacidad de creación de los estudiantes.', default='x')
+    bajo_puntaje_pisa = CharField(max_length=5, choices=OPCIONES_ACUERDO, verbose_name=u'Con respecto al bajo puntaje en lectura que obtuvieron los estudiantes caleños en las pruebas PISA (398), una persona expresó lo siguiente: "Lo que encuentran por Internet son textos cortos, sin ortografía, hoy a un joven le cuesta mucho hacerse entender por escrito, hay problemas de interpretación y argumentación"', default='x')
+    razon_pisa = TextField(blank=True)
 

@@ -7,23 +7,18 @@ def encuesta_padre(request):
 
     data = request.POST or None
     
-    datosBasicosForm = DatosBasicosPadreForm(data)
-    frecuenciaUsoForm = FrecuenciaUsoPadreForm(data)
-    
-    mejoraForms = []
-    for mat in Materia.objects.all():
-        f = MejoraMateriaPadreForm(initial={'materia':mat})
-        mejoraForms.append(f)
+    form = EncuestaPadreForm(data)
+    mejoraFormset = MejorasMateriaFormset(MejoraMateriaPadreForm, data)
 
-
+    campos_basicos = ( form[x] for x in  ('jornada', 'nombre', 'parentesco', 'municipio_nacimiento', 'fecha_nacimiento', 'barrio', 'institucion', 'grado', 'nivel_educativo', 'titulo', 'ocupacion'))
 
     if request.method == 'POST':
         pass
     
         
     return render(request, 'encuesta_padre.html', {
-        'datosBasicosForm': datosBasicosForm,
-        'frecuenciaUsoForm': frecuenciaUsoForm,
-        'mejoraFormset': MejorasMateriaFormset(MejoraMateriaPadreForm, data)
+        'form': form,
+        'campos_basicos' : campos_basicos,
+        'mejoraFormset': mejoraFormset,
     }) 
 

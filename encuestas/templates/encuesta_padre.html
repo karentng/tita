@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load bootstrap3 %}
-
+{% load mytags %}
 {% block css %}
     {{datosBasicosForm.media}}
     <style>
@@ -21,10 +21,15 @@
     </style>
 {% endblock %}
 
-{% block contenido_panel %}
+{% block contenido %}
 <form method="POST"> {% csrf_token %}
-    {% bootstrap_form datosBasicosForm label_class='bold' form_group_class='form-group bordered' %}
-    {% bootstrap_form frecuenciaUsoForm label_class='bold' form_group_class='form-group bordered' %}
+    {% mypanel 'Información Personal y Socioeconómica Básica' %}
+        {% for campo in campos_basicos %}
+            {% bootstrap_field campo label_class='bold' form_group_class='form-group bordered' %}
+        {% endfor %}
+    {% endmypanel %}
+
+
 
     <div class="form-horizontal bordered">
         <label class="bold">
@@ -34,15 +39,19 @@
         </label>
         {{mejoraFormset.management_form}}
         {% for f in mejoraFormset %}
-            {% bootstrap_form f layout='horizontal' label_class='col-md-4'  field_class='btn-group'%}
+            {% bootstrap_form f layout='horizontal' label_class='col-md-4'  field_class='col-md-3'%}
         {% endfor %}
     </div>
+
+    
 
     <br>
     <center><button type="submit" class="btn btn-success btn-lg">Enviar Encuesta</button></center>
     
 </form>
 
-
+{% mypanel 'Holaaa' 'warning' %}
+hola mundo
+{% endmypanel %}
 
 {% endblock %}
