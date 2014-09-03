@@ -4,8 +4,8 @@ from django.core import serializers
 from convocat.models import * 
 from django.db.models import Count
 import json
-from estudiante.forms import EstudianteForm, InfoLaboralForm, CertificacionTICForm, ProgramaTICForm, HorarioForm
-from campus.models import CertificacionTIC, ProgramaTIC, Horario, Asignatura
+from estudiante.forms import EstudianteForm, InfoLaboralForm, CertificacionTICForm, ProgramaTICForm
+from campus.models import CertificacionTIC, ProgramaTIC, Asignatura
 
 
 def inscripcion(request):
