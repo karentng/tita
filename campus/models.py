@@ -131,7 +131,7 @@ class Horario(models.Model):
 class Clase(models.Model):
     fecha_programada = models.DateTimeField(verbose_name=u'fecha de realización')
     curso = models.ForeignKey(Curso)
-    asistentes = models.ManyToManyField(Estudiante)
+    asistentes = models.ManyToManyField(Estudiante, blank=True)
     def __unicode__(self):
         return unicode(self.fecha_programada)
     
