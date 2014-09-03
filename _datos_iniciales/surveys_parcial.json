@@ -1,0 +1,738 @@
+[
+{
+  "pk": 1, 
+  "model": "survey.survey", 
+  "fields": {
+    "name": "Encuesta a Padres", 
+    "description": ":)"
+  }
+},
+{
+  "pk": 1, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Si usted no es el padre o la madre del estudiante, indique el parentesco que tiene con \u00e9l/ella", 
+    "required": true, 
+    "number": 3.0, 
+    "choices": "", 
+    "survey": 1, 
+    "question_type": "text"
+  }
+},
+{
+  "pk": 2, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Grado en el que est\u00e1 su hijo(a)", 
+    "required": true, 
+    "number": 9.0, 
+    "choices": "Primero,\r\nSegundo,\r\nTercero,\r\nCuarto,\r\nQuinto,\r\nSexto,\r\nS\u00e9ptimo,\r\nOctavo,\r\nNoveno,\r\nD\u00e9cimo,\r\nOnce", 
+    "survey": 1, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 3, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "\u00bfCu\u00e1l es su m\u00e1ximo nivel educativo?", 
+    "required": true, 
+    "number": 10.0, 
+    "choices": "Primaria incompleta,\r\nPrimaria completa,\r\nSecundaria incompleta,\r\nSecundaria completa,\r\nT\u00e9cnica incompleta,\r\nT\u00e9cnica completa,\r\nTecnol\u00f3gica incompleta,\r\nTecnol\u00f3gica completa,\r\nUniversidad incompleta,\r\nUniversidad completa,\r\nPostgrado", 
+    "survey": 1, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 4, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "T\u00edtulo obtenido", 
+    "required": false, 
+    "number": 10.1, 
+    "choices": "", 
+    "survey": 1, 
+    "question_type": "text"
+  }
+},
+{
+  "pk": 5, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "\u00bfCu\u00e1l es su ocupaci\u00f3n actual?", 
+    "required": true, 
+    "number": 11.0, 
+    "choices": "Empresario,\r\nComerciante (propietario de tienda de comestibles o de peque\u00f1o negocio de venta de productos o servicios),\r\nTrabajador del Estado,\r\nT\u00e9cnico (trabajador asalariado o independiente con calificaci\u00f3n t\u00e9cnica como electricista; mecanico; soldador; panadero),\r\nObrero (trabajador no calificado y asalariado; por ejemplo obrero de construcci\u00f3n o de una f\u00e1brica),\r\nArtesano (carpintero; costurera; sastre; zapatero),\r\nEmpleado de servicios personales (trabajadoras del hogar; vigilantes; conductor asalariado; mensajero),\r\nTrabajador Informal,\r\nOficios del Hogar (tareas dom\u00e9sticas del propio hogar),\r\nJubilado,\r\nDesempleado", 
+    "survey": 1, 
+    "question_type": "radio"
+  }
+},
+{
+  "pk": 6, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "\u00bfActualmente utiliza computador? \u00bfCon qu\u00e9 frecuencia lo utiliza?", 
+    "required": true, 
+    "number": 13.0, 
+    "choices": "De 4 a 7 d\u00edas a la semana,\r\n3 d\u00edas a la semana,\r\n2 d\u00edas a la semana,\r\n1 d\u00eda a la semana,\r\nCasi nunca,\r\nNunca", 
+    "survey": 1, 
+    "question_type": "radio"
+  }
+},
+{
+  "pk": 7, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "\u00bfActualmente utiliza Internet? \u00bfCon qu\u00e9 frecuencia lo utiliza?", 
+    "required": true, 
+    "number": 15.0, 
+    "choices": "De 4 a 7 d\u00edas a la semana,\r\n3 d\u00edas a la semana,\r\n2 d\u00edas a la semana,\r\n1 d\u00eda a la semana,\r\nCasi nunca,\r\nNunca", 
+    "survey": 1, 
+    "question_type": "radio"
+  }
+},
+{
+  "pk": 8, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "\u00bfQu\u00e9 opina sobre que su hijo(a) haga las tareas con ayuda de Internet?", 
+    "required": true, 
+    "number": 16.0, 
+    "choices": "Es m\u00e1s f\u00e1cil para \u00e9l/ella,\r\nDa lo mismo,\r\nEs m\u00e1s dificil para \u00e9l/ella", 
+    "survey": 1, 
+    "question_type": "radio"
+  }
+},
+{
+  "pk": 9, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "\u00bfC\u00f3mo cree que ser\u00edan las clases que recibe su hijo(a) si se utilizara Internet? <small>Puede marcar varias opciones</small>", 
+    "required": true, 
+    "number": 17.0, 
+    "choices": "Ser\u00edan m\u00e1s interesantes,\r\nLe entender\u00eda m\u00e1s al profesor,\r\nDar\u00eda lo mismo,\r\nSer\u00eda m\u00e1s dif\u00edcil aprender,\r\nSe distraer\u00eda con m\u00e1s facilidad\r\n", 
+    "survey": 1, 
+    "question_type": "select-multiple"
+  }
+},
+{
+  "pk": 10, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Matem\u00e1ticas", 
+    "required": true, 
+    "number": 18.01, 
+    "choices": "1,2,3", 
+    "survey": 1, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 11, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Ingl\u00e9s", 
+    "required": true, 
+    "number": 18.02, 
+    "choices": "1,2,3", 
+    "survey": 1, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 12, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Tecnolog\u00eda e Inform\u00e1tica", 
+    "required": true, 
+    "number": 18.03, 
+    "choices": "1,2,3", 
+    "survey": 1, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 13, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Ciencias Sociales", 
+    "required": true, 
+    "number": 18.04, 
+    "choices": "1,2,3", 
+    "survey": 1, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 14, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Biolog\u00eda", 
+    "required": true, 
+    "number": 18.05, 
+    "choices": "1,2,3", 
+    "survey": 1, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 15, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Filosof\u00eda", 
+    "required": true, 
+    "number": 18.06, 
+    "choices": "1,2,3", 
+    "survey": 1, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 16, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Qu\u00edmica", 
+    "required": true, 
+    "number": 18.07, 
+    "choices": "1,2,3", 
+    "survey": 1, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 17, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Educaci\u00f3n F\u00edsica", 
+    "required": true, 
+    "number": 18.08, 
+    "choices": "1,2,3", 
+    "survey": 1, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 18, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "\u00c9tica y Valores", 
+    "required": true, 
+    "number": 18.09, 
+    "choices": "1,2,3", 
+    "survey": 1, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 19, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Econom\u00eda Pol\u00edtica", 
+    "required": true, 
+    "number": 18.1, 
+    "choices": "1,2,3", 
+    "survey": 1, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 20, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "\u00c1lgebra", 
+    "required": true, 
+    "number": 18.11, 
+    "choices": "1,2,3", 
+    "survey": 1, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 21, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Lengua Castellana", 
+    "required": true, 
+    "number": 18.12, 
+    "choices": "1,2,3", 
+    "survey": 1, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 22, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Artes", 
+    "required": true, 
+    "number": 18.13, 
+    "choices": "1,2,3", 
+    "survey": 1, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 23, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Trigonometr\u00eda", 
+    "required": true, 
+    "number": 18.14, 
+    "choices": "1,2,3", 
+    "survey": 1, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 24, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Geometr\u00eda", 
+    "required": true, 
+    "number": 18.15, 
+    "choices": "1,2,3", 
+    "survey": 1, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 25, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "F\u00edsica", 
+    "required": true, 
+    "number": 18.16, 
+    "choices": "1,2,3", 
+    "survey": 1, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 26, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "C\u00e1lculo", 
+    "required": true, 
+    "number": 18.17, 
+    "choices": "1,2,3", 
+    "survey": 1, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 27, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Religi\u00f3n", 
+    "required": true, 
+    "number": 18.18, 
+    "choices": "1,2,3", 
+    "survey": 1, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 28, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Democracia", 
+    "required": true, 
+    "number": 18.19, 
+    "choices": "1,2,3", 
+    "survey": 1, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 29, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Me genera angustia la evoluci\u00f3n que han tenido los computadores y la Internet", 
+    "required": true, 
+    "number": 19.0, 
+    "choices": "De acuerdo,\r\nNi de acuerdo ni en desacuerdo,\r\nEn desacuerdo", 
+    "survey": 1, 
+    "question_type": "radio"
+  }
+},
+{
+  "pk": 30, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "El computador y la Internet dispersan la atenci\u00f3n de los estudiantes", 
+    "required": true, 
+    "number": 20.0, 
+    "choices": "De acuerdo,\r\nNi de acuerdo ni en desacuerdo,\r\nEn desacuerdo", 
+    "survey": 1, 
+    "question_type": "radio"
+  }
+},
+{
+  "pk": 31, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "El computador y la Internet limitan la capacidad de creaci\u00f3n de los estudiantes", 
+    "required": true, 
+    "number": 21.0, 
+    "choices": "De acuerdo,\r\nNi de acuerdo ni en desacuerdo,\r\nEn desacuerdo", 
+    "survey": 1, 
+    "question_type": "radio"
+  }
+},
+{
+  "pk": 32, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Con respecto al bajo puntaje en lectura que obtuvieron los estudiantes cale\u00f1os en las pruebas PISA (398), una persona expres\u00f3 lo siguiente: \"Lo que encuentran por Internet son textos cortos, sin ortograf\u00eda; hoy a un joven le cuesta mucho hacerse entender por escrito, hay problemas de interpretaci\u00f3n y argumentaci\u00f3n\".", 
+    "required": true, 
+    "number": 22.0, 
+    "choices": "De acuerdo,\r\nNi de acuerdo ni en desacuerdo,\r\nEn desacuerdo", 
+    "survey": 1, 
+    "question_type": "radio"
+  }
+},
+{
+  "pk": 33, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "\u00bfPor qu\u00e9?", 
+    "required": true, 
+    "number": 22.1, 
+    "choices": "", 
+    "survey": 1, 
+    "question_type": "text"
+  }
+},
+{
+  "pk": 34, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "\u00bfLe genera dificultades el uso del computador y la Internet?", 
+    "required": true, 
+    "number": 23.0, 
+    "choices": "S\u00ed,\r\nNo", 
+    "survey": 1, 
+    "question_type": "radio"
+  }
+},
+{
+  "pk": 35, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "\u00bfUsted ha hecho alg\u00fan curso de manejo de computador e Internet?", 
+    "required": true, 
+    "number": 24.0, 
+    "choices": "S\u00ed,\r\nNo", 
+    "survey": 1, 
+    "question_type": "radio"
+  }
+},
+{
+  "pk": 36, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "\u00bfEn Cuales?", 
+    "required": false, 
+    "number": 24.1, 
+    "choices": "", 
+    "survey": 1, 
+    "question_type": "text"
+  }
+},
+{
+  "pk": 37, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Procesador de texto (Word, OpenOffice Writer, LibreOffice Writer)", 
+    "required": true, 
+    "number": 25.01, 
+    "choices": "Siempre,\r\nA veces,\r\nNunca,\r\nNo s\u00e9 qu\u00e9 es esto", 
+    "survey": 1, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 38, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Bases de datos (MySQL, ORACLE, Microsoft Access).", 
+    "required": true, 
+    "number": 25.02, 
+    "choices": "Siempre,\r\nA veces,\r\nNunca,\r\nNo s\u00e9 qu\u00e9 es esto", 
+    "survey": 1, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 39, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Correo electr\u00f3nico", 
+    "required": true, 
+    "number": 25.03, 
+    "choices": "Siempre,\r\nA veces,\r\nNunca,\r\nNo s\u00e9 qu\u00e9 es esto", 
+    "survey": 1, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 40, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Hoja de c\u00e1lculo (Microsoft Excel, Apache Open Office Calc, Spreadsheet de Google Drive)", 
+    "required": true, 
+    "number": 25.04, 
+    "choices": "Siempre,\r\nA veces,\r\nNunca,\r\nNo s\u00e9 qu\u00e9 es esto", 
+    "survey": 1, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 41, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Programas para hacer presentaciones (PowerPoint, Prezi)", 
+    "required": true, 
+    "number": 25.05, 
+    "choices": "Siempre,\r\nA veces,\r\nNunca,\r\nNo s\u00e9 qu\u00e9 es esto", 
+    "survey": 1, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 42, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Programas de dibujo (Corel Draw, Adobe Flash, Microsoft Paint).\r\n", 
+    "required": true, 
+    "number": 25.06, 
+    "choices": "Siempre,\r\nA veces,\r\nNunca,\r\nNo s\u00e9 qu\u00e9 es esto", 
+    "survey": 1, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 43, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Programas para editar im\u00e1genes y fotograf\u00edas (Adobe Photoshop, GIMP).\r\n", 
+    "required": true, 
+    "number": 25.07, 
+    "choices": "Siempre,\r\nA veces,\r\nNunca,\r\nNo s\u00e9 qu\u00e9 es esto", 
+    "survey": 1, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 44, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Internet para realizar consultas generales.\r\n", 
+    "required": true, 
+    "number": 25.08, 
+    "choices": "Siempre,\r\nA veces,\r\nNunca,\r\nNo s\u00e9 qu\u00e9 es esto", 
+    "survey": 1, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 45, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Medios audiovisuales\r\n", 
+    "required": true, 
+    "number": 25.09, 
+    "choices": "Siempre,\r\nA veces,\r\nNunca,\r\nNo s\u00e9 qu\u00e9 es esto", 
+    "survey": 1, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 46, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Plataforma virtual de aprendizaje\r\n", 
+    "required": true, 
+    "number": 25.1, 
+    "choices": "Siempre,\r\nA veces,\r\nNunca,\r\nNo s\u00e9 qu\u00e9 es esto", 
+    "survey": 1, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 47, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Blog personal\r\n", 
+    "required": true, 
+    "number": 25.11, 
+    "choices": "Siempre,\r\nA veces,\r\nNunca,\r\nNo s\u00e9 qu\u00e9 es esto", 
+    "survey": 1, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 48, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Sitios especializados en temas que le interesan\r\n", 
+    "required": true, 
+    "number": 25.12, 
+    "choices": "Siempre,\r\nA veces,\r\nNunca,\r\nNo s\u00e9 qu\u00e9 es esto", 
+    "survey": 1, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 49, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Software especializado", 
+    "required": true, 
+    "number": 25.13, 
+    "choices": "Siempre,\r\nA veces,\r\nNunca,\r\nNo s\u00e9 qu\u00e9 es esto", 
+    "survey": 1, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 50, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Agenda o programador digital de actividades", 
+    "required": true, 
+    "number": 25.14, 
+    "choices": "Siempre,\r\nA veces,\r\nNunca,\r\nNo s\u00e9 qu\u00e9 es esto", 
+    "survey": 1, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 51, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Otra herramienta, \u00bfCu\u00e1l?", 
+    "required": false, 
+    "number": 25.15, 
+    "choices": "", 
+    "survey": 1, 
+    "question_type": "text"
+  }
+},
+{
+  "pk": 52, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "\u00bfEn d\u00f3nde se conecta a Internet? <small>Puede marcar varias opciones</small>", 
+    "required": true, 
+    "number": 26.0, 
+    "choices": "En su casa,\r\nEn un caf\u00e9 Internet,\r\nEn la casa de sus amigos o familiares,\r\nEn el colegio donde estudian sus hijos,\r\nEn un lugar p\u00fablico como bibliotecas o centros comunitarios,\r\nEn un lugar p\u00fablico con WIFI,\r\nEn su sitio de trabajo", 
+    "survey": 1, 
+    "question_type": "select-multiple"
+  }
+},
+{
+  "pk": 53, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "En otro lugar. \u00bfCu\u00e1l?", 
+    "required": false, 
+    "number": 26.1, 
+    "choices": "", 
+    "survey": 1, 
+    "question_type": "text"
+  }
+},
+{
+  "pk": 54, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "\u00bfUsted qu\u00e9 hace cuando su hijo(a) se conecta a internet? <small>Puede marcar varias opciones </small>", 
+    "required": true, 
+    "number": 27.0, 
+    "choices": "Le pregunta \u00bfQu\u00e9 est\u00e1 haciendo?,\r\nEcha un vistazo para ver qu\u00e9 est\u00e1 haciendo,\r\nLe ayuda,\r\nSe sienta con \u00e9l/ella,\r\nHacen alguna actividad,\r\nComprueba despu\u00e9s por donde ha navegado,\r\nSe ubica en el mismo lugar a hacer otras actividades,\r\nRevisa la informaci\u00f3n que pone en redes sociales,\r\nControla los horarios en que se conecta,\r\nNo se hace nada", 
+    "survey": 1, 
+    "question_type": "select-multiple"
+  }
+},
+{
+  "pk": 55, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Hace otra cosa. \u00bfCu\u00e1l?", 
+    "required": false, 
+    "number": 27.1, 
+    "choices": "", 
+    "survey": 1, 
+    "question_type": "text"
+  }
+},
+{
+  "pk": 56, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "De los siguientes dispositivos, si los tiene en casa, \u00bfCu\u00e1les usa? <small>Puede marcar varias opciones</small>", 
+    "required": true, 
+    "number": 28.0, 
+    "choices": "Computador sin conexi\u00f3n a internet,\r\nComputador con conexi\u00f3n a internet,\r\nCelular sin plan de datos,\r\nCelular con plan de datos,\r\nConsola de videojuegos,\r\nTablet,\r\nLector digital de libros,\r\nC\u00e1mara fotogr\u00e1fica digital,\r\nC\u00e1mara de video,\r\nGrabadora digital,\r\nDVD/Blue-ray,\r\nTelevisor,\r\nRadio", 
+    "survey": 1, 
+    "question_type": "select-multiple"
+  }
+}
+]

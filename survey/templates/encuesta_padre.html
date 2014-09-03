@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% load mytags %}
+{% block css %}
+    {{datosBasicosForm.media}}
+    <style>
+        label.bold {
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .bordered {
+            border-style: dotted;
+            border-width: 1px;
+            padding: 3px;
+            border-radius: 3px;
+            border-color: gray;
+        }
+
+
+    </style>
+{% endblock %}
+
+{% block contenido %}
+<form method="POST"> {% csrf_token %}
+    {% mypanel 'Información Personal y Socioeconómica Básica' %}
+        <div class="form-horizontal">
+            {% bootstrap_field form.numero_documento layout="horizontal" %}
+            {% bootstrap_field form.nombre layout="horizontal" %}
+            {% bootstrap_field form.municipio_nacimiento layout="horizontal" %}
+            {% bootstrap_field form.fecha_nacimiento layout="horizontal" %}
+            {% bootstrap_field form.barrio layout="horizontal" %}
+        </div>
+        {% bootstrap_field form.question_1 %}
+        {% bootstrap_field form.institucion  %}
+        {% bootstrap_field form.question_2 %}
+        
+        <div class="bordered">
+            {% bootstrap_field form.question_3 %}
+            {% bootstrap_field form.question_4 %}
+        </div>
+        <br>
+        {% bootstrap_field form.question_5 form_group_class='form-group bordered' %}
+    {% endmypanel %}
+
+    {% mypanel 'Uso Actual de Computador e Internet' %}
+        {% bootstrap_field form.question_6 form_group_class='form-group bordered' %}
+        {% bootstrap_field form.question_7 form_group_class='form-group bordered' %}
+    {% endmypanel %}
+        
+    {% mypanel 'Percepciones Sobre el Uso de las TIC en los Procesos e Enseñanza y Aprendizaje' %}
+        {% bootstrap_field form.question_7 form_group_class='form-group bordered' %}
+        {% bootstrap_field form.question_8 form_group_class='form-group bordered' %}
+        {% bootstrap_field form.question_9 form_group_class='form-group bordered' %}
+
+        <div class="bordered">
+            <label for="" class="control-label">
+                Califique de 1 a 3 las siguientes materias según qué tanto le serviría a su hijo(a)
+                utilizar Internet en cada una de ellas. Si cree que le servirían mucho marque 3, si cree que le servirían un poco marque 2 
+                y si cree que le servirían muy poquito o nada marque 1.
+            </label>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-horizontal">
+                        {% for field in camposMaterias1 %}
+                            {% bootstrap_field field layout="horizontal" label_class="col-md-6" field_class="col-md-3"  %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-horizontal">
+                        {% for field in camposMaterias2 %}
+                            {% bootstrap_field field layout="horizontal" label_class="col-md-6" field_class="col-md-3"  %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <br>
+        <label class="control-label">
+            <strong>Seleccione su grado de acuerdo respecto a las siguientes afirmaciones</strong>
+        </label>
+        {% bootstrap_field form.question_29 form_group_class='form-group bordered' %}
+        {% bootstrap_field form.question_30 form_group_class='form-group bordered' %}
+        {% bootstrap_field form.question_31 form_group_class='form-group bordered' %}
+
+        <div class="bordered">
+            {% bootstrap_field form.question_32 %}
+            {% bootstrap_field form.question_33 %}
+        </div>
+        <br>
+        {% bootstrap_field form.question_34 form_group_class='form-group bordered' %}
+    {% endmypanel %}
+
+    {% mypanel 'Hábitos Sobre el Uso de las TIC en los Procesos de Enseñanza y Aprendizaje' %}
+        <div class="bordered">
+            {% bootstrap_field form.question_35 %}
+            {% bootstrap_field form.question_36 %}
+        </div>
+        <br>
+        <div class="bordered">
+            <label class="control-label">
+                De las siguientes herramientas seleccione con qué frecuencia las utiliza
+            </label>
+            <div class="form-horizontal">
+                {% for campo in camposHerramientas %}
+                    {% bootstrap_field campo layout='horizontal' label_class='col-md-7' field_class='col-md-3' %}
+                {% endfor %}
+            </div>
+        </div>
+        <br>
+        <div class="bordered">
+            {% bootstrap_field form.question_52 %}
+            <div class="form-horizontal">
+                {% bootstrap_field form.question_53 layout="horizontal" %}
+            </div>
+        </div>
+        <br>
+        <div class="bordered">
+            {% bootstrap_field form.question_54 %}
+            <div class="form-horizontal">
+                {% bootstrap_field form.question_55 layout="horizontal" %}
+            </div>
+        </div>
+    {% endmypanel %}
+
+    {% mypanel 'Hábitos Sobre el Uso de las TIC en la Vida Cotidiana' %}
+        
+            {% bootstrap_field form.question_56 form_group_class='form-group bordered' %}            
+        
+
+    {% endmypanel %}
+    
+    <br>
+    <center><button type="submit" class="btn btn-success btn-lg">Enviar Encuesta</button></center>
+    
+
+</form>
+
+
+{% endblock %}
