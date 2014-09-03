@@ -4,8 +4,8 @@ from django.core import serializers
 from convocat.models import * 
 from django.db.models import Count
 import json
-from estudiante.forms import EstudianteForm, DatosLaboralesForm, CertificacionTICForm, ProgramaTICForm, HorarioForm
-from campus.models import CertificacionTIC, ProgramasTIC, Horario, Asignatura
+from estudiante.forms import EstudianteForm, InfoLaboralForm, CertificacionTICForm, ProgramaTICForm, HorarioForm
+from campus.models import CertificacionTIC, ProgramaTIC, Horario, Asignatura
 
 
 def inscripcion(request):
@@ -23,14 +23,14 @@ def inscripcion(request):
 
 def datosProfesionales(request):
     if request.method == 'POST':
-        form = DatosLaboralesForm(request.POST)
+        form = InfoLaboralForm(request.POST)
         if form.is_valid():
             objeto = form.save(commit=False)
             objeto.estudiante_id = request.session.get('clave_estudiante')
             objeto.save()
             return redirect('certificaciones_DE')
     else :
-        form = DatosLaboralesForm()
+        form = InfoLaboralForm()
     return render(request, 'inscripcion/datosLaborales.html', {
         'form': form,
     })
@@ -64,7 +64,7 @@ def programasTIC(request):
     else :
         form = ProgramaTICForm()
 
-    programas = ProgramasTIC.objects.filter(estudiante__id = request.session.get('clave_estudiante'))
+    programas = ProgramaTIC.objects.filter(estudiante__id = request.session.get('clave_estudiante'))
 
     return render(request, 'inscripcion/programas_DE.html', {
         'form': form,

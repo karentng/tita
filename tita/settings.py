@@ -44,17 +44,18 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #'encuestas',
-    'survey',
-    'convocat',
-    'estudiante',
-    'campus',
+
+
     'bootstrap3',
-    'cronograma',
-    #'bootstrap3_datetime',
     'datetimewidget',
     'django_select2',
     'django_extensions', # para sqldiff
+
+    'convocat',
+    'estudiante',
+    'campus',
+    'survey',
+    'cronograma',
 )
 
 MIDDLEWARE_CLASSES = (
