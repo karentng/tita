@@ -105,9 +105,9 @@ class AspiranteAdmin(admin.ModelAdmin):
 
     def recalcular_puntaje(self, request, queryset):
         for aspirante in queryset:
-            if aspirante.puntuacion_hv is not None:
-                aspirante.puntuacion_hv = aspirante.calcular_puntaje()
-                aspirante.save()
+            #if aspirante.puntuacion_hv is not None:
+            aspirante.puntuacion_hv = aspirante.calcular_puntaje()
+            aspirante.save()
 
     def get_queryset(self, request):
         qs = super(AspiranteAdmin, self).get_queryset(request)
