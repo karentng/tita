@@ -5,8 +5,8 @@ from datetimewidget.widgets import DateWidget
 from django.forms import ModelForm, Textarea, HiddenInput, TextInput, Select, CheckboxSelectMultiple, FileInput, ClearableFileInput
 from django.forms.models import inlineformset_factory
 from django_select2 import AutoModelSelect2Field, Select2MultipleWidget, Select2Widget
-from campus.models import Estudiante, InfoLaboral, Horario
-from estudiante.models import CertificacionTIC, ProgramaTIC
+from campus.models import Estudiante
+from estudiante.models import InfoLaboral,  CertificacionTIC, ProgramaTIC
 from convocat.forms import MyDateWidget, MunicipioChoice
 
 class EstudianteForm(forms.ModelForm):
@@ -42,7 +42,7 @@ class ProgramaTICForm(forms.ModelForm):
             'fecha': MyDateWidget()
         }
 
-class HorarioForm(forms.ModelForm):
-    class Meta:
-        model = Horario
-        fields = ('dia', 'inicio', 'fin', 'curso')
+#class HorarioForm(forms.ModelForm):
+#    class Meta:
+#        model = Horario
+#        fields = ('dia', 'inicio', 'fin', 'curso')
