@@ -3,36 +3,7 @@
 from django.db import models
 from convocat.models import Municipio, Aspirante
 from django.contrib.auth.models import User
-
-
-INSTITUCIONES = (
-    (1, 'INEM Jorge Isaac'),
-    (2, 'Liceo Departamental'),
-    (3, 'Profesional'),
-    (4, 'IETI Comuna 17'),
-    (5, 'Normal Superior Farallones de Cali'),
-    (6, 'Celmira Bueno de Orejuela'),
-    (7, 'Otro')
-)
-
-CARGOS = (
-    ('R', 'Rector'),
-    ('C', 'Coordinador'),
-    ('D', 'Docente')
-)
-
-ASIGNATURAS = (
-    (1, 'Ciencias Naturales y Educación Ambiental'),
-    (2, 'Ciencias Sociales, Historia, Geografía, Constitución Política y Democracia'),
-    (3, 'Educación Artística'),
-    (4, 'Educación Ética y en Valores Humanos'),
-    (5, 'Educación Física, Recreación y Deporte'),
-    (6, 'Educación Religiosa'),
-    (7, 'Humanidades, Lenguas Castellana e Idiomas Extranjeros'),
-    (8, 'Matemáticas'),
-    (9, 'Tecnología e Informática'),
-    (10, 'Todas')
-)
+from estudiante.models import Cargo, Grado, Asignatura, SecretariaEducacion, CertificacionTIC, ProgramaTIC
 
 GRADOS = (
     ('P', 'Prejardín'),
@@ -69,24 +40,6 @@ class InstitucionEducativa(models.Model):
 
     def __unicode__(self):
         return (u"%s"%self.nombre)
-
-class Cargo(models.Model):
-    nombre = models.CharField(max_length=200)
-
-    def __unicode__(self):
-        return self.nombre
-
-class Grado(models.Model):
-    nombre = models.CharField(max_length=200)
-
-    def __unicode__(self):
-        return self.nombre
-
-class Asignatura(models.Model):
-    nombre = models.CharField(max_length=200)
-
-    def __unicode__(self):
-        return self.nombre
 
 #Corresponde a los formadores de formadores
 class Formador(models.Model):    
@@ -159,36 +112,22 @@ class Estudiante(models.Model):
     def __unicode__(self):
         return (u"%s %s %s %s"%(self.nombre1,self.nombre2 or '', self.apellido1, self.apellido2 or '')).strip() or "-"
 
-class SecretariasEducacion(models.Model):
-    nombre = models.CharField(max_length=100)
 
-    def __unicode__(self):
-        return (u"%s"%self.nombre)
 
-class CertificacionTIC(models.Model):
-    estudiante = models.ForeignKey(Estudiante)
-    nombre = models.CharField(max_length=100, verbose_name="nombre de la certificación")
-    entidad = models.CharField(max_length=100, verbose_name="entidad certificadora")
-    fecha = models.DateTimeField(verbose_name="fecha de la certificación")
-
-    def __unicode__(self):
-        return (u"%s"%self.nombre)
-
-class ProgramasTIC(models.Model):
-    estudiante = models.ForeignKey(Estudiante)
-    nombre = models.CharField(max_length=100, verbose_name="nombre del programa")
-    fecha = models.DateTimeField(verbose_name="fecha de la participación en el programa")
-
-    def __unicode__(self):
-        return (u"%s"%self.nombre)
-
-class DatosLaborales(models.Model):
+class InfoLaboral(models.Model):
+    ETNOEDUCADOR = (
+        (1, 'No se desempeña como etnoeducador'),
+        (1, 'Raizal'),
+        (1, 'Afrocolombiano'),
+        (1, 'Indígena'),
+        (1, 'N.A'),
+    )
 
     estudiante = models.ForeignKey(Estudiante)
 
-    secretaria_educacion = models.ForeignKey(SecretariasEducacion)
+    secretaria_educacion = models.ForeignKey(SecretariaEducacion)
     institucion_educativa = models.ForeignKey(InstitucionEducativa)
-    cargos = models.IntegerField(choices=[(1, 'Docente'), (2, 'Directivo Docente')], verbose_name="cargo")
+    cargo = models.IntegerField(choices=[(1, 'Docente'), (2, 'Directivo Docente')], verbose_name="cargo")
     sector = models.CharField( choices=[('O','Oficial'), ('N', 'No Oficial')], max_length=1, verbose_name='sector')
     zona = models.CharField( choices=[('R','Rural'), ('U', 'Urbana'), ('N', 'N.A')], max_length=1, verbose_name='zona')
     jornada = models.CharField(choices=JORNADAS, max_length=1)
@@ -199,8 +138,7 @@ class DatosLaborales(models.Model):
     #grado escalafon
     nombramiento = models.IntegerField(choices=[(1,'Propiedad'), (2, 'Período de Prueba'), (3, 'Provisional')], max_length=1, verbose_name='tipo de nombramiento')
 
-    etnoeducador = models.BooleanField(verbose_name="se desempeña como etnoeducador")
-    tipo_etnoeducador = models.IntegerField(choices=[(1, 'Raizal'),(2, 'Afrocolombiano'),(3, 'Indígena'), (4, 'N.A')], null=True)
+    tipo_etnoeducador = models.IntegerField(choices=ETNOEDUCADOR)
     poblacion_etnica = models.CharField(max_length="100", verbose_name="poblacion étnica que atiende", null=True)
     
 class Horario(models.Model):

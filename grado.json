@@ -1,104 +1,104 @@
 [
 {
   "pk": 1, 
-  "model": "campus.grado", 
+  "model": "estudiante.grado", 
   "fields": {
     "nombre": "Prejardín"
   }
 },
 {
   "pk": 2, 
-  "model": "campus.grado", 
+  "model": "estudiante.grado", 
   "fields": {
     "nombre": "Jardín"
   }
 },
 {
   "pk": 3, 
-  "model": "campus.grado", 
+  "model": "estudiante.grado", 
   "fields": {
     "nombre": "Transición"
   }
 },
 {
   "pk": 4, 
-  "model": "campus.grado", 
+  "model": "estudiante.grado", 
   "fields": {
     "nombre": "Primero"
   }
 },
 {
   "pk": 5, 
-  "model": "campus.grado", 
+  "model": "estudiante.grado", 
   "fields": {
     "nombre": "Segundo"
   }
 },
 {
   "pk": 6, 
-  "model": "campus.grado", 
+  "model": "estudiante.grado", 
   "fields": {
     "nombre": "Tercero"
   }
 },
 {
   "pk": 7, 
-  "model": "campus.grado", 
+  "model": "estudiante.grado", 
   "fields": {
     "nombre": "Cuarto"
   }
 },
 {
   "pk": 8, 
-  "model": "campus.grado", 
+  "model": "estudiante.grado", 
   "fields": {
     "nombre": "Quinto"
   }
 },
 {
   "pk": 9, 
-  "model": "campus.grado", 
+  "model": "estudiante.grado", 
   "fields": {
     "nombre": "Sexto"
   }
 },
 {
   "pk": 10, 
-  "model": "campus.grado", 
+  "model": "estudiante.grado", 
   "fields": {
     "nombre": "Séptimo"
   }
 },
 {
   "pk": 11, 
-  "model": "campus.grado", 
+  "model": "estudiante.grado", 
   "fields": {
     "nombre": "Octavo"
   }
 },{
   "pk": 12, 
-  "model": "campus.grado", 
+  "model": "estudiante.grado", 
   "fields": {
     "nombre": "Noveno"
   }
 },
 {
   "pk": 13, 
-  "model": "campus.grado", 
+  "model": "estudiante.grado", 
   "fields": {
     "nombre": "Décimo"
   }
 },
 {
   "pk": 14, 
-  "model": "campus.grado", 
+  "model": "estudiante.grado", 
   "fields": {
     "nombre": "Once"
   }
 },
 {
   "pk": 15, 
-  "model": "campus.grado", 
+  "model": "estudiante.grado", 
   "fields": {
     "nombre": "Programa de Formación Complementaria"
   }

@@ -4,33 +4,26 @@ from django import forms
 from datetimewidget.widgets import DateWidget
 from django.forms import ModelForm, Textarea, HiddenInput, TextInput, Select, CheckboxSelectMultiple, FileInput, ClearableFileInput
 from django.forms.models import inlineformset_factory
-from django_select2 import AutoModelSelect2Field, Select2MultipleWidget
-from campus.models import Estudiante, DatosLaborales, CertificacionTIC, ProgramasTIC, Horario
+from django_select2 import AutoModelSelect2Field, Select2MultipleWidget, Select2Widget
+from campus.models import Estudiante, InfoLaboral, Horario
+from estudiante.models import CertificacionTIC, ProgramaTIC
 from convocat.forms import MyDateWidget, MunicipioChoice
 
 class EstudianteForm(forms.ModelForm):
-    #cargos = AutoModelSelect2Field()
-    #instituciones = AutoModelSelect2Field()
-    #asignaturas = AutoModelSelect2Field()
-    #grados = AutoModelSelect2Field()
     municipio = MunicipioChoice(label = u"Municipio de residencia")
     class Meta:
         model = Estudiante
         fields = ('numero_documento', 'nombre1', 'nombre2', 'apellido1', 'apellido2', 'sexo', 'email', 'email_institucional', 'municipio','telefono', 'celular', 'direccion', 'nivel_educativo' )
-        #fields = ('numero_documento', 'nombre1', 'nombre2', 'apellido1', 'apellido2', 'sexo', 'nacionalidad', 'municipio_nacimiento', 'direccion', 'municipio', 'telefono', 'celular', 'email')
-        widgets = {
-            # 'fecha_nacimiento': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
-            #'cargos' : AutoModelSelect2Field()
-        }
 
-class DatosLaboralesForm(forms.ModelForm):
+class InfoLaboralForm(forms.ModelForm):
     class Meta:
-        model = DatosLaborales
-        fields = ('secretaria_educacion', 'institucion_educativa', 'cargos', 'sector', 'zona', 'jornada', 'grados', 'asignaturas', 'decreto_docente', 'nombramiento', 'etnoeducador', 'tipo_etnoeducador', 'poblacion_etnica')
-        #fields = ('numero_documento', 'nombre1', 'nombre2', 'apellido1', 'apellido2', 'sexo', 'nacionalidad', 'municipio_nacimiento', 'direccion', 'municipio', 'telefono', 'celular', 'email')
+        model = InfoLaboral
+        fields = ('secretaria_educacion', 'institucion_educativa', 'cargo', 'sector', 'zona', 'jornada', 'grados', 'asignaturas', 'decreto_docente', 'nombramiento', 'tipo_etnoeducador', 'poblacion_etnica')
         widgets = {
-            # 'fecha_nacimiento': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
-            #'cargos' : AutoModelSelect2Field()
+            'secretaria_educacion': Select2Widget(),
+            'institucion_educativa': Select2Widget(),
+            'grados': Select2MultipleWidget(),
+            'asignaturas': Select2MultipleWidget(),
         }
 
 class CertificacionTICForm(forms.ModelForm):
@@ -43,7 +36,7 @@ class CertificacionTICForm(forms.ModelForm):
 
 class ProgramaTICForm(forms.ModelForm):
     class Meta:
-        model = ProgramasTIC
+        model = ProgramaTIC
         fields = ('nombre', 'fecha')
         widgets = {
             'fecha': MyDateWidget()

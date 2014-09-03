@@ -1,72 +1,65 @@
 [
 {
   "pk": 1, 
-  "model": "campus.asignatura", 
+  "model": "estudiante.asignatura", 
   "fields": {
     "nombre": "Ciencias naturales y Educación ambiental"
   }
 },
 {
   "pk": 2, 
-  "model": "campus.asignatura", 
+  "model": "estudiante.asignatura", 
   "fields": {
     "nombre": "Ciencias sociales, Historia, Geografía, Constitución política y Democracia"
   }
 },
 {
   "pk": 3, 
-  "model": "campus.asignatura", 
+  "model": "estudiante.asignatura", 
   "fields": {
     "nombre": "Educación Artística"
   }
 },
 {
   "pk": 4, 
-  "model": "campus.asignatura", 
+  "model": "estudiante.asignatura", 
   "fields": {
     "nombre": "Educación ética y en valores humanos"
   }
 },
 {
   "pk": 5, 
-  "model": "campus.asignatura", 
+  "model": "estudiante.asignatura", 
   "fields": {
     "nombre": "Educación física, recreación y deporte"
   }
 },
 {
   "pk": 6, 
-  "model": "campus.asignatura", 
+  "model": "estudiante.asignatura", 
   "fields": {
     "nombre": "Educación religiosa"
   }
 },
 {
   "pk": 7, 
-  "model": "campus.asignatura", 
+  "model": "estudiante.asignatura", 
   "fields": {
     "nombre": "Humanidades, lenguas castellana e idiomas extranjeros"
   }
 },
 {
   "pk": 8, 
-  "model": "campus.asignatura", 
+  "model": "estudiante.asignatura", 
   "fields": {
     "nombre": "Matemáticas"
   }
 },
 {
   "pk": 9, 
-  "model": "campus.asignatura", 
+  "model": "estudiante.asignatura", 
   "fields": {
     "nombre": "Tecnología e Informática"
-  }
-},
-{
-  "pk": 10, 
-  "model": "campus.asignatura", 
-  "fields": {
-    "nombre": "Todas"
   }
 }
 ]
