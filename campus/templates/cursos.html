@@ -8,8 +8,6 @@
 {% endblock %}
 
 {% block css %}
-    <link href="{{STATIC_URL}}plugins/bootstrap-wizard/css/bwizard.min.css" rel="stylesheet" />
-    {{form.media}} {# agrega los js y css necesarios para el bootstrap3 datetimepicker #}
 {% endblock %}
 
 {% block js %}
@@ -17,16 +15,16 @@
 {% endblock %}
 
 {% block miga_pan %}
-    <li><a href="javascript:;">Inicio</a></li>
+    <li><a href="{% url 'home' %}">Inicio</a></li>
     <li class="active">Cursos</li>
 {% endblock %}
 
-{% block titulo_contenido %}Listado de Cursos{% endblock %}
+{% block titulo_contenido %}Seleccione las actividades de un curso:{% endblock %}
 
-{% block titulo_panel %}<i class="fa fa-check-square-o"></i> Cursos Dictados{% endblock %}
+{% block titulo_panel %}<i class="fa fa-users"></i> Listado de sus Cursos{% endblock %}
 {% block contenido_panel %}
 
-    <table class="table" width="50%" >
+    <table class="table" width="100%" >
         <thead>            
             <tr>
                 <th>Institución</th>
@@ -39,7 +37,7 @@
             <tr>
                 <td>{{curso.institucion|capfirst}}</td>
                 <td>{{curso.descripcion}}</td>
-                <td><a href="{% url 'listar_clases_curso' curso.id %}">Actividades</a></td>
+                <td><a href="{% url 'listar_clases_curso' curso.id %}"> Lista de Clases</a></td>
             </tr>
             {% endfor %}
         </tbody>

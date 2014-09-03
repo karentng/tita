@@ -222,7 +222,7 @@ class Clase(models.Model):
     curso = models.ForeignKey(Curso)
 
     def __unicode__(self):
-        return self.fecha_programada
+        return unicode(self.fecha_programada)
     
 class Asistencia(models.Model):
     clase = models.ForeignKey(Clase)
