@@ -5,6 +5,7 @@ from convocat.models import Municipio, Aspirante
 from django.contrib.auth.models import User
 from estudiante.models import Cargo, Grado, Asignatura, SecretariaEducacion, CertificacionTIC, ProgramaTIC
 
+"""" esto se esta usando en algun lado???
 GRADOS = (
     ('P', 'Prejardín'),
     ('J', 'Jardín'),
@@ -25,13 +26,8 @@ GRADOS = (
         ('11', 'Once'),
         ('F', 'Programa de Formación Complementaria')))
 )
+"""
 
-JORNADAS = (
-    ('C', 'Completa'),
-    ('M', 'Mañana'),
-    ('T', 'Tarde'),
-    ('N', 'Nocturna')
-)
 
 class InstitucionEducativa(models.Model):
     nombre = models.CharField(max_length=100)
@@ -63,6 +59,7 @@ class Curso(models.Model):
 
 
 
+"""
 #Horarios disponibles
 DIAS=(
     (1, 'Lunes'),
@@ -76,6 +73,7 @@ class HorarioClase(models.Model):
     inicio = models.TimeField(auto_now=False)
     fin = models.TimeField(auto_now=False)
     grado = models.ForeignKey(Grado)
+"""
 
 #Corresponde a los Maestros Estudiantes 
 class Estudiante(models.Model):
@@ -114,33 +112,7 @@ class Estudiante(models.Model):
 
 
 
-class InfoLaboral(models.Model):
-    ETNOEDUCADOR = (
-        (1, 'No se desempeña como etnoeducador'),
-        (1, 'Raizal'),
-        (1, 'Afrocolombiano'),
-        (1, 'Indígena'),
-        (1, 'N.A'),
-    )
-
-    estudiante = models.ForeignKey(Estudiante)
-
-    secretaria_educacion = models.ForeignKey(SecretariaEducacion)
-    institucion_educativa = models.ForeignKey(InstitucionEducativa)
-    cargo = models.IntegerField(choices=[(1, 'Docente'), (2, 'Directivo Docente')], verbose_name="cargo")
-    sector = models.CharField( choices=[('O','Oficial'), ('N', 'No Oficial')], max_length=1, verbose_name='sector')
-    zona = models.CharField( choices=[('R','Rural'), ('U', 'Urbana'), ('N', 'N.A')], max_length=1, verbose_name='zona')
-    jornada = models.CharField(choices=JORNADAS, max_length=1)
-
-    grados = models.ManyToManyField(Grado)
-    asignaturas = models.ManyToManyField(Asignatura)
-    decreto_docente = models.IntegerField( choices=[(1,'D.L 1278 de 2002'), (2, 'D.L 2277 de 1979')], max_length=1, verbose_name='decreto profesional docente')
-    #grado escalafon
-    nombramiento = models.IntegerField(choices=[(1,'Propiedad'), (2, 'Período de Prueba'), (3, 'Provisional')], max_length=1, verbose_name='tipo de nombramiento')
-
-    tipo_etnoeducador = models.IntegerField(choices=ETNOEDUCADOR)
-    poblacion_etnica = models.CharField(max_length="100", verbose_name="poblacion étnica que atiende", null=True)
-    
+"""   
 class Horario(models.Model):
     DIAS = (
         (1, 'Lunes'),
@@ -154,6 +126,7 @@ class Horario(models.Model):
     inicio = models.TimeField(verbose_name="hora inicial")
     fin = models.TimeField(verbose_name="hora final")
     curso = models.ForeignKey(Asignatura)
+"""
 
 class Clase(models.Model):
     fecha_programada = models.DateTimeField(verbose_name=u'fecha de realización')
