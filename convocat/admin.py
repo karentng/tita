@@ -2,6 +2,7 @@
 from collections import OrderedDict
 from django.contrib import admin
 from convocat.models import *
+from django.core.exceptions import ObjectDoesNotExist
 # Register your models here.
 
 
@@ -106,7 +107,10 @@ class AspiranteAdmin(admin.ModelAdmin):
     def recalcular_puntaje(self, request, queryset):
         for aspirante in queryset:
             #if aspirante.puntuacion_hv is not None:
-            aspirante.puntuacion_hv = aspirante.calcular_puntaje()
+            try :
+                aspirante.puntuacion_hv = aspirante.calcular_puntaje()
+            except ObjectDoesNotExist:
+                aspirante.puntuacion_hv = -1
             aspirante.save()
 
     def get_queryset(self, request):
