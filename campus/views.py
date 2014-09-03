@@ -26,14 +26,15 @@ def listar_clases_curso(request, curso_id):
 
 
 def listado_estudiantes(request, curso_id, clase_id):
-    try:
-        curso = get_object_or_404(Curso, id=curso_id)
-        clase = get_object_or_404(Clase, id=clase_id)
-    except Clase.DoesNotExist:
-        raise Http404
+    curso = get_object_or_404(Curso, id=curso_id)
+    clase = get_object_or_404(Clase, id=clase_id)
+
+    form = AsistenciaForm(request.POST or None, instance=clase)
+
     return render(request, 'calificar.html', {
         'clase':clase,
-        'curso': curso
+        'curso': curso,
+        'form': form,
     })
 
 
