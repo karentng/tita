@@ -11,7 +11,7 @@ import datetime
 from models import Question, Survey, Category
 from forms import ResponseForm
 
-
+"""
 def Index(request):
 	return render(request, 'index.html')
 
@@ -38,7 +38,7 @@ def Confirm(request, uuid):
 
 def privacy(request):
 	return render(request, 'privacy.html')
-
+"""
 
 def encuesta_padre(request):
 	survey = Survey.objects.get(id=1)
@@ -50,7 +50,7 @@ def encuesta_padre(request):
 		form = ResponseForm(request.POST, survey=survey)
 		if form.is_valid():
 			form.save()
-			return redirect('home')
+			return redirect('encuesta_finalizada')
 		else:
 			print "error llenando", form.errors
 	else :
