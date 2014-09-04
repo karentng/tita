@@ -23,12 +23,20 @@
     <li class="active">Estudiantes</li>
 {% endblock %}
 
-{% block titulo_contenido %}Califique la asistencia:{% endblock %}
+{% block titulo_contenido %} Clase del {{clase.fecha_programada}}  {% endblock %}
 
-{% block titulo_panel %}<i class="fa fa-list-ul"></i> Listado de Estudiantes para la clase del {{clase.fecha_programada}}{% endblock %}
-{% block contenido_panel %}
+{% block contenido %}
 
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#"><h5>Asistencia</h5></a></li>
+    <li><a href="{% url 'calificar_actividades' clase.curso_id clase.id  %}"><h5>Actividades</h5></a></li>
+</ul>
+<div class="tab-content">
+    <form method="POST"> {% csrf_token %}
+    {%bootstrap_form form %}
+    <button type="submit" class="btn btn-lg btn-primary">Guardar</button>
+    </form>
+</div>
 
-    
-    
 {% endblock %}
+

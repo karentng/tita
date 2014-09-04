@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block titulo %} Lista de Estudiantes{% endblock %}
+
+{% block menu %}
+    {% include "menus/publico.html" with opcion_menu=10 %}
+{% endblock %}
+
+{% block css %}
+    {{form.media}} {# agrega los js y css necesarios para el bootstrap3 datetimepicker #}
+{% endblock %}
+
+{% block js %}
+    
+{% endblock %}
+
+{% block miga_pan %}
+    <li><a href="{% url 'home' %}">Inicio</a></li>
+    <li><a href="{% url 'listar_cursos_profesor' %}">Cursos</a></li>
+    <li><a href="{% url 'listar_clases_curso' clase.curso_id%}">Clases</a></li>
+    <li class="active">Estudiantes</li>
+{% endblock %}
+
+{% block titulo_contenido %} Clase del {{clase.fecha_programada}}  {% endblock %}
+
+{% block contenido %}
+
+<ul class="nav nav-tabs">
+    <li><a href="{% url 'asistencia' clase.curso_id clase.id  %}"><h5>Asistencia</h5></a></li>
+    <li class="active"><a href=""><h5>Actividades</h5></a></li>
+</ul>
+<div class="tab-content">
+    
+    <div class="col-md-7 col-md-offset-5">
+        <div class="panel  {% if actividad_form.errors %} panel-danger {%else%} panel-inverse {% endif %}">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" href="#collapseOne">
+                        <i class="fa fa-plus-circle pull-right"></i> 
+                        Crear Actividad
+                    </a>
+                </h3>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse {% if actividad_form.errors %} in {% endif %}">
+                <div class="panel-body" style="border-width:1px; border-color:black; border-style:solid">
+                    <form method="POST" class="form-horizontal"> {% csrf_token %}
+                        {% bootstrap_form actividad_form layout='horizontal' field_class="col-md-7" %}
+                        <center><button type="submit" name="accion" value="crear_actividad" class="btn btn-primary">Crear</button></center>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-lg btn-primary">Guardar</button>
+    </form>
+</div>
+
+{% endblock %}
+
