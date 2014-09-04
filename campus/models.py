@@ -131,12 +131,21 @@ class Horario(models.Model):
 class Clase(models.Model):
     fecha_programada = models.DateTimeField(verbose_name=u'fecha de realización')
     curso = models.ForeignKey(Curso)
-
+    asistentes = models.ManyToManyField(Estudiante, blank=True, verbose_name='Seleccione las personas que asistieron a la clase')
     def __unicode__(self):
         return unicode(self.fecha_programada)
     
-class Asistencia(models.Model):
+
+class Actividad(models.Model):
     clase = models.ForeignKey(Clase)
-    formador = models.ForeignKey(Formador)
+    descripcion = models.CharField(max_length=100)
+
+
+class CalificacionActividad(models.Model):
+    class Meta:
+        unique_together = [('estudiante','actividad'),]
+        
     estudiante = models.ForeignKey(Estudiante)
-    asistio = models.BooleanField(verbose_name=u'¿Asistió?')
+    actividad = models.ForeignKey(Actividad)
+    nota = models.FloatField()
+    observacion = models.TextField()
