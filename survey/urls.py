@@ -14,6 +14,7 @@ urlpatterns = patterns('',
 	#url(r'^confirm/(?P<uuid>\w+)/$', 'survey.views.Confirm', name='confirmation'),
 	#url(r'^privacy/$', 'survey.views.privacy', name='privacy_statement'),
     url(r'padre$', 'survey.views.encuesta_padre', name='encuesta_padre'),
+    url(r'docente$', 'survey.views.encuesta_docente', name='encuesta_docente'),
 
     url(r'finalizada$', TemplateView.as_view(template_name='finalizada.html'), name="encuesta_finalizada"),
 
