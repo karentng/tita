@@ -103,12 +103,6 @@ class Response(models.Model):
     barrio = models.CharField(max_length=100, verbose_name=u'Barrio donde reside actualmente')
     
    
-    #interviewer = models.CharField('Name of Interviewer', max_length=400)
-    #interviewee = models.CharField('Name of Interviewee', max_length=400)
-    #conditions = models.TextField('Conditions during interview', blank=True, null=True)
-    #comments = models.TextField('Any additional Comments', blank=True, null=True)
-    #interview_uuid = models.CharField("Interview unique identifier", max_length=36)
-
     def __unicode__(self):
         return ("response %s" % self.id)
 

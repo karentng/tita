@@ -14,6 +14,7 @@ urlpatterns = patterns('',
 	url(r'^confirm/(?P<uuid>\w+)/$', 'survey.views.Confirm', name='confirmation'),
 	#url(r'^privacy/$', 'survey.views.privacy', name='privacy_statement'),
     url(r'padre$', 'survey.views.encuesta_padre', name='encuesta_padre'),
+    url(r'docente$', 'survey.views.encuesta_docente', name='encuesta_docente'),
 
 	# Uncomment the admin/doc line below to enable admin documentation:
 	#url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
