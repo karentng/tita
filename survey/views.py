@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -44,14 +44,29 @@ def encuesta_padre(request):
 	category_items = list(survey.category_set.all())
 	#categories = [c.name for c in category_items]
 	
-	form = ResponseForm(request.POST or None, survey=survey)
+	
+	if request.method == 'POST':
+		form = ResponseForm(request.POST, survey=survey)
+		if form.is_valid():
+			form.save()
+			return redirect('home')
+		else:
+			print "error llenando", form.errors
+	else :
+		form = ResponseForm(survey=survey)
 
-	#camposBasicos = ( form['question_%d'%x] for x in xrange(1,11) )
+
+
+	#camposBasicos = ( form['question_%d'%x] for x in xrange(1,1 1) )
 	#camposUsoInternet = ( form['question_%d'%x] for x in (11,12) )
 
 	#camposPercepcion = ( form['question_%d'%x] for x in (13,14) )
 	camposMaterias = [form['question_%d'%x] for x in xrange(10,29) ]
+	camposDispositivos = [form['question_%d'%x] for x in xrange(57,61) ]
+	camposUsos = [form['question_%d'%x] for x in xrange(65,84)]
 	camposHerramientas = [form['question_%d'%x] for x in xrange(37,52) ]
+	camposExpectativas = [form['question_%d'%x] for x in xrange(90,98) ]
+	camposLamentaria = [form['question_%d'%x] for x in xrange(100,108) ]
 	#camposAcuerdo = (form['question_%d'%x] for x in xrange(34,39) )
 
 	return render(request, 'encuesta_padre.html', {
@@ -61,7 +76,11 @@ def encuesta_padre(request):
 		#'camposPercepcion' : camposPercepcion,
 		'camposMaterias1': camposMaterias[:10],
 		'camposMaterias2': camposMaterias[10:],
+		'camposDispositivos': camposDispositivos,
 		'camposHerramientas' : camposHerramientas,
+		'camposUsos' : camposUsos,
+		'camposExpectativas' : camposExpectativas,
+		'camposLamentaria' : camposLamentaria,
 		#'camposAcuerdo': camposAcuerdo,
 		#'survey': survey,
 		#'categories': categories

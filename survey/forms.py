@@ -1,4 +1,6 @@
+# encoding: utf-8
 from django import forms
+from django.core.exceptions import ValidationError
 from django.forms import models
 from survey.models import Question, Category, Survey, Response, AnswerText, AnswerRadio, AnswerSelect, AnswerInteger, AnswerSelectMultiple
 from django.utils.safestring import mark_safe
@@ -71,6 +73,14 @@ class ResponseForm(models.ModelForm):
 			# initialize the form field with values from a POST request, if any.
 			if data:
 				self.fields["question_%d" % q.pk].initial = data.get('question_%d' % q.pk)
+
+	def clean_numero_documento(self):
+		# Revisar que esta misma persona (por numero_documento), no haya llenado esta misma encuesta
+		doc = self.cleaned_data['numero_documento']
+		if Response.objects.filter(survey_id=self.survey, numero_documento=doc).exists():
+			raise ValidationError('Ya se ha diligenciado la encuesta usando este número de documento')
+		else:
+			return doc
 
 	def save(self, commit=True):
 		# save the response object

@@ -22,6 +22,16 @@
 {% endblock %}
 
 {% block contenido %}
+
+{% if form.errors %}
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        Faltan algunas preguntas por responder. Verifique los campos en color Rojo
+    </div>
+{% endif %}
+
+
+
 <form method="POST"> {% csrf_token %}
     {% mypanel 'Información Personal y Socioeconómica Básica' %}
         <div class="form-horizontal">
@@ -30,6 +40,7 @@
             {% bootstrap_field form.municipio_nacimiento layout="horizontal" %}
             {% bootstrap_field form.fecha_nacimiento layout="horizontal" %}
             {% bootstrap_field form.barrio layout="horizontal" %}
+            {% bootstrap_field form.jornada layout="horizontal" %}
         </div>
         {% bootstrap_field form.question_1 %}
         {% bootstrap_field form.institucion  %}
@@ -49,7 +60,6 @@
     {% endmypanel %}
         
     {% mypanel 'Percepciones Sobre el Uso de las TIC en los Procesos e Enseñanza y Aprendizaje' %}
-        {% bootstrap_field form.question_7 form_group_class='form-group bordered' %}
         {% bootstrap_field form.question_8 form_group_class='form-group bordered' %}
         {% bootstrap_field form.question_9 form_group_class='form-group bordered' %}
 
@@ -128,9 +138,89 @@
 
     {% mypanel 'Hábitos Sobre el Uso de las TIC en la Vida Cotidiana' %}
         
-            {% bootstrap_field form.question_56 form_group_class='form-group bordered' %}            
-        
+            {% bootstrap_field form.question_56 form_group_class='form-group bordered' %}
 
+        <div class="bordered">   
+            <label for="" class="control-label">
+                ¿Para qué le sirven cada uno de los siguientes dispositivos? <small>Puede marcar varias respuestas para cada dispositivo.</small>
+            </label> 
+            <div class="form-horizontal">
+                {% for field in camposDispositivos %}
+                    {% bootstrap_field field layout="horizontal" label_class="col-md-4" field_class="col-md-6"  %}
+                {% endfor %}
+            </div>
+        </div>
+        <br>
+        <div class="bordered">
+            {% bootstrap_field form.question_61 %}
+            <div class="form-horizontal">
+                {% bootstrap_field form.question_62 layout="horizontal" %}
+            </div>
+        </div>
+        <br>
+        <div class="bordered">
+            {% bootstrap_field form.question_63 %}
+            <div class="form-horizontal">
+                {% bootstrap_field form.question_64 layout="horizontal" %}
+            </div>
+        </div>
+        <br>
+        <div class="bordered">   
+            <label for="" class="control-label">
+                ¿Qué hace cuando entra a internet y con qué frecuencia?
+            </label> 
+            <div class="form-horizontal">
+                {% for field in camposUsos %}
+                    {% bootstrap_field field layout="horizontal" label_class="col-md-6" field_class="col-md-2"  %}
+                {% endfor %}
+                <div class="form-horizontal">
+                {% bootstrap_field form.question_83 layout="horizontal" label_class="col-md-6" %}
+                </div>
+            </div>
+        </div>
+        <br>
+        {% bootstrap_field form.question_84 form_group_class='form-group bordered' %}
+        <br>
+        {% bootstrap_field form.question_86 form_group_class='form-group bordered' %}
+        <br>
+        {% bootstrap_field form.question_88 form_group_class='form-group bordered' %}
+        <br>
+        {% bootstrap_field form.question_89 form_group_class='form-group bordered' %}
+    {% endmypanel %}
+
+    {% mypanel 'Expectativas Sobre el Uso de las TIC' %}
+        <div class="bordered">   
+            <label for="" class="control-label">
+                Si se ganara un concurso y pudiera escoger del siguiente listado <b>tres</b> dispositivos ¿Cuáles escogería? Califique de 1 a 3 qué tan importante es para usted cada uno de esos tres dispositivos que seleccionó. Si es el más importante le pone 3, si es menos importante que el anterior le pone 2 y si es el menos importante que el anterior le pone 2 y si es el menos importante de los tres le pone 1.
+            </label> 
+            <div class="form-horizontal">
+                {% for field in camposExpectativas %}
+                    {% bootstrap_field field layout="horizontal" label_class="col-md-3" field_class="col-md-2"  %}
+                {% endfor %}
+            </div>
+        </div>
+        <br>
+        <div class="bordered">
+            {% bootstrap_field form.question_98 %}
+            <div class="form-horizontal">
+                {% bootstrap_field form.question_99 layout="horizontal" %}
+            </div>
+        </div>
+        <br>
+        <div class="bordered">   
+            <label for="" class="control-label">
+                De los siguientes dispositivos escoja <b>tres</b> que lamentaría perder. Califique de 1 a 3 qué tan importante es para usted cada uno de esos tres dispositivos que lamentaría perder. Si es el más importante le pone 3, si es menos importante que el anterior le pone 2 y si es el menos importante de los tres le pone 1. 
+            </label> 
+            <div class="form-horizontal">
+                {% for field in camposLamentaria %}
+                    {% bootstrap_field field layout="horizontal" label_class="col-md-3" field_class="col-md-2"  %}
+                {% endfor %}
+            </div>
+        </div>
+    {% endmypanel %}
+    
+    {% mypanel 'Otros' %}
+        {% bootstrap_field form.question_108 form_group_class='form-group bordered'%}
     {% endmypanel %}
     
     <br>
