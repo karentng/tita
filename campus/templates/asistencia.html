@@ -32,9 +32,16 @@
     <li><a href="{% url 'calificar_actividades' clase.curso_id clase.id  %}"><h5>Actividades</h5></a></li>
 </ul>
 <div class="tab-content">
-    <form method="POST"> {% csrf_token %}
-    {%bootstrap_form form %}
-    <button type="submit" class="btn btn-lg btn-primary">Guardar</button>
+
+    <form method="POST" enctype="multipart/form-data"> {% csrf_token %}
+        <div class="col-md-6">
+            {%bootstrap_form form %}
+        </div>
+        <div class="col-md-6">
+            <strong>Soportes de clase</strong>
+            {%bootstrap_formset soportesFormset display_label=False %}
+        </div>
+        <button type="submit" class="btn btn-lg btn-primary">Guardar</button>
     </form>
 </div>
 

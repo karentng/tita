@@ -1,3 +1,4 @@
+
 #encoding: utf-8
 
 from django.db import models
@@ -103,7 +104,7 @@ class Estudiante(models.Model):
     direccion = models.CharField(verbose_name="dirección", max_length=100)
     nivel_educativo = models.IntegerField(choices=NIVEL_EDUCATIVO, verbose_name="último nivel educativo aprobado")
 
-    curso = models.ForeignKey(Curso, verbose_name='curso', null=True)
+    curso = models.ForeignKey(Curso, verbose_name='curso', null=True, blank=True)
 
     aprobo = models.NullBooleanField()
     
@@ -128,12 +129,27 @@ class Horario(models.Model):
     curso = models.ForeignKey(Asignatura)
 """
 
+
+
 class Clase(models.Model):
     fecha_programada = models.DateTimeField(verbose_name=u'fecha de realización')
+    modificado = models.DateTimeField(auto_now=True)
     curso = models.ForeignKey(Curso)
     asistentes = models.ManyToManyField(Estudiante, blank=True, verbose_name='Seleccione las personas que asistieron a la clase')
     def __unicode__(self):
         return unicode(self.fecha_programada)
+
+"""
+class Asistencia(models.Model):
+    clase = models.ForeignKey(Clase)
+    estudiante = models.ForeignKey(Estudiante)
+    asistio = models.BooleanField(default=False)
+    modificado = models.DateTimeField(auto_now=True)
+"""
+
+class SoporteClase(models.Model):
+    clase = models.ForeignKey(Clase)
+    archivo = models.FileField(upload_to="soportesclases/%Y%m%d_")
     
 
 class Actividad(models.Model):

@@ -1,6 +1,6 @@
-from django.shortcuts import render, get_list_or_404, get_object_or_404
+from django.shortcuts import render, redirect, get_list_or_404, get_object_or_404
 from campus.models import *
-from campus.forms import AsistenciaForm, ActividadForm
+from campus.forms import AsistenciaForm, SoportesFormset, ActividadForm
 
 # Create your views here.
 
@@ -29,12 +29,30 @@ def asistencia(request, curso_id, clase_id):
     curso = get_object_or_404(Curso, id=curso_id)
     clase = get_object_or_404(Clase, id=clase_id)
 
-    form = AsistenciaForm(request.POST or None, instance=clase)
+    if request.method=='POST':
+        form = AsistenciaForm(request.POST, instance=clase)
+        soportesFormset = SoportesFormset(request.POST, request.FILES, instance=clase)
+        #advertencia: no trate de copiar este codigo, trabaja de manera inusual
+        if form.is_valid() : form.save()
+        if soportesFormset.is_valid() : 
+            result = soportesFormset.save()
+            print "result=",result
+        
+        print "valido1=", form.is_valid(), "valido2=", soportesFormset.is_valid()
+
+        if form.is_valid() and soportesFormset.is_valid():
+            return redirect('asistencia', curso_id, clase_id)
+
+
+    else :
+        form = AsistenciaForm(instance=clase)
+        soportesFormset = SoportesFormset(instance=clase)
 
     return render(request, 'asistencia.html', {
         'clase':clase,
         'curso': curso,
         'form': form,
+        'soportesFormset' : soportesFormset,
     })
 
 
