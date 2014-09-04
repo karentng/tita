@@ -38,7 +38,7 @@ class ResponseForm(models.ModelForm):
 		for q in survey.questions():
 			if q.question_type == Question.TEXT:
 				self.fields["question_%d" % q.pk] = forms.CharField(label=q.text, 
-					widget=forms.TextInput)
+					widget=forms.TextInput, required=q.required)
 			elif q.question_type == Question.RADIO:
 				question_choices = q.get_choices()
 				self.fields["question_%d" % q.pk] = forms.ChoiceField(label=q.text, 
@@ -64,6 +64,7 @@ class ResponseForm(models.ModelForm):
 				self.fields["question_%d" % q.pk].widget.attrs["class"] = "required"
 			else:
 				self.fields["question_%d" % q.pk].required = False
+			
 				
 			# add the category as a css class, and add it as a data attribute
 			# as well (this is used in the template to allow sorting the
