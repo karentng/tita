@@ -1,10 +1,12 @@
 # encoding: utf-8
+import uuid
 from django import forms
 from django.core.exceptions import ValidationError
+from django.utils.safestring import mark_safe
 from django.forms import models
 from survey.models import Question, Category, Survey, Response, AnswerText, AnswerRadio, AnswerSelect, AnswerInteger, AnswerSelectMultiple
-from django.utils.safestring import mark_safe
-import uuid
+from convocat.forms import MunicipioChoice, MyDateWidget
+from django_select2 import Select2Widget
 
 # blatantly stolen from 
 # http://stackoverflow.com/questions/5935546/align-radio-buttons-horizontally-in-django-forms?rq=1
@@ -14,9 +16,14 @@ class HorizontalRadioRenderer(forms.RadioSelect.renderer):
 
 
 class ResponseForm(models.ModelForm):
+	municipio_nacimiento = MunicipioChoice()
 	class Meta:
 		model = Response	
 		fields = ('numero_documento','nombre','jornada', 'municipio_nacimiento', 'fecha_nacimiento', 'barrio', 'institucion') #('interviewer', 'interviewee', 'conditions', 'comments')
+		widgets = {
+			'institucion' : Select2Widget(),
+			'fecha_nacimiento' : MyDateWidget(),
+		}
 
 	def __init__(self, *args, **kwargs):
 		# expects a survey object to be passed in initially

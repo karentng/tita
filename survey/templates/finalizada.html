@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block titulo %} Encuesta Finalizada {% endblock %}
+
+
+{% block miga_pan %}
+    <li><a href="{% url 'home' %}">Inicio</a></li>
+{% endblock %}
+
+{% block titulo_contenido %}Encuesta{% endblock %}
+
+{% block titulo_panel %}<i class="fa fa-key"></i> Encuesta Finalizada{% endblock %}
+{% block contenido_panel %}
+<div class="row">
+    <div class="col-md-10 col-md-offset-1 text-center" style="font-size:15px">
+        <i class="fa fa-flag fa-4x"></i>
+        <h4 align="center"><b> Encuesta Diligenciada Exitósamente</b></h4>
+        <br>
+        
+
+            <strong class="text-success">Gracias por su tiempo!</strong>
+            <br><br>
+            
+            
+        
+        <br>
+        
+        <a href="{% url 'home' %}" class="btn btn-lg btn-success"><i class="fa fa-home"></i> Volver a la Página Principal</a> 
+        <br><br>
+    </div>
+</div>
+        
+    
+{% endblock %}

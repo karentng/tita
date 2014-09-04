@@ -4,9 +4,9 @@
 {% block css %}
     {{datosBasicosForm.media}}
     <style>
-        label.bold {
+        label.control-label {
             font-weight: bold;
-            font-size: 15px;
+            
         }
 
         .bordered {
@@ -15,10 +15,18 @@
             padding: 3px;
             border-radius: 3px;
             border-color: gray;
+            padding: 5px 10px 5px 10px;
         }
 
 
     </style>
+
+    {{form.media}}
+{% endblock %}
+
+
+{% block titulo_contenido %}
+    Encuesta a Padres de Familia
 {% endblock %}
 
 {% block contenido %}
@@ -35,12 +43,12 @@
 <form method="POST"> {% csrf_token %}
     {% mypanel 'Información Personal y Socioeconómica Básica' %}
         <div class="form-horizontal">
-            {% bootstrap_field form.numero_documento layout="horizontal" %}
-            {% bootstrap_field form.nombre layout="horizontal" %}
-            {% bootstrap_field form.municipio_nacimiento layout="horizontal" %}
-            {% bootstrap_field form.fecha_nacimiento layout="horizontal" %}
-            {% bootstrap_field form.barrio layout="horizontal" %}
-            {% bootstrap_field form.jornada layout="horizontal" %}
+            {% bootstrap_field form.numero_documento layout="horizontal" label_class="col-md-5" %}
+            {% bootstrap_field form.nombre layout="horizontal" label_class="col-md-5" %}
+            {% bootstrap_field form.municipio_nacimiento layout="horizontal" label_class="col-md-5" %}
+            {% bootstrap_field form.fecha_nacimiento layout="horizontal" label_class="col-md-5" %}
+            {% bootstrap_field form.barrio layout="horizontal" label_class="col-md-5" %}
+            {% bootstrap_field form.jornada layout="horizontal" label_class="col-md-5" %}
         </div>
         {% bootstrap_field form.question_1 %}
         {% bootstrap_field form.institucion  %}
