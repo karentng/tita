@@ -1,3 +1,4 @@
+# encoding: utf-8
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
@@ -55,7 +56,9 @@ def encuesta_padre(request):
 	else :
 		form = ResponseForm(survey=survey)
 
-
+	# customizar form de acuerdo a la encuesta para padres
+	form.fields['jornada'].label = u"Jornada en la que estudia su hijo(a)"
+	form.fields['institucion'].label = u"Institución donde estudia su hijo(a)"
 
 	#camposBasicos = ( form['question_%d'%x] for x in xrange(1,1 1) )
 	#camposUsoInternet = ( form['question_%d'%x] for x in (11,12) )
