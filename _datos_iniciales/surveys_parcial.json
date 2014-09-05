@@ -1723,7 +1723,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Adem\u00e1s del Diplomado \u00bfha realizado otros cursos de formaci\u00f3n en TIC? ", 
+    "text": "Adem\u00e1s del Diplomado \u00bfha realizado otros cursos de formaci\u00f3n en TIC? <small> Si su respuesta es NO, deje en blanco la siguiente pregunta.</small>", 
     "required": true, 
     "number": 13.0, 
     "choices": "S\u00ed,\r\nNo", 
@@ -2152,7 +2152,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": " En el \u00faltimo mes de trabajo \u00bfha utilizado el computador en sus clases?\r\n", 
+    "text": " En el \u00faltimo mes de trabajo \u00bfha utilizado el computador en sus clases? <small> Si su respuesta es NO, dej\u00e9 la siguiete pregunta sin contestar.</small>\r\n", 
     "required": true, 
     "number": 17.0, 
     "choices": "S\u00ed,\r\nNo", 
@@ -2246,7 +2246,7 @@
     "text": "\u00bfDe qu\u00e9 manera usted investiga en Internet sobre un tema que le interesa para sus clases? <small>Puede marcar varias opciones.</small>", 
     "required": true, 
     "number": 23.0, 
-    "choices": "Busca en bases de datos de revistas especializadas,\r\nUtiliza buscadores especializados (Google Acad\u00e9mico, Edukaweb),\r\nBusca en portales educativos (Eduteka, Colombia Aprende),\r\nConsulta a trav\u00e9s de los buscadores convencionales (Google, Yahoo),\r\nNo usa Internet. \t\t\t\t\t\t\t\t\t\t\t\r\n", 
+    "choices": "Busca en bases de datos de revistas especializadas,\r\nUtiliza buscadores especializados (Google Acad\u00e9mico; Edukaweb),\r\nBusca en portales educativos (Eduteka; Colombia Aprende),\r\nConsulta a trav\u00e9s de los buscadores convencionales (Google; Yahoo),\r\nNo usa Internet\t\t\t\t\t\t\t\t\t\t\t\r\n", 
     "survey": 2, 
     "question_type": "select-multiple"
   }
@@ -2337,7 +2337,7 @@
     "text": "\u00bfPara qu\u00e9 utiliza su tel\u00e9fono celular? <small>Puede marcar varias opciones</small>", 
     "required": true, 
     "number": 29.0, 
-    "choices": "Hacer y recibir llamadas,\r\nEnviar y recibir mensajes de texto,\r\nTomar fotos,\r\nEscuchar m\u00fasica,\r\nEscuchar emisoras de radio,\r\nGrabar videos,\r\nConectarse a internet,\r\nEnviar y recibir correo electr\u00f3nico,\r\nChatear,\r\nVer videos,\r\nConectarse a las redes sociales,\r\nHacer transacciones en bancos o entidades financieras,\r\nComprar o vender cosas,\r\n", 
+    "choices": "Hacer y recibir llamadas,\r\nEnviar y recibir mensajes de texto,\r\nTomar fotos,\r\nEscuchar m\u00fasica,\r\nEscuchar emisoras de radio,\r\nGrabar videos,\r\nConectarse a internet,\r\nEnviar y recibir correo electr\u00f3nico,\r\nChatear,\r\nVer videos,\r\nConectarse a las redes sociales,\r\nHacer transacciones en bancos o entidades financieras,\r\nComprar o vender cosas\r\n", 
     "survey": 2, 
     "question_type": "select-multiple"
   }
@@ -2622,7 +2622,7 @@
     "category": null, 
     "text": "Hacer transacciones con bancos o entidades financieras", 
     "required": true, 
-    "number": 3.19, 
+    "number": 31.19, 
     "choices": "Siempre,\r\nA veces,\r\nNunca", 
     "survey": 2, 
     "question_type": "select"
@@ -2642,35 +2642,406 @@
   }
 },
 {
+  "pk": 215, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "\u00bfCon qui\u00e9n comparte la informaci\u00f3n que encuentra en Internet? <small>Puede marcar varias opciones.</small>\t\t\t\t\t\t\t", 
+    "required": true, 
+    "number": 32.0, 
+    "choices": "Con sus amigos,\r\nCon otros profesores,\r\nCon familiares,\r\nCon sus estudiantes,\r\nCon nadie \r\n", 
+    "survey": 2, 
+    "question_type": "select-multiple"
+  }
+},
+{
+  "pk": 216, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "\u00bfCon qui\u00e9n aprende a usar el computador y la Internet? <small>Puede marcar varias opciones.</small> \t", 
+    "required": true, 
+    "number": 33.0, 
+    "choices": "Solo, cacharreando o averiguando en Internet,\r\nCon sus amigos,\r\nCon otros profesores,\r\nCon familiares,\r\nCon sus estudiantes,\r\nHaciendo cursos virtuales,\r\nHaciendo cursos presenciales en alguna instituci\u00f3n,\r\nContratando clases personalizadas\r\n", 
+    "survey": 2, 
+    "question_type": "select-multiple"
+  }
+},
+{
+  "pk": 217, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Cuando usa Internet \u00bfcon qui\u00e9n prefiere hacerlo? ", 
+    "required": true, 
+    "number": 35.0, 
+    "choices": "Solo,\r\nCon sus amigos,\r\nCon familiares,\r\nCon otros profesores,\r\nCon sus estudiantes\r\n", 
+    "survey": 2, 
+    "question_type": "radio"
+  }
+},
+{
+  "pk": 218, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "\u00bfDurante cu\u00e1ntas horas diarias navega en Internet?  Si no navega en Internet todos los d\u00edas, haga el promedio de horas por d\u00eda a partir del total de horas que navega durante los d\u00edas de la semana en que s\u00ed lo hace. \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t", 
+    "required": true, 
+    "number": 36.0, 
+    "choices": "Entre 1 y 2 horas,\r\nEntre 3 y 5 horas,\r\nM\u00e1s de 5 horas \r\n", 
+    "survey": 2, 
+    "question_type": "radio"
+  }
+},
+{
+  "pk": 219, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Celular\t\t\t\t\t\t\t\t\t\t\t\t\t\t", 
+    "required": true, 
+    "number": 37.01, 
+    "choices": "1, 2, 3", 
+    "survey": 2, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 220, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Computador", 
+    "required": true, 
+    "number": 37.02, 
+    "choices": "1, 2, 3", 
+    "survey": 2, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 221, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Tablet", 
+    "required": true, 
+    "number": 37.03, 
+    "choices": "1, 2, 3", 
+    "survey": 2, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 222, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Conexi\u00f3n a internet", 
+    "required": true, 
+    "number": 37.04, 
+    "choices": "1, 2, 3", 
+    "survey": 2, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 223, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "DVD o Blue-ray", 
+    "required": true, 
+    "number": 37.05, 
+    "choices": "1, 2, 3", 
+    "survey": 2, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 224, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Radio", 
+    "required": true, 
+    "number": 37.06, 
+    "choices": "1, 2, 3", 
+    "survey": 2, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 225, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Televisor", 
+    "required": true, 
+    "number": 37.07, 
+    "choices": "1, 2, 3", 
+    "survey": 2, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 226, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Video beam", 
+    "required": true, 
+    "number": 37.08, 
+    "choices": "1, 2, 3", 
+    "survey": 2, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 227, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "\u00bfQu\u00e9 le gustar\u00eda hacer o aprender a hacer con Internet? <small>Puede marcar varias opciones.</small>\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t", 
+    "required": true, 
+    "number": 38.0, 
+    "choices": "Desarrollar programas inform\u00e1ticos,\r\nConstruir p\u00e1ginas web,\r\nCrear contenidos sobre la materia que ense\u00f1o,\r\nHacer un curso virtual complementario sobre la materia que ense\u00f1o,\r\nConstruir un espacio virtual en el que pueda interactuar con mis estudiantes,\r\nCrear videos y pel\u00edculas,\t\t\t\t\t\t\t\t\t\t\t\r\nCrear mejores fotograf\u00edas,\t\t\t\t\t\r\nEscribir historias y cuentos,\t\t\t\t\t\t\t\t\t\r\nHacer un video y subirlo a You Tube,\r\nDise\u00f1ar un videojuego,\t\t\t\t\t\t\t\t\t\r\nConstruir un blog; un diario; un peri\u00f3dico; un programa de radio y m\u00fasica,\t\t\t\t\t\t\t\t\t\t\t\r\nAprender un idioma que no conozco,\r\nHacer amigos de mi edad,\t\t\t\t\t\t\t\t\r\nComponer m\u00fasica utilizando software especializado", 
+    "survey": 2, 
+    "question_type": "select-multiple"
+  }
+},
+{
+  "pk": 228, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Otra cosa. \u00bfCu\u00e1l?", 
+    "required": false, 
+    "number": 38.01, 
+    "choices": "", 
+    "survey": 2, 
+    "question_type": "text"
+  }
+},
+{
+  "pk": 261, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Celular\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t", 
+    "required": true, 
+    "number": 39.01, 
+    "choices": "1, 2, 3", 
+    "survey": 2, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 262, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Computador", 
+    "required": true, 
+    "number": 39.02, 
+    "choices": "1, 2, 3", 
+    "survey": 2, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 263, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Tablet", 
+    "required": true, 
+    "number": 39.03, 
+    "choices": "1, 2, 3", 
+    "survey": 2, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 264, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Conexi\u00f3n a internet", 
+    "required": true, 
+    "number": 39.04, 
+    "choices": "1, 2, 3", 
+    "survey": 2, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 265, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "DVD o Blue-ray", 
+    "required": true, 
+    "number": 39.05, 
+    "choices": "1, 2, 3", 
+    "survey": 2, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 266, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Radio", 
+    "required": true, 
+    "number": 39.06, 
+    "choices": "1, 2, 3", 
+    "survey": 2, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 267, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Televisor", 
+    "required": true, 
+    "number": 39.07, 
+    "choices": "1, 2, 3", 
+    "survey": 2, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 268, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Video Beam", 
+    "required": true, 
+    "number": 39.08, 
+    "choices": "1, 2, 3", 
+    "survey": 2, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 269, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Suponiendo que el escenario descrito al inicio ya es real, \u00bfqu\u00e9 cree que suceder\u00eda con el desempe\u00f1o y el comportamiento de sus estudiantes en clase?\t\t\t\t\t\t\t\t\t\t\t", 
+    "required": true, 
+    "number": 40.0, 
+    "choices": "No creo que el desempe\u00f1o escolar y el comportamiento de los estudiantes cambien mucho,\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\r\nCreo que el desempe\u00f1o escolar \u00a0puede mejorar, pero el comportamiento (atenci\u00f3n; concentraci\u00f3n; disciplina) puede deteriorarse,\r\nCreo que el desempe\u00f1o escolar no necesariamente mejorar\u00e1; pero el comportamiento (atenci\u00f3n; concentraci\u00f3n; disciplina) puede mejorar,\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\r\nCreo que el desempe\u00f1o escolar y el comportamiento de los estudiantes pueden mejorar mucho\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t", 
+    "survey": 2, 
+    "question_type": "radio"
+  }
+},
+{
+  "pk": 270, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Suponiendo que el escenario descrito al inicio ya es real, \u00bfqu\u00e9 cree que suceder\u00eda con las tareas y responsabilidades de los profesores con los nuevos equipos?\t\t\t\t\t\t\t\t\t\t", 
+    "required": true, 
+    "number": 41.0, 
+    "choices": "Creo que esta dotaci\u00f3n tecnol\u00f3gica (Tit@) realmente facilitar\u00e1 y cualificar\u00e1 nuestro trabajo\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\r\nCreo que esta dotaci\u00f3n tecnol\u00f3gica (Tit@) facilitar\u00e1 nuestro trabajo; lo har\u00e1 m\u00e1s cualificado; pero aumentar\u00e1 nuestras responsabilidades y tareas docentes,\t\t\t\r\nCreo que esta dotaci\u00f3n tecnol\u00f3gica (Tit@) facilitar\u00e1 las tareas administrativas; pero no cualificar\u00e1 de manera importante nuestro trabajo acad\u00e9mico docente,\t\t\t\t\r\nCreo que esta dotaci\u00f3n tecnol\u00f3gica (Tit@) har\u00e1 m\u00e1s dif\u00edcil nuestro trabajo y aumentar\u00e1 el n\u00famero de tareas (administrativas y acad\u00e9micas) por realizar", 
+    "survey": 2, 
+    "question_type": "radio"
+  }
+},
+{
+  "pk": 271, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Suponiendo que el escenario descrito al inicio ya es real, \u00bfqu\u00e9 cree que suceder\u00eda con la comunicaci\u00f3n con los padres de familia? \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t", 
+    "required": true, 
+    "number": 42.0, 
+    "choices": "Creo que habr\u00e1 una comunicaci\u00f3n m\u00e1s fluida y continua con los padres de familia; ellos estar\u00e1n mejor enterados de lo que pasa con los estudiantes,\r\nNo creo que esto cambie mucho. Los padres y acudientes interesados en sus hijos mantienen comunicaci\u00f3n constante con los profesores; con o sin plataforma digital. Los que no est\u00e1n interesados no cambiar\u00e1n; aunque haya plataforma digital,\t\t\t\t\t\t\t\t\t\t\t\t\t\t\r\nLa plataforma permitir\u00e1 que los padres est\u00e9n al tanto del desempe\u00f1o escolar de los estudiantes y muy probablemente eso implicar\u00e1 para nosotros mayor dedicaci\u00f3n de tiempo para responder a \u00a0un n\u00famero creciente de consultas de los padres,\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\r\nEsto no va a funcionar porque los padres no est\u00e1n capacitados para manejar este tipo de plataformas o no cuentan con la dotaci\u00f3n tecnol\u00f3gica necesaria para aprovecharla\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t", 
+    "survey": 2, 
+    "question_type": "radio"
+  }
+},
+{
+  "pk": 272, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "\u00bfLe gust\u00f3 responder esta encuesta en computador?", 
+    "required": true, 
+    "number": 43.0, 
+    "choices": "S\u00ed,\r\nNo,\r\nEs igual a si la hubiese respondido en papel", 
+    "survey": 2, 
+    "question_type": "radio"
+  }
+},
+{
   "pk": 1, 
   "model": "survey.response", 
   "fields": {
-    "fecha_nacimiento": "1988-04-30", 
     "updated": "2014-09-03T21:21:57.081", 
     "jornada": "M", 
     "created": "2014-09-03T21:21:57.081", 
     "numero_documento": 123, 
-    "municipio_nacimiento": 1006, 
     "institucion": 1, 
     "survey": 1, 
-    "nombre": "Victor Padilla", 
-    "barrio": "Ciudadela Comfandi"
+    "nombre": "Victor Padilla"
   }
 },
 {
   "pk": 3, 
   "model": "survey.response", 
   "fields": {
-    "fecha_nacimiento": "1988-04-30", 
     "updated": "2014-09-03T22:17:40.843", 
     "jornada": "M", 
     "created": "2014-09-03T22:17:40.843", 
     "numero_documento": 1237, 
-    "municipio_nacimiento": 1006, 
     "institucion": 8, 
     "survey": 1, 
-    "nombre": "Victor Padilla", 
-    "barrio": "Ciudadela Comfandi"
+    "nombre": "Victor Padilla"
+  }
+},
+{
+  "pk": 4, 
+  "model": "survey.response", 
+  "fields": {
+    "updated": "2014-09-05T00:19:10.933", 
+    "jornada": "M", 
+    "created": "2014-09-05T00:19:10.933", 
+    "numero_documento": 1143839254, 
+    "institucion": 3, 
+    "survey": 2, 
+    "nombre": "Karent Narvaez"
+  }
+},
+{
+  "pk": 5, 
+  "model": "survey.response", 
+  "fields": {
+    "updated": "2014-09-05T00:22:08.292", 
+    "jornada": "M", 
+    "created": "2014-09-05T00:22:08.292", 
+    "numero_documento": 16402074, 
+    "institucion": 3, 
+    "survey": 2, 
+    "nombre": "Karent Narvaez"
+  }
+},
+{
+  "pk": 6, 
+  "model": "survey.response", 
+  "fields": {
+    "updated": "2014-09-05T00:27:07.505", 
+    "jornada": "M", 
+    "created": "2014-09-05T00:27:07.505", 
+    "numero_documento": 16706040, 
+    "institucion": 3, 
+    "survey": 2, 
+    "nombre": "Karent Narvaez"
   }
 },
 {
@@ -2869,6 +3240,231 @@
     "body": "Editor", 
     "question": 51, 
     "response": 3
+  }
+},
+{
+  "pk": 23, 
+  "model": "survey.answertext", 
+  "fields": {
+    "body": "", 
+    "question": 185, 
+    "response": 4
+  }
+},
+{
+  "pk": 24, 
+  "model": "survey.answertext", 
+  "fields": {
+    "body": "", 
+    "question": 180, 
+    "response": 4
+  }
+},
+{
+  "pk": 25, 
+  "model": "survey.answertext", 
+  "fields": {
+    "body": "", 
+    "question": 182, 
+    "response": 4
+  }
+},
+{
+  "pk": 26, 
+  "model": "survey.answertext", 
+  "fields": {
+    "body": "chatear", 
+    "question": 183, 
+    "response": 4
+  }
+},
+{
+  "pk": 27, 
+  "model": "survey.answertext", 
+  "fields": {
+    "body": "", 
+    "question": 228, 
+    "response": 4
+  }
+},
+{
+  "pk": 28, 
+  "model": "survey.answertext", 
+  "fields": {
+    "body": "", 
+    "question": 194, 
+    "response": 4
+  }
+},
+{
+  "pk": 29, 
+  "model": "survey.answertext", 
+  "fields": {
+    "body": "", 
+    "question": 192, 
+    "response": 4
+  }
+},
+{
+  "pk": 30, 
+  "model": "survey.answertext", 
+  "fields": {
+    "body": "", 
+    "question": 185, 
+    "response": 5
+  }
+},
+{
+  "pk": 31, 
+  "model": "survey.answertext", 
+  "fields": {
+    "body": "", 
+    "question": 180, 
+    "response": 5
+  }
+},
+{
+  "pk": 32, 
+  "model": "survey.answertext", 
+  "fields": {
+    "body": "", 
+    "question": 182, 
+    "response": 5
+  }
+},
+{
+  "pk": 33, 
+  "model": "survey.answertext", 
+  "fields": {
+    "body": "chatear", 
+    "question": 183, 
+    "response": 5
+  }
+},
+{
+  "pk": 34, 
+  "model": "survey.answertext", 
+  "fields": {
+    "body": "", 
+    "question": 228, 
+    "response": 5
+  }
+},
+{
+  "pk": 35, 
+  "model": "survey.answertext", 
+  "fields": {
+    "body": "", 
+    "question": 194, 
+    "response": 5
+  }
+},
+{
+  "pk": 36, 
+  "model": "survey.answertext", 
+  "fields": {
+    "body": "", 
+    "question": 192, 
+    "response": 5
+  }
+},
+{
+  "pk": 37, 
+  "model": "survey.answertext", 
+  "fields": {
+    "body": "", 
+    "question": 185, 
+    "response": 6
+  }
+},
+{
+  "pk": 38, 
+  "model": "survey.answertext", 
+  "fields": {
+    "body": "", 
+    "question": 180, 
+    "response": 6
+  }
+},
+{
+  "pk": 39, 
+  "model": "survey.answertext", 
+  "fields": {
+    "body": "", 
+    "question": 182, 
+    "response": 6
+  }
+},
+{
+  "pk": 40, 
+  "model": "survey.answertext", 
+  "fields": {
+    "body": "chatear", 
+    "question": 183, 
+    "response": 6
+  }
+},
+{
+  "pk": 41, 
+  "model": "survey.answertext", 
+  "fields": {
+    "body": "", 
+    "question": 228, 
+    "response": 6
+  }
+},
+{
+  "pk": 42, 
+  "model": "survey.answertext", 
+  "fields": {
+    "body": "", 
+    "question": 194, 
+    "response": 6
+  }
+},
+{
+  "pk": 43, 
+  "model": "survey.answertext", 
+  "fields": {
+    "body": "", 
+    "question": 192, 
+    "response": 6
+  }
+},
+{
+  "pk": 44, 
+  "model": "survey.answertext", 
+  "fields": {
+    "body": "porq si", 
+    "question": 141, 
+    "response": 6
+  }
+},
+{
+  "pk": 45, 
+  "model": "survey.answertext", 
+  "fields": {
+    "body": "", 
+    "question": 145, 
+    "response": 6
+  }
+},
+{
+  "pk": 46, 
+  "model": "survey.answertext", 
+  "fields": {
+    "body": "", 
+    "question": 176, 
+    "response": 6
+  }
+},
+{
+  "pk": 47, 
+  "model": "survey.answertext", 
+  "fields": {
+    "body": "dormir y leer", 
+    "question": 178, 
+    "response": 6
   }
 },
 {
@@ -3103,6 +3699,213 @@
     "body": "Solo", 
     "question": 88, 
     "response": 3
+  }
+},
+{
+  "pk": 27, 
+  "model": "survey.answerradio", 
+  "fields": {
+    "body": "S\u00ed", 
+    "question": 181, 
+    "response": 4
+  }
+},
+{
+  "pk": 28, 
+  "model": "survey.answerradio", 
+  "fields": {
+    "body": "Es m\u00e1s f\u00e1cil para \u00e9l/ella", 
+    "question": 117, 
+    "response": 4
+  }
+},
+{
+  "pk": 29, 
+  "model": "survey.answerradio", 
+  "fields": {
+    "body": "De 4 a 7 d\u00edas a la semana", 
+    "question": 116, 
+    "response": 4
+  }
+},
+{
+  "pk": 30, 
+  "model": "survey.answerradio", 
+  "fields": {
+    "body": "De 4 a 7 d\u00edas a la semana", 
+    "question": 115, 
+    "response": 4
+  }
+},
+{
+  "pk": 31, 
+  "model": "survey.answerradio", 
+  "fields": {
+    "body": "S\u00ed", 
+    "question": 272, 
+    "response": 4
+  }
+},
+{
+  "pk": 32, 
+  "model": "survey.answerradio", 
+  "fields": {
+    "body": "S\u00ed", 
+    "question": 181, 
+    "response": 5
+  }
+},
+{
+  "pk": 33, 
+  "model": "survey.answerradio", 
+  "fields": {
+    "body": "Es m\u00e1s f\u00e1cil para \u00e9l/ella", 
+    "question": 117, 
+    "response": 5
+  }
+},
+{
+  "pk": 34, 
+  "model": "survey.answerradio", 
+  "fields": {
+    "body": "De 4 a 7 d\u00edas a la semana", 
+    "question": 116, 
+    "response": 5
+  }
+},
+{
+  "pk": 35, 
+  "model": "survey.answerradio", 
+  "fields": {
+    "body": "De 4 a 7 d\u00edas a la semana", 
+    "question": 115, 
+    "response": 5
+  }
+},
+{
+  "pk": 36, 
+  "model": "survey.answerradio", 
+  "fields": {
+    "body": "S\u00ed", 
+    "question": 272, 
+    "response": 5
+  }
+},
+{
+  "pk": 37, 
+  "model": "survey.answerradio", 
+  "fields": {
+    "body": "S\u00ed", 
+    "question": 181, 
+    "response": 6
+  }
+},
+{
+  "pk": 38, 
+  "model": "survey.answerradio", 
+  "fields": {
+    "body": "Es m\u00e1s f\u00e1cil para \u00e9l/ella", 
+    "question": 117, 
+    "response": 6
+  }
+},
+{
+  "pk": 39, 
+  "model": "survey.answerradio", 
+  "fields": {
+    "body": "De 4 a 7 d\u00edas a la semana", 
+    "question": 116, 
+    "response": 6
+  }
+},
+{
+  "pk": 40, 
+  "model": "survey.answerradio", 
+  "fields": {
+    "body": "De 4 a 7 d\u00edas a la semana", 
+    "question": 115, 
+    "response": 6
+  }
+},
+{
+  "pk": 41, 
+  "model": "survey.answerradio", 
+  "fields": {
+    "body": "S\u00ed", 
+    "question": 272, 
+    "response": 6
+  }
+},
+{
+  "pk": 42, 
+  "model": "survey.answerradio", 
+  "fields": {
+    "body": "Creo que esta dotaci\u00f3n tecnol\u00f3gica (Tit@) realmente facilitar\u00e1 y cualificar\u00e1 nuestro trabajo\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\r\nCreo que esta dotaci\u00f3n tecnol\u00f3gica (Tit@) facilitar\u00e1 nuestro trabajo; lo har\u00e1 m\u00e1s cualificado; pero aumentar\u00e1 nuestras responsabilidades y tareas docentes", 
+    "question": 270, 
+    "response": 6
+  }
+},
+{
+  "pk": 43, 
+  "model": "survey.answerradio", 
+  "fields": {
+    "body": "Creo que habr\u00e1 una comunicaci\u00f3n m\u00e1s fluida y continua con los padres de familia; ellos estar\u00e1n mejor enterados de lo que pasa con los estudiantes", 
+    "question": 271, 
+    "response": 6
+  }
+},
+{
+  "pk": 44, 
+  "model": "survey.answerradio", 
+  "fields": {
+    "body": "De acuerdo", 
+    "question": 140, 
+    "response": 6
+  }
+},
+{
+  "pk": 45, 
+  "model": "survey.answerradio", 
+  "fields": {
+    "body": "S\u00ed", 
+    "question": 142, 
+    "response": 6
+  }
+},
+{
+  "pk": 46, 
+  "model": "survey.answerradio", 
+  "fields": {
+    "body": "No", 
+    "question": 144, 
+    "response": 6
+  }
+},
+{
+  "pk": 47, 
+  "model": "survey.answerradio", 
+  "fields": {
+    "body": "Creo que el desempe\u00f1o escolar \u00a0puede mejorar", 
+    "question": 269, 
+    "response": 6
+  }
+},
+{
+  "pk": 48, 
+  "model": "survey.answerradio", 
+  "fields": {
+    "body": "M\u00e1s de 5 horas", 
+    "question": 218, 
+    "response": 6
+  }
+},
+{
+  "pk": 49, 
+  "model": "survey.answerradio", 
+  "fields": {
+    "body": "Solo", 
+    "question": 217, 
+    "response": 6
   }
 },
 {
@@ -4348,6 +5151,1293 @@
   }
 },
 {
+  "pk": 139, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "2", 
+    "question": 261, 
+    "response": 4
+  }
+},
+{
+  "pk": 140, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "1", 
+    "question": 263, 
+    "response": 4
+  }
+},
+{
+  "pk": 141, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "3", 
+    "question": 262, 
+    "response": 4
+  }
+},
+{
+  "pk": 142, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "1", 
+    "question": 265, 
+    "response": 4
+  }
+},
+{
+  "pk": 143, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "1", 
+    "question": 264, 
+    "response": 4
+  }
+},
+{
+  "pk": 144, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "3", 
+    "question": 225, 
+    "response": 4
+  }
+},
+{
+  "pk": 145, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "2", 
+    "question": 224, 
+    "response": 4
+  }
+},
+{
+  "pk": 146, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "2", 
+    "question": 221, 
+    "response": 4
+  }
+},
+{
+  "pk": 147, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "2", 
+    "question": 226, 
+    "response": 4
+  }
+},
+{
+  "pk": 148, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "1", 
+    "question": 220, 
+    "response": 4
+  }
+},
+{
+  "pk": 149, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "2", 
+    "question": 223, 
+    "response": 4
+  }
+},
+{
+  "pk": 150, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "1", 
+    "question": 222, 
+    "response": 4
+  }
+},
+{
+  "pk": 151, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "2", 
+    "question": 119, 
+    "response": 4
+  }
+},
+{
+  "pk": 152, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "1", 
+    "question": 118, 
+    "response": 4
+  }
+},
+{
+  "pk": 153, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "A veces", 
+    "question": 199, 
+    "response": 4
+  }
+},
+{
+  "pk": 154, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "A veces", 
+    "question": 198, 
+    "response": 4
+  }
+},
+{
+  "pk": 155, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "A veces", 
+    "question": 197, 
+    "response": 4
+  }
+},
+{
+  "pk": 156, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "A veces", 
+    "question": 196, 
+    "response": 4
+  }
+},
+{
+  "pk": 157, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "Siempre", 
+    "question": 195, 
+    "response": 4
+  }
+},
+{
+  "pk": 158, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "1", 
+    "question": 122, 
+    "response": 4
+  }
+},
+{
+  "pk": 159, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "1", 
+    "question": 123, 
+    "response": 4
+  }
+},
+{
+  "pk": 160, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "3", 
+    "question": 120, 
+    "response": 4
+  }
+},
+{
+  "pk": 161, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "3", 
+    "question": 121, 
+    "response": 4
+  }
+},
+{
+  "pk": 162, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "2", 
+    "question": 126, 
+    "response": 4
+  }
+},
+{
+  "pk": 163, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "2", 
+    "question": 127, 
+    "response": 4
+  }
+},
+{
+  "pk": 164, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "2", 
+    "question": 124, 
+    "response": 4
+  }
+},
+{
+  "pk": 165, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "2", 
+    "question": 125, 
+    "response": 4
+  }
+},
+{
+  "pk": 166, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "1", 
+    "question": 128, 
+    "response": 4
+  }
+},
+{
+  "pk": 167, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "1", 
+    "question": 129, 
+    "response": 4
+  }
+},
+{
+  "pk": 168, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "2", 
+    "question": 261, 
+    "response": 5
+  }
+},
+{
+  "pk": 169, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "1", 
+    "question": 263, 
+    "response": 5
+  }
+},
+{
+  "pk": 170, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "3", 
+    "question": 262, 
+    "response": 5
+  }
+},
+{
+  "pk": 171, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "1", 
+    "question": 265, 
+    "response": 5
+  }
+},
+{
+  "pk": 172, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "1", 
+    "question": 264, 
+    "response": 5
+  }
+},
+{
+  "pk": 173, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "3", 
+    "question": 225, 
+    "response": 5
+  }
+},
+{
+  "pk": 174, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "2", 
+    "question": 224, 
+    "response": 5
+  }
+},
+{
+  "pk": 175, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "2", 
+    "question": 221, 
+    "response": 5
+  }
+},
+{
+  "pk": 176, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "2", 
+    "question": 226, 
+    "response": 5
+  }
+},
+{
+  "pk": 177, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "1", 
+    "question": 220, 
+    "response": 5
+  }
+},
+{
+  "pk": 178, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "2", 
+    "question": 223, 
+    "response": 5
+  }
+},
+{
+  "pk": 179, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "1", 
+    "question": 222, 
+    "response": 5
+  }
+},
+{
+  "pk": 180, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "2", 
+    "question": 119, 
+    "response": 5
+  }
+},
+{
+  "pk": 181, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "1", 
+    "question": 118, 
+    "response": 5
+  }
+},
+{
+  "pk": 182, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "A veces", 
+    "question": 199, 
+    "response": 5
+  }
+},
+{
+  "pk": 183, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "A veces", 
+    "question": 198, 
+    "response": 5
+  }
+},
+{
+  "pk": 184, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "A veces", 
+    "question": 197, 
+    "response": 5
+  }
+},
+{
+  "pk": 185, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "A veces", 
+    "question": 196, 
+    "response": 5
+  }
+},
+{
+  "pk": 186, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "Siempre", 
+    "question": 195, 
+    "response": 5
+  }
+},
+{
+  "pk": 187, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "1", 
+    "question": 122, 
+    "response": 5
+  }
+},
+{
+  "pk": 188, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "1", 
+    "question": 123, 
+    "response": 5
+  }
+},
+{
+  "pk": 189, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "3", 
+    "question": 120, 
+    "response": 5
+  }
+},
+{
+  "pk": 190, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "3", 
+    "question": 121, 
+    "response": 5
+  }
+},
+{
+  "pk": 191, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "2", 
+    "question": 126, 
+    "response": 5
+  }
+},
+{
+  "pk": 192, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "2", 
+    "question": 127, 
+    "response": 5
+  }
+},
+{
+  "pk": 193, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "2", 
+    "question": 124, 
+    "response": 5
+  }
+},
+{
+  "pk": 194, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "2", 
+    "question": 125, 
+    "response": 5
+  }
+},
+{
+  "pk": 195, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "1", 
+    "question": 128, 
+    "response": 5
+  }
+},
+{
+  "pk": 196, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "1", 
+    "question": 129, 
+    "response": 5
+  }
+},
+{
+  "pk": 197, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "2", 
+    "question": 261, 
+    "response": 6
+  }
+},
+{
+  "pk": 198, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "1", 
+    "question": 263, 
+    "response": 6
+  }
+},
+{
+  "pk": 199, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "3", 
+    "question": 262, 
+    "response": 6
+  }
+},
+{
+  "pk": 200, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "1", 
+    "question": 265, 
+    "response": 6
+  }
+},
+{
+  "pk": 201, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "1", 
+    "question": 264, 
+    "response": 6
+  }
+},
+{
+  "pk": 202, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "3", 
+    "question": 225, 
+    "response": 6
+  }
+},
+{
+  "pk": 203, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "2", 
+    "question": 224, 
+    "response": 6
+  }
+},
+{
+  "pk": 204, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "2", 
+    "question": 221, 
+    "response": 6
+  }
+},
+{
+  "pk": 205, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "2", 
+    "question": 226, 
+    "response": 6
+  }
+},
+{
+  "pk": 206, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "1", 
+    "question": 220, 
+    "response": 6
+  }
+},
+{
+  "pk": 207, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "2", 
+    "question": 223, 
+    "response": 6
+  }
+},
+{
+  "pk": 208, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "1", 
+    "question": 222, 
+    "response": 6
+  }
+},
+{
+  "pk": 209, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "2", 
+    "question": 119, 
+    "response": 6
+  }
+},
+{
+  "pk": 210, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "1", 
+    "question": 118, 
+    "response": 6
+  }
+},
+{
+  "pk": 211, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "A veces", 
+    "question": 199, 
+    "response": 6
+  }
+},
+{
+  "pk": 212, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "A veces", 
+    "question": 198, 
+    "response": 6
+  }
+},
+{
+  "pk": 213, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "A veces", 
+    "question": 197, 
+    "response": 6
+  }
+},
+{
+  "pk": 214, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "A veces", 
+    "question": 196, 
+    "response": 6
+  }
+},
+{
+  "pk": 215, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "Siempre", 
+    "question": 195, 
+    "response": 6
+  }
+},
+{
+  "pk": 216, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "1", 
+    "question": 122, 
+    "response": 6
+  }
+},
+{
+  "pk": 217, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "1", 
+    "question": 123, 
+    "response": 6
+  }
+},
+{
+  "pk": 218, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "3", 
+    "question": 120, 
+    "response": 6
+  }
+},
+{
+  "pk": 219, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "3", 
+    "question": 121, 
+    "response": 6
+  }
+},
+{
+  "pk": 220, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "2", 
+    "question": 126, 
+    "response": 6
+  }
+},
+{
+  "pk": 221, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "2", 
+    "question": 127, 
+    "response": 6
+  }
+},
+{
+  "pk": 222, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "2", 
+    "question": 124, 
+    "response": 6
+  }
+},
+{
+  "pk": 223, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "2", 
+    "question": 125, 
+    "response": 6
+  }
+},
+{
+  "pk": 224, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "1", 
+    "question": 128, 
+    "response": 6
+  }
+},
+{
+  "pk": 225, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "1", 
+    "question": 129, 
+    "response": 6
+  }
+},
+{
+  "pk": 226, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "3", 
+    "question": 135, 
+    "response": 6
+  }
+},
+{
+  "pk": 227, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "3", 
+    "question": 134, 
+    "response": 6
+  }
+},
+{
+  "pk": 228, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "3", 
+    "question": 136, 
+    "response": 6
+  }
+},
+{
+  "pk": 229, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "3", 
+    "question": 131, 
+    "response": 6
+  }
+},
+{
+  "pk": 230, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "1", 
+    "question": 130, 
+    "response": 6
+  }
+},
+{
+  "pk": 231, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "3", 
+    "question": 133, 
+    "response": 6
+  }
+},
+{
+  "pk": 232, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "3", 
+    "question": 132, 
+    "response": 6
+  }
+},
+{
+  "pk": 233, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "A veces", 
+    "question": 148, 
+    "response": 6
+  }
+},
+{
+  "pk": 234, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "A veces", 
+    "question": 149, 
+    "response": 6
+  }
+},
+{
+  "pk": 235, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "Siempre", 
+    "question": 146, 
+    "response": 6
+  }
+},
+{
+  "pk": 236, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "A veces", 
+    "question": 147, 
+    "response": 6
+  }
+},
+{
+  "pk": 237, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "1", 
+    "question": 268, 
+    "response": 6
+  }
+},
+{
+  "pk": 238, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "Nunca", 
+    "question": 159, 
+    "response": 6
+  }
+},
+{
+  "pk": 239, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "Nunca", 
+    "question": 158, 
+    "response": 6
+  }
+},
+{
+  "pk": 240, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "Nunca", 
+    "question": 153, 
+    "response": 6
+  }
+},
+{
+  "pk": 241, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "No s\u00e9 qu\u00e9 es esto", 
+    "question": 152, 
+    "response": 6
+  }
+},
+{
+  "pk": 242, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "Siempre", 
+    "question": 151, 
+    "response": 6
+  }
+},
+{
+  "pk": 243, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "A veces", 
+    "question": 150, 
+    "response": 6
+  }
+},
+{
+  "pk": 244, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "Siempre", 
+    "question": 157, 
+    "response": 6
+  }
+},
+{
+  "pk": 245, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "Siempre", 
+    "question": 156, 
+    "response": 6
+  }
+},
+{
+  "pk": 246, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "Nunca", 
+    "question": 155, 
+    "response": 6
+  }
+},
+{
+  "pk": 247, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "Nunca", 
+    "question": 154, 
+    "response": 6
+  }
+},
+{
+  "pk": 248, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "1", 
+    "question": 267, 
+    "response": 6
+  }
+},
+{
+  "pk": 249, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "Siempre", 
+    "question": 166, 
+    "response": 6
+  }
+},
+{
+  "pk": 250, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "A veces", 
+    "question": 167, 
+    "response": 6
+  }
+},
+{
+  "pk": 251, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "Siempre", 
+    "question": 164, 
+    "response": 6
+  }
+},
+{
+  "pk": 252, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "Siempre", 
+    "question": 165, 
+    "response": 6
+  }
+},
+{
+  "pk": 253, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "A veces", 
+    "question": 162, 
+    "response": 6
+  }
+},
+{
+  "pk": 254, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "Siempre", 
+    "question": 163, 
+    "response": 6
+  }
+},
+{
+  "pk": 255, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "Siempre", 
+    "question": 160, 
+    "response": 6
+  }
+},
+{
+  "pk": 256, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "Siempre", 
+    "question": 161, 
+    "response": 6
+  }
+},
+{
+  "pk": 257, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "Siempre", 
+    "question": 168, 
+    "response": 6
+  }
+},
+{
+  "pk": 258, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "Siempre", 
+    "question": 169, 
+    "response": 6
+  }
+},
+{
+  "pk": 259, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "2", 
+    "question": 266, 
+    "response": 6
+  }
+},
+{
+  "pk": 260, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "1", 
+    "question": 219, 
+    "response": 6
+  }
+},
+{
+  "pk": 261, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "Siempre", 
+    "question": 214, 
+    "response": 6
+  }
+},
+{
+  "pk": 262, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "Siempre", 
+    "question": 210, 
+    "response": 6
+  }
+},
+{
+  "pk": 263, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "Siempre", 
+    "question": 211, 
+    "response": 6
+  }
+},
+{
+  "pk": 264, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "Siempre", 
+    "question": 212, 
+    "response": 6
+  }
+},
+{
+  "pk": 265, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "A veces", 
+    "question": 213, 
+    "response": 6
+  }
+},
+{
+  "pk": 266, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "A veces", 
+    "question": 171, 
+    "response": 6
+  }
+},
+{
+  "pk": 267, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "A veces", 
+    "question": 170, 
+    "response": 6
+  }
+},
+{
+  "pk": 268, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "Siempre", 
+    "question": 173, 
+    "response": 6
+  }
+},
+{
+  "pk": 269, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "Nunca", 
+    "question": 172, 
+    "response": 6
+  }
+},
+{
+  "pk": 270, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "Nunca", 
+    "question": 174, 
+    "response": 6
+  }
+},
+{
+  "pk": 271, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "S\u00ed", 
+    "question": 177, 
+    "response": 6
+  }
+},
+{
+  "pk": 272, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "Nunca", 
+    "question": 209, 
+    "response": 6
+  }
+},
+{
+  "pk": 273, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "Siempre", 
+    "question": 208, 
+    "response": 6
+  }
+},
+{
+  "pk": 274, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "Siempre", 
+    "question": 207, 
+    "response": 6
+  }
+},
+{
+  "pk": 275, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "A veces", 
+    "question": 206, 
+    "response": 6
+  }
+},
+{
+  "pk": 276, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "A veces", 
+    "question": 205, 
+    "response": 6
+  }
+},
+{
+  "pk": 277, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "Siempre", 
+    "question": 204, 
+    "response": 6
+  }
+},
+{
+  "pk": 278, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "A veces", 
+    "question": 203, 
+    "response": 6
+  }
+},
+{
+  "pk": 279, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "Siempre", 
+    "question": 202, 
+    "response": 6
+  }
+},
+{
+  "pk": 280, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "Siempre", 
+    "question": 201, 
+    "response": 6
+  }
+},
+{
+  "pk": 281, 
+  "model": "survey.answerselect", 
+  "fields": {
+    "body": "A veces", 
+    "question": 200, 
+    "response": 6
+  }
+},
+{
   "pk": 1, 
   "model": "survey.answerselectmultiple", 
   "fields": {
@@ -4579,6 +6669,285 @@
     "body": "[u'En su casa', u'En la casa de sus amigos o familiares', u'En un lugar p\\xfablico como bibliotecas o centros comunitarios', u'En un lugar p\\xfablico con WIFI', u'En su sitio de trabajo']", 
     "question": 52, 
     "response": 3
+  }
+},
+{
+  "pk": 27, 
+  "model": "survey.answerselectmultiple", 
+  "fields": {
+    "body": "[u'Me ayuda a pasar el tiempo']", 
+    "question": 188, 
+    "response": 4
+  }
+},
+{
+  "pk": 28, 
+  "model": "survey.answerselectmultiple", 
+  "fields": {
+    "body": "[u'Me divierte', u'Me comunico con amigos y otras personas']", 
+    "question": 189, 
+    "response": 4
+  }
+},
+{
+  "pk": 29, 
+  "model": "survey.answerselectmultiple", 
+  "fields": {
+    "body": "[u'Utiliza buscadores especializados (Google Acad\\xe9mico; Edukaweb)']", 
+    "question": 184, 
+    "response": 4
+  }
+},
+{
+  "pk": 30, 
+  "model": "survey.answerselectmultiple", 
+  "fields": {
+    "body": "[u'Computador sin conexi\\xf3n a internet', u'Computador con conexi\\xf3n a internet']", 
+    "question": 186, 
+    "response": 4
+  }
+},
+{
+  "pk": 31, 
+  "model": "survey.answerselectmultiple", 
+  "fields": {
+    "body": "[u'Me ayuda a pasar el tiempo', u'Me divierte']", 
+    "question": 187, 
+    "response": 4
+  }
+},
+{
+  "pk": 32, 
+  "model": "survey.answerselectmultiple", 
+  "fields": {
+    "body": "[u'Desarrollar programas inform\\xe1ticos', u'Construir p\\xe1ginas web', u'Construir un espacio virtual en el que pueda interactuar con mis estudiantes']", 
+    "question": 227, 
+    "response": 4
+  }
+},
+{
+  "pk": 33, 
+  "model": "survey.answerselectmultiple", 
+  "fields": {
+    "body": "[u'Google+', u'Youtube', u'Slideshare', u'LinkedIn']", 
+    "question": 193, 
+    "response": 4
+  }
+},
+{
+  "pk": 34, 
+  "model": "survey.answerselectmultiple", 
+  "fields": {
+    "body": "[u'Hacer y recibir llamadas', u'Enviar y recibir mensajes de texto', u'Tomar fotos', u'Escuchar m\\xfasica']", 
+    "question": 191, 
+    "response": 4
+  }
+},
+{
+  "pk": 35, 
+  "model": "survey.answerselectmultiple", 
+  "fields": {
+    "body": "[u'Me ayuda a pasar el tiempo', u'Me informa']", 
+    "question": 190, 
+    "response": 4
+  }
+},
+{
+  "pk": 36, 
+  "model": "survey.answerselectmultiple", 
+  "fields": {
+    "body": "[u'Me ayuda a pasar el tiempo']", 
+    "question": 188, 
+    "response": 5
+  }
+},
+{
+  "pk": 37, 
+  "model": "survey.answerselectmultiple", 
+  "fields": {
+    "body": "[u'Me divierte', u'Me comunico con amigos y otras personas']", 
+    "question": 189, 
+    "response": 5
+  }
+},
+{
+  "pk": 38, 
+  "model": "survey.answerselectmultiple", 
+  "fields": {
+    "body": "[u'Utiliza buscadores especializados (Google Acad\\xe9mico; Edukaweb)']", 
+    "question": 184, 
+    "response": 5
+  }
+},
+{
+  "pk": 39, 
+  "model": "survey.answerselectmultiple", 
+  "fields": {
+    "body": "[u'Computador sin conexi\\xf3n a internet', u'Computador con conexi\\xf3n a internet']", 
+    "question": 186, 
+    "response": 5
+  }
+},
+{
+  "pk": 40, 
+  "model": "survey.answerselectmultiple", 
+  "fields": {
+    "body": "[u'Me ayuda a pasar el tiempo', u'Me divierte']", 
+    "question": 187, 
+    "response": 5
+  }
+},
+{
+  "pk": 41, 
+  "model": "survey.answerselectmultiple", 
+  "fields": {
+    "body": "[u'Desarrollar programas inform\\xe1ticos', u'Construir p\\xe1ginas web', u'Construir un espacio virtual en el que pueda interactuar con mis estudiantes']", 
+    "question": 227, 
+    "response": 5
+  }
+},
+{
+  "pk": 42, 
+  "model": "survey.answerselectmultiple", 
+  "fields": {
+    "body": "[u'Google+', u'Youtube', u'Slideshare', u'LinkedIn']", 
+    "question": 193, 
+    "response": 5
+  }
+},
+{
+  "pk": 43, 
+  "model": "survey.answerselectmultiple", 
+  "fields": {
+    "body": "[u'Hacer y recibir llamadas', u'Enviar y recibir mensajes de texto', u'Tomar fotos', u'Escuchar m\\xfasica']", 
+    "question": 191, 
+    "response": 5
+  }
+},
+{
+  "pk": 44, 
+  "model": "survey.answerselectmultiple", 
+  "fields": {
+    "body": "[u'Me ayuda a pasar el tiempo', u'Me informa']", 
+    "question": 190, 
+    "response": 5
+  }
+},
+{
+  "pk": 45, 
+  "model": "survey.answerselectmultiple", 
+  "fields": {
+    "body": "[u'Me ayuda a pasar el tiempo']", 
+    "question": 188, 
+    "response": 6
+  }
+},
+{
+  "pk": 46, 
+  "model": "survey.answerselectmultiple", 
+  "fields": {
+    "body": "[u'Me divierte', u'Me comunico con amigos y otras personas']", 
+    "question": 189, 
+    "response": 6
+  }
+},
+{
+  "pk": 47, 
+  "model": "survey.answerselectmultiple", 
+  "fields": {
+    "body": "[u'Utiliza buscadores especializados (Google Acad\\xe9mico; Edukaweb)']", 
+    "question": 184, 
+    "response": 6
+  }
+},
+{
+  "pk": 48, 
+  "model": "survey.answerselectmultiple", 
+  "fields": {
+    "body": "[u'Computador sin conexi\\xf3n a internet', u'Computador con conexi\\xf3n a internet']", 
+    "question": 186, 
+    "response": 6
+  }
+},
+{
+  "pk": 49, 
+  "model": "survey.answerselectmultiple", 
+  "fields": {
+    "body": "[u'Me ayuda a pasar el tiempo', u'Me divierte']", 
+    "question": 187, 
+    "response": 6
+  }
+},
+{
+  "pk": 50, 
+  "model": "survey.answerselectmultiple", 
+  "fields": {
+    "body": "[u'Desarrollar programas inform\\xe1ticos', u'Construir p\\xe1ginas web', u'Construir un espacio virtual en el que pueda interactuar con mis estudiantes']", 
+    "question": 227, 
+    "response": 6
+  }
+},
+{
+  "pk": 51, 
+  "model": "survey.answerselectmultiple", 
+  "fields": {
+    "body": "[u'Google+', u'Youtube', u'Slideshare', u'LinkedIn']", 
+    "question": 193, 
+    "response": 6
+  }
+},
+{
+  "pk": 52, 
+  "model": "survey.answerselectmultiple", 
+  "fields": {
+    "body": "[u'Hacer y recibir llamadas', u'Enviar y recibir mensajes de texto', u'Tomar fotos', u'Escuchar m\\xfasica']", 
+    "question": 191, 
+    "response": 6
+  }
+},
+{
+  "pk": 53, 
+  "model": "survey.answerselectmultiple", 
+  "fields": {
+    "body": "[u'Me ayuda a pasar el tiempo', u'Me informa']", 
+    "question": 190, 
+    "response": 6
+  }
+},
+{
+  "pk": 54, 
+  "model": "survey.answerselectmultiple", 
+  "fields": {
+    "body": "[u'Con familiares', u'Con sus estudiantes']", 
+    "question": 215, 
+    "response": 6
+  }
+},
+{
+  "pk": 55, 
+  "model": "survey.answerselectmultiple", 
+  "fields": {
+    "body": "[u'cacharreando o averiguando en Internet', u'Con sus amigos', u'Con familiares']", 
+    "question": 216, 
+    "response": 6
+  }
+},
+{
+  "pk": 56, 
+  "model": "survey.answerselectmultiple", 
+  "fields": {
+    "body": "[u'En su casa', u'En la casa de sus amigos o familiares']", 
+    "question": 175, 
+    "response": 6
+  }
+},
+{
+  "pk": 57, 
+  "model": "survey.answerselectmultiple", 
+  "fields": {
+    "body": "[u'Consultas sobre temas que ense\\xf1\\xf3 en clase', u'Consultas sobre temas que no ha ense\\xf1ado en clase']", 
+    "question": 179, 
+    "response": 6
   }
 }
 ]

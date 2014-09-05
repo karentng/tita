@@ -62,9 +62,25 @@ def encuesta_docente(request):
     else :
         form = ResponseForm(survey=survey)
 
-    #camposMaterias = [form['question_%d'%x] for x in xrange(10,29) ]
+    camposMaterias = [form['question_%d'%x] for x in xrange(118,137) ]
+    camposHerramientas = [form['question_%d'%x] for x in xrange(146,175) ]
+    camposDispositivos = [form['question_%d'%x] for x in xrange(187,191) ]
+    camposUsos = [form['question_%d'%x] for x in xrange(195,215) ]
+    camposConcurso = [form['question_%d'%x] for x in xrange(219,227) ]
+    camposLamentaria = [form['question_%d'%x] for x in xrange(261,269) ]
 
     return render(request, 'encuesta_docente.html', {
         'form': form,
-        #'camposMaterias1': camposMaterias[:10],
+        'camposMaterias1': camposMaterias[:10],
+        'camposMaterias2': camposMaterias[10:],
+        'camposHerramientas1': camposHerramientas[:14],
+        'camposHerramientas2': camposHerramientas[14:],
+        'camposDispositivos1': camposDispositivos[:2],
+        'camposDispositivos2': camposDispositivos[2:],
+        'camposUsos1': camposUsos[:10],
+        'camposUsos2': camposUsos[10:],
+        'camposConcurso1': camposConcurso[:4],
+        'camposConcurso2': camposConcurso[4:],
+        'camposLamentaria1': camposLamentaria[:4],
+        'camposLamentaria2': camposLamentaria[4:],
     })

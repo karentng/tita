@@ -16,13 +16,13 @@ class HorizontalRadioRenderer(forms.RadioSelect.renderer):
 
 
 class ResponseForm(models.ModelForm):
-	municipio_nacimiento = MunicipioChoice()
+	#municipio_nacimiento = MunicipioChoice()
 	class Meta:
 		model = Response	
-		fields = ('numero_documento','nombre','jornada', 'municipio_nacimiento', 'fecha_nacimiento', 'barrio', 'institucion') #('interviewer', 'interviewee', 'conditions', 'comments')
+		fields = ('numero_documento','nombre','jornada', 'institucion') #('interviewer', 'interviewee', 'conditions', 'comments')
 		widgets = {
 			'institucion' : Select2Widget(),
-			'fecha_nacimiento' : MyDateWidget(),
+			#'fecha_nacimiento' : MyDateWidget(),
 		}
 
 	def __init__(self, *args, **kwargs):
