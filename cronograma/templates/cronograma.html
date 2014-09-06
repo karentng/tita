@@ -20,6 +20,8 @@
 {% block css %}
 	<link rel="stylesheet" href="assets/plugins/fullcalendar/fullcalendar/fullcalendar.css" />
 	<script src="assets/plugins/fullcalendar/fullcalendar/fullcalendar.js"></script>
+	<link href="{{STATIC_URL}}plugins/bootstrap-wizard/css/bwizard.min.css" rel="stylesheet" />
+    {{form.media}} {# agrega los js y css necesarios para el bootstrap3 datetimepicker #}
 {% endblock %}
 
 {% block titulo_panel %}
@@ -40,6 +42,17 @@
 			    <div class="panel-body p-0">
 			        <div class="vertical-box">
 			            <div class="vertical-column p-15 bg-silver width-sm ui-sortable">
+			            	<h4 class=" m-b-20">Añadir un evento</h4>
+			            	<form  method="post">
+   								 {% csrf_token %}
+   								 Nombre:<br> {{ evento.nombre }}<br><br>
+   								 Fecha de inicio: {{ evento.fecha_inicio }}<br>
+   								 Fecha de finalización{{ evento.fecha_finalizacion}}<br>
+   								 Descripción <br>{{ evento.descripcion }}<br><br>
+   								 <input type="submit" value="Submit" /><br>
+							</form>
+							<br>
+
                             <div id="external-events" class="calendar-event width-sm">
                                 <h4 class=" m-b-20">Eventos disponibles</h4>
                                 <div class="external-event bg-purple ui-draggable" data-bg="bg-purple" data-title="Discussion" data-media="<i class='fa fa-comments'></i>" data-desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit." style="position: relative;">
