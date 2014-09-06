@@ -1,3 +1,8 @@
 from django.contrib import admin
+from cronograma.models import Evento
 
-# Register your models here.
+class EventoAdmin(admin.ModelAdmin):
+	model = Evento
+	list_display = ('nombre', 'fecha_inicio')
+
+admin.site.register(Evento, EventoAdmin)
