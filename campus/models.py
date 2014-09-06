@@ -91,6 +91,7 @@ class Estudiante(models.Model):
     )
 
     numero_documento = models.BigIntegerField(unique=True, verbose_name='número documento')
+    #municipio_documento = models.ForeignKey(Municipio, verbose_name='municipio de expedición')
     nombre1 = models.CharField( max_length=255, verbose_name='primer nombre')
     nombre2 = models.CharField( max_length=255, blank=True, verbose_name='segundo nombre')
     apellido1 = models.CharField( max_length=255, verbose_name='primer apellido')
@@ -111,7 +112,10 @@ class Estudiante(models.Model):
     def __unicode__(self):
         return (u"%s %s %s %s"%(self.nombre1,self.nombre2 or '', self.apellido1, self.apellido2 or '')).strip() or "-"
 
-
+    def numero_inscripcion(self):
+        mihash = (self.numero_documento*44383)%1000000007
+        clave = "%d-%d"%(self.id, mihash)
+        return clave
 
 """   
 class Horario(models.Model):

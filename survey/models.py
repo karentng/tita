@@ -97,10 +97,9 @@ class Response(models.Model):
     numero_documento = models.BigIntegerField()
     nombre = models.CharField(max_length=300, verbose_name=u'Nombres y Apellidos')
     institucion = models.ForeignKey(InstitucionEducativa)
-    fecha_nacimiento = models.DateField()
-    municipio_nacimiento = models.ForeignKey(Municipio, null=True, blank=True)
-    
-    barrio = models.CharField(max_length=100, verbose_name=u'Barrio donde reside actualmente')
+    #fecha_nacimiento = models.DateField()
+    #municipio_nacimiento = models.ForeignKey(Municipio, null=True, blank=True)    
+    #barrio = models.CharField(max_length=100, verbose_name=u'Barrio donde reside actualmente')
     
    
     def __unicode__(self):
@@ -118,16 +117,16 @@ class AnswerBase(models.Model):
 # field sizes depending on the actual question this answer corresponds to. any
 # "required" attribute will be enforced by the form.
 class AnswerText(AnswerBase):
-    body = models.CharField(max_length=200, blank=True, null=True)
+    body = models.TextField(blank=True, null=True)
 
 class AnswerRadio(AnswerBase):
-    body = models.CharField(max_length=200, blank=True, null=True)
+    body = models.TextField(blank=True, null=True)
 
 class AnswerSelect(AnswerBase):
-    body = models.CharField(max_length=200, blank=True, null=True)
+    body = models.TextField(blank=True, null=True)
 
 class AnswerSelectMultiple(AnswerBase):
-    body = models.CharField(max_length=200, blank=True, null=True)
+    body = models.TextField(blank=True, null=True)
 
 class AnswerInteger(AnswerBase):
     body = models.IntegerField(blank=True, null=True)
