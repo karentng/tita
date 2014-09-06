@@ -22,6 +22,26 @@
     </script>
 
     {% endif %}
+
+    <script type="text/javascript">
+        $( document ).ready(function() {
+            function etnoeducador(){
+                $("#id_tipo_etnoeducador")
+                val = $("#id_tipo_etnoeducador").val();
+                if(val < 2){
+                    $('#id_poblacion_etnica').prop('readonly', true);
+                    $('#id_poblacion_etnica').val('');
+                }else{
+                    $('#id_poblacion_etnica').prop('readonly', false);
+                }
+            }
+            etnoeducador();
+            
+            $("#id_tipo_etnoeducador").on('change', function(){
+                etnoeducador();
+            })
+        });
+    </script>
 {% endblock %}
 
 {% block miga_pan %}
@@ -37,6 +57,9 @@
 
 {% block titulo_panel %}<i class="fa fa-lightbulb-o"></i> Inscripción{% endblock %}
 {% block contenido_panel %}
+    <div class="alert alert-info fade in m-b-15" align="center">
+        Por favor guarde su número de registro: <b>{{clave}}</b>, es muy importante para futuros procesos.
+    </div>
     <form class="form-horizontal" method="post">{% csrf_token %}
         {% bootstrap_form form layout="horizontal" %}
 

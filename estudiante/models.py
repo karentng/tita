@@ -56,10 +56,10 @@ class ProgramaTIC(models.Model):
 class InfoLaboral(models.Model):
     ETNOEDUCADOR = (
         (1, 'No se desempeña como etnoeducador'),
-        (1, 'Raizal'),
-        (1, 'Afrocolombiano'),
-        (1, 'Indígena'),
-        (1, 'N.A'),
+        (2, 'Raizal'),
+        (3, 'Afrocolombiano'),
+        (4, 'Indígena'),
+        (5, 'N.A'),
     )
 
     estudiante = models.ForeignKey('campus.Estudiante')
@@ -79,3 +79,16 @@ class InfoLaboral(models.Model):
 
     tipo_etnoeducador = models.IntegerField(choices=ETNOEDUCADOR)
     poblacion_etnica = models.CharField(max_length="100", verbose_name="poblacion étnica que atiende", null=True)
+
+def crear_ruta_archivo(instance, filename):
+    randomstr = instance.estudiante.numero_documento*99251
+    return "estudiante_soportes/%s-%s/%s"%(instance.estudiante_id, randomstr, filename.encode('ascii','ignore'))
+
+class DocumentosSoporte(models.Model):
+    estudiante = models.OneToOneField('campus.Estudiante')
+    acta_compromiso = models.FileField(upload_to=crear_ruta_archivo, blank=True, null=True)
+    hv = models.FileField(upload_to=crear_ruta_archivo, blank=True, null=True)
+    otros = models.FileField(upload_to=crear_ruta_archivo, blank=True, null=True)
+
+    def tiene_soportes(self):
+        return bool(self.acta_compromiso or self.hv)
