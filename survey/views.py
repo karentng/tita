@@ -84,3 +84,40 @@ def encuesta_docente(request):
         'camposLamentaria1': camposLamentaria[:4],
         'camposLamentaria2': camposLamentaria[4:],
     })
+
+def encuesta_estudiante(request):
+    survey = Survey.objects.get(id=3)
+    category_items = list(survey.category_set.all())    
+    
+    if request.method == 'POST':
+        form = ResponseForm(request.POST, survey=survey)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+        else:
+            print "error llenando", form.errors
+    else :
+        form = ResponseForm(survey=survey)
+
+    camposMaterias = [form['question_%d'%x] for x in xrange(282,301) ]
+    camposRecursos = [form['question_%d'%x] for x in xrange(305,312) ]
+    camposDispositivos = [form['question_%d'%x] for x in xrange(316,320) ]
+    camposInternet = [form['question_%d'%x] for x in xrange(323,341) ]
+    camposDispos = [form['question_%d'%x] for x in xrange(346,354) ]
+    camposLamentaria = [form['question_%d'%x] for x in xrange(356,364) ]
+
+    return render(request, 'encuesta_estudiante.html', {
+        'form': form,
+        'camposMaterias1': camposMaterias[:10],
+        'camposMaterias2': camposMaterias[10:],
+        'camposRecursos1': camposRecursos[:4],
+        'camposRecursos2': camposRecursos[4:],
+        'camposDispositivos1': camposDispositivos[:2],
+        'camposDispositivos2': camposDispositivos[2:],
+        'camposInternet1': camposInternet[:8],
+        'camposInternet2': camposInternet[8:],
+        'camposDispos1': camposDispos[:4],
+        'camposDispos2': camposDispos[4:],
+        'camposLamentaria1': camposLamentaria[:4],
+        'camposLamentaria2': camposLamentaria[4:],
+    })
