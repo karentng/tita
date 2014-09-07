@@ -15,10 +15,13 @@ def dashboard(request):
     aprobados = Aspirante.objects.filter(aceptado= True)
     total_aprobados = aprobados.count()
     rechazados = Aspirante.objects.filter(aceptado= False)
-    maximo = mejores[0].puntuacion_hv
+    if len(mejores):
+        maximo = mejores[0].puntuacion_hv
+    else:
+        maximo = "---"
 
     munis = []
-    municipios = Aspirante.objects.values('municipio').annotate(dcount=Count('municipio'))
+    municipios = Aspirante.objects.values('municipio').annotate(dcount=Count('municipio_institucion'))
     for i in municipios:
         nombre = unicode(Municipio.objects.get(id=i['municipio']).nombre)
         munis.append({'nombre': nombre, 'dcount': i['dcount']})
