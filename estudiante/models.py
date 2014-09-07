@@ -62,6 +62,37 @@ class InfoLaboral(models.Model):
         (5, 'N.A'),
     )
 
+    GRADO_ESCALAFON = (
+        ('D.L 1278 de 2002',
+            ((1, '01'),
+            (2,  '02'),
+            (3,  '03'),
+            (4,  '04'),
+            (5,  '05'),
+            (6,  '06'),
+            (7,  '07'),
+            (8,  '08'),
+            (9,  '09'),
+            (10,  '10'),
+            (11,  '11'),
+            (12,  '12'),
+            (13,  '13'),
+            (14,  '14'))),
+        ('D.L 2277 de 1979',
+            ((15, '1A'),
+            (16,  '1B'),
+            (17,  '1C'),
+            (18,  '1D'),
+            (19,  '2A'),
+            (20,  '2B'),
+            (21,  '2C'),
+            (22,  '2D'),
+            (23,  '3A'),
+            (24,  '3B'),
+            (25,  '3C'),
+            (26,  '3D')))
+    )
+
     estudiante = models.ForeignKey('campus.Estudiante')
 
     secretaria_educacion = models.ForeignKey(SecretariaEducacion)
@@ -73,8 +104,7 @@ class InfoLaboral(models.Model):
 
     grados = models.ManyToManyField(Grado)
     asignaturas = models.ManyToManyField(Asignatura)
-    decreto_docente = models.IntegerField( choices=[(1,'D.L 1278 de 2002'), (2, 'D.L 2277 de 1979')], max_length=1, verbose_name='decreto profesional docente')
-    #grado escalafon
+    decreto_docente = models.IntegerField( choices=GRADO_ESCALAFON, max_length=1, verbose_name='decreto profesional docente')
     nombramiento = models.IntegerField(choices=[(1,'Propiedad'), (2, 'Período de Prueba'), (3, 'Provisional')], max_length=1, verbose_name='tipo de nombramiento')
 
     tipo_etnoeducador = models.IntegerField(choices=ETNOEDUCADOR)
