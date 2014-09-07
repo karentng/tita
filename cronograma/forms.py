@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 from django import forms
 from cronograma.models import Evento
-from datetimewidget.widgets import DateWidget
-
-def MyDateWidget():
-    return DateWidget(usel10n=False, bootstrap_version=3, options={'format': 'yyyy-mm-dd', 'startView':4, 'language':'es'})
+from convocat.forms import MyDateWidget
 
 class EventoForm(forms.ModelForm):
     class Meta:
@@ -13,5 +10,7 @@ class EventoForm(forms.ModelForm):
         widgets = {
             #'fecha_inicio': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
             #'fecha_terminacion': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
-            'fecha_inicio': MyDateWidget(), 'fecha_finalizacion': MyDateWidget()
+            'fecha_inicio': MyDateWidget(),
+            'fecha_finalizacion': MyDateWidget(),
+            'descripcion': forms.Textarea(attrs={'rows': 4})
         }
