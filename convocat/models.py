@@ -52,6 +52,8 @@ class Aspirante(models.Model):
 
     modificado = models.DateTimeField(null=True, auto_now=True)
 
+    puntuacion_final = models.IntegerField(null=True, blank=True)
+
     def save(self, *args, **kwargs):
         debeCrearDocumentosSoporte = self.id is None
         super(Aspirante,self).save(*args, **kwargs)

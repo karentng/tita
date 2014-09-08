@@ -6,17 +6,17 @@ import json
 
 
 def dashboard(request):
-    mejores = Aspirante.objects.order_by('-puntuacion_hv')
+    mejores = Aspirante.objects.order_by('-puntuacion_final')
     if len(mejores) > 60:
         mejores = mejores[:60]
 
     inscritos = Aspirante.objects.all()
     total_inscritos = inscritos.count()
-    aprobados = Aspirante.objects.filter(aceptado= True)
+    aprobados = Aspirante.objects.filter(puntuacion_final__gte = 50)
     total_aprobados = aprobados.count()
-    rechazados = Aspirante.objects.filter(aceptado= False)
+    rechazados = Aspirante.objects.filter(puntuacion_final__lt = 50)
     if len(mejores):
-        maximo = mejores[0].puntuacion_hv
+        maximo = mejores[0].puntuacion_final
     else:
         maximo = "---"
 
