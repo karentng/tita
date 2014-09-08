@@ -215,6 +215,7 @@
     {% block js %}
     {% endblock %}
     <!-- Fin Bloque javascript -->
+    {% block js_ready %}
     <script>
         $(document).ready(function() {
             App.init();
@@ -231,5 +232,6 @@
         }
         {% endcomment %}
     </script>
+    {% endblock %}
 </body>
 </html>
