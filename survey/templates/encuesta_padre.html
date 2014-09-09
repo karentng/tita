@@ -29,6 +29,10 @@
     Encuesta a Padres de Familia
 {% endblock %}
 
+{%block menu %}
+    {% include "menus/publico.html" with opcion_menu='encuesta_padre' %}
+{% endblock %}
+
 {% block contenido %}
 
 {% if form.errors %}

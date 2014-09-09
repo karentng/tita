@@ -24,6 +24,10 @@
     {{form.media}}
 {% endblock %}
 
+{%block menu %}
+    {% include "menus/publico.html" with opcion_menu='encuesta_estudiante' %}
+{% endblock %}
+
 
 {% block titulo_contenido %}
     Encuesta a Padres de Familia
