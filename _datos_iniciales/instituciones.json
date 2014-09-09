@@ -3,370 +3,501 @@
   "pk": 1, 
   "model": "campus.institucioneducativa", 
   "fields": {
-    "nombre": "INEM JORGE ISAACS",
-    "rector": "MENDEZ HERNANDEZ ARGEMIRO",
-    "principal": null
+    "nombre": "INEM JORGE ISAACS"
   }
 },
 {
   "pk": 2, 
   "model": "campus.institucioneducativa", 
   "fields": {
-    "nombre": "CECILIA MUÑOZ RICAURTE",
-    "rector": null,
-    "principal": 1
+    "nombre": "ANTONIO JOSE CAMACHO"
   }
 },
 {
   "pk": 3, 
   "model": "campus.institucioneducativa", 
   "fields": {
-    "nombre": "LAS AMERICAS",
-    "rector": null,
-    "principal": 1
+    "nombre": "NORMAL. SUPERIOR SANTIAGO DE CALI"
   }
 },
+
 {
   "pk": 4, 
   "model": "campus.institucioneducativa", 
   "fields": {
-    "nombre": "CAMILO TORRES",
-    "rector": null,
-    "principal": 1
+    "nombre": "GOLONDRINAS"
   }
 },
+
 {
   "pk": 5, 
   "model": "campus.institucioneducativa", 
   "fields": {
-    "nombre": "CENTRO EDUCATIVO DEL NORTE",
-    "rector": null,
-    "principal": 1
+    "nombre": "CARLOS HOLGUIN MALLARINO"
   }
 },
 {
   "pk": 6, 
   "model": "campus.institucioneducativa", 
   "fields": {
-    "nombre": "FRAY DOMINGO DE LAS CASAS",
-    "rector": null,
-    "principal": 1
+    "nombre": "MANUEL MARIA  MALLARINO"
   }
 },
+
 {
   "pk": 7, 
   "model": "campus.institucioneducativa", 
   "fields": {
-    "nombre": "PABLO EMILIO",
-    "rector": null,
-    "principal": 1
+    "nombre": "EL DIAMANTE"
   }
 },
 {
   "pk": 8, 
   "model": "campus.institucioneducativa", 
   "fields": {
-    "nombre": "ANTONIO JOSE CAMACHO",
-    "rector": "OCORO LUCUMI CESAR AUGUSTO",
-    "principal": null
+    "nombre": "EUSTAQUIO PALACIOS"
   }
 },
+
 {
   "pk": 9, 
   "model": "campus.institucioneducativa", 
   "fields": {
-    "nombre": "REPUBLICA DEL PERU",
-    "rector": null,
-    "principal": 8
+    "nombre": "JOSE MARIA CARBONELL"
   }
 },
 {
   "pk": 10, 
   "model": "campus.institucioneducativa", 
   "fields": {
-    "nombre": "MARCO FIDEL SUAREZ",
-    "rector": null,
-    "principal": 8
+    "nombre": "IE  BOYACA"
   }
 },
 {
   "pk": 11, 
   "model": "campus.institucioneducativa", 
   "fields": {
-    "nombre": "OLGA LUCIA LLOREDA",
-    "rector": null,
-    "principal": 8
+    "nombre": "MARICE SINISTERRA"
   }
 },
 {
   "pk": 12, 
   "model": "campus.institucioneducativa", 
   "fields": {
-    "nombre": "NORMAL. SUPERIOR SANTIAGO DE CALI",
-    "rector": "VARELA MARMOLEJO YOLANDA",
-    "principal": null
+    "nombre": "YUMBO-IE MAYOR DE YUMBO"
   }
 },
 {
   "pk": 13, 
   "model": "campus.institucioneducativa", 
   "fields": {
-    "nombre": "JOAQUIN DE CAYZEDO Y CUERO",
-    "rector": null,
-    "principal": 12
+    "nombre": "YUMBO-IE JOSÉ MARÍA CÓRDOBA"
   }
 },
 {
   "pk": 14, 
   "model": "campus.institucioneducativa", 
   "fields": {
-    "nombre": "GOLONDRINAS",
-    "rector": "CUARAN ERAZO EDGAR JAVIER",
-    "principal": null
+    "nombre": "YUMBO-IE TITAN"
   }
 },
 {
   "pk": 15, 
   "model": "campus.institucioneducativa", 
   "fields": {
-    "nombre": "ANTONIO BARBERENA",
-    "rector": null,
-    "principal": 14
+    "nombre": "YUMBO-IE CEAT GENERAL PIERO MARIOTTI"
   }
 },
 {
   "pk": 16, 
   "model": "campus.institucioneducativa", 
   "fields": {
-    "nombre": "CARLOS HOLGUIN MALLARINO",
-    "rector": "VIVEROS ANDRADE SONIA MARIA",
-    "principal": null
+    "nombre": "YUMBO-IE MANUEL MARÍA SÁNCHEZ"
   }
 },
 {
   "pk": 17, 
   "model": "campus.institucioneducativa", 
   "fields": {
-    "nombre": "NIÑO JESUS DE ATOCHA",
-    "rector": null,
-    "principal": 16
+    "nombre": "YUMBO-IE ROSA ZÁRATE DE PEÑA"
   }
 },
 {
   "pk": 18, 
   "model": "campus.institucioneducativa", 
   "fields": {
+    "nombre": "VIJES"
+  }
+},
+{
+  "pk": 1, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "INEM JORGE ISAACS",
+    "institucion": 1
+  }
+},
+{
+  "pk": 2, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "CECILIA MUÑOZ RICAURTE",
+    "institucion": 1
+  }
+},
+{
+  "pk": 3, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "LAS AMERICAS",
+    "institucion": 1
+  }
+},
+{
+  "pk": 4, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "CAMILO TORRES",
+    "institucion": 1
+  }
+},
+{
+  "pk": 5, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "CENTRO EDUCATIVO DEL NORTE",
+    "institucion": 1
+  }
+},
+{
+  "pk": 6, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "FRAY DOMINGO DE LAS CASAS",
+    "institucion": 1
+  }
+},
+{
+  "pk": 7, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "PABLO EMILIO",
+    "institucion": 1
+  }
+},
+{
+  "pk": 8, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "ANTONIO JOSE CAMACHO",
+    "institucion": 2
+  }
+},
+{
+  "pk": 9, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "REPUBLICA DEL PERU",
+    "institucion": 2
+  }
+},
+{
+  "pk": 10, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "MARCO FIDEL SUAREZ",
+    "institucion": 2
+  }
+},
+{
+  "pk": 11, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "OLGA LUCIA LLOREDA",
+    "institucion": 2
+  }
+},
+{
+  "pk": 12, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "NORMAL. SUPERIOR SANTIAGO DE CALI",
+    "institucion": 3
+  }
+},
+{
+  "pk": 13, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "JOAQUIN DE CAYZEDO Y CUERO",
+    "institucion": 3
+  }
+},
+{
+  "pk": 14, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "GOLONDRINAS",
+    "institucion": 4
+  }
+}
+
+,
+{
+  "pk": 15, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "ANTONIO BARBERENA",
+    "institucion": 4
+  }
+},
+{
+  "pk": 16, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "CARLOS HOLGUIN MALLARINO",
+    "institucion": 5
+  }
+},
+{
+  "pk": 17, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "NIÑO JESUS DE ATOCHA",
+    "institucion": 5
+  }
+},
+{
+  "pk": 18, 
+  "model": "estudiante.sede", 
+  "fields": {
     "nombre": "MIGUEL DE POMBO",
-    "rector": null,
-    "principal": 16
+    "institucion": 5
   }
 },
 {
   "pk": 19, 
-  "model": "campus.institucioneducativa", 
+  "model": "estudiante.sede", 
   "fields": {
     "nombre": "MANUEL MARIA  MALLARINO",
-    "rector": "PINZON HOYOS LUZ ANGELA",
-    "principal": null
+    "institucion": 6
   }
 },
 {
   "pk": 20, 
-  "model": "campus.institucioneducativa", 
+  "model": "estudiante.sede", 
   "fields": {
     "nombre": "LAURA VICUÑA",
-    "rector": null,
-    "principal": 19
+    "institucion": 6
   }
 },
 {
   "pk": 21, 
-  "model": "campus.institucioneducativa", 
+  "model": "estudiante.sede", 
   "fields": {
     "nombre": "LOS PINOS",
-    "rector": null,
-    "principal": 19
+    "institucion": 6
   }
 },
 {
   "pk": 22, 
-  "model": "campus.institucioneducativa", 
+  "model": "estudiante.sede", 
   "fields": {
     "nombre": "CARLOS HOLGUIN SARDI",
-    "rector": null,
-    "principal": 19
+    "institucion": 6
   }
 },
 {
   "pk": 23, 
-  "model": "campus.institucioneducativa", 
+  "model": "estudiante.sede", 
   "fields": {
     "nombre": "EL DIAMANTE",
-    "rector": "ECHEVERRY SERRATO LUZ DARY",
-    "principal": null
+    "institucion": 7
   }
 },
 {
   "pk": 24, 
-  "model": "campus.institucioneducativa", 
+  "model": "estudiante.sede", 
   "fields": {
     "nombre": "JUAN PABLO II",
-    "rector": null,
-    "principal": 23
+    "institucion": 7
   }
 },
 {
   "pk": 25, 
-  "model": "campus.institucioneducativa", 
+  "model": "estudiante.sede", 
   "fields": {
     "nombre": "EUSTAQUIO PALACIOS",
-    "rector": "ORDOÑEZ PEREZ OSCAR ATILIO",
-    "principal": null
+    "institucion": 8
   }
 },
 {
   "pk": 26, 
-  "model": "campus.institucioneducativa", 
+  "model": "estudiante.sede", 
   "fields": {
     "nombre": "LUIS LOPEZ MESA",
-    "rector": null,
-    "principal": 25
+    "institucion": 8
   }
 },
 {
   "pk": 27, 
-  "model": "campus.institucioneducativa", 
+  "model": "estudiante.sede", 
   "fields": {
     "nombre": "CELANESE",
-    "rector": null,
-    "principal": 25
+    "institucion": 8
   }
 },
 {
   "pk": 28, 
-  "model": "campus.institucioneducativa", 
+  "model": "estudiante.sede", 
   "fields": {
     "nombre": "MANUEL MARIA BUENAVENTURA",
-    "rector": null,
-    "principal": 25
+    "institucion": 8
   }
 },
 {
   "pk": 29, 
-  "model": "campus.institucioneducativa", 
+  "model": "estudiante.sede", 
   "fields": {
     "nombre": "MARISCAL JORGE ROBLEDO",
-    "rector": null,
-    "principal": 25
+    "institucion": 8
   }
 },
 
 {
   "pk": 30, 
-  "model": "campus.institucioneducativa", 
+  "model": "estudiante.sede", 
   "fields": {
     "nombre": "MIGUEL ANTONIO CARO",
-    "rector": null,
-    "principal": 25
+    "institucion": 8
   }
 },
 {
   "pk": 31, 
-  "model": "campus.institucioneducativa", 
+  "model": "estudiante.sede", 
   "fields": {
     "nombre": "GENERAL ANZOATEGUI",
-    "rector": null,
-    "principal": 25
+    "institucion": 8
   }
 },
 {
   "pk": 32, 
-  "model": "campus.institucioneducativa", 
+  "model": "estudiante.sede", 
   "fields": {
     "nombre": "TULIO ENRIQUE TASCON",
-    "rector": null,
-    "principal": 25
+    "institucion": 8
   }
 },
 {
   "pk": 33, 
-  "model": "campus.institucioneducativa", 
+  "model": "estudiante.sede", 
   "fields": {
     "nombre": "SANTIAGO RENGIFO",
-    "rector": null,
-    "principal": 25
+    "institucion": 8
   }
 },
 {
   "pk": 34, 
-  "model": "campus.institucioneducativa", 
+  "model": "estudiante.sede", 
   "fields": {
     "nombre": "SOFIA CAMARGO",
-    "rector": null,
-    "principal": 25
+    "institucion": 8
   }
 },
 {
   "pk": 35, 
-  "model": "campus.institucioneducativa", 
+  "model": "estudiante.sede", 
   "fields": {
     "nombre": "JOSE MARIA CARBONELL",
-    "rector": "MORALES CASTRO CARLOS ARTURO",
-    "principal": null
+    "institucion": 9
   }
 },
 {
   "pk": 36, 
-  "model": "campus.institucioneducativa", 
+  "model": "estudiante.sede", 
   "fields": {
     "nombre": "HONORIO VILLEGAS",
-    "rector": null,
-    "principal": 35
+    "institucion": 9
   }
 },
 {
   "pk": 37, 
-  "model": "campus.institucioneducativa", 
+  "model": "estudiante.sede", 
   "fields": {
     "nombre": "IE  BOYACA",
-    "rector": "RAMIREZ ECHEVERRY PATRICIA",
-    "principal": null
+    "institucion": 10
   }
 },
 {
   "pk": 38, 
-  "model": "campus.institucioneducativa", 
+  "model": "estudiante.sede", 
   "fields": {
     "nombre": "MARICE SINISTERRA",
-    "rector": "ANGULO  OBREGON DANIEL",
-    "principal": null
+    "institucion": 11
   }
 },
 {
   "pk": 39, 
-  "model": "campus.institucioneducativa", 
+  "model": "estudiante.sede", 
   "fields": {
     "nombre": "FENALCO ASTURIAS",
-    "rector": null,
-    "principal": 38
+    "institucion": 11
   }
 },
 {
   "pk": 40, 
-  "model": "campus.institucioneducativa", 
+  "model": "estudiante.sede", 
   "fields": {
-    "nombre": "YUMBO",
-    "rector": "",
-    "principal": null
+    "nombre": "YUMBO-IE MAYOR DE YUMBO",
+    "institucion": 12
   }
 },
 {
-  "pk": 40, 
-  "model": "campus.institucioneducativa", 
+  "pk": 41, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "YUMBO-IE JOSÉ MARÍA CÓRDOBA",
+    "institucion": 13
+  }
+},
+{
+  "pk": 42, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "YUMBO-IE TITAN",
+    "institucion": 14
+  }
+},
+{
+  "pk": 43, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "YUMBO-IE CEAT GENERAL PIERO MARIOTTI",
+    "institucion": 15
+  }
+},
+{
+  "pk": 44, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "YUMBO-IE MANUEL MARÍA SÁNCHEZ",
+    "institucion": 16
+  }
+},
+{
+  "pk": 45, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "YUMBO-IE ROSA ZÁRATE DE PEÑA",
+    "institucion": 17
+  }
+},
+{
+  "pk": 46, 
+  "model": "estudiante.sede", 
   "fields": {
     "nombre": "VIJES",
-    "rector": "",
-    "principal": null
+    "institucion": 18
   }
 }
 ]

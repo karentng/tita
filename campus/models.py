@@ -4,7 +4,7 @@
 from django.db import models
 from convocat.models import Municipio, Aspirante
 from django.contrib.auth.models import User
-from estudiante.models import Cargo, Grado, Asignatura, SecretariaEducacion, CertificacionTIC, ProgramaTIC
+from estudiante.models import Cargo, Grado, Asignatura, SecretariaEducacion, CertificacionTIC
 
 """" esto se esta usando en algun lado???
 GRADOS = (
@@ -32,8 +32,6 @@ GRADOS = (
 
 class InstitucionEducativa(models.Model):
     nombre = models.CharField(max_length=100)
-    rector = models.CharField(max_length=100, null=True)
-    principal = models.ForeignKey("self", null=True)
 
     def __unicode__(self):
         return (u"%s"%self.nombre)
@@ -90,20 +88,21 @@ class Estudiante(models.Model):
         (8, 'Postgrado en otras áreas')
     )
 
-    numero_documento = models.BigIntegerField(unique=True, verbose_name='número documento')
+    numero_documento = models.BigIntegerField(unique=True, verbose_name='número de documento de identidad')
     #municipio_documento = models.ForeignKey(Municipio, verbose_name='municipio de expedición')
     nombre1 = models.CharField( max_length=255, verbose_name='primer nombre')
     nombre2 = models.CharField( max_length=255, blank=True, verbose_name='segundo nombre')
     apellido1 = models.CharField( max_length=255, verbose_name='primer apellido')
     apellido2 = models.CharField( max_length=255, blank=True, verbose_name='segundo apellido')
     sexo = models.CharField( choices=[('M','Hombre'), ('F', 'Mujer')], max_length=1, verbose_name='genero')
-    email = models.EmailField()
+    email = models.EmailField(verbose_name="email personal")
     email_institucional = models.EmailField()
     municipio = models.ForeignKey(Municipio, verbose_name='municipio de residencia', null=True)
     telefono = models.BigIntegerField(null=True, blank=True, verbose_name=u'teléfono fijo')
     celular = models.BigIntegerField(null=True, blank=True, verbose_name=u'número de celular')
     direccion = models.CharField(verbose_name="dirección", max_length=100)
     nivel_educativo = models.IntegerField(choices=NIVEL_EDUCATIVO, verbose_name="último nivel educativo aprobado")
+    acta_compromiso = models.NullBooleanField()
 
     curso = models.ForeignKey(Curso, verbose_name='curso', null=True, blank=True)
 

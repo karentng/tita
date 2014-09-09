@@ -6,7 +6,7 @@ from django.forms import ModelForm, Textarea, HiddenInput, TextInput, Select, Ch
 from django.forms.models import inlineformset_factory
 from django_select2 import AutoModelSelect2Field, Select2MultipleWidget, Select2Widget
 from campus.models import Estudiante
-from estudiante.models import InfoLaboral,  CertificacionTIC, ProgramaTIC, DocumentosSoporte
+from estudiante.models import InfoLaboral,  CertificacionTIC, FormacionAcademicaME
 from convocat.forms import MyDateWidget, MunicipioChoice
 from convocat.forms import MyFileInput
 
@@ -20,38 +20,30 @@ class EstudianteForm(forms.ModelForm):
 class InfoLaboralForm(forms.ModelForm):
     class Meta:
         model = InfoLaboral
-        fields = ('secretaria_educacion', 'institucion_educativa', 'cargo', 'sector', 'zona', 'jornada', 'grados', 'asignaturas', 'decreto_docente', 'nombramiento', 'tipo_etnoeducador', 'poblacion_etnica')
+        fields = ('secretaria_educacion', 'institucion_educativa', 'sedes', 'cargo', 'zona', 'jornada', 'grados', 'asignaturas', 'decreto_docente', 'nombramiento', 'tipo_etnoeducador', 'poblacion_etnica')
         widgets = {
             'secretaria_educacion': Select2Widget(),
-            'institucion_educativa': Select2Widget(),
+            #'institucion_educativa': Select2Widget(),
             'grados': Select2MultipleWidget(),
             'asignaturas': Select2MultipleWidget(),
+        }
+
+class FormacionAcademicaMEForm(forms.ModelForm):
+    class Meta:
+        model = FormacionAcademicaME
+        fields = ('nivel', 'titulo', 'fecha_inicio', 'fecha_terminacion', 'institucion', 'relacionado_pedagogia', 'relacionado_tic')
+        widgets = {
+            'fecha_inicio': MyDateWidget(),
+            'fecha_terminacion': MyDateWidget()
         }
 
 class CertificacionTICForm(forms.ModelForm):
     class Meta:
         model = CertificacionTIC
-        fields = ('nombre', 'entidad', 'fecha')
+        fields = ('nombre', 'duracion', 'entidad', 'fecha_inicio', 'fecha_terminacion')
         widgets = {
-            'fecha': MyDateWidget()
-        }
-
-class ProgramaTICForm(forms.ModelForm):
-    class Meta:
-        model = ProgramaTIC
-        fields = ('nombre', 'fecha')
-        widgets = {
-            'fecha': MyDateWidget()
-        }
-
-class DocumentosSoporteForm(forms.ModelForm):
-    class Meta:
-        model = DocumentosSoporte
-        exclude = ('estudiante',)
-        widgets = {
-            'acta_compromiso' : MyFileInput(),
-            'hv' : MyFileInput(),
-            'otros' : MyFileInput()
+            'fecha_inicio': MyDateWidget(),
+            'fecha_terminacion': MyDateWidget()
         }
 
 class ContinuarRegistroFormDE(forms.Form):

@@ -4,10 +4,11 @@ from django.core import serializers
 from convocat.models import * 
 from django.db.models import Count
 import json
-from estudiante.forms import EstudianteForm, InfoLaboralForm, CertificacionTICForm, ProgramaTICForm, DocumentosSoporteForm, ContinuarRegistroFormDE
-from campus.models import CertificacionTIC, ProgramaTIC, Asignatura, Estudiante
-from estudiante.models import InfoLaboral
+from estudiante.forms import EstudianteForm, InfoLaboralForm, CertificacionTICForm, ContinuarRegistroFormDE, FormacionAcademicaMEForm
+from campus.models import CertificacionTIC, Asignatura, Estudiante
+from estudiante.models import InfoLaboral, FormacionAcademicaME, Sede
 from datetime import datetime
+import json
 
 def iniciar(request):
     if 'clave_estudiante' in request.session:
@@ -84,18 +85,60 @@ def datosProfesionales(request):
             objeto.estudiante = estudiante
             objeto.save()
             form.save_m2m()
-            return redirect('certificaciones_DE')
+            return redirect('formacion_DE')
     else :
         form = InfoLaboralForm(instance=datos)
 
     if datos:
         print datos.grados.all()
 
+    sedes = []
+    for i in range(0,18):
+        sedes.append([])
+    sds = Sede.objects.all()
+    for i in sds:
+        indice = (int(i.institucion.id)-1)
+        sedes[indice].append({'nombre': i.nombre, 'id': i.id})
+
+    print sedes
     numero_registro = request.session['clave_estudiante']
     return render(request, 'inscripcion/datosLaborales.html', {
         'form': form,
+        'clave': numero_registro,
+        'sedes': json.dumps(sedes)
+    })
+
+def formacionAcademica(request):
+    estudiante = estudiante_sesion(request)
+    if not estudiante : return redirect('home')
+    if request.method == 'POST':
+        form = FormacionAcademicaMEForm(request.POST)
+        if form.is_valid():
+            objeto = form.save(commit=False)
+            objeto.estudiante = estudiante
+            objeto.save()
+            return redirect('formacion_DE')
+    else :
+        form = FormacionAcademicaMEForm()
+
+    estudios = FormacionAcademicaME.objects.filter(estudiante=estudiante)
+
+    numero_registro = request.session['clave_estudiante']
+
+    return render(request, 'inscripcion/formacion_academica.html', {
+        'form': form,
+        'estudios': estudios,
         'clave': numero_registro
     })
+
+def eliminarFormacionAcademicaDE(request, formAcadId):
+    estudiante = estudiante_sesion(request)
+    if not estudiante : return redirect('home')
+
+    formAcad = get_object_or_404(FormacionAcademicaME.objects, estudiante=estudiante, id=formAcadId)
+    formAcad.delete()
+
+    return redirect('formacion_DE')
 
 def certificacionesTIC(request):
     estudiante = estudiante_sesion(request)
@@ -117,6 +160,59 @@ def certificacionesTIC(request):
         'form': form,
         'certificaciones': certificaciones,
         'clave': numero_registro
+    })
+
+def eliminarTicDE(request, ticId):
+    estudiante = estudiante_sesion(request)
+    if not estudiante : return redirect('home')
+
+    cerTic = get_object_or_404(CertificacionTIC.objects, estudiante=estudiante, id=ticId)
+    cerTic.delete()
+
+    return redirect('certificaciones_DE')
+
+def acta_compromiso(request):
+    estudiante = estudiante_sesion(request)
+    if not estudiante : return redirect('home')
+
+    numero_registro = request.session['clave_estudiante']
+    ie = InfoLaboral.objects.get(estudiante=estudiante).institucion_educativa
+
+    return render(request, 'inscripcion/acta_compromiso.html', {
+        'clave': numero_registro,
+        'estudiante': estudiante,
+        'ie': ie,
+        'hoy': datetime.now()
+    })
+
+def imprimir_actaDE(request):
+    estudiante = estudiante_sesion(request)
+    if not estudiante : return redirect('home')
+
+    ie = InfoLaboral.objects.get(estudiante=estudiante).institucion_educativa
+
+    return render(request, 'inscripcion/imprimir_acta_compromiso.html', {
+        'estudiante': estudiante,
+        'ie': ie,
+        'hoy': datetime.now()
+    })
+
+def finalizar(request, acta):
+    estudiante = estudiante_sesion(request)
+    if not estudiante : return redirect('home')
+
+    if request.method=='POST': # presionaron finalizar
+        del request.session['clave_estudiante']
+        return redirect('iniciar_DE')
+
+    estudiante.acta_compromiso = int(acta)
+    estudiante.save()
+    numero_registro = request.session['clave_estudiante']
+
+    return render(request, 'inscripcion/finalizar_DE.html', {
+        'estudiante': estudiante,
+        'clave': numero_registro,
+        'acta': acta,
     })
 
 def programasTIC(request):
@@ -165,29 +261,5 @@ def soportes(request):
         'clave': numero_registro
     })
 
-def acta_compromiso(request):
-    estudiante = estudiante_sesion(request)
-    if not estudiante : return redirect('home')
 
-    ie = InfoLaboral.objects.get(estudiante=estudiante).institucion_educativa
 
-    return render(request, 'inscripcion/acta_compromiso.html', {
-        'estudiante': estudiante,
-        'ie': ie,
-        'hoy': datetime.now()
-    })
-
-def finalizar(request):
-    estudiante = estudiante_sesion(request)
-    if not estudiante : return redirect('home')
-
-    numero_registro = request.session['clave_estudiante']
-
-    if request.method=='POST': # presionaron finalizar
-        del request.session['clave_estudiante']
-        return redirect('iniciar_DE')
-
-    return render(request, 'inscripcion/finalizar_DE.html', {
-        'estudiante': estudiante,
-        'clave': numero_registro
-    })
