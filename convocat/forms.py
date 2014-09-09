@@ -8,7 +8,7 @@ from django.forms.models import inlineformset_factory
 from django_select2 import AutoModelSelect2Field, Select2MultipleWidget
 
 def MyDateWidget():
-    return DateWidget(usel10n=False, bootstrap_version=3, attrs={}, options={'format': 'yyyy-mm-dd', 'startView':4, 'language':'es'})
+    return DateWidget(usel10n=False, bootstrap_version=3, options={'format': 'yyyy-mm-dd', 'startView':4, 'language':'es'})
 
 class MunicipioChoice(AutoModelSelect2Field):
     queryset = Municipio.objects.select_related('departamento')

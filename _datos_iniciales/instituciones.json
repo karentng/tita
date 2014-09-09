@@ -1,0 +1,503 @@
+[
+{
+  "pk": 1, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
+    "nombre": "INEM JORGE ISAACS"
+  }
+},
+{
+  "pk": 2, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
+    "nombre": "ANTONIO JOSE CAMACHO"
+  }
+},
+{
+  "pk": 3, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
+    "nombre": "NORMAL. SUPERIOR SANTIAGO DE CALI"
+  }
+},
+
+{
+  "pk": 4, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
+    "nombre": "GOLONDRINAS"
+  }
+},
+
+{
+  "pk": 5, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
+    "nombre": "CARLOS HOLGUIN MALLARINO"
+  }
+},
+{
+  "pk": 6, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
+    "nombre": "MANUEL MARIA  MALLARINO"
+  }
+},
+
+{
+  "pk": 7, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
+    "nombre": "EL DIAMANTE"
+  }
+},
+{
+  "pk": 8, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
+    "nombre": "EUSTAQUIO PALACIOS"
+  }
+},
+
+{
+  "pk": 9, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
+    "nombre": "JOSE MARIA CARBONELL"
+  }
+},
+{
+  "pk": 10, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
+    "nombre": "IE  BOYACA"
+  }
+},
+{
+  "pk": 11, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
+    "nombre": "MARICE SINISTERRA"
+  }
+},
+{
+  "pk": 12, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
+    "nombre": "YUMBO-IE MAYOR DE YUMBO"
+  }
+},
+{
+  "pk": 13, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
+    "nombre": "YUMBO-IE JOSÉ MARÍA CÓRDOBA"
+  }
+},
+{
+  "pk": 14, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
+    "nombre": "YUMBO-IE TITAN"
+  }
+},
+{
+  "pk": 15, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
+    "nombre": "YUMBO-IE CEAT GENERAL PIERO MARIOTTI"
+  }
+},
+{
+  "pk": 16, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
+    "nombre": "YUMBO-IE MANUEL MARÍA SÁNCHEZ"
+  }
+},
+{
+  "pk": 17, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
+    "nombre": "YUMBO-IE ROSA ZÁRATE DE PEÑA"
+  }
+},
+{
+  "pk": 18, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
+    "nombre": "VIJES"
+  }
+},
+{
+  "pk": 1, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "INEM JORGE ISAACS",
+    "institucion": 1
+  }
+},
+{
+  "pk": 2, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "CECILIA MUÑOZ RICAURTE",
+    "institucion": 1
+  }
+},
+{
+  "pk": 3, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "LAS AMERICAS",
+    "institucion": 1
+  }
+},
+{
+  "pk": 4, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "CAMILO TORRES",
+    "institucion": 1
+  }
+},
+{
+  "pk": 5, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "CENTRO EDUCATIVO DEL NORTE",
+    "institucion": 1
+  }
+},
+{
+  "pk": 6, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "FRAY DOMINGO DE LAS CASAS",
+    "institucion": 1
+  }
+},
+{
+  "pk": 7, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "PABLO EMILIO",
+    "institucion": 1
+  }
+},
+{
+  "pk": 8, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "ANTONIO JOSE CAMACHO",
+    "institucion": 2
+  }
+},
+{
+  "pk": 9, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "REPUBLICA DEL PERU",
+    "institucion": 2
+  }
+},
+{
+  "pk": 10, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "MARCO FIDEL SUAREZ",
+    "institucion": 2
+  }
+},
+{
+  "pk": 11, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "OLGA LUCIA LLOREDA",
+    "institucion": 2
+  }
+},
+{
+  "pk": 12, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "NORMAL. SUPERIOR SANTIAGO DE CALI",
+    "institucion": 3
+  }
+},
+{
+  "pk": 13, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "JOAQUIN DE CAYZEDO Y CUERO",
+    "institucion": 3
+  }
+},
+{
+  "pk": 14, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "GOLONDRINAS",
+    "institucion": 4
+  }
+}
+
+,
+{
+  "pk": 15, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "ANTONIO BARBERENA",
+    "institucion": 4
+  }
+},
+{
+  "pk": 16, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "CARLOS HOLGUIN MALLARINO",
+    "institucion": 5
+  }
+},
+{
+  "pk": 17, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "NIÑO JESUS DE ATOCHA",
+    "institucion": 5
+  }
+},
+{
+  "pk": 18, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "MIGUEL DE POMBO",
+    "institucion": 5
+  }
+},
+{
+  "pk": 19, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "MANUEL MARIA  MALLARINO",
+    "institucion": 6
+  }
+},
+{
+  "pk": 20, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "LAURA VICUÑA",
+    "institucion": 6
+  }
+},
+{
+  "pk": 21, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "LOS PINOS",
+    "institucion": 6
+  }
+},
+{
+  "pk": 22, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "CARLOS HOLGUIN SARDI",
+    "institucion": 6
+  }
+},
+{
+  "pk": 23, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "EL DIAMANTE",
+    "institucion": 7
+  }
+},
+{
+  "pk": 24, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "JUAN PABLO II",
+    "institucion": 7
+  }
+},
+{
+  "pk": 25, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "EUSTAQUIO PALACIOS",
+    "institucion": 8
+  }
+},
+{
+  "pk": 26, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "LUIS LOPEZ MESA",
+    "institucion": 8
+  }
+},
+{
+  "pk": 27, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "CELANESE",
+    "institucion": 8
+  }
+},
+{
+  "pk": 28, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "MANUEL MARIA BUENAVENTURA",
+    "institucion": 8
+  }
+},
+{
+  "pk": 29, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "MARISCAL JORGE ROBLEDO",
+    "institucion": 8
+  }
+},
+
+{
+  "pk": 30, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "MIGUEL ANTONIO CARO",
+    "institucion": 8
+  }
+},
+{
+  "pk": 31, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "GENERAL ANZOATEGUI",
+    "institucion": 8
+  }
+},
+{
+  "pk": 32, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "TULIO ENRIQUE TASCON",
+    "institucion": 8
+  }
+},
+{
+  "pk": 33, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "SANTIAGO RENGIFO",
+    "institucion": 8
+  }
+},
+{
+  "pk": 34, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "SOFIA CAMARGO",
+    "institucion": 8
+  }
+},
+{
+  "pk": 35, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "JOSE MARIA CARBONELL",
+    "institucion": 9
+  }
+},
+{
+  "pk": 36, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "HONORIO VILLEGAS",
+    "institucion": 9
+  }
+},
+{
+  "pk": 37, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "IE  BOYACA",
+    "institucion": 10
+  }
+},
+{
+  "pk": 38, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "MARICE SINISTERRA",
+    "institucion": 11
+  }
+},
+{
+  "pk": 39, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "FENALCO ASTURIAS",
+    "institucion": 11
+  }
+},
+{
+  "pk": 40, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "YUMBO-IE MAYOR DE YUMBO",
+    "institucion": 12
+  }
+},
+{
+  "pk": 41, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "YUMBO-IE JOSÉ MARÍA CÓRDOBA",
+    "institucion": 13
+  }
+},
+{
+  "pk": 42, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "YUMBO-IE TITAN",
+    "institucion": 14
+  }
+},
+{
+  "pk": 43, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "YUMBO-IE CEAT GENERAL PIERO MARIOTTI",
+    "institucion": 15
+  }
+},
+{
+  "pk": 44, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "YUMBO-IE MANUEL MARÍA SÁNCHEZ",
+    "institucion": 16
+  }
+},
+{
+  "pk": 45, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "YUMBO-IE ROSA ZÁRATE DE PEÑA",
+    "institucion": 17
+  }
+},
+{
+  "pk": 46, 
+  "model": "estudiante.sede", 
+  "fields": {
+    "nombre": "VIJES",
+    "institucion": 18
+  }
+}
+]

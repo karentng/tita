@@ -1,0 +1,53 @@
+
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block titulo %} Formulario Estudiante {% endblock %}
+
+{% block menu %}
+    {% include "menus/publico.html" with opcion_menu=6 %}
+{% endblock %}
+
+{% block css %}
+    <link href="{{STATIC_URL}}plugins/bootstrap-wizard/css/bwizard.min.css" rel="stylesheet" />
+    <!--- ñiiipi -->
+    {{form.media}} {# agrega los js y css necesarios para el bootstrap3 datetimepicker y select2 #}
+    <!--- :D -->
+{% endblock %}
+
+
+{% block miga_pan %}
+    <li><a href="{% url 'home' %}">Inicio</a></li>
+    <li class="active">Formulario de Registro</li>
+{% endblock %}
+
+{% block titulo_contenido %}Formulario de Registro de Aspirantes Maestros - Estudiantes{% endblock %}
+
+{% block titulo_panel %}<i class="fa fa-key"></i> Confirmar Finalizar{% endblock %}
+{% block contenido_panel %}
+<div class="row">
+    <div class="col-md-10 col-md-offset-1"style="font-size:15px">
+        <h4 align="center"><b> Por favor confirme que desea finalizar su inscripción:</b></h4>
+        <br>
+        {% if acta == "1" %}
+        <p style="text-align: justify">
+            Acabó de finalizar su inscripción para ser Maestro Estudiante, usted podrá acceder a modificar sus datos en cualquier momento mientras este vigente la convocatoria, para ello recuerde conservar su número de inscripción:
+            <b>{{clave}}</b>.
+        </p>
+        {% else %}
+        <p style="text-align: justify">
+            Usted no aceptó el Acta de Compromiso, por lo tanto no puede continuar con el proceso de inscripción. Le agradecemos el interés por nuestro programa, esperamos contar con usted para una nueva oportudad próximamente.
+        </p>
+        <p>Muchas Gracias.</p>
+        {% endif %}
+        <center>
+            <form method="POST">{% csrf_token %}
+            {#<a href="{% url 'home' %}" class="btn btn-lg btn-success"><i class="fa fa-trophy"></i> Finalizar Inscripción</a> #}
+                <button type="submit" name="finalizar" value="finalizar" class="btn btn-lg btn-success"><i class="fa fa-gavel"></i> Finalizar Inscripción</button>
+            </form>
+        </center>
+    </div>
+</div>
+        <br>
+    <a href="{% url 'acta_compromisoDE' %}" class="btn btn-lg btn-default pull-left"><i class="fa fa-angle-left"></i> Anterior</a>
+{% endblock %}

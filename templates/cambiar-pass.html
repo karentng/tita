@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% block pagina_blanca %}
+
+<div class="login bg-black animated fadeInDown">
+    <!-- begin brand -->
+    <div class="login-header">
+        <div class="brand">
+            {#<span class="logo"></span>#} 
+            <a href="{% url 'home' %}"><img src="{{STATIC_URL}}img/tita.png" style="height:78px"> </a>
+            
+        </div>
+        <div class="icon">
+            <i class="fa fa-unlock-alt"></i>
+        </div>
+    </div>
+    <!-- end brand -->
+    <div class="login-content">
+        <h2 class="text-info">Cambio de Contraseña</h2>
+        <form method="post" action="{% url 'cambiar_pass' %}" class="margin-bottom-0"> {% csrf_token %}
+          <input type="hidden" name="next" value="{{next}}"/>
+
+          {% bootstrap_form form  %}
+
+          <div class="login-buttons">
+            <button type="submit" class="btn btn-success btn-block btn-lg">
+              <!--span class="glyphicon glyphicon-ok-circle"></span-->
+              <i class="fa fa-unlock-alt"></i> Cambiar Contraseña
+            </button>
+          </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

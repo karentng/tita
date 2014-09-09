@@ -1,6 +1,4 @@
 from django.shortcuts import redirect, render, render_to_response, get_object_or_404
-from django.core import serializers
-from django.http import HttpResponse
 from convocat.models import * 
 from convocat.forms import *
 
@@ -304,6 +302,5 @@ def soportes(request):
 
     return render(request, 'inscripcion/soportes.html', {
         'form': form,
-        
     })
-    
+

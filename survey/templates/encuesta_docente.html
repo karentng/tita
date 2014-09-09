@@ -1,0 +1,277 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% load mytags %}
+{% block css %}
+    {{datosBasicosForm.media}}
+    <style>
+        label.control-label {
+            font-weight: bold;
+            
+        }
+
+        .bordered {
+            border-style: dotted;
+            border-width: 1px;
+            padding: 3px;
+            border-radius: 3px;
+            border-color: gray;
+            padding: 5px 10px 5px 10px;
+        }
+
+
+    </style>
+
+    {{form.media}}
+{% endblock %}
+
+
+{% block titulo_contenido %}
+    Encuesta a Padres de Familia
+{% endblock %}
+
+{% block contenido %}
+
+{% if form.errors %}
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        Faltan algunas preguntas por responder. Verifique los campos en color Rojo
+    </div>
+{% endif %}
+
+
+<form method="POST"> {% csrf_token %}
+    {% mypanel 'Información Personal y Socioeconómica Básica' %}
+        <div class="form-horizontal">
+            {% bootstrap_field form.numero_documento layout="horizontal" label_class="col-md-5" %}
+            {% bootstrap_field form.nombre layout="horizontal" label_class="col-md-5" %}
+            {% bootstrap_field form.jornada layout="horizontal" label_class="col-md-5" %}
+            {% bootstrap_field form.institucion layout="horizontal" label_class="col-md-5" %}
+        </div>
+    {% endmypanel %}
+    {% mypanel 'Uso Actual de Computador e Internet' %}
+
+        {% bootstrap_field form.question_115 form_group_class='form-group bordered' %}
+        {% bootstrap_field form.question_116 form_group_class='form-group bordered' %}
+
+    {% endmypanel %}
+
+    {% mypanel 'Percepción Sobre el Uso de las TIC en los Procesos de Enseñanza y Aprendizaje' %}
+
+        {% bootstrap_field form.question_117 form_group_class='form-group bordered' %} 
+
+        <div class="bordered">
+            <label>
+                Califique de 1 a 3 las siguientes materias según qué tanto le serviría utilizar Internet en cada una de ellas. Si cree que le serviría mucho marque 3, si cree que le serviría un poco marque 2 y si cree que le serviría muy poquito o nada marque 1.
+            </label>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-horizontal">
+                        {% for field in camposMaterias1 %}
+                            {% bootstrap_field field layout="horizontal" label_class="col-md-6" field_class="col-md-3"  %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-horizontal">
+                        {% for field in camposMaterias2 %}
+                            {% bootstrap_field field layout="horizontal" label_class="col-md-6" field_class="col-md-3"  %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="bordered">
+            {% bootstrap_field form.question_140 %}
+            {% bootstrap_field form.question_141 %}
+        </div>
+        <br>
+        {% bootstrap_field form.question_142 form_group_class='form-group bordered' %}
+
+    {% endmypanel %}
+
+    {% mypanel 'Hábitos Sobre los Usos de las TIC en los Procesos de Enseñanza y Aprendizaje' %}
+        <div class="bordered">
+            {% bootstrap_field form.question_144 %}
+            {% bootstrap_field form.question_145 %}
+        </div>
+        <br>
+        <div class="bordered">
+            <label class="control-label">
+                De las siguientes herramientas seleccione con qué frecuencia las utiliza:
+            </label>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-horizontal">
+                        {% for campo in camposHerramientas1 %}
+                            {% bootstrap_field campo layout='horizontal' label_class='col-md-7' field_class='col-md-3' %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-horizontal">
+                        {% for campo in camposHerramientas2 %}
+                            {% bootstrap_field campo layout='horizontal' label_class='col-md-7' field_class='col-md-3' %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>            
+        </div>
+        <br>
+        <div class="bordered">
+            {% bootstrap_field form.question_175 %}
+            {% bootstrap_field form.question_176 %}
+        </div>
+        <br>
+        <div class="bordered">
+            {% bootstrap_field form.question_177 %}
+            {% bootstrap_field form.question_178 %}
+        </div>
+        <br>
+        <div class="bordered">
+            {% bootstrap_field form.question_179 %}
+            {% bootstrap_field form.question_180 %}
+        </div>
+        <br>
+        <div class="bordered">
+            {% bootstrap_field form.question_181 %}
+            {% bootstrap_field form.question_182 %}
+        </div>
+        <br>
+        {% bootstrap_field form.question_183 form_group_class='form-group bordered' %}
+        <div class="bordered">
+            {% bootstrap_field form.question_184 %}
+            {% bootstrap_field form.question_185 %}
+        </div>
+    {% endmypanel %}
+    {% mypanel 'Hábitos Sobre el Uso de las TIC en la Vida Cotidiana' %}
+    {% bootstrap_field form.question_186 form_group_class='form-group bordered' %}
+    <div class="bordered">
+            <label class="control-label">
+                ¿Para qué le sirven cada uno de los siguientes dispositivos?
+            </label>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-horizontal">
+                        {% for campo in camposDispositivos1 %}
+                            {% bootstrap_field campo layout='horizontal' label_class='col-md-7' field_class='col-md-3' %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-horizontal">
+                        {% for campo in camposDispositivos2 %}
+                            {% bootstrap_field campo layout='horizontal' label_class='col-md-7' field_class='col-md-3' %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>            
+        </div>
+        <br>
+        <div class="bordered">
+            {% bootstrap_field form.question_191 %}
+            {% bootstrap_field form.question_192 %}
+        </div>
+        <br>
+        <div class="bordered">
+            {% bootstrap_field form.question_193 %}
+            {% bootstrap_field form.question_194 %}
+        </div>
+        <br>
+        <div class="bordered">
+            <label class="control-label">
+                ¿Qué hace cuando entra a Internet y con qué frecuencia?
+            </label>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-horizontal">
+                        {% for campo in camposUsos1 %}
+                            {% bootstrap_field campo layout='horizontal' label_class='col-md-7' field_class='col-md-3' %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-horizontal">
+                        {% for campo in camposUsos2 %}
+                            {% bootstrap_field campo layout='horizontal' label_class='col-md-7' field_class='col-md-3' %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>            
+        </div>
+        <br>
+        {% bootstrap_field form.question_215 form_group_class='form-group bordered' %}
+        {% bootstrap_field form.question_216 form_group_class='form-group bordered' %}
+        {% bootstrap_field form.question_217 form_group_class='form-group bordered' %}
+        {% bootstrap_field form.question_218 form_group_class='form-group bordered' %}
+    {% endmypanel %}
+    {% mypanel 'Expectativas Sobre el Uso de las TIC' %}
+    <div class="bordered">
+        <label class="control-label">
+             Si se ganara un concurso y pudiera escoger del siguiente listado tres dispositivos ¿cuáles escogería? Califique de 1 a 3 qué tan importante es para usted cada uno de esos tres dispositivos que seleccionó. Si es el más importante le pone 3, si es menos importante que el anterior le pone 2 y si es el menos importante de los tres le pone 1.
+        </label>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-horizontal">
+                    {% for campo in camposConcurso1 %}
+                        {% bootstrap_field campo layout='horizontal' label_class='col-md-5' field_class='col-md-3' %}
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-horizontal">
+                    {% for campo in camposConcurso2 %}
+                        {% bootstrap_field campo layout='horizontal' label_class='col-md-5' field_class='col-md-3' %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>            
+    </div>
+    <br>
+    <div class="bordered">
+        {% bootstrap_field form.question_227 %}
+        {% bootstrap_field form.question_228 %}
+    </div>
+    <br>
+    <div class="bordered">
+        <label class="control-label">
+            De los siguientes dispositivos escoja tres que lamentaría perder. Califique de 1 a 3 qué tan importante es para usted cada uno de esos tres dispositivos que lamentaría perder. Si es el más importante le pone 3, si es menos importante que el anterior le pone 2 y si es el menos importante de los tres le pone 1. 
+        </label>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-horizontal">
+                    {% for campo in camposLamentaria1 %}
+                        {% bootstrap_field campo layout='horizontal' label_class='col-md-5' field_class='col-md-3' %}
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-horizontal">
+                    {% for campo in camposLamentaria2 %}
+                        {% bootstrap_field campo layout='horizontal' label_class='col-md-5' field_class='col-md-3' %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>            
+    </div>
+    <br>
+    {% endmypanel %}
+    {% mypanel 'Simulación de Escenarios' %}
+        <label>
+            Como sabe, ya están llegando los equipos del proyecto Tit@ a las instituciones educativas y en cuestión de semanas estará completa la dotación. Ahora, imagínese que usted tiene todo el equipo requerido en su salón de clases, cuenta con la plataforma digital y todos los estudiantes tienen acceso a sus computadores. Usted tiene, entre otras cosas, el gestor de aula, que es un sistema que le permitirá monitorear y ver lo que hace cada estudiante en su computador, calificar los exámenes en línea y entregar resultados de manera inmediata.
+        </label>
+        {% bootstrap_field form.question_269 form_group_class='form-group bordered' %}
+        {% bootstrap_field form.question_270 form_group_class='form-group bordered' %}
+        {% bootstrap_field form.question_271 form_group_class='form-group bordered' %}
+        {% bootstrap_field form.question_272 form_group_class='form-group bordered' %}
+
+    {% endmypanel %}
+
+    <br>
+    <center><button type="submit" class="btn btn-success btn-lg">Enviar Encuesta</button></center>
+    
+</form>
+
+
+{% endblock %}

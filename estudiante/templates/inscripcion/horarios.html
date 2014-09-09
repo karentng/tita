@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block titulo %} Formulario Aspirante DE {% endblock %}
+
+{% block menu %}
+    {% include "menus/publico.html" with opcion_menu=10 %}
+{% endblock %}
+
+{% block css %}
+    <link href="{{STATIC_URL}}plugins/bootstrap-wizard/css/bwizard.min.css" rel="stylesheet" />
+    {{form.media}} {# agrega los js y css necesarios para el bootstrap3 datetimepicker #}
+{% endblock %}
+
+{% block js %}
+    {% if solo_lectura%}
+    <script>
+        $(function(){
+            $("select").attr("disabled", "disabled");
+            $("input").attr("readonly", "readonly");
+        });
+    </script>
+
+    {% endif %}
+{% endblock %}
+
+{% block miga_pan %}
+    <li><a href="{% url 'home' %}">Inicio</a></li>
+    <li class="active">Formulario de Registro DE</li>
+{% endblock %}
+
+{% block titulo_contenido %}Formulario de Registro de Aspirantes Docentes - Estudiantes{% endblock %}
+
+{% block previo_contenido_panel %}
+    {% include "inscripcion/_wizard_ME.html" with wizard_stage=5 %}
+{% endblock %}
+
+{% block titulo_panel %}<i class="fa fa-lightbulb-o"></i> Inscripción{% endblock %}
+{% block contenido_panel %}
+    <div class="row" style="margin-bottom:10px">
+        <div class="col-sm-12">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <td><b>Día</b></td>
+                        <td><b>Inicio</b></td>
+                        <td><b>Fin</b></td>
+                        <td><b>Curso</b></td>
+                    </tr>
+                    <tr></tr>
+                </thead>
+                <tbody>
+                {% for horario in horarios %}
+                    <tr align="center">
+                        <td>{{horario.dia}}</td>
+                        <td>{{horario.inicio}}</td>
+                        <td>{{horario.fin}}</td>
+                        <td>{{horario.curso}}</td>
+                {% empty %}
+                        <td colspan="4" align="center"><b>No hay horarios registrados</b></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-12">
+            <form class="form-horizontal" method="post">{% csrf_token %}
+                {% bootstrap_form form layout="horizontal" %}
+                <button class="btn btn-primary pull-left" type="submit">Guardar</button>
+            </form>
+        </div>
+    </div>
+    
+    <a href="{% url 'programas_DE' %}" class="btn btn-lg btn-default pull-left"> <i class="fa fa-angle-left"></i> Anterior</a>
+    <a id="siguiente" href="{% url 'home' %}" class="btn btn-lg btn-primary pull-right">Finalizar <i class="fa fa-check"></i></a>
+{% endblock %}

@@ -6,11 +6,16 @@ from django.conf.urls.static import static
 
 admin.autodiscover()
 
-urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'tita.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
+
+urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # solo en servidor de desarrollo
+
+
+urlpatterns += patterns('',
     url(r'^select2/', include('django_select2.urls')),
+
+    url(r'^login/$', 'django.contrib.auth.views.login', {'template_name':'login.html'}, name='login'),
+    url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page':'home'}, name='logout'),
+    url(r'^cambiar-pass/$', 'django.contrib.auth.views.password_change', {'template_name':'cambiar-pass.html', 'post_change_redirect':'home'}, name='cambiar_pass'),
     
     url(r'^admin/', include(admin.site.urls)),
     #url(r'^$', 'convocat.views.inscripcion.index', name="publico"),
@@ -20,44 +25,17 @@ urlpatterns = patterns('',
     url(r'^calendario/$', TemplateView.as_view(template_name='info/calendario.html'), name="info_calendario"),
     url(r'^requisitos/$',TemplateView.as_view(template_name='info/requisitos.html'), name="info_requisitos"),
     url(r'^registrarse/$',TemplateView.as_view(template_name='info/registrarse.html'), name="info_registrarse"),
-     url(r'^contactenos/$',TemplateView.as_view(template_name='info/contactenos.html'), name="info_contactenos"),
+    url(r'^contactenos/$',TemplateView.as_view(template_name='info/contactenos.html'), name="info_contactenos"),
+    
 
+    url('', include('convocat.urls')),
+    url('', include('estudiante.urls')),
+    url(r'^encuestas/', include('survey.urls')),
+    url(r'^campus/', include('campus.urls')),
+    url('', include('cronograma.urls')),
 
-    #url(r'^formulario/$', 'convocat.views.inscripcion.formulario', name="formulario"),#
-    #url(r'^registrarse/$', 'convocat.views.inscripcion.registrarse', name="publico_registrarse"),   
-    #url(r'^login/$', 'django.contrib.auth.views.login', {'template_name':'publico/login.html'}, name= 'publico_login'),
-    #url(r'^cerrar/$', 'django.contrib.auth.views.logout', {'template_name':'info.html'}, name= 'logout'),
-    #url(r'^guardarHV/$', 'convocat.views.guardarHV', name= 'guardarHV'),
 )
 
 
-urlpatterns += patterns('convocat.views.inscripcion',
-    url(r'^inscripcion/iniciar-inscripcion$',      'iniciarInscripcion', name="iniciarInscripcion"),
-
-    url(r'^inscripcion/datos-personales$',      'datosPersonales', name="datosPersonales"),
-
-    
-
-    url(r'^inscripcion/formacion-academica$',   'formacionAcademica', name="formacionAcademica"),
-    url(r'^inscripcion/formacion-academica/eliminar/(\d+)$', 'eliminarFormacionAcademica', name="eliminarFormacionAcademica"),
-
-    url(r'^inscripcion/formacion-tics$',        'formacionTics', name="formacionTics"),
-    url(r'^inscripcion/formacion-tics/eliminar/(\d+)$', 'eliminarFormacionTics', name="eliminarFormacionTics"),
-
-    url(r'^inscripcion/conocimientos$',         'conocimientosEspecificos', name="conocimientosEspecificos"),
-    url(r'^inscripcion/idiomas$',               'idiomasManejados', name="idiomasManejados"),
-    url(r'^inscripcion/idiomas/eliminar/(\d+)$', 'eliminarIdioma', name="eliminarIdioma"),
-
-    url(r'^inscripcion/experiencia-ensenanza$',             'experienciaEnsenanza', name="experienciaEnsenanza"),
-    url(r'^inscripcion/experiencia-ensenanza/eliminar/(\d+)$', 'eliminarExperienciaEnsenanza', name="eliminarExperienciaEnsenanza"),
-
-    #url(r'^inscripcion/experiencia-otra$',                  'experienciaOtra', name="experienciaOtra"),
-    #url(r'^inscripcion/experiencia-otra/eliminar/(\d+)$', 'eliminarExperienciaOtra', name="eliminarExperienciaOtra"),
-
-    url(r'^inscripcion/finalizar$',      'finalizar', name="finalizar"),
-    url(r'^inscripcion/finalizada$',      'finalizada', name="finalizada"),
-    
-    url(r'^inscripcion/soportes$',      'soportes', name="soportes"),
 
 
-) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

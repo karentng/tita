@@ -1,0 +1,205 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block titulo %}
+	Tit@ - Calendario
+{% endblock %}
+
+{% block menu %}
+	{% include "menus/publico.html" with opcion_menu=13 %}
+{% endblock %}
+
+{% block miga_pan %}
+	<li><a href="{% url 'home' %}">Inicio</a></li>
+	<li class="active">Cronograma</li>
+{% endblock %}
+
+{% block titulo_contenido %}
+	Cronograma de actividades
+{% endblock %}
+
+{% block css %}
+	<link href="{{STATIC_URL}}plugins/bootstrap-wizard/css/bwizard.min.css" rel="stylesheet" />
+	<link href="{{STATIC_URL}}plugins/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" />
+    {{form.media}} {# agrega los js y css necesarios para el bootstrap3 datetimepicker #}
+{% endblock %}
+
+{% block js %}
+
+<script src="{{STATIC_URL}}plugins/fullcalendar/fullcalendar/fullcalendar.js"></script>
+<script type="text/javascript">
+
+	var colors = ['bg-purple', 'bg-red', 'bg-green', 'bg-yellow', 'bg-orange' ];
+
+	var eventos = (("{{eventos}}").replace(/&(l|g|quo)t;/g, function(a,b){
+        return {
+            l   : '<',
+            g   : '>',
+            quo : '"'
+        }[b];
+    }));
+	eventos = JSON.parse( eventos );
+
+	var datos = [];
+	for (i in eventos){
+		var aux = eventos[i];
+		var inicio = aux.inicio;
+		var fin = aux.fin;
+		datos.push({
+			title: aux.nombre,
+			start: new Date(inicio[0], inicio[1], inicio[2]),
+			end: new Date(fin[0], fin[1], fin[2]),
+			className: colors[i%5],
+			description: aux.descripcion,
+		});
+	}
+
+
+	var handleCalendarDemo = function () {
+	"use strict";
+	var buttonSetting = {left: 'today prev,next ', center: 'title', right: 'month,agendaWeek,agendaDay'};
+	var date = new Date();
+	var m = date.getMonth();
+	var y = date.getFullYear();
+	
+	var calendar = $('#calendar').fullCalendar({
+		header: buttonSetting,
+		selectable: true,
+		selectHelper: true,
+		droppable: true,
+		drop: function(date, allDay) { // this function is called when something is dropped
+		
+			// retrieve the dropped element's stored Event Object
+			var originalEventObject = $(this).data('eventObject');
+			
+			// we need to copy it, so that multiple events don't have a reference to the same object
+			var copiedEventObject = $.extend({}, originalEventObject);
+			
+			// assign it the date that was reported
+			copiedEventObject.start = date;
+			copiedEventObject.allDay = allDay;
+			
+			// render the event on the calendar
+			// the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
+			$('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
+			
+			// is the "remove after drop" checkbox checked?
+			if ($('#drop-remove').is(':checked')) {
+				// if so, remove the element from the "Draggable Events" list
+				$(this).remove();
+			}
+			
+		},
+		select: function(start, end, allDay) {
+			var title = prompt('Event Title:');
+			if (title) {
+				calendar.fullCalendar('renderEvent',
+					{
+						title: title,
+						start: start,
+						end: end,
+						allDay: allDay
+					},
+					true // make the event "stick"
+				);
+			}
+			calendar.fullCalendar('unselect');
+		},
+		eventRender: function(event, element, calEvent) {
+				var mediaObject = (event.media) ? event.media : '';
+				var description = (event.description) ? event.description : '';
+            element.find(".fc-event-title").after($("<span class=\"fc-event-icons\"></span>").html(mediaObject));
+            element.find(".fc-event-title").append('<small>'+ description +'</small>');
+        },
+		editable: false,
+		events: datos
+	});
+	
+	/* initialize the external events
+	-----------------------------------------------------------------*/
+	$('#external-events .external-event').each(function() {
+		var eventObject = {
+			title: $.trim($(this).attr('data-title')),
+			className: $(this).attr('data-bg'),
+			media: $(this).attr('data-media'),
+			description: $(this).attr('data-desc')
+		};
+		
+		$(this).data('eventObject', eventObject);
+		
+		$(this).draggable({
+			zIndex: 999,
+			revert: true,
+			revertDuration: 0
+		});
+	});
+};
+</script>
+{% endblock %}
+
+{% block js_ready %}
+<script type="text/javascript">
+	$(document).ready(function() {
+        App.init();
+        handleCalendarDemo();
+    });
+</script>
+{% endblock %}
+
+{% block titulo_panel %}
+	Calendario
+{% endblock %}
+
+
+{% block contenido %}
+	<div >
+	<div class="panel panel-inverse">
+		    <div class="panel-heading">
+		        <div class="panel-heading-btn">
+		            
+		            
+		        </div>
+		        <h4 class="panel-title">Calendario</h4>
+		    </div>
+		    <div class="panel-body p-0">
+		        <div class="vertical-box">
+		            <div class="vertical-column p-15 bg-silver width-sm ui-sortable">
+		            	<h4 class=" m-b-20">Añadir un evento</h4>
+		            	<form  method="post">
+								 {% csrf_token %}
+								 {% bootstrap_form evento layout="vertical" %}
+								 <button class="btn btn-primary" type="submit">Programar</button>
+						</form>
+						<br>
+						{% comment %}
+                        <div id="external-events" class="calendar-event width-sm">
+                            <h4 class=" m-b-20">Eventos disponibles</h4>
+                            <div class="external-event bg-purple" data-bg="bg-purple" data-title="Discussion" data-media="<i class='fa fa-comments'></i>" data-desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit." style="position: relative;">
+                                <h5><i class="fa fa-comments fa-lg fa-fw"></i> Evento 123</h5>
+                                <p>Esta es la descripción del evento 123 </p>
+                            </div>
+                            <div class="external-event bg-blue ui-draggable" data-bg="bg-blue" data-title="Dinner" data-media="<i class='fa fa-cutlery'></i>" data-desc="Cum sociis natoque penatibus et magnis dis parturient montes." style="position: relative;"> 
+                                <h5><i class="fa fa-cutlery fa-lg fa-fw"></i> Evento 234</h5>
+                                <p>Esta es la descripción del evento 234</p>
+                            </div>
+                            <div class="external-event bg-green ui-draggable" data-bg="bg-green" data-title="Brainstorming" data-media="<i class='fa fa-lightbulb-o'></i>" data-desc="Mauris tristique massa eu venenatis semper. Phasellus a nibh nisi." style="position: relative;">
+                                <h5><i class="fa fa-lightbulb-o fa-lg fa-fw"></i> Evento 345</h5>
+                                <p>Esta es la descripción del evento 345</p>
+                            </div>
+                            <div class="external-event bg-orange ui-draggable" data-bg="bg-orange" data-title="Performance Rating" data-media="<i class='fa fa-tasks'></i>" data-desc="Class aptent taciti sociosqu ad litora torquent per conubia nostra." style="position: relative;">
+                                 <h5><i class="fa fa-tasks fa-lg fa-fw"></i> Evento 456</h5>
+                                <p>Esta es la descripción del evento 456</p>
+                            </div>
+                            <div class="external-event bg-red ui-draggable" data-bg="bg-red" data-title="Video Shooting" data-media="<i class='fa fa-video-camera'></i>" data-desc="Donec ligula nisi, tempus eu egestas id, auctor sit amet velit." style="position: relative;">
+                                <h5><i class="fa fa-video-camera fa-lg fa-fw"></i> Evento 567</h5>
+                                <p>Esta es la descripción del evento 567</p>
+                            </div>
+                        </div>
+                        {% endcomment %}
+                    </div>
+                    <div id="calendar" class="vertical-column p-15 calendar"></div>
+		        </div>
+		    </div>
+		</div>
+	</div>
+{% endblock %}

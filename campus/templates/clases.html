@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block titulo %} Lista de Clases{% endblock %}
+
+{% block menu %}
+    {% include "menus/publico.html" with opcion_menu=10 %}
+{% endblock %}
+
+{% block css %}
+    <link href="{{STATIC_URL}}plugins/bootstrap-wizard/css/bwizard.min.css" rel="stylesheet" />
+    {{form.media}} {# agrega los js y css necesarios para el bootstrap3 datetimepicker #}
+{% endblock %}
+
+{% block js %}
+    
+{% endblock %}
+
+{% block miga_pan %}
+    <li><a href="{% url 'home' %}">Inicio</a></li>
+    <li><a href="{% url 'listar_cursos_profesor' %}">Cursos</a></li>
+    <li class="active">Clases</li>
+{% endblock %}
+
+{% block titulo_contenido %}Seleccione una actividad para calificar:{% endblock %}
+
+{% block titulo_panel %}<i class="fa fa-list-ul"></i> Clases del Curso {{curso.id}} de la Institución {{curso.institucion|capfirst}}{% endblock %}
+{% block contenido_panel %}
+
+
+    <table class="table" width="100%" >
+        <thead>            
+            <tr>
+                <th>Fecha Programada</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for clase in clases%}
+            <tr>
+                <td>{{clase.fecha_programada}}</td>
+                <td><a href="{% url 'listado_estudiantes' curso.id clase.id %}">Calificar</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table> 
+    
+{% endblock %}

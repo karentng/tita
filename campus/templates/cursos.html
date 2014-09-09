@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block titulo %} Listado de Cursos {% endblock %}
+
+{% block menu %}
+    {% include "menus/publico.html" with opcion_menu=10 %}
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block js %}
+    
+{% endblock %}
+
+{% block miga_pan %}
+    <li><a href="{% url 'home' %}">Inicio</a></li>
+    <li class="active">Cursos</li>
+{% endblock %}
+
+{% block titulo_contenido %}Seleccione las actividades de un curso:{% endblock %}
+
+{% block titulo_panel %}<i class="fa fa-users"></i> Listado de sus Cursos{% endblock %}
+{% block contenido_panel %}
+
+    <table class="table" width="100%" >
+        <thead>            
+            <tr>
+                <th>Institución</th>
+                <th>Descripción</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for curso in cursos%}
+            <tr>
+                <td>{{curso.institucion|capfirst}}</td>
+                <td>{{curso.descripcion}}</td>
+                <td><a href="{% url 'listar_clases_curso' curso.id %}"> Lista de Clases</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>  
+    
+{% endblock %}

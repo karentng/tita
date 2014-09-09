@@ -1,0 +1,258 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+	Tit@ - Cuadro de Control
+{% endblock %}
+
+{% block menu %}
+	{% include "menus/publico.html" with opcion_menu=9 %}
+{% endblock %}
+
+{% block js %}
+<script src="{{STATIC_URL}}plugins/flot/jquery.flot.min.js"></script>
+<script src="{{STATIC_URL}}plugins/flot/jquery.flot.pie.min.js"></script>
+<script src="{{STATIC_URL}}plugins/flot/jquery.flot.categories.js"></script>
+<script type="text/javascript">
+	var purple = '#727cb6';
+
+
+    if ($('#bar-chart').length !== 0) {
+    	var municipios = (("{{municipios}}").replace(/&(l|g|quo)t;/g, function(a,b){
+                return {
+                    l   : '<',
+                    g   : '>',
+                    quo : '"'
+                }[b];
+            }));
+
+		municipios = JSON.parse( municipios );
+		//console.log(municipios);
+		var data = [];
+		for (i in municipios){
+        	var aux = municipios[i];
+        	data[i] = [aux.nombre, aux.dcount]
+        }
+        //var data = [ ["January", 10], ["February", 8], ["March", 4], ["April", 13], ["May", 17], ["June", 9] ];
+        $.plot("#bar-chart", [ {data: data, color: purple} ], {
+            series: {
+                bars: {
+                    show: true,
+                    barWidth: 0.4,
+                    align: 'center',
+                    fill: true,
+                    fillColor: purple,
+                    zero: true
+                }
+            },
+            xaxis: {
+                mode: "categories",
+                tickColor: '#ddd',
+				tickLength: 0
+            },
+            grid: {
+                borderWidth: 0
+            }
+        });
+    }
+
+    function mostrar(num){
+    	var paneles = ["#inscritos", "#aprobados", "#rechazados", "#mejores"];
+    	for(i in paneles){
+    		$(paneles[i]).hide();
+    	}
+    	$(paneles[num]).show();
+    }
+</script>
+{% endblock %}
+
+{% block miga_pan %}
+	<li><a href="javascript:;">Cuadro de Control</a></li>
+	
+{% endblock %}
+
+{% block titulo_contenido %}
+	Resultados Convocatoria a Formadores Etapa Presencial y Virtual
+{% endblock %}
+
+{% block contenido %}
+	<!-- begin row -->
+			<div class="row">
+				<div class="col-md-3 col-sm-6">
+					<div class="widget widget-state bg-green">
+						<div class="state-icon"><i class="fa fa-users"></i></div>
+						<div class="state-info">
+							<h4>TOTAL DE INSCRITOS</h4>
+							<p>{{total_inscritos}}</p>	
+						</div>
+						<div class="state-link">
+							<a href="javascript:;" onclick="mostrar(0)">Ver Reporte <i class="fa fa-arrow-circle-o-right"></i></a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-6">
+					<div class="widget widget-state bg-blue">
+						<div class="state-icon"><i class="fa fa-check"></i></div>
+						<div class="state-info">
+							<h4>TOTAL SELECCIONADOS</h4>
+							<p>{{total_aprobados}}</p>	
+						</div>
+						<div class="state-link">
+							<a href="javascript:;" onclick="mostrar(1)">Ver Reporte <i class="fa fa-arrow-circle-o-right"></i></a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-6">
+					<div class="widget widget-state bg-red">
+						<div class="state-icon"><i class="fa fa-frown-o"></i></div>
+						<div class="state-info">
+							<h4>NO SELECCIONADOS</h4>
+							<p>{{total_rechazados}}</p>	
+						</div>
+						<div class="state-link">
+							<a href="javascript:;" onclick="mostrar(2)">Ver Reporte <i class="fa fa-arrow-circle-o-right"></i></a>
+						</div>
+					</div>
+				</div>	
+				<div class="col-md-3 col-sm-6">
+					<div class="widget widget-state bg-purple">
+						<div class="state-icon"><i class="fa fa-trophy"></i></div>
+						<div class="state-info">
+							<h4>MEJOR PUNTAJE</h4>
+							<p>{{maximo}}</p>	
+						</div>
+						<div class="state-link">
+							<a href="javascript:;" onclick="mostrar(3)">Ver Reporte <i class="fa fa-arrow-circle-o-right"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- end row -->
+			<!-- begin row -->
+			<div class="row">
+				<!-- begin col-8 -->
+				<div class="col-md-8">
+					<div class="panel panel-inverse" id="inscritos">
+						<div class="panel-heading">
+							<div class="panel-heading-btn">
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+							</div>
+							<h4 class="panel-title">Inscritos</h4>
+						</div>
+						<div class="panel-body">
+							<table class="table table-valign-middle m-b-0">
+								<thead>
+									<tr>	
+										<th>Cédula</th>
+										<th>Municipio</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for aspirante in inscritos %}
+									<tr>
+										<td>{{aspirante.numero_documento}}</td>
+										<td>{{aspirante.municipio}}</td>
+									</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="panel panel-inverse" id="aprobados" style="display: none;">
+						<div class="panel-heading">
+							<div class="panel-heading-btn">
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+							</div>
+							<h4 class="panel-title">Seleccionados</h4>
+						</div>
+						<div class="panel-body">
+							<table class="table table-valign-middle m-b-0">
+								<thead>
+									<tr>	
+										<th>Cédula</th>
+										<th>Municipio</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for aspirante in aprobados %}
+									<tr>
+										<td>{{aspirante.numero_documento}}</td>
+										<td>{{aspirante.municipio}}</td>
+									</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="panel panel-inverse" id="rechazados" style="display: none;">
+						<div class="panel-heading">
+							<div class="panel-heading-btn">
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+							</div>
+							<h4 class="panel-title">No Seleccionados</h4>
+						</div>
+						<div class="panel-body">
+							<table class="table table-valign-middle m-b-0">
+								<thead>
+									<tr>	
+										<th>Cédula</th>
+										<th>Municipio</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for aspirante in rechazados %}
+									<tr>
+										<td>{{aspirante.numero_documento}}</td>
+										<td>{{aspirante.municipio}}</td>
+									</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="panel panel-inverse" id="mejores" style="display: none;">
+						<div class="panel-heading">
+							<div class="panel-heading-btn">
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+							</div>
+							<h4 class="panel-title">Mejores Puntajes</h4>
+						</div>
+						<div class="panel-body">
+							<table class="table table-valign-middle m-b-0">
+								<thead>
+									<tr>	
+										<th>Cédula</th>
+										<th>Municipio</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for aspirante in mejores %}
+									<tr>
+										<td>{{aspirante.numero_documento}}</td>
+										<td>{{aspirante.municipio}}</td>
+									</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<!-- end col-8 -->
+				<!-- begin col-4 -->
+				<div class="col-md-4">
+                    <div class="panel panel-inverse">
+                        <div class="panel-heading">
+                            <div class="panel-heading-btn">
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                            </div>
+                            <h4 class="panel-title">Inscritos por Ciudades</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div id="bar-chart" class="height-sm"></div>
+                        </div>
+                    </div>
+		        </div>
+				<!-- end col-4 -->
+			</div>
+			<!-- end row -->
+		
+{% endblock %}

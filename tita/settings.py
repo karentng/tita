@@ -30,8 +30,8 @@ ALLOWED_HOSTS = []
 #para login
 
 from django.core.urlresolvers import reverse_lazy
-LOGIN_URL = reverse_lazy('publico_login')
-LOGIN_REDIRECT_URL = reverse_lazy('publico')
+LOGIN_URL = reverse_lazy('login')
+LOGIN_REDIRECT_URL = reverse_lazy('home')
 LOGOUT_URL = reverse_lazy('logout')
 
 
@@ -44,12 +44,18 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'convocat',
+
+
     'bootstrap3',
-    #'bootstrap3_datetime',
     'datetimewidget',
     'django_select2',
     'django_extensions', # para sqldiff
+
+    'convocat',
+    'estudiante',
+    'campus',
+    'survey',
+    'cronograma',
 )
 
 MIDDLEWARE_CLASSES = (
