@@ -22,9 +22,13 @@
 	<a href="{% url 'info_contactenos' %}"><i class="fa fa-2x fa-question-circle"></i> <span>Contáctenos</span></a>
 </li>
 
+<li {% if opcion_menu == 9 %} class="active" {% endif %}>
+	<a href="{% url 'dashboard' %}"><i class="fa fa-2x fa-flag-o"></i> Resultado Convocatoria</a>
+</li>
+
 {% comment %}
-Diseño de DashBoard y Reportes
-{% endcomment %}
+{# Diseño de DashBoard y Reportes #}
+
 
 <li class="has-sub {% if opcion_menu >= 9 %} active {% endif %}">
 	<a href="javascript:;">
@@ -38,3 +42,4 @@ Diseño de DashBoard y Reportes
 		<li><a href="javascript:;">Conformación de Grupos</a></li>
 	</ul>
 </li>
+{% endcomment %}
