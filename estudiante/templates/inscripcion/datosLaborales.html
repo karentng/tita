@@ -62,7 +62,7 @@
 
                 $("#id_sedes").empty();
                 if(valor > 0){
-                    for (i in sedes[valor]){
+                    for (i in sedes[valor-1]){
                         var aux = sedes[valor][i];
                         $("#id_sedes").append($("<option></option>")
                              .attr("value", aux.id).text(aux.nombre));
