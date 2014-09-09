@@ -52,10 +52,10 @@ INSTALLED_APPS = (
     'django_extensions', # para sqldiff
 
     'convocat',
-    #'estudiante',
-    #'campus',
-    #'survey',
-    #'cronograma',
+    'estudiante',
+    'campus',
+    'survey',
+    'cronograma',
 )
 
 MIDDLEWARE_CLASSES = (
