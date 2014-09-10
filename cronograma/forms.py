@@ -10,7 +10,6 @@ class EventoForm(forms.ModelForm):
         widgets = {
             #'fecha_inicio': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
             #'fecha_terminacion': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
-            'fecha_inicio': MyDateWidget(),
-            'fecha_finalizacion': MyDateWidget(),
+         
             'descripcion': forms.Textarea(attrs={'rows': 4})
         }

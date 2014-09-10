@@ -50,6 +50,7 @@ INSTALLED_APPS = (
     'datetimewidget',
     'django_select2',
     'django_extensions', # para sqldiff
+    'bootstrap3_datetime',
 
     'convocat',
     'estudiante',
