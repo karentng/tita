@@ -63,7 +63,7 @@
                         <td>{{est.fecha_terminacion}}</td>
                         <td>
                             {% if est.relacionado_pedagogia %}<span class="label label-info">Pedagogía</span>{% endif %}
-                            {% if est.relacionado_tic %}<span class="label label-info">TICs</span>{% endif %}
+                            {% if est.relacionado_tic %}<span class="label label-info">TIC</span>{% endif %}
                         </td>
                         <td>
                             <a href="{% url 'eliminarFormacionAcademicaDE' est.id %}" onclick="return confirm('Seguro que desea eliminar esta entrada?')" class="text-danger">Eliminar</a>
@@ -84,8 +84,15 @@
                 <br>
                 <span class="alert alert-info fade in m-b-15" align="center">
                     <b>Recuerde guardar los estudios digitados presionando "Guardar"</b>
-                    <button class="btn btn-primary pull-left" type="submit">Guardar</button>
+                    <button class="btn btn-primary" type="submit">Guardar</button>
                 </span>
+                {% if not tiene_estudios %}
+                <br>
+                <br><br>
+                <span class="alert alert-danger fade in m-b-15" align="center">
+                    <b>Para continuar con la siguiente sección debe tener por lo menos un estudio registrado!</b>
+                </span>
+                {% endif %}
             </form>
         </div>
     </div>

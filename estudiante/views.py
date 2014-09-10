@@ -6,7 +6,7 @@ from django.db.models import Count
 import json
 from estudiante.forms import EstudianteForm, InfoLaboralForm, CertificacionTICForm, ContinuarRegistroFormDE, FormacionAcademicaMEForm
 from campus.models import CertificacionTIC, Asignatura, Estudiante
-from estudiante.models import InfoLaboral, FormacionAcademicaME, Sede
+from estudiante.models import InfoLaboral, FormacionAcademicaME
 from datetime import datetime
 import json
 
@@ -89,23 +89,11 @@ def datosProfesionales(request):
     else :
         form = InfoLaboralForm(instance=datos)
 
-    if datos:
-        print datos.grados.all()
-
-    sedes = []
-    for i in range(0,18):
-        sedes.append([])
-    sds = Sede.objects.all()
-    for i in sds:
-        indice = (int(i.institucion.id)-1)
-        sedes[indice].append({'nombre': i.nombre, 'id': i.id})
-
-    print sedes
     numero_registro = request.session['clave_estudiante']
+
     return render(request, 'inscripcion/datosLaborales.html', {
         'form': form,
-        'clave': numero_registro,
-        'sedes': json.dumps(sedes)
+        'clave': numero_registro
     })
 
 def formacionAcademica(request):
@@ -128,7 +116,8 @@ def formacionAcademica(request):
     return render(request, 'inscripcion/formacion_academica.html', {
         'form': form,
         'estudios': estudios,
-        'clave': numero_registro
+        'clave': numero_registro,
+        'tiene_estudios': len(estudios)
     })
 
 def eliminarFormacionAcademicaDE(request, formAcadId):
@@ -143,6 +132,9 @@ def eliminarFormacionAcademicaDE(request, formAcadId):
 def certificacionesTIC(request):
     estudiante = estudiante_sesion(request)
     if not estudiante : return redirect('home')
+    estudios = FormacionAcademicaME.objects.filter(estudiante=estudiante)
+    if not len(estudios):
+        return redirect('formacion_DE')
     if request.method == 'POST':
         form = CertificacionTICForm(request.POST)
         if form.is_valid():
@@ -176,7 +168,7 @@ def acta_compromiso(request):
     if not estudiante : return redirect('home')
 
     numero_registro = request.session['clave_estudiante']
-    ie = InfoLaboral.objects.get(estudiante=estudiante).institucion_educativa
+    ie = InfoLaboral.objects.get(estudiante=estudiante).get_sede_display
 
     return render(request, 'inscripcion/acta_compromiso.html', {
         'clave': numero_registro,

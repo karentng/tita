@@ -35,13 +35,6 @@ class SecretariaEducacion(models.Model):
     def __unicode__(self):
         return (u"%s"%self.nombre)
 
-class Sede(models.Model):
-    nombre = models.CharField(max_length=100)
-    institucion = models.ForeignKey('campus.InstitucionEducativa')
-
-    def __unicode__(self):
-        return (u"%s"%self.nombre)
-
 class InfoLaboral(models.Model):
     ETNOEDUCADOR = (
         (1, 'No se desempeña como etnoeducador'),
@@ -81,11 +74,71 @@ class InfoLaboral(models.Model):
             (26,  '3D')))
     )
 
+    SEDES = (
+        ('INEM JORGE ISAACS',
+            ((1, 'Principal INEM JORGE ISAACS'),
+            (2,  'Satelite CECILIA MUÑOZ RICAURTE'),
+            (3,  'Satelite LAS AMERICAS'),
+            (4,  'Satelite CAMILO TORRES'),
+            (5,  'Satelite CENTRO EDUCATIVO DEL NORTE'),
+            (6,  'Satelite FRAY DOMINGO DE LAS CASAS'),
+            (7,  'Satelite PABLO EMILIO'))),
+        ('ANTONIO JOSE CAMACHO',
+            ((8, 'Principal ANTONIO JOSE CAMACHO'),
+            (9, 'Satelite REPUBLICA DEL PERU'),
+            (10, 'Satelite MARCO FIDEL SUAREZ'),
+            (11, 'Satelite OLGA LUCIA LLOREDA'))),
+        ('NORMAL. SUPERIOR SANTIAGO DE CALI',
+            ((12, 'Principal NORMAL. SUPERIOR SANTIAGO DE CALI'),
+            (13,  'Satelite JOAQUIN DE CAYZEDO Y CUERO'))),
+        ('GOLONDRINAS PRINCIPAL',
+            ((14, 'Principal GOLONDRINAS PRINCIPAL'),
+            (15,  'Satelite ANTONIO BARBERENA'))),
+        ('CARLOS HOLGUIN MALLARINO',
+            ((16, 'Principal CARLOS HOLGUIN MALLARINO'),
+            (17,  'Satelite NIÑO JESUS DE ATOCHA'),
+            (18,  'Satelite MIGUEL DE POMBO'))),
+        ('MANUEL MARIA MALLARINO',
+            ((19, 'Principal MANUEL MARIA MALLARINO'),
+            (20, 'Satelite LAURA VICUÑA'),
+            (21, 'Satelite LOS PINOS'),
+            (22, 'Satelite CARLOS HOLGUIN SARDI'))),
+        ('EL DIAMANTE',
+            ((23, 'Principal EL DIAMANTE'),
+            (24, 'Satelite JUAN PABLO II'))),
+        ('EUSTAQUIO PALACIOS',
+            ((25, 'Principal EUSTAQUIO PALACIOS'),
+            (26, 'Satelite    LUIS LOPEZ MESA'),
+            (27, 'Satelite    CELANESE'),
+            (28, 'Satelite    MANUEL MARIA BUENAVENTURA'),
+            (29, 'Satelite    MARISCAL JORGE ROBLEDO'),
+            (30, 'Satelite    MIGUEL ANTONIO CARO'),
+            (31, 'Satelite    GENERAL ANZOATEGUI'),
+            (32, 'Satelite    TULIO ENRIQUE TASCON'),
+            (33, 'Satelite    SANTIAGO RENGIFO'),
+            (34, 'Satelite    SOFIA CAMARGO'))),
+        ('JOSE MARIA CARBONELL',
+            ((35, 'Principal JOSE MARIA CARBONELL'),
+            (36, 'Satelite HONORIO VILLEGAS'))),
+        ('MARICE SINISTERRA',
+            ((38, 'Principal MARICE SINISTERRA'),
+            (39, 'Satelite FENALCO ASTURIAS'))),
+        (37, 'Principal IE BOYACA'),
+        (40, 'Principal YUMBO-IE MAYOR DE YUMBO - SEDE PRINCIPAL'),
+        (41, 'Principal YUMBO-IE JOSÉ MARÍA CÓRDOBA - SEDE PRINCIPAL'),
+        (42, 'Principal YUMBO-IE TITAN - SEDE PRINCIPAL'),
+        (43, 'Principal YUMBO-IE CEAT GENERAL PIERO MARIOTTI - SEDE JOHN F. KENNEDY'),
+        (44, 'Principal YUMBO-IE MANUEL MARÍA SÁNCHEZ - SEDE PRINCIPAL'),
+        (45, 'Principal YUMBO-IE ROSA ZÁRATE DE PEÑA - SEDE PRINCIPAL'),
+        (46, 'Principal VIJES')
+    )
+
+
     estudiante = models.ForeignKey('campus.Estudiante')
 
     secretaria_educacion = models.ForeignKey(SecretariaEducacion)
-    institucion_educativa = models.ForeignKey('campus.InstitucionEducativa')
-    sedes = models.ForeignKey(Sede)
+    #institucion_educativa = models.ForeignKey('campus.InstitucionEducativa')
+    sede = models.IntegerField(choices=SEDES, max_length=2)
     cargo = models.IntegerField(choices=[(1, 'Docente'), (2, 'Rector'), (3, 'Coordinador'), (4, 'Otro')], verbose_name="cargo")
     zona = models.CharField( choices=[('R','Rural'), ('U', 'Urbana'), ('N', 'N.A')], max_length=1, verbose_name='zona')
     jornada = models.CharField(choices=JORNADAS, max_length=1)
@@ -113,7 +166,7 @@ class FormacionAcademicaME(models.Model):
     fecha_terminacion = models.DateField(verbose_name='fecha de finalización')
     institucion = models.CharField(max_length=255, verbose_name=u'institución formadora')
     relacionado_pedagogia = models.BooleanField(verbose_name=u'este estudio está relacionado con la pedagogía')
-    relacionado_tic = models.BooleanField(verbose_name=u'este estudio está relacionado con las TICs')
+    relacionado_tic = models.BooleanField(verbose_name=u'este estudio está relacionado con las TIC')
     
     def __unicode__(self):
         return self.titulo

@@ -73,11 +73,13 @@
 
 
 	<div class="row">
+		{% comment %}
 		<div class="col-xs-12" align="center">
 			<span class="alert alert-info fade in m-b-15" align="center">
 		        Para imprimir el acta haga <a class="" href="{% url  'imprimir_actaDE' %}" target="_blank"><b>Click Aquí</b></a>
 		    </span>
 		</div>
+		{% endcomment %}
 		<div class="col-xs-12" align="center" style="margin-top:40px">
 			<span class="alert alert-danger fade in m-b-15" align="center">
 		        <b>Atención: </b>Al presionar "Acepto" usted esta aceptando todo lo estipulado en el "Acta de Compromiso"
@@ -95,36 +97,3 @@
         
     </form>
 {% endblock %}
-
-
-<html>
-    <head>
-        <meta charset="utf-8"> 
-        <title>Acta de Compromiso</title>
-        <style type="text/css" media="print">
-            .noprint { display: none; }
-        </style>
-    
-        <style type="text/css" media="all">
-            body, td, div {
-                font-family: Sans-serif;
-                font-size: 10pt;
-            }
-        
-        </style>
-
-
-    </head>
-    <body>
-
-
-
-    <div id="imprimir">
-    	<p align="center"><button class="btn btn-primary noprint" onclick="window.print()"><i class="fa fa-file-pdf-o"></i> Imprimir</button></p>
-    	<div style="width:870px; margin-left:auto; margin-right:auto; text-align:justify">
-	    	
-		</div>
-	</div>
-</body>
-
-</html>

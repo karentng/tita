@@ -30,7 +30,7 @@
 		var data = [];
 		for (i in municipios){
         	var aux = municipios[i];
-        	data[i] = [aux.nombre, aux.dcount]
+        	data[i] = [aux.nombre, aux.cantidad]
         }
         //var data = [ ["January", 10], ["February", 8], ["March", 4], ["April", 13], ["May", 17], ["June", 9] ];
         $.plot("#bar-chart", [ {data: data, color: purple} ], {
@@ -93,7 +93,7 @@
 					<div class="widget widget-state bg-blue">
 						<div class="state-icon"><i class="fa fa-check"></i></div>
 						<div class="state-info">
-							<h4>TOTAL SELECCIONADOS</h4>
+							<h4>PRESELECCIONADOS</h4>
 							<p>{{total_aprobados}}</p>	
 						</div>
 						<div class="state-link">
@@ -117,11 +117,11 @@
 					<div class="widget widget-state bg-purple">
 						<div class="state-icon"><i class="fa fa-trophy"></i></div>
 						<div class="state-info">
-							<h4>MEJOR PUNTAJE</h4>
-							<p>{{maximo}}</p>	
+							<h4>MEJOR CLASIFICADO</h4>
+							<p><label style="font-size:20px">{{maximo.numero_documento}}</label></p>	
 						</div>
 						<div class="state-link">
-							<a href="javascript:;" onclick="mostrar(3)">Ver Reporte <i class="fa fa-arrow-circle-o-right"></i></a>
+							<a href="javascript:;">{{maximo.municipio_institucion}} <i class="fa fa-arrow-circle-o-right"></i></a>
 						</div>
 					</div>
 				</div>
@@ -130,7 +130,7 @@
 			<!-- begin row -->
 			<div class="row">
 				<!-- begin col-8 -->
-				<div class="col-md-8">
+				<div class="col-md-6">
 					<div class="panel panel-inverse" id="inscritos">
 						<div class="panel-heading">
 							<div class="panel-heading-btn">
@@ -150,7 +150,7 @@
 									{% for aspirante in inscritos %}
 									<tr>
 										<td>{{aspirante.numero_documento}}</td>
-										<td>{{aspirante.municipio}}</td>
+										<td>{{aspirante.municipio_institucion}}</td>
 									</tr>
 									{% endfor %}
 								</tbody>
@@ -176,7 +176,7 @@
 									{% for aspirante in aprobados %}
 									<tr>
 										<td>{{aspirante.numero_documento}}</td>
-										<td>{{aspirante.municipio}}</td>
+										<td>{{aspirante.municipio_institucion}}</td>
 									</tr>
 									{% endfor %}
 								</tbody>
@@ -202,7 +202,7 @@
 									{% for aspirante in rechazados %}
 									<tr>
 										<td>{{aspirante.numero_documento}}</td>
-										<td>{{aspirante.municipio}}</td>
+										<td>{{aspirante.municipio_institucion}}</td>
 									</tr>
 									{% endfor %}
 								</tbody>
@@ -228,7 +228,7 @@
 									{% for aspirante in mejores %}
 									<tr>
 										<td>{{aspirante.numero_documento}}</td>
-										<td>{{aspirante.municipio}}</td>
+										<td>{{aspirante.municipio_institucion}}</td>
 									</tr>
 									{% endfor %}
 								</tbody>
@@ -238,7 +238,7 @@
 				</div>
 				<!-- end col-8 -->
 				<!-- begin col-4 -->
-				<div class="col-md-4">
+				<div class="col-md-6">
                     <div class="panel panel-inverse">
                         <div class="panel-heading">
                             <div class="panel-heading-btn">
