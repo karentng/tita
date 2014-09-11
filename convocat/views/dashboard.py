@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render, render_to_response, get_list_or_4
 from django.core import serializers
 from convocat.models import * 
 from django.db.models import Count
+from campus.models import Estudiante
 import json
 
 
@@ -59,4 +60,13 @@ def dashboard(request):
         'maximo':maximo,
 
         'municipios':json.dumps(munis),
+    })
+
+def reporteME(request):
+    estudiantes = Estudiante.objects.all()
+
+    return render(request, 'dashboard/reporteME.html', {
+        'estudiantes': estudiantes,
+
+        #'municipios':json.dumps(munis),
     })
