@@ -8,11 +8,34 @@
 	{% include "menus/publico.html" with opcion_menu=9 %}
 {% endblock %}
 
+{% block css %}
+<link href="{{STATIC_URL}}plugins/DataTables-1.9.4/css/data-table.css" rel="stylesheet" />
+{% endblock %}
+
 {% block js %}
+<script src="{{STATIC_URL}}plugins/DataTables-1.9.4/js/jquery.dataTables.js"></script>
+<script src="{{STATIC_URL}}plugins/DataTables-1.9.4/js/data-table.js"></script>
+
 <script src="{{STATIC_URL}}plugins/flot/jquery.flot.min.js"></script>
 <script src="{{STATIC_URL}}plugins/flot/jquery.flot.pie.min.js"></script>
 <script src="{{STATIC_URL}}plugins/flot/jquery.flot.categories.js"></script>
 <script type="text/javascript">
+
+    $('#data-table2').dataTable( {
+        "sDom": "<'row'<'col-md-6 col-sm-6'l><'col-md-6 col-sm-6'f>r>t<'row'<'col-md-6 col-sm-6'i><'col-md-6 col-sm-6'p>>",
+        "sPaginationType": "bootstrap",
+        "oLanguage": {
+            "sLengthMenu": "_MENU_ registros por página"
+        }
+    });
+    $('#data-table3').dataTable( {
+        "sDom": "<'row'<'col-md-6 col-sm-6'l><'col-md-6 col-sm-6'f>r>t<'row'<'col-md-6 col-sm-6'i><'col-md-6 col-sm-6'p>>",
+        "sPaginationType": "bootstrap",
+        "oLanguage": {
+            "sLengthMenu": "_MENU_ registros por página"
+        }
+    });
+
 	var purple = '#727cb6';
 
 
@@ -139,22 +162,24 @@
 							<h4 class="panel-title">Inscritos</h4>
 						</div>
 						<div class="panel-body">
-							<table class="table table-valign-middle m-b-0">
-								<thead>
-									<tr>	
-										<th>Cédula</th>
-										<th>Municipio</th>
-									</tr>
-								</thead>
-								<tbody>
-									{% for aspirante in inscritos %}
-									<tr>
-										<td>{{aspirante.numero_documento}}</td>
-										<td>{{aspirante.municipio_institucion}}</td>
-									</tr>
-									{% endfor %}
-								</tbody>
-							</table>
+							<div class="table-responsive">
+                                <table id="data-table" class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Cédula</th>
+                                            <th>Municipio</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for aspirante in inscritos %}
+                                        <tr class="odd gradeX">
+                                            <td>{{aspirante.numero_documento}}</td>
+                                            <td>{{aspirante.municipio_institucion}}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
 						</div>
 					</div>
 					<div class="panel panel-inverse" id="aprobados" style="display: none;">
@@ -165,22 +190,24 @@
 							<h4 class="panel-title">Seleccionados</h4>
 						</div>
 						<div class="panel-body">
-							<table class="table table-valign-middle m-b-0">
-								<thead>
-									<tr>	
-										<th>Cédula</th>
-										<th>Municipio</th>
-									</tr>
-								</thead>
-								<tbody>
-									{% for aspirante in aprobados %}
-									<tr>
-										<td>{{aspirante.numero_documento}}</td>
-										<td>{{aspirante.municipio_institucion}}</td>
-									</tr>
-									{% endfor %}
-								</tbody>
-							</table>
+                            <div class="table-responsive">
+                                <table id="data-table2" class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Cédula</th>
+                                            <th>Municipio</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for aspirante in aprobados %}
+                                        <tr class="odd gradeX">
+                                            <td>{{aspirante.numero_documento}}</td>
+                                            <td>{{aspirante.municipio_institucion}}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
 						</div>
 					</div>
 					<div class="panel panel-inverse" id="rechazados" style="display: none;">
@@ -191,22 +218,24 @@
 							<h4 class="panel-title">No Seleccionados</h4>
 						</div>
 						<div class="panel-body">
-							<table class="table table-valign-middle m-b-0">
-								<thead>
-									<tr>	
-										<th>Cédula</th>
-										<th>Municipio</th>
-									</tr>
-								</thead>
-								<tbody>
-									{% for aspirante in rechazados %}
-									<tr>
-										<td>{{aspirante.numero_documento}}</td>
-										<td>{{aspirante.municipio_institucion}}</td>
-									</tr>
-									{% endfor %}
-								</tbody>
-							</table>
+                            <div class="table-responsive">
+                                <table id="data-table3" class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Cédula</th>
+                                            <th>Municipio</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for aspirante in rechazados %}
+                                        <tr class="odd gradeX">
+                                            <td>{{aspirante.numero_documento}}</td>
+                                            <td>{{aspirante.municipio_institucion}}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
 						</div>
 					</div>
 					<div class="panel panel-inverse" id="mejores" style="display: none;">
