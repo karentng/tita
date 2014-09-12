@@ -40,11 +40,16 @@ def encuesta_padre(request):
         'form': form,
         'camposMaterias1': camposMaterias[:10],
         'camposMaterias2': camposMaterias[10:],
-        'camposDispositivos': camposDispositivos,
-        'camposHerramientas' : camposHerramientas,
-        'camposUsos' : camposUsos,
-        'camposExpectativas' : camposExpectativas,
-        'camposLamentaria' : camposLamentaria,
+        'camposDispositivos1': camposDispositivos[:2],
+        'camposDispositivos2': camposDispositivos[2:],
+        'camposHerramientas1' : camposHerramientas[:7],
+        'camposHerramientas2' : camposHerramientas[7:],
+        'camposUsos1' : camposUsos[:10],
+        'camposUsos2' : camposUsos[10:],
+        'camposExpectativas1' : camposExpectativas[:4],
+        'camposExpectativas2' : camposExpectativas[4:],
+        'camposLamentaria1' : camposLamentaria[:4],
+        'camposLamentaria2' : camposLamentaria[4:],
     })
 
 
@@ -56,7 +61,7 @@ def encuesta_docente(request):
         form = ResponseForm(request.POST, survey=survey)
         if form.is_valid():
             form.save()
-            return redirect('home')
+            return redirect('encuesta_finalizada')
         else:
             print "error llenando", form.errors
     else :
@@ -93,7 +98,7 @@ def encuesta_estudiante(request):
         form = ResponseForm(request.POST, survey=survey)
         if form.is_valid():
             form.save()
-            return redirect('home')
+            return redirect('encuesta_finalizada')
         else:
             print "error llenando", form.errors
     else :
@@ -114,8 +119,8 @@ def encuesta_estudiante(request):
         'camposRecursos2': camposRecursos[4:],
         'camposDispositivos1': camposDispositivos[:2],
         'camposDispositivos2': camposDispositivos[2:],
-        'camposInternet1': camposInternet[:8],
-        'camposInternet2': camposInternet[8:],
+        'camposInternet1': camposInternet[:9],
+        'camposInternet2': camposInternet[9:],
         'camposDispos1': camposDispos[:4],
         'camposDispos2': camposDispos[4:],
         'camposLamentaria1': camposLamentaria[:4],

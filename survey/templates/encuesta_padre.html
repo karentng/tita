@@ -50,17 +50,13 @@
             {% bootstrap_field form.numero_documento layout="horizontal" label_class="col-md-5" %}
             {% bootstrap_field form.nombre layout="horizontal" label_class="col-md-5" %}
             {% bootstrap_field form.jornada layout="horizontal" label_class="col-md-5" %}
+            
         </div>
-        {% bootstrap_field form.question_1 %}
-        {% bootstrap_field form.institucion  %}
+        {% bootstrap_field form.question_368 %}
+        {% bootstrap_field form.institucion %}
         {% bootstrap_field form.question_2 %}
+        {% bootstrap_field form.question_1 %}
         
-        <div class="bordered">
-            {% bootstrap_field form.question_3 %}
-            {% bootstrap_field form.question_4 %}
-        </div>
-        <br>
-        {% bootstrap_field form.question_5 form_group_class='form-group bordered' %}
     {% endmypanel %}
 
     {% mypanel 'Uso Actual de Computador e Internet' %}
@@ -83,14 +79,14 @@
                 <div class="col-md-6">
                     <div class="form-horizontal">
                         {% for field in camposMaterias1 %}
-                            {% bootstrap_field field layout="horizontal" label_class="col-md-6" field_class="col-md-3"  %}
+                            {% bootstrap_field field layout="horizontal" label_class="col-md-3" field_class="col-md-6"  %}
                         {% endfor %}
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-horizontal">
                         {% for field in camposMaterias2 %}
-                            {% bootstrap_field field layout="horizontal" label_class="col-md-6" field_class="col-md-3"  %}
+                            {% bootstrap_field field layout="horizontal" label_class="col-md-3" field_class="col-md-6"  %}
                         {% endfor %}
                     </div>
                 </div>
@@ -98,19 +94,13 @@
         </div>
         
         <br>
-        <label class="control-label">
-            <strong>Seleccione su grado de acuerdo respecto a las siguientes afirmaciones</strong>
-        </label>
-        {% bootstrap_field form.question_29 form_group_class='form-group bordered' %}
-        {% bootstrap_field form.question_30 form_group_class='form-group bordered' %}
-        {% bootstrap_field form.question_31 form_group_class='form-group bordered' %}
-
         <div class="bordered">
             {% bootstrap_field form.question_32 %}
             {% bootstrap_field form.question_33 %}
         </div>
         <br>
-        {% bootstrap_field form.question_34 form_group_class='form-group bordered' %}
+        {% bootstrap_field form.question_29 form_group_class='form-group bordered' %}
+        
     {% endmypanel %}
 
     {% mypanel 'Hábitos Sobre el Uso de las TIC en los Procesos de Enseñanza y Aprendizaje' %}
@@ -123,10 +113,21 @@
             <label class="control-label">
                 De las siguientes herramientas seleccione con qué frecuencia las utiliza
             </label>
-            <div class="form-horizontal">
-                {% for campo in camposHerramientas %}
-                    {% bootstrap_field campo layout='horizontal' label_class='col-md-7' field_class='col-md-3' %}
-                {% endfor %}
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-horizontal">
+                        {% for field in camposHerramientas1 %}
+                            {% bootstrap_field field layout="horizontal" label_class="col-md-6" field_class="col-md-3"  %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-horizontal">
+                        {% for field in camposHerramientas2 %}
+                            {% bootstrap_field field layout="horizontal" label_class="col-md-6" field_class="col-md-3"  %}
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
         <br>
@@ -153,10 +154,21 @@
             <label for="" class="control-label">
                 ¿Para qué le sirven cada uno de los siguientes dispositivos? <small>Puede marcar varias respuestas para cada dispositivo.</small>
             </label> 
-            <div class="form-horizontal">
-                {% for field in camposDispositivos %}
-                    {% bootstrap_field field layout="horizontal" label_class="col-md-4" field_class="col-md-6"  %}
-                {% endfor %}
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-horizontal">
+                        {% for field in camposDispositivos1 %}
+                            {% bootstrap_field field layout="horizontal" label_class="col-md-6" field_class="col-md-3"  %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-horizontal">
+                        {% for field in camposDispositivos2 %}
+                            {% bootstrap_field field layout="horizontal" label_class="col-md-6" field_class="col-md-3"  %}
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
         <br>
@@ -178,10 +190,21 @@
             <label for="" class="control-label">
                 ¿Qué hace cuando entra a internet y con qué frecuencia?
             </label> 
-            <div class="form-horizontal">
-                {% for field in camposUsos %}
-                    {% bootstrap_field field layout="horizontal" label_class="col-md-6" field_class="col-md-2"  %}
-                {% endfor %}
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-horizontal">
+                        {% for field in camposUsos1 %}
+                            {% bootstrap_field field layout="horizontal" label_class="col-md-6" field_class="col-md-3"  %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-horizontal">
+                        {% for field in camposUsos2 %}
+                            {% bootstrap_field field layout="horizontal" label_class="col-md-6" field_class="col-md-3"  %}
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
         <br>
@@ -199,10 +222,21 @@
             <label for="" class="control-label">
                 Si se ganara un concurso y pudiera escoger del siguiente listado <b>tres</b> dispositivos ¿Cuáles escogería? Califique de 1 a 3 qué tan importante es para usted cada uno de esos tres dispositivos que seleccionó. Si es el más importante le pone 3, si es menos importante que el anterior le pone 2 y si es el menos importante que el anterior le pone 2 y si es el menos importante de los tres le pone 1.
             </label> 
-            <div class="form-horizontal">
-                {% for field in camposExpectativas %}
-                    {% bootstrap_field field layout="horizontal" label_class="col-md-3" field_class="col-md-2"  %}
-                {% endfor %}
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-horizontal">
+                        {% for field in camposExpectativas1 %}
+                            {% bootstrap_field field layout="horizontal" label_class="col-md-6" field_class="col-md-3"  %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-horizontal">
+                        {% for field in camposExpectativas2 %}
+                            {% bootstrap_field field layout="horizontal" label_class="col-md-6" field_class="col-md-3"  %}
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
         <br>
@@ -217,11 +251,28 @@
             <label for="" class="control-label">
                 De los siguientes dispositivos escoja <b>tres</b> que lamentaría perder. Califique de 1 a 3 qué tan importante es para usted cada uno de esos tres dispositivos que lamentaría perder. Si es el más importante le pone 3, si es menos importante que el anterior le pone 2 y si es el menos importante de los tres le pone 1. 
             </label> 
-            <div class="form-horizontal">
-                {% for field in camposLamentaria %}
-                    {% bootstrap_field field layout="horizontal" label_class="col-md-3" field_class="col-md-2"  %}
-                {% endfor %}
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-horizontal">
+                        {% for field in camposLamentaria1 %}
+                            {% bootstrap_field field layout="horizontal" label_class="col-md-6" field_class="col-md-3"  %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-horizontal">
+                        {% for field in camposLamentaria2 %}
+                            {% bootstrap_field field layout="horizontal" label_class="col-md-6" field_class="col-md-3"  %}
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
+        </div>
+    {% endmypanel %}
+    {% mypanel 'Simulación de Escenarios' %}
+        <div class="bordered">
+            {% bootstrap_field form.question_369 %}
+            {% bootstrap_field form.question_370 %}
         </div>
     {% endmypanel %}
     
