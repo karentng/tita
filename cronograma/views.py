@@ -2,7 +2,7 @@ from django.shortcuts import render
 from cronograma.forms import *
 from cronograma.models import Evento
 import json
-from django.shortcuts import redirect, render, render_to_response, get_object_or_404
+
 def cronograma(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
@@ -11,7 +11,7 @@ def cronograma(request):
             objeto = form.save()
             return redirect('cronograma')
     else:
-        evento = EventoForm()
+        form = EventoForm()
 
     eventos = Evento.objects.all()
     events = []
@@ -27,6 +27,6 @@ def cronograma(request):
         })
     
     return render(request, 'cronograma.html', {
-        'evento': evento,
+        'evento': form,
         'eventos': json.dumps(events)
     })

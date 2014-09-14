@@ -8,7 +8,7 @@
 	<a href="{% url 'info_general' %}"><i class="fa fa-check"></i> <span>Información general</span></a>
 </li>
 <li {% if opcion_menu == 4 %} class="active" {% endif %}>
-	<a href="{% url 'info_calendario' %}"><i class="fa fa-2x fa-calendar"></i> <span>Calendario</span></a>
+	<a href="{% url 'info_calendario' %}"><i class="fa fa-2x fa-tasks"></i> <span>Calendario de Selección</span></a>
 </li>
 <li {% if opcion_menu == 5 %} class="active" {% endif %}>
 	<a href="{% url 'info_requisitos' %}"><i class="fa fa-list-ol"></i> <span>Requisitos</span></a>
@@ -65,4 +65,23 @@
 			<a href="{% url 'encuesta_docente' %}"><i class="fa fa-mortar-board"></i> Maestros Estudiantes</a>
 		</li>
 	</ul>
+</li>
+
+<li class="has-sub active " {% if opcion_menu == 'cronograma_' %} class="active" {% endif %}>
+	<a href="javascript:;">
+		<i class="fa fa-2x fa-calendar"></i>Programación
+		<b class="caret pull-right"></b>
+	</a>
+	<ul class="sub-menu">
+		<li {% if opcion_menu == 'cronograma_diplomado' %} class="active" {% endif %}>
+			<a href="{% url 'cronograma_diplomado' %}"><i class="fa fa fa-university"></i> Diplomado</a>
+		</li>
+		<li {% if opcion_menu == 'cronograma_acompanamiento' %} class="active" {% endif %}>
+			<a href="{% url 'cronograma_acompanamiento' %}"><i class="fa fa fa-folder-o"></i> Acompañamiento in situ</a>
+		</li>
+	</ul>
+</li>
+
+<li {% if opcion_menu == 6 %} class="active" {% endif %}>
+	<a href="{% url 'iniciarInscripcion' %}"><i class="fa fa-pencil-square-o"></i> <span>Formulario Convocatoria</span></a>
 </li>
