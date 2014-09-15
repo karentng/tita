@@ -2,20 +2,20 @@
 {% load bootstrap3 %}
 
 {% block titulo %}
-	Tit@ - Programación acompañamiento in situ
+	Tit@ - Programación diplomado
 {% endblock %}
 
 {% block menu %}
-	{% include "menus/publico.html" with opcion_menu=14 %}
+	{% include "menus/publico.html" with opcion_menu=13 %}
 {% endblock %}
 
 {% block miga_pan %}
 	<li><a href="{% url 'home' %}">Inicio</a></li>
-	<li class="active">Programación acompañamiento in situ</li>
+	<li class="active">Programación diplomado</li>
 {% endblock %}
 
 {% block titulo_contenido %}
-	Programación de actividades
+	Porgramación de actividades
 {% endblock %}
 
 {% block css %}
@@ -147,7 +147,7 @@
 {% endblock %}
 
 {% block titulo_panel %}
-	Programación acompañamiento in situ
+	Programación Diplomado
 {% endblock %}
 
 
@@ -159,25 +159,11 @@
 		            
 		            
 		        </div>
-		        <h4 class="panel-title">Programación acompañamiento in situ</h4>
+		        <h4 class="panel-title">Programación Diplomado</h4>
 		    </div>
 		    <div class="panel-body p-0">
 		        <div class="vertical-box">
 		            <div class="vertical-column p-15 bg-silver width-sm ui-sortable">
-		            	<form  method="post">
-							<h4>Seleccione la institución educativa</h4>
-
-			            	<select class="form-control">
-                                            <option>Institución 1</option>
-                                            <option>Institución 2</option>
-                                            <option>Institución 3</option>
-                                            <option>Institución 4</option>
-                                            <option>Institución 5</option>
-                            </select>
-						
-						</form>
-
-						<br><br>
 		            	<h4 class=" m-b-20">Añadir un evento</h4>
 		            	<form  method="post">
 								 {% csrf_token %}

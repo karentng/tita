@@ -4,6 +4,6 @@ from django.contrib import admin
 from django.conf import settings
 
 urlpatterns = patterns('cronograma.views',
-    url(r'^programacion/cronograma_diplomado$',      'cronograma', name="cronograma_diplomado"),
+    url(r'^programacion/cronograma_diplomado$',      'diplomado', name="cronograma_diplomado"),
     url(r'^programacion/cronograma_acompanamiento$',      'cronograma', name="cronograma_acompanamiento"),
 )
