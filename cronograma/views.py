@@ -27,6 +27,6 @@ def cronograma(request):
         })
     
     return render(request, 'cronograma.html', {
-        'evento': form,
+        'form': form,
         'eventos': json.dumps(events)
     })
