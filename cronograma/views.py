@@ -1,20 +1,20 @@
 from django.shortcuts import render
-from cronograma.forms import EventoForm
-from cronograma.models import Evento
+from cronograma.forms import EventosAcompanamientoForm, EventosDiplomadoForm
+from cronograma.models import EventosAcompanamiento, EventosDiplomado
 import json
 from django.shortcuts import redirect, render, render_to_response
 
 def cronograma(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
-        form = EventoForm(request.POST)
+        form = EventosAcompanamientoForm(request.POST)
         if form.is_valid():
             objeto = form.save()
             return redirect('cronograma_acompanamiento')
     else:
-        form = EventoForm()
+        form = EventosAcompanamientoForm()
 
-    eventos = Evento.objects.all()
+    eventos = EventosAcompanamiento.objects.all()
     events = []
 
     for i in eventos:
@@ -22,27 +22,27 @@ def cronograma(request):
         fin = i.fecha_finalizacion
         events.append({
             'nombre': i.nombre,
-            'inicio': [inicio.year, inicio.month, inicio.day],
-            'fin': [fin.year, fin.month, fin.day],
+            'inicio': [inicio.year, inicio.month-1, inicio.day],
+            'fin': [fin.year, fin.month-1, fin.day],
             'descripcion': i.descripcion
         })
     
     return render(request, 'cronograma.html', {
-        'form': form,
+        'formAcompanamiento': form,
         'eventos': json.dumps(events)
     })
 
 def diplomado(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
-        form = EventoForm(request.POST)
+        form = EventosDiplomadoForm(request.POST)
         if form.is_valid():
             objeto = form.save()
             return redirect('cronograma_diplomado')
     else:
-        form = EventoForm()
+        form = EventosDiplomadoForm()
 
-    eventos = Evento.objects.all()
+    eventos = EventosDiplomado.objects.all()
     events = []
 
     for i in eventos:
@@ -50,12 +50,12 @@ def diplomado(request):
         fin = i.fecha_finalizacion
         events.append({
             'nombre': i.nombre,
-            'inicio': [inicio.year, inicio.month, inicio.day],
-            'fin': [fin.year, fin.month, fin.day],
+            'inicio': [inicio.year, inicio.month-1, inicio.day],
+            'fin': [fin.year, fin.month-1, fin.day],
             'descripcion': i.descripcion
         })
     
     return render(request, 'diplomado.html', {
-        'form': form,
+        'formDiplomado': form,
         'eventos': json.dumps(events)
     })
