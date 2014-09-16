@@ -20,7 +20,7 @@ class EventosAcompanamientoForm(forms.ModelForm):
     class Meta:
         model = EventosAcompanamiento
 
-        fields = ('nombre', 'fecha_inicio', 'hora_inicio', 'fecha_finalizacion', 'hora_finalizacion', 'descripcion')
+        fields = ('institucion', 'nombre', 'fecha_inicio', 'hora_inicio', 'fecha_finalizacion', 'hora_finalizacion', 'descripcion')
         widgets = {
             'fecha_inicio': MyDateWidget(),
             'fecha_finalizacion': MyDateWidget(),
