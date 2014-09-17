@@ -29,7 +29,7 @@ class EventosAcompanamientoForm(forms.ModelForm):
             'fecha_finalizacion': MyDateWidget(),
          	#'hora_inicio' : forms.TimeInput(format='%H:%M'),
             #'hora_inicio' : DateWidget(usel10n=False, bootstrap_version=3, options={'format': 'hh:mm'}),
-            'hora_inicio': DateTimeWidget(options={'format': 'HH:ii P', 'autoclose': 'true', 'showMeridian' : 'true', 'startView':0},usel10n=False, bootstrap_version=3),
-            #'hora_inicio': SelectTimeWidget(twelve_hr=True),
+            'hora_inicio': DateTimeWidget(options={'format': 'HH:ii P','viewSelect':'hour', 'initialDate':'asas','autoclose': 'true', 'showMeridian' : 'true', 'startView':'1', 'minview':'0','maxView':'1','minuteStep':'30','keyboardNavigation':'false', 'language':'en',},usel10n=False, bootstrap_version=3),
+            'hora_finalizacion': DateTimeWidget(options={'format': 'HH:ii P','viewSelect':'hour', 'initialDate':'asas','autoclose': 'true', 'showMeridian' : 'true', 'startView':'1', 'minview':'0','maxView':'1','minuteStep':'30','keyboardNavigation':'false', 'language':'en',},usel10n=False, bootstrap_version=3),
             'descripcion': forms.Textarea(attrs={'rows': 3})
         }
