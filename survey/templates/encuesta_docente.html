@@ -30,7 +30,20 @@
 
 
 {% block titulo_contenido %}
-    Encuesta a Docentes
+    <label align="center">
+        UNIVERSIDAD DEL VALLE
+        <h4>PROYECTO CALI VIVE DIGITAL / TIT@ EDUCACIÓN DIGITAL PARA TODOS</h4>
+        <h5>
+            ENCUESTA SOBRE PERCEPCIONES Y HÁBITOS ACERCA DEL USO DE LAS TIC EN LOS PROCESOS DE ENSEÑANZA Y APRENDIZAJE (SEGUNDA APLICACIÓN)
+            CUESTIONARIO PARA PADRES DE FAMILIA O ACUDIENTES
+        </h5>
+        Cuestionario para Docentes
+        <br>
+        <b style="font-size:13px;">
+            La información que se recoge en este cuestionario es confidencial y se utilizará exclusivamente con fines académicos.
+        </b>                                                                                   
+
+    </label>
 {% endblock %}
 
 {% block contenido %}
@@ -42,20 +55,24 @@
     </div>
 {% endif %}
 
+                                                                               
+
+
 
 <form method="POST"> {% csrf_token %}
     {% mypanel 'Información Personal y Socioeconómica Básica' %}
         <div class="form-horizontal">
-            {% bootstrap_field form.numero_documento layout="horizontal" label_class="col-md-5" %}
-            {% bootstrap_field form.nombre layout="horizontal" label_class="col-md-5" %}
             {% bootstrap_field form.jornada layout="horizontal" label_class="col-md-5" %}
             {% bootstrap_field form.institucion layout="horizontal" label_class="col-md-5" %}
+            {% bootstrap_field form.nombre layout="horizontal" label_class="col-md-5" %}
         </div>
     {% endmypanel %}
     {% mypanel 'Uso Actual de Computador e Internet' %}
 
         {% bootstrap_field form.question_115 form_group_class='form-group bordered' %}
+        {% bootstrap_field form.question_371 form_group_class='form-group bordered' %}
         {% bootstrap_field form.question_116 form_group_class='form-group bordered' %}
+        {% bootstrap_field form.question_372 form_group_class='form-group bordered' %}
 
     {% endmypanel %}
 
@@ -64,8 +81,8 @@
         {% bootstrap_field form.question_117 form_group_class='form-group bordered' %} 
 
         <div class="bordered">
-            <label>
-                Califique de 1 a 3 las siguientes materias según qué tanto le serviría utilizar Internet en cada una de ellas. Si cree que le serviría mucho marque 3, si cree que le serviría un poco marque 2 y si cree que le serviría muy poquito o nada marque 1.
+            <label class="control-label">
+                9. Califique de 1 a 3 las siguientes materias según qué tanto le serviría utilizar Internet en cada una de ellas. Si cree que le serviría mucho marque 3, si cree que le serviría un poco marque 2 y si cree que le serviría muy poquito o nada marque 1.
             </label>
             
             <div class="row">
@@ -103,7 +120,7 @@
         <br>
         <div class="bordered">
             <label class="control-label">
-                De las siguientes herramientas seleccione con qué frecuencia las utiliza:
+                15. De las siguientes herramientas seleccione con qué frecuencia las utiliza:
             </label>
             <div class="row">
                 <div class="col-md-6">
@@ -185,7 +202,7 @@
         <br>
         <div class="bordered">
             <label class="control-label">
-                ¿Qué hace cuando entra a Internet y con qué frecuencia?
+                31. ¿Qué hace cuando entra a Internet y con qué frecuencia?
             </label>
             <div class="row">
                 <div class="col-md-6">
@@ -207,13 +224,14 @@
         <br>
         {% bootstrap_field form.question_215 form_group_class='form-group bordered' %}
         {% bootstrap_field form.question_216 form_group_class='form-group bordered' %}
+        {% bootstrap_field form.question_373 form_group_class='form-group bordered' %}
         {% bootstrap_field form.question_217 form_group_class='form-group bordered' %}
         {% bootstrap_field form.question_218 form_group_class='form-group bordered' %}
     {% endmypanel %}
     {% mypanel 'Expectativas Sobre el Uso de las TIC' %}
     <div class="bordered">
         <label class="control-label">
-             Si se ganara un concurso y pudiera escoger del siguiente listado tres dispositivos ¿cuáles escogería? Califique de 1 a 3 qué tan importante es para usted cada uno de esos tres dispositivos que seleccionó. Si es el más importante le pone 3, si es menos importante que el anterior le pone 2 y si es el menos importante de los tres le pone 1.
+             37. Si se ganara un concurso y pudiera escoger del siguiente listado tres dispositivos ¿cuáles escogería? Califique de 1 a 3 qué tan importante es para usted cada uno de esos tres dispositivos que seleccionó. Si es el más importante le pone 3, si es menos importante que el anterior le pone 2 y si es el menos importante de los tres le pone 1.
         </label>
         <div class="row">
             <div class="col-md-6">
@@ -240,7 +258,7 @@
     <br>
     <div class="bordered">
         <label class="control-label">
-            De los siguientes dispositivos escoja tres que lamentaría perder. Califique de 1 a 3 qué tan importante es para usted cada uno de esos tres dispositivos que lamentaría perder. Si es el más importante le pone 3, si es menos importante que el anterior le pone 2 y si es el menos importante de los tres le pone 1. 
+            39. De los siguientes dispositivos escoja tres que lamentaría perder. Califique de 1 a 3 qué tan importante es para usted cada uno de esos tres dispositivos que lamentaría perder. Si es el más importante le pone 3, si es menos importante que el anterior le pone 2 y si es el menos importante de los tres le pone 1. 
         </label>
         <div class="row">
             <div class="col-md-6">

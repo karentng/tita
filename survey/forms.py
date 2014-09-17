@@ -19,7 +19,7 @@ class ResponseForm(models.ModelForm):
 	#municipio_nacimiento = MunicipioChoice()
 	class Meta:
 		model = Response	
-		fields = ('numero_documento','nombre','jornada', 'institucion') #('interviewer', 'interviewee', 'conditions', 'comments')
+		fields = ('nombre','jornada', 'institucion') #('interviewer', 'interviewee', 'conditions', 'comments')
 		widgets = {
 			'institucion' : Select2Widget(),
 			#'fecha_nacimiento' : MyDateWidget(),
@@ -82,6 +82,7 @@ class ResponseForm(models.ModelForm):
 			if data:
 				self.fields["question_%d" % q.pk].initial = data.get('question_%d' % q.pk)
 
+	'''
 	def clean_numero_documento(self):
 		# Revisar que esta misma persona (por numero_documento), no haya llenado esta misma encuesta
 		doc = self.cleaned_data['numero_documento']
@@ -89,6 +90,7 @@ class ResponseForm(models.ModelForm):
 			raise ValidationError('Ya se ha diligenciado la encuesta usando este número de documento')
 		else:
 			return doc
+	'''
 
 	def save(self, commit=True):
 		# save the response object

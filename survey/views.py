@@ -26,8 +26,9 @@ def encuesta_padre(request):
         form = ResponseForm(survey=survey)
 
     # customizar form de acuerdo a la encuesta para padres
-    form.fields['jornada'].label = u"Jornada en la que estudia su hijo(a)"
-    form.fields['institucion'].label = u"Institución donde estudia su hijo(a)"
+    form.fields['jornada'].label = u"1. Jornada en la que estudia su hijo(a)"
+    form.fields['nombre'].label = u"3. Nombre(s) y apellidos del padre de familia o acudiente"
+    form.fields['institucion'].label = u"5. Nombre de la institución educativa en la que estudia su hijo(a)"
 
     camposMaterias = [form['question_%d'%x] for x in xrange(10,29) ]
     camposDispositivos = [form['question_%d'%x] for x in xrange(57,61) ]
@@ -67,6 +68,13 @@ def encuesta_docente(request):
     else :
         form = ResponseForm(survey=survey)
 
+
+    # customizar form de acuerdo a la encuesta para padres
+    form.fields['jornada'].label = u"1. Jornada en la que estudias"
+    form.fields['institucion'].label = u"2. Nombre de tu institución educativa"
+    form.fields['nombre'].label = u"3. Nombre y apellidos"
+
+
     camposMaterias = [form['question_%d'%x] for x in xrange(118,137) ]
     camposHerramientas = [form['question_%d'%x] for x in xrange(146,175) ]
     camposDispositivos = [form['question_%d'%x] for x in xrange(187,191) ]
@@ -103,6 +111,12 @@ def encuesta_estudiante(request):
             print "error llenando", form.errors
     else :
         form = ResponseForm(survey=survey)
+
+    # customizar form de acuerdo a la encuesta para padres
+    form.fields['jornada'].label = u"1. Jornada"
+    form.fields['institucion'].label = u"2. Nombre y apellidos"
+    form.fields['nombre'].label = u"3. Nombre y apellidos"
+
 
     camposMaterias = [form['question_%d'%x] for x in xrange(282,301) ]
     camposRecursos = [form['question_%d'%x] for x in xrange(305,312) ]
