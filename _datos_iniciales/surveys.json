@@ -28,7 +28,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Si usted no es el padre o la madre del estudiante, indique el parentesco que tiene con \u00e9l/ella", 
+    "text": "4. Si usted no es el padre o la madre del estudiante, indique el parentesco que tiene con \u00e9l/ella", 
     "required": false, 
     "number": 4.0, 
     "choices": "", 
@@ -41,10 +41,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Curso en el que est\u00e1 su hijo(a)", 
+    "text": "6. Curso en el que est\u00e1 su hijo(a)", 
     "required": true, 
     "number": 6.0, 
-    "choices": "Primero,\r\nSegundo,\r\nTercero,\r\nCuarto,\r\nQuinto,\r\nSexto,\r\nS\u00e9ptimo,\r\nOctavo,\r\nNoveno,\r\nD\u00e9cimo,\r\nOnce", 
+    "choices": "(1) Primero,\r\n(2) Segundo,\r\n(3) Tercero,\r\n(4) Cuarto,\r\n(5) Quinto,\r\n(6) Sexto,\r\n(7) S\u00e9ptimo,\r\n(8) Octavo,\r\n(9) Noveno,\r\n(10) D\u00e9cimo\r\n(11) Once", 
     "survey": 1, 
     "question_type": "select"
   }
@@ -54,10 +54,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "\u00bfActualmente utiliza computador? \u00bfCon qu\u00e9 frecuencia lo utiliza?", 
+    "text": "7. \u00bfActualmente utiliza computador? <small>Si su respuesta es No pase a la pregunta 9. </small>\r\n", 
     "required": true, 
     "number": 7.0, 
-    "choices": "De 4 a 7 d\u00edas a la semana,\r\n3 d\u00edas a la semana,\r\n2 d\u00edas a la semana,\r\n1 d\u00eda a la semana,\r\nCasi nunca,\r\nNunca", 
+    "choices": "(1) S\u00ed,\r\n(2) No", 
     "survey": 1, 
     "question_type": "radio"
   }
@@ -67,10 +67,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "\u00bfActualmente utiliza Internet? \u00bfCon qu\u00e9 frecuencia lo utiliza?", 
+    "text": "9. \u00bfActualmente utiliza Internet? <small>Si su respuesta es No pase a la pregunta 11. </small>\r\n", 
     "required": true, 
     "number": 9.0, 
-    "choices": "De 4 a 7 d\u00edas a la semana,\r\n3 d\u00edas a la semana,\r\n2 d\u00edas a la semana,\r\n1 d\u00eda a la semana,\r\nCasi nunca,\r\nNunca", 
+    "choices": "(1) S\u00ed,\r\n(2) No", 
     "survey": 1, 
     "question_type": "radio"
   }
@@ -80,10 +80,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "\u00bfQu\u00e9 opina sobre que su hijo(a) haga las tareas con ayuda de Internet?", 
+    "text": "11. \u00bfQu\u00e9 opina sobre que su hijo(a) haga las tareas con ayuda de Internet?", 
     "required": true, 
     "number": 11.0, 
-    "choices": "Es m\u00e1s f\u00e1cil para \u00e9l/ella,\r\nDa lo mismo,\r\nEs m\u00e1s dificil para \u00e9l/ella", 
+    "choices": "(1) Es m\u00e1s f\u00e1cil para \u00e9l/ella,\r\n(2) Da lo mismo,\r\n(3) Es m\u00e1s dificil para \u00e9l/ella", 
     "survey": 1, 
     "question_type": "radio"
   }
@@ -93,10 +93,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "\u00bfC\u00f3mo cree que ser\u00edan las clases que recibe su hijo(a) si se utilizara Internet? <small>Puede marcar varias opciones</small>", 
+    "text": "12. \u00bfC\u00f3mo cree que ser\u00edan las clases que recibe su hijo(a) si se utilizara Internet? <small>Puede marcar varias opciones</small>", 
     "required": true, 
     "number": 12.0, 
-    "choices": "Ser\u00edan m\u00e1s interesantes,\r\nLe entender\u00eda m\u00e1s al profesor,\r\nDar\u00eda lo mismo,\r\nSer\u00eda m\u00e1s dif\u00edcil aprender,\r\nSe distraer\u00eda con m\u00e1s facilidad\r\n", 
+    "choices": "(1) Ser\u00edan m\u00e1s interesantes,\r\n(2) Le entender\u00eda m\u00e1s al profesor,\r\n(3) Dar\u00eda lo mismo,\r\n(4) Ser\u00eda m\u00e1s dif\u00edcil aprender,\r\n(5) Se distraer\u00eda con m\u00e1s facilidad\r\n", 
     "survey": 1, 
     "question_type": "select-multiple"
   }
@@ -353,7 +353,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "\u00bfLe genera dificultades el uso del computador y la Internet? \r\n", 
+    "text": "16. \u00bfLe genera dificultades el uso del computador y la Internet? \r\n", 
     "required": true, 
     "number": 16.0, 
     "choices": "S\u00ed,\r\nNo", 
@@ -366,10 +366,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Con respecto al bajo puntaje en lectura que obtuvieron los estudiantes cale\u00f1os en las pruebas PISA (398), una persona expres\u00f3 lo siguiente: \"Lo que encuentran por Internet son textos cortos, sin ortograf\u00eda; hoy a un joven le cuesta mucho hacerse entender por escrito, hay problemas de interpretaci\u00f3n y argumentaci\u00f3n\".", 
+    "text": "14. Con respecto al bajo puntaje en lectura que obtuvieron los estudiantes cale\u00f1os en las pruebas PISA (398), una persona expres\u00f3 lo siguiente: \"Lo que encuentran por Internet son textos cortos, sin ortograf\u00eda; hoy a un joven le cuesta mucho hacerse entender por escrito, hay problemas de interpretaci\u00f3n y argumentaci\u00f3n\".", 
     "required": true, 
     "number": 14.0, 
-    "choices": "De acuerdo,\r\nNi de acuerdo ni en desacuerdo,\r\nEn desacuerdo", 
+    "choices": "(1) De acuerdo,\r\n(2) Ni de acuerdo ni en desacuerdo,\r\n(3) En desacuerdo", 
     "survey": 1, 
     "question_type": "radio"
   }
@@ -379,7 +379,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "\u00bfPor qu\u00e9?", 
+    "text": "15. Justifique su respuesta a la pregunta anterior (No. 14). En esta pregunta debe explicar las razones por las que escogi\u00f3 una de las tres opciones de la pregunta 14.\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t", 
     "required": true, 
     "number": 15.0, 
     "choices": "", 
@@ -392,7 +392,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "En los \u00faltimos seis meses \u00bfUsted ha hecho alg\u00fan curso de manejo de computador e Internet?", 
+    "text": "17. En los \u00faltimos seis meses \u00bfUsted ha hecho alg\u00fan curso de manejo de computador e Internet? <small> Si su respuesta es No pase a la pregunta 19. </small>\r\n", 
     "required": true, 
     "number": 17.0, 
     "choices": "S\u00ed,\r\nNo", 
@@ -405,7 +405,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "\u00bfEn Cuales?", 
+    "text": "18. \u00bfQu\u00e9 cursos ha realizado?", 
     "required": false, 
     "number": 18.0, 
     "choices": "", 
@@ -418,10 +418,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Procesador de texto (Word, OpenOffice Writer, LibreOffice Writer)", 
+    "text": "(1) Procesador de texto (Word, OpenOffice Writer, LibreOffice Writer)", 
     "required": true, 
     "number": 19.01, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca,\r\nNo s\u00e9 qu\u00e9 es esto", 
+    "choices": "(4) Siempre,\r\n(3) A veces,\r\n(2) Nunca,\r\n(1) No s\u00e9 qu\u00e9 es esto", 
     "survey": 1, 
     "question_type": "select"
   }
@@ -431,10 +431,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Bases de datos (MySQL, ORACLE, Microsoft Access).", 
+    "text": "(2) Bases de datos (MySQL, ORACLE, Microsoft Access).", 
     "required": true, 
     "number": 19.02, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca,\r\nNo s\u00e9 qu\u00e9 es esto", 
+    "choices": "(4) Siempre,\r\n(3) A veces,\r\n(2) Nunca,\r\n(1) No s\u00e9 qu\u00e9 es esto", 
     "survey": 1, 
     "question_type": "select"
   }
@@ -444,10 +444,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Correo electr\u00f3nico", 
+    "text": "(3) Correo electr\u00f3nico", 
     "required": true, 
     "number": 19.03, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca,\r\nNo s\u00e9 qu\u00e9 es esto", 
+    "choices": "(4) Siempre,\r\n(3) A veces,\r\n(2) Nunca,\r\n(1) No s\u00e9 qu\u00e9 es esto", 
     "survey": 1, 
     "question_type": "select"
   }
@@ -457,10 +457,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Hoja de c\u00e1lculo (Microsoft Excel, Apache Open Office Calc, Spreadsheet de Google Drive)", 
+    "text": "(4) Hoja de c\u00e1lculo (Microsoft Excel, Apache Open Office Calc, Spreadsheet de Google Drive)", 
     "required": true, 
     "number": 19.04, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca,\r\nNo s\u00e9 qu\u00e9 es esto", 
+    "choices": "(4) Siempre,\r\n(3) A veces,\r\n(2) Nunca,\r\n(1) No s\u00e9 qu\u00e9 es esto", 
     "survey": 1, 
     "question_type": "select"
   }
@@ -470,10 +470,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Programas para hacer presentaciones (PowerPoint, Prezi)", 
+    "text": "(5) Programas para hacer presentaciones (PowerPoint, Prezi)", 
     "required": true, 
     "number": 19.05, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca,\r\nNo s\u00e9 qu\u00e9 es esto", 
+    "choices": "(4) Siempre,\r\n(3) A veces,\r\n(2) Nunca,\r\n(1) No s\u00e9 qu\u00e9 es esto", 
     "survey": 1, 
     "question_type": "select"
   }
@@ -483,10 +483,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Programas de dibujo (Corel Draw, Adobe Flash, Microsoft Paint).\r\n", 
+    "text": "(6) Programas de dibujo (Corel Draw, Adobe Flash, Microsoft Paint).\r\n", 
     "required": true, 
     "number": 19.06, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca,\r\nNo s\u00e9 qu\u00e9 es esto", 
+    "choices": "(4) Siempre,\r\n(3) A veces,\r\n(2) Nunca,\r\n(1) No s\u00e9 qu\u00e9 es esto", 
     "survey": 1, 
     "question_type": "select"
   }
@@ -496,10 +496,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Programas para editar im\u00e1genes y fotograf\u00edas (Adobe Photoshop, GIMP).\r\n", 
+    "text": "(7) Programas para editar im\u00e1genes y fotograf\u00edas (Adobe Photoshop, GIMP).\r\n", 
     "required": true, 
     "number": 19.07, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca,\r\nNo s\u00e9 qu\u00e9 es esto", 
+    "choices": "(4) Siempre,\r\n(3) A veces,\r\n(2) Nunca,\r\n(1) No s\u00e9 qu\u00e9 es esto", 
     "survey": 1, 
     "question_type": "select"
   }
@@ -509,10 +509,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Internet para realizar consultas generales.\r\n", 
+    "text": "(8) Internet para realizar consultas generales.\r\n", 
     "required": true, 
     "number": 19.08, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca,\r\nNo s\u00e9 qu\u00e9 es esto", 
+    "choices": "(4) Siempre,\r\n(3) A veces,\r\n(2) Nunca,\r\n(1) No s\u00e9 qu\u00e9 es esto", 
     "survey": 1, 
     "question_type": "select"
   }
@@ -522,10 +522,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Medios audiovisuales\r\n", 
+    "text": "(9) Medios audiovisuales\r\n", 
     "required": true, 
     "number": 19.09, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca,\r\nNo s\u00e9 qu\u00e9 es esto", 
+    "choices": "(4) Siempre,\r\n(3) A veces,\r\n(2) Nunca,\r\n(1) No s\u00e9 qu\u00e9 es esto", 
     "survey": 1, 
     "question_type": "select"
   }
@@ -535,10 +535,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Plataforma virtual de aprendizaje\r\n", 
+    "text": "(10) Plataforma virtual de aprendizaje\r\n", 
     "required": true, 
     "number": 19.1, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca,\r\nNo s\u00e9 qu\u00e9 es esto", 
+    "choices": "(4) Siempre,\r\n(3) A veces,\r\n(2) Nunca,\r\n(1) No s\u00e9 qu\u00e9 es esto", 
     "survey": 1, 
     "question_type": "select"
   }
@@ -548,10 +548,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Blog personal\r\n", 
+    "text": "(11) Blog personal\r\n", 
     "required": true, 
     "number": 19.11, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca,\r\nNo s\u00e9 qu\u00e9 es esto", 
+    "choices": "(4) Siempre,\r\n(3) A veces,\r\n(2) Nunca,\r\n(1) No s\u00e9 qu\u00e9 es esto", 
     "survey": 1, 
     "question_type": "select"
   }
@@ -561,10 +561,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Sitios especializados en temas que le interesan\r\n", 
+    "text": "(12) Sitios especializados en temas que le interesan\r\n", 
     "required": true, 
     "number": 19.12, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca,\r\nNo s\u00e9 qu\u00e9 es esto", 
+    "choices": "(4) Siempre,\r\n(3) A veces,\r\n(2) Nunca,\r\n(1) No s\u00e9 qu\u00e9 es esto", 
     "survey": 1, 
     "question_type": "select"
   }
@@ -574,10 +574,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Software especializado", 
+    "text": "(13) Software especializado", 
     "required": true, 
     "number": 19.13, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca,\r\nNo s\u00e9 qu\u00e9 es esto", 
+    "choices": "(4) Siempre,\r\n(3) A veces,\r\n(2) Nunca,\r\n(1) No s\u00e9 qu\u00e9 es esto", 
     "survey": 1, 
     "question_type": "select"
   }
@@ -587,10 +587,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Agenda o programador digital de actividades", 
+    "text": "(14) Agenda o programador digital de actividades", 
     "required": true, 
     "number": 19.14, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca,\r\nNo s\u00e9 qu\u00e9 es esto", 
+    "choices": "(4) Siempre,\r\n(3) A veces,\r\n(2) Nunca,\r\n(1) No s\u00e9 qu\u00e9 es esto", 
     "survey": 1, 
     "question_type": "select"
   }
@@ -600,7 +600,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Otra herramienta, \u00bfCu\u00e1l?", 
+    "text": "(14) Otra herramienta, \u00bfCu\u00e1l?", 
     "required": false, 
     "number": 19.15, 
     "choices": "", 
@@ -613,10 +613,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "En los \u00faltimos seis meses \u00bfEn d\u00f3nde se conecta a Internet? <small>Puede marcar varias opciones</small>", 
+    "text": "20. En los \u00faltimos seis meses \u00bfEn d\u00f3nde se conecta a Internet? <small>Puede marcar varias opciones</small>", 
     "required": true, 
     "number": 20.0, 
-    "choices": "En su casa,\r\nEn un caf\u00e9 Internet,\r\nEn la casa de sus amigos o familiares,\r\nEn el colegio donde estudian sus hijos,\r\nEn un lugar p\u00fablico como bibliotecas o centros comunitarios,\r\nEn un lugar p\u00fablico con WIFI,\r\nEn su sitio de trabajo", 
+    "choices": "(1) En su casa,\r\n(2) En un caf\u00e9 Internet,\r\n(3) En la casa de sus amigos o familiares,\r\n(4) En el colegio,\r\n(5) En un lugar p\u00fablico como bibliotecas o centros comunitarios,\r\n(6) En un lugar p\u00fablico con WIFI,\r\n(7) En su sitio de trabajo", 
     "survey": 1, 
     "question_type": "select-multiple"
   }
@@ -626,7 +626,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "En otro lugar. \u00bfCu\u00e1l?", 
+    "text": "(8) En otro lugar. \u00bfCu\u00e1l?", 
     "required": false, 
     "number": 20.1, 
     "choices": "", 
@@ -639,10 +639,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "\u00bfUsted qu\u00e9 hace cuando su hijo(a) se conecta a internet? <small>Puede marcar varias opciones </small>", 
+    "text": "21. \u00bfUsted qu\u00e9 hace cuando su hijo(a) se conecta a internet? <small>Puede marcar varias opciones </small>", 
     "required": true, 
     "number": 21.0, 
-    "choices": "Le pregunta \u00bfQu\u00e9 est\u00e1 haciendo?,\r\nEcha un vistazo para ver qu\u00e9 est\u00e1 haciendo,\r\nLe ayuda,\r\nSe sienta con \u00e9l/ella,\r\nHacen alguna actividad,\r\nComprueba despu\u00e9s por donde ha navegado,\r\nSe ubica en el mismo lugar a hacer otras actividades,\r\nRevisa la informaci\u00f3n que pone en redes sociales,\r\nControla los horarios en que se conecta,\r\nNo se hace nada", 
+    "choices": "(1) Le pregunta \u00bfqu\u00e9 est\u00e1 haciendo?,\r\n(2) Echa un vistazo para ver qu\u00e9 est\u00e1 haciendo,\r\n(3) Le ayuda,\r\n(4) Se sienta con \u00e9l/ella,\r\n(5) Hacen alguna actividad juntos,\r\n(6) Comprueba despu\u00e9s por d\u00f3nde ha navegado,\r\n(7) Se ubica en el mismo lugar a hacer otras actividades,\r\n(8) Revisa la informaci\u00f3n que pone en redes sociales,\r\n(9) Controla los horarios en los que se conecta,\r\n(10) No hace nada", 
     "survey": 1, 
     "question_type": "select-multiple"
   }
@@ -652,7 +652,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Hace otra cosa. \u00bfCu\u00e1l?", 
+    "text": "(11) Hace otra cosa. \u00bfCu\u00e1l?", 
     "required": false, 
     "number": 21.1, 
     "choices": "", 
@@ -665,10 +665,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "De los siguientes dispositivos, si los tiene en casa, \u00bfCu\u00e1les usa? <small>Puede marcar varias opciones</small>", 
+    "text": "22. De los siguientes dispositivos, si los tiene en casa, \u00bfCu\u00e1les usa? <small>Puede marcar varias opciones</small>", 
     "required": true, 
     "number": 22.0, 
-    "choices": "Computador sin conexi\u00f3n a internet,\r\nComputador con conexi\u00f3n a internet,\r\nCelular sin plan de datos,\r\nCelular con plan de datos,\r\nConsola de videojuegos,\r\nTablet,\r\nLector digital de libros,\r\nC\u00e1mara fotogr\u00e1fica digital,\r\nC\u00e1mara de video,\r\nGrabadora digital,\r\nDVD/Blue-ray,\r\nTelevisor,\r\nRadio", 
+    "choices": "(1) Computador sin conexi\u00f3n a Internet,\r\n(2) Computador con conexi\u00f3n a Internet,\r\n(3) Celular sin plan de datos,\r\n(4) Celular con plan de datos,\r\n(5) Consola de videojuegos,\r\n(6) Tablet,\r\n(7) Lector digital de libros,\r\n(8) C\u00e1mara fotogr\u00e1fica digital,\r\n(9) C\u00e1mara de video,\r\n(10) Grabadora digital,\r\n(11) DVD/Blue-ray,\r\n(12) Televisor,\r\n(13) Radio", 
     "survey": 1, 
     "question_type": "select-multiple"
   }
@@ -678,7 +678,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Internet", 
+    "text": "23. Internet", 
     "required": true, 
     "number": 23.0, 
     "choices": "Me ayuda a pasar el tiempo,\r\nMe divierte,\r\nMe informa,\r\nMe ense\u00f1a,\r\nMe comunico con amigos y otras personas,\r\nNo lo uso", 
@@ -691,7 +691,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Celular", 
+    "text": "24. Celular", 
     "required": true, 
     "number": 24.0, 
     "choices": "Me ayuda a pasar el tiempo,\r\nMe divierte,\r\nMe informa,\r\nMe ense\u00f1a,\r\nMe comunico con amigos y otras personas,\r\nNo lo uso", 
@@ -704,7 +704,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Computador", 
+    "text": "25. Computador", 
     "required": true, 
     "number": 25.0, 
     "choices": "Me ayuda a pasar el tiempo,\r\nMe divierte,\r\nMe informa,\r\nMe ense\u00f1a,\r\nMe comunico con amigos y otras personas,\r\nNo lo uso", 
@@ -717,7 +717,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Videojuegos", 
+    "text": "26. Videojuegos", 
     "required": true, 
     "number": 26.0, 
     "choices": "Me ayuda a pasar el tiempo,\r\nMe divierte,\r\nMe informa,\r\nMe ense\u00f1a,\r\nMe comunico con amigos y otras personas,\r\nNo lo uso", 
@@ -730,10 +730,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "\u00bfPara qu\u00e9 utiliza su tel\u00e9fono celular? <small>Puede marcar varias opciones</small>", 
+    "text": "27. \u00bfPara qu\u00e9 utiliza su tel\u00e9fono celular? <small>Puede marcar varias opciones</small>", 
     "required": true, 
     "number": 27.0, 
-    "choices": "Hacer y recibir llamadas,\r\nEnviar y recibir mensajes de texto,\r\nTomar fotos,\r\nEscuchar m\u00fasica,\r\nEscuchar emisoras de radio,\r\nGrabar videos,\r\nConectarse a internet,\r\nEnviar y recibir correo electr\u00f3nico,\r\nChatear,\r\nVer videos,\r\nConectarse a las redes sociales,\r\nHacer transacciones con bancos o entidades financieras,\r\nComprar o vender cosas", 
+    "choices": "(1) Hacer y recibir llamadas,\r\n(2) Enviar y recibir mensajes de texto,\r\n(3) Tomar fotos,\r\n(4) Escuchar m\u00fasica,\r\n(5) Escuchar emisoras de radio,\r\n(6) Grabar videos,\r\n(7) Conectarse a Internet,\r\n(8) Enviar y recibir correo electr\u00f3nico,\r\n(9) Chatear,\r\n(10) Ver videos,\r\n(11) Conectarse a las redes sociales,\r\n(12) Hacer transacciones con bancos o entidades financieras,\r\n(13) Comprar o vender cosas", 
     "survey": 1, 
     "question_type": "select-multiple"
   }
@@ -743,7 +743,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Otro uso. \u00bfCu\u00e1l?", 
+    "text": "(14) Otro uso. \u00bfCu\u00e1l?", 
     "required": false, 
     "number": 27.01, 
     "choices": "", 
@@ -756,10 +756,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "\u00bfA qu\u00e9 redes sociales pertenece? <small>Puede marcar varias opciones</small>", 
+    "text": "28. \u00bfA qu\u00e9 redes sociales pertenece? <small>Puede marcar varias opciones</small>", 
     "required": true, 
     "number": 28.0, 
-    "choices": "Facebook,\r\nTwitter,\r\nInstagram,\r\nGoogle+,\r\nYoutube,\r\nSlideshare,\r\nLinkedIn,\r\nTumblr,\r\nBadoo,\r\nMySpace,\r\nSonico,\r\nHi5,\r\nSnapchat", 
+    "choices": "(1) Facebook,\r\n(2) Twitter,\r\n(3) Instagram,\r\n(4) You Tube,\r\n(5) Slideshare,\r\n(6) LinkedIn,\r\n(7) Tumblr,\r\n(8) Badoo,\r\n(9) Google+\r\n", 
     "survey": 1, 
     "question_type": "select-multiple"
   }
@@ -769,7 +769,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Otra. \u00bfCu\u00e1l?", 
+    "text": "(10) Otra. \u00bfCu\u00e1l?", 
     "required": false, 
     "number": 28.1, 
     "choices": "", 
@@ -782,10 +782,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Jugar", 
+    "text": "(1) Jugar", 
     "required": true, 
-    "number": 32.01, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca", 
+    "number": 29.01, 
+    "choices": "(3) Siempre,\r\n(2) A veces,\r\n(1) Nunca", 
     "survey": 1, 
     "question_type": "select"
   }
@@ -795,10 +795,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Subir, bajar o compartir im\u00e1genes, fotos, pel\u00edculas, videos", 
+    "text": "(2) Subir, bajar o compartir im\u00e1genes, fotos, pel\u00edculas, videos", 
     "required": true, 
-    "number": 32.02, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca", 
+    "number": 29.02, 
+    "choices": "(3) Siempre,\r\n(2) A veces,\r\n(1) Nunca", 
     "survey": 1, 
     "question_type": "select"
   }
@@ -808,10 +808,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Ver pel\u00edculas", 
+    "text": "(3) Ver pel\u00edculas", 
     "required": true, 
-    "number": 32.03, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca", 
+    "number": 29.03, 
+    "choices": "(3) Siempre,\r\n(2) A veces,\r\n(1) Nunca", 
     "survey": 1, 
     "question_type": "select"
   }
@@ -821,10 +821,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Ver videos\r\n", 
+    "text": "(4) Ver videos\r\n", 
     "required": true, 
-    "number": 32.04, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca", 
+    "number": 29.04, 
+    "choices": "(3) Siempre,\r\n(2) A veces,\r\n(1) Nunca", 
     "survey": 1, 
     "question_type": "select"
   }
@@ -834,10 +834,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Ver videos musicales", 
+    "text": "(5) Ver videos musicales", 
     "required": true, 
-    "number": 32.05, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca", 
+    "number": 29.05, 
+    "choices": "(3) Siempre,\r\n(2) A veces,\r\n(1) Nunca", 
     "survey": 1, 
     "question_type": "select"
   }
@@ -847,10 +847,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Chatear", 
+    "text": "(7) Chatear", 
     "required": true, 
-    "number": 32.07, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca", 
+    "number": 29.07, 
+    "choices": "(3) Siempre,\r\n(2) A veces,\r\n(1) Nunca", 
     "survey": 1, 
     "question_type": "select"
   }
@@ -860,10 +860,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Hacer consultas sobre temas que le interesan", 
+    "text": "(8) Hacer consultas sobre temas que le interesan", 
     "required": true, 
-    "number": 32.08, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca", 
+    "number": 29.08, 
+    "choices": "(3) Siempre,\r\n(2) A veces,\r\n(1) Nunca", 
     "survey": 1, 
     "question_type": "select"
   }
@@ -873,10 +873,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Leer noticias", 
+    "text": "(9) Leer noticias", 
     "required": true, 
-    "number": 32.09, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca", 
+    "number": 29.09, 
+    "choices": "(3) Siempre,\r\n(2) A veces,\r\n(1) Nunca", 
     "survey": 1, 
     "question_type": "select"
   }
@@ -886,10 +886,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Leer historias, cuentos, novelas", 
+    "text": "(10) Leer historias, cuentos, novelas", 
     "required": true, 
-    "number": 32.1, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca", 
+    "number": 29.1, 
+    "choices": "(3) Siempre,\r\n(2) A veces,\r\n(1) Nunca", 
     "survey": 1, 
     "question_type": "select"
   }
@@ -899,10 +899,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Escribir y publicar comentarios", 
+    "text": "(11) Escribir y publicar comentarios", 
     "required": true, 
-    "number": 32.11, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca", 
+    "number": 29.11, 
+    "choices": "(3) Siempre,\r\n(2) A veces,\r\n(1) Nunca", 
     "survey": 1, 
     "question_type": "select"
   }
@@ -912,10 +912,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Escribir historias", 
+    "text": "(12) Escribir historias", 
     "required": true, 
-    "number": 32.12, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca", 
+    "number": 29.12, 
+    "choices": "(3) Siempre,\r\n(2) A veces,\r\n(1) Nunca", 
     "survey": 1, 
     "question_type": "select"
   }
@@ -925,10 +925,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Dibujar o crear im\u00e1genes", 
+    "text": "(13) Dibujar o crear im\u00e1genes", 
     "required": true, 
-    "number": 32.13, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca", 
+    "number": 29.13, 
+    "choices": "(3) Siempre,\r\n(2) A veces,\r\n(1) Nunca", 
     "survey": 1, 
     "question_type": "select"
   }
@@ -938,10 +938,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Descargar m\u00fasica", 
+    "text": "(14) Descargar m\u00fasica", 
     "required": true, 
-    "number": 32.14, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca", 
+    "number": 29.14, 
+    "choices": "(3) Siempre,\r\n(2) A veces,\r\n(1) Nunca", 
     "survey": 1, 
     "question_type": "select"
   }
@@ -951,10 +951,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Descargar juegos", 
+    "text": "(15) Descargar juegos", 
     "required": true, 
-    "number": 32.15, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca", 
+    "number": 29.15, 
+    "choices": "(3) Siempre,\r\n(2) A veces,\r\n(1) Nunca", 
     "survey": 1, 
     "question_type": "select"
   }
@@ -964,10 +964,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Hacer amigos y conocer gente", 
+    "text": "(16) Hacer amigos y conocer gente", 
     "required": true, 
-    "number": 32.16, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca", 
+    "number": 29.16, 
+    "choices": "(3) Siempre,\r\n(2) A veces,\r\n(1) Nunca", 
     "survey": 1, 
     "question_type": "select"
   }
@@ -977,10 +977,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Conocer otros pa\u00edses, otras culturas", 
+    "text": "(17) Conocer otros pa\u00edses, otras culturas", 
     "required": true, 
-    "number": 32.17, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca", 
+    "number": 29.17, 
+    "choices": "(3) Siempre,\r\n(2) A veces,\r\n(1) Nunca", 
     "survey": 1, 
     "question_type": "select"
   }
@@ -990,10 +990,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Hacer transacciones con bancos o entidades financieras", 
+    "text": "(18) Hacer transacciones con bancos o entidades financieras", 
     "required": true, 
-    "number": 32.18, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca", 
+    "number": 29.18, 
+    "choices": "(3) Siempre,\r\n(2) A veces,\r\n(1) Nunca", 
     "survey": 1, 
     "question_type": "select"
   }
@@ -1003,10 +1003,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Comprar o vender cosas", 
+    "text": "(19) Comprar o vender cosas", 
     "required": true, 
-    "number": 32.19, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca", 
+    "number": 29.19, 
+    "choices": "(3) Siempre,\r\n(2) A veces,\r\n(1) Nunca", 
     "survey": 1, 
     "question_type": "select"
   }
@@ -1016,9 +1016,9 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Otro uso. \u00bfCu\u00e1l?", 
+    "text": "(20) Otro uso. \u00bfCu\u00e1l?", 
     "required": false, 
-    "number": 32.2, 
+    "number": 29.2, 
     "choices": "", 
     "survey": 1, 
     "question_type": "text"
@@ -1029,10 +1029,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "\u00bfCon qui\u00e9n comparte la informaci\u00f3n que encuentra en internet? <small>Puede marcar varias opciones</small>", 
+    "text": "30. \u00bfCon qui\u00e9n comparte la informaci\u00f3n que encuentra en internet? <small>Puede marcar varias opciones</small>", 
     "required": true, 
-    "number": 33.0, 
-    "choices": "Con amigos,\r\nCon sus hijos,\r\nCon otros familiares,\r\nCon sus compa\u00f1eros de trabajo,\r\nCon nadie", 
+    "number": 30.0, 
+    "choices": "(1) Con sus amigos,\r\n(2) Con otros hijos,\r\n(3) Con familiares,\r\n(4) Con sus compa\u00f1eros de trabajo,\r\n(5) Haciendo cursos", 
     "survey": 1, 
     "question_type": "select-multiple"
   }
@@ -1042,10 +1042,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "\u00bfCon qui\u00e9n aprende a usar el computador y la internet? <small>Puede marcar varias opciones</small>", 
+    "text": "31. \u00bfCon qui\u00e9n aprende a usar el computador y la Internet? <small> Puede marcar varias opciones. Si responde la opci\u00f3n \"\"Haciendo cursos\"\" conteste la siguiente pregunta, de lo contrario pase a la pregunta 30.</small>\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t", 
     "required": true, 
-    "number": 34.0, 
-    "choices": "Solo, cacharreando o averiguando en internet,\r\nCon sus amigos,\r\nCon sus hijos,\r\nCon otros familiares,\r\nCon sus compa\u00f1eros de trabajo,\r\nHaciendo cursos virtuales,\r\nHaciendo cursos presenciales", 
+    "number": 31.0, 
+    "choices": "(1) Solo, cacharreando o averiguando en Internet,\r\n(2) Con sus amigos,\r\n(3) Con sus hijos,\r\n(4) Con otros familiares,\r\n(5) Con sus compa\u00f1eros de trabajo,\r\n(6) Haciendo cursos. \r\n", 
     "survey": 1, 
     "question_type": "select-multiple"
   }
@@ -1055,10 +1055,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Cuando usa internet \u00bfcon qui\u00e9n prefiere hacerlo? ", 
+    "text": "33. Cuando usa internet \u00bfcon qui\u00e9n prefiere hacerlo? ", 
     "required": true, 
-    "number": 35.0, 
-    "choices": "Solo,\r\nCon su amigo,\r\nCon sus hijos,\r\nCon otros familiares,\r\nCon sus compa\u00f1eros de trabajo", 
+    "number": 33.0, 
+    "choices": "(1) Solo,\r\n(2) Con su amigo,\r\n(3) Con sus hijos,\r\n(4) Con otros familiares,\r\n(5) Con sus compa\u00f1eros de trabajo", 
     "survey": 1, 
     "question_type": "radio"
   }
@@ -1068,10 +1068,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "\u00bfDurante cu\u00e1ntas horas diarias navega en internet? Si no utiliza internet todos los d\u00edas, escriba al lado de su respuesta cada cu\u00e1nto lo hace.", 
+    "text": "34. \u00bfDurante cu\u00e1ntas horas diarias navega en Internet? Si no navega en Internet todos los d\u00edas, haga el promedio de horas por d\u00eda a partir del total de horas que navega durante los d\u00edas de la semana en que s\u00ed lo hace. \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t", 
     "required": false, 
-    "number": 36.1, 
-    "choices": "Entre 1 y 2 horas,\r\nEntre 3 y 5 horas,\r\nMas de 5 horas,\r\nNo lo utiliza diariamente", 
+    "number": 34.0, 
+    "choices": "(1) Entre 1 y 2 horas,\r\n(2) Entre 3 y 5 horas,\r\n(3) M\u00e1s de 5 horas", 
     "survey": 1, 
     "question_type": "radio"
   }
@@ -1081,9 +1081,9 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Celular", 
+    "text": "(1) Celular", 
     "required": true, 
-    "number": 37.01, 
+    "number": 35.01, 
     "choices": "1, 2, 3", 
     "survey": 1, 
     "question_type": "select"
@@ -1094,9 +1094,9 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Computador", 
+    "text": "(2) Computador", 
     "required": true, 
-    "number": 37.02, 
+    "number": 35.02, 
     "choices": "1, 2, 3", 
     "survey": 1, 
     "question_type": "select"
@@ -1107,9 +1107,9 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Tablet", 
+    "text": "(3) Tablet", 
     "required": true, 
-    "number": 37.03, 
+    "number": 35.03, 
     "choices": "1, 2, 3", 
     "survey": 1, 
     "question_type": "select"
@@ -1120,9 +1120,9 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Conexi\u00f3n a internet", 
+    "text": "(4) Conexi\u00f3n a internet", 
     "required": true, 
-    "number": 37.04, 
+    "number": 35.04, 
     "choices": "1, 2, 3", 
     "survey": 1, 
     "question_type": "select"
@@ -1133,9 +1133,9 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "DVD o Blue-ray", 
+    "text": "(5) DVD o Blue-ray", 
     "required": true, 
-    "number": 37.05, 
+    "number": 35.05, 
     "choices": "1, 2, 3", 
     "survey": 1, 
     "question_type": "select"
@@ -1146,9 +1146,9 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Radio", 
+    "text": "(6) Radio", 
     "required": true, 
-    "number": 37.06, 
+    "number": 35.06, 
     "choices": "1, 2, 3", 
     "survey": 1, 
     "question_type": "select"
@@ -1159,9 +1159,9 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Televisor", 
+    "text": "(7) Televisor", 
     "required": true, 
-    "number": 37.07, 
+    "number": 35.07, 
     "choices": "1, 2, 3", 
     "survey": 1, 
     "question_type": "select"
@@ -1172,9 +1172,9 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Video Beam", 
+    "text": "(8) Video Beam", 
     "required": true, 
-    "number": 37.08, 
+    "number": 35.08, 
     "choices": "1, 2, 3", 
     "survey": 1, 
     "question_type": "select"
@@ -1185,10 +1185,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "\u00bfQu\u00e9 le gustar\u00eda hacer o aprender a hacer con internet?", 
+    "text": "36. \u00bfQu\u00e9 le gustar\u00eda hacer o aprender a hacer con internet?", 
     "required": true, 
-    "number": 38.0, 
-    "choices": "Desarrollar programas inform\u00e1ticos,\r\nConstruir p\u00e1ginas web,\r\nConstruir un espacio virtual en el que pueda interactuar con mis hijos,\r\nCrear videos y pel\u00edculas,\r\nCrear mejores fotograf\u00edas,\r\nEscribir historias y cuentos,\r\nHacer un video y subirlo a Youtube,\r\nDise\u00f1ar un videojuego,\r\nConstruir un blog; un diario; un peri\u00f3dico; un programa de radio y m\u00fasica,\r\nAprender un idioma que no conozco,\r\nHacer amigos de mi edad,\r\nComponer m\u00fasica utilizando software especializado,\r\nIntercambiar objetos,\r\nVender o comprar creaciones propias (m\u00fasica; dibujos; cuentos; im\u00e1genes; artes)", 
+    "number": 36.0, 
+    "choices": "(1) Desarrollar programas inform\u00e1ticos,\t\t\r\n(2) Construir p\u00e1ginas web,\t\t\r\n(3) Construir un espacio virtual donde pueda interactuar con mis hijo(s),\t\t\r\n(4) Hacer un curso virtual complementario sobre la materia que ense\u00f1o,\t\t\t\t\t\t\t\t\t\r\n(5) Construir un espacio virtual en el que pueda interactuar con mis estudiantes,\t\t\r\n(6) Crear videos y pel\u00edculas,\t\t\r\n(7) Crear mejores fotograf\u00edas,\t\t\r\n(8) Escribir historias y cuentos,\t\t\r\n(9) Hacer un video y subirlo a You Tube,\t\t\r\n(10) Dise\u00f1ar un videojuego,\t\t\r\n(11) Construir un blog; un diario; un peri\u00f3dico; un programa de radio y m\u00fasica,\t\t\t\t\t\t\r\n(12) Aprender un idioma que no conozco,\t\t\r\n(13) Hacer amigos de mi edad,\t\t\r\n(14) Componer m\u00fasica utilizando software especializado", 
     "survey": 1, 
     "question_type": "select-multiple"
   }
@@ -1198,9 +1198,9 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Otra cosa. \u00bfCu\u00e1l?", 
+    "text": "(15) Otra cosa. \u00bfCu\u00e1l?", 
     "required": false, 
-    "number": 38.01, 
+    "number": 36.01, 
     "choices": "", 
     "survey": 1, 
     "question_type": "text"
@@ -1211,9 +1211,9 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Celular", 
+    "text": "(1) Celular", 
     "required": true, 
-    "number": 39.01, 
+    "number": 37.01, 
     "choices": "1, 2, 3", 
     "survey": 1, 
     "question_type": "select"
@@ -1224,9 +1224,9 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Computador", 
+    "text": "(2) Computador", 
     "required": true, 
-    "number": 39.02, 
+    "number": 37.02, 
     "choices": "1, 2, 3", 
     "survey": 1, 
     "question_type": "select"
@@ -1237,9 +1237,9 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Tablet", 
+    "text": "(3) Tablet", 
     "required": true, 
-    "number": 39.03, 
+    "number": 37.03, 
     "choices": "1, 2, 3", 
     "survey": 1, 
     "question_type": "select"
@@ -1250,9 +1250,9 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Conexi\u00f3n a internet", 
+    "text": "(4) Conexi\u00f3n a internet", 
     "required": true, 
-    "number": 39.04, 
+    "number": 37.04, 
     "choices": "1, 2, 3", 
     "survey": 1, 
     "question_type": "select"
@@ -1263,9 +1263,9 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "DVD o Blue-ray", 
+    "text": "(5) DVD o Blue-ray", 
     "required": true, 
-    "number": 39.05, 
+    "number": 37.05, 
     "choices": "1, 2, 3", 
     "survey": 1, 
     "question_type": "select"
@@ -1276,9 +1276,9 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Radio", 
+    "text": "(6) Radio", 
     "required": true, 
-    "number": 39.06, 
+    "number": 37.06, 
     "choices": "1, 2, 3", 
     "survey": 1, 
     "question_type": "select"
@@ -1289,9 +1289,9 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Televisor", 
+    "text": "(7) Televisor", 
     "required": true, 
-    "number": 39.07, 
+    "number": 37.07, 
     "choices": "1, 2, 3", 
     "survey": 1, 
     "question_type": "select"
@@ -1302,9 +1302,9 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Video beam", 
+    "text": "(8) Video beam", 
     "required": true, 
-    "number": 39.08, 
+    "number": 37.08, 
     "choices": "1, 2, 3", 
     "survey": 1, 
     "question_type": "select"
@@ -1315,10 +1315,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "\u00bfC\u00f3mo le gusta m\u00e1s responder esta encuesta?", 
+    "text": "40. \u00bfC\u00f3mo le gusta m\u00e1s responder esta encuesta?", 
     "required": true, 
-    "number": 42.0, 
-    "choices": "En papel,\r\nEn computador,\r\nDa lo mismo", 
+    "number": 40.0, 
+    "choices": "(1) En papel,\r\n(2) En computador,\r\n(3) Da lo mismo", 
     "survey": 1, 
     "question_type": "radio"
   }
@@ -2914,12 +2914,12 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Curso en el que est\u00e1s", 
+    "text": "4. Curso en el que est\u00e1s", 
     "required": true, 
     "number": 4.0, 
-    "choices": "", 
+    "choices": "(1) Primero,\r\n(2) Segundo,\r\n(3) Tercero,\r\n(4) Cuarto,\r\n(5) Quinto,\r\n(6) Sexto,\r\n(7) S\u00e9ptimo,\r\n(8) Octavo,\r\n(9) Noveno,\r\n(10) D\u00e9cimo\r\n(11) Once", 
     "survey": 3, 
-    "question_type": "text"
+    "question_type": "select"
   }
 },
 {
@@ -2927,10 +2927,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "\u00bfEn cu\u00e1l de los siguientes talleres participaste?\r\n", 
+    "text": "5. \u00bfEn cu\u00e1l de los siguientes talleres participaste?\r\n", 
     "required": true, 
     "number": 5.0, 
-    "choices": "Dise\u00f1o y Animaci\u00f3n,\r\nExperimentaci\u00f3n Sonora,\r\nExperimentaci\u00f3n Visual,\r\nEscritura Creativa para Entornos Digitales,\r\nEn ninguno\r\n", 
+    "choices": "(1) Dise\u00f1o y Animaci\u00f3n,\r\n\r\n(2) Experimentaci\u00f3n Sonora,\r\n\r\n(3) Experimentaci\u00f3n Visual,\r\n\r\n(4) Escritura Creativa para Entornos Digitales, \r\n\r\n(5) En ninguno\r\n", 
     "survey": 3, 
     "question_type": "radio"
   }
@@ -2940,10 +2940,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "\u00bfActualmente utiliza computador? \u00bfCon qu\u00e9 frecuencia lo utiliza?", 
+    "text": "6. \u00bfActualmente utiliza computador? <small>Si tu respuesta es No pasa a la pregunta 8. </small>\r\n", 
     "required": true, 
     "number": 6.0, 
-    "choices": "De 4 a 7 d\u00edas a la semana,\r\n3 d\u00edas a la semana,\r\n2 d\u00edas a la semana,\r\n1 d\u00eda a la semana,\r\nCasi nunca,\r\nNunca", 
+    "choices": "(1) S\u00ed,\r\n(2) No", 
     "survey": 3, 
     "question_type": "radio"
   }
@@ -2953,10 +2953,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "\u00bfActualmente utiliza Internet? \u00bfCon qu\u00e9 frecuencia lo utiliza?", 
+    "text": "8. Actualmente \u00bfutilizas Internet? <small>Si tu respuesta es No pasa a la pregunta 10. </small>\r\n\r\n", 
     "required": true, 
-    "number": 7.0, 
-    "choices": "De 4 a 7 d\u00edas a la semana,\r\n3 d\u00edas a la semana,\r\n2 d\u00edas a la semana,\r\n1 d\u00eda a la semana,\r\nCasi nunca,\r\nNunca", 
+    "number": 8.0, 
+    "choices": "(1) S\u00ed,\r\n(2) No", 
     "survey": 3, 
     "question_type": "radio"
   }
@@ -2966,10 +2966,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "\u00bfQu\u00e9 opinas de hacer tus tareas con ayuda de Internet? \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t", 
-    "required": true, 
+    "text": "10. \u00bfQu\u00e9 opinas de hacer tus tareas con ayuda de Internet? \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t", 
+    "required": false, 
     "number": 10.0, 
-    "choices": "Es m\u00e1s f\u00e1cil,\r\nDa lo mismo,\r\nEs m\u00e1s dificil", 
+    "choices": "(1) Es m\u00e1s f\u00e1cil,\r\n(2) Da lo mismo,\r\n(3) Es m\u00e1s dif\u00edcil.\r\n", 
     "survey": 3, 
     "question_type": "radio"
   }
@@ -2979,12 +2979,12 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Encuentras informaci\u00f3n interesante que no conoc\u00edas.", 
+    "text": "(1) Encuentras informaci\u00f3n interesante que no conoc\u00edas.", 
     "required": true, 
     "number": 11.01, 
-    "choices": "Definitivamente s\u00ed,\r\nA veces,\r\nNunca me pasa eso", 
+    "choices": "(1) Definitivamente s\u00ed,\r\n(2) A veces,\r\n(3) Nunca me pasa eso", 
     "survey": 3, 
-    "question_type": "radio"
+    "question_type": "select"
   }
 },
 {
@@ -2992,12 +2992,12 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Aprendes cosas que no te hab\u00edan ense\u00f1ado en las clases. ", 
+    "text": "(2) Aprendes cosas que no te hab\u00edan ense\u00f1ado en las clases. ", 
     "required": true, 
     "number": 11.02, 
-    "choices": "Definitivamente s\u00ed,\r\nA veces,\r\nNunca me pasa eso", 
+    "choices": "(1) Definitivamente s\u00ed,\r\n(2) A veces,\r\n(3) Nunca me pasa eso", 
     "survey": 3, 
-    "question_type": "radio"
+    "question_type": "select"
   }
 },
 {
@@ -3005,12 +3005,12 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Terminas haciendo cosas que no tienen que ver con la tarea.", 
+    "text": "(3) Terminas haciendo cosas que no tienen que ver con la tarea.", 
     "required": true, 
     "number": 11.03, 
-    "choices": "Definitivamente s\u00ed,\r\nA veces,\r\nNunca me pasa eso", 
+    "choices": "(1) Definitivamente s\u00ed,\r\n(2) A veces,\r\n(3) Nunca me pasa eso", 
     "survey": 3, 
-    "question_type": "radio"
+    "question_type": "select"
   }
 },
 {
@@ -3018,10 +3018,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "\u00bfC\u00f3mo crees que ser\u00edan tus clases si se utilizara Internet? Puedes marcar varias opciones.", 
+    "text": "12. \u00bfC\u00f3mo crees que ser\u00edan tus clases si se utilizara Internet? Puedes marcar varias opciones.", 
     "required": true, 
     "number": 12.0, 
-    "choices": "Ser\u00edan m\u00e1s interesantes,\r\nLe entender\u00eda m\u00e1s al profesor,\r\nDar\u00eda lo mismo,\r\nSer\u00eda m\u00e1s dif\u00edcil aprender,\r\nMe distraer\u00eda con m\u00e1s facilidad\r\n", 
+    "choices": "(1) Ser\u00edan m\u00e1s interesantes,\r\n(2) Le entender\u00eda m\u00e1s al profesor,\r\n(3) Dar\u00eda lo mismo,\r\n(4) Ser\u00eda m\u00e1s dif\u00edcil aprender,\r\n(5) Me distraer\u00eda con m\u00e1s facilidad. \r\n", 
     "survey": 3, 
     "question_type": "select-multiple"
   }
@@ -3278,7 +3278,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "\u00bfTe genera dificultades el uso del computador y la Internet? ", 
+    "text": "14. \u00bfTe genera dificultades el uso del computador y la Internet? ", 
     "required": true, 
     "number": 14.0, 
     "choices": "S\u00ed,\r\nNo", 
@@ -3291,10 +3291,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Para tus clases y hacer las tareas \u00bfqu\u00e9 programas inform\u00e1ticos usas? ", 
+    "text": "15. Para tus clases y hacer las tareas \u00bfqu\u00e9 programas inform\u00e1ticos usas? <small>Puede marcar varias opciones</small>", 
     "required": true, 
     "number": 15.0, 
-    "choices": "Procesador de texto (Ejemplo: Word; Apache OpenOffice Writer;LibreOffice Writer),\r\nHoja de c\u00e1lculo (Ejemplo: Excel; Apache OpenOffice Calc; LibreOffice Calc; StartOffice Calc),\r\nProgramas para hacer presentaciones (Ejemplo: Power Point; Prez; Apache OpenOffice Impress),\r\nProgramas de dibujo (Ejemplo: Corel Draw; Adobe Flash; Microsoft Paint),\r\nProgramas para editar im\u00e1genes y fotograf\u00edas (Ejemplo: Adobe Photoshop; GIMP)\r\n", 
+    "choices": "(1) Procesador de texto (Ejemplo: Word; Apache OpenOffice Writer; LibreOffice Writer),\r\n(2) Hoja de c\u00e1lculo (Ejemplo: Excel; Apache OpenOffice Calc; LibreOffice Calc; StartOffice Calc),\r\n(3) Programas para hacer presentaciones (Ejemplo: Power Point; Prezi; Apache OpenOffice Impress),  \r\n\r\n(4) Programas de dibujo (Ejemplo: Corel Draw; Adobe Flash; Microsoft Paint),\r\n(5) Programas para editar im\u00e1genes y fotograf\u00edas (Ejemplo: Adobe Photoshop; GIMP). \r\n", 
     "survey": 3, 
     "question_type": "select-multiple"
   }
@@ -3304,10 +3304,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "\u00bfBuscas en Internet sobre lo que te ense\u00f1an en el colegio? <small> Si tu respuesta es nunca deja la siguiente pregunta sin contestar </small>", 
+    "text": "16. \u00bfBuscas en Internet sobre lo que te ense\u00f1an en el colegio? <small> Si tu respuesta es nunca deja pasa a la pregunta 18 </small>", 
     "required": true, 
     "number": 16.0, 
-    "choices": "Lo hago con bastante frecuencia,\r\nLo hago pocas veces,\r\nNunca lo hago", 
+    "choices": "(1) Nunca lo hago,\r\n(2) Lo hago pocas veces,\r\n(3) Lo hago con bastante frecuencia\r\n", 
     "survey": 3, 
     "question_type": "radio"
   }
@@ -3317,10 +3317,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "\u00bfPor qu\u00e9 raz\u00f3n buscas en Internet sobre lo que te ense\u00f1an en el colegio?", 
+    "text": "17. \u00bfPor qu\u00e9 raz\u00f3n buscas en Internet sobre lo que te ense\u00f1an en el colegio?\"", 
     "required": false, 
     "number": 17.0, 
-    "choices": "Porque el profesor te lo pide,\r\nPorque t\u00fa quieres hacerlo", 
+    "choices": "(1) Porque el profesor te lo pide,\r\n(2) Porque t\u00fa quieres hacerlo", 
     "survey": 3, 
     "question_type": "radio"
   }
@@ -3330,10 +3330,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Enciclopedias o diccionarios digitales como ENCARTA\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\r\n", 
+    "text": "(1) Enciclopedias o diccionarios digitales como ENCARTA\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\r\n", 
     "required": true, 
     "number": 18.01, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca", 
+    "choices": "(1) Siempre,\r\n(2) A veces,\r\n(3) Nunca", 
     "survey": 3, 
     "question_type": "select"
   }
@@ -3343,10 +3343,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Revistas y peri\u00f3dicos en Internet\t", 
+    "text": "(2) Revistas y peri\u00f3dicos en Internet\t", 
     "required": true, 
     "number": 18.02, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca", 
+    "choices": "(1) Siempre,\r\n(2) A veces,\r\n(3) Nunca", 
     "survey": 3, 
     "question_type": "select"
   }
@@ -3356,10 +3356,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Sitios de consulta como Wikipedia\t\t\t\t\t\t\t\t\t\t\t", 
+    "text": "(3) Sitios de consulta como Wikipedia\t\t\t\t\t\t\t\t\t\t\t", 
     "required": true, 
     "number": 18.03, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca", 
+    "choices": "(1) Siempre,\r\n(2) A veces,\r\n(3) Nunca", 
     "survey": 3, 
     "question_type": "select"
   }
@@ -3369,10 +3369,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Sitios de tareas como el Rinc\u00f3n del Vago \t\t\t\t\t\t\t\t\t\t\t", 
+    "text": "(4) Sitios de tareas como el Rinc\u00f3n del Vago \t\t\t\t\t\t\t\t\t\t\t", 
     "required": true, 
     "number": 18.04, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca", 
+    "choices": "(1) Siempre,\r\n(2) A veces,\r\n(3) Nunca", 
     "survey": 3, 
     "question_type": "select"
   }
@@ -3382,10 +3382,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Videos en You Tube", 
+    "text": "(5) Videos en You Tube", 
     "required": true, 
     "number": 18.05, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca", 
+    "choices": "(1) Siempre,\r\n(2) A veces,\r\n(3) Nunca", 
     "survey": 3, 
     "question_type": "select"
   }
@@ -3395,10 +3395,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Cursos en Internet\t\t\t\t\t", 
+    "text": "(6) Cursos en Internet\t\t\t\t\t", 
     "required": true, 
     "number": 18.06, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca", 
+    "choices": "(1) Siempre,\r\n(2) A veces,\r\n(3) Nunca", 
     "survey": 3, 
     "question_type": "select"
   }
@@ -3408,10 +3408,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Plataforma virtual de aprendizaje como Moodle, Blackboard, Atutor, etc.", 
+    "text": "(7) Plataforma virtual de aprendizaje como Moodle, Blackboard, Atutor, etc.", 
     "required": true, 
     "number": 18.07, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca", 
+    "choices": "(1) Siempre,\r\n(2) A veces,\r\n(3) Nunca", 
     "survey": 3, 
     "question_type": "select"
   }
@@ -3421,10 +3421,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Cuando tus compa\u00f1eros hacen las tareas usando Internet \u00bfqu\u00e9 crees que hacen con la informaci\u00f3n que encuentran? \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t", 
+    "text": "19. Cuando tus compa\u00f1eros hacen las tareas usando Internet \u00bfqu\u00e9 crees que hacen con la informaci\u00f3n que encuentran? \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t", 
     "required": true, 
     "number": 19.0, 
-    "choices": "Ingresan al primer enlace que les aparece en el buscador y copian y pegan (o escriben en el cuaderno) lo que encontraron; sin leerlo ni cambiarlo,\t\t\t\t\t\t\r\nIngresan al primer enlace que les aparece en el buscador; leen completamente la informaci\u00f3n y escriben con sus propias palabras lo que entendieron,\r\nBuscan en varias p\u00e1ginas; leen todo lo que encuentran y escriben su propio texto a partir de lo que leyeron\t\t\t\t\t\t\t\t\t\t\t\t\t", 
+    "choices": "(1) Ingresan al primer enlace que les aparece en el buscador y copian y pegan (o escriben en el cuaderno) lo que encontraron; sin leerlo ni cambiarlo,\t\t\t\t\t\t\r\n(2) Ingresan al primer enlace que les aparece en el buscador; leen completamente la informaci\u00f3n y escriben con sus propias palabras lo que entendieron,\r\n(3) Buscan en varias p\u00e1ginas; leen todo lo que encuentran y escriben su propio texto a partir de lo que leyeron\t\t\t\t\t\t\t\t\t\t\t\t\t", 
     "survey": 3, 
     "question_type": "radio"
   }
@@ -3434,10 +3434,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "En los \u00faltimos seis meses \u00bfen qu\u00e9 sitios te conectas a Internet? Puedes marcar varias opciones. \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t", 
+    "text": "20. En los \u00faltimos seis meses \u00bfen qu\u00e9 sitios te conectas a Internet? Puedes marcar varias opciones. \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t", 
     "required": true, 
     "number": 20.0, 
-    "choices": "En tu casa,\r\nEn un caf\u00e9 Internet,\r\nEn la casa de tus amigos o familiares,\r\nEn tu colegio,\r\nEn un lugar p\u00fablico como bibliotecas o centros comunitarios,\r\nEn lugares p\u00fablicos con WIFI\r\n", 
+    "choices": "(1) En tu casa,\r\n(2) En un caf\u00e9 Internet,\r\n(3) En la casa de sus amigos o familiares,\r\n(4) En el colegio,\r\n(5) En un lugar p\u00fablico como bibliotecas o centros comunitarios,\r\n(6) En un lugar p\u00fablico con WIFI", 
     "survey": 3, 
     "question_type": "select-multiple"
   }
@@ -3447,7 +3447,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "En otro lugar. \u00bfCu\u00e1l?", 
+    "text": "(7) En otro lugar. \u00bfCu\u00e1l?", 
     "required": false, 
     "number": 20.01, 
     "choices": "", 
@@ -3460,10 +3460,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "De los siguientes dispositivos, si los tienes en casa, \u00bfcu\u00e1les usas? Puedes marcar varias opciones.\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t", 
+    "text": "21. De los siguientes dispositivos, si los tienes en casa, \u00bfcu\u00e1les usas? Puedes marcar varias opciones.\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t", 
     "required": true, 
     "number": 21.0, 
-    "choices": "Computador sin conexi\u00f3n a Internet,\r\nComputador con conexi\u00f3n a Internet,\r\nCelular sin plan de datos,\r\nCelular con plan de datos,\r\nConsola de videojuegos,\r\nTablet,\r\nLector digital de libros,\r\nC\u00e1mara fotogr\u00e1fica digital,\r\nC\u00e1mara de video,\r\nGrabadora digital\r\nDVD/Blue-ray\r\nTelevisor\r\nRadio", 
+    "choices": "(1) Computador sin conexi\u00f3n a Internet,\r\n(2) Computador con conexi\u00f3n a Internet,\r\n(3) Celular sin plan de datos,\r\n(4) Celular con plan de datos,\r\n(5) Consola de videojuegos,\r\n(6) Tablet,\r\n(7) Lector digital de libros,\r\n(8) C\u00e1mara fotogr\u00e1fica digital,\r\n(9) C\u00e1mara de video,\r\n(10) Grabadora digital,\r\n(11) DVD/Blue-ray,\r\n(12) Televisor,\r\n(13) Radio", 
     "survey": 3, 
     "question_type": "select-multiple"
   }
@@ -3473,7 +3473,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Internet", 
+    "text": "22. Internet", 
     "required": true, 
     "number": 22.0, 
     "choices": "Me ayuda a pasar el tiempo,\r\nMe divierte,\r\nMe informa,\r\nMe ense\u00f1a,\r\nMe comunico con amigos y otras personas,\r\nNo lo uso", 
@@ -3486,7 +3486,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Celular", 
+    "text": "23. Celular", 
     "required": true, 
     "number": 23.0, 
     "choices": "Me ayuda a pasar el tiempo,\r\nMe divierte,\r\nMe informa,\r\nMe ense\u00f1a,\r\nMe comunico con amigos y otras personas,\r\nNo lo uso", 
@@ -3499,7 +3499,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Computador", 
+    "text": "24. Computador", 
     "required": true, 
     "number": 24.0, 
     "choices": "Me ayuda a pasar el tiempo,\r\nMe divierte,\r\nMe informa,\r\nMe ense\u00f1a,\r\nMe comunico con amigos y otras personas,\r\nNo lo uso", 
@@ -3512,7 +3512,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Videojuegos", 
+    "text": "25. Videojuegos", 
     "required": true, 
     "number": 25.0, 
     "choices": "Me ayuda a pasar el tiempo,\r\nMe divierte,\r\nMe informa,\r\nMe ense\u00f1a,\r\nMe comunico con amigos y otras personas,\r\nNo lo uso", 
@@ -3525,10 +3525,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "\u00bfPara qu\u00e9 utilizas tu tel\u00e9fono celular? <small> Puede marcar varias opciones.</small>", 
+    "text": "26. \u00bfPara qu\u00e9 utilizas tu tel\u00e9fono celular? <small> Puede marcar varias opciones.</small>", 
     "required": true, 
     "number": 26.0, 
-    "choices": "Hacer y recibir llamadas,\r\nEnviar y recibir mensajes de texto,\r\nTomar fotos,\r\nEscuchar m\u00fasica,\r\nEscuchar emisoras de radio,\r\nGrabar videos,\r\nConectarse a Internet,\r\nEnviar y recibir correo electr\u00f3nico,\r\nChatear,\r\nVer videos,\r\nConectarse a las redes sociales\r\n\r\n", 
+    "choices": "(1) Hacer y recibir llamadas,\r\n(2) Enviar y recibir mensajes de texto,\r\n(3) Tomar fotos,\r\n(4) Escuchar m\u00fasica,\r\n(5) Escuchar emisoras de radio,\r\n(6) Grabar videos,\r\n(7) Conectarse a Internet,\r\n(8) Enviar y recibir correo electr\u00f3nico,\r\n(9) Chatear,\r\n(10) Ver videos,\r\n(11) Conectarse a las redes sociales\r\n\r\n", 
     "survey": 3, 
     "question_type": "select-multiple"
   }
@@ -3538,7 +3538,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Otro uso. \u00bfCu\u00e1l?", 
+    "text": "(12) Otro uso. \u00bfCu\u00e1l?", 
     "required": false, 
     "number": 26.01, 
     "choices": "", 
@@ -3551,10 +3551,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "\u00bfA qu\u00e9 redes sociales pertenece? <small>Puede marcar varias opciones</small>", 
+    "text": "27. \u00bfA qu\u00e9 redes sociales pertenece? <small>Puede marcar varias opciones</small>", 
     "required": true, 
     "number": 27.0, 
-    "choices": "Facebook,\r\nTwitter,\r\nInstagram,\r\nGoogle+,\r\nYoutube,\r\nSlideshare,\r\nLinkedIn,\r\nTumblr,\r\nBadoo", 
+    "choices": "(1) Facebook,\r\n(2) Twitter,\r\n(3) Instagram,\r\n(4) You Tube,\r\n(5) Slideshare,\r\n(6) LinkedIn,\r\n(7) Tumblr,\r\n(8) Badoo,\r\n(9) Google+\r\n", 
     "survey": 3, 
     "question_type": "select-multiple"
   }
@@ -3564,10 +3564,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Jugar", 
+    "text": "(1) Jugar", 
     "required": true, 
     "number": 28.01, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca", 
+    "choices": "(3) Siempre,\r\n(2) A veces,\r\n(1) Nunca", 
     "survey": 3, 
     "question_type": "select"
   }
@@ -3577,10 +3577,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Subir, bajar o compartir im\u00e1genes, fotos, pel\u00edculas, videos", 
+    "text": "(2) Subir, bajar o compartir im\u00e1genes, fotos, pel\u00edculas, videos", 
     "required": true, 
     "number": 28.02, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca", 
+    "choices": "(3) Siempre,\r\n(2) A veces,\r\n(1) Nunca", 
     "survey": 3, 
     "question_type": "select"
   }
@@ -3590,10 +3590,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Ver pel\u00edculas", 
+    "text": "(3) Ver pel\u00edculas", 
     "required": true, 
     "number": 28.03, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca", 
+    "choices": "(3) Siempre,\r\n(2) A veces,\r\n(1) Nunca", 
     "survey": 3, 
     "question_type": "select"
   }
@@ -3603,10 +3603,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Ver videos musicales", 
+    "text": "(4) Ver videos musicales", 
     "required": true, 
     "number": 28.04, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca", 
+    "choices": "(3) Siempre,\r\n(2) A veces,\r\n(1) Nunca", 
     "survey": 3, 
     "question_type": "select"
   }
@@ -3616,10 +3616,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Entrar a Facebook, Instagram u otras redes sociales", 
+    "text": "(5) Entrar a Facebook, Instagram u otras redes sociales", 
     "required": true, 
     "number": 28.05, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca", 
+    "choices": "(3) Siempre,\r\n(2) A veces,\r\n(1) Nunca", 
     "survey": 3, 
     "question_type": "select"
   }
@@ -3629,10 +3629,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Enviar y recibir correos electr\u00f3nicos", 
+    "text": "(6) Enviar y recibir correos electr\u00f3nicos", 
     "required": true, 
     "number": 28.06, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca", 
+    "choices": "(3) Siempre,\r\n(2) A veces,\r\n(1) Nunca", 
     "survey": 3, 
     "question_type": "select"
   }
@@ -3642,10 +3642,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Chatear", 
+    "text": "(7) Chatear", 
     "required": true, 
     "number": 28.07, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca", 
+    "choices": "(3) Siempre,\r\n(2) A veces,\r\n(1) Nunca", 
     "survey": 3, 
     "question_type": "select"
   }
@@ -3655,10 +3655,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Visitar p\u00e1ginas web ", 
+    "text": "(8) Visitar p\u00e1ginas web ", 
     "required": true, 
     "number": 28.08, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca", 
+    "choices": "(3) Siempre,\r\n(2) A veces,\r\n(1) Nunca", 
     "survey": 3, 
     "question_type": "select"
   }
@@ -3668,10 +3668,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Leer noticias", 
+    "text": "(9) Leer noticias", 
     "required": true, 
     "number": 28.09, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca", 
+    "choices": "(3) Siempre,\r\n(2) A veces,\r\n(1) Nunca", 
     "survey": 3, 
     "question_type": "select"
   }
@@ -3681,10 +3681,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Leer historias, cuentos, novelas \t", 
+    "text": "(10) Leer historias, cuentos, novelas \t", 
     "required": true, 
     "number": 28.1, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca", 
+    "choices": "(3) Siempre,\r\n(2) A veces,\r\n(1) Nunca", 
     "survey": 3, 
     "question_type": "select"
   }
@@ -3694,10 +3694,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Escribir y publicar comentarios ", 
+    "text": "(11) Escribir y publicar comentarios ", 
     "required": true, 
     "number": 28.11, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca", 
+    "choices": "(3) Siempre,\r\n(2) A veces,\r\n(1) Nunca", 
     "survey": 3, 
     "question_type": "select"
   }
@@ -3707,10 +3707,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Escribir historias\t", 
+    "text": "(12) Escribir historias\t", 
     "required": true, 
     "number": 28.12, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca", 
+    "choices": "(3) Siempre,\r\n(2) A veces,\r\n(1) Nunca", 
     "survey": 3, 
     "question_type": "select"
   }
@@ -3720,10 +3720,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Dibujar o crear im\u00e1genes", 
+    "text": "(13) Dibujar o crear im\u00e1genes", 
     "required": true, 
     "number": 28.13, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca", 
+    "choices": "(3) Siempre,\r\n(2) A veces,\r\n(1) Nunca", 
     "survey": 3, 
     "question_type": "select"
   }
@@ -3733,10 +3733,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Descargar m\u00fasica", 
+    "text": "(14) Descargar m\u00fasica", 
     "required": true, 
     "number": 28.14, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca", 
+    "choices": "(3) Siempre,\r\n(2) A veces,\r\n(1) Nunca", 
     "survey": 3, 
     "question_type": "select"
   }
@@ -3746,10 +3746,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Descargar juegos", 
+    "text": "(15) Descargar juegos", 
     "required": true, 
     "number": 28.15, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca", 
+    "choices": "(3) Siempre,\r\n(2) A veces,\r\n(1) Nunca", 
     "survey": 3, 
     "question_type": "select"
   }
@@ -3759,7 +3759,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Otro uso. \u00bfCu\u00e1l?", 
+    "text": "(18) Otro uso. \u00bfCu\u00e1l?", 
     "required": false, 
     "number": 28.18, 
     "choices": "", 
@@ -3772,10 +3772,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Hacer amigos y conocer gente \t", 
+    "text": "(16) Hacer amigos y conocer gente \t", 
     "required": true, 
     "number": 28.16, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca", 
+    "choices": "(3) Siempre,\r\n(2) A veces,\r\n(1) Nunca", 
     "survey": 3, 
     "question_type": "select"
   }
@@ -3785,10 +3785,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Conocer otro paises y culturas", 
+    "text": "(17) Conocer otro paises y culturas", 
     "required": true, 
     "number": 28.17, 
-    "choices": "Siempre,\r\nA veces,\r\nNunca", 
+    "choices": "(3) Siempre,\r\n(2) A veces,\r\n(1) Nunca", 
     "survey": 3, 
     "question_type": "select"
   }
@@ -3798,10 +3798,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "\u00bfCon qui\u00e9n compartes la informaci\u00f3n que encuentra en Internet? <small>Puede marcar varias opciones.</small>", 
+    "text": "29. \u00bfCon qui\u00e9n compartes la informaci\u00f3n que encuentra en Internet? <small>Puede marcar varias opciones.</small>", 
     "required": true, 
     "number": 29.0, 
-    "choices": "Con sus amigos,\r\nCon otros profesores,\r\nCon familiares,\r\nCon sus estudiantes,\r\nCon nadie \r\n", 
+    "choices": "(1) Con tus padres,\r\n(2) Con tus hermanos,\r\n(3) Con amigos,\r\n(4) Con tus profesores,\r\n(5) Con tus compa\u00f1eros de estudio,\r\n(6) Con nadie", 
     "survey": 3, 
     "question_type": "select-multiple"
   }
@@ -3811,10 +3811,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "\u00bfCon qui\u00e9n aprende a usar el computador y la Internet? <small>Puede marcar varias opciones.</small> \t", 
+    "text": "30. \u00bfCon qui\u00e9n aprende a usar el computador y la Internet? <small>Puede marcar varias opciones.</small> \t", 
     "required": true, 
     "number": 30.0, 
-    "choices": "Solo; cacharreando o averiguando en Internet,\r\nCon sus amigos,\r\nCon otros profesores,\r\nCon familiares,\r\nCon sus estudiantes,\r\nHaciendo cursos virtuales,\r\nHaciendo cursos presenciales en alguna instituci\u00f3n,\r\nContratando clases personalizadas", 
+    "choices": "(1) Solo; cacharreando o averiguando en Internet,\r\n(2) Con tus padres,\r\n(3) Con tus hermanos,\r\n(4) Con tus amigos,\r\n(5) Con tus profesores,\r\n\r\n(6) Con tus compa\u00f1eros de estudio,\r\n(7) Haciendo cursos. \r\n", 
     "survey": 3, 
     "question_type": "select-multiple"
   }
@@ -3824,10 +3824,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "\u00bfQu\u00e9 tipo de cursos has hecho para aprender a usar el computador y la Internet? <small> Puedes marcar varias opciones. </small>", 
+    "text": "31. \u00bfQu\u00e9 tipo de cursos has hecho para aprender a usar el computador y la Internet? <small> Puedes marcar varias opciones. </small>", 
     "required": true, 
     "number": 31.0, 
-    "choices": "Cursos virtuales,\r\nCursos presenciales en alguna instituci\u00f3n,\r\nTus padres te pagan clases personalizadas. \r\n", 
+    "choices": "(1) Cursos virtuales,\r\n(2) Cursos presenciales en alguna instituci\u00f3n,\r\n(3) Tus padres te pagan clases personalizadas. \r\n", 
     "survey": 3, 
     "question_type": "select-multiple"
   }
@@ -3837,10 +3837,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "\u00bfCuando usas Internet \u00bfcon qui\u00e9n prefiere hacerlo? ", 
+    "text": "32. \u00bfCuando usas Internet \u00bfcon qui\u00e9n prefiere hacerlo? ", 
     "required": true, 
     "number": 32.0, 
-    "choices": "Solo,\r\nCon tus padres,\r\nCon tus hermanos,\r\nCon tus amigos,\r\nCon otros profesores,\r\nCon tus compa\u00f1eros de estudio", 
+    "choices": "(1) Solo,\r\n(2) Con tus padres,\r\n(3) Con tus hermanos,\r\n(4) Con tus amigos,\r\n(5) Con tus profesores,\r\n(6) Con tus compa\u00f1eros de estudio. \r\n", 
     "survey": 3, 
     "question_type": "radio"
   }
@@ -3850,10 +3850,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "\u00bfDurante cu\u00e1ntas horas diarias navegas en Internet? Si no navegas en Internet todos los d\u00edas, calcula el promedio de horas por d\u00eda a partir del total de horas que navegas durante los d\u00edas de la semana en que s\u00ed lo haces.", 
+    "text": "33. \u00bfDurante cu\u00e1ntas horas diarias navegas en Internet? Si no navegas en Internet todos los d\u00edas, calcula el promedio de horas por d\u00eda a partir del total de horas que navegas durante los d\u00edas de la semana en que s\u00ed lo haces.", 
     "required": true, 
     "number": 33.0, 
-    "choices": "Entre 1 y 2 horas,\r\nEntre 3 y 5 horas,\r\nM\u00e1s de 5 horas \r\n", 
+    "choices": "(1) Entre 1 y 2 horas,\r\n(2) Entre 3 y 5 horas,\r\n(3) M\u00e1s de 5 horas \r\n", 
     "survey": 3, 
     "question_type": "radio"
   }
@@ -3863,7 +3863,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Celular", 
+    "text": "(1) Celular", 
     "required": true, 
     "number": 34.01, 
     "choices": "1, 2, 3", 
@@ -3876,7 +3876,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Computador", 
+    "text": "(2) Computador", 
     "required": true, 
     "number": 34.02, 
     "choices": "1, 2, 3", 
@@ -3889,7 +3889,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Tablet", 
+    "text": "(3) Tablet", 
     "required": true, 
     "number": 34.03, 
     "choices": "1, 2, 3", 
@@ -3902,7 +3902,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Conexi\u00f3n a internet", 
+    "text": "(4) Conexi\u00f3n a internet", 
     "required": true, 
     "number": 34.04, 
     "choices": "1, 2, 3", 
@@ -3915,7 +3915,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "DVD o Blue-ray", 
+    "text": "(5) DVD o Blue-ray", 
     "required": true, 
     "number": 34.05, 
     "choices": "1, 2, 3", 
@@ -3928,7 +3928,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Radio", 
+    "text": "(6) Radio", 
     "required": true, 
     "number": 34.06, 
     "choices": "1, 2, 3", 
@@ -3941,7 +3941,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Televisor", 
+    "text": "(7) Televisor", 
     "required": true, 
     "number": 34.07, 
     "choices": "1, 2, 3", 
@@ -3954,7 +3954,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Video beam", 
+    "text": "(8) Video beam", 
     "required": true, 
     "number": 34.08, 
     "choices": "1, 2, 3", 
@@ -3967,10 +3967,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "\u00bfQu\u00e9 te gustar\u00eda hacer o aprender a hacer con Internet? <small>Puede marcar varias opciones.</small>", 
+    "text": "35. \u00bfQu\u00e9 te gustar\u00eda hacer o aprender a hacer con Internet? <small>Puede marcar varias opciones.</small>", 
     "required": true, 
     "number": 35.0, 
-    "choices": "Desarrollar programas inform\u00e1ticos,\r\nConstruir p\u00e1ginas web,\r\nCrear contenidos sobre la materia que ense\u00f1o,\r\nCrear videos y pel\u00edculas,\t\t\t\t\t\t\t\t\t\t\t\r\nCrear mejores fotograf\u00edas,\t\t\t\t\t\r\nEscribir historias y cuentos,\t\t\t\t\t\t\t\t\t\r\nHacer un video y subirlo a You Tube,\r\nDise\u00f1ar un videojuego,\t\t\t\t\t\t\t\t\t\r\nConstruir un blog; un diario; un peri\u00f3dico; un programa de radio y m\u00fasica,\t\t\t\t\t\t\t\t\t\t\t\r\nAprender un idioma que no conozco,\r\nHacer amigos de mi edad,\t\t\t\t\t\t\t\t\r\nComponer m\u00fasica utilizando software especializado,\r\nIntercambiar objetos,\r\nVender o comprar creaciones propias (m\u00fasica, dibujos, cuentos, im\u00e1genes, artes)", 
+    "choices": "(1) Desarrollar programas inform\u00e1ticos,\r\n(2) Construir p\u00e1ginas web,\r\n(3) Crear contenidos sobre la materia que ense\u00f1o,\r\n(4) Crear videos y pel\u00edculas,\t\t\t\t\t\t\t\t\t\t\t\r\n(5) Crear mejores fotograf\u00edas,\t\t\t\t\t\r\n(6) Escribir historias y cuentos,\t\t\t\t\t\t\t\t\t\r\n(7) Hacer un video y subirlo a You Tube,\r\n(8) Dise\u00f1ar un videojuego,\t\t\t\t\t\t\t\t\t\r\n(9) Construir un blog; un diario; un peri\u00f3dico; un programa de radio y m\u00fasica,\t\t\t\t\t\t\t\t\t\t\t\r\n(10) Aprender un idioma que no conozco,\r\n(11) Hacer amigos de mi edad,\t\t\t\t\t\t\t\t\r\n(12) Componer m\u00fasica utilizando software especializado,\r\n(13) Intercambiar objetos,\r\n(14) Vender o comprar creaciones propias (m\u00fasica; dibujos; cuentos; im\u00e1genes; artes)", 
     "survey": 3, 
     "question_type": "select-multiple"
   }
@@ -3993,7 +3993,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Celular", 
+    "text": "(1) Celular", 
     "required": true, 
     "number": 36.01, 
     "choices": "1, 2, 3", 
@@ -4006,7 +4006,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Computador", 
+    "text": "(2) Computador", 
     "required": true, 
     "number": 36.02, 
     "choices": "1, 2, 3", 
@@ -4019,7 +4019,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Tablet", 
+    "text": "(3) Tablet", 
     "required": true, 
     "number": 36.03, 
     "choices": "1, 2, 3", 
@@ -4032,7 +4032,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Conexi\u00f3n a internet", 
+    "text": "(4) Conexi\u00f3n a internet", 
     "required": true, 
     "number": 36.04, 
     "choices": "1, 2, 3", 
@@ -4045,7 +4045,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "DVD o Blue-ray", 
+    "text": "(5) DVD o Blue-ray", 
     "required": true, 
     "number": 36.05, 
     "choices": "1, 2, 3", 
@@ -4058,7 +4058,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Radio", 
+    "text": "(6) Radio", 
     "required": true, 
     "number": 36.06, 
     "choices": "1, 2, 3", 
@@ -4071,7 +4071,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Televisor", 
+    "text": "(7) Televisor", 
     "required": true, 
     "number": 36.07, 
     "choices": "1, 2, 3", 
@@ -4084,7 +4084,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Video beam", 
+    "text": "(8) Video beam", 
     "required": true, 
     "number": 36.08, 
     "choices": "1, 2, 3", 
@@ -4097,10 +4097,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Suponiendo que el escenario descrito al inicio ya es real, \u00bfqu\u00e9 cree que suceder\u00eda con el desempe\u00f1o y el comportamiento de sus estudiantes en clase?", 
+    "text": "37. Suponiendo que el escenario descrito al inicio ya es real, \u00bfqu\u00e9 cree que suceder\u00eda con el desempe\u00f1o y el comportamiento de sus estudiantes en clase?", 
     "required": true, 
     "number": 37.0, 
-    "choices": "No creo que el desempe\u00f1o escolar y el comportamiento de los estudiantes cambien mucho,\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\r\nCreo que el desempe\u00f1o escolar \u00a0puede mejorar, pero el comportamiento (atenci\u00f3n; concentraci\u00f3n; disciplina) puede deteriorarse,\r\nCreo que el desempe\u00f1o escolar no necesariamente mejorar\u00e1; pero el comportamiento (atenci\u00f3n; concentraci\u00f3n; disciplina) puede mejorar,\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\r\nCreo que el desempe\u00f1o escolar y el comportamiento de los estudiantes pueden mejorar mucho\t", 
+    "choices": "(1) No creo que el desempe\u00f1o escolar y el comportamiento de los estudiantes cambien mucho,\r\n(2) Creo que el desempe\u00f1o escolar \u00a0puede mejorar; pero el comportamiento (atenci\u00f3n; concentraci\u00f3n; disciplina) puede deteriorarse,\r\n(3) Creo que el desempe\u00f1o escolar no necesariamente mejorar\u00e1; pero el comportamiento (atenci\u00f3n; concentraci\u00f3n; disciplina) puede mejorar,\r\n(4) Creo que el desempe\u00f1o escolar y el comportamiento de los estudiantes pueden mejorar mucho\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t", 
     "survey": 3, 
     "question_type": "radio"
   }
@@ -4110,10 +4110,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Suponiendo que el escenario descrito al inicio ya es real, \u00bfqu\u00e9 cree que suceder\u00eda con la comunicaci\u00f3n con los padres de familia? ", 
+    "text": "38. Suponiendo que el escenario descrito al inicio ya es real, \u00bfqu\u00e9 cree que suceder\u00eda con la comunicaci\u00f3n con los padres de familia? ", 
     "required": true, 
     "number": 38.0, 
-    "choices": "Creo que habr\u00e1 una comunicaci\u00f3n m\u00e1s fluida y continua con los padres de familia; ellos estar\u00e1n mejor enterados de lo que pasa con los estudiantes,\r\nNo creo que esto cambie mucho. Los padres y acudientes interesados en sus hijos mantienen comunicaci\u00f3n constante con los profesores; con o sin plataforma digital. Los que no est\u00e1n interesados no cambiar\u00e1n; aunque haya plataforma digital,\t\t\t\t\t\t\t\t\t\t\t\t\t\t\r\nLa plataforma permitir\u00e1 que los padres est\u00e9n al tanto del desempe\u00f1o escolar de los estudiantes y muy probablemente eso implicar\u00e1 para nosotros mayor dedicaci\u00f3n de tiempo para responder a \u00a0un n\u00famero creciente de consultas de los padres,\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\r\nEsto no va a funcionar porque los padres no est\u00e1n capacitados para manejar este tipo de plataformas o no cuentan con la dotaci\u00f3n tecnol\u00f3gica necesaria para aprovecharla", 
+    "choices": "(1) Creo que esta dotaci\u00f3n tecnol\u00f3gica (Tit@) realmente facilitar\u00e1 y cualificar\u00e1 nuestro trabajo,\r\n(2) Creo que esta dotaci\u00f3n tecnol\u00f3gica (Tit@) facilitar\u00e1 nuestro trabajo; lo har\u00e1 m\u00e1s cualificado; pero aumentar\u00e1 nuestras responsabilidades y tareas docentes,\r\n(3) Creo que esta dotaci\u00f3n tecnol\u00f3gica (Tit@) facilitar\u00e1 las tareas administrativas; pero no cualificar\u00e1 de manera importante nuestro trabajo acad\u00e9mico docente,\r\n(4) Creo que esta dotaci\u00f3n tecnol\u00f3gica (Tit@) har\u00e1 m\u00e1s dif\u00edcil nuestro trabajo y aumentar\u00e1 el n\u00famero de tareas (administrativas y acad\u00e9micas) por realizar\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n(4) Esto no va a funcionar porque los padres no est\u00e1n capacitados para manejar este tipo de plataformas o no cuentan con la dotaci\u00f3n tecnol\u00f3gica necesaria para aprovecharla.", 
     "survey": 3, 
     "question_type": "radio"
   }
@@ -4123,10 +4123,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "\u00bfTe gust\u00f3 responder esta encuesta en computador?", 
+    "text": "39. \u00bfTe gust\u00f3 responder esta encuesta en computador?", 
     "required": true, 
     "number": 39.0, 
-    "choices": "S\u00ed,\r\nNo,\r\nEs igual a si la hubiese respondido en papel", 
+    "choices": "(1) S\u00ed,\r\n(2) No,\r\n(3) Es igual a si la hubiese respondido en papel", 
     "survey": 3, 
     "question_type": "radio"
   }
@@ -4136,7 +4136,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Otra red. \u00bfCu\u00e1l?", 
+    "text": "(10) Otra red. \u00bfCu\u00e1l?", 
     "required": false, 
     "number": 27.01, 
     "choices": "", 
@@ -4149,7 +4149,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Nombre(s) y apellido(s) de sus hijo(a)", 
+    "text": "2. Nombre(s) y apellido(s) de sus hijo(a)", 
     "required": true, 
     "number": 2.0, 
     "choices": "", 
@@ -4162,10 +4162,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Suponiendo que el escenario descrito al inicio ya es real, \u00bfqu\u00e9 cree que suceder\u00eda con el desempe\u00f1o y el comportamiento de los estudiantes en clase?\t\t\t\t\t\t\t\t\t\t\t", 
+    "text": "38. Suponiendo que el escenario descrito al inicio ya es real, \u00bfqu\u00e9 cree que suceder\u00eda con el desempe\u00f1o y el comportamiento de los estudiantes en clase?\t\t\t\t\t\t\t\t\t\t\t", 
     "required": true, 
-    "number": 40.0, 
-    "choices": "No creo que el desempe\u00f1o escolar y el comportamiento de los estudiantes cambien mucho,\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\r\nCreo que el desempe\u00f1o escolar \u00a0puede mejorar; pero el comportamiento (atenci\u00f3n; concentraci\u00f3n; disciplina) puede deteriorarse,\r\nCreo que el desempe\u00f1o escolar no necesariamente mejorar\u00e1; pero el comportamiento (atenci\u00f3n; concentraci\u00f3n; disciplina) puede mejorar,\r\nCreo que el desempe\u00f1o escolar y el comportamiento de los estudiantes pueden mejorar mucho\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t", 
+    "number": 38.0, 
+    "choices": "(1) No creo que el desempe\u00f1o escolar y el comportamiento de los estudiantes cambien mucho,\r\n(2) Creo que el desempe\u00f1o escolar \u00a0puede mejorar; pero el comportamiento (atenci\u00f3n; concentraci\u00f3n; disciplina) puede deteriorarse,\r\n(3) Creo que el desempe\u00f1o escolar no necesariamente mejorar\u00e1; pero el comportamiento (atenci\u00f3n; concentraci\u00f3n; disciplina) puede mejorar,\r\n(4) Creo que el desempe\u00f1o escolar y el comportamiento de los estudiantes pueden mejorar mucho\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t", 
     "survey": 1, 
     "question_type": "radio"
   }
@@ -4175,10 +4175,10 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Suponiendo que el escenario descrito al inicio ya es real, \u00bfqu\u00e9 cree que suceder\u00eda con la comunicaci\u00f3n con los padres de familia de los compa\u00f1eros de clase de sus hijos?\t\t\t\t\t\t\t\t\t\t", 
+    "text": "39. Suponiendo que el escenario descrito al inicio ya es real, \u00bfqu\u00e9 cree que suceder\u00eda con la comunicaci\u00f3n con los padres de familia de los compa\u00f1eros de clase de sus hijos?\t\t\t\t\t\t\t\t\t\t", 
     "required": true, 
-    "number": 41.0, 
-    "choices": "Creo que habr\u00e1 una comunicaci\u00f3n m\u00e1s fluida y continua con esos padres de familia; ellos estar\u00e1n mejor enterados de lo que pasa con los estudiantes,\r\nNo creo que esto cambie mucho. Los padres y acudientes interesados en sus hijos mantienen comunicaci\u00f3n constante con los profesores; con o sin plataforma digital. Los que no est\u00e1n interesados no cambiar\u00e1n; aunque haya plataforma digital,\t\t\t\r\nLa plataforma permitir\u00e1 que los padres est\u00e9n al tanto del desempe\u00f1o escolar de los estudiantes y muy probablemente eso implicar\u00e1 para los docentes una mayor dedicaci\u00f3n de tiempo para responder a un n\u00famero creciente de consultas de los padres\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n(4) Esto no va a funcionar porque los padres no est\u00e1n capacitados para manejar este tipo de plataformas o no cuentan con la dotaci\u00f3n tecnol\u00f3gica necesaria para aprovecharla.\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t", 
+    "number": 39.0, 
+    "choices": "(1) Creo que esta dotaci\u00f3n tecnol\u00f3gica (Tit@) realmente facilitar\u00e1 y cualificar\u00e1 nuestro trabajo,\r\n(2) Creo que esta dotaci\u00f3n tecnol\u00f3gica (Tit@) facilitar\u00e1 nuestro trabajo; lo har\u00e1 m\u00e1s cualificado; pero aumentar\u00e1 nuestras responsabilidades y tareas docentes,\r\n(3) Creo que esta dotaci\u00f3n tecnol\u00f3gica (Tit@) facilitar\u00e1 las tareas administrativas; pero no cualificar\u00e1 de manera importante nuestro trabajo acad\u00e9mico docente,\r\n(4) Creo que esta dotaci\u00f3n tecnol\u00f3gica (Tit@) har\u00e1 m\u00e1s dif\u00edcil nuestro trabajo y aumentar\u00e1 el n\u00famero de tareas (administrativas y acad\u00e9micas) por realizar\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n(4) Esto no va a funcionar porque los padres no est\u00e1n capacitados para manejar este tipo de plataformas o no cuentan con la dotaci\u00f3n tecnol\u00f3gica necesaria para aprovecharla.\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t", 
     "survey": 1, 
     "question_type": "radio"
   }
@@ -4221,4 +4221,83 @@
     "survey": 2, 
     "question_type": "radio"
   }
-}]
+},
+{
+  "pk": 374, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "8. \u00bfCon qu\u00e9 frecuencia utiliza el computador?\r\n", 
+    "required": true, 
+    "number": 8.0, 
+    "choices": "(1) De 4 a 7 d\u00edas a la semana,\r\n(2) 3 d\u00edas a la semana,\r\n(3) 2 d\u00edas a la semana,\r\n(4) 1 d\u00eda a la semana,\r\n(5) Casi nunca", 
+    "survey": 1, 
+    "question_type": "radio"
+  }
+},
+{
+  "pk": 375, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "10. \u00bfCon qu\u00e9 frecuencia se conecta a Internet?\r\n", 
+    "required": true, 
+    "number": 10.0, 
+    "choices": "(1) De 4 a 7 d\u00edas a la semana,\r\n(2) 3 d\u00edas a la semana,\r\n(3) 2 d\u00edas a la semana,\r\n(4) 1 d\u00eda a la semana,\r\n(5) Casi nunca", 
+    "survey": 1, 
+    "question_type": "radio"
+  }
+},
+{
+  "pk": 376, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "(6) Enviar y recibir correos electr\u00f3nicos. \t\t\t\t\t\t\t\t\t\t\t", 
+    "required": true, 
+    "number": 29.06, 
+    "choices": "(3) Siempre,\r\n(2) A veces,\r\n(1) Nunca", 
+    "survey": 1, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 377, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "32. \u00bfQu\u00e9 tipo de cursos ha hecho para aprender a usar el computador y la Internet? <small> Puede marcar varias opciones.</small>\t\t\t\t\t\t", 
+    "required": true, 
+    "number": 32.0, 
+    "choices": "(1) Cursos virtuales,\r\n(2) Cursos presenciales en alguna instituci\u00f3n,\r\n(3) Contrata clases personalizadas\r\n", 
+    "survey": 1, 
+    "question_type": "text"
+  }
+},
+{
+  "pk": 378, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "7. \u00bfCon qu\u00e9 frecuencia utilizas el computador? ", 
+    "required": false, 
+    "number": 7.0, 
+    "choices": "(1) De 4 a 7 d\u00edas a la semana,  \r\n\r\n(2) 3 d\u00edas a la semana,\r\n\r\n(3) 2 d\u00edas a la semana, \r\n\r\n(4) 1 d\u00eda a la semana,\r\n\r\n(5) Casi nunca\r\n", 
+    "survey": 3, 
+    "question_type": "text"
+  }
+},
+{
+  "pk": 379, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "9. \u00bfCon qu\u00e9 frecuencia te conectas a Internet? Marca con una X solo una respuesta. \r\n", 
+    "required": false, 
+    "number": 9.0, 
+    "choices": "(1) De 4 a 7 d\u00edas a la semana,\r\n(2) 3 d\u00edas a la semana,\r\n(3) 2 d\u00edas a la semana,\r\n(4) 1 d\u00eda a la semana,\r\n(5) Casi nunca.\r\n", 
+    "survey": 3, 
+    "question_type": "radio"
+  }
+}
+]
