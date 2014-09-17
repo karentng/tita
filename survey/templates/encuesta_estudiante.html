@@ -29,8 +29,20 @@
 {% endblock %}
 
 
-{% block titulo_contenido %}
-    Encuesta a Estudiantes
+{% block titulo_contenido %}    <label align="center">
+        UNIVERSIDAD DEL VALLE
+        <h4>PROYECTO CALI VIVE DIGITAL / TIT@ EDUCACIÓN DIGITAL PARA TODOS</h4>
+        <h5>
+            ENCUESTA SOBRE PERCEPCIONES Y HÁBITOS ACERCA DEL USO DE LAS TIC EN LOS PROCESOS DE ENSEÑANZA Y APRENDIZAJE (SEGUNDA APLICACIÓN)
+            CUESTIONARIO PARA PADRES DE FAMILIA O ACUDIENTES
+        </h5>
+        Cuestionario para Estudiantes
+        <br>
+        <b style="font-size:13px;">
+            La información que se recoge en este cuestionario es confidencial y se utilizará exclusivamente con fines académicos.
+        </b>                                                                                   
+
+    </label>
 {% endblock %}
 
 {% block contenido %}
@@ -46,23 +58,24 @@
 <form method="POST"> {% csrf_token %}
     {% mypanel 'Información Personal y Socioeconómica Básica' %}
         <div class="form-horizontal">
-            {% bootstrap_field form.numero_documento layout="horizontal" label_class="col-md-5" %}
-            {% bootstrap_field form.nombre layout="horizontal" label_class="col-md-5" %}
             {% bootstrap_field form.jornada layout="horizontal" label_class="col-md-5" %}
             {% bootstrap_field form.institucion layout="horizontal" label_class="col-md-5" %}
+            {% bootstrap_field form.nombre layout="horizontal" label_class="col-md-5" %}
             {% bootstrap_field form.question_273 layout="horizontal" label_class="col-md-5" %}
         </div>
     {% endmypanel %}
     {% mypanel 'Uso Actual del Computador e Internet' %}
         {% bootstrap_field form.question_274 form_group_class='form-group bordered' %}
         {% bootstrap_field form.question_275 form_group_class='form-group bordered' %}
+        {% bootstrap_field form.question_378 form_group_class='form-group bordered' %}
         {% bootstrap_field form.question_276 form_group_class='form-group bordered' %}
+        {% bootstrap_field form.question_379 form_group_class='form-group bordered' %}
     {% endmypanel %}
     {% mypanel 'Percepciones Sobre el Uso de las TIC en los Procesos de Enseñanza y Aprendizaje' %}
     {% bootstrap_field form.question_277 form_group_class='form-group bordered' %}
     <div class="bordered">
-        <label>
-            ¿Qué pasa cuando haces tus tareas usando Internet? 
+        <label class="control-label">
+            11. ¿Qué pasa cuando haces tus tareas usando Internet? 
         </label>
         {% bootstrap_field form.question_278 %}
         {% bootstrap_field form.question_279 %}
@@ -72,8 +85,8 @@
     {% bootstrap_field form.question_281 form_group_class='form-group bordered' %}
     <br>
     <div class="bordered">
-        <label>
-           ¿Qué tanto te serviría utilizar Internet en las materias que ves? Califica de 1 a 3 de la siguiente forma: si crees que te serviría mucho marcas 3, si crees que te serviría un poco marcas 2 y si crees que te serviría muy poquito o nada marcas 1.
+        <label class="control-label">
+           13. ¿Qué tanto te serviría utilizar Internet en las materias que ves? Califica de 1 a 3 de la siguiente forma: si crees que te serviría mucho marcas 3, si crees que te serviría un poco marcas 2 y si crees que te serviría muy poquito o nada marcas 1.
         </label>
         
         <div class="row">
@@ -103,22 +116,22 @@
         {% bootstrap_field form.question_304 form_group_class='form-group bordered' %}
 
         <div class="bordered">
-            <label>
-               ¿Cuáles de estos recursos utilizas para hacer tus tareas y cada cuánto los usas?
+            <label class="control-label">
+               18. ¿Cuáles de estos recursos utilizas para hacer tus tareas y cada cuánto los usas?
             </label>
             
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-horizontal">
                         {% for field in camposRecursos1 %}
-                            {% bootstrap_field field layout="horizontal" label_class="col-md-6" field_class="col-md-3"  %}
+                            {% bootstrap_field field layout="horizontal" label_class="col-md-8" field_class="col-md-3"  %}
                         {% endfor %}
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-horizontal">
                         {% for field in camposRecursos2 %}
-                            {% bootstrap_field field layout="horizontal" label_class="col-md-6" field_class="col-md-3"  %}
+                            {% bootstrap_field field layout="horizontal" label_class="col-md-8" field_class="col-md-3"  %}
                         {% endfor %}
                     </div>
                 </div>
@@ -134,7 +147,7 @@
     {% mypanel 'Hábitos Sobre el Uso de las TIC en la Vida Cotidiana' %}
         {% bootstrap_field form.question_315 form_group_class='form-group bordered' %}
         <div class="bordered">
-            <label>
+            <label class="control-label">
                 ¿Para qué te sirven cada uno de los siguientes dispositivos?
             </label>
             <div class="row">
@@ -166,8 +179,8 @@
         </div>
         <br>
         <div class="bordered">
-            <label>
-                ¿Qué haces cuando entras a Internet y con qué frecuencia?
+            <label class="control-label">
+                28. ¿Qué haces cuando entras a Internet y con qué frecuencia?
             </label>
             <div class="row">
                 <div class="col-md-6">
@@ -196,8 +209,8 @@
     {% endmypanel %}
     {% mypanel 'Expectativas Sobre el Uso de las TIC' %}
         <div class="bordered">
-            <label>
-                Si te ganaras un concurso y pudieras escoger del siguiente listado tres dispositivos ¿cuáles escogerías? Califica de 1 a 3 qué tan importante es para ti cada uno de esos tres dispositivos que seleccionaste. Si es el más importante le pones 3, si es menos importante que el anterior le pones 2 y si es el menos importante de los tres le pones 1.
+            <label class="control-label">
+                34. Si te ganaras un concurso y pudieras escoger del siguiente listado tres dispositivos ¿cuáles escogerías? Califica de 1 a 3 qué tan importante es para ti cada uno de esos tres dispositivos que seleccionaste. Si es el más importante le pones 3, si es menos importante que el anterior le pones 2 y si es el menos importante de los tres le pones 1. 
             </label>
             <div class="row">
                 <div class="col-md-6">
@@ -223,8 +236,9 @@
         </div>
         <br>
         <div class="bordered">
-            <label>
-                Si te ganaras un concurso y pudieras escoger del siguiente listado tres dispositivos ¿cuáles escogerías? Califica de 1 a 3 qué tan importante es para ti cada uno de esos tres dispositivos que seleccionaste. Si es el más importante le pones 3, si es menos importante que el anterior le pones 2 y si es el menos importante de los tres le pones 1.
+            <label class="control-label">
+                36. De los siguientes dispositivos escoge tres que lamentarías perder. Califica de 1 a 3 qué tan importante es para ti cada uno de esos tres dispositivos que lamentarías perder. Si es el más importante le pones 3, si es menos importante que el anterior le pones 2 y si es el menos importante de los tres le pones  1.                                                                            
+
             </label>
             <div class="row">
                 <div class="col-md-6">

@@ -26,7 +26,20 @@
 
 
 {% block titulo_contenido %}
-    Encuesta a Padres de Familia
+    <label align="center">
+        UNIVERSIDAD DEL VALLE
+        <h4>PROYECTO CALI VIVE DIGITAL / TIT@ EDUCACIÓN DIGITAL PARA TODOS</h4>
+        <h5>
+            ENCUESTA SOBRE PERCEPCIONES Y HÁBITOS ACERCA DEL USO DE LAS TIC EN LOS PROCESOS DE ENSEÑANZA Y APRENDIZAJE (SEGUNDA APLICACIÓN)
+            CUESTIONARIO PARA PADRES DE FAMILIA O ACUDIENTES
+        </h5>
+        Cuestionario para Padres de Familia
+        <br>
+        <b style="font-size:13px;">
+            La información que se recoge en este cuestionario es confidencial y se utilizará exclusivamente con fines académicos.
+        </b>                                                                                   
+
+    </label>
 {% endblock %}
 
 {%block menu %}
@@ -47,21 +60,23 @@
 <form method="POST"> {% csrf_token %}
     {% mypanel 'Información Personal y Socioeconómica Básica' %}
         <div class="form-horizontal">
-            {% bootstrap_field form.numero_documento layout="horizontal" label_class="col-md-5" %}
-            {% bootstrap_field form.nombre layout="horizontal" label_class="col-md-5" %}
-            {% bootstrap_field form.jornada layout="horizontal" label_class="col-md-5" %}
             
+            {% bootstrap_field form.jornada layout="horizontal" label_class="col-md-5" %}
+            {% bootstrap_field form.question_368 layout="horizontal" label_class="col-md-5"%}
+            {% bootstrap_field form.nombre layout="horizontal" label_class="col-md-5" %}            
         </div>
-        {% bootstrap_field form.question_368 %}
+        {% bootstrap_field form.question_1 %}
         {% bootstrap_field form.institucion %}
         {% bootstrap_field form.question_2 %}
-        {% bootstrap_field form.question_1 %}
+        
         
     {% endmypanel %}
 
     {% mypanel 'Uso Actual de Computador e Internet' %}
         {% bootstrap_field form.question_6 form_group_class='form-group bordered' %}
+        {% bootstrap_field form.question_374 form_group_class='form-group bordered' %}
         {% bootstrap_field form.question_7 form_group_class='form-group bordered' %}
+        {% bootstrap_field form.question_375 form_group_class='form-group bordered' %}
     {% endmypanel %}
         
     {% mypanel 'Percepciones Sobre el Uso de las TIC en los Procesos e Enseñanza y Aprendizaje' %}
@@ -70,7 +85,7 @@
 
         <div class="bordered">
             <label for="" class="control-label">
-                Califique de 1 a 3 las siguientes materias según qué tanto le serviría a su hijo(a)
+                13. Califique de 1 a 3 las siguientes materias según qué tanto le serviría a su hijo(a)
                 utilizar Internet en cada una de ellas. Si cree que le servirían mucho marque 3, si cree que le servirían un poco marque 2 
                 y si cree que le servirían muy poquito o nada marque 1.
             </label>
@@ -111,7 +126,7 @@
         <br>
         <div class="bordered">
             <label class="control-label">
-                De las siguientes herramientas seleccione con qué frecuencia las utiliza
+                19. De las siguientes herramientas seleccione con qué frecuencia las utiliza
             </label>
             <div class="row">
                 <div class="col-md-6">
@@ -188,7 +203,7 @@
         <br>
         <div class="bordered">   
             <label for="" class="control-label">
-                ¿Qué hace cuando entra a internet y con qué frecuencia?
+                29. ¿Qué hace cuando entra a internet y con qué frecuencia?
             </label> 
             <div class="row">
                 <div class="col-md-6">
@@ -209,18 +224,16 @@
         </div>
         <br>
         {% bootstrap_field form.question_84 form_group_class='form-group bordered' %}
-        <br>
         {% bootstrap_field form.question_86 form_group_class='form-group bordered' %}
-        <br>
+        {% bootstrap_field form.question_377 form_group_class='form-group bordered' %}
         {% bootstrap_field form.question_88 form_group_class='form-group bordered' %}
-        <br>
         {% bootstrap_field form.question_89 form_group_class='form-group bordered' %}
     {% endmypanel %}
 
     {% mypanel 'Expectativas Sobre el Uso de las TIC' %}
         <div class="bordered">   
             <label for="" class="control-label">
-                Si se ganara un concurso y pudiera escoger del siguiente listado <b>tres</b> dispositivos ¿Cuáles escogería? Califique de 1 a 3 qué tan importante es para usted cada uno de esos tres dispositivos que seleccionó. Si es el más importante le pone 3, si es menos importante que el anterior le pone 2 y si es el menos importante que el anterior le pone 2 y si es el menos importante de los tres le pone 1.
+                35. Si se ganara un concurso y pudiera escoger del siguiente listado <b>tres</b> dispositivos ¿Cuáles escogería? Califique de 1 a 3 qué tan importante es para usted cada uno de esos tres dispositivos que seleccionó. Si es el más importante le pone 3, si es menos importante que el anterior le pone 2 y si es el menos importante que el anterior le pone 2 y si es el menos importante de los tres le pone 1.
             </label> 
             <div class="row">
                 <div class="col-md-6">
@@ -249,7 +262,7 @@
         <br>
         <div class="bordered">   
             <label for="" class="control-label">
-                De los siguientes dispositivos escoja <b>tres</b> que lamentaría perder. Califique de 1 a 3 qué tan importante es para usted cada uno de esos tres dispositivos que lamentaría perder. Si es el más importante le pone 3, si es menos importante que el anterior le pone 2 y si es el menos importante de los tres le pone 1. 
+                37. De los siguientes dispositivos escoja <b>tres</b> que lamentaría perder. Califique de 1 a 3 qué tan importante es para usted cada uno de esos tres dispositivos que lamentaría perder. Si es el más importante le pone 3, si es menos importante que el anterior le pone 2 y si es el menos importante de los tres le pone 1. 
             </label> 
             <div class="row">
                 <div class="col-md-6">

@@ -86,15 +86,15 @@ class Question(models.Model):
 
 class Response(models.Model):
     class Meta:
-        unique_together = (('survey', 'numero_documento'),)
+        unique_together = (('survey'),)
     # a response object is just a collection of questions and answers with a
     # unique interview uuid
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     survey = models.ForeignKey(Survey)
     
-    jornada = models.CharField(max_length=1, choices=(('M',u'Mañana'),('T', 'Tarde')))
-    numero_documento = models.BigIntegerField()
+    jornada = models.CharField(max_length=1, choices=(('M',u'(1) Mañana'),('T', '(2) Tarde')))
+    #numero_documento = models.BigIntegerField()
     nombre = models.CharField(max_length=300, verbose_name=u'Nombres y Apellidos')
     institucion = models.ForeignKey(InstitucionEducativa)
     #fecha_nacimiento = models.DateField()
