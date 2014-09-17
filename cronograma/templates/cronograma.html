@@ -43,6 +43,25 @@
 	var datos = [];
 	for (i in eventos){
 		var aux = eventos[i];
+		var hi = aux.hora_inicio;
+		var hf = aux.hora_finalizacion;
+		for (j in aux.diasEvento){
+			dia = aux.diasEvento[j]
+			datos.push({
+				title: aux.nombre,
+				start: new Date(dia[0], dia[1], dia[2], hi[0], hi[1],0),
+				duration: aux.duracion,
+				end: new Date(dia[0], dia[1], dia[2], hf[0], hf[1],0),
+				className: colors[i%5],
+				description: aux.descripcion+"<br/>"+aux.institucion,
+				allDay: false,
+			});
+		}
+	}
+
+	/*var datos = [];
+	for (i in eventos){
+		var aux = eventos[i];
 		var inicio = aux.inicio;
 		var fin = aux.fin;
 		datos.push({
@@ -52,7 +71,7 @@
 			className: colors[i%5],
 			description: aux.descripcion,
 		});
-	}
+	}*/
 
 
 	var handleCalendarDemo = function () {
@@ -133,6 +152,7 @@
 			revertDuration: 0
 		});
 	});
+	jQuery(document).ready(function(){ jQuery('.timepicker').datepicker(); });
 };
 </script>
 {% endblock %}

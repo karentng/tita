@@ -43,17 +43,21 @@
 	var datos = [];
 	for (i in eventos){
 		var aux = eventos[i];
-		var inicio = aux.inicio;
-		var fin = aux.fin;
-		datos.push({
-			title: aux.nombre,
-			start: new Date(inicio[0], inicio[1], inicio[2]),
-			end: new Date(fin[0], fin[1], fin[2]),
-			className: colors[i%5],
-			description: aux.descripcion,
-		});
+		var hi = aux.hora_inicio;
+		var hf = aux.hora_finalizacion;
+		for (j in aux.diasEvento){
+			dia = aux.diasEvento[j]
+			datos.push({
+				title: aux.nombre,
+				start: new Date(dia[0], dia[1], dia[2], hi[0], hi[1],0),
+				duration: aux.duracion,
+				end: new Date(dia[0], dia[1], dia[2], hf[0], hf[1],0),
+				className: colors[i%5],
+				description: aux.descripcion,
+				allDay: false,
+			});
+		}
 	}
-
 
 	var handleCalendarDemo = function () {
 	"use strict";
