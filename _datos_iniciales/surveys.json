@@ -2967,7 +2967,7 @@
   "fields": {
     "category": null, 
     "text": "10. \u00bfQu\u00e9 opinas de hacer tus tareas con ayuda de Internet? \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t", 
-    "required": false, 
+    "required": true, 
     "number": 10.0, 
     "choices": "(1) Es m\u00e1s f\u00e1cil,\r\n(2) Da lo mismo,\r\n(3) Es m\u00e1s dif\u00edcil.\r\n", 
     "survey": 3, 
@@ -3292,7 +3292,7 @@
   "fields": {
     "category": null, 
     "text": "15. Para tus clases y hacer las tareas \u00bfqu\u00e9 programas inform\u00e1ticos usas? <small>Puede marcar varias opciones</small>", 
-    "required": true, 
+    "required": false, 
     "number": 15.0, 
     "choices": "(1) Procesador de texto (Ejemplo: Word; Apache OpenOffice Writer; LibreOffice Writer),\r\n(2) Hoja de c\u00e1lculo (Ejemplo: Excel; Apache OpenOffice Calc; LibreOffice Calc; StartOffice Calc),\r\n(3) Programas para hacer presentaciones (Ejemplo: Power Point; Prezi; Apache OpenOffice Impress),  \r\n\r\n(4) Programas de dibujo (Ejemplo: Corel Draw; Adobe Flash; Microsoft Paint),\r\n(5) Programas para editar im\u00e1genes y fotograf\u00edas (Ejemplo: Adobe Photoshop; GIMP). \r\n", 
     "survey": 3, 
@@ -3435,7 +3435,7 @@
   "fields": {
     "category": null, 
     "text": "20. En los \u00faltimos seis meses \u00bfen qu\u00e9 sitios te conectas a Internet? Puedes marcar varias opciones. \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t", 
-    "required": true, 
+    "required": false, 
     "number": 20.0, 
     "choices": "(1) En tu casa,\r\n(2) En un caf\u00e9 Internet,\r\n(3) En la casa de sus amigos o familiares,\r\n(4) En el colegio,\r\n(5) En un lugar p\u00fablico como bibliotecas o centros comunitarios,\r\n(6) En un lugar p\u00fablico con WIFI", 
     "survey": 3, 
@@ -3461,7 +3461,7 @@
   "fields": {
     "category": null, 
     "text": "21. De los siguientes dispositivos, si los tienes en casa, \u00bfcu\u00e1les usas? Puedes marcar varias opciones.\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t", 
-    "required": true, 
+    "required": false, 
     "number": 21.0, 
     "choices": "(1) Computador sin conexi\u00f3n a Internet,\r\n(2) Computador con conexi\u00f3n a Internet,\r\n(3) Celular sin plan de datos,\r\n(4) Celular con plan de datos,\r\n(5) Consola de videojuegos,\r\n(6) Tablet,\r\n(7) Lector digital de libros,\r\n(8) C\u00e1mara fotogr\u00e1fica digital,\r\n(9) C\u00e1mara de video,\r\n(10) Grabadora digital,\r\n(11) DVD/Blue-ray,\r\n(12) Televisor,\r\n(13) Radio", 
     "survey": 3, 
@@ -3526,7 +3526,7 @@
   "fields": {
     "category": null, 
     "text": "26. \u00bfPara qu\u00e9 utilizas tu tel\u00e9fono celular? <small> Puede marcar varias opciones.</small>", 
-    "required": true, 
+    "required": false, 
     "number": 26.0, 
     "choices": "(1) Hacer y recibir llamadas,\r\n(2) Enviar y recibir mensajes de texto,\r\n(3) Tomar fotos,\r\n(4) Escuchar m\u00fasica,\r\n(5) Escuchar emisoras de radio,\r\n(6) Grabar videos,\r\n(7) Conectarse a Internet,\r\n(8) Enviar y recibir correo electr\u00f3nico,\r\n(9) Chatear,\r\n(10) Ver videos,\r\n(11) Conectarse a las redes sociales\r\n\r\n", 
     "survey": 3, 
@@ -3552,7 +3552,7 @@
   "fields": {
     "category": null, 
     "text": "27. \u00bfA qu\u00e9 redes sociales pertenece? <small>Puede marcar varias opciones</small>", 
-    "required": true, 
+    "required": false, 
     "number": 27.0, 
     "choices": "(1) Facebook,\r\n(2) Twitter,\r\n(3) Instagram,\r\n(4) You Tube,\r\n(5) Slideshare,\r\n(6) LinkedIn,\r\n(7) Tumblr,\r\n(8) Badoo,\r\n(9) Google+\r\n", 
     "survey": 3, 
@@ -3812,7 +3812,7 @@
   "fields": {
     "category": null, 
     "text": "30. \u00bfCon qui\u00e9n aprende a usar el computador y la Internet? <small>Puede marcar varias opciones.</small> \t", 
-    "required": true, 
+    "required": false, 
     "number": 30.0, 
     "choices": "(1) Solo; cacharreando o averiguando en Internet,\r\n(2) Con tus padres,\r\n(3) Con tus hermanos,\r\n(4) Con tus amigos,\r\n(5) Con tus profesores,\r\n\r\n(6) Con tus compa\u00f1eros de estudio,\r\n(7) Haciendo cursos. \r\n", 
     "survey": 3, 
@@ -3825,7 +3825,7 @@
   "fields": {
     "category": null, 
     "text": "31. \u00bfQu\u00e9 tipo de cursos has hecho para aprender a usar el computador y la Internet? <small> Puedes marcar varias opciones. </small>", 
-    "required": true, 
+    "required": false, 
     "number": 31.0, 
     "choices": "(1) Cursos virtuales,\r\n(2) Cursos presenciales en alguna instituci\u00f3n,\r\n(3) Tus padres te pagan clases personalizadas. \r\n", 
     "survey": 3, 
@@ -4284,7 +4284,7 @@
     "number": 7.0, 
     "choices": "(1) De 4 a 7 d\u00edas a la semana,  \r\n\r\n(2) 3 d\u00edas a la semana,\r\n\r\n(3) 2 d\u00edas a la semana, \r\n\r\n(4) 1 d\u00eda a la semana,\r\n\r\n(5) Casi nunca\r\n", 
     "survey": 3, 
-    "question_type": "text"
+    "question_type": "radio"
   }
 },
 {
@@ -4292,7 +4292,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "9. \u00bfCon qu\u00e9 frecuencia te conectas a Internet? Marca con una X solo una respuesta. \r\n", 
+    "text": "9. \u00bfCon qu\u00e9 frecuencia te conectas a Internet? Selecciona solo una respuesta. \r\n", 
     "required": false, 
     "number": 9.0, 
     "choices": "(1) De 4 a 7 d\u00edas a la semana,\r\n(2) 3 d\u00edas a la semana,\r\n(3) 2 d\u00edas a la semana,\r\n(4) 1 d\u00eda a la semana,\r\n(5) Casi nunca.\r\n", 
