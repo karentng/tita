@@ -135,13 +135,30 @@ def certificacionesTIC(request):
     estudios = FormacionAcademicaME.objects.filter(estudiante=estudiante)
     if not len(estudios):
         return redirect('formacion_DE')
+    error = False
     if request.method == 'POST':
         form = CertificacionTICForm(request.POST)
         if form.is_valid():
             objeto = form.save(commit=False)
             objeto.estudiante = estudiante
-            objeto.save()
-            return redirect('certificaciones_DE')
+
+            dias_dif =  objeto.fecha_terminacion - objeto.fecha_inicio
+            dias_dif = dias_dif.days
+            if dias_dif < 0:
+                error = "La fecha de terminación debe ser después de la fecha inicial"
+            else:
+                # se supone el hecho que se estudia 8 horas diarias
+                if objeto.duracion == 40 and dias_dif < 5:
+                    error = "Muy poco tiempo para realizar un curso de 40 horas, por favor revise las fechas"
+                elif objeto.duracion == 90 and dias_dif < 12:
+                    error = "Muy poco tiempo para realizar un curso de 90 horas, por favor revise las fechas"
+                elif objeto.duracion == 140 and dias_dif < 18:
+                    error = "Muy poco tiempo para realizar un curso de 140 horas, por favor revise las fechas"
+                elif objeto.duracion == 141 and dias_dif < 18:
+                    error = "Muy poco tiempo para realizar un curso de más de 140 horas, por favor revise las fechas"
+                else:
+                    objeto.save()
+                    return redirect('certificaciones_DE')        
     else :
         form = CertificacionTICForm()
 
@@ -151,7 +168,8 @@ def certificacionesTIC(request):
     return render(request, 'inscripcion/certificaciones_DE.html', {
         'form': form,
         'certificaciones': certificaciones,
-        'clave': numero_registro
+        'clave': numero_registro,
+        'error': error,
     })
 
 def eliminarTicDE(request, ticId):

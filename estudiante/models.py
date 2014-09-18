@@ -183,10 +183,10 @@ class FormacionAcademicaME(models.Model):
 
 class CertificacionTIC(models.Model):
     DURACION_CURSO = (
-        (4, 'Curso TIC mínimo 40 horas'),
-        (6, 'Cursos TIC  hasta 90 horas'),
-        (8, 'Cursos TIC hasta 140 horas certificados o en proceso de certificación'),
-        (10, 'Cursos TIC mas 140 horas')
+        (40, 'Curso TIC mínimo 40 horas'),
+        (90, 'Cursos TIC  hasta 90 horas'),
+        (140, 'Cursos TIC hasta 140 horas certificados o en proceso de certificación'),
+        (141, 'Cursos TIC mas 140 horas')
     )
 
     estudiante = models.ForeignKey('campus.Estudiante')
