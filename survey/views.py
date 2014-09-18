@@ -70,7 +70,7 @@ def encuesta_docente(request):
 
 
     # customizar form de acuerdo a la encuesta para padres
-    form.fields['jornada'].label = u"1. Jornada en la que estudias"
+    form.fields['jornada'].label = u"1. Jornada en la que enseñas"
     form.fields['institucion'].label = u"2. Nombre de tu institución educativa"
     form.fields['nombre'].label = u"3. Nombre y apellidos"
 
@@ -113,8 +113,8 @@ def encuesta_estudiante(request):
         form = ResponseForm(survey=survey)
 
     # customizar form de acuerdo a la encuesta para padres
-    form.fields['jornada'].label = u"1. Jornada"
-    form.fields['institucion'].label = u"2. Nombre y apellidos"
+    form.fields['jornada'].label = u"1. Jornada en la que estudias"
+    form.fields['institucion'].label = u"2. Institución en la que estudias"
     form.fields['nombre'].label = u"3. Nombre y apellidos"
 
 
