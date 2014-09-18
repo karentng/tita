@@ -3304,7 +3304,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "16. \u00bfBuscas en Internet sobre lo que te ense\u00f1an en el colegio? <small> Si tu respuesta es nunca deja pasa a la pregunta 18 </small>", 
+    "text": "16. \u00bfBuscas en Internet sobre lo que te ense\u00f1an en el colegio? <small> Si tu respuesta es \"Nunca lo hago\" pasa a la pregunta 18 </small>", 
     "required": true, 
     "number": 16.0, 
     "choices": "(1) Nunca lo hago,\r\n(2) Lo hago pocas veces,\r\n(3) Lo hago con bastante frecuencia\r\n", 
