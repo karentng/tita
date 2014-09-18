@@ -8,6 +8,11 @@
     <li><a href="{% url 'home' %}">Inicio</a></li>
 {% endblock %}
 
+
+{%block menu %}
+    {% include "menus/publico.html" with opcion_menu='encuesta_' %}
+{% endblock %}
+
 {% block titulo_contenido %}Encuesta{% endblock %}
 
 {% block titulo_panel %}<i class="fa fa-key"></i> Encuesta Finalizada{% endblock %}
