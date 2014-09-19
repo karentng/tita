@@ -37,6 +37,10 @@
 
 {% block titulo_panel %}<i class="fa fa-lightbulb-o"></i> Inscripción{% endblock %}
 {% block contenido_panel %}
+    <div class="alert alert-warning fade in m-b-15">
+        <center><strong>Tenga en cuenta!</strong>
+        Los campos marcados con * son obligatorios.</center>
+    </div>
     <form class="form-horizontal" method="post">{% csrf_token %}
         {% bootstrap_form form layout="horizontal" %}
 

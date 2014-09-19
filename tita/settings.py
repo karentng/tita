@@ -51,7 +51,6 @@ INSTALLED_APPS = (
     'django_select2',
     'django_extensions', # para sqldiff
     'bootstrap3_datetime',
-    'datetimewidget',
 
     'convocat',
     'estudiante',
@@ -67,7 +66,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
+    #'django.middleware.locale.LocaleMiddleware',
 )
 
 ROOT_URLCONF = 'tita.urls'
@@ -115,7 +114,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+#USE_TZ = True
 
 SHORT_DATE_FORMAT = 'Y-m-d'
 SHORT_DATETIME_FORMAT = 'Y-m-d'

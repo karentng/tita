@@ -85,8 +85,6 @@ class Question(models.Model):
 
 
 class Response(models.Model):
-    class Meta:
-        unique_together = (('survey'),)
     # a response object is just a collection of questions and answers with a
     # unique interview uuid
     created = models.DateTimeField(auto_now_add=True)
