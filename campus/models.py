@@ -195,10 +195,10 @@ class Clase(models.Model):
 
     nombre = models.CharField(max_length=255, null=True, blank=True)
     institucion = models.IntegerField(choices=SEDES, max_length=2, verbose_name="institución", null=True, blank=True)
-    fecha_inicio = models.DateTimeField(verbose_name=u'fecha de realización')
+    fecha_inicio = models.DateTimeField(verbose_name=u'fecha de inicio')
     fecha_finalizacion = models.DateTimeField(verbose_name=u'fecha de realización')
     modificado = models.DateTimeField(auto_now=True)
-    curso = models.ForeignKey(Curso)
+    curso = models.ForeignKey(Curso, null=True, blank=True)
     asistentes = models.ManyToManyField(Estudiante, blank=True, verbose_name='Seleccione las personas que asistieron a la clase')
     descripcion = models.CharField( max_length=1000, null=True, blank=True)
     tipo = models.CharField( max_length=10) # para especificar si es de diplomado o de acompanamiento in situ

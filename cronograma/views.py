@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from cronograma.forms import EventosAcompanamientoForm, EventosDiplomadoForm
-from cronograma.models import EventosAcompanamiento, EventosDiplomado
+from campus.models import Clase
 import json
 from django.shortcuts import redirect, render, render_to_response
 from datetime import datetime, date, timedelta
@@ -10,11 +10,6 @@ def cronograma(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         form = EventosAcompanamientoForm(request.POST)
-
-        postFormatoDict = request.POST.dict() #obtuvimos el post
-
-        post = str(postFormatoDict) #lo convertimos a string
-        print "POST:::::::::::::::"+post
     
         if form.is_valid():
             objeto = form.save()
@@ -22,14 +17,14 @@ def cronograma(request):
     else:
         form = EventosAcompanamientoForm()
 
-    eventos = EventosAcompanamiento.objects.all()
+    eventos = Clase.objects.all()
     events = []
     for i in eventos:
         inicio = i.fecha_inicio
         fin = i.fecha_finalizacion
 
-        hora_inicio = [i.hora_inicio.hour, i.hora_inicio.minute, 0]
-        hora_finalizacion = [i.hora_finalizacion.hour, i.hora_finalizacion.minute, 0]
+        hora_inicio = [i.fecha_inicio.hour, i.fecha_inicio.minute, 0]
+        hora_finalizacion = [i.fecha_finalizacion.hour, i.fecha_finalizacion.minute, 0]
 
         diasTotal = (fin - inicio).days
         
