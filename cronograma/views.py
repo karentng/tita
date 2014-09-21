@@ -10,6 +10,12 @@ def cronograma(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         form = EventosAcompanamientoForm(request.POST)
+
+        postFormatoDict = request.POST.dict() #obtuvimos el post
+
+        post = str(postFormatoDict) #lo convertimos a string
+        print "POST:::::::::::::::"+post
+    
         if form.is_valid():
             objeto = form.save()
             return redirect('cronograma_acompanamiento')
