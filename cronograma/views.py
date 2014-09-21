@@ -10,14 +10,20 @@ def cronograma(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         form = EventosAcompanamientoForm(request.POST)
-    
+        form.tipo = "asa"
+        
         if form.is_valid():
+            objeto = Clase()
             objeto = form.save()
+            objeto.tipo = "2"
+            objeto.save()
+
             return redirect('cronograma_acompanamiento')
     else:
-        form = EventosAcompanamientoForm()
 
-    eventos = Clase.objects.all()
+        form = EventosAcompanamientoForm()
+        
+    eventos = Clase.objects.filter(tipo="2")
     events = []
     for i in eventos:
         inicio = i.fecha_inicio
@@ -67,20 +73,23 @@ def diplomado(request):
     if request.method == 'POST':
         form = EventosDiplomadoForm(request.POST)
         if form.is_valid():
+            objeto = Clase()
             objeto = form.save()
+            objeto.tipo = "1"
+            objeto.save()
             return redirect('cronograma_diplomado')
     else:
         form = EventosDiplomadoForm()
 
-    eventos = EventosDiplomado.objects.all()
+    eventos = Clase.objects.filter(tipo="1")
     events = []
 
     for i in eventos:
         inicio = i.fecha_inicio
         fin = i.fecha_finalizacion
 
-        hora_inicio = [i.hora_inicio.hour, i.hora_inicio.minute, 0]
-        hora_finalizacion = [i.hora_finalizacion.hour, i.hora_finalizacion.minute, 0]
+        hora_inicio = [i.fecha_inicio.hour, i.fecha_inicio.minute, 0]
+        hora_finalizacion = [i.fecha_finalizacion.hour, i.fecha_finalizacion.minute, 0]
 
         diasTotal = (fin - inicio).days
         
