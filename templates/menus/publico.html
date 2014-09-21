@@ -67,16 +67,16 @@
 	</ul>
 </li>
 
-<li class="has-sub active " {% if opcion_menu == 'cronograma_' %} class="active" {% endif %}>
+<li class="has-sub  {% if opcion_menu >= 11 and opcion_menu <= 12 %} active {% endif %}">
 	<a href="javascript:;">
 		<i class="fa fa-2x fa-calendar"></i>Programación
 		<b class="caret pull-right"></b>
 	</a>
 	<ul class="sub-menu">
-		<li {% if opcion_menu == 'cronograma_diplomado' %} class="active" {% endif %}>
+		<li {% if opcion_menu == 11 %} class="active" {% endif %}>
 			<a href="{% url 'cronograma_diplomado' %}"><i class="fa fa fa-university"></i> Diplomado</a>
 		</li>
-		<li {% if opcion_menu == 'cronograma_acompanamiento' %} class="active" {% endif %}>
+		<li {% if opcion_menu == 12 %} class="active" {% endif %}>
 			<a href="{% url 'cronograma_acompanamiento' %}"><i class="fa fa fa-folder-o"></i> Acompañamiento in situ</a>
 		</li>
 	</ul>
