@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block titulo %} Modificación de Curso {% endblock %}
+
+{% block menu %}
+    {% include "menus/publico.html" with opcion_menu=12 %}
+{% endblock %}
+
+{% block css %}
+    <link href="{{STATIC_URL}}plugins/bootstrap-wizard/css/bwizard.min.css" rel="stylesheet" />
+    {{form.media}} {# agrega los js y css necesarios para el bootstrap3 datetimepicker #}
+{% endblock %}
+
+{% block js %}
+    {% if solo_lectura%}
+    <script>
+        $(function(){
+            $("select").attr("disabled", "disabled");
+            $("input").attr("readonly", "readonly");
+        });
+    </script>
+
+    {% endif %}
+{% endblock %}
+
+{% block miga_pan %}
+    <li><a href="{% url 'home' %}">Inicio</a></li>
+    <li class="active">Modificación de Curso</li>
+{% endblock %}
+
+{% block titulo_contenido %}Modificación de Curso{% endblock %}
+
+{% block titulo_panel %}<i class="fa fa-lightbulb-o"></i> Modificación{% endblock %}
+{% block contenido_panel %}
+    <form class="form-horizontal" method="post">{% csrf_token %}
+        {% bootstrap_form form layout="horizontal" %}
+
+        <button class="btn btn-lg btn-primary pull-right" type="submit">Modificar <i class="fa fa-angle-right"></i></button>
+        
+    </form>
+{% endblock %}

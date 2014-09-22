@@ -40,6 +40,7 @@ def cronograma(request):
             diasEvento.append([aux.year, aux.month-1, aux.day])
 
         events.append({
+            'id': i.id,
             'nombre': i.nombre,
             'descripcion': i.descripcion,
             'hora_inicio': hora_inicio,
@@ -99,6 +100,7 @@ def diplomado(request):
             diasEvento.append([aux.year, aux.month-1, aux.day])
 
         events.append({
+            'id': i.id,
             'nombre': i.nombre,
             'descripcion': i.descripcion,
             'hora_inicio': hora_inicio,
@@ -109,4 +111,20 @@ def diplomado(request):
     return render(request, 'diplomado.html', {
         'formDiplomado': form,
         'eventos': json.dumps(events)
+    })
+
+def diplomado_modificar(request):
+    idCurso = request.GET.get('idCurso')
+    curso = Clase.objects.filter(id=idCurso)[0]
+    if request.method == 'POST':
+        form = EventosDiplomadoForm(request.POST, instance=curso)
+        if form.is_valid():
+            objeto = form.save()
+            objeto.save()
+            return redirect('cronograma_diplomado')
+    else:
+        form = EventosDiplomadoForm(instance=curso)
+
+    return render(request, 'diplomado_modificar.html', {
+        'form': form,
     })
