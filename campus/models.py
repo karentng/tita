@@ -200,7 +200,7 @@ class Clase(models.Model):
     modificado = models.DateTimeField(auto_now=True)
     curso = models.ForeignKey(Curso, null=True, blank=True)
     asistentes = models.ManyToManyField(Estudiante, blank=True, verbose_name='Seleccione las personas que asistieron a la clase')
-    descripcion = models.CharField( max_length=1000, null=True, blank=True)
+    descripcion = models.CharField( max_length=1000, null=True, blank=True, verbose_name="descripción")
     tipo = models.CharField( max_length=10) # para especificar si es de diplomado o de acompanamiento in situ
     def __unicode__(self):
         return unicode(self.nombre)
