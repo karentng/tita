@@ -22,10 +22,14 @@
 	<link href="{{STATIC_URL}}plugins/bootstrap-wizard/css/bwizard.min.css" rel="stylesheet" />
 	<link href="{{STATIC_URL}}plugins/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" />
     {{formAcompanamiento.media}} {# agrega los js y css necesarios para el bootstrap3 datetimepicker #}
+    <style type="text/css">
+    	.fc-event-inner{
+    		overflow-y: scroll;
+    	}
+    </style>
 {% endblock %}
 
 {% block js %}
-
 <script src="{{STATIC_URL}}plugins/fullcalendar/fullcalendar/fullcalendar.js"></script>
 <script type="text/javascript">
 
@@ -39,41 +43,29 @@
         }[b];
     }));
 	eventos = JSON.parse( eventos );
-console.log("a")
 	var datos = [];
 	for (i in eventos){
 		var aux = eventos[i];
 		var hi = aux.hora_inicio;
 		var hf = aux.hora_finalizacion;
 		
+
 		for (j in aux.diasEvento){
 			dia = aux.diasEvento[j]
+			
+			var url = "{% url 'cronograma_diplomado_modificar' %}"+"?idCurso="+aux.id;
 			datos.push({
 				title: aux.nombre,
 				start: new Date(dia[0], dia[1], dia[2], hi[0], hi[1],0),
 				duration: aux.duracion,
 				end: new Date(dia[0], dia[1], dia[2], hf[0], hf[1],0),
 				className: colors[i%5],
-				description: aux.descripcion+"<br/>"+aux.institucion+"<br><button class='btn btn-primary'>Modificar</button>",
+				description: aux.descripcion,
 				allDay: false,
+				media: "<a href='"+url+"'><button class='btn btn-primary'>Modificar</button></a>",
 			});
 		}
 	}
-
-	/*var datos = [];
-	for (i in eventos){
-		var aux = eventos[i];
-		var inicio = aux.inicio;
-		var fin = aux.fin;
-		datos.push({
-			title: aux.nombre,
-			start: new Date(inicio[0], inicio[1], inicio[2]),
-			end: new Date(fin[0], fin[1], fin[2]),
-			className: colors[i%5],
-			description: aux.descripcion,
-		});
-	}*/
-
 
 	var handleCalendarDemo = function () {
 	"use strict";
@@ -153,7 +145,6 @@ console.log("a")
 			revertDuration: 0
 		});
 	});
-	jQuery(document).ready(function(){ jQuery('.timepicker').datepicker(); });
 };
 </script>
 {% endblock %}
