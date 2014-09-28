@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+	Tit@ - Tablero de Control
+{% endblock %}
+
+{% block menu %}
+	{% include "menus/publico.html" with opcion_menu=13 %}
+{% endblock %}
+
+{% block css %}
+<link href="{{STATIC_URL}}plugins/DataTables-1.9.4/css/data-table.css" rel="stylesheet" />
+{% endblock %}
+
+{% block js %}
+<script src="{{STATIC_URL}}plugins/DataTables-1.9.4/js/jquery.dataTables.js"></script>
+<script src="{{STATIC_URL}}plugins/DataTables-1.9.4/js/data-table.js"></script>
+
+<script src="{{STATIC_URL}}plugins/flot/jquery.flot.min.js"></script>
+<script src="{{STATIC_URL}}plugins/flot/jquery.flot.pie.min.js"></script>
+<script src="{{STATIC_URL}}plugins/flot/jquery.flot.categories.js"></script>
+{% endblock %}
+
+{% block miga_pan %}
+	<li><a href="javascript:;">Tablero de Control</a></li>
+	
+{% endblock %}
+
+{% block titulo_contenido %}
+	Tablero de Control
+{% endblock %}
+
+{% block contenido %}
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-primary" id="inscritos">
+				<div class="panel-heading">
+					<div class="panel-heading-btn">
+						<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+					</div>
+					<h4 class="panel-title">Estado de Avance del Proyecto</h4>
+				</div>
+				<div class="panel-body">
+					<div class="table-responsive">
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Meta</th>
+                                    <th>Avance Actual</th>
+                                    <th>Presupuesto Actividad</th>
+                                    <th>Presupuesto Ejecutado</th>
+                                    <th>Ejecución Financiera</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd gradeX">
+                                	<td><input class="form-control"></td>
+                                    <td><input class="form-control"></td>
+                                    <td><input class="form-control"></td>
+                                    <td><input class="form-control"></td>
+                                    <td><input class="form-control"></td>
+                                    <td><input class="form-control"></td>
+                                </tr>
+                                <tr class="odd gradeX">
+                                    <td><input class="form-control"></td>
+                                    <td><input class="form-control"></td>
+                                    <td><input class="form-control"></td>
+                                    <td><input class="form-control"></td>
+                                    <td><input class="form-control"></td>
+                                    <td><input class="form-control"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <ul class="nav nav-pills">
+        <li class="active"><a href="#nav-pills-tab-1" data-toggle="tab">INSCRIPCIÓN</a></li>
+        <li><a href="#nav-pills-tab-2" data-toggle="tab">RESULTADOS PROCESO</a></li>
+        <li><a href="#nav-pills-tab-3" data-toggle="tab">EVIDENCIAS</a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane fade active in" id="nav-pills-tab-1">
+            
+        </div>
+        <div class="tab-pane fade" id="nav-pills-tab-2">
+            
+        </div>
+        <div class="tab-pane fade" id="nav-pills-tab-3">
+            
+        </div>
+    </div>
+</div>
+{% endblock %}

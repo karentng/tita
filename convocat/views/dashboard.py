@@ -70,3 +70,7 @@ def reporteME(request):
 
         #'municipios':json.dumps(munis),
     })
+
+def tablero_control(request):
+    return render(request, 'dashboard/tablero_control.html', {
+    })
