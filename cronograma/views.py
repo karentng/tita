@@ -27,13 +27,15 @@ def cronograma(request):
     events = []
     for i in eventos:
         inicio = i.fecha_inicio
-        fin = i.fecha_finalizacion
+        #fin = i.fecha_finalizacion
 
         hora_inicio = [i.fecha_inicio.hour, i.fecha_inicio.minute, 0]
-        hora_finalizacion = [i.fecha_finalizacion.hour, i.fecha_finalizacion.minute, 0]
+        #hora_finalizacion = [i.fecha_finalizacion.hour, i.fecha_finalizacion.minute, 0]
+        hora_finalizacion = [i.fecha_inicio.hour + i.duracion, i.fecha_inicio.minute, 0]
 
-        diasTotal = (fin - inicio).days
+        diasTotal = 1
         
+        #diasEvento = 1
         diasEvento = []
         for j in range(0, diasTotal+1):
             aux = inicio + timedelta(days = j)
@@ -90,7 +92,7 @@ def diplomado(request):
         fin = i.fecha_finalizacion
 
         hora_inicio = [i.fecha_inicio.hour, i.fecha_inicio.minute, 0]
-        hora_finalizacion = [i.fecha_finalizacion.hour, i.fecha_finalizacion.minute, 0]
+        #hora_finalizacion = [i.fecha_finalizacion.hour, i.fecha_finalizacion.minute, 0]
 
         diasTotal = (fin - inicio).days
         
