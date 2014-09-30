@@ -94,6 +94,7 @@ class Estudiante(models.Model):
     nombre2 = models.CharField( max_length=255, blank=True, verbose_name='segundo nombre')
     apellido1 = models.CharField( max_length=255, verbose_name='primer apellido *')
     apellido2 = models.CharField( max_length=255, blank=True, verbose_name='segundo apellido')
+    nacimiento = models.DateField(verbose_name=u'fecha de nacimiento', help_text='Formato año-mes-día (ej: 1988-04-30)')
     sexo = models.CharField( choices=[('M','Hombre'), ('F', 'Mujer')], max_length=1, verbose_name='genero *')
     email = models.EmailField(verbose_name="email personal *")
     email_institucional = models.EmailField(blank=True, null=True)

@@ -10,6 +10,7 @@
 
 {% block css %}
 <link href="{{STATIC_URL}}plugins/DataTables-1.9.4/css/data-table.css" rel="stylesheet" />
+<link href="{{STATIC_URL}}plugins/morris/morris.css" rel="stylesheet" />
 {% endblock %}
 
 {% block js %}
@@ -19,6 +20,20 @@
 <script src="{{STATIC_URL}}plugins/flot/jquery.flot.min.js"></script>
 <script src="{{STATIC_URL}}plugins/flot/jquery.flot.pie.min.js"></script>
 <script src="{{STATIC_URL}}plugins/flot/jquery.flot.categories.js"></script>
+
+
+<script src="{{STATIC_URL}}plugins/morris/raphael.min.js"></script>
+<script src="{{STATIC_URL}}plugins/morris/morris.js"></script>
+<script src="{{STATIC_URL}}js/chart-morris.demo.js"></script>
+{% endblock %}
+
+{% block js_ready %}
+<script>
+    $(document).ready(function() {
+        App.init();
+        MorrisChart.init();
+    });
+</script>
 {% endblock %}
 
 {% block miga_pan %}
@@ -41,16 +56,36 @@
 					<h4 class="panel-title">Estado de Avance del Proyecto</h4>
 				</div>
 				<div class="panel-body">
+                    <center><b>Actividad 1.  Curso de formación  y acompañamiento a formadores de formadores  para apropiación de pedagogía en el uso efectivo de las TIC.</b></center>
+                    <br>
 					<div class="table-responsive">
                         <table class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Fecha</th>
-                                    <th>Meta</th>
-                                    <th>Avance Actual</th>
-                                    <th>Presupuesto Actividad</th>
-                                    <th>Presupuesto Ejecutado</th>
-                                    <th>Ejecución Financiera</th>
+                                    <th>
+                                        <center>Fecha</center>
+                                        <img src="{{STATIC_URL}}img/imagenTabla.png" alt="" />
+                                    </th>
+                                    <th>
+                                        <center>Meta</center>
+                                        <img src="{{STATIC_URL}}img/imagenTabla.png" alt="" />
+                                    </th>
+                                    <th>
+                                        <center>Avance Actual</center>
+                                        <img src="{{STATIC_URL}}img/imagenTabla.png" alt="" />
+                                    </th>
+                                    <th>
+                                        <center>Presupuesto Actividad</center>
+                                        <img src="{{STATIC_URL}}img/imagenTabla.png" alt="" />
+                                    </th>
+                                    <th>
+                                        <center>Presupuesto Ejecutado</center>
+                                        <img src="{{STATIC_URL}}img/imagenTabla.png" alt="" />
+                                    </th>
+                                    <th>
+                                        <center>Ejecución Financiera</center>
+                                        <img src="{{STATIC_URL}}img/imagenTabla.png" alt="" />
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -78,21 +113,89 @@
 		</div>
 	</div>
 
-    <ul class="nav nav-pills">
-        <li class="active"><a href="#nav-pills-tab-1" data-toggle="tab">INSCRIPCIÓN</a></li>
-        <li><a href="#nav-pills-tab-2" data-toggle="tab">RESULTADOS PROCESO</a></li>
-        <li><a href="#nav-pills-tab-3" data-toggle="tab">EVIDENCIAS</a></li>
-    </ul>
-    <div class="tab-content">
-        <div class="tab-pane fade active in" id="nav-pills-tab-1">
-            
-        </div>
-        <div class="tab-pane fade" id="nav-pills-tab-2">
-            
-        </div>
-        <div class="tab-pane fade" id="nav-pills-tab-3">
-            
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#default-tab-1" data-toggle="tab">INSCRIPCIÓN</a></li>
+                <li class=""><a href="#default-tab-2" data-toggle="tab">RESULTADOS PROCESO</a></li>
+                <li class=""><a href="#default-tab-3" data-toggle="tab">EVIDENCIAS</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade active in" id="default-tab-1">
+                    <div id="morris-bar-chart" class="height-sm"></div>
+                </div>
+                <div class="tab-pane fade" id="default-tab-2">
+                    <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Username</th>
+                                        <th>Email Address</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Nicky Almera</td>
+                                        <td>nicky@hotmail.com</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Edmund Wong</td>
+                                        <td>edmund@yahoo.com</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Harvinder Singh</td>
+                                        <td>harvinder@gmail.com</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Terry Khoo</td>
+                                        <td>terry@gmail.com</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                </div>
+                <div class="tab-pane fade" id="default-tab-3">
+                    <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Username</th>
+                                        <th>Email Address</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Nicky Almera</td>
+                                        <td>nicky@hotmail.com</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Edmund Wong</td>
+                                        <td>edmund@yahoo.com</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Harvinder Singh</td>
+                                        <td>harvinder@gmail.com</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Terry Khoo</td>
+                                        <td>terry@gmail.com</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                </div>
+            </div>
         </div>
     </div>
+
+
+
+
 </div>
 {% endblock %}

@@ -142,7 +142,7 @@ def certificacionesTIC(request):
             objeto = form.save(commit=False)
             objeto.estudiante = estudiante
 
-            dias_dif =  objeto.fecha_terminacion - objeto.fecha_inicio
+            '''dias_dif =  objeto.fecha_terminacion - objeto.fecha_inicio
             dias_dif = dias_dif.days
             if dias_dif < 0:
                 error = "La fecha de terminación debe ser después de la fecha inicial"
@@ -156,9 +156,9 @@ def certificacionesTIC(request):
                     error = "Muy poco tiempo para realizar un curso de 140 horas, por favor revise las fechas"
                 elif objeto.duracion == 141 and dias_dif < 18:
                     error = "Muy poco tiempo para realizar un curso de más de 140 horas, por favor revise las fechas"
-                else:
-                    objeto.save()
-                    return redirect('certificaciones_DE')        
+                else:'''
+            objeto.save()
+            return redirect('certificaciones_DE')        
     else :
         form = CertificacionTICForm()
 

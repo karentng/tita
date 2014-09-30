@@ -15,7 +15,10 @@ class EstudianteForm(forms.ModelForm):
     #municipio_documento = MunicipioChoice(label = u"Municipio de expedición")
     class Meta:
         model = Estudiante
-        fields = ('numero_documento', 'nombre1', 'nombre2', 'apellido1', 'apellido2', 'sexo', 'email', 'email_institucional', 'municipio','telefono', 'celular', 'direccion', 'nivel_educativo' )
+        fields = ('numero_documento', 'nombre1', 'nombre2', 'apellido1', 'apellido2', 'nacimiento', 'sexo', 'email', 'email_institucional', 'municipio','telefono', 'celular', 'direccion', 'nivel_educativo' )
+        widgets = {
+            'nacimiento': MyDateWidget(),
+        }
 
 class InfoLaboralForm(forms.ModelForm):
     class Meta:
@@ -31,19 +34,19 @@ class InfoLaboralForm(forms.ModelForm):
 class FormacionAcademicaMEForm(forms.ModelForm):
     class Meta:
         model = FormacionAcademicaME
-        fields = ('nivel', 'titulo', 'fecha_inicio', 'fecha_terminacion', 'institucion', 'relacionado_pedagogia', 'relacionado_tic')
+        fields = ('nivel', 'titulo', 'institucion', 'relacionado_pedagogia', 'relacionado_tic')
         widgets = {
-            'fecha_inicio': MyDateWidget(),
-            'fecha_terminacion': MyDateWidget()
+            #'fecha_inicio': MyDateWidget(),
+            #'fecha_terminacion': MyDateWidget()
         }
 
 class CertificacionTICForm(forms.ModelForm):
     class Meta:
         model = CertificacionTIC
-        fields = ('nombre', 'duracion', 'entidad', 'fecha_inicio', 'fecha_terminacion')
+        fields = ('nombre', 'duracion', 'entidad')
         widgets = {
-            'fecha_inicio': MyDateWidget(),
-            'fecha_terminacion': MyDateWidget()
+            #'fecha_inicio': MyDateWidget(),
+            #'fecha_terminacion': MyDateWidget()
         }
 
 class ContinuarRegistroFormDE(forms.Form):

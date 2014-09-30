@@ -47,8 +47,6 @@
                     <tr align="center">
                         <td><b>Nombre</b></td>
                         <td><b>Entidad</b></td>
-                        <td><b>Inicio</b></td>
-                        <td><b>Terminación</b></td>
                         <td></td>
                     </tr>
                     <tr></tr>
@@ -58,8 +56,6 @@
                     <tr align="center">
                         <td>{{certificacion}}</td>
                         <td>{{certificacion.entidad}}</td>
-                        <td>{{certificacion.fecha_inicio}}</td>
-                        <td>{{certificacion.fecha_terminacion}}</td>
                         <td>
                             <a href="{% url 'eliminarTicDE' certificacion.id %}" onclick="return confirm('Seguro que desea eliminar esta entrada?')" class="text-danger">Eliminar</a>
                         </td>

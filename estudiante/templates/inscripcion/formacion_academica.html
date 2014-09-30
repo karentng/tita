@@ -47,8 +47,6 @@
                     <tr align="center">
                         <td><b>Título</b></td>
                         <td><b>Institución</b></td>
-                        <td><b>Inicio</b></td>
-                        <td><b>Terminación</b></td>
                         <td></td>
                         <td></td>
                     </tr>
@@ -56,11 +54,9 @@
                 </thead>
                 <tbody>
                 {% for est in estudios %}
-                    <tr>
+                    <tr align="center">
                         <td>{{est.titulo}}</td>
                         <td>{{est.institucion}}</td>
-                        <td>{{est.fecha_inicio}}</td>
-                        <td>{{est.fecha_terminacion}}</td>
                         <td>
                             {% if est.relacionado_pedagogia %}<span class="label label-info">Pedagogía</span>{% endif %}
                             {% if est.relacionado_tic %}<span class="label label-info">TIC</span>{% endif %}

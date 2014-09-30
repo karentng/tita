@@ -162,8 +162,8 @@ class FormacionAcademicaME(models.Model):
 
     nivel = models.IntegerField(choices=NIVELES, verbose_name='Nivel')
     titulo = models.CharField(max_length=255, verbose_name='título obtenido')
-    fecha_inicio = models.DateField(verbose_name=u'fecha de inicio', help_text='Formato año-mes-día (ej: 1988-04-30)')
-    fecha_terminacion = models.DateField(verbose_name='fecha de finalización')
+    #fecha_inicio = models.DateField(verbose_name=u'fecha de inicio', help_text='Formato año-mes-día (ej: 1988-04-30)')
+    #fecha_terminacion = models.DateField(verbose_name='fecha de finalización')
     institucion = models.CharField(max_length=255, verbose_name=u'institución formadora')
     relacionado_pedagogia = models.BooleanField(verbose_name=u'este estudio está relacionado con la pedagogía')
     relacionado_tic = models.BooleanField(verbose_name=u'este estudio está relacionado con las TIC')
@@ -193,8 +193,8 @@ class CertificacionTIC(models.Model):
     nombre = models.CharField(max_length=100, verbose_name="nombre del programa")
     duracion = models.IntegerField(choices=DURACION_CURSO)
     entidad = models.CharField(max_length=100, verbose_name="entidad certificadora")
-    fecha_inicio = models.DateField(verbose_name=u'fecha de inicio', help_text='Formato año-mes-día (ej: 1988-04-30)')
-    fecha_terminacion = models.DateField(verbose_name='fecha de finalización', help_text='Formato año-mes-día (ej: 1988-04-30)')
+    #fecha_inicio = models.DateField(verbose_name=u'fecha de inicio', help_text='Formato año-mes-día (ej: 1988-04-30)')
+    #fecha_terminacion = models.DateField(verbose_name='fecha de finalización', help_text='Formato año-mes-día (ej: 1988-04-30)')
 
     def __unicode__(self):
         return (u"%s"%self.nombre)
