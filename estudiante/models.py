@@ -144,10 +144,12 @@ class InfoLaboral(models.Model):
     jornada = models.CharField(choices=JORNADAS, max_length=1)
     grados = models.ManyToManyField(Grado)
     asignaturas = models.ManyToManyField(Asignatura)
+    otra_asignatura = models.CharField(max_length=100, verbose_name="otra asignatura no registrada", null=True, blank=True)
     decreto_docente = models.IntegerField( choices=GRADO_ESCALAFON, max_length=1, verbose_name='decreto profesional docente')
     nombramiento = models.IntegerField(choices=[(1,'Propiedad'), (2, 'Período de Prueba'), (3, 'Provisional')], max_length=1, verbose_name='tipo de nombramiento')
     tipo_etnoeducador = models.IntegerField(choices=ETNOEDUCADOR)
     poblacion_etnica = models.CharField(max_length="100", verbose_name="poblacion étnica que atiende", null=True, blank=True)
+    detalles = models.TextField(null=True, blank=True, verbose_name="detalles extras")
 
 class FormacionAcademicaME(models.Model):
     NIVELES = (
