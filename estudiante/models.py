@@ -140,7 +140,7 @@ class InfoLaboral(models.Model):
     #institucion_educativa = models.ForeignKey('campus.InstitucionEducativa')
     sede = models.IntegerField(choices=SEDES, max_length=2)
     cargo = models.IntegerField(choices=[(1, 'Docente'), (2, 'Rector'), (3, 'Coordinador'), (4, 'Otro')], verbose_name="cargo")
-    zona = models.CharField( choices=[('R','Rural'), ('U', 'Urbana'), ('N', 'N.A')], max_length=1, verbose_name='zona')
+    zona = models.CharField( choices=[('R','Rural'), ('U', 'Urbana')], max_length=1, verbose_name='zona')
     jornada = models.CharField(choices=JORNADAS, max_length=1)
     grados = models.ManyToManyField(Grado)
     asignaturas = models.ManyToManyField(Asignatura)
@@ -149,7 +149,6 @@ class InfoLaboral(models.Model):
     nombramiento = models.IntegerField(choices=[(1,'Propiedad'), (2, 'Período de Prueba'), (3, 'Provisional')], max_length=1, verbose_name='tipo de nombramiento')
     tipo_etnoeducador = models.IntegerField(choices=ETNOEDUCADOR)
     poblacion_etnica = models.CharField(max_length="100", verbose_name="poblacion étnica que atiende", null=True, blank=True)
-    detalles = models.TextField(null=True, blank=True, verbose_name="detalles extras")
 
 class FormacionAcademicaME(models.Model):
     NIVELES = (
