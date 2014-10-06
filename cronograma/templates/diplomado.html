@@ -181,6 +181,37 @@
 		            	<form  method="post">
 								 {% csrf_token %}
 								 {% bootstrap_form formDiplomado layout="vertical" %}
+								 <input type= "radio" name= "repetir" value="1"> Repetir el evento todos los días<br>
+								 <input type= "radio" name= "repetir" value="2"> Repetir el evento cada semana<br>
+								 <input type= "radio" name= "repetir" value="3"> Repetir el evento cada mes<br><br>
+
+								 <div class="form-group"><label class="control-label" for="id_fecha_inicio_0">Repetir hasta:</label>
+				                    <div id="931bae735b2949a88d1448594baafcc8" class="input-group date">
+				                    	<input class="form-control" id="id_fecha_inicio_0" name="repetirfecha" readonly="" required="false" title="" type="text">
+				                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+									<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+									</div>
+									<script type="text/javascript">
+									$("#931bae735b2949a88d1448594baafcc8").datetimepicker({
+									    format : 'yyyy-mm-dd',
+									    startDate : '',
+									    endDate : '',
+									    weekStart : 0,
+									    daysOfWeekDisabled : [],
+									    autoclose : true,
+									    startView : 4,
+									    minView : 2,
+									    maxView : 4,
+									    todayBtn : false,
+									    todayHighlight : false,
+									    minuteStep : 5,
+									    pickerPosition : 'bottom-right',
+									    showMeridian : false,
+									    clearBtn : true,
+									    language : 'es',
+									}).find('input').addClass("form-control");
+									</script>
+				                    </div><br>
 								 <button class="btn btn-primary" type="submit">Programar</button>
 						</form>
 						<br>

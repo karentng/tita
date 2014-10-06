@@ -36,29 +36,230 @@ def cronograma(request):
                 repetir = request.POST['repetir']
                 fecha = objeto.fecha_inicio
                 #fecha = fecha.toordinal()
+
+                mes = int(fecha.month)
+                dia = int(fecha.day)
+                ano = int(fecha.year)
                                 
                 if repetir == "1":
                     for i in range(1, int((repetir_hasta - fecha).days + 2)):
-                        if (fecha.day + i) > 31:
-                            nueva_fecha = datetime.datetime(fecha.year, fecha.month, fecha.day, fecha.hour, fecha.minute, 00, 000000)
-                            print "SE PASO DEL RANGO"
+                        if ((dia + 1) > 31) and (mes == 1):
+                            global mes, dia, ano
+                            #global dia
+                            dia = (dia + 1) - 31
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                           
+                        elif ((dia + 1) > 31) and (mes == 12):
+                            global mes, dia, ano
+                            #global dia
+                            dia = (dia + 1) - 31
+                            mes = (mes + 1) -12
+                            ano = ano + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        elif ((dia + 1) > 31) and (mes == 3):
+                            global mes, dia
+                            #global dia
+                            dia = (dia + 1) - 31
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        elif ((dia + 1) > 31) and (mes == 5):
+                            global mes, dia
+                            #global dia
+                            dia = (dia + 1) - 31
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        elif ((dia + 1) > 31) and (mes == 7):
+                            global mes, dia
+                            #global dia
+                            dia = (dia + 1) - 31
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        elif ((dia + 1) > 31) and (mes == 8):
+                            global mes, dia
+                            #global dia
+                            dia = (dia + 1) - 31
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        elif ((dia + 1) > 31) and (mes == 10):
+                            global mes, dia
+                            #global dia
+                            dia = (dia + 1) - 31
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        elif ((dia + 1) > 30) and (mes == 4):
+                            global mes, dia
+                            #global dia
+                            dia = (dia + 1) - 30
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        elif ((dia + 1) > 30) and (mes == 6):
+                            global mes, dia
+                            #global dia
+                            dia = (dia + 1) - 30
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        elif ((dia + 1) > 30) and (mes == 9):
+                            global mes, dia
+                            #global dia
+                            dia = (dia + 1) - 30
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        elif ((dia + 1) > 30) and (mes == 11):
+                            global mes, dia
+                            #global dia
+                            dia = (dia + 1) - 30
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        elif ((dia + 1) > 28) and (mes == 2): 
+                            global mes, dia
+                            #global dia
+                            dia = (dia + 1) - 28
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
                         else:
-                            nueva_fecha = datetime.datetime(fecha.year, fecha.month, fecha.day + i, fecha.hour, fecha.minute, 00, 000000)
+                            global dia
+                            dia = dia + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
                             
-                            objetoi = Clase()
-                            objetoi.institucion=objeto.institucion
-                            objetoi.nombre=objeto.nombre
-                            objetoi.fecha_inicio=nueva_fecha
-                            objetoi.duracion=objeto.duracion
-                            objetoi.descripcion=objeto.descripcion
-                            objetoi.tipo=objeto.tipo
-                            objetoi.save()
+                        objetoi = Clase()
+                        objetoi.institucion=objeto.institucion
+                        objetoi.nombre=objeto.nombre
+                        objetoi.fecha_inicio=nueva_fecha
+                        objetoi.duracion=objeto.duracion
+                        objetoi.descripcion=objeto.descripcion
+                        objetoi.tipo=objeto.tipo
+                        objetoi.save()
                                                    
 
                 if repetir == "2":
-                    print "valor repetir 2"
+                    for i in range(1, int((repetir_hasta - fecha).days + 2)/7):
+                        if ((dia + 7) > 31) and (mes == 1):
+                            global mes, dia, ano
+                            #global dia
+                            dia = (dia + 7) - 31
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                           
+                        elif ((dia + 7) > 31) and (mes == 12):
+                            global mes, dia, ano
+                            #global dia
+                            dia = (dia + 7) - 31
+                            mes = (mes + 1) - 12
+                            ano = ano + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        elif ((dia + 7) > 31) and (mes == 3):
+                            global mes, dia, ano
+                            #global dia
+                            dia = (dia + 7) - 31
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        elif ((dia + 7) > 31) and (mes == 5):
+                            global mes, dia, ano
+                            #global dia
+                            dia = (dia + 7) - 31
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        elif ((dia + 7) > 31) and (mes == 7):
+                            global mes, dia, ano
+                            #global dia
+                            dia = (dia + 7) - 31
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        elif ((dia + 7) > 31) and (mes == 8):
+                            global mes, dia, ano
+                            #global dia
+                            dia = (dia + 7) - 31
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        elif ((dia + 7) > 31) and (mes == 10):
+                            global mes, dia, ano
+                            #global dia
+                            dia = (dia + 7) - 31
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        elif ((dia + 7) > 30) and (mes == 4):
+                            global mes, dia, ano
+                            #global dia
+                            dia = (dia + 7) - 30
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        elif ((dia + 7) > 30) and (mes == 6):
+                            global mes, dia, ano
+                            #global dia
+                            dia = (dia + 7) - 30
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        elif ((dia + 7) > 30) and (mes == 9):
+                            global mes, dia, ano
+                            #global dia
+                            dia = (dia + 7) - 30
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        elif ((dia + 7) > 30) and (mes == 11):
+                            global mes, dia, ano
+                            #global dia
+                            dia = (dia + 7) - 30
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        elif ((dia + 7) > 28) and (mes == 2): 
+                            global mes, dia, ano
+                            #global dia
+                            dia = (dia + 7) - 28
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        else:
+                            global dia
+                            dia = dia + 7
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                            
+                        objetoi = Clase()
+                        objetoi.institucion=objeto.institucion
+                        objetoi.nombre=objeto.nombre
+                        objetoi.fecha_inicio=nueva_fecha
+                        objetoi.duracion=objeto.duracion
+                        objetoi.descripcion=objeto.descripcion
+                        objetoi.tipo=objeto.tipo
+                        objetoi.save()
+                
                 if repetir == "3":
-                    print "valor repetir 3"
+
+                    meses_entre_anos = 0
+
+                    if((int(repetir_hasta.year)-int(fecha.year))>0):
+                        global meses_entre_anos
+                        meses_entre_anos = (int(repetir_hasta.year)-int(fecha.year))*12
+                    
+                    else:
+                        global meses_entre_anos
+                        meses_entre_anos=0
+
+
+                    numero_meses = ((12 - int(fecha.month))+meses_entre_anos) - (12 - int(repetir_hasta.month))
+
+                    global numero_meses
+
+                    for i in range(1, numero_meses ):
+                        if mes == 12:
+                            global mes, ano
+                            mes = (mes + 1)-12
+                            ano = ano + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                           
+                        else:
+                            global mes, ano
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                            
+                        objetoi = Clase()
+                        objetoi.institucion=objeto.institucion
+                        objetoi.nombre=objeto.nombre
+                        objetoi.fecha_inicio=nueva_fecha
+                        objetoi.duracion=objeto.duracion
+                        objetoi.descripcion=objeto.descripcion
+                        objetoi.tipo=objeto.tipo
+                        objetoi.save()
+
             
             
 
@@ -126,16 +327,258 @@ def diplomado(request):
         form = EventosDiplomadoForm(request.POST)
         if form.is_valid():
             objeto = Clase()
-
-            repetir = request.POST['repetir']
-            repetirHasta = request.POST['repetirfecha']
-
-            print "AAAAAAAAAAAAAAAAAAAAAAAAA!"+ repetir
             
             objeto = form.save()
             
             objeto.tipo = "1"
             objeto.save()
+
+            postFormatoDict = request.POST.dict() #obtuvimos el post
+            post = str(postFormatoDict)
+
+            repetir_hasta = datetime.datetime.now()
+
+            if 'repetirfecha'in post:          
+                global repetir_hasta
+                repetir_fecha = request.POST['repetirfecha']
+                repetir_fecha = str(repetir_fecha)
+                repetir_hasta = datetime.datetime(int(repetir_fecha[0:4]),int(repetir_fecha[5:7]),int(repetir_fecha[8:10]))
+                #repetir_hasta = repetir_hasta.toordinal()
+                
+            if 'repetir'in post: 
+
+                repetir = request.POST['repetir']
+                fecha = objeto.fecha_inicio
+                #fecha = fecha.toordinal()
+
+                mes = int(fecha.month)
+                dia = int(fecha.day)
+                ano = int(fecha.year)
+                                
+                if repetir == "1":
+                    for i in range(1, int((repetir_hasta - fecha).days + 2)):
+                        if ((dia + 1) > 31) and (mes == 1):
+                            global mes, dia, ano
+                            #global dia
+                            dia = (dia + 1) - 31
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                           
+                        elif ((dia + 1) > 31) and (mes == 12):
+                            global mes, dia, ano
+                            #global dia
+                            dia = (dia + 1) - 31
+                            mes = (mes + 1) -12
+                            ano = ano + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        elif ((dia + 1) > 31) and (mes == 3):
+                            global mes, dia
+                            #global dia
+                            dia = (dia + 1) - 31
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        elif ((dia + 1) > 31) and (mes == 5):
+                            global mes, dia
+                            #global dia
+                            dia = (dia + 1) - 31
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        elif ((dia + 1) > 31) and (mes == 7):
+                            global mes, dia
+                            #global dia
+                            dia = (dia + 1) - 31
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        elif ((dia + 1) > 31) and (mes == 8):
+                            global mes, dia
+                            #global dia
+                            dia = (dia + 1) - 31
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        elif ((dia + 1) > 31) and (mes == 10):
+                            global mes, dia
+                            #global dia
+                            dia = (dia + 1) - 31
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        elif ((dia + 1) > 30) and (mes == 4):
+                            global mes, dia
+                            #global dia
+                            dia = (dia + 1) - 30
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        elif ((dia + 1) > 30) and (mes == 6):
+                            global mes, dia
+                            #global dia
+                            dia = (dia + 1) - 30
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        elif ((dia + 1) > 30) and (mes == 9):
+                            global mes, dia
+                            #global dia
+                            dia = (dia + 1) - 30
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        elif ((dia + 1) > 30) and (mes == 11):
+                            global mes, dia
+                            #global dia
+                            dia = (dia + 1) - 30
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        elif ((dia + 1) > 28) and (mes == 2): 
+                            global mes, dia
+                            #global dia
+                            dia = (dia + 1) - 28
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        else:
+                            global dia
+                            dia = dia + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                            
+                        objetoi = Clase()
+                        objetoi.institucion=objeto.institucion
+                        objetoi.nombre=objeto.nombre
+                        objetoi.fecha_inicio=nueva_fecha
+                        objetoi.duracion=objeto.duracion
+                        objetoi.descripcion=objeto.descripcion
+                        objetoi.tipo=objeto.tipo
+                        objetoi.save()
+                                                   
+
+                if repetir == "2":
+                    for i in range(1, int((repetir_hasta - fecha).days + 2)/7):
+                        if ((dia + 7) > 31) and (mes == 1):
+                            global mes, dia, ano
+                            #global dia
+                            dia = (dia + 7) - 31
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                           
+                        elif ((dia + 7) > 31) and (mes == 12):
+                            global mes, dia, ano
+                            #global dia
+                            dia = (dia + 7) - 31
+                            mes = (mes + 1) - 12
+                            ano = ano + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        elif ((dia + 7) > 31) and (mes == 3):
+                            global mes, dia, ano
+                            #global dia
+                            dia = (dia + 7) - 31
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        elif ((dia + 7) > 31) and (mes == 5):
+                            global mes, dia, ano
+                            #global dia
+                            dia = (dia + 7) - 31
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        elif ((dia + 7) > 31) and (mes == 7):
+                            global mes, dia, ano
+                            #global dia
+                            dia = (dia + 7) - 31
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        elif ((dia + 7) > 31) and (mes == 8):
+                            global mes, dia, ano
+                            #global dia
+                            dia = (dia + 7) - 31
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        elif ((dia + 7) > 31) and (mes == 10):
+                            global mes, dia, ano
+                            #global dia
+                            dia = (dia + 7) - 31
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        elif ((dia + 7) > 30) and (mes == 4):
+                            global mes, dia, ano
+                            #global dia
+                            dia = (dia + 7) - 30
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        elif ((dia + 7) > 30) and (mes == 6):
+                            global mes, dia, ano
+                            #global dia
+                            dia = (dia + 7) - 30
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        elif ((dia + 7) > 30) and (mes == 9):
+                            global mes, dia, ano
+                            #global dia
+                            dia = (dia + 7) - 30
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        elif ((dia + 7) > 30) and (mes == 11):
+                            global mes, dia, ano
+                            #global dia
+                            dia = (dia + 7) - 30
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        elif ((dia + 7) > 28) and (mes == 2): 
+                            global mes, dia, ano
+                            #global dia
+                            dia = (dia + 7) - 28
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                        else:
+                            global dia
+                            dia = dia + 7
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                            
+                        objetoi = Clase()
+                        objetoi.institucion=objeto.institucion
+                        objetoi.nombre=objeto.nombre
+                        objetoi.fecha_inicio=nueva_fecha
+                        objetoi.duracion=objeto.duracion
+                        objetoi.descripcion=objeto.descripcion
+                        objetoi.tipo=objeto.tipo
+                        objetoi.save()
+                
+                if repetir == "3":
+
+                    meses_entre_anos = 0
+
+                    if((int(repetir_hasta.year)-int(fecha.year))>0):
+
+                        global meses_entre_anos
+                        meses_entre_anos = (int(repetir_hasta.year)-int(fecha.year))*12
+                        print "meses entre anos "+str(meses_entre_anos)
+                    
+                    else:
+                        global meses_entre_anos
+                        print "no hay entre anos"
+                        meses_entre_anos=0
+
+
+                    numero_meses = ((12 - int(fecha.month))+meses_entre_anos) - (12 - int(repetir_hasta.month))
+
+                    global numero_meses
+
+                    for i in range(1, numero_meses ):
+                        if mes == 12:
+                            global mes, ano
+                            mes = (mes + 1)-12
+                            ano = ano + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                           
+                        else:
+                            global mes, ano
+                            mes = mes + 1
+                            nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
+                            
+                        objetoi = Clase()
+                        objetoi.institucion=objeto.institucion
+                        objetoi.nombre=objeto.nombre
+                        objetoi.fecha_inicio=nueva_fecha
+                        objetoi.duracion=objeto.duracion
+                        objetoi.descripcion=objeto.descripcion
+                        objetoi.tipo=objeto.tipo
+                        objetoi.save()
+
+
+
             return redirect('cronograma_diplomado')
     else:
         form = EventosDiplomadoForm()
@@ -150,7 +593,7 @@ def diplomado(request):
         #hora_finalizacion = [i.fecha_finalizacion.hour, i.fecha_finalizacion.minute, 0]
         hora_finalizacion = [i.fecha_inicio.hour + i.duracion, i.fecha_inicio.minute, 0]
 
-        diasTotal = 1
+        diasTotal = 0
         
         #diasEvento = 1
         diasEvento = []
