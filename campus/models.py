@@ -84,8 +84,12 @@ class Estudiante(models.Model):
         (4, 'Técnico o tecnólogo en otras áreas'),
         (5, 'Profesional o licenciado en educación'),
         (6, 'Profesional en otras áreas, no licenciado'),
-        (7, 'Postgrado en educación'),
-        (8, 'Postgrado en otras áreas')
+        (7, 'Especialización en educación'),
+        (8, 'Especialización en otras áreas'),
+        (9, 'Maestría en educación'),
+        (10, 'Maestría en otras áreas'),
+        (11, 'Doctorado en educación'),
+        (12, 'Doctorado en otras áreas')
     )
 
     numero_documento = models.BigIntegerField(unique=True, verbose_name='número de documento de identidad *')

@@ -23,7 +23,7 @@ class EstudianteForm(forms.ModelForm):
 class InfoLaboralForm(forms.ModelForm):
     class Meta:
         model = InfoLaboral
-        fields = ('secretaria_educacion', 'sede', 'cargo', 'zona', 'jornada', 'grados', 'asignaturas', 'decreto_docente', 'nombramiento', 'tipo_etnoeducador', 'poblacion_etnica')
+        fields = ('secretaria_educacion', 'sede', 'cargo', 'zona', 'jornada', 'grados', 'asignaturas', 'otra_asignatura', 'decreto_docente', 'nombramiento', 'tipo_etnoeducador', 'poblacion_etnica')
         widgets = {
             'secretaria_educacion': Select2Widget(),
             #'institucion_educativa': Select2Widget(),

@@ -85,7 +85,7 @@ def datosProfesionales(request):
             objeto.estudiante = estudiante
             objeto.save()
             form.save_m2m()
-            return redirect('formacion_DE')
+            #return redirect('formacion_DE')
     else :
         form = InfoLaboralForm(instance=datos)
 
