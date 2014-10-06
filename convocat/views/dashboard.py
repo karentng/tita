@@ -13,7 +13,7 @@ def dashboard(request):
 
     inscritos = Aspirante.objects.all()
     total_inscritos = inscritos.count()
-    aprobados = Aspirante.objects.filter(puntuacion_final = 50)
+    aprobados = Aspirante.objects.filter(puntuacion_final = 80)
     total_aprobados = aprobados.count()
     rechazados = Aspirante.objects.filter(puntuacion_final = 0)
     if len(mejores):
