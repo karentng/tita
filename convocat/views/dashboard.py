@@ -13,9 +13,9 @@ def dashboard(request):
 
     inscritos = Aspirante.objects.all()
     total_inscritos = inscritos.count()
-    aprobados = Aspirante.objects.raw("SELECT * FROM convocat_aspirante WHERE aceptado = True")
-    total_aprobados = 0#aprobados.count()
-    rechazados = Aspirante.objects.raw('SELECT * FROM convocat_aspirante WHERE aceptado = False')
+    aprobados = Aspirante.objects.filter(puntuacion_final = 50)
+    total_aprobados = aprobados.count()
+    rechazados = Aspirante.objects.filter(puntuacion_final = 0)
     if len(mejores):
         maximo = mejores[0]
     else:
