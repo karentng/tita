@@ -13,9 +13,9 @@ def dashboard(request):
 
     inscritos = Aspirante.objects.all()
     total_inscritos = inscritos.count()
-    aprobados = Aspirante.objects.filter(aceptado = 1)
+    aprobados = Aspirante.objects.filter(aceptado = "t")
     total_aprobados = aprobados.count()
-    rechazados = Aspirante.objects.filter(aceptado = 2)
+    rechazados = Aspirante.objects.filter(aceptado = "f")
     if len(mejores):
         maximo = mejores[0]
     else:
