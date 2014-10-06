@@ -203,6 +203,7 @@ class Clase(models.Model):
     asistentes = models.ManyToManyField(Estudiante, blank=True, verbose_name='Seleccione las personas que asistieron a la clase')
     descripcion = models.CharField( max_length=1000, null=True, blank=True, verbose_name="descripción")
     tipo = models.CharField( max_length=10) # para especificar si es de diplomado o de acompanamiento in situ
+
     def __unicode__(self):
         return unicode(self.nombre)
 
