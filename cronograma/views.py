@@ -617,17 +617,40 @@ def diplomado(request):
     })
 
 def diplomado_modificar(request):
+
     idCurso = request.GET.get('idCurso')
     curso = Clase.objects.filter(id=idCurso)[0]
     if request.method == 'POST':
-        form = EventosDiplomadoForm(request.POST, instance=curso)
-        if form.is_valid():
-            objeto = form.save()
-            objeto.save()
+
+        get = request.POST['boton']
+        
+        if get == "0":
+
+            form = EventosDiplomadoForm(request.POST, instance=curso)
+            if form.is_valid():
+                objeto = form.save()
+                objeto.save()
+                return redirect('cronograma_diplomado')
+
+        if get == "1":
+            form = EventosDiplomadoForm(instance=curso)
+
+        if get == "2":
+            idCurso = request.GET.get('idCurso')
+            curso = Clase.objects.filter(id=idCurso)[0]
+            curso.delete()
             return redirect('cronograma_diplomado')
     else:
         form = EventosDiplomadoForm(instance=curso)
 
     return render(request, 'diplomado_modificar.html', {
-        'form': form,
+        'form': form, 
     })
+
+def evento_eliminar(request):
+    
+    idCurso = request.GET.get('idCurso')
+    curso = Clase.objects.filter(id=idCurso)[0]
+    curso.delete()
+
+    return redirect('cronograma_diplomado')

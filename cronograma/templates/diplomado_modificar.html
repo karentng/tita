@@ -33,10 +33,24 @@
 
 {% block titulo_panel %}<i class="fa fa-lightbulb-o"></i> Modificación{% endblock %}
 {% block contenido_panel %}
+
+<script type="text/javascript">
+        function mensajeConfirmacion() {
+            if (confirm("Está seguro de eliminar el evento?") == true) {
+                $("#1").attr("value","2")
+                console.log($("#1").val())
+            } 
+        }
+        
+</script>
+
     <form class="form-horizontal" method="post">{% csrf_token %}
         {% bootstrap_form form layout="horizontal" %}
 
-        <button class="btn btn-lg btn-primary pull-right" type="submit">Modificar <i class="fa fa-angle-right"></i></button>
+         
+        <button name = "boton" class="btn btn-lg btn-primary pull-right" type="submit" value ="0">Modificar <i class="fa fa-angle-right"></i></button>         
+        <a href='/programacion/cronograma_diplomado'><button name = "boton" id = "1" onclick=mensajeConfirmacion() class="btn btn-lg btn-danger pull-right" type="submit" value="1">Eliminar</button></a>
         
     </form>
 {% endblock %}
+

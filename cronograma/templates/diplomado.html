@@ -63,7 +63,7 @@
 				className: colors[i%5],
 				description: aux.descripcion,
 				allDay: false,
-				media: "<a href='"+url+"'><button class='btn btn-primary'>Modificar</button></a>",
+				media: "<a href='"+url+"'><button class='btn btn-primary'>Modificar</button></a>" , 
 			});
 		}
 	}
@@ -215,31 +215,7 @@
 								 <button class="btn btn-primary" type="submit">Programar</button>
 						</form>
 						<br>
-						{% comment %}
-                        <div id="external-events" class="calendar-event width-sm">
-                            <h4 class=" m-b-20">Eventos disponibles</h4>
-                            <div class="external-event bg-purple" data-bg="bg-purple" data-title="Discussion" data-media="<i class='fa fa-comments'></i>" data-desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit." style="position: relative;">
-                                <h5><i class="fa fa-comments fa-lg fa-fw"></i> Evento 123</h5>
-                                <p>Esta es la descripción del evento 123 </p>
-                            </div>
-                            <div class="external-event bg-blue ui-draggable" data-bg="bg-blue" data-title="Dinner" data-media="<i class='fa fa-cutlery'></i>" data-desc="Cum sociis natoque penatibus et magnis dis parturient montes." style="position: relative;"> 
-                                <h5><i class="fa fa-cutlery fa-lg fa-fw"></i> Evento 234</h5>
-                                <p>Esta es la descripción del evento 234</p>
-                            </div>
-                            <div class="external-event bg-green ui-draggable" data-bg="bg-green" data-title="Brainstorming" data-media="<i class='fa fa-lightbulb-o'></i>" data-desc="Mauris tristique massa eu venenatis semper. Phasellus a nibh nisi." style="position: relative;">
-                                <h5><i class="fa fa-lightbulb-o fa-lg fa-fw"></i> Evento 345</h5>
-                                <p>Esta es la descripción del evento 345</p>
-                            </div>
-                            <div class="external-event bg-orange ui-draggable" data-bg="bg-orange" data-title="Performance Rating" data-media="<i class='fa fa-tasks'></i>" data-desc="Class aptent taciti sociosqu ad litora torquent per conubia nostra." style="position: relative;">
-                                 <h5><i class="fa fa-tasks fa-lg fa-fw"></i> Evento 456</h5>
-                                <p>Esta es la descripción del evento 456</p>
-                            </div>
-                            <div class="external-event bg-red ui-draggable" data-bg="bg-red" data-title="Video Shooting" data-media="<i class='fa fa-video-camera'></i>" data-desc="Donec ligula nisi, tempus eu egestas id, auctor sit amet velit." style="position: relative;">
-                                <h5><i class="fa fa-video-camera fa-lg fa-fw"></i> Evento 567</h5>
-                                <p>Esta es la descripción del evento 567</p>
-                            </div>
-                        </div>
-                        {% endcomment %}
+						
                     </div>
                     <div id="calendar" class="vertical-column p-15 calendar"></div>
 		        </div>

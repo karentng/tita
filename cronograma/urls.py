@@ -7,4 +7,5 @@ urlpatterns = patterns('cronograma.views',
     url(r'^programacion/cronograma_diplomado$',      'diplomado', name='cronograma_diplomado'),
     url(r'^programacion/cronograma_diplomado_modificar$',      'diplomado_modificar', name='cronograma_diplomado_modificar'),
     url(r'^programacion/cronograma_acompanamiento$',      'cronograma', name='cronograma_acompanamiento'),
+    
 )
