@@ -23,17 +23,15 @@ def cronograma(request):
             post = str(postFormatoDict)
 
             repetir_hasta = datetime.datetime.now()
+                
+            if 'repetir-'in post: 
 
-            if 'repetirfecha'in post:          
                 global repetir_hasta
                 repetir_fecha = request.POST['repetirfecha']
                 repetir_fecha = str(repetir_fecha)
                 repetir_hasta = datetime.datetime(int(repetir_fecha[0:4]),int(repetir_fecha[5:7]),int(repetir_fecha[8:10]))
-                #repetir_hasta = repetir_hasta.toordinal()
-                
-            if 'repetir'in post: 
 
-                repetir = request.POST['repetir']
+                repetir = request.POST['repetir-']
                 fecha = objeto.fecha_inicio
                 #fecha = fecha.toordinal()
 
@@ -337,17 +335,15 @@ def diplomado(request):
             post = str(postFormatoDict)
 
             repetir_hasta = datetime.datetime.now()
+                
+            if 'repetir-'in post: 
 
-            if 'repetirfecha'in post:          
                 global repetir_hasta
                 repetir_fecha = request.POST['repetirfecha']
                 repetir_fecha = str(repetir_fecha)
                 repetir_hasta = datetime.datetime(int(repetir_fecha[0:4]),int(repetir_fecha[5:7]),int(repetir_fecha[8:10]))
-                #repetir_hasta = repetir_hasta.toordinal()
-                
-            if 'repetir'in post: 
 
-                repetir = request.POST['repetir']
+                repetir = request.POST['repetir-']
                 fecha = objeto.fecha_inicio
                 #fecha = fecha.toordinal()
 
@@ -646,11 +642,3 @@ def diplomado_modificar(request):
     return render(request, 'diplomado_modificar.html', {
         'form': form, 
     })
-
-def evento_eliminar(request):
-    
-    idCurso = request.GET.get('idCurso')
-    curso = Clase.objects.filter(id=idCurso)[0]
-    curso.delete()
-
-    return redirect('cronograma_diplomado')
