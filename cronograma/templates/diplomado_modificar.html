@@ -49,7 +49,7 @@
 
          
         <button name = "boton" class="btn btn-lg btn-primary pull-right" type="submit" value ="0">Modificar <i class="fa fa-angle-right"></i></button>         
-        <a href='/programacion/cronograma_diplomado'><button name = "boton" id = "1" onclick=mensajeConfirmacion() class="btn btn-lg btn-danger pull-right" type="submit" value="1">Eliminar</button></a>
+        <a href= "{% url 'cronograma_diplomado_modificar' %}"><button name = "boton" id = "1" onclick=mensajeConfirmacion() class="btn btn-lg btn-danger pull-right" type="submit" value="1">Eliminar</button></a>
         
     </form>
 {% endblock %}
