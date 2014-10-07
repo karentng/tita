@@ -356,7 +356,7 @@ def diplomado(request):
                         if ((dia + 1) > 31) and (mes == 1):
                             global mes, dia, ano
                             #global dia
-                            dia = (dia + 1) - 31
+                            dia = (dia + 1) - 31  
                             mes = mes + 1
                             nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
                            
@@ -577,7 +577,7 @@ def diplomado(request):
 
             return redirect('cronograma_diplomado')
     else:
-        form = EventosDiplomadoForm()
+        form = EventosDiplomadoForm() 
 
     eventos = Clase.objects.filter(tipo="1")
     events = []
