@@ -4,7 +4,7 @@
 {% block titulo %} Tit@ - Inicio {% endblock %}
 
 {% block menu %}
-    {% include "menus/publico.html" with opcion_menu=1 visible=3 %}
+    {% include "menus/publico.html" with opcion_menu=1 %}
 {% endblock %}
 
 {% block miga_pan %}
@@ -30,22 +30,113 @@
                 <h4 class="panel-title" style="font-size:15px; font-color: FFFFFF;"><i class="fa fa-bullhorn"></i> Noticias Importantes</h4>
             </div>
             <div class="panel-body">
-                <!--img style="border-radius:10px; height:100px;" class="img-responsive pull-right" src="{{STATIC_URL}}img/ampliacion_plazo.jpg"-->
-                <h4>Actualización:</h4>
-                <p style="font-size:13px">
-                    <b>A partir de este momento en la aplicación  se encuentra habilitado el módulo de subir documentos soporte.</b>
-                    <br><br>
-                    En atención a que  muchos docentes, no alcanzaron a subir en la plataforma los soportes en la fecha  requerida, se habilita la apertura de la plataforma para tal fin, hasta el viernes <b>5 de Septiembre de 2014 a la 1:00 pm.</b>
-                    <br><br>
-                    En consecuencia a la modificación del cronograma y a la necesidad de tiempo para la  realización de nuevas  pruebas, la publicación de resultados del proceso de selección de esta convocatoria, tendrá lugar el <b>lunes 15 de Septiembre.</b>
-                    <h4>Recuerde que:</h4>
-                    <h5><b>LA SUBIDA DE SOPORTES ESTARÁ HABILITADA HASTA EL VIERNES 5 DE SEPTIEMBRE A LA 1:00 PM Y LO PUEDE HACER MEDIANTE SU NÚMERO DE REGISTRO.</b></h5>
-                </p>
+                <h4><b>Seleccionados convocatoria a formadores etapa presencial y virtual</b></h4>
+                <table align="center" width="70%" class = "table">
+                    <thead>
+                        <td class="info">No.</td>
+                        <td class="info">Cédula</td>
+                        <td class="info">Municipio</td>
+                    </thead>
+                    <tr>
+                        <td>1</td><td>94.529.807</td><td>Cali</td>
+                    </tr>
+                    <tr>
+                        <td>2</td><td>94.550.490</td><td>Cali</td>
+                    </tr>
+                     <tr>
+                        <td>3</td><td>16.648.442<td>Cali</td>
+                    </tr>
+                     <tr>
+                        <td>4</td><td>14.590.405<td>Cali</td>
+                    </tr>
+                     <tr>
+                        <td>5</td><td>31.902.520<td>Cali</td>
+                    </tr>
+                     <tr>
+                        <td>6</td><td>10.489.130<td>Cali</td>
+                    </tr>
+                     <tr>
+                        <td>7</td><td>1.130.592.005<td>Cali</td>
+                    </tr>
+                     <tr>
+                        <td>8</td><td>16.748.596<td>Cali</td>
+                    </tr>
+                     <tr>
+                        <td>9</td><td>16.733.099<td>Cali</td>
+                    </tr>
+                     <tr>
+                        <td>10</td><td>29.540.484<td>Cali</td>
+                    </tr>
+                     <tr>
+                        <td>11</td><td>16.753.929<td>Cali</td>
+                    </tr>
+                     <tr>
+                        <td>12</td><td>16.751.274<td>Cali</td>
+                    </tr>
+                     <tr>
+                        <td>13</td><td>94.380.351<td>Cali</td>
+                    </tr>
+                     <tr>
+                        <td>14</td><td>66.928.373<td>Cali</td>
+                    </tr>
+                     <tr>
+                        <td>15</td><td>38.641.130<td>Cali</td>
+                    </tr>
+                     <tr>
+                        <td>16</td><td>31.882.679<td>Cali</td>
+                    </tr>
+                     <tr>
+                        <td>17</td><td>54.253.139<td>Cali</td>
+                    </tr>
+                     <tr>
+                        <td>18</td><td>16.681.398<td>Cali</td>
+                    </tr>
+                     <tr>
+                        <td>19</td><td>66.845.203<td>Cali</td>
+                    </tr>
+                     <tr>
+                        <td>20</td><td>94.398.219<td>Cali</td>
+                    </tr>
+                     <tr>
+                        <td>21</td><td>66.827.372<td>Cali</td>
+                    </tr>
+                     <tr>
+                        <td>22</td><td>1.130.588.896<td>Cali</td>
+                    </tr>
+                     <tr>
+                        <td>23</td><td>66.924.201<td>Cali</td>
+                    </tr>
+                     <tr>
+                        <td>24</td><td>5.208.596<td>Cali</td>
+                    </tr>
+                     <tr>
+                        <td>25</td><td>16.714.673<td>Cali</td>
+                    </tr>
+                     <tr>
+                        <td>26</td><td>10.296.473<td>Cali</td>
+                    </tr>
+                     <tr>
+                        <td>27</td><td>94.040.599<td>Cali</td>
+                    </tr>
+                     <tr>
+                        <td>28</td><td>72.146.080<td>Cali</td>
+                    </tr>
+                    <tr><td>29</td><td>16.985.992<td>Dagua</td></tr>
+<tr><td>30</td><td> 6.253.177<td>Dagua</td></tr>
+<tr><td>31</td><td>31.270.237<td>Yumbo</td></tr>
+<tr><td>32</td><td>16.797.561<td>Yumbo</td></tr>
+<tr><td>33</td><td>79.254.787<td>Vijes</td></tr>
+<tr><td>34</td><td>94.396.426<td>Vijes</td></tr>
+
+                </table>
                 <a href="{{STATIC_URL}}documents/adenda.pdf" target="_blank" style="font-size:13px" type="button" class="btn btn-link m-b-5 text-warning"> 
                     <i class="fa fa-file-pdf-o"></i><b> Adenda</b>
                 </a>
                 <a href="{{STATIC_URL}}documents/adenda_3_4.pdf" target="_blank" style="font-size:13px" type="button" class="btn btn-link m-b-5 text-warning"> 
                     <i class="fa fa-file-pdf-o"></i><b> Adenda 3 y 4</b>
+                </a>
+                <a href="{{STATIC_URL}}documents/adenda_5.pdf" target="_blank" style="font-size:13px" type="button" class="btn btn-link m-b-5 text-warning"> 
+                    <i class="fa fa-file-pdf-o"></i><b> Adenda 5</b>
                 </a>
             </div>
         </div>  

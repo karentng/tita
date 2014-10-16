@@ -13,9 +13,9 @@ def dashboard(request):
 
     inscritos = Aspirante.objects.all()
     total_inscritos = inscritos.count()
-    aprobados = Aspirante.objects.filter(puntuacion_final = 80)
+    aprobados = Aspirante.objects.filter(puntuacion_final__gte = 50)
     total_aprobados = aprobados.count()
-    rechazados = Aspirante.objects.filter(puntuacion_final = 0)
+    rechazados = Aspirante.objects.filter(puntuacion_final__lt = 50)
     if len(mejores):
         maximo = mejores[0]
     else:
@@ -69,8 +69,4 @@ def reporteME(request):
         'estudiantes': estudiantes,
 
         #'municipios':json.dumps(munis),
-    })
-
-def tablero_control(request):
-    return render(request, 'dashboard/tablero_control.html', {
     })

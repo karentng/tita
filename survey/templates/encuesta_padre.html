@@ -31,7 +31,6 @@
         <h4>PROYECTO CALI VIVE DIGITAL / TIT@ EDUCACIÓN DIGITAL PARA TODOS</h4>
         <h5>
             ENCUESTA SOBRE PERCEPCIONES Y HÁBITOS ACERCA DEL USO DE LAS TIC EN LOS PROCESOS DE ENSEÑANZA Y APRENDIZAJE (SEGUNDA APLICACIÓN)
-            CUESTIONARIO PARA PADRES DE FAMILIA O ACUDIENTES
         </h5>
         Cuestionario para Padres de Familia
         <br>
@@ -43,7 +42,7 @@
 {% endblock %}
 
 {%block menu %}
-    {% include "menus/publico.html" with opcion_menu='encuesta_padre' visible=11 %}
+    {% include "menus/publico.html" with opcion_menu='encuesta_padre' %}
 {% endblock %}
 
 {% block contenido %}
@@ -57,31 +56,31 @@
 
 
 
-<form method="POST"> {% csrf_token %}
+<form method="POST" onsubmit="deshabilitarBoton()"> {% csrf_token %}
     {% mypanel 'Información Personal y Socioeconómica Básica' %}
         <div class="form-horizontal">
             
-            {% bootstrap_field form.jornada layout="horizontal" label_class="col-md-5" %}
-            {% bootstrap_field form.question_368 layout="horizontal" label_class="col-md-5"%}
-            {% bootstrap_field form.nombre layout="horizontal" label_class="col-md-5" %}            
+            {% bootstrap_field form.question_01 layout="horizontal" label_class="col-md-5" %}
+            {% bootstrap_field form.question_02 layout="horizontal" label_class="col-md-5"%}
+            {% bootstrap_field form.question_03 layout="horizontal" label_class="col-md-5" %}
         </div>
-        {% bootstrap_field form.question_1 %}
-        {% bootstrap_field form.institucion %}
-        {% bootstrap_field form.question_2 %}
+        {% bootstrap_field form.question_04 %}
+        {% bootstrap_field form.question_05 %}
+        {% bootstrap_field form.question_06 %}
         
         
     {% endmypanel %}
 
     {% mypanel 'Uso Actual de Computador e Internet' %}
-        {% bootstrap_field form.question_6 form_group_class='form-group bordered' %}
-        {% bootstrap_field form.question_374 form_group_class='form-group bordered' %}
-        {% bootstrap_field form.question_7 form_group_class='form-group bordered' %}
-        {% bootstrap_field form.question_375 form_group_class='form-group bordered' %}
+        {% bootstrap_field form.question_07 form_group_class='form-group bordered' %}
+        {% bootstrap_field form.question_08 form_group_class='form-group bordered' %}
+        {% bootstrap_field form.question_09 form_group_class='form-group bordered' %}
+        {% bootstrap_field form.question_10 form_group_class='form-group bordered' %}
     {% endmypanel %}
         
     {% mypanel 'Percepciones Sobre el Uso de las TIC en los Procesos e Enseñanza y Aprendizaje' %}
-        {% bootstrap_field form.question_8 form_group_class='form-group bordered' %}
-        {% bootstrap_field form.question_9 form_group_class='form-group bordered' %}
+        {% bootstrap_field form.question_11 form_group_class='form-group bordered' %}
+        {% bootstrap_field form.question_12 form_group_class='form-group bordered' %}
 
         <div class="bordered">
             <label for="" class="control-label">
@@ -110,18 +109,18 @@
         
         <br>
         <div class="bordered">
-            {% bootstrap_field form.question_32 %}
-            {% bootstrap_field form.question_33 %}
+            {% bootstrap_field form.question_14 %}
+            {% bootstrap_field form.question_15 %}
         </div>
         <br>
-        {% bootstrap_field form.question_29 form_group_class='form-group bordered' %}
+        {% bootstrap_field form.question_16 form_group_class='form-group bordered' %}
         
     {% endmypanel %}
 
     {% mypanel 'Hábitos Sobre el Uso de las TIC en los Procesos de Enseñanza y Aprendizaje' %}
         <div class="bordered">
-            {% bootstrap_field form.question_35 %}
-            {% bootstrap_field form.question_36 %}
+            {% bootstrap_field form.question_17 %}
+            {% bootstrap_field form.question_18 %}
         </div>
         <br>
         <div class="bordered">
@@ -147,23 +146,23 @@
         </div>
         <br>
         <div class="bordered">
-            {% bootstrap_field form.question_52 %}
+            {% bootstrap_field form.question_20 %}
             <div class="form-horizontal">
-                {% bootstrap_field form.question_53 layout="horizontal" %}
+                {% bootstrap_field form.question_2001 layout="horizontal" %}
             </div>
         </div>
         <br>
         <div class="bordered">
-            {% bootstrap_field form.question_54 %}
+            {% bootstrap_field form.question_21 %}
             <div class="form-horizontal">
-                {% bootstrap_field form.question_55 layout="horizontal" %}
+                {% bootstrap_field form.question_2101 layout="horizontal" %}
             </div>
         </div>
     {% endmypanel %}
 
     {% mypanel 'Hábitos Sobre el Uso de las TIC en la Vida Cotidiana' %}
         
-            {% bootstrap_field form.question_56 form_group_class='form-group bordered' %}
+            {% bootstrap_field form.question_22 form_group_class='form-group bordered' %}
 
         <div class="bordered">   
             <label for="" class="control-label">
@@ -188,16 +187,16 @@
         </div>
         <br>
         <div class="bordered">
-            {% bootstrap_field form.question_61 %}
+            {% bootstrap_field form.question_27 %}
             <div class="form-horizontal">
-                {% bootstrap_field form.question_62 layout="horizontal" %}
+                {% bootstrap_field form.question_2701 layout="horizontal" %}
             </div>
         </div>
         <br>
         <div class="bordered">
-            {% bootstrap_field form.question_63 %}
+            {% bootstrap_field form.question_28 %}
             <div class="form-horizontal">
-                {% bootstrap_field form.question_64 layout="horizontal" %}
+                {% bootstrap_field form.question_2801 layout="horizontal" %}
             </div>
         </div>
         <br>
@@ -223,82 +222,66 @@
             </div>
         </div>
         <br>
-        {% bootstrap_field form.question_84 form_group_class='form-group bordered' %}
-        {% bootstrap_field form.question_86 form_group_class='form-group bordered' %}
-        {% bootstrap_field form.question_377 form_group_class='form-group bordered' %}
-        {% bootstrap_field form.question_88 form_group_class='form-group bordered' %}
-        {% bootstrap_field form.question_89 form_group_class='form-group bordered' %}
+        {% bootstrap_field form.question_30 form_group_class='form-group bordered' %}
+        {% bootstrap_field form.question_31 form_group_class='form-group bordered' %}
+        {% bootstrap_field form.question_32 form_group_class='form-group bordered' %}
+        {% bootstrap_field form.question_33 form_group_class='form-group bordered' %}
+        {% bootstrap_field form.question_34 form_group_class='form-group bordered' %}
     {% endmypanel %}
 
     {% mypanel 'Expectativas Sobre el Uso de las TIC' %}
         <div class="bordered">   
             <label for="" class="control-label">
-                35. Si se ganara un concurso y pudiera escoger del siguiente listado <b>tres</b> dispositivos ¿Cuáles escogería? Califique de 1 a 3 qué tan importante es para usted cada uno de esos tres dispositivos que seleccionó. Si es el más importante le pone 3, si es menos importante que el anterior le pone 2 y si es el menos importante que el anterior le pone 2 y si es el menos importante de los tres le pone 1.
+                35. Si se ganara un concurso y pudiera escoger del siguiente listado tres dispositivos ¿cuáles escogería? Seleccione los tres dispositivos que desearía ganarse, según qué tan importantes son para usted cada uno de ellos. Es decir, seleccione en primer lugar el que sea más importante, en segundo lugar el que sea un poco menos importante que el anterior y en último lugar el menos importante de los tres dispositivos.
             </label> 
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-horizontal">
-                        {% for field in camposExpectativas1 %}
-                            {% bootstrap_field field layout="horizontal" label_class="col-md-6" field_class="col-md-3"  %}
-                        {% endfor %}
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-horizontal">
-                        {% for field in camposExpectativas2 %}
-                            {% bootstrap_field field layout="horizontal" label_class="col-md-6" field_class="col-md-3"  %}
-                        {% endfor %}
-                    </div>
-                </div>
+            <div class="form-horizontal">
+                {% bootstrap_field form.question_3501 label_class="col-md-5" layout="horizontal" %}
+                {% bootstrap_field form.question_3502 label_class="col-md-5" layout="horizontal" %}
+                {% bootstrap_field form.question_3503 label_class="col-md-5" layout="horizontal" %}
             </div>
         </div>
         <br>
         <div class="bordered">
-            {% bootstrap_field form.question_98 %}
+            {% bootstrap_field form.question_36 %}
             <div class="form-horizontal">
-                {% bootstrap_field form.question_99 layout="horizontal" %}
+                {% bootstrap_field form.question_3601 layout="horizontal" %}
             </div>
         </div>
         <br>
         <div class="bordered">   
             <label for="" class="control-label">
-                37. De los siguientes dispositivos escoja <b>tres</b> que lamentaría perder. Califique de 1 a 3 qué tan importante es para usted cada uno de esos tres dispositivos que lamentaría perder. Si es el más importante le pone 3, si es menos importante que el anterior le pone 2 y si es el menos importante de los tres le pone 1. 
+                37. De los siguientes dispositivos escoja tres que lamentaría perder. Seleccione los tres dispositivos que lamentaría perder según qué tan importantes son para usted cada uno de ellos. Es decir, selecciona en primer lugar el que sea más importante, en segundo lugar el que sea un poco menos importante que el anterior y en último lugar el menos importante de los tres dispositivos. 
             </label> 
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-horizontal">
-                        {% for field in camposLamentaria1 %}
-                            {% bootstrap_field field layout="horizontal" label_class="col-md-6" field_class="col-md-3"  %}
-                        {% endfor %}
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-horizontal">
-                        {% for field in camposLamentaria2 %}
-                            {% bootstrap_field field layout="horizontal" label_class="col-md-6" field_class="col-md-3"  %}
-                        {% endfor %}
-                    </div>
-                </div>
+            <div class="form-horizontal">
+                {% bootstrap_field form.question_3701 label_class="col-md-5" layout="horizontal" %}
+                {% bootstrap_field form.question_3702 label_class="col-md-5" layout="horizontal" %}
+                {% bootstrap_field form.question_3703 label_class="col-md-5" layout="horizontal" %}
             </div>
         </div>
     {% endmypanel %}
+
     {% mypanel 'Simulación de Escenarios' %}
         <label>
-            Como sabes, ya están llegando los equipos del proyecto Tit@ a las instituciones educativas y en cuestión de semanas estará completa la dotación. Ahora, imagínate que está todo el equipo requerido en tu salón de clases, que cuentas con la plataforma digital y que todos los estudiantes tienen acceso a los computadores. Dentro de la plataforma los docentes tienen, entre otras cosas, el gestor de aula, que es un sistema que les permitirá monitorear y ver lo que hace cada estudiante en su computador, calificar los exámenes en línea y entregar resultados de manera inmediata.
+            Como sabe, ya están llegando los equipos del proyecto Tit@ a las instituciones educativas y en cuestión de semanas estará completa la dotación. Ahora, imagínese que los docentes tienen todo el equipo requerido en su salón de clases, cuentan con la plataforma digital y todos los estudiantes tienen acceso a los computadores. Dentro de la plataforma los docentes tienen, entre otras cosas, el gestor de aula, que es un sistema que les permitirá monitorear y ver lo que hace cada estudiante en su computador, calificar los exámenes en línea y entregar resultados de manera inmediata.
         </label>
-        <br>
         <div class="bordered">
-            {% bootstrap_field form.question_369 %}
-            {% bootstrap_field form.question_370 %}
+            {% bootstrap_field form.question_38 %}
+            {% bootstrap_field form.question_39 %}
         </div>
     {% endmypanel %}
     
     {% mypanel 'Otros' %}
-        {% bootstrap_field form.question_108 form_group_class='form-group bordered'%}
+        {% bootstrap_field form.question_40 form_group_class='form-group bordered'%}
     {% endmypanel %}
-    
+  
     <br>
-    <center><button type="submit" class="btn btn-success btn-lg">Enviar Encuesta</button></center>
+    <script>
+        function deshabilitarBoton() {
+            $('#btnEnviar').text('Enviando... Por favor espere').attr('disabled','disabled');
+        }
+
+    </script>
+    <center><button id="btnEnviar" type="submit" class="btn btn-success btn-lg" >Enviar Encuesta</button></center>
     
 
 </form>

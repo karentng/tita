@@ -30,13 +30,14 @@ class Category(models.Model):
 
 def validate_list(value):
     '''takes a text value and verifies that there is at least one comma '''
-    values = value.split(',')
+    values = value.split('\n')
     if len(values) < 2:
         raise ValidationError("The selected field requires an associated list of choices. Choices must contain more than one item.")
 
 class Question(models.Model):
     class Meta:
         ordering = ('number',)
+        unique_together = (('survey','number') ,)
 
     TEXT = 'text'
     RADIO = 'radio'
@@ -52,7 +53,7 @@ class Question(models.Model):
         (INTEGER, 'integer'),
     )
     
-    number = models.FloatField(null=True)
+    number = models.CharField(max_length=10)
 
     text = models.TextField()
     required = models.BooleanField(default=True)
@@ -72,7 +73,7 @@ class Question(models.Model):
     def get_choices(self):
         ''' parse the choices field and return a tuple formatted appropriately
         for the 'choices' argument of a form widget.'''
-        choices = self.choices.split(',')
+        choices = self.choices.split('\n')
         choices_list = []
         for c in choices:
             c = c.strip()
@@ -91,10 +92,10 @@ class Response(models.Model):
     updated = models.DateTimeField(auto_now=True)
     survey = models.ForeignKey(Survey)
     
-    jornada = models.CharField(max_length=1, choices=(('M',u'(1) Mañana'),('T', '(2) Tarde')))
+    #jornada = models.CharField(max_length=1, choices=(('M',u'(1) Mañana'),('T', '(2) Tarde')))
     #numero_documento = models.BigIntegerField()
-    nombre = models.CharField(max_length=300, verbose_name=u'Nombres y Apellidos')
-    institucion = models.ForeignKey(InstitucionEducativa)
+    #nombre = models.CharField(max_length=300, verbose_name=u'Nombres y Apellidos')
+    #institucion = models.ForeignKey(InstitucionEducativa)
     #fecha_nacimiento = models.DateField()
     #municipio_nacimiento = models.ForeignKey(Municipio, null=True, blank=True)    
     #barrio = models.CharField(max_length=100, verbose_name=u'Barrio donde reside actualmente')

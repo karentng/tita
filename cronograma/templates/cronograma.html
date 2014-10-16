@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block menu %}
-	{% include "menus/publico.html" with opcion_menu=11 %}
+	{% include "menus/publico.html" with opcion_menu=14 %}
 {% endblock %}
 
 {% block miga_pan %}
@@ -22,14 +22,10 @@
 	<link href="{{STATIC_URL}}plugins/bootstrap-wizard/css/bwizard.min.css" rel="stylesheet" />
 	<link href="{{STATIC_URL}}plugins/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" />
     {{formAcompanamiento.media}} {# agrega los js y css necesarios para el bootstrap3 datetimepicker #}
-    <style type="text/css">
-    	.fc-event-inner{
-    		overflow-y: scroll;
-    	}
-    </style>
 {% endblock %}
 
 {% block js %}
+
 <script src="{{STATIC_URL}}plugins/fullcalendar/fullcalendar/fullcalendar.js"></script>
 <script type="text/javascript">
 
@@ -43,29 +39,40 @@
         }[b];
     }));
 	eventos = JSON.parse( eventos );
+
 	var datos = [];
 	for (i in eventos){
 		var aux = eventos[i];
 		var hi = aux.hora_inicio;
 		var hf = aux.hora_finalizacion;
-		
-
 		for (j in aux.diasEvento){
 			dia = aux.diasEvento[j]
-			
-			var url = "{% url 'cronograma_diplomado_modificar' %}"+"?idCurso="+aux.id;
 			datos.push({
 				title: aux.nombre,
 				start: new Date(dia[0], dia[1], dia[2], hi[0], hi[1],0),
 				duration: aux.duracion,
 				end: new Date(dia[0], dia[1], dia[2], hf[0], hf[1],0),
 				className: colors[i%5],
-				description: aux.descripcion,
+				description: aux.descripcion+"<br/>"+aux.institucion,
 				allDay: false,
-				media: "<a href='"+url+"'><button class='btn btn-primary'>Modificar</button></a>",
 			});
 		}
 	}
+
+	/*var datos = [];
+	for (i in eventos){
+		var aux = eventos[i];
+		var inicio = aux.inicio;
+		var fin = aux.fin;
+		datos.push({
+			title: aux.nombre,
+			start: new Date(inicio[0], inicio[1], inicio[2]),
+			end: new Date(fin[0], fin[1], fin[2]),
+			className: colors[i%5],
+			description: aux.descripcion,
+		});
+	}*/
+
 
 	var handleCalendarDemo = function () {
 	"use strict";
@@ -103,7 +110,7 @@
 			
 		},
 		select: function(start, end, allDay) {
-			/*var title = prompt('Event Title:');
+			var title = prompt('Event Title:');
 			if (title) {
 				calendar.fullCalendar('renderEvent',
 					{
@@ -115,7 +122,7 @@
 					true // make the event "stick"
 				);
 			}
-			calendar.fullCalendar('unselect');*/
+			calendar.fullCalendar('unselect');
 		},
 		eventRender: function(event, element, calEvent) {
 				var mediaObject = (event.media) ? event.media : '';
@@ -145,21 +152,9 @@
 			revertDuration: 0
 		});
 	});
+	jQuery(document).ready(function(){ jQuery('.timepicker').datepicker(); });
 };
 </script>
-
-<script language="JavaScript">
-			<!--
-			var era;
-			var previo=null;
-			function uncheckRadio(rbutton){
-			if(previo &&previo!=rbutton){previo.era=false;}
-			if(rbutton.checked==true && rbutton.era==true){rbutton.checked=false;}
-			rbutton.era=rbutton.checked;
-			previo=rbutton;
-			}
-</script>
-
 {% endblock %}
 
 {% block js_ready %}
@@ -192,39 +187,7 @@
 		            	<h4 class=" m-b-20">Añadir un evento</h4>
 		            	<form  method="post">
 								 {% csrf_token %}
-								 {% bootstrap_form formAcompanamiento layout="vertical"%}
-								 <input type= "radio" name= "repetir-" value="1" onclick="uncheckRadio(this)"> Repetir el evento todos los días<br>
-								 <input type= "radio" name= "repetir-" value="2" onclick="uncheckRadio(this)"> Repetir el evento cada semana<br>
-								 <input type= "radio" name= "repetir-" value="3" onclick="uncheckRadio(this)"> Repetir el evento cada mes<br><br>
-
-								 <div class="form-group"><label class="control-label" for="id_fecha_inicio_0">Repetir hasta:</label>
-				                    <div id="931bae735b2949a88d1448594baafcc8" class="input-group date">
-				                    	<input class="form-control" id="id_fecha_inicio_0" name="repetirfecha" readonly="" required="false" title="" type="text">
-				                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-									<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-									</div>
-									<script type="text/javascript">
-									$("#931bae735b2949a88d1448594baafcc8").datetimepicker({
-									    format : 'yyyy-mm-dd',
-									    startDate : '',
-									    endDate : '',
-									    weekStart : 0,
-									    daysOfWeekDisabled : [],
-									    autoclose : true,
-									    startView : 4,
-									    minView : 2,
-									    maxView : 4,
-									    todayBtn : false,
-									    todayHighlight : false,
-									    minuteStep : 5,
-									    pickerPosition : 'bottom-right',
-									    showMeridian : false,
-									    clearBtn : true,
-									    language : 'es',
-									}).find('input').addClass("form-control");
-									</script>
-				                    </div><br>
-
+								 {% bootstrap_form formAcompanamiento layout="vertical" %}
 								 <button class="btn btn-primary" type="submit">Programar</button>
 						</form>
 						<br>

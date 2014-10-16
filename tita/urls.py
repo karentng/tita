@@ -19,15 +19,14 @@ urlpatterns += patterns('',
     
     url(r'^admin/', include(admin.site.urls)),
     #url(r'^$', 'convocat.views.inscripcion.index', name="publico"),
-    #url(r'^$', TemplateView.as_view(template_name='info/index.html'), name='home'),
-    url(r'^$', TemplateView.as_view(template_name='index.html'), name='home'),
-    url(r'^antecedentes/$', TemplateView.as_view(template_name='info/antecedentes.html'), name="info_antecedentes"),
+    url(r'^$', TemplateView.as_view(template_name='info/index.html'), name='home'),
+     url(r'^antecedentes/$', TemplateView.as_view(template_name='info/antecedentes.html'), name="info_antecedentes"),
     url(r'^infogeneral/$', TemplateView.as_view(template_name='info/infogeneral.html'), name="info_general"),
     url(r'^calendario/$', TemplateView.as_view(template_name='info/calendario.html'), name="info_calendario"),
     url(r'^requisitos/$',TemplateView.as_view(template_name='info/requisitos.html'), name="info_requisitos"),
     url(r'^registrarse/$',TemplateView.as_view(template_name='info/registrarse.html'), name="info_registrarse"),
     url(r'^contactenos/$',TemplateView.as_view(template_name='info/contactenos.html'), name="info_contactenos"),
-    url(r'^index/$',TemplateView.as_view(template_name='index.html'), name="index"),
+    
 
     url('', include('convocat.urls')),
     url('', include('estudiante.urls')),

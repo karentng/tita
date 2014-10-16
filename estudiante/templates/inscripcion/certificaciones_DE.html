@@ -47,6 +47,8 @@
                     <tr align="center">
                         <td><b>Nombre</b></td>
                         <td><b>Entidad</b></td>
+                        <td><b>Inicio</b></td>
+                        <td><b>Terminación</b></td>
                         <td></td>
                     </tr>
                     <tr></tr>
@@ -56,6 +58,8 @@
                     <tr align="center">
                         <td>{{certificacion}}</td>
                         <td>{{certificacion.entidad}}</td>
+                        <td>{{certificacion.fecha_inicio}}</td>
+                        <td>{{certificacion.fecha_terminacion}}</td>
                         <td>
                             <a href="{% url 'eliminarTicDE' certificacion.id %}" onclick="return confirm('Seguro que desea eliminar esta entrada?')" class="text-danger">Eliminar</a>
                         </td>
@@ -67,6 +71,10 @@
             </table>
         </div>
         <div class="col-sm-12" align="center">
+            <div class="alert alert-warning fade in m-b-15">
+                <center><strong>Tenga en cuenta!</strong>
+                Para las fechas de inicio y finalización, sino conoce o recuerda el día exacto, seleccione el primero del mes (1).</center>
+            </div>
             {% if error %}
                 <div class="alert alert-danger fade in m-b-15">
                     <center><strong>Error!</strong> {{error}}</center>

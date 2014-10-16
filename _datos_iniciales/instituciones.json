@@ -10,123 +10,294 @@
   "pk": 2, 
   "model": "campus.institucioneducativa", 
   "fields": {
-    "nombre": "ANTONIO JOSE CAMACHO"
+    "nombre": "CECILIA MU\u00d1OZ RICAURTE"
   }
 },
 {
   "pk": 3, 
   "model": "campus.institucioneducativa", 
   "fields": {
-    "nombre": "NORMAL. SUPERIOR SANTIAGO DE CALI"
+    "nombre": "LAS AMERICAS"
   }
 },
-
 {
   "pk": 4, 
   "model": "campus.institucioneducativa", 
   "fields": {
-    "nombre": "GOLONDRINAS"
+    "nombre": "CAMILO TORRES"
   }
 },
-
 {
   "pk": 5, 
   "model": "campus.institucioneducativa", 
   "fields": {
-    "nombre": "CARLOS HOLGUIN MALLARINO"
+    "nombre": "CENTRO EDUCATIVO DEL NORTE"
   }
 },
 {
   "pk": 6, 
   "model": "campus.institucioneducativa", 
   "fields": {
-    "nombre": "MANUEL MARIA  MALLARINO"
+    "nombre": "FRAY DOMINGO DE LAS CASAS"
   }
 },
-
 {
   "pk": 7, 
   "model": "campus.institucioneducativa", 
   "fields": {
-    "nombre": "EL DIAMANTE"
+    "nombre": "PABLO EMILIO"
   }
 },
 {
   "pk": 8, 
   "model": "campus.institucioneducativa", 
   "fields": {
-    "nombre": "EUSTAQUIO PALACIOS"
+    "nombre": "ANTONIO JOSE CAMACHO"
   }
 },
-
 {
   "pk": 9, 
   "model": "campus.institucioneducativa", 
   "fields": {
-    "nombre": "JOSE MARIA CARBONELL"
+    "nombre": "REPUBLICA DEL PERU"
   }
 },
 {
   "pk": 10, 
   "model": "campus.institucioneducativa", 
   "fields": {
-    "nombre": "IE  BOYACA"
+    "nombre": "MARCO FIDEL SUAREZ"
   }
 },
 {
   "pk": 11, 
   "model": "campus.institucioneducativa", 
   "fields": {
-    "nombre": "MARICE SINISTERRA"
+    "nombre": "OLGA LUCIA LLOREDA"
   }
 },
 {
   "pk": 12, 
   "model": "campus.institucioneducativa", 
   "fields": {
-    "nombre": "YUMBO-IE MAYOR DE YUMBO"
+    "nombre": "NORMAL SUPERIOR FARALLONES DE CALI"
   }
 },
 {
   "pk": 13, 
   "model": "campus.institucioneducativa", 
   "fields": {
-    "nombre": "YUMBO-IE JOSÉ MARÍA CÓRDOBA"
+    "nombre": "JOAQUIN DE CAYZEDO Y CUERO"
   }
 },
 {
   "pk": 14, 
   "model": "campus.institucioneducativa", 
   "fields": {
-    "nombre": "YUMBO-IE TITAN"
+    "nombre": "GOLONDRINAS"
   }
 },
 {
   "pk": 15, 
   "model": "campus.institucioneducativa", 
   "fields": {
-    "nombre": "YUMBO-IE CEAT GENERAL PIERO MARIOTTI"
+    "nombre": "ANTONIO BARBERENA"
   }
 },
 {
   "pk": 16, 
   "model": "campus.institucioneducativa", 
   "fields": {
-    "nombre": "YUMBO-IE MANUEL MARÍA SÁNCHEZ"
+    "nombre": "CARLOS HOLGUIN MALLARINO"
   }
 },
 {
   "pk": 17, 
   "model": "campus.institucioneducativa", 
   "fields": {
-    "nombre": "YUMBO-IE ROSA ZÁRATE DE PEÑA"
+    "nombre": "NI\u00d1O JESUS DE ATOCHA"
   }
 },
 {
   "pk": 18, 
   "model": "campus.institucioneducativa", 
   "fields": {
+    "nombre": "MIGUEL DE POMBO"
+  }
+},
+{
+  "pk": 19, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
+    "nombre": "MANUEL MARIA  MALLARINO"
+  }
+},
+{
+  "pk": 20, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
+    "nombre": "LAURA VICU\u00d1A"
+  }
+},
+{
+  "pk": 21, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
+    "nombre": "LOS PINOS"
+  }
+},
+{
+  "pk": 22, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
+    "nombre": "CARLOS HOLGUIN SARDI"
+  }
+},
+{
+  "pk": 23, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
+    "nombre": "EL DIAMANTE"
+  }
+},
+{
+  "pk": 24, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
+    "nombre": "JUAN PABLO II"
+  }
+},
+{
+  "pk": 25, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
+    "nombre": "EUSTAQUIO PALACIOS"
+  }
+},
+{
+  "pk": 26, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
+    "nombre": "LUIS LOPEZ MESA"
+  }
+},
+{
+  "pk": 27, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
+    "nombre": "CELANESE"
+  }
+},
+{
+  "pk": 28, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
+    "nombre": "MANUEL MARIA BUENAVENTURA"
+  }
+},
+{
+  "pk": 29, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
+    "nombre": "MARISCAL JORGE ROBLEDO"
+  }
+},
+{
+  "pk": 30, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
+    "nombre": "MIGUEL ANTONIO CARO"
+  }
+},
+{
+  "pk": 31, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
+    "nombre": "GENERAL ANZOATEGUI"
+  }
+},
+{
+  "pk": 32, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
+    "nombre": "TULIO ENRIQUE TASCON"
+  }
+},
+{
+  "pk": 33, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
+    "nombre": "SANTIAGO RENGIFO"
+  }
+},
+{
+  "pk": 34, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
+    "nombre": "SOFIA CAMARGO"
+  }
+},
+{
+  "pk": 35, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
+    "nombre": "JOSE MARIA CARBONELL"
+  }
+},
+{
+  "pk": 36, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
+    "nombre": "HONORIO VILLEGAS"
+  }
+},
+{
+  "pk": 37, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
+    "nombre": "IE  BOYACA"
+  }
+},
+{
+  "pk": 38, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
+    "nombre": "MARICE SINISTERRA"
+  }
+},
+{
+  "pk": 39, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
+    "nombre": "FENALCO ASTURIAS"
+  }
+},
+{
+  "pk": 40, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
     "nombre": "VIJES"
+  }
+},
+{
+  "pk": 41, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
+    "nombre": "LICEO DEPARTAMENTAL"
+  }
+},
+{
+  "pk": 42, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
+    "nombre": "IETI COMUNA 17"
+  }
+},
+{
+  "pk": 43, 
+  "model": "campus.institucioneducativa", 
+  "fields": {
+    "nombre": "CELMIRA BUENO DE OREJUELA"
   }
 }
 ]

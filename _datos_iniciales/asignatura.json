@@ -17,14 +17,14 @@
   "pk": 3, 
   "model": "estudiante.asignatura", 
   "fields": {
-    "nombre": "Educación Artística, Música, Teatro y Artes Plásticas"
+    "nombre": "Educación Artística"
   }
 },
 {
   "pk": 4, 
   "model": "estudiante.asignatura", 
   "fields": {
-    "nombre": "Filosofía, Educación Ética y Valores Humanos"
+    "nombre": "Educación ética y en valores humanos"
   }
 },
 {
@@ -45,44 +45,21 @@
   "pk": 7, 
   "model": "estudiante.asignatura", 
   "fields": {
-    "nombre": "Lenguas Castellana"
+    "nombre": "Humanidades, lenguas castellana e idiomas extranjeros"
   }
 },
 {
   "pk": 8, 
   "model": "estudiante.asignatura", 
   "fields": {
-    "nombre": "Lenguas Extranjeras"
+    "nombre": "Matemáticas"
   }
 },
 {
   "pk": 9, 
   "model": "estudiante.asignatura", 
   "fields": {
-    "nombre": "Matemáticas"
-  }
-},
-{
-  "pk": 10, 
-  "model": "estudiante.asignatura", 
-  "fields": {
-    "nombre": "Áreas Tecnológicas, Informática, Sistemas y Programación"
-  }
-}
-,
-{
-  "pk": 11, 
-  "model": "estudiante.asignatura", 
-  "fields": {
-    "nombre": "Áreas Comerciales"
-  }
-}
-,
-{
-  "pk": 12, 
-  "model": "estudiante.asignatura", 
-  "fields": {
-    "nombre": "Áreas Técnico-Industriales"
+    "nombre": "Tecnología e Informática"
   }
 }
 ]

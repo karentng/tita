@@ -30,6 +30,5 @@ urlpatterns = patterns('convocat.views.inscripcion',
 urlpatterns += patterns('convocat.views.dashboard',
     url(r'^resultados$',      'dashboard', name="dashboard"),
     url(r'^resultadosME$',      'reporteME', name="reporteME"),
-    url(r'^tablero_control$',      'tablero_control', name="tablero_control"),
 )
 

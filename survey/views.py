@@ -12,6 +12,8 @@ from models import Question, Survey, Category
 from forms import ResponseForm
 
 
+
+
 def encuesta_padre(request):
     survey = Survey.objects.get(id=1)
     
@@ -26,19 +28,18 @@ def encuesta_padre(request):
         form = ResponseForm(survey=survey)
 
     # customizar form de acuerdo a la encuesta para padres
-    form.fields['jornada'].label = u"1. Jornada en la que estudia su hijo(a)"
-    form.fields['nombre'].label = u"3. Nombre(s) y apellidos del padre de familia o acudiente"
-    form.fields['institucion'].label = u"5. Nombre de la institución educativa en la que estudia su hijo(a)"
+    #form.fields['jornada'].label = u"1. Jornada en la que estudia su hijo(a)"
+    #form.fields['nombre'].label = u"3. Nombre(s) y apellidos del padre de familia o acudiente"
+    #form.fields['institucion'].label = u"5. Nombre de la institución educativa en la que estudia su hijo(a)"
 
-    camposMaterias = [form['question_%d'%x] for x in xrange(10,29) ]
-    camposDispositivos = [form['question_%d'%x] for x in xrange(57,61) ]
-    camposUsos = [form['question_%d'%x] for x in xrange(65,84)]
-    camposHerramientas = [form['question_%d'%x] for x in xrange(37,52) ]
-    camposExpectativas = [form['question_%d'%x] for x in xrange(90,98) ]
-    camposLamentaria = [form['question_%d'%x] for x in xrange(100,108) ]
+    camposMaterias = [form['question_13%02d'%x] for x in xrange(1,20) ]
+    camposDispositivos = [form['question_%d'%x] for x in xrange(23,27) ]
+    camposUsos = [form['question_29%02d'%x] for x in xrange(1,20)]
+    camposHerramientas = [form['question_19%02d'%x] for x in xrange(1,15) ]
 
     return render(request, 'encuesta_padre.html', {
         'form': form,
+        
         'camposMaterias1': camposMaterias[:10],
         'camposMaterias2': camposMaterias[10:],
         'camposDispositivos1': camposDispositivos[:2],
@@ -46,11 +47,7 @@ def encuesta_padre(request):
         'camposHerramientas1' : camposHerramientas[:7],
         'camposHerramientas2' : camposHerramientas[7:],
         'camposUsos1' : camposUsos[:10],
-        'camposUsos2' : camposUsos[10:],
-        'camposExpectativas1' : camposExpectativas[:4],
-        'camposExpectativas2' : camposExpectativas[4:],
-        'camposLamentaria1' : camposLamentaria[:4],
-        'camposLamentaria2' : camposLamentaria[4:],
+        'camposUsos2' : camposUsos[10:]
     })
 
 
@@ -70,17 +67,15 @@ def encuesta_docente(request):
 
 
     # customizar form de acuerdo a la encuesta para padres
-    form.fields['jornada'].label = u"1. Jornada en la que enseñas"
-    form.fields['institucion'].label = u"2. Nombre de tu institución educativa"
-    form.fields['nombre'].label = u"3. Nombre y apellidos"
+    #form.fields['jornada'].label = u"1. Jornada en la que enseñas"
+    #form.fields['institucion'].label = u"2. Nombre de tu institución educativa"
+    #form.fields['nombre'].label = u"3. Nombre y apellidos"
 
 
-    camposMaterias = [form['question_%d'%x] for x in xrange(118,137) ]
-    camposHerramientas = [form['question_%d'%x] for x in xrange(146,175) ]
-    camposDispositivos = [form['question_%d'%x] for x in xrange(187,191) ]
-    camposUsos = [form['question_%d'%x] for x in xrange(195,215) ]
-    camposConcurso = [form['question_%d'%x] for x in xrange(219,227) ]
-    camposLamentaria = [form['question_%d'%x] for x in xrange(261,269) ]
+    camposMaterias = [form['question_09%02d'%x] for x in xrange(1,20) ]
+    camposHerramientas = [form['question_15%02d'%x] for x in xrange(1,30) ]
+    camposDispositivos = [form['question_%02d'%x] for x in xrange(25,29) ]
+    camposUsos = [form['question_31%02d'%x] for x in xrange(1,21) ]
 
     return render(request, 'encuesta_docente.html', {
         'form': form,
@@ -91,11 +86,7 @@ def encuesta_docente(request):
         'camposDispositivos1': camposDispositivos[:2],
         'camposDispositivos2': camposDispositivos[2:],
         'camposUsos1': camposUsos[:10],
-        'camposUsos2': camposUsos[10:],
-        'camposConcurso1': camposConcurso[:4],
-        'camposConcurso2': camposConcurso[4:],
-        'camposLamentaria1': camposLamentaria[:4],
-        'camposLamentaria2': camposLamentaria[4:],
+        'camposUsos2': camposUsos[10:]
     })
 
 def encuesta_estudiante(request):
@@ -113,17 +104,11 @@ def encuesta_estudiante(request):
         form = ResponseForm(survey=survey)
 
     # customizar form de acuerdo a la encuesta para padres
-    form.fields['jornada'].label = u"1. Jornada en la que estudias"
-    form.fields['institucion'].label = u"2. Institución en la que estudias"
-    form.fields['nombre'].label = u"3. Nombre y apellidos"
 
-
-    camposMaterias = [form['question_%d'%x] for x in xrange(282,301) ]
-    camposRecursos = [form['question_%d'%x] for x in xrange(305,312) ]
-    camposDispositivos = [form['question_%d'%x] for x in xrange(316,320) ]
-    camposInternet = [form['question_%d'%x] for x in xrange(323,341) ]
-    camposDispos = [form['question_%d'%x] for x in xrange(346,354) ]
-    camposLamentaria = [form['question_%d'%x] for x in xrange(356,364) ]
+    camposMaterias = [form['question_13%02d'%x] for x in xrange(1,20) ]
+    camposRecursos = [form['question_18%02d'%x] for x in xrange(1,8) ]
+    camposDispositivos = [form['question_2%0d'%x] for x in xrange(2,6) ]
+    camposInternet = [form['question_28%02d'%x] for x in xrange(1,19) ]
 
     return render(request, 'encuesta_estudiante.html', {
         'form': form,
@@ -134,9 +119,5 @@ def encuesta_estudiante(request):
         'camposDispositivos1': camposDispositivos[:2],
         'camposDispositivos2': camposDispositivos[2:],
         'camposInternet1': camposInternet[:9],
-        'camposInternet2': camposInternet[9:],
-        'camposDispos1': camposDispos[:4],
-        'camposDispos2': camposDispos[4:],
-        'camposLamentaria1': camposLamentaria[:4],
-        'camposLamentaria2': camposLamentaria[4:],
+        'camposInternet2': camposInternet[9:]
     })
