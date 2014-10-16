@@ -53,7 +53,7 @@ INSTALLED_APPS = (
     'bootstrap3_datetime',
 
     'convocat',
-    #'estudiante',
+    'estudiante',
     'campus',
     'survey',
     #'cronograma',
