@@ -26,7 +26,7 @@ urlpatterns += patterns('',
     url(r'^requisitos/$',TemplateView.as_view(template_name='info/requisitos.html'), name="info_requisitos"),
     url(r'^registrarse/$',TemplateView.as_view(template_name='info/registrarse.html'), name="info_registrarse"),
     url(r'^contactenos/$',TemplateView.as_view(template_name='info/contactenos.html'), name="info_contactenos"),
-    
+    url(r'^index/$',TemplateView.as_view(template_name='index.html'), name="index"),
 
     url('', include('convocat.urls')),
     url('', include('estudiante.urls')),

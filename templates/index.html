@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="es">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <title>Tit@: Desarrollo y Educaci&oacute;n Digital Para Todos.</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="Proyecto TITA - Formación docente en pedagogía mediada con tecnologías de la información y la comunicación" name="description" />
+    <meta content="Cedesoft" name="author" />
+    
+    <link rel="icon" type="image/png" href="{{STATIC_URL}}img/favicon.png">
+
+    <script src="{{STATIC_URL}}plugins/jquery-1.8.2/jquery-1.8.2.min.js"></script> {# jquery aqui porque algunos plugins lo usan directamente #}
+    <!-- ================== BEGIN BASE CSS STYLE ================== -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link href="{{STATIC_URL}}plugins/jquery-ui-1.10.4/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
+    <link href="{{STATIC_URL}}plugins/bootstrap-3.1.1/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="{{STATIC_URL}}plugins/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="{{STATIC_URL}}css/animate.min.css" rel="stylesheet" />
+    <link href="{{STATIC_URL}}css/style.css?v=1" rel="stylesheet" />
+    <link href="{{STATIC_URL}}css/style-responsive.min.css" rel="stylesheet" />
+    <style>
+        b.titulo {
+            color:rgb(30,85,146);
+            font-weight:900;
+            font-size:25px; 
+            margin-top:20px; 
+            text-overflow:ellipsis;
+            white-space: nowrap;
+            width:auto;
+        }
+        
+        .in {
+			background-color:white
+		}
+    </style>
+    <!-- ================== END BASE CSS STYLE ================== -->
+</head>
+<body class="in">
+    <!-- begin #page-loader -->
+    {#<div id="page-loader" class="fade in"><span class="spinner"></span></div>#}
+    <!-- end #page-loader -->
+    
+    <!-- begin #page-container -->
+    <div id="page-container" {# class="fade" #} >
+        <!-- begin #header -->
+        <div id="header" class="header navbar navbar-default navbar-fixed-top">
+            <!-- begin container-fluid -->
+            <div class="container-fluid">
+                <!-- begin mobile sidebar expand / collapse button -->
+                <div class="navbar-header">
+                    <b class="titulo">TIT@ <small>DESARROLLO Y EDUCACIÓN DIGITAL PARA TODOS</small></b>
+                    <!--<a href="index.html" class="navbar-brand"><span class="navbar-logo"></span> <b><label style="color:blue;font-weight:10px">Tit@</label></b></a>-->
+                    <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <!-- end mobile sidebar expand / collapse button -->
+                <!-- begin header navigation right -->
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown navbar-user">
+                    {% if request.user.is_authenticated %}
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="{{STATIC_URL}}img/desconocido.jpg" alt="">
+                            <span class="hidden-xs">
+                                {{user.username}}
+                            </span> <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu animated fadeInRight">
+                            <li class="arrow"></li>
+                            <li><a href="{% url 'cambiar_pass' %}"><i class="fa fa-unlock-alt"></i> Cambiar Contraseña</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Cerrar Sesión</a></li>
+                        </ul>
+                    </li>
+                    {% else %}
+
+                    <li class="dropdown navbar-user">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                            {#<img src="{{STATIC_URL}}img/desconocido.jpg" alt="" /> #}
+                            
+                            Ingresar
+                            </span> <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu animated fadeInRight">
+                            <li class="arrow"></li>
+                            <li><a href="{% url 'login' %}"><i class="fa fa-briefcase"></i> Acceso para Funcionarios</a></li>
+                            <!--<li><a href="javascript:;"><span class="badge badge-danger pull-right">2</span> Inbox</a></li>
+                            <li><a href="javascript:;">Calendar</a></li>
+                            <li><a href="javascript:;">Setting</a></li>
+                            <li class="divider"></li>
+                            <li><a href="javascript:;">Cerrar Sesión</a></li>-->
+                        </ul>
+                    </li>
+                    {% endif %}
+                </ul>
+                <!-- end header navigation right -->
+            </div>
+            <!-- end container-fluid -->
+        </div>
+        <!-- end #header -->
+        <!-- begin #content -->
+        <div id="content" style="background-color:white">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-2">
+						<div class="image-inner">
+							<img class="" src="{{STATIC_URL}}img/tita-small.png?v=1" alt="" />
+						</div>
+					</div>
+					<div class="col-md-10" >
+						<div style="background-color:#225894;">
+							<h2 style="color:white;">Formaci&oacute;n Docente en Pedagog&iacute;a mediada con TIC</h2>
+							<br/>
+							<br/>
+							<br/>
+							<br/>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-4 col-sm-6">
+						<div class="widget widget-state bg-green">
+							<div class="state-icon"><i class="fa fa-users"></i></div>
+							<div class="state-info">
+								<h4>CONVOCATORIA PARA DOCENTES<br/><br/>SEGUNDA COHORTE</h4>	
+							</div>
+							<div class="state-link">
+								<a href="javascript:;" onclick="mostrar(0)">Haga clic aqui<i class="fa fa-arrow-circle-o-right"></i></a>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6">
+						<div class="widget widget-state bg-blue">
+							<div class="state-icon"><i class="fa fa-pencil-square-o"></i></div>
+							<div class="state-info">
+								<h4>INCRIPCI&Oacute;N AL PROGRAMA<br/> DE FORMACI&Oacute;N DOCENTE<br/> EN PEDAGOG&Iacute;A MEDIADA POR TIC.
+								</h4>
+							</div>
+							<div class="state-link">
+								<a href="javascript:;" onclick="mostrar(0)">Haga clic aqui<i class="fa fa-arrow-circle-o-right"></i></a>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6">
+						<div class="widget widget-state bg-red">
+							<div class="state-icon"><i class="fa fa-list-alt"></i></div>
+							<div class="state-info">
+								<h4>ENCUESTA A:<br/>PROFESORES, ESTUDIANTES <br/>Y PADRES DE FAMILIA</h4>
+							</div>
+							<div class="state-link">
+								<a href="javascript:;" onclick="mostrar(0)">Haga clic aqui<i class="fa fa-arrow-circle-o-right"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!--<div class="row"
+					<div class="col-md-4">
+									<a href="http://convocatoria2.titaedpt.com.co/inscripcion/iniciar-inscripcion">
+										<img style="border-radius:10px; height:100px;" class="img-responsive" 
+src="{{STATIC_URL}}img/portada-facebook.png">
+					</div>
+					<div class="col-md-4">
+									<a href="http://convocatoria2.titaedpt.com.co/inscripcion/iniciar-inscripcion">
+										<img style="border-radius:10px; height:100px;" class="img-responsive" 
+src="{{STATIC_URL}}img/InscripcionFormacion.png">
+					</div>
+                </div>-->
+			</div>
+			<hr>
+			<img class="img-responsive pull-left" src="{{STATIC_URL}}img/footer.png?v=2"  style="border-radius:10px;" >
+			<h6 class="text-center">Contacto: <a href="mailto:titaedpt@gmail.com">titaedpt@gmail.com</a></h6>
+        </div>
+        <!-- end #content -->
+        <!-- begin scroll to top btn -->
+        <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+        <!-- end scroll to top btn -->
+    </div>
+    <!-- end page container -->
+    
+    <!-- ================== BEGIN BASE JS ================== -->
+    
+    <script src="{{STATIC_URL}}plugins/jquery-ui-1.10.4/ui/minified/jquery-ui.min.js"></script>
+    <script src="{{STATIC_URL}}plugins/bootstrap-3.1.1/js/bootstrap.min.js"></script>
+    <!--[if lt IE 9]>
+        <script src="{{STATIC_URL}}crossbrowserjs/html5shiv.js"></script>
+        <script src="{{STATIC_URL}}crossbrowserjs/respond.min.js"></script>
+        <script src="{{STATIC_URL}}crossbrowserjs/excanvas.min.js"></script>
+    <![endif]-->
+    <script src="{{STATIC_URL}}plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- ================== END BASE JS ================== -->
+    
+    <!-- ================== BEGIN PAGE LEVEL JS ================== -->
+    <script src="{{STATIC_URL}}js/apps.min.js"></script>
+    <!-- ================== END PAGE LEVEL JS ================== -->
+        <!-- Bloque de javascript para las plantillas que heredan -->
+    {% block js %}
+    {% endblock %}
+    <!-- Fin Bloque javascript -->
+    {% block js_ready %}
+    <script>
+        $(document).ready(function() {
+            App.init();
+        });
+        {% comment %}
+        function mensaje(titulo, mensaje){
+            $.gritter.add({
+                title: titulo,
+                text: mensaje,
+                sticky: false,
+                time: ''
+            });
+            return false;
+        }
+        {% endcomment %}
+    </script>
+    {% endblock %}
+</body>
+</html>
