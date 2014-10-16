@@ -35,6 +35,19 @@
         .in {
 			background-color:white
 		}
+		
+		/* centered columns styles */
+		.row-centered {
+			text-align:center;
+		}
+		.col-centered {
+			display:inline-block;
+			float:none;
+			/* reset the text-align */
+			text-align:left;
+			/* inline-block space fix */
+			margin-right:-4px;
+		}
     </style>
     <!-- ================== END BASE CSS STYLE ================== -->
 </head>
@@ -82,18 +95,12 @@
                     <li class="dropdown navbar-user">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
                             {#<img src="{{STATIC_URL}}img/desconocido.jpg" alt="" /> #}
-                            
                             Ingresar
                             </span> <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu animated fadeInRight">
                             <li class="arrow"></li>
                             <li><a href="{% url 'login' %}"><i class="fa fa-briefcase"></i> Acceso para Funcionarios</a></li>
-                            <!--<li><a href="javascript:;"><span class="badge badge-danger pull-right">2</span> Inbox</a></li>
-                            <li><a href="javascript:;">Calendar</a></li>
-                            <li><a href="javascript:;">Setting</a></li>
-                            <li class="divider"></li>
-                            <li><a href="javascript:;">Cerrar Sesión</a></li>-->
                         </ul>
                     </li>
                     {% endif %}
@@ -107,35 +114,32 @@
         <div id="content" style="background-color:white">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-md-2">
-						<div class="image-inner">
-							<img class="" src="{{STATIC_URL}}img/tita-small.png?v=1" alt="" />
+					<div class="col-lg-2">
+						<div style="margin-top:10px;">
+							<img class="img-responsive" src="{{STATIC_URL}}img/tita-small.png?v=1" alt="" />
 						</div>
 					</div>
-					<div class="col-md-10" >
-						<div style="background-color:#225894;">
-							<h2 style="color:white;">Formaci&oacute;n Docente en Pedagog&iacute;a mediada con TIC</h2>
-							<br/>
-							<br/>
-							<br/>
-							<br/>
-						</div>
+					<div class="col-md-10" style="background-color:#225894;">
+						<h2 style="color:white;">Formaci&oacute;n Docente en Pedagog&iacute;a mediada con TIC<h6><br/><br/><br/></h6></h2>
 					</div>
 				</div>
-				
-				<div class="row">
-					<div class="col-md-4 col-sm-6">
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<div class="row row-centered">
+					<div class="col-md-3 col-sm-6 col-centered">
 						<div class="widget widget-state bg-green">
 							<div class="state-icon"><i class="fa fa-users"></i></div>
 							<div class="state-info">
-								<h4>CONVOCATORIA PARA DOCENTES<br/><br/>SEGUNDA COHORTE</h4>	
+								<h4>CONVOCATORIA PARA DOCENTES<br/>SEGUNDA COHORTE<br/><br/></h4>	
 							</div>
 							<div class="state-link">
-								<a href="javascript:;" onclick="mostrar(0)">Haga clic aqui<i class="fa fa-arrow-circle-o-right"></i></a>
+								<a href="{% url 'iniciarInscripcion' %}" onclick="mostrar(0)">Haga clic aqui <i class="fa fa-arrow-circle-o-right"></i></a>
 							</div>
 						</div>
 					</div>
-					<div class="col-md-4 col-sm-6">
+					<div class="col-md-3 col-sm-6 col-centered">
 						<div class="widget widget-state bg-blue">
 							<div class="state-icon"><i class="fa fa-pencil-square-o"></i></div>
 							<div class="state-info">
@@ -143,38 +147,28 @@
 								</h4>
 							</div>
 							<div class="state-link">
-								<a href="javascript:;" onclick="mostrar(0)">Haga clic aqui<i class="fa fa-arrow-circle-o-right"></i></a>
+								<a href="{% url 'iniciar_DE' %}" onclick="mostrar(0)">Haga clic aqui <i class="fa fa-arrow-circle-o-right"></i></a>
 							</div>
 						</div>
 					</div>
-					<div class="col-md-4 col-sm-6">
+					<div class="col-md-3 col-sm-6 col-centered">
 						<div class="widget widget-state bg-red">
 							<div class="state-icon"><i class="fa fa-list-alt"></i></div>
 							<div class="state-info">
 								<h4>ENCUESTA A:<br/>PROFESORES, ESTUDIANTES <br/>Y PADRES DE FAMILIA</h4>
 							</div>
 							<div class="state-link">
-								<a href="javascript:;" onclick="mostrar(0)">Haga clic aqui<i class="fa fa-arrow-circle-o-right"></i></a>
+								<a href="{% url 'encuesta_estudiante' %}" onclick="mostrar(0)">Haga clic aqui <i class="fa fa-arrow-circle-o-right"></i></a>
 							</div>
 						</div>
 					</div>
 				</div>
-				
-				<!--<div class="row"
-					<div class="col-md-4">
-									<a href="http://convocatoria2.titaedpt.com.co/inscripcion/iniciar-inscripcion">
-										<img style="border-radius:10px; height:100px;" class="img-responsive" 
-src="{{STATIC_URL}}img/portada-facebook.png">
-					</div>
-					<div class="col-md-4">
-									<a href="http://convocatoria2.titaedpt.com.co/inscripcion/iniciar-inscripcion">
-										<img style="border-radius:10px; height:100px;" class="img-responsive" 
-src="{{STATIC_URL}}img/InscripcionFormacion.png">
-					</div>
-                </div>-->
 			</div>
+			<br/>
+			<br/>
+			<br/>
 			<hr>
-			<img class="img-responsive pull-left" src="{{STATIC_URL}}img/footer.png?v=2"  style="border-radius:10px;" >
+			<img class="img-responsive center-block" src="{{STATIC_URL}}img/footer.png?v=2"  style="width:85%; border-radius:10px;" >
 			<h6 class="text-center">Contacto: <a href="mailto:titaedpt@gmail.com">titaedpt@gmail.com</a></h6>
         </div>
         <!-- end #content -->
