@@ -112,6 +112,7 @@ class Estudiante(models.Model):
     curso = models.ForeignKey(Curso, verbose_name='curso *', null=True, blank=True)
 
     aprobo = models.NullBooleanField()
+    cohorte = models.IntegerField(default=1) ## cohorte uno, para la convocatoria 2 cambiarlo a 2.
     
     def __unicode__(self):
         return (u"%s %s %s %s"%(self.nombre1,self.nombre2 or '', self.apellido1, self.apellido2 or '')).strip() or "-"

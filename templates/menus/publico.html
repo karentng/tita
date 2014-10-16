@@ -53,6 +53,7 @@
 {% endcomment %}
 
 {% if visible == 11 %}
+{% comment %}
 <li class="has-sub {% if opcion_menu >= 'encuesta_' and opcion_menu < 'encuestz' %} active {% endif %}">
 	<a href="javascript:;">
 		<i class="fa fa-2x fa-dot-circle-o"></i> <span>Encuestas</span>
@@ -70,7 +71,20 @@
 		</li>
 	</ul>
 </li>
+{% endcomment %}
+
+<li {% if opcion_menu == 'encuesta_estudiante' %} class="active" {% endif %}>
+	<a href="{% url 'encuesta_estudiante' %}"><i class="fa fa-child"></i><i class="fa fa-child"></i> <span>Alumnos</span></a>
+</li>
+<li {% if opcion_menu == 'encuesta_padre' %} class="active" {% endif %}>
+	<a href="{% url 'encuesta_padre' %}"><i class="fa fa-umbrella"></i> <span>Padres de Familia</span></a>
+</li>
+<li {% if opcion_menu == 'encuesta_docente' %} class="active" {% endif %}>
+	<a href="{% url 'encuesta_docente' %}"><i class="fa fa-mortar-board"></i> <span>Maestros Estudiantes</span></a>
+</li>
 {% endif %}
+
+
 
 {% if visible == 12 %}
 <li class="has-sub  {% if opcion_menu >= 11 and opcion_menu <= 12 %} active {% endif %}">
