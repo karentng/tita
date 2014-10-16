@@ -1,6 +1,7 @@
 <li {% if opcion_menu == 1 %} class="active" {% endif %}>
 	<a href="{% url 'home' %}"><i class="fa fa-info"></i> <span>Inicio</span></a>
 </li>
+{% if visible > 1 and visible < 9 %}
 <li {% if opcion_menu == 2 %} class="active" {% endif %}>
 	<a href="{% url 'info_antecedentes' %}"><i class="fa fa-users"></i> <span>Antecedentes</span></a>
 </li>
@@ -21,14 +22,17 @@
 <li {% if opcion_menu == 8 %} class="active" {% endif %}>
 	<a href="{% url 'info_contactenos' %}"><i class="fa fa-2x fa-question-circle"></i> <span>Contáctenos</span></a>
 </li>
-
+{% endif %}
+{% if visible == 9 %}
 <li {% if opcion_menu == 9 %} class="active" {% endif %}>
 	<a href="{% url 'dashboard' %}"><i class="fa fa-2x fa-flag-o"></i> <span>Resultado Convocatoria</span></a>
 </li>
-
+{% endif %}
+{% if visible == 10 %}
 <li {% if opcion_menu == 10 %} class="active" {% endif %}>
 	<a href="{% url 'iniciar_DE' %}"><i class="fa fa-2x fa-mortar-board"></i> <span>Inscripcion de Maestros</span></a>
 </li>
+{% endif %}
 
 {% comment %}
 {# Diseño de DashBoard y Reportes #}
@@ -48,7 +52,7 @@
 </li>
 {% endcomment %}
 
-
+{% if visible == 11 %}
 <li class="has-sub {% if opcion_menu >= 'encuesta_' and opcion_menu < 'encuestz' %} active {% endif %}">
 	<a href="javascript:;">
 		<i class="fa fa-2x fa-dot-circle-o"></i> <span>Encuestas</span>
@@ -66,7 +70,9 @@
 		</li>
 	</ul>
 </li>
+{% endif %}
 
+{% if visible == 12 %}
 <li class="has-sub  {% if opcion_menu >= 11 and opcion_menu <= 12 %} active {% endif %}">
 	<a href="javascript:;">
 		<i class="fa fa-2x fa-calendar"></i><span>Programación</span>
@@ -81,10 +87,16 @@
 		</li>
 	</ul>
 </li>
+{% endif %}
 
+{% if visible == 13 %}
 <li {% if opcion_menu == 13 %} class="active" {% endif %}>
 	<a href="{% url 'tablero_control' %}"><i class="fa fa-cogs"></i> <span>Tablero de Control</span></a>
 </li>
+{% endif %}
+
+{% if visible == 14 %}
 <li {% if opcion_menu == 14 %} class="active" {% endif %}>
 	<a href="{% url 'reporteME' %}"><i class="fa fa-users"></i> <span>Resultados Inscripción Maestros Estudiantes</span></a>
 </li>
+{% endif %}
