@@ -20,7 +20,9 @@
     <li class="active">Formulario de Registro</li>
 {% endblock %}
 
-{% block titulo_contenido %}Proceso de Inscripción Maestro Estudiante{% endblock %}
+{% block titulo_contenido %}
+	<label style="color:#1d5491">Proceso de inscripción al Programa de Formación Docente en Pedagogía mediada por TIC.</label>
+{% endblock %}
 
 {% block titulo_panel %} {% endblock %}
 
@@ -28,9 +30,18 @@
 {% block contenido %}
 
 <div class="well well-lg text-center ">
-    <br><br>
     {% comment %}<h4>La convocatoria ha cerrado.</h4>{% endcomment %}
-    <b>Si ya está inscrito y desea revisar su hoja de vida, ingrese su número de registro aquí:</b>
+
+	<h4>Para ser diligenciado por los docentes oficiales de las Instituciones Educativas que participan del proyecto Tit@ Desarrollo y Educación Digital para Todos</h4>
+
+	<br>
+    <a href="{% url 'inscripcion_DE' %}" class="btn btn-lg btn-primary">Iniciar Inscripción</a> 
+
+    <br><br>
+    
+    <h6>(Al iniciar la inscripción se aceptará automáticamente la politica de tratamiento de datos personales y los términos de privacidad del proyecto)</h6>
+    
+    <b>Si ya está inscrito y desea revisar su inscripción ingrese su número de registro aquí: </b>
 
     <br><br>
     <form class="form-inline" method="post">{% csrf_token %}
@@ -38,18 +49,12 @@
         <button class="btn btn-md btn-success" style="margin-top:7px" type="submit"><i class="fa fa-play-circle"></i> Continuar</button>
     </form>
     <h6 class="text-danger text-center"><b>{{mensaje}}</b></h6>
-
-
-
-
-    <h4>O si cumple todos los requisitos y desea participar en la convocatoria como estudiante inicie aquí. </h4> <h6>(Al iniciar la inscripción se aceptará automáticamente la politica de tratamiento de datos personales y los términos de privacidad del proyecto)</h6>
-    <br>
-    <a href="{% url 'inscripcion_DE' %}" class="btn btn-lg btn-primary">Iniciar Inscripción</a> 
-
-    <br><br>
+    
     <a class="pull-left" href="{{STATIC_URL}}documents/politica_tratamiento_datos_personales.pdf" target="_blank"><b>Política de Tratamiento de Datos Personales</b></a>
     <br>
     <a class="pull-left" href="{{STATIC_URL}}documents/terminos_proyecto_tita.pdf" target="_blank"><b>Términos de Privacidad Proyecto Tita</b></a>
+    <br>
+    <a class="pull-left" href="{{STATIC_URL}}documents/FAQ.pdf" target="_blank"><b>Preguntas Frecuentes</b></a>
     <br>
 </div> 
 
