@@ -30,7 +30,7 @@
 {% endif %}
 {%  if visible == 10%}
 <li {% if opcion_menu == 10 %} class="active" {% endif %}>
-	<a href="{% url 'iniciar_DE' %}"><i class="fa fa-2x fa-mortar-board"></i> Inscripcion de Maestros</a>
+	<a href="{% url 'iniciar_DE' %}"><i class="fa fa-2x fa-mortar-board"></i> <span>Inscripcion de Maestros</span></a>
 </li>
 {% endif %}
 
@@ -73,13 +73,13 @@
 </li>
 {% endcomment %}
 <li {% if opcion_menu == 'encuesta_estudiante' %} class="active" {% endif %}>
-	<a href="{% url 'encuesta_estudiante' %}"><i class="fa fa-child"></i><i class="fa fa-child"></i> Alumnos</a>
+	<a href="{% url 'encuesta_estudiante' %}"><i class="fa fa-child"></i><i class="fa fa-child"></i> <span>Alumnos</span></a>
 </li>
 <li {% if opcion_menu == 'encuesta_padre' %} class="active" {% endif %}>
-	<a href="{% url 'encuesta_padre' %}"><i class="fa fa-umbrella"></i> Padres de Familia</a>
+	<a href="{% url 'encuesta_padre' %}"><i class="fa fa-umbrella"></i> <span>Padres de Familia</span></a>
 </li>
 <li {% if opcion_menu == 'encuesta_docente' %} class="active" {% endif %}>
-	<a href="{% url 'encuesta_docente' %}"><i class="fa fa-mortar-board"></i> Maestros Estudiantes</a>
+	<a href="{% url 'encuesta_docente' %}"><i class="fa fa-mortar-board"></i> <span>Maestros Estudiantes</span></a>
 </li>
 {% endif %}
 
