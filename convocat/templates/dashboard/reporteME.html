@@ -99,23 +99,23 @@
                                 <tr>
                                     <th>Item</th>
                                     <th>Nombres y Apellidos</th>
-                                    <th>Municipio de Residencia</th>
+                                    <th>Institución Educativa</th>
                                     <th>Nivel Educativo</th>
-                                    <th>Teléfono Celular</th>
+                                    <th>Datos ME</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            	{% with 0 as cont %}
                                 {% for estudiante in estudiantes %}
                                 <tr class="odd gradeX">
-                                	<td>{{ cont|add:"1" }}</td>
-                                    <td>{{estudiante.numero_documento}}</td>
-                                    <td>{{estudiante.municipio}}</td>
-                                    <td>{{estudiante.get_nivel_educativo_display}}</td>
-                                    <td>{{estudiante.celular}}</td>
+                                	<td>{{estudiante.item}}</td>
+                                    <td>{{estudiante.nombre}}</td>
+                                    <td>{{estudiante.institucion}}</td>
+                                    <td>{{estudiante.nivel}}</td>
+                                    <td>
+                                        <button class="btn btn-primary">Detalles</button>
+                                    </td>
                                 </tr>
                                 {% endfor %}
-                                {% endwith %}
                             </tbody>
                         </table>
                     </div>

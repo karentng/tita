@@ -1,6 +1,18 @@
+#encoding: utf-8
 from django.shortcuts import render, redirect, get_list_or_404, get_object_or_404
 from campus.models import *
 from campus.forms import AsistenciaForm, SoportesFormset, ActividadForm
+
+'''Función que me retorna una lista con las opciones de menu necesarias, da por sentado que cada usuario pertenece solo a un grupo'''
+def user_group(request):
+    if request.user.is_authenticated():
+        grupo = request.user.groups.all()
+        if len(grupo) > 0:
+            return grupo[0].name
+        else:
+            None
+    else:
+        return None
 
 # Create your views here.
 

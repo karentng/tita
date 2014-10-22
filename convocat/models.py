@@ -43,7 +43,7 @@ class Aspirante(models.Model):
     celular = models.BigIntegerField(null=True, blank=True, verbose_name=u'número de celular')
     email = models.EmailField()
     
-    puntuacion_hv = models.IntegerField(null=True, blank=True)
+    puntuacion_hv = models.FloatField(null=True, blank=True)
     aceptado = models.NullBooleanField()
 
     institucion_actual = models.CharField(max_length=100, null=True, verbose_name=u'Institución donde labora actualmente')

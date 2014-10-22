@@ -3,6 +3,9 @@ from django.core import serializers
 from convocat.models import * 
 from django.db.models import Count
 from campus.models import Estudiante
+from estudiante.models import InfoLaboral
+from campus.views import user_group
+
 import json
 
 
@@ -63,10 +66,18 @@ def dashboard(request):
     })
 
 def reporteME(request):
-    estudiantes = Estudiante.objects.all()
-
+    estudiantes = []
+    cont = 1
+    students = Estudiante.objects.filter(acta_compromiso=True).select_related('estudiante.InfoLaboral__estudiante')
+    for estudiante in students:
+        estudiantes.append(
+            {"item": cont, "nombre": estudiante, "institucion":InfoLaboral.objects.get(estudiante=estudiante).get_sede_display, "nivel":estudiante.get_nivel_educativo_display}
+        )
+        cont = cont + 1
+    print "------------------"
+    print type(user_group(request))
     return render(request, 'dashboard/reporteME.html', {
         'estudiantes': estudiantes,
-
+        'user_group': user_group(request)
         #'municipios':json.dumps(munis),
     })
