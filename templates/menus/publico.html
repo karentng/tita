@@ -4,7 +4,7 @@
 
 
 
-
+{% comment %}
 <li {% if opcion_menu == 2 %} class="active" {% endif %}>
 	<a href="{% url 'info_antecedentes' %}"><i class="fa fa-users"></i> <span>Antecedentes</span></a>
 </li>
@@ -25,6 +25,7 @@
 <li {% if opcion_menu == 8 %} class="active" {% endif %}>
 	<a href="{% url 'info_contactenos' %}"><i class="fa fa-2x fa-question-circle"></i> <span>Contáctenos</span></a>
 </li>
+{% endcomment %}
 
 {% if visible == 9 %}
 <li {% if opcion_menu == 9 %} class="active" {% endif %}>
