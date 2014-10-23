@@ -9,7 +9,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="Proyecto TITA - Formación docente en pedagogía mediada con tecnologías de la información y la comunicación" name="description" />
     <meta content="Cedesoft" name="author" />
-    
+
     <link rel="icon" type="image/png" href="{{STATIC_URL}}img/favicon.png">
 
     <script src="{{STATIC_URL}}plugins/jquery-1.8.2/jquery-1.8.2.min.js"></script> {# jquery aqui porque algunos plugins lo usan directamente #}
@@ -29,8 +29,8 @@
         b.titulo {
             color:rgb(30,85,146);
             font-weight:900;
-            font-size:25px; 
-            margin-top:20px; 
+            font-size:25px;
+            margin-top:20px;
             text-overflow:ellipsis;
             white-space: nowrap;
             width:auto;
@@ -52,7 +52,7 @@
     <!-- begin #page-loader -->
     {#<div id="page-loader" class="fade in"><span class="spinner"></span></div>#}
     <!-- end #page-loader -->
-    
+
     <!-- begin #page-container -->
     <div id="page-container" {# class="fade" #} >
         {% block pagina_blanca %}
@@ -71,7 +71,7 @@
                     </button>
                 </div>
                 <!-- end mobile sidebar expand / collapse button -->
-                
+
 
                 <!-- begin header navigation right -->
                 <ul class="nav navbar-nav navbar-right">
@@ -95,7 +95,7 @@
                     <li class="dropdown navbar-user">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
                             {#<img src="{{STATIC_URL}}img/desconocido.jpg" alt="" /> #}
-                            
+
                             Ingresar
                             </span> <b class="caret"></b>
                         </a>
@@ -112,12 +112,12 @@
                     {% endif %}
                 </ul>
                 <!-- end header navigation right -->
-                
+
             </div>
             <!-- end container-fluid -->
         </div>
         <!-- end #header -->
-        
+
         <!-- begin #sidebar -->
         <div id="sidebar" class="sidebar">
             <!-- begin sidebar scrollbar -->
@@ -128,15 +128,26 @@
                         <div class="info">
                             <a href="{% url 'home' %}"><img src="{{STATIC_URL}}img/tita.png?v=1" alt="" style="width:100%" /></a>
                         </div>
-                    </li>   
+                    </li>
                 </ul>
                 <!-- end sidebar user -->
                 <!-- begin sidebar nav -->
                 <ul class="nav">
                     <li class="nav-header">Navegación</li>
+                    {% if user_group == "Coordinador" %}
+                        {% include "menus/coordinador.html" %}
+                    {% elif user_group == "Alcaldia" %}
+                        {% include "menus/alcaldia.html" %}
+                    {% elif user_group == "Formador" %}
+                        {% include "menus/formador.html" %}
+                    {% else %}
+                        {% include "menus/publico.html" %}
+                    {% endif %}
+                    {% comment %}
                     {% block menu %}
-                        {% include "menus/admin.html" %}
-                    {% endblock %}
+                        {% include "menus/alcaldia.html" %}
+                    {% endblock %#}
+                    {% endcomment %}
                     <!-- begin sidebar minify button -->
                     <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
                     <!-- end sidebar minify button -->
@@ -182,11 +193,11 @@
                 <img class="img-responsive" src="{{STATIC_URL}}img/footer.png?v=2"  style="border-radius:10px; " >
                 <h6 class="text-center">Contacto: <a href="mailto:titaedpt@gmail.com">titaedpt@gmail.com</a></h6>
             {% endblock %}
-            
+
         </div>
-        
+
         <!-- end #content -->
-        
+
         <!-- begin scroll to top btn -->
         <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
         <!-- end scroll to top btn -->
@@ -194,9 +205,9 @@
         {% endblock pagina_blanca %}
     </div>
     <!-- end page container -->
-    
+
     <!-- ================== BEGIN BASE JS ================== -->
-    
+
     <script src="{{STATIC_URL}}plugins/jquery-ui-1.10.4/ui/minified/jquery-ui.min.js"></script>
     <script src="{{STATIC_URL}}plugins/bootstrap-3.1.1/js/bootstrap.min.js"></script>
     <!--[if lt IE 9]>
@@ -206,7 +217,7 @@
     <![endif]-->
     <script src="{{STATIC_URL}}plugins/slimscroll/jquery.slimscroll.min.js"></script>
     <!-- ================== END BASE JS ================== -->
-    
+
     <!-- ================== BEGIN PAGE LEVEL JS ================== -->
     <script src="{{STATIC_URL}}js/apps.min.js"></script>
     <!-- ================== END PAGE LEVEL JS ================== -->

@@ -47,8 +47,6 @@
                     <tr align="center">
                         <td><b>Título</b></td>
                         <td><b>Institución</b></td>
-                        <td><b>Inicio</b></td>
-                        <td><b>Terminación</b></td>
                         <td></td>
                         <td></td>
                     </tr>
@@ -56,11 +54,9 @@
                 </thead>
                 <tbody>
                 {% for est in estudios %}
-                    <tr>
+                    <tr align="center">
                         <td>{{est.titulo}}</td>
                         <td>{{est.institucion}}</td>
-                        <td>{{est.fecha_inicio}}</td>
-                        <td>{{est.fecha_terminacion}}</td>
                         <td>
                             {% if est.relacionado_pedagogia %}<span class="label label-info">Pedagogía</span>{% endif %}
                             {% if est.relacionado_tic %}<span class="label label-info">TIC</span>{% endif %}
@@ -78,10 +74,6 @@
             </table>
         </div>
         <div class="col-sm-12" align="center">
-            <div class="alert alert-warning fade in m-b-15">
-                <center><strong>Tenga en cuenta!</strong>
-                Para las fechas de inicio y finalización, sino conoce o recuerda el día exacto, seleccione el primero del mes (1).</center>
-            </div>
             <form class="form-horizontal" method="post">{% csrf_token %}
                 {% bootstrap_form form layout="horizontal" %}
                 

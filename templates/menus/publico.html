@@ -4,7 +4,7 @@
 
 
 
-{% if visible > 1 and visible < 9 %}
+
 <li {% if opcion_menu == 2 %} class="active" {% endif %}>
 	<a href="{% url 'info_antecedentes' %}"><i class="fa fa-users"></i> <span>Antecedentes</span></a>
 </li>
@@ -25,7 +25,7 @@
 <li {% if opcion_menu == 8 %} class="active" {% endif %}>
 	<a href="{% url 'info_contactenos' %}"><i class="fa fa-2x fa-question-circle"></i> <span>Contáctenos</span></a>
 </li>
-{% endif %}
+
 {% if visible == 9 %}
 <li {% if opcion_menu == 9 %} class="active" {% endif %}>
 	<a href="{% url 'dashboard' %}"><i class="fa fa-2x fa-flag-o"></i> Resultado Convocatoria</a>
@@ -43,9 +43,9 @@
 
 <li class="has-sub {% if opcion_menu >= 9 %} active {% endif %}">
 	<a href="javascript:;">
-	    <i class="fa fa-folder-open-o"></i> 
+	    <i class="fa fa-folder-open-o"></i>
 	    <b class="caret pull-right"></b>
-	    <span>Reportes</span> 
+	    <span>Reportes</span>
 	</a>
 	<ul class="sub-menu" {% if opcion_menu == 9 %} class="active" {% endif %}>
 		<li {% if opcion_menu == 9 %} class="active" {% endif %}><a href="{% url 'dashboard' %}">Resultado Convocatoria</a></li>
@@ -104,17 +104,17 @@
 
 {% endif %}
 
-{#% if visible == 13 %#}
+{% if visible == 13 %}
 <li {% if opcion_menu == 13 %} class="active" {% endif %}>
         <a href="{% url 'tablero_control' %}"><i class="fa fa-cogs"></i> <span>Tablero de Control</span></a>
 </li>
-{#% endif %#}
+{% endif %}
 
-{#% if visible == 14 %#}
+{% if visible == 14 %}
 <li {% if opcion_menu == 14 %} class="active" {% endif %}>
         <a href="{% url 'reporteME' %}"><i class="fa fa-users"></i> <span>Resultados Inscripción Maestros Estudiantes</span></a>
 </li>
-{#% endif %#}
+{% endif %}
 
 {% if user_group == "Coordinador" %}
 <li>

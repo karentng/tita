@@ -31,20 +31,12 @@ class InfoLaboralForm(forms.ModelForm):
 class FormacionAcademicaMEForm(forms.ModelForm):
     class Meta:
         model = FormacionAcademicaME
-        fields = ('nivel', 'titulo', 'fecha_inicio', 'fecha_terminacion', 'institucion', 'relacionado_pedagogia', 'relacionado_tic')
-        widgets = {
-            'fecha_inicio': MyDateWidget(),
-            'fecha_terminacion': MyDateWidget()
-        }
+        fields = ('nivel', 'titulo', 'institucion', 'relacionado_pedagogia', 'relacionado_tic')
 
 class CertificacionTICForm(forms.ModelForm):
     class Meta:
         model = CertificacionTIC
-        fields = ('nombre', 'duracion', 'entidad', 'fecha_inicio', 'fecha_terminacion')
-        widgets = {
-            'fecha_inicio': MyDateWidget(),
-            'fecha_terminacion': MyDateWidget()
-        }
+        fields = ('nombre', 'duracion', 'entidad')
 
 class ContinuarRegistroFormDE(forms.Form):
     registro = forms.CharField(label='',max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Escriba su numero registro'}))

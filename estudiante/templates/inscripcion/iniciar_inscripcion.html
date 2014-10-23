@@ -3,9 +3,7 @@
 
 {% block titulo %} Formulario Maestro Estudiante {% endblock %}
 
-{% block menu %}
-    {% include "menus/publico.html" with opcion_menu=10 visible=10 %}
-{% endblock %}
+
 
 {% block css %}
     <link href="{{STATIC_URL}}plugins/bootstrap-wizard/css/bwizard.min.css" rel="stylesheet" />
@@ -35,12 +33,12 @@
 	<h4>Para ser diligenciado por los docentes oficiales de las Instituciones Educativas que participan del proyecto Tit@ Desarrollo y Educación Digital para Todos</h4>
 
 	<br>
-    <a href="{% url 'inscripcion_DE' %}" class="btn btn-lg btn-primary">Iniciar Inscripción</a> 
+    <a href="{% url 'inscripcion_DE' %}" class="btn btn-lg btn-primary">Iniciar Inscripción</a>
 
     <br><br>
-    
+
     <h6>(Al iniciar la inscripción se aceptará automáticamente la politica de tratamiento de datos personales y los términos de privacidad del proyecto)</h6>
-    
+
     <b>Si ya está inscrito y desea revisar su inscripción ingrese su número de registro aquí: </b>
 
     <br><br>
@@ -49,14 +47,14 @@
         <button class="btn btn-md btn-success" style="margin-top:7px" type="submit"><i class="fa fa-play-circle"></i> Continuar</button>
     </form>
     <h6 class="text-danger text-center"><b>{{mensaje}}</b></h6>
-    
+
     <a class="pull-left" href="{{STATIC_URL}}documents/politica_tratamiento_datos_personales.pdf" target="_blank"><b>Política de Tratamiento de Datos Personales</b></a>
     <br>
     <a class="pull-left" href="{{STATIC_URL}}documents/terminos_proyecto_tita.pdf" target="_blank"><b>Términos de Privacidad Proyecto Tita</b></a>
     <br>
     <a class="pull-left" href="{{STATIC_URL}}documents/FAQ.pdf" target="_blank"><b>Preguntas Frecuentes</b></a>
     <br>
-</div> 
+</div>
 
 <br>
 

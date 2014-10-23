@@ -1,9 +1,10 @@
-from django.shortcuts import redirect, render, render_to_response, get_list_or_404
+from django.shortcuts import redirect, render, render_to_response, get_list_or_404, get_object_or_404
 from django.core import serializers
+from django.http import HttpResponse
 from convocat.models import * 
 from django.db.models import Count
 from campus.models import Estudiante
-from estudiante.models import InfoLaboral
+from estudiante.models import InfoLaboral, FormacionAcademicaME, CertificacionTIC
 from campus.views import user_group
 
 import json
@@ -71,7 +72,7 @@ def reporteME(request):
     students = Estudiante.objects.filter(acta_compromiso=True).select_related('estudiante.InfoLaboral__estudiante')
     for estudiante in students:
         estudiantes.append(
-            {"item": cont, "nombre": estudiante, "institucion":InfoLaboral.objects.get(estudiante=estudiante).get_sede_display, "nivel":estudiante.get_nivel_educativo_display}
+            {"id": estudiante.id, "item": cont, "nombre": estudiante, "institucion":InfoLaboral.objects.get(estudiante=estudiante).get_sede_display, "nivel":estudiante.get_nivel_educativo_display}
         )
         cont = cont + 1
     print "------------------"
@@ -81,3 +82,31 @@ def reporteME(request):
         'user_group': user_group(request)
         #'municipios':json.dumps(munis),
     })
+    
+def obtener_estudiante(valor):
+    try :
+        miid, mihash = map(int,valor.split("-"))
+        asp = Estudiante.objects.get(id=miid)
+
+        if asp.numero_inscripcion()==valor:
+            return asp
+        else :
+            return None
+    except Exception as ex:
+        return None
+    
+def impresionME(request, id_estudiante):
+    try :
+        estudiante = Estudiante.objects.get(id=id_estudiante)
+        infoLaboral = InfoLaboral.objects.get(estudiante=estudiante)
+        certificacionTIC = CertificacionTIC.objects.filter(estudiante=estudiante)
+        formacionAcademicaME = FormacionAcademicaME.objects.filter(estudiante=estudiante)
+        
+        return render(request, 'dashboard/impresionME.html', {
+			'estudiante' : estudiante,
+			'infoLaboral' : infoLaboral,
+			'formacionAcademicaME' : formacionAcademicaME,
+			'certificacionTIC' : certificacionTIC
+		})
+    except Exception as ex:
+        return redirect('reporteME')

@@ -112,7 +112,7 @@
                                     <td>{{estudiante.institucion}}</td>
                                     <td>{{estudiante.nivel}}</td>
                                     <td>
-                                        <button class="btn btn-primary">Detalles</button>
+                                        <a href="{% url 'impresionME' estudiante.id %}" target="_blank"><button class="btn btn-primary">Detalles</button></a>
                                     </td>
                                 </tr>
                                 {% endfor %}
