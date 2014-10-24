@@ -14,6 +14,18 @@ def user_group(request):
     else:
         return None
 
+''' Función que me envia a la página correspondiente de acuerdo al perfil de la persona logueada '''
+def logged_user(request):
+    grupo = user_group(request)
+    if grupo == None:
+        return redirect('home')
+    elif grupo == 'Coordinador':
+        return redirect('dashboard')
+    elif grupo == 'Formador':
+        return redirect('home') # mientras se definen las opciones que tendrá
+    else: #grupo == 'Alcaldia'
+        return redirect('tablero_control')
+
 # Create your views here.
 
 def listar_cursos_profesor(request):

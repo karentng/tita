@@ -141,13 +141,8 @@
                     {% elif user_group == "Formador" %}
                         {% include "menus/formador.html" %}
                     {% else %}
-                        {% include "menus/formador.html" %}
+                        {% include "menus/publico.html" %}
                     {% endif %}
-                    {% comment %}
-                    {% block menu %}
-                        {% include "menus/alcaldia.html" %}
-                    {% endblock %#}
-                    {% endcomment %}
                     <!-- begin sidebar minify button -->
                     <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
                     <!-- end sidebar minify button -->

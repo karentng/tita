@@ -133,7 +133,5 @@ class ResponseForm(models.ModelForm):
 				a.save()
 		return response
 
-
-
-
-
+class CodigoEncuestaForm(forms.Form):
+    registro = forms.CharField(label='',max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Escriba el código de acceso a las encuestas'}))

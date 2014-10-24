@@ -62,7 +62,7 @@ def dashboard(request):
         'total_aprobados':total_aprobados,
         'total_rechazados':total_inscritos - total_aprobados,
         'maximo':maximo,
-
+        'user_group': user_group(request),
         'municipios':json.dumps(munis),
     })
 

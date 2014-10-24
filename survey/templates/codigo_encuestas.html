@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block titulo %} Código de Encuestas {% endblock %}
+
+{% block css %}
+    <!--- ñiiipi -->
+    {{form.media}} {# agrega los js y css necesarios para el bootstrap3 datetimepicker y select2 #}
+    <!--- :D -->
+{% endblock %}
+
+
+{% block miga_pan %}
+    <li><a href="{% url 'home' %}">Inicio</a></li>
+    <li class="active">Codigo de Encuestas</li>
+{% endblock %}
+
+{% block titulo_contenido %}Código para Acceder a las Encuestas{% endblock %}
+
+{% block titulo_panel %} {% endblock %}
+
+
+{% block contenido %}
+
+<div class="well well-lg text-center ">
+    <b>Ingrese el código para tener acceso a los diferentes tipos de encuestas:</b>
+    <br><br>
+    <form class="form-inline" method="post">{% csrf_token %}
+         {% bootstrap_form form %}
+        <button class="btn btn-md btn-success" type="submit"><i class="fa fa-play-circle"></i> Continuar</button>
+    </form>
+    <h6 class="text-danger text-center"><b>{{mensaje}}</b></h6>
+</div>
+
+{% endblock %}

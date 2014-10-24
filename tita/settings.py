@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 
 from django.core.urlresolvers import reverse_lazy
 LOGIN_URL = reverse_lazy('login')
-LOGIN_REDIRECT_URL = reverse_lazy('home')
+LOGIN_REDIRECT_URL = reverse_lazy('logged_user')
 LOGOUT_URL = reverse_lazy('logout')
 
 

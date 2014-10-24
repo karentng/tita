@@ -8,6 +8,7 @@ from estudiante.forms import EstudianteForm, InfoLaboralForm, CertificacionTICFo
 from campus.models import CertificacionTIC, Asignatura, Estudiante
 from estudiante.models import InfoLaboral, FormacionAcademicaME
 from datetime import datetime
+from campus.views import user_group
 import json
 
 def iniciar(request):
@@ -30,7 +31,8 @@ def iniciar(request):
 
     return render(request, 'inscripcion/iniciar_inscripcion.html', {
         'mensaje':mensaje,
-        'form' : form
+        'form' : form,
+        'user_group': user_group(request)
     })
 
 def buscar_estudiante_por_clave(valor):

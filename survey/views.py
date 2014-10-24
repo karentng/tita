@@ -9,12 +9,41 @@ import datetime
 #import settings
 
 from models import Question, Survey, Category
-from forms import ResponseForm
+from forms import ResponseForm, CodigoEncuestaForm
 
+def codigo_encuesta_session(request):
+    codigo = request.session.get('codigo_encuesta')
+    if not codigo:
+        return None
+    return codigo
 
+def codigo_encuesta(request):
+    codigo = codigo_encuesta_session(request)
+    if codigo:
+        return redirect('encuesta_estudiante')
+    mensaje = ""
+    if request.method == 'POST':
+        form = CodigoEncuestaForm(request.POST)
+        if form.is_valid():
+            clave = form.cleaned_data['registro']
+            if clave == '98765234567': # clave de acceso
+                request.session['codigo_encuesta']=clave
+                return redirect('encuesta_estudiante')
+            else :
+                mensaje = "Código inválido"
+    else:
+        form = CodigoEncuestaForm()
 
+    return render(request, 'codigo_encuestas.html', {
+        'mensaje':mensaje,
+        'form' : form
+    })
 
 def encuesta_padre(request):
+    codigo = codigo_encuesta_session(request)
+    if not codigo:
+        return codigo_encuesta(request)
+
     survey = Survey.objects.get(id=1)
     
     if request.method == 'POST':
@@ -52,6 +81,9 @@ def encuesta_padre(request):
 
 
 def encuesta_docente(request):
+    codigo = codigo_encuesta_session(request)
+    if not codigo:
+        return codigo_encuesta(request)
     survey = Survey.objects.get(id=2)
     category_items = list(survey.category_set.all())    
     
@@ -90,6 +122,11 @@ def encuesta_docente(request):
     })
 
 def encuesta_estudiante(request):
+    codigo = codigo_encuesta_session(request)
+    print "--------------------"
+    print codigo 
+    if not codigo:
+        return codigo_encuesta(request)
     survey = Survey.objects.get(id=3)
     category_items = list(survey.category_set.all())    
     
