@@ -1,26 +1,28 @@
-<li {% if opcion_menu == 1 %} class="active" {% endif %}>
+<li>
     <a href="{% url 'home' %}"><i class="fa fa-info"></i> <span>Inicio</span></a>
 </li>
 {# Reporte Aspirantes Convocatoria 1 #}
-<li {% if opcion_menu == 9 %} class="active" {% endif %}>
-    <a href="{% url 'dashboard' %}"><i class="fa fa-2x fa-flag-o"></i> Resultado Convocatoria 1</a>
+<li {% if opcion_menu == 1 %} class="active" {% endif %}>
+    <a href="{% url 'dashboard' %}"><i class="fa fa-2x fa-flag-o"></i> <span>Resultado Convocatoria 1</span></a>
 </li>
 {# Reporte ME #}
-<li {% if opcion_menu == 14 %} class="active" {% endif %}>
+<li {% if opcion_menu == 2 %} class="active" {% endif %}>
         <a href="{% url 'reporteME' %}"><i class="fa fa-users"></i> <span>Resultados Inscripción Maestros Estudiantes</span></a>
 </li>
 {# Cronogramas #}
-<li class="has-sub active " {% if opcion_menu == 'cronograma_' %} class="active" {% endif %}>
+{% comment %}
+<li class="has-sub active " {% if opcion_menu > 2 %} class="active" {% endif %}>
     <a href="javascript:;">
-        <i class="fa fa-2x fa-calendar"></i>Programación
+        <i class="fa fa-2x fa-calendar"></i> <span>Programación</span>
         <b class="caret pull-right"></b>
     </a>
     <ul class="sub-menu">
-        <li {% if opcion_menu == 'cronograma_diplomado' %} class="active" {% endif %}>
+        <li {% if opcion_menu == 3 %} class="active" {% endif %}>
             <a href="{% url 'cronograma_diplomado' %}"><i class="fa fa fa-university"></i> Diplomado</a>
         </li>
-        <li {% if opcion_menu == 'cronograma_acompanamiento' %} class="active" {% endif %}>
+        <li {% if opcion_menu == 4 %} class="active" {% endif %}>
             <a href="{% url 'cronograma_acompanamiento' %}"><i class="fa fa fa-folder-o"></i> Acompañamiento in situ</a>
         </li>
     </ul>
 </li>
+{% endcomment %}

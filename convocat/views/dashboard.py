@@ -64,6 +64,7 @@ def dashboard(request):
         'maximo':maximo,
         'user_group': user_group(request),
         'municipios':json.dumps(munis),
+        'opcion_menu': 1
     })
 
 def reporteME(request):
@@ -79,7 +80,8 @@ def reporteME(request):
     print type(user_group(request))
     return render(request, 'dashboard/reporteME.html', {
         'estudiantes': estudiantes,
-        'user_group': user_group(request)
+        'user_group': user_group(request),
+        'opcion_menu': 2
         #'municipios':json.dumps(munis),
     })
     
