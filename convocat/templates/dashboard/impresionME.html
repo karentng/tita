@@ -9,7 +9,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="Proyecto TITA - Formación docente en pedagogía mediada con tecnologías de la información y la comunicación" name="description" />
     <meta content="Cedesoft" name="author" />
-    
+
     <link rel="icon" type="image/png" href="{{STATIC_URL}}img/favicon.png">
 
     <script src="{{STATIC_URL}}plugins/jquery-1.8.2/jquery-1.8.2.min.js"></script>
@@ -25,17 +25,17 @@
         b.titulo {
             color:rgb(30,85,146);
             font-weight:900;
-            font-size:25px; 
-            margin-top:20px; 
+            font-size:25px;
+            margin-top:20px;
             text-overflow:ellipsis;
             white-space: nowrap;
             width:auto;
         }
-        
+
         .in {
 			background-color:white
 		}
-		
+
 		.row-centered {
 			text-align:center;
 		}
@@ -50,7 +50,7 @@
     </style>
     <!-- ================== END BASE CSS STYLE ================== -->
 </head>
-<body class="in">   
+<body class="in">
     <!-- begin #page-container -->
     <div id="page-container" {# class="fade" #} >
         <!-- begin #header -->
@@ -72,13 +72,13 @@
 				<div class="row">
 					<div class="col-md-1">
 						<div style="margin-top:10px;">
-							<img class="img-responsive" src="{{STATIC_URL}}img/tita-small.png?v=2" alt="" 
+							<img class="img-responsive" src="{{STATIC_URL}}img/tita-small.png?v=2" alt=""
 								style=" border-radius:10px;"/>
 						</div>
 					</div>
 					<div class="col-md-11" style="background-color:#225894;">
 						<h4 style="color:white;">
-							Informaci&oacute;n del Maestro Estudiante 
+							Informaci&oacute;n del Maestro Estudiante
 							<h5 class="pull-right" style="color:white;">Fecha de generaci&oacute;n: {% now "F j \d\e Y H:i" %}</h5>
 						</h4>
 					</div>
@@ -93,31 +93,31 @@
 					<div class="col-md-2 col-sm-6"><h5 class="pull-left">Nombre:</h5></div>
 					<div class="col-md-2 col-sm-6"><p class="pull-left">{{estudiante}}</p></div>
 					<div class="col-md-3 col-sm-6"><h5 class="pull-left">Número de documento de identidad:</h5></div>
-					<div class="col-md-2 col-sm-6"><p class="pull-left">{{estudiante.numero_documento}} </p></div>
+					<div class="col-md-3 col-sm-6"><p class="pull-left">{{estudiante.numero_documento}} </p></div>
 				</div>
 				<div class="row row-centered">
 					<div class="col-md-2 col-sm-6"><h5 class="pull-left">Email personal:</h5></div>
 					<div class="col-md-2 col-sm-6"><p class="pull-left">{{estudiante.email}}</p></div>
 					<div class="col-md-3 col-sm-6"><h5 class="pull-left">Email institucional:</h5></div>
-					<div class="col-md-2 col-sm-6"><p class="pull-left">{{estudiante.email_institucional}}</p></div>
+					<div class="col-md-3 col-sm-6"><p class="pull-left">{{estudiante.email_institucional}}</p></div>
 				</div>
 				<div class="row row-centered">
 					<div class="col-md-2 col-sm-6"><h5 class="pull-left">Municipio de residencia:</h5></div>
 					<div class="col-md-2 col-sm-6"><p class="pull-left">{{estudiante.municipio}}</p></div>
 					<div class="col-md-3 col-sm-6"><h5 class="pull-left ">Dirección:</h5></div>
-					<div class="col-md-2 col-sm-6"><p class="pull-left">{{estudiante.direccion}}</p></div>
+					<div class="col-md-3 col-sm-6"><p class="pull-left">{{estudiante.direccion}}</p></div>
 				</div>
 				<div class="row row-centered">
 					<div class="col-md-2 col-sm-6"><h5 class="pull-left">Teléfono fijo:</h5></div>
 					<div class="col-md-2 col-sm-6"><p class="pull-left">{{estudiante.telefono}}</p></div>
 					<div class="col-md-3 col-sm-6"><h5 class="pull-left">Número de celular:</h5></div>
-					<div class="col-md-2 col-sm-6"><p class="pull-left">{{estudiante.celular}}</p></div>
+					<div class="col-md-3 col-sm-6"><p class="pull-left">{{estudiante.celular}}</p></div>
 				</div>
 				<div class="row row-centered">
 					<div class="col-md-2 col-sm-6"><h5 class="pull-left">Genero:</h5></div>
 					<div class="col-md-2 col-sm-6"><p class="pull-left">{{estudiante.get_sexo_display}}</p></div>
 					<div class="col-md-3 col-sm-6"><h5 class="pull-left">Último nivel educativo aprobado:</h5></div>
-					<div class="col-md-2 col-sm-6"><p class="pull-left">{{estudiante.get_nivel_educativo_display}}</p></div>
+					<div class="col-md-3 col-sm-6"><p class="pull-left">{{estudiante.get_nivel_educativo_display}}</p></div>
 				</div>
 				<div class="row">
 					<div class="col-md-12">
@@ -171,7 +171,7 @@
 						<hr/><h3>Formación Académica</h3><hr/>
 					</div>
 				</div>
-				<div class="row row-centered">
+				<div class="row">
 					<div class="col-md-2 col-sm-6"><h5>Nivel</h5></div>
 					<div class="col-md-2 col-sm-6"><h5>Título obtenido</h5></div>
 					<div class="col-md-2 col-sm-6"><h5>Institución</h5></div>
@@ -179,9 +179,9 @@
 				</div>
 				{% for formacionAcademica in formacionAcademicaME.all %}
 					<div class="row row-centered">
-						<div class="col-md-2 col-sm-6"><p>{{formacionAcademica.get_nivel_display}}</p></div>
-						<div class="col-md-2 col-sm-6"><p>{{formacionAcademica.titulo}}</p></div>
-						<div class="col-md-2 col-sm-6"><p>{{formacionAcademica.institucion}}</p></div>
+						<div class="col-md-2 col-sm-6"><p class="pull-left">{{formacionAcademica.get_nivel_display}}</p></div>
+						<div class="col-md-2 col-sm-6"><p class="pull-left">{{formacionAcademica.titulo}}</p></div>
+						<div class="col-md-2 col-sm-6"><p class="pull-left">{{formacionAcademica.institucion}}</p></div>
 						<div class="col-md-2 col-sm-6">
 							<p>
 								{% if formacionAcademica.relacionado_pedagogia %}<span class="label label-info">Pedagogía</span>{% endif %}
@@ -195,16 +195,16 @@
 						<hr/><h3>Certificaciones en TIC </h3><hr/>
 					</div>
 				</div>
-				<div class="row row-centered">
+				<div class="row">
 					<div class="col-md-3 col-sm-6"><h5>Nombre del programa</h5></div>
 					<div class="col-md-3 col-sm-6"><h5>Duración</h5></div>
 					<div class="col-md-3 col-sm-6"><h5>Entidad certificadora</h5></div>
 				</div>
 				{% for certificacion in certificacionTIC.all %}
 					<div class="row row-centered">
-						<div class="col-md-3 col-sm-6"><p>{{certificacion.nombre}}</p></div>
-						<div class="col-md-3 col-sm-6"><p>{{certificacion.get_duracion_display}}</p></div>
-						<div class="col-md-3 col-sm-6"><p>{{certificacion.entidad}}</p></div>
+						<div class="col-md-3 col-sm-6"><p class="pull-left">{{certificacion.nombre}}</p></div>
+						<div class="col-md-3 col-sm-6"><p class="pull-left">{{certificacion.get_duracion_display}}</p></div>
+						<div class="col-md-3 col-sm-6"><p class="pull-left">{{certificacion.entidad}}</p></div>
 					</div>
 				{% endfor %}
 			</div>
@@ -215,9 +215,9 @@
         <!-- end #content -->
     </div>
     <!-- end page container -->
-    
+
     <!-- ================== BEGIN BASE JS ================== -->
-    
+
     <script src="{{STATIC_URL}}plugins/jquery-ui-1.10.4/ui/minified/jquery-ui.min.js"></script>
     <script src="{{STATIC_URL}}plugins/bootstrap-3.1.1/js/bootstrap.min.js"></script>
     <!--[if lt IE 9]>
@@ -227,7 +227,7 @@
     <![endif]-->
     <script src="{{STATIC_URL}}plugins/slimscroll/jquery.slimscroll.min.js"></script>
     <!-- ================== END BASE JS ================== -->
-    
+
     <!-- ================== BEGIN PAGE LEVEL JS ================== -->
     <script src="{{STATIC_URL}}js/apps.min.js"></script>
     <!-- ================== END PAGE LEVEL JS ================== -->
