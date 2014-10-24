@@ -11,6 +11,9 @@ import json
 
 
 def dashboard(request):
+    grupo = user_group(request)
+    if grupo == None:
+        return redirect('home')
     mejores = Aspirante.objects.order_by('-puntuacion_final')
     if len(mejores) > 60:
         mejores = mejores[:60]
@@ -68,6 +71,9 @@ def dashboard(request):
     })
 
 def reporteME(request):
+    grupo = user_group(request)
+    if grupo == None:
+        return redirect('home')
     estudiantes = []
     cont = 1
     students = Estudiante.objects.filter(acta_compromiso=True).select_related('estudiante.InfoLaboral__estudiante')
