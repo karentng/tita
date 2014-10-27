@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block menu %}
-	{% include "menus/publico.html" with opcion_menu=14 %}
+	{% include "menus/publico.html" with opcion_menu=12 %}
 {% endblock %}
 
 {% block miga_pan %}
@@ -22,10 +22,14 @@
 	<link href="{{STATIC_URL}}plugins/bootstrap-wizard/css/bwizard.min.css" rel="stylesheet" />
 	<link href="{{STATIC_URL}}plugins/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" />
     {{formAcompanamiento.media}} {# agrega los js y css necesarios para el bootstrap3 datetimepicker #}
+    <style type="text/css">
+    	.fc-event-inner{
+    		overflow-y: scroll;
+    	}
+    </style>
 {% endblock %}
 
 {% block js %}
-
 <script src="{{STATIC_URL}}plugins/fullcalendar/fullcalendar/fullcalendar.js"></script>
 <script type="text/javascript">
 
@@ -39,40 +43,29 @@
         }[b];
     }));
 	eventos = JSON.parse( eventos );
-
 	var datos = [];
 	for (i in eventos){
 		var aux = eventos[i];
 		var hi = aux.hora_inicio;
 		var hf = aux.hora_finalizacion;
+		
+
 		for (j in aux.diasEvento){
 			dia = aux.diasEvento[j]
+			
+			var url = "{% url 'cronograma_diplomado_modificar' %}"+"?idCurso="+aux.id;
 			datos.push({
 				title: aux.nombre,
 				start: new Date(dia[0], dia[1], dia[2], hi[0], hi[1],0),
 				duration: aux.duracion,
 				end: new Date(dia[0], dia[1], dia[2], hf[0], hf[1],0),
 				className: colors[i%5],
-				description: aux.descripcion+"<br/>"+aux.institucion,
+				description: aux.descripcion,
 				allDay: false,
+				media: "<a href='"+url+"'><button class='btn btn-primary'>Modificar</button></a>",
 			});
 		}
 	}
-
-	/*var datos = [];
-	for (i in eventos){
-		var aux = eventos[i];
-		var inicio = aux.inicio;
-		var fin = aux.fin;
-		datos.push({
-			title: aux.nombre,
-			start: new Date(inicio[0], inicio[1], inicio[2]),
-			end: new Date(fin[0], fin[1], fin[2]),
-			className: colors[i%5],
-			description: aux.descripcion,
-		});
-	}*/
-
 
 	var handleCalendarDemo = function () {
 	"use strict";
@@ -110,7 +103,7 @@
 			
 		},
 		select: function(start, end, allDay) {
-			var title = prompt('Event Title:');
+			/*var title = prompt('Event Title:');
 			if (title) {
 				calendar.fullCalendar('renderEvent',
 					{
@@ -122,7 +115,7 @@
 					true // make the event "stick"
 				);
 			}
-			calendar.fullCalendar('unselect');
+			calendar.fullCalendar('unselect');*/
 		},
 		eventRender: function(event, element, calEvent) {
 				var mediaObject = (event.media) ? event.media : '';
@@ -152,9 +145,21 @@
 			revertDuration: 0
 		});
 	});
-	jQuery(document).ready(function(){ jQuery('.timepicker').datepicker(); });
 };
 </script>
+
+<script language="JavaScript">
+			<!--
+			var era;
+			var previo=null;
+			function uncheckRadio(rbutton){
+			if(previo &&previo!=rbutton){previo.era=false;}
+			if(rbutton.checked==true && rbutton.era==true){rbutton.checked=false;}
+			rbutton.era=rbutton.checked;
+			previo=rbutton;
+			}
+</script>
+
 {% endblock %}
 
 {% block js_ready %}
@@ -176,50 +181,73 @@
 	<div class="panel panel-inverse">
 		    <div class="panel-heading">
 		        <div class="panel-heading-btn">
-		            
+		            <div class="panel-heading-btn">
+                    <a class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-collapse" data-original-title="" title=""><i class="fa fa-minus"></i></a>
+                </div>
 		            
 		        </div>
-		        <h4 class="panel-title">Programación acompañamiento in situ</h4>
+		        <h4 class="panel-title">Añadir un evento</h4>
+
 		    </div>
 		    <div class="panel-body p-0">
-		        <div class="vertical-box">
-		            <div class="vertical-column p-15 bg-silver width-sm ui-sortable">
-		            	<h4 class=" m-b-20">Añadir un evento</h4>
-		            	<form  method="post">
+		        <div class="horizontal-box">
+		            <div class="col-md-12 p-15 bg-silver " >
+		            	
+		            	<form  method="post" >
 								 {% csrf_token %}
 								 {% bootstrap_form formAcompanamiento layout="vertical" %}
+								 <input type= "radio" name= "repetir-" value="1" onclick="uncheckRadio(this)"> Repetir el evento todos los días<br>
+								 <input type= "radio" name= "repetir-" value="2" onclick="uncheckRadio(this)"> Repetir el evento cada semana<br>
+								 <input type= "radio" name= "repetir-" value="3" onclick="uncheckRadio(this)"> Repetir el evento cada mes<br><br>
+
+								 <div class="form-group"><label class="control-label" for="id_fecha_inicio_0">Repetir hasta:</label>
+				                    <div id="931bae735b2949a88d1448594baafcc8" class="input-group date">
+				                    	<input class="form-control" id="id_fecha_inicio_0" name="repetirfecha" readonly="" required="false" title="" type="text">
+				                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+									<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+									</div>
+									<script type="text/javascript">
+									$("#931bae735b2949a88d1448594baafcc8").datetimepicker({
+									    format : 'yyyy-mm-dd',
+									    startDate : '',
+									    endDate : '',
+									    weekStart : 0,
+									    daysOfWeekDisabled : [],
+									    autoclose : true,
+									    startView : 4,
+									    minView : 2,
+									    maxView : 4,
+									    todayBtn : false,
+									    todayHighlight : false,
+									    minuteStep : 5,
+									    pickerPosition : 'bottom-right',
+									    showMeridian : false,
+									    clearBtn : true,
+									    language : 'es',
+									}).find('input').addClass("form-control");
+									</script>
+				                    </div><br>
 								 <button class="btn btn-primary" type="submit">Programar</button>
 						</form>
 						<br>
-						{% comment %}
-                        <div id="external-events" class="calendar-event width-sm">
-                            <h4 class=" m-b-20">Eventos disponibles</h4>
-                            <div class="external-event bg-purple" data-bg="bg-purple" data-title="Discussion" data-media="<i class='fa fa-comments'></i>" data-desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit." style="position: relative;">
-                                <h5><i class="fa fa-comments fa-lg fa-fw"></i> Evento 123</h5>
-                                <p>Esta es la descripción del evento 123 </p>
-                            </div>
-                            <div class="external-event bg-blue ui-draggable" data-bg="bg-blue" data-title="Dinner" data-media="<i class='fa fa-cutlery'></i>" data-desc="Cum sociis natoque penatibus et magnis dis parturient montes." style="position: relative;"> 
-                                <h5><i class="fa fa-cutlery fa-lg fa-fw"></i> Evento 234</h5>
-                                <p>Esta es la descripción del evento 234</p>
-                            </div>
-                            <div class="external-event bg-green ui-draggable" data-bg="bg-green" data-title="Brainstorming" data-media="<i class='fa fa-lightbulb-o'></i>" data-desc="Mauris tristique massa eu venenatis semper. Phasellus a nibh nisi." style="position: relative;">
-                                <h5><i class="fa fa-lightbulb-o fa-lg fa-fw"></i> Evento 345</h5>
-                                <p>Esta es la descripción del evento 345</p>
-                            </div>
-                            <div class="external-event bg-orange ui-draggable" data-bg="bg-orange" data-title="Performance Rating" data-media="<i class='fa fa-tasks'></i>" data-desc="Class aptent taciti sociosqu ad litora torquent per conubia nostra." style="position: relative;">
-                                 <h5><i class="fa fa-tasks fa-lg fa-fw"></i> Evento 456</h5>
-                                <p>Esta es la descripción del evento 456</p>
-                            </div>
-                            <div class="external-event bg-red ui-draggable" data-bg="bg-red" data-title="Video Shooting" data-media="<i class='fa fa-video-camera'></i>" data-desc="Donec ligula nisi, tempus eu egestas id, auctor sit amet velit." style="position: relative;">
-                                <h5><i class="fa fa-video-camera fa-lg fa-fw"></i> Evento 567</h5>
-                                <p>Esta es la descripción del evento 567</p>
-                            </div>
-                        </div>
-                        {% endcomment %}
+						
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-inverse">
+            <div class="panel-heading">
+		        <div class="panel-heading-btn">
+		            
+		            
+		        </div>
+		        <h4 class="panel-title">Calendario</h4>
+		    </div>
+            <div class="panel-body p-0">
+		        <div class="horizontal-box">
                     <div id="calendar" class="vertical-column p-15 calendar"></div>
 		        </div>
 		    </div>
 		</div>
-	</div>
+	
 {% endblock %}

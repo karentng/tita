@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block titulo %} Formulario Monitores {% endblock %}
+
+{% block menu %}
+    {% include "menus/publico.html" with opcion_menu=6 %}
+{% endblock %}
+
+{% block css %}
+    
+    <link href="{{STATIC_URL}}plugins/bootstrap-wizard/css/bwizard.min.css" rel="stylesheet" />
+    {{form.media}} {# agrega los js y css necesarios para el bootstrap3 datetimepicker #}
+
+    <style>
+    input[type=file] {
+        display: inline-block !important;
+    }
+    </style>
+{% endblock %}
+
+
+
+
+{% block miga_pan %}
+    <li><a href="{% url 'home' %}">Inicio</a></li>
+    <li class="active">Formulario de Monitores</li>
+    
+{% endblock %}
+
+{% block titulo_contenido %}Formulario de Registro de Monitores{% endblock %}
+
+{% block previo_contenido_panel %}
+    {% include "wizard.html" with wizard_stage=6 %}
+{% endblock %}
+
+
+
+
+{% block titulo_panel %}<i class="fa fa-file-text"></i> Adjuntar Documentos {% endblock %}
+{% block contenido_panel %}
+
+    <h5>Debe subir soportes especificados.<b> Si no lo hace no será tenido en cuenta como candidato</b>. Adjunte el archivo haciendo click en el botón examinar para buscar el archivo en su equipo y luego presionando el botón <b>Subir Archivo</b> respectivo.
+    <br><br>
+    Se recomienda que comprima todos los archivos en una carpeta <b>ZIP</b>, o añadirlo todo a un documento y subirlo en formato <b>PDF</b>.
+    </h5>
+    <br>
+    
+
+    <form class="form-horizontal"  enctype="multipart/form-data" method="post">{% csrf_token %}
+
+        <table class="table table-hover">
+            <tr>
+                <td style="width:300px; padding-right:30px;">
+                    <strong>Adjunte la certificación de:</strong><br>
+                     DE-10,<br> Tabulado, <br>Recibo de pago, <br>RUT y <br>Hoja de vida (opcional)
+                </td>
+                <td style="width:400px">{{form.soportes }}</td>
+                 <td style="width:60px"><button class="btn btn-sm btn-primary" type="submit"><i class="fa fa-upload"></i>  Subir Archivo</button></td> 
+            </tr>
+
+
+        </table>
+
+
+    </form>
+    
+    <br>
+    <a href="{% url 'finalizar' %}" class="btn btn-lg btn-success pull-right">Finalizar <i class="fa fa-angle-right"></i> </a>
+{% endblock %}

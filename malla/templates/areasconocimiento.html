@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block titulo %} Formulario Aspirante {% endblock %}
+
+{% block menu %}
+    {% include "menus/publico.html" with opcion_menu=15 %}
+{% endblock %}
+
+{% block css %}
+    <link href="{{STATIC_URL}}plugins/bootstrap-wizard/css/bwizard.min.css" rel="stylesheet" />
+    <!--- ñiiipi -->
+    {{form.media}} {# agrega los js y css necesarios para el bootstrap3 datetimepicker y select2 #}
+    <!--- :D -->
+{% endblock %}
+
+{% block js %}
+    {% if solo_lectura%}
+    <script>
+        $(function(){
+            $("select").attr("disabled", "disabled");
+            $("input").attr("readonly", "readonly");
+        });
+    </script>
+
+    {% endif %}
+{% endblock %}
+
+{% block miga_pan %}
+    <li><a href="{% url 'home' %}">Inicio</a></li>
+    <li class="active">Formulario de Monitores</li>
+{% endblock %}
+
+{% block titulo_contenido %}Formulario de Registro de Monitores{% endblock %}
+
+{% block previo_contenido_panel %}
+    {% include "wizard.html" with wizard_stage=4 %}
+{% endblock %}
+
+{% block titulo_panel %}<i class="fa fa-user"></i> Áreas de Conocimiento{% endblock %}
+{% block contenido_panel %}
+
+    {% if request.POST %}
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            Faltan algunos campos por ingresar correctamente. Verifique los campos en color Rojo
+        </div>
+    {% endif %}
+
+    
+    <h5>En esta sección nos dará a conocer en que áreas del conocimiento se siente usted capacitado para ofrecer apoyo docente en las instituciones educativas.
+    <br><br>
+    </h5>
+    <br><br>
+
+
+    <form class="form-horizontal" method="post">{% if solo_lectura %} {% else %} {% csrf_token %} {% endif %}
+        <table class="table">
+            <tbody>
+                <tr><td>{{form.cienciasnaturales}} Ciencias Naturales</td>
+                    <td>{{form.fisica}} Física</td>
+                    <td>{{form.quimica}} Química</td>
+                </tr>
+                <tr><td>{{form.biologia}} Biología </td>
+                    <td>{{form.matematica}} Matemática</td>
+                    <td>{{form.trigonometria}} Trigonometría</td>
+                </tr>
+                <tr><td>{{form.algebra}} Álgebra</td>
+                    <td>{{form.logica}} Lógica</td>
+                    <td>{{form.geometria}} Geometría</td>
+                </tr>
+                <tr><td>{{form.electronica}} Electrónica</td>
+                    <td>{{form.espanol}} Español</td>
+                    <td>{{form.ingles}} Inglés</td>
+                </tr>
+                <tr><td>{{form.cienciassociales}} Ciencias Sociales</td>
+                    <td>{{form.filosofia}} Filosofía</td>
+                    <td>{{form.artistica}} Artística</td>
+                </tr>
+                <tr><td>{{form.etica}} Ética y valores</td>
+                    <td>{{form.cienciaseconomicas}} Ciencias Económicas</td>
+                    <td>{{form.educacionfisica}} Educación Física</td>
+                </tr>
+                <tr><td>{{form.tecnologia}} Tecnología y Sistemas</td>
+                    <td>{{form.pedagogia}} Pedagogía</td>
+                    <td>{{form.dibujotecnico}} Dibujo Técnico</td>
+                </tr>
+            </tbody>
+
+        </table>
+
+        {% if solo_lectura %}
+            <a id="siguiente" href="{% url 'horarios_disponibilidad' %}" class="btn btn-lg btn-primary pull-right">Siguiente <i class="fa fa-angle-right"></i></a>
+        {% else %}
+            <button class="btn btn-lg btn-primary pull-right" type="submit">Siguiente <i class="fa fa-angle-right"></i></button>
+        {% endif %}
+    </form>
+{% endblock %}
+
