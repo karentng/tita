@@ -14,15 +14,15 @@ def dashboard(request):
     grupo = user_group(request)
     if grupo == None:
         return redirect('home')
-    mejores = Aspirante.objects.order_by('-puntuacion_final')
+    mejores = Aspirante.objects.order_by('-puntuacion_hv')
     if len(mejores) > 60:
         mejores = mejores[:60]
 
     inscritos = Aspirante.objects.all()
     total_inscritos = inscritos.count()
-    aprobados = Aspirante.objects.filter(Q(puntuacion_final__gte = 50) & ~Q(puntuacion_final= None))
+    aprobados = Aspirante.objects.filter(Q(puntuacion_final__gte = 99) & ~Q(puntuacion_final= None))
     total_aprobados = aprobados.count()
-    rechazados = Aspirante.objects.filter(puntuacion_final__lt = 50)
+    rechazados = Aspirante.objects.filter(puntuacion_final__lt = 1)
     if len(mejores):
         maximo = mejores[0]
     else:
@@ -38,15 +38,6 @@ def dashboard(request):
     ]
 
     munisAprobados = [
-        {'nombre': 'Santiago de Cali', 'cantidad': 0},
-        {'nombre': 'Yumbo', 'cantidad': 0},
-        {'nombre': 'Vijes', 'cantidad': 0},
-        {'nombre': 'La Cumbre', 'cantidad': 0},
-        {'nombre': 'Dagua', 'cantidad': 0},
-        {'nombre': 'Otros', 'cantidad': 0}
-    ]
-
-    munisRechazados = [
         {'nombre': 'Santiago de Cali', 'cantidad': 0},
         {'nombre': 'Yumbo', 'cantidad': 0},
         {'nombre': 'Vijes', 'cantidad': 0},
@@ -73,10 +64,8 @@ def dashboard(request):
 
         print "....................................."
         print i
-        if i['puntuacion_final']>= 50:
+        if i['puntuacion_final']>= 100:
             munisAprobados[posicion]['cantidad'] = i['dcount']
-        else:
-            munisRechazados[posicion]['cantidad'] = i['dcount']
 
         munis[posicion]['cantidad'] = i['dcount']
         
@@ -93,7 +82,6 @@ def dashboard(request):
         'user_group': user_group(request),
         'municipios':json.dumps(munis),
         'municipiosA':json.dumps(munisAprobados),
-        'municipiosR':json.dumps(munisRechazados),
         'opcion_menu': 1
     })
 

@@ -117,45 +117,6 @@
         });
     }
 
-    if ($('#rechazados-chart').length !== 0) {
-    	var municipios = (("{{municipiosR}}").replace(/&(l|g|quo)t;/g, function(a,b){
-                return {
-                    l   : '<',
-                    g   : '>',
-                    quo : '"'
-                }[b];
-            }));
-
-		municipios = JSON.parse( municipios );
-		//console.log(municipios);
-		var data = [];
-		for (i in municipios){
-        	var aux = municipios[i];
-        	data[i] = [aux.nombre, aux.cantidad]
-        }
-        //var data = [ ["January", 10], ["February", 8], ["March", 4], ["April", 13], ["May", 17], ["June", 9] ];
-        $.plot("#rechazados-chart", [ {data: data, color: purple} ], {
-            series: {
-                bars: {
-                    show: true,
-                    barWidth: 0.4,
-                    align: 'center',
-                    fill: true,
-                    fillColor: purple,
-                    zero: true
-                }
-            },
-            xaxis: {
-                mode: "categories",
-                tickColor: '#ddd',
-				tickLength: 0
-            },
-            grid: {
-                borderWidth: 0
-            }
-        });
-    }
-
     function mostrar(num){
     	var paneles = ["#inscritos", "#aprobados", "#rechazados", "#mejores"];
     	for(i in paneles){
@@ -221,7 +182,7 @@
 							<p><label style="font-size:20px">{{maximo}}</label></p>	
 						</div>
 						<div class="state-link">
-							<a href="javascript:;">{{maximo.numero_documento}} <i class="fa fa-arrow-circle-o-right"></i></a>
+							<a href="javascript:;">{{maximo.municipio_institucion}} <i class="fa fa-arrow-circle-o-right"></i></a>
 						</div>
 					</div>
 				</div>
@@ -370,19 +331,7 @@
                         </div>
                     </div>
 		        </div>
-		        <div class="col-md-6">
-                    <div class="panel panel-inverse">
-                        <div class="panel-heading">
-                            <div class="panel-heading-btn">
-                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                            </div>
-                            <h4 class="panel-title">No Seleccionados por Ciudades</h4>
-                        </div>
-                        <div class="panel-body">
-                            <div id="rechazados-chart" class="height-sm"></div>
-                        </div>
-                    </div>
-		        </div>
+		        
 				<!-- end col-4 -->
 			</div>
 			<!-- end row -->

@@ -63,7 +63,8 @@ class Aspirante(models.Model):
 
 
     def __unicode__(self):
-        return (u"%s %s %s %s"%(self.nombre1,self.nombre2 or '', self.apellido1, self.apellido2 or '')).strip() or "-"
+        #return (u"%s %s %s %s"%(self.nombre1,self.nombre2 or '', self.apellido1, self.apellido2 or '')).strip() or "-"
+        return (u"%s %s %s"%(self.nombre1,self.nombre2 or '', self.apellido1)).strip() or "-"
 
     def calcular_puntaje(self):
         def maximo_puntaje(objetos):
