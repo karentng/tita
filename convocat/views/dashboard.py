@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render, render_to_response, get_list_or_4
 from django.core import serializers
 from django.http import HttpResponse
 from convocat.models import * 
-from django.db.models import Count
+from django.db.models import Count, Q
 from campus.models import Estudiante
 from estudiante.models import InfoLaboral, FormacionAcademicaME, CertificacionTIC
 from campus.views import user_group
@@ -20,7 +20,7 @@ def dashboard(request):
 
     inscritos = Aspirante.objects.all()
     total_inscritos = inscritos.count()
-    aprobados = Aspirante.objects.filter(puntuacion_final__gte = 50)
+    aprobados = Aspirante.objects.filter(Q(puntuacion_final__gte = 50) & ~Q(puntuacion_final= None))
     total_aprobados = aprobados.count()
     rechazados = Aspirante.objects.filter(puntuacion_final__lt = 50)
     if len(mejores):
@@ -36,8 +36,26 @@ def dashboard(request):
         {'nombre': 'Dagua', 'cantidad': 0},
         {'nombre': 'Otros', 'cantidad': 0}
     ]
+
+    munisAprobados = [
+        {'nombre': 'Santiago de Cali', 'cantidad': 0},
+        {'nombre': 'Yumbo', 'cantidad': 0},
+        {'nombre': 'Vijes', 'cantidad': 0},
+        {'nombre': 'La Cumbre', 'cantidad': 0},
+        {'nombre': 'Dagua', 'cantidad': 0},
+        {'nombre': 'Otros', 'cantidad': 0}
+    ]
+
+    munisRechazados = [
+        {'nombre': 'Santiago de Cali', 'cantidad': 0},
+        {'nombre': 'Yumbo', 'cantidad': 0},
+        {'nombre': 'Vijes', 'cantidad': 0},
+        {'nombre': 'La Cumbre', 'cantidad': 0},
+        {'nombre': 'Dagua', 'cantidad': 0},
+        {'nombre': 'Otros', 'cantidad': 0}
+    ]
     
-    municipios = Aspirante.objects.values('municipio').annotate(dcount=Count('municipio_institucion'))
+    municipios = Aspirante.objects.values('municipio', 'puntuacion_final').annotate(dcount=Count('municipio_institucion'))
     for i in municipios:
         id_m = i['municipio']
         if id_m == 152: # cali
@@ -53,6 +71,13 @@ def dashboard(request):
         else:
             posicion = 5;
 
+        print "....................................."
+        print i
+        if i['puntuacion_final']>= 50:
+            munisAprobados[posicion]['cantidad'] = i['dcount']
+        else:
+            munisRechazados[posicion]['cantidad'] = i['dcount']
+
         munis[posicion]['cantidad'] = i['dcount']
         
     return render(request, 'dashboard/dashboard.html', {
@@ -67,6 +92,8 @@ def dashboard(request):
         'maximo':maximo,
         'user_group': user_group(request),
         'municipios':json.dumps(munis),
+        'municipiosA':json.dumps(munisAprobados),
+        'municipiosR':json.dumps(munisRechazados),
         'opcion_menu': 1
     })
 

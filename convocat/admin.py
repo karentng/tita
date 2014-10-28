@@ -93,7 +93,7 @@ class AspiranteAdmin(admin.ModelAdmin):
     actions = ['recalcular_puntaje']
     get_readonly_fields = readonly
     search_fields = ('nombre1','apellido1')
-    list_filter = (PuntajeFilter,MunicipioInstitucionFilter)
+    list_filter = (PuntajeFilter,MunicipioInstitucionFilter, 'jornada')
 
     def nombre_completo(self, obj):
         return unicode(obj)
