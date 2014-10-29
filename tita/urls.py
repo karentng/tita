@@ -37,6 +37,7 @@ urlpatterns += patterns('',
     url(r'^encuestas/', include('survey.urls')),
     url(r'^campus/', include('campus.urls')),
     url('', include('cronograma.urls')),
+    url('', include('malla.urls')),
 
 )
 

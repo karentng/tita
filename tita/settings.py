@@ -56,7 +56,8 @@ INSTALLED_APPS = (
     'estudiante',
     'campus',
     'survey',
-    #'cronograma',
+    'cronograma',
+    'malla',
 )
 
 MIDDLEWARE_CLASSES = (

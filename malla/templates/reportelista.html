@@ -1,0 +1,127 @@
+
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block titulo %} Listas {% endblock %}
+
+{% block menu %}
+    {% include "menus/publico.html" with opcion_menu=20 %}
+{% endblock %}
+
+{% block css %}
+    
+    <!--- ñiiipi -->
+    {{form.media}} {# agrega los js y css necesarios para el bootstrap3 datetimepicker y select2 #}
+    <!--- :D -->
+{% endblock %}
+
+{% block js %}
+    {% if solo_lectura%}
+    <script>
+        $(function(){
+            $("select").attr("disabled", "disabled");
+            $("input").attr("readonly", "readonly");
+        });
+    </script>
+
+    {% endif %}
+{% endblock %}
+
+{% block miga_pan %}
+    <li><a href="{% url 'home' %}">Inicio</a></li>
+    <li class="active">Listas</li>
+{% endblock %}
+
+{% block titulo_contenido %}Lista de Listas{% endblock %}
+
+{% block previo_contenido_panel %}
+    
+{% endblock %}
+
+{% block titulo_panel %}<i class="fa fa-user"></i> Ver Listas{% endblock %}
+{% block contenido_panel %}
+
+    
+
+                    <table  class = "table">
+                    <tr>
+                        <thead>
+                            <td class="info">
+                                Asignación
+                            </td>
+                            <td class="info">
+                                Profesor
+                            </td>
+                            <td class="info">
+                                Monitor
+                            </td>
+                            <td class="info">
+                                Institución
+                            </td>
+                            <td class="info">
+                                Asignatura
+                            </td>
+                            <td class="info">
+                                Espacio
+                            </td>
+                            <td class="info">
+                                Condición
+                            </td>
+                            <td class="info">
+                                Tipo
+                            </td>
+                            <td class="info">
+                                Modificar
+                            </td>
+                            <td class="info">
+                                Eliminar
+                            </td>
+                        </thead>
+                    </tr>
+            {% for lista in lista_list %}
+                    <tr>
+                        <tbody>
+                            <td >
+                                {{ lista.asignacion }}
+                            </td>
+                            <td >
+                                {{ lista.profesor }}
+                            </td>
+                            <td >
+                                {{ lista.monitor }}
+                            </td>
+                            <td >
+                                {{ lista.colegio }}
+                            </td>
+                            <td >
+                                {{ lista.materia }}
+                            </td>
+                            <td >
+                                {{ lista.espacio }}
+                            </td>
+                            <td >
+                                {{ lista.condicion }}
+                            </td>
+                            <td >
+                                {{ lista.tipo }}
+                            </td>
+                            <td >
+                                <a href="javascript:;" class="btn btn-warning btn-icon btn-circle btn-lg"><i class="fa fa- fa-edit"></i></a>
+                            </td>
+                            <td >
+                                <a href="javascript:;" class="btn btn-danger btn-icon btn-circle btn-lg"><i class="fa fa-times"></i></a>
+                            </td>
+                        
+                    {% endfor %}
+                    </tbody>
+                    </tr>
+                </table><br>
+                
+                    
+                
+                
+
+{% endblock %}
+
+
+

@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block titulo %} Formulario Aspirante {% endblock %}
+
+{% block menu %}
+    {% include "menus/publico.html" with opcion_menu=15 %}
+{% endblock %}
+
+{% block css %}
+    <link href="{{STATIC_URL}}plugins/bootstrap-wizard/css/bwizard.min.css" rel="stylesheet" />
+    <!--- ñiiipi -->
+    {{form.media}} {# agrega los js y css necesarios para el bootstrap3 datetimepicker y select2 #}
+    <!--- :D -->
+{% endblock %}
+
+{% block js %}
+    {% if solo_lectura%}
+    <script>
+        $(function(){
+            $("select").attr("disabled", "disabled");
+            $("input").attr("readonly", "readonly");
+        });
+    </script>
+
+    {% endif %}
+{% endblock %}
+
+{% block miga_pan %}
+    <li><a href="{% url 'home' %}">Inicio</a></li>
+    <li class="active">Formulario de Monitores</li>
+{% endblock %}
+
+{% block titulo_contenido %}Formulario de Registro de Monitores{% endblock %}
+
+{% block previo_contenido_panel %}
+    {% include "wizard.html" with wizard_stage=2 %}
+{% endblock %}
+
+{% block titulo_panel %}<i class="fa fa-user"></i> Datos de Contacto{% endblock %}
+{% block contenido_panel %}
+
+    {% if request.POST %}
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            Faltan algunos campos por ingresar correctamente. Verifique los campos en color Rojo
+        </div>
+    {% endif %}
+
+    
+    <h5>Antes de dar siguiente en esta página por favor asegúrese que están totalmente diligenciadas todas casillas.
+    <br><br>
+    </h5>
+    <br><br>
+
+
+    <form class="form-horizontal" method="post">{% if solo_lectura %} {% else %} {% csrf_token %} {% endif %}
+        {% bootstrap_form form layout="horizontal" %}
+
+        {% if solo_lectura %}
+            <a id="siguiente" href="{% url 'datos_academicos' %}" class="btn btn-lg btn-primary pull-right">Siguiente <i class="fa fa-angle-right"></i></a>
+        {% else %}
+            <button class="btn btn-lg btn-primary pull-right" type="submit">Siguiente <i class="fa fa-angle-right"></i></button>
+        {% endif %}
+    </form>
+{% endblock %}
