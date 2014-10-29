@@ -46,9 +46,9 @@ def dashboard(request):
         {'nombre': 'Otros', 'cantidad': 0}
     ]
     
-    municipios = Aspirante.objects.values('municipio', 'puntuacion_final').annotate(dcount=Count('municipio_institucion'))
+    municipios = Aspirante.objects.values('municipio_institucion', 'puntuacion_final').annotate(dcount=Count('municipio_institucion'))
     for i in municipios:
-        id_m = i['municipio']
+        id_m = i['municipio_institucion']
         if id_m == 152: # cali
             posicion = 0;
         elif id_m == 1089: # yumbo
