@@ -211,3 +211,8 @@ def reporte_lista(request, limit=100):
     lista_list = Lista.objects.all()    
     
     return render(request, 'reportelista.html', {'lista_list': lista_list})
+
+def modificar_lista(request, limit=100):
+    lista_list = Lista.objects.all()    
+    
+    return render(request, 'reportelista.html', {'lista_list': lista_list})

@@ -50,11 +50,11 @@ class Formador(models.Model):
 
 class Curso(models.Model):
     descripcion = models.CharField(max_length=255, verbose_name=u'descripción del curso')
-    institucion = models.ForeignKey(InstitucionEducativa, verbose_name='institucion')
+    institucion = models.ForeignKey(InstitucionEducativa, verbose_name='institucion', null=True, blank=True)
     formador = models.ForeignKey(Formador)
 
     def __unicode__(self):
-        return self.descripcion
+        return (u"Curso: %s - Formador: %s"%(self.descripcion,self.formador))
 
 
 
@@ -134,7 +134,7 @@ class Horario(models.Model):
 """
 
 
-
+'''
 class Clase(models.Model):
 
     SEDES = (
@@ -207,6 +207,93 @@ class Clase(models.Model):
     tipo = models.CharField( max_length=10) # para especificar si es de diplomado o de acompanamiento in situ
 
     def __unicode__(self):
+        return unicode(self.nombre)'''
+
+
+class Clase(models.Model):
+
+    nombre = models.CharField(max_length=255)
+    fecha_inicio = models.DateTimeField(verbose_name=u'fecha y hora de inicio')
+    modificado = models.DateTimeField(auto_now=True)
+    duracion = models.IntegerField(help_text='Seleccione el numero de horas (ej: 1)')
+    curso = models.ForeignKey(Curso)
+    asistentes = models.ManyToManyField(Estudiante, blank=True, verbose_name='Seleccione las personas que asistieron a la clase')
+    descripcion = models.CharField( max_length=1000, null=True, blank=True, verbose_name="descripción")
+    #soportes = models.FileField(upload_to=crear_ruta_archivo, blank=True, null=True)
+ 
+    def __unicode__(self):
+        return unicode(self.nombre)
+
+class AcompanamientoInSitu(models.Model):
+
+    SEDES = (
+        ('INEM JORGE ISAACS',
+            ((1, 'Principal INEM JORGE ISAACS'),
+            (2,  'Satelite CECILIA MUÑOZ RICAURTE'),
+            (3,  'Satelite LAS AMERICAS'),
+            (4,  'Satelite CAMILO TORRES'),
+            (5,  'Satelite CENTRO EDUCATIVO DEL NORTE'),
+            (6,  'Satelite FRAY DOMINGO DE LAS CASAS'),
+            (7,  'Satelite PABLO EMILIO'))),
+        ('ANTONIO JOSE CAMACHO',
+            ((8, 'Principal ANTONIO JOSE CAMACHO'),
+            (9, 'Satelite REPUBLICA DEL PERU'),
+            (10, 'Satelite MARCO FIDEL SUAREZ'),
+            (11, 'Satelite OLGA LUCIA LLOREDA'))),
+        ('NORMAL. SUPERIOR SANTIAGO DE CALI',
+            ((12, 'Principal NORMAL. SUPERIOR SANTIAGO DE CALI'),
+            (13,  'Satelite JOAQUIN DE CAYZEDO Y CUERO'))),
+        ('GOLONDRINAS PRINCIPAL',
+            ((14, 'Principal GOLONDRINAS PRINCIPAL'),
+            (15,  'Satelite ANTONIO BARBERENA'))),
+        ('CARLOS HOLGUIN MALLARINO',
+            ((16, 'Principal CARLOS HOLGUIN MALLARINO'),
+            (17,  'Satelite NIÑO JESUS DE ATOCHA'),
+            (18,  'Satelite MIGUEL DE POMBO'))),
+        ('MANUEL MARIA MALLARINO',
+            ((19, 'Principal MANUEL MARIA MALLARINO'),
+            (20, 'Satelite LAURA VICUÑA'),
+            (21, 'Satelite LOS PINOS'),
+            (22, 'Satelite CARLOS HOLGUIN SARDI'))),
+        ('EL DIAMANTE',
+            ((23, 'Principal EL DIAMANTE'),
+            (24, 'Satelite JUAN PABLO II'))),
+        ('EUSTAQUIO PALACIOS',
+            ((25, 'Principal EUSTAQUIO PALACIOS'),
+            (26, 'Satelite    LUIS LOPEZ MESA'),
+            (27, 'Satelite    CELANESE'),
+            (28, 'Satelite    MANUEL MARIA BUENAVENTURA'),
+            (29, 'Satelite    MARISCAL JORGE ROBLEDO'),
+            (30, 'Satelite    MIGUEL ANTONIO CARO'),
+            (31, 'Satelite    GENERAL ANZOATEGUI'),
+            (32, 'Satelite    TULIO ENRIQUE TASCON'),
+            (33, 'Satelite    SANTIAGO RENGIFO'),
+            (34, 'Satelite    SOFIA CAMARGO'))),
+        ('JOSE MARIA CARBONELL',
+            ((35, 'Principal JOSE MARIA CARBONELL'),
+            (36, 'Satelite HONORIO VILLEGAS'))),
+        ('MARICE SINISTERRA',
+            ((38, 'Principal MARICE SINISTERRA'),
+            (39, 'Satelite FENALCO ASTURIAS'))),
+        (37, 'Principal IE BOYACA'),
+        (40, 'Principal YUMBO-IE MAYOR DE YUMBO - SEDE PRINCIPAL'),
+        (41, 'Principal YUMBO-IE JOSÉ MARÍA CÓRDOBA - SEDE PRINCIPAL'),
+        (42, 'Principal YUMBO-IE TITAN - SEDE PRINCIPAL'),
+        (43, 'Principal YUMBO-IE CEAT GENERAL PIERO MARIOTTI - SEDE JOHN F. KENNEDY'),
+        (44, 'Principal YUMBO-IE MANUEL MARÍA SÁNCHEZ - SEDE PRINCIPAL'),
+        (45, 'Principal YUMBO-IE ROSA ZÁRATE DE PEÑA - SEDE PRINCIPAL'),
+        (46, 'Principal VIJES')
+    )
+
+    nombre = models.CharField(max_length=255)
+    institucion = models.IntegerField(choices=SEDES, max_length=2, verbose_name="institución", null=True, blank=True)
+    fecha_inicio = models.DateTimeField(verbose_name=u'fecha y hora de inicio')
+    modificado = models.DateTimeField(auto_now=True)
+    duracion = models.IntegerField(help_text='Seleccione el numero de horas (ej: 1)')
+    asistentes = models.ManyToManyField(Estudiante, blank=True, verbose_name='Seleccione las personas que asistieron a la clase')
+    descripcion = models.CharField( max_length=1000, null=True, blank=True, verbose_name="descripción")
+
+    def __unicode__(self):
         return unicode(self.nombre)
 
 """
@@ -216,10 +303,13 @@ class Asistencia(models.Model):
     asistio = models.BooleanField(default=False)
     modificado = models.DateTimeField(auto_now=True)
 """
+def crear_ruta_archivo(instance, filename):
+    randomstr = str(instance.clase.fecha_inicio.day)+"-"+str(instance.clase.fecha_inicio.month)+"-"+str(instance.clase.fecha_inicio.year)+""
+    return "soportes_clase/%s_fecha%s/%s"%(instance.clase.nombre, randomstr, filename.encode('ascii','ignore'))
 
 class SoporteClase(models.Model):
     clase = models.ForeignKey(Clase)
-    archivo = models.FileField(upload_to="soportesclases/%Y%m%d_")
+    archivo = models.FileField(upload_to=crear_ruta_archivo)
     
 
 class Actividad(models.Model):
@@ -235,3 +325,11 @@ class CalificacionActividad(models.Model):
     actividad = models.ForeignKey(Actividad)
     nota = models.FloatField()
     observacion = models.TextField()
+
+def crear_ruta_archivo2(instance, filename):
+    randomstr = str(instance.acompanamiento.fecha_inicio.day)+"-"+str(instance.acompanamiento.fecha_inicio.month)+"-"+str(instance.acompanamiento.fecha_inicio.year)+""
+    return "soportes_acompanamiento/%s_fecha%s/%s"%(instance.acompanamiento.nombre, randomstr, filename.encode('ascii','ignore'))
+
+class SoporteAcompanamiento(models.Model):
+    acompanamiento = models.ForeignKey(AcompanamientoInSitu)
+    archivo = models.FileField(upload_to=crear_ruta_archivo2)

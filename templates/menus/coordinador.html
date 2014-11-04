@@ -10,8 +10,9 @@
         <a href="{% url 'reporteME' %}"><i class="fa fa-users"></i> <span>Resultados Inscripción Maestros Estudiantes</span></a>
 </li>
 {# Cronogramas #}
-{% comment %}
-<li class="has-sub active " {% if opcion_menu > 2 %} class="active" {% endif %}>
+
+<li class="has-sub {% if opcion_menu > 2 and opcion_menu < 5 %} active {% endif %}"
+>
     <a href="javascript:;">
         <i class="fa fa-2x fa-calendar"></i> <span>Programación</span>
         <b class="caret pull-right"></b>
@@ -25,4 +26,3 @@
         </li>
     </ul>
 </li>
-{% endcomment %}

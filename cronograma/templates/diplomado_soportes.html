@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block titulo %} Soportes de Curso {% endblock %}
+
+{% block menu %}
+    {% include "menus/publico.html" with opcion_menu=3 %}
+{% endblock %}
+
+{% block css %}
+    <link href="{{STATIC_URL}}plugins/bootstrap-wizard/css/bwizard.min.css" rel="stylesheet" />
+    {{form.media}} {# agrega los js y css necesarios para el bootstrap3 datetimepicker #}
+{% endblock %}
+
+{% block js %}
+    {% if solo_lectura%}
+    <script>
+        $(function(){
+            $("select").attr("disabled", "disabled");
+            $("input").attr("readonly", "readonly");
+        });
+    </script>
+
+    {% endif %}
+{% endblock %}
+
+{% block miga_pan %}
+    <li><a href="{% url 'home' %}">Inicio</a></li>
+    <li class="active">Soportes de Curso</li>
+{% endblock %}
+
+{% block titulo_contenido %}Soportes del Curso{% endblock %}
+
+{% block titulo_panel %}<i class="fa fa-lightbulb-o"></i> Soportes{% endblock %}
+{% block contenido_panel %}
+
+    Se recomienda que comprima todos los archivos en una carpeta <b>ZIP</b>, o añadirlo todo a un documento y subirlo en formato <b>PDF</b>.
+    </h5>
+    <br>
+
+    <form class="form-horizontal"  enctype="multipart/form-data" method="post">{% csrf_token %}
+        <br><br>
+        <table class="table table-hover">
+            <tr>
+                <td style="width:300px; padding-right:30px;">
+                    <strong>Adjunte la certificación:</strong><br>
+                     
+                </td>
+                <td style="width:400px">{{form.archivo }}</td>
+                 <td style="width:60px"><button class="btn btn-sm btn-primary" type="submit"><i class="fa fa-upload"></i>  Subir Archivo</button></td> 
+            </tr>
+
+
+        </table>
+
+
+    </form>
+{% endblock %}
+
