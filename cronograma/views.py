@@ -1,22 +1,27 @@
 from django.shortcuts import render
-from cronograma.forms import EventosAcompanamientoForm, EventosDiplomadoForm
-from campus.models import Clase
+from cronograma.forms import EventosAcompanamientoForm, EventosDiplomadoForm, DocumentosSoporteForm, DocumentosSoporteAcompanamientoForm
+from campus.models import Clase, AcompanamientoInSitu
 import json
 from django.shortcuts import redirect, render, render_to_response
 from datetime import datetime, date, timedelta
 from math import ceil
 import datetime 
+from campus.views import user_group
 
 def cronograma(request):
     # if this is a POST request we need to process the form data
+    grupo = user_group(request)
+    if grupo == None:
+        return redirect('home')
+
     if request.method == 'POST':
         form = EventosAcompanamientoForm(request.POST)
                 
         if form.is_valid():
-            objeto = Clase()
+            objeto = AcompanamientoInSitu()
             objeto = form.save()
 
-            objeto.tipo = "2"
+            #objeto.tipo = "2"
             objeto.save()
 
             postFormatoDict = request.POST.dict() #obtuvimos el post
@@ -120,13 +125,13 @@ def cronograma(request):
                             dia = dia + 1
                             nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
                             
-                        objetoi = Clase()
+                        objetoi = AcompanamientoInSitu()
                         objetoi.institucion=objeto.institucion
                         objetoi.nombre=objeto.nombre
                         objetoi.fecha_inicio=nueva_fecha
                         objetoi.duracion=objeto.duracion
                         objetoi.descripcion=objeto.descripcion
-                        objetoi.tipo=objeto.tipo
+                        
                         objetoi.save()
                                                    
 
@@ -211,13 +216,13 @@ def cronograma(request):
                             dia = dia + 7
                             nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
                             
-                        objetoi = Clase()
+                        objetoi = AcompanamientoInSitu()
                         objetoi.institucion=objeto.institucion
                         objetoi.nombre=objeto.nombre
                         objetoi.fecha_inicio=nueva_fecha
                         objetoi.duracion=objeto.duracion
                         objetoi.descripcion=objeto.descripcion
-                        objetoi.tipo=objeto.tipo
+                        
                         objetoi.save()
                 
                 if repetir == "3":
@@ -249,13 +254,13 @@ def cronograma(request):
                             mes = mes + 1
                             nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
                             
-                        objetoi = Clase()
+                        objetoi = AcompanamientoInSitu()
                         objetoi.institucion=objeto.institucion
                         objetoi.nombre=objeto.nombre
                         objetoi.fecha_inicio=nueva_fecha
                         objetoi.duracion=objeto.duracion
                         objetoi.descripcion=objeto.descripcion
-                        objetoi.tipo=objeto.tipo
+                        
                         objetoi.save()
 
             
@@ -266,7 +271,7 @@ def cronograma(request):
 
         form = EventosAcompanamientoForm()
 
-    eventos = Clase.objects.filter(tipo="2")
+    eventos = AcompanamientoInSitu.objects.all()
 
     events = []
 
@@ -293,7 +298,7 @@ def cronograma(request):
             'hora_inicio': hora_inicio,
             'hora_finalizacion': hora_finalizacion,
             'diasEvento': diasEvento,
-            'institucion': i.get_institucion_display()
+            
         })
     '''
     for i in eventos:
@@ -308,9 +313,10 @@ def cronograma(request):
     
     return render(request, 'cronograma.html', {
         'formAcompanamiento': form,
-        'eventos': json.dumps(events)
+        'eventos': json.dumps(events),
+        'user_group': user_group(request),
+        'opcion_menu': 4,
     })
-
 
 
 def menor10(val):
@@ -321,6 +327,10 @@ def menor10(val):
 
 def diplomado(request):
     # if this is a POST request we need to process the form data
+    grupo = user_group(request)
+    if grupo == None:
+        return redirect('home')
+
     if request.method == 'POST':
         form = EventosDiplomadoForm(request.POST)
         if form.is_valid():
@@ -328,7 +338,7 @@ def diplomado(request):
             
             objeto = form.save()
             
-            objeto.tipo = "1"
+            #objeto.tipo = "1"
             objeto.save()
 
             postFormatoDict = request.POST.dict() #obtuvimos el post
@@ -433,12 +443,12 @@ def diplomado(request):
                             nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
                             
                         objetoi = Clase()
-                        objetoi.institucion=objeto.institucion
+                        objetoi.curso=objeto.curso
                         objetoi.nombre=objeto.nombre
                         objetoi.fecha_inicio=nueva_fecha
                         objetoi.duracion=objeto.duracion
                         objetoi.descripcion=objeto.descripcion
-                        objetoi.tipo=objeto.tipo
+                        #objetoi.tipo=objeto.tipo
                         objetoi.save()
                                                    
 
@@ -524,12 +534,13 @@ def diplomado(request):
                             nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
                             
                         objetoi = Clase()
-                        objetoi.institucion=objeto.institucion
+                        objetoi.curso=objeto.curso
+
                         objetoi.nombre=objeto.nombre
                         objetoi.fecha_inicio=nueva_fecha
                         objetoi.duracion=objeto.duracion
                         objetoi.descripcion=objeto.descripcion
-                        objetoi.tipo=objeto.tipo
+                        #objetoi.tipo=objeto.tipo
                         objetoi.save()
                 
                 if repetir == "3":
@@ -565,12 +576,12 @@ def diplomado(request):
                             nueva_fecha = datetime.datetime(ano, mes, dia, fecha.hour, fecha.minute, 00, 000000)
                             
                         objetoi = Clase()
-                        objetoi.institucion=objeto.institucion
+                        objetoi.curso=objeto.curso
                         objetoi.nombre=objeto.nombre
                         objetoi.fecha_inicio=nueva_fecha
                         objetoi.duracion=objeto.duracion
                         objetoi.descripcion=objeto.descripcion
-                        objetoi.tipo=objeto.tipo
+                        #objetoi.tipo=objeto.tipo
                         objetoi.save()
 
 
@@ -579,7 +590,7 @@ def diplomado(request):
     else:
         form = EventosDiplomadoForm() 
 
-    eventos = Clase.objects.filter(tipo="1")
+    eventos = Clase.objects.all()
     events = []
     for i in eventos:
         inicio = i.fecha_inicio
@@ -604,15 +615,21 @@ def diplomado(request):
             'hora_inicio': hora_inicio,
             'hora_finalizacion': hora_finalizacion,
             'diasEvento': diasEvento,
-            'institucion': i.get_institucion_display()
+            
         })
     
     return render(request, 'diplomado.html', {
         'formDiplomado': form,
-        'eventos': json.dumps(events)
+        'eventos': json.dumps(events),
+        'user_group': user_group(request),
+        'opcion_menu': 3,
     })
 
 def diplomado_modificar(request):
+
+    grupo = user_group(request)
+    if grupo == None:
+        return redirect('home')
 
     idCurso = request.GET.get('idCurso')
     curso = Clase.objects.filter(id=idCurso)[0]
@@ -641,4 +658,105 @@ def diplomado_modificar(request):
 
     return render(request, 'diplomado_modificar.html', {
         'form': form, 
+        'user_group': user_group(request),
+        'opcion_menu': 3,
+    })
+
+def acompanamiento_modificar(request):
+
+    grupo = user_group(request)
+    if grupo == None:
+        return redirect('home')
+
+    idCurso = request.GET.get('idCurso')
+    curso = AcompanamientoInSitu.objects.filter(id=idCurso)[0]
+    if request.method == 'POST':
+
+        get = request.POST['boton']
+        
+        if get == "0":
+
+            form = EventosDiplomadoForm(request.POST, instance=curso)
+            if form.is_valid():
+                objeto = form.save()
+                objeto.save()
+                return redirect('cronograma_acompanamiento')
+
+        if get == "1":
+            form = EventosDiplomadoForm(instance=curso)
+
+        if get == "2":
+            idCurso = request.GET.get('idCurso')
+            curso = Clase.objects.filter(id=idCurso)[0]
+            curso.delete()
+            return redirect('cronograma_acompanamiento')
+    else:
+        form = EventosDiplomadoForm(instance=curso)
+
+    return render(request, 'acompanamiento_modificar.html', {
+        'form': form, 
+        'user_group': user_group(request),
+        'opcion_menu': 4,
+    })
+
+def subirsoportes(request):
+
+    grupo = user_group(request)
+    if grupo == None:
+        return redirect('home')
+
+    identificador = request.GET['v']
+    clase = Clase.objects.get(id=identificador)
+
+    if request.method == 'POST':
+        print "as"
+        form = DocumentosSoporteForm(request.POST, request.FILES)
+        
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.clase = clase
+            obj.save()
+            
+            return redirect('cronograma_diplomado')
+
+    else:
+        print "asdafdsa"
+        form = DocumentosSoporteForm()
+
+        
+    return render(request, 'diplomado_soportes.html', {
+        'form': form,
+        'user_group': user_group(request),
+        'opcion_menu': 3,
+    })
+
+def subirsoportesacompanamiento(request):
+
+    grupo = user_group(request)
+    if grupo == None:
+        return redirect('home')
+
+    identificador = request.GET['v']
+    acompanamiento= AcompanamientoInSitu.objects.get(id=identificador)
+
+    if request.method == 'POST':
+        #print "as"
+        form = DocumentosSoporteAcompanamientoForm(request.POST, request.FILES)
+        
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.acompanamiento = acompanamiento
+            obj.save()
+            
+            return redirect('cronograma_acompanamiento')
+
+    else:
+        #print "asdafdsa"
+        form = DocumentosSoporteAcompanamientoForm()
+
+        
+    return render(request, 'diplomado_soportes.html', {
+        'form': form,
+        'user_group': user_group(request),
+        'opcion_menu': 4,
     })

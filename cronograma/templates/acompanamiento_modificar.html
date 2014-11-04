@@ -4,7 +4,7 @@
 {% block titulo %} Modificación de Curso {% endblock %}
 
 {% block menu %}
-    {% include "menus/publico.html" with opcion_menu=3 %}
+    {% include "menus/publico.html" with opcion_menu=2 %}
 {% endblock %}
 
 {% block css %}
@@ -53,9 +53,8 @@
 
          
         <button name = "boton" class="btn btn-lg btn-warning pull-right" type="submit" value ="0">Modificar <i class="fa fa-angle-right"></i></button>         
-        <a href= "{% url 'cronograma_diplomado_modificar' %}"><button name = "boton" id = "1" onclick=mensajeConfirmacion() class="btn btn-lg btn-danger pull-right" type="submit" value="1">Eliminar</button></a>
-        <a href= "{% url 'cronograma_diplomado' %} " class="btn btn-lg btn-primary pull-right" >Volver</a>
+        <a href= "{% url 'cronograma_acompanamiento_modificar' %}"><button name = "boton" id = "1" onclick=mensajeConfirmacion() class="btn btn-lg btn-danger pull-right" type="submit" value="1">Eliminar</button></a>
+        <a href= "{% url 'cronograma_acompanamiento' %} " class="btn btn-lg btn-primary pull-right" >Volver</a>
         
     </form>
 {% endblock %}
-
