@@ -63,9 +63,7 @@ def dashboard(request):
         else:
             posicion = 5;
 
-        print "....................................."
-        print i
-        if i['puntuacion_final']>= 100:
+        if i['puntuacion_final']>= 99:
             munisAprobados[posicion]['cantidad'] = i['dcount']
 
         munis[posicion]['cantidad'] = i['dcount']
