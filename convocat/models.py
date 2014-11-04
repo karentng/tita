@@ -25,7 +25,7 @@ class Municipio(models.Model):
         return self.nombre
 
 
-class Aspirante(models.Model):    
+class Aspirante(models.Model):
     numero_documento = models.BigIntegerField(unique=True, verbose_name='número documento')
     nombre1 = models.CharField( max_length=255, verbose_name='primer nombre')
     nombre2 = models.CharField( max_length=255, blank=True, verbose_name='segundo nombre')
@@ -36,13 +36,13 @@ class Aspirante(models.Model):
     nacionalidad = models.CharField( max_length=255, blank=True, verbose_name='nacionalidad')
     fecha_nacimiento = models.DateField(verbose_name='fecha de nacimiento', help_text='Formato año-mes-día (ej: 1988-04-30)')
     municipio_nacimiento = models.ForeignKey(Municipio, null=True, blank=True, verbose_name='municipio de nacimiento', related_name='municipio_nacimiento')
-    
+
     direccion = models.CharField( max_length=100, verbose_name='dirección')
     municipio = models.ForeignKey(Municipio, verbose_name='municipio de residencia', null=True)
     telefono = models.BigIntegerField(null=True, blank=True, verbose_name=u'teléfono fijo')
     celular = models.BigIntegerField(null=True, blank=True, verbose_name=u'número de celular')
     email = models.EmailField()
-    
+
     puntuacion_hv = models.FloatField(null=True, blank=True)
     aceptado = models.NullBooleanField()
 
@@ -115,7 +115,7 @@ class FormacionAcademica(models.Model):
     institucion = models.CharField(max_length=255, verbose_name=u'institución formadora')
     relacionado_pedagogia = models.BooleanField(verbose_name=u'este estudio está relacionado con la pedagogía')
     relacionado_tics = models.BooleanField(verbose_name=u'este estudio está relacionado con las TICs')
-    
+
     def __unicode__(self):
         return self.titulo
 
@@ -157,7 +157,7 @@ class ConocimientosEspecificos(models.Model):
         (1, 'Regular'),
         (2, 'Bueno'),
         (3, 'Muy bueno'),
-    ) 
+    )
     aspirante = models.OneToOneField(Aspirante)
     conocimiento1 = models.IntegerField(choices=HABILIDAD_CONOCIMIENTO, verbose_name='Conocimiento y manejo de herramientas ofimáticas')
     conocimiento2 = models.IntegerField(choices=HABILIDAD_CONOCIMIENTO, verbose_name='Conocimiento y manejo de herramientas  Web 2')
@@ -257,3 +257,59 @@ class DocumentosSoporte(models.Model):
 
     def tiene_soportes(self):
         return bool(self.formacion_academica or self.formacion_tics or self.idiomas or self.ensenanza_tic_estudiantes or self.ensenanza_tic_profesores or self.ensenanza_tic_formadores)
+
+class Actividad(models.Model):
+    nombre = models.CharField( max_length=255, verbose_name='nombre')
+    descripcion = models.CharField( max_length=255, verbose_name='descripcion')
+
+    def __unicode__(self):
+        return self.nombre
+
+    def get_grupos(self):
+        return Grupo.objects.filter(actividad=self, grupo_padre=None).order_by('id')
+
+    def get_estados_de_avance(self):
+        return EstadoDeAvance.objects.filter(actividad = self).order_by('id')
+
+class EstadoDeAvance(models.Model):
+    fecha = models.DateField(verbose_name=u'fecha')
+    meta = models.FloatField(verbose_name='meta')
+    avance_actual = models.FloatField(verbose_name='avance actual')
+    presupuesto_actividad = models.FloatField(verbose_name='presupuesto de la actividad')
+    presupuesto_ejecutado = models.FloatField(verbose_name='presupuesto ejecutado')
+    ejecucion_financiera = models.FloatField(verbose_name='ejecucion financiera')
+    actividad = models.ForeignKey(Actividad)
+
+    def __unicode__(self):
+        return self.nombre
+
+def crear_ruta_archivo_tablero_control(instance, filename):
+    randomstr = 7*99251
+    return "archivos_actividades/%s-%s"%(randomstr, filename.encode('ascii','ignore'))
+
+class Archivo(models.Model):
+    nombre = models.CharField(max_length=255, verbose_name='nombre')
+    ruta = models.FileField(upload_to=crear_ruta_archivo_tablero_control, blank=True, null=True)
+    descripcion = models.CharField(max_length=255, verbose_name='descripcion')
+    grupo = models.ForeignKey("Grupo")
+
+    def __unicode__(self):
+        return self.nombre
+
+class Grupo(models.Model):
+    nombre = models.CharField(max_length=255, verbose_name='nombre')
+    descripcion = models.CharField(max_length=255, verbose_name='descripcion')
+    actividad = models.ForeignKey(Actividad)
+    grupo_padre = models.ForeignKey("self", null=True, blank=True)
+
+    def __unicode__(self):
+        if (self.grupo_padre != None):
+            return str(self.grupo_padre) + " - " + self.nombre
+        else:
+            return self.actividad.nombre + " - " + self.nombre
+
+    def get_grupos(self):
+        return Grupo.objects.filter(grupo_padre=self).order_by('id')
+
+    def get_archivos(self):
+        return Archivo.objects.filter(grupo=self).order_by('id')
