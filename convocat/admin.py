@@ -83,7 +83,7 @@ class MunicipioInstitucionFilter(admin.SimpleListFilter):
     def queryset(self, request, queryset):
         print "value es", self.value()
         if self.value() is not None:
-            
+
             queryset =  queryset.filter(municipio_institucion_id=self.value())
         return queryset
 
@@ -116,9 +116,12 @@ class AspiranteAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         qs = super(AspiranteAdmin, self).get_queryset(request)
         return qs.select_related('documentossoporte')
-    
+
 
 
 
 admin.site.register(Aspirante, AspiranteAdmin)
 
+admin.site.register(Actividad)
+admin.site.register(Grupo)
+admin.site.register(Archivo)

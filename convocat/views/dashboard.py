@@ -1,7 +1,8 @@
 from django.shortcuts import redirect, render, render_to_response, get_list_or_404, get_object_or_404
 from django.core import serializers
-from django.http import HttpResponse
-from convocat.models import * 
+from django.http import HttpResponse, HttpResponseRedirect
+from convocat.models import *
+from convocat.forms import *
 from django.db.models import Count, Q
 from campus.models import Estudiante
 from estudiante.models import InfoLaboral, FormacionAcademicaME, CertificacionTIC
@@ -45,7 +46,7 @@ def dashboard(request):
         {'nombre': 'Dagua', 'cantidad': 0},
         {'nombre': 'Otros', 'cantidad': 0}
     ]
-    
+
     municipios = Aspirante.objects.values('municipio_institucion', 'puntuacion_final').annotate(dcount=Count('municipio_institucion'))
     for i in municipios:
         id_m = i['municipio_institucion']
@@ -62,13 +63,11 @@ def dashboard(request):
         else:
             posicion = 5;
 
-        print "....................................."
-        print i
-        if i['puntuacion_final']>= 100:
+        if i['puntuacion_final']>= 99:
             munisAprobados[posicion]['cantidad'] = i['dcount']
 
         munis[posicion]['cantidad'] = i['dcount']
-        
+
     return render(request, 'dashboard/dashboard.html', {
         'mejores':mejores,
 
@@ -94,7 +93,12 @@ def reporteME(request):
     students = Estudiante.objects.filter(acta_compromiso=True).select_related('estudiante.InfoLaboral__estudiante')
     for estudiante in students:
         estudiantes.append(
-            {"id": estudiante.id, "item": cont, "nombre": estudiante, "institucion":InfoLaboral.objects.get(estudiante=estudiante).get_sede_display, "nivel":estudiante.get_nivel_educativo_display}
+            {"id": estudiante.id,
+            "item": cont,
+            "nombre": estudiante,
+            "cedula": estudiante.numero_documento,
+            "jornada": InfoLaboral.objects.get(estudiante=estudiante).get_jornada_display,
+            "institucion":InfoLaboral.objects.get(estudiante=estudiante).get_sede_display,}
         )
         cont = cont + 1
     print "------------------"
@@ -105,7 +109,7 @@ def reporteME(request):
         'opcion_menu': 2
         #'municipios':json.dumps(munis),
     })
-    
+
 def obtener_estudiante(valor):
     try :
         miid, mihash = map(int,valor.split("-"))
@@ -117,14 +121,14 @@ def obtener_estudiante(valor):
             return None
     except Exception as ex:
         return None
-    
+
 def impresionME(request, id_estudiante):
     try :
         estudiante = Estudiante.objects.get(id=id_estudiante)
         infoLaboral = InfoLaboral.objects.get(estudiante=estudiante)
         certificacionTIC = CertificacionTIC.objects.filter(estudiante=estudiante)
         formacionAcademicaME = FormacionAcademicaME.objects.filter(estudiante=estudiante)
-        
+
         return render(request, 'dashboard/impresionME.html', {
 			'estudiante' : estudiante,
 			'infoLaboral' : infoLaboral,
@@ -133,3 +137,30 @@ def impresionME(request, id_estudiante):
 		})
     except Exception as ex:
         return redirect('reporteME')
+
+def actividades(request, id_actividad):
+    if id_actividad=='':
+        id_actividad=1
+
+    actividad = Actividad.objects.get(id=id_actividad)
+    request.session['actividad_tablero_control']=id_actividad
+
+    return render(request, 'dashboard/actividades.html', {
+        'actividad' : actividad,
+        'formArchivo': ArchivoForm(),
+        'formGrupo': GrupoForm()
+    })
+
+def guardarArchivo(request):
+    form = ArchivoForm(request.POST, request.FILES)
+    if form.is_valid():
+        form.save()
+
+    return HttpResponseRedirect('actividades/' + str(request.session['actividad_tablero_control']))
+
+def guardarGrupo(request):
+    form = GrupoForm(request.POST, request.FILES)
+    if form.is_valid():
+        form.save()
+
+    return HttpResponseRedirect('actividades/' + str(request.session['actividad_tablero_control']))

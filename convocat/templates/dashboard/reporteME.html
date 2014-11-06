@@ -99,8 +99,9 @@
                                 <tr>
                                     <th>Item</th>
                                     <th>Nombres y Apellidos</th>
+                                    <th>Cédula</th>
                                     <th>Institución Educativa</th>
-                                    <th>Nivel Educativo</th>
+                                    <th>Jornada</th>
                                     <th>Datos ME</th>
                                 </tr>
                             </thead>
@@ -109,8 +110,9 @@
                                 <tr class="odd gradeX">
                                 	<td>{{estudiante.item}}</td>
                                     <td>{{estudiante.nombre}}</td>
+                                    <td>{{estudiante.cedula}}</td>
                                     <td>{{estudiante.institucion}}</td>
-                                    <td>{{estudiante.nivel}}</td>
+                                    <td>{{estudiante.jornada}}</td>
                                     <td>
                                         <a href="{% url 'impresionME' estudiante.id %}" target="_blank"><button class="btn btn-primary">Detalles</button></a>
                                     </td>

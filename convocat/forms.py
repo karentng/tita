@@ -64,7 +64,7 @@ class IdiomasManejadosForm(forms.ModelForm):
     class Meta:
         model = Idioma
         fields = ('idioma','habla','lee','escribe',)
-        
+
 
 
 class ExperienciaFormadorForm(forms.ModelForm):
@@ -166,3 +166,11 @@ class DocumentosSoporteForm(forms.ModelForm):
             'ensenanza_tic_profesores' : MyFileInput(),
             'ensenanza_tic_formadores' : MyFileInput(),
         }
+
+class ArchivoForm(forms.ModelForm):
+    class Meta:
+        model = Archivo
+
+class GrupoForm(forms.ModelForm):
+    class Meta:
+        model = Grupo

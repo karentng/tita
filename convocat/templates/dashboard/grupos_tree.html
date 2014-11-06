@@ -1,0 +1,20 @@
+<li>
+    <span><i class="fa fa-folder-open-o"></i> {{grupo.nombre}}</span>
+    <ul>
+        {% for subgrupo in grupo.get_grupos %}
+            {%with grupo=subgrupo template_name="dashboard/grupos_tree.html" %}
+                {%include template_name%}
+            {%endwith%}
+        {% endfor %}
+    </ul>
+    <ul>
+        {% for archivo in grupo.get_archivos %}
+            <li>
+                <a href="{{STATIC_URL}}../media/{{archivo.ruta}}" target="_blank">
+                    <span><i class="fa fa-file-o"></i>  {{archivo.nombre}} &ndash; {{archivo.descripcion}}</span>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</li>
+

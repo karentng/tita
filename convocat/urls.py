@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.conf import settings
 
 urlpatterns = patterns('convocat.views.inscripcion',
-    
+
     url(r'^inscripcion/iniciar-inscripcion$',      'iniciarInscripcion', name="iniciarInscripcion"),
     url(r'^inscripcion/datos-personales$',      'datosPersonales', name="datosPersonales"),
     url(r'^inscripcion/formacion-academica$',   'formacionAcademica', name="formacionAcademica"),
@@ -22,14 +22,17 @@ urlpatterns = patterns('convocat.views.inscripcion',
 
     url(r'^inscripcion/finalizar$',      'finalizar', name="finalizar"),
     url(r'^inscripcion/finalizada$',      'finalizada', name="finalizada"),
-    
+
     url(r'^inscripcion/soportes$',      'soportes', name="soportes"),
 
-) 
+)
 
 urlpatterns += patterns('convocat.views.dashboard',
     url(r'^resultados$',      'dashboard', name="dashboard"),
     url(r'^resultadosME$',      'reporteME', name="reporteME"),
     url(r'^impresionME/(\d+)$',      'impresionME', name="impresionME"),
+    url(r'^tablero_control/actividades/(\d*)$', 'actividades', name="tableroControlActividades"),
+    url(r'^tablero_control/guardarArchivos$', 'guardarArchivo', name="tableroControlGuardarArchivo"),
+    url(r'^tablero_control/guardarGrupo$', 'guardarGrupo', name="tableroControlGuardarGrupo"),
 )
 
