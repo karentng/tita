@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block titulo %} Gestión de Cursos {% endblock %}
+
+{% block menu %}
+    {% include "menus/publico.html" with opcion_menu=20 %}
+{% endblock %}
+
+{% block css %}
+    
+    <!--- ñiiipi -->
+    {{form.media}} {# agrega los js y css necesarios para el bootstrap3 datetimepicker y select2 #}
+    <!--- :D -->
+{% endblock %}
+
+{% block js %}
+    {% if solo_lectura%}
+    <script>
+        $(function(){
+            $("select").attr("disabled", "disabled");
+            $("input").attr("readonly", "readonly");
+        });
+    </script>
+
+    {% endif %}
+{% endblock %}
+
+{% block miga_pan %}
+    <li><a href="{% url 'home' %}">Inicio</a></li>
+    <li class="active">Gestión de Cursos</li>
+{% endblock %}
+
+{% block titulo_contenido %}Gestión de Cursos{% endblock %}
+
+{% block previo_contenido_panel %}
+    
+{% endblock %}
+
+{% block titulo_panel %}<i class="fa fa-user"></i> Ver Cursos{% endblock %}
+{% block contenido_panel %}
+
+    
+
+                    <table  class = "table">
+                    <tr>
+                        <thead>
+                            <td class="info">
+                                Curso
+                            </td>
+                            <td class="info">
+                                Institución
+                            </td>
+                            <td class="info">
+                                Formador
+                            </td>
+                            <td class="info">
+                                Estudiantes
+                            </td>
+                            <td class="info">
+                                Modificas
+                            </td>
+                            <td class="info">
+                                Eliminar
+                            </td>
+                        </thead>
+                    </tr>
+            {% for curso in curso_list %}
+                    <tr>
+                        <tbody>
+                            <td >
+                                {{ curso.descripcion }}
+                            </td>
+                            <td >
+                                {{ curso.institucion }}
+                            </td>
+                            <td >
+                                {{ curso.formador }}
+                            </td>
+                            <td >
+                                {% for estudiante in curso.estudiante.all %}
+                                    {{ curso.estudiante.nombre }} x
+                                {% endfor %}
+                                x
+                            </td>
+                            <td >
+                                <a href="javascript:;" class="btn btn-warning btn-icon btn-circle btn-lg"><i class="fa fa- fa-edit"></i></a>
+                            </td>
+                            <td >
+                                <a href="javascript:;" class="btn btn-danger btn-icon btn-circle btn-lg"><i class="fa fa-times"></i></a>
+                            </td>
+                        
+                    {% endfor %}
+                    </tbody>
+                    </tr>
+                </table><br>
+                
+                    
+                
+                
+
+{% endblock %}
+
+
+

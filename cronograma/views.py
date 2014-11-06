@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from cronograma.forms import EventosAcompanamientoForm, EventosDiplomadoForm, DocumentosSoporteForm, DocumentosSoporteAcompanamientoForm
-from campus.models import Clase, AcompanamientoInSitu
+from cronograma.forms import *
+from campus.models import Clase, AcompanamientoInSitu, Estudiante
 import json
 from django.shortcuts import redirect, render, render_to_response
 from datetime import datetime, date, timedelta
@@ -676,22 +676,22 @@ def acompanamiento_modificar(request):
         
         if get == "0":
 
-            form = EventosDiplomadoForm(request.POST, instance=curso)
+            form = EventosAcompanamientoForm(request.POST, instance=curso)
             if form.is_valid():
                 objeto = form.save()
                 objeto.save()
                 return redirect('cronograma_acompanamiento')
 
         if get == "1":
-            form = EventosDiplomadoForm(instance=curso)
+            form = EventosAcompanamientoForm(instance=curso)
 
         if get == "2":
             idCurso = request.GET.get('idCurso')
-            curso = Clase.objects.filter(id=idCurso)[0]
+            curso = AcompanamientoInSitu.objects.filter(id=idCurso)[0]
             curso.delete()
             return redirect('cronograma_acompanamiento')
     else:
-        form = EventosDiplomadoForm(instance=curso)
+        form = EventosAcompanamientoForm(instance=curso)
 
     return render(request, 'acompanamiento_modificar.html', {
         'form': form, 
@@ -760,3 +760,51 @@ def subirsoportesacompanamiento(request):
         'user_group': user_group(request),
         'opcion_menu': 4,
     })
+
+def curso(request):
+
+    grupo = user_group(request)
+    if grupo == None:
+        return redirect('home')
+
+    if request.method == 'POST':
+        form = CursoForm(request.POST)
+        if form.is_valid():
+            objeto = form.save()
+            
+            return redirect('home')
+    else :
+        form = CursoForm()
+
+    return render(request, 'curso.html', {
+        'form': form,
+        'user_group': user_group(request),
+        'opcion_menu': 5,
+    })
+
+def formador(request):
+
+    grupo = user_group(request)
+    if grupo == None:
+        return redirect('home')
+
+    if request.method == 'POST':
+        form = FormadorForm(request.POST)
+        if form.is_valid():
+            objeto = form.save()
+            
+            return redirect('home')
+    else :
+        form = FormadorForm()
+
+    return render(request, 'formador.html', {
+        'form': form,
+        'user_group': user_group(request),
+        'opcion_menu': 5,
+    })
+
+def reporte_cursos(request, limit=100):
+    curso_list = Curso.objects.all() 
+    estudiante_list = Estudiante.objects.all()    
+    
+    return render(request, 'gestion.html', {'curso_list': curso_list, 'estudiante_list': estudiante_list},)

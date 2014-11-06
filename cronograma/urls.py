@@ -10,6 +10,10 @@ urlpatterns = patterns('cronograma.views',
     url(r'^programacion/cronograma_acompanamiento$',      'cronograma', name='cronograma_acompanamiento'),
     url(r'^programacion/cronograma_diplomado_soportes$',      'subirsoportes', name='cronograma_diplomado_soportes'),
     url(r'^programacion/cronograma_acompanamiento_soportes$',      'subirsoportesacompanamiento', name='cronograma_acompanamiento_soportes'),
-    #url(r'^programacion/cronograma2_acompanamiento$',      'cronograma2', name='cronograma_acompanamiento2'),
+    url(r'^programacion/curso$',      'curso', name='cronograma_curso'),
+    url(r'^programacion/formador$',      'formador', name='cronograma_formador'),
+    url(r'^programacion/gestioncursos$',      'reporte_cursos', name='gestion_cursos'),
+
+    
     
 )
