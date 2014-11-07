@@ -902,6 +902,19 @@
     "choices": "S\u00ed\r\nNo\r\nEs igual a si la hubiese respondido en papel", 
     "survey": 4, 
     "question_type": "radio"
+  },
+  {
+  "pk": 523, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Otra. \u00bfCu\u00e1l?", 
+    "required": false, 
+    "number": "1801", 
+    "choices": "", 
+    "survey": 4, 
+    "question_type": "text"
   }
+},
 }
 ]
