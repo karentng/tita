@@ -174,3 +174,16 @@ class ArchivoForm(forms.ModelForm):
 class GrupoForm(forms.ModelForm):
     class Meta:
         model = Grupo
+
+class EstadoDeAvanceForm(forms.ModelForm):
+    #fecha = forms.DateField(label='', widget=forms.TextInput(attrs={'size':14}))
+    fecha = forms.DateField(label='', widget=DateWidget(usel10n=False, bootstrap_version=3, attrs={'size':12}, options={'format': 'yyyy-mm-dd', 'startView':2, 'language':'es'}))
+    meta = forms.FloatField(label='', widget=forms.NumberInput(attrs={'style':'width:100px'}))
+    avance_actual = forms.FloatField(label='', widget=forms.NumberInput(attrs={'style':'width:100px'}))
+    presupuesto_actividad = forms.FloatField(label='', widget=forms.NumberInput(attrs={'style':'width:200px'}))
+    presupuesto_ejecutado = forms.FloatField(label='', widget=forms.NumberInput(attrs={'style':'width:150px'}))
+    ejecucion_financiera = forms.FloatField(label='', widget=forms.NumberInput(attrs={'style':'width:150px'}))
+
+    class Meta:
+        model = EstadoDeAvance
+        exclude = ('actividad',)

@@ -31,8 +31,10 @@ urlpatterns += patterns('convocat.views.dashboard',
     url(r'^resultados$',      'dashboard', name="dashboard"),
     url(r'^resultadosME$',      'reporteME', name="reporteME"),
     url(r'^impresionME/(\d+)$',      'impresionME', name="impresionME"),
+    url(r'^tablero_control/(\d*)$', 'tablero_control', name="tablero_control"),
     url(r'^tablero_control/actividades/(\d*)$', 'actividades', name="tableroControlActividades"),
     url(r'^tablero_control/guardarArchivos$', 'guardarArchivo', name="tableroControlGuardarArchivo"),
+    url(r'^tablero_control/guardarEstadoDeAvance$', 'guardarEstadoDeAvance', name="tableroControlGuardarEstadoDeAvance"),
     url(r'^tablero_control/guardarGrupo$', 'guardarGrupo', name="tableroControlGuardarGrupo"),
 )
 

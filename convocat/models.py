@@ -259,17 +259,32 @@ class DocumentosSoporte(models.Model):
         return bool(self.formacion_academica or self.formacion_tics or self.idiomas or self.ensenanza_tic_estudiantes or self.ensenanza_tic_profesores or self.ensenanza_tic_formadores)
 
 class Actividad(models.Model):
-    nombre = models.CharField( max_length=255, verbose_name='nombre')
-    descripcion = models.CharField( max_length=255, verbose_name='descripcion')
+    nombre = models.CharField(max_length=255, verbose_name='nombre')
+    descripcion = models.CharField( max_length=500, verbose_name='descripcion')
 
     def __unicode__(self):
         return self.nombre
 
-    def get_grupos(self):
-        return Grupo.objects.filter(actividad=self, grupo_padre=None).order_by('id')
-
     def get_estados_de_avance(self):
         return EstadoDeAvance.objects.filter(actividad = self).order_by('id')
+
+    def get_conceptos_por_actividad(self):
+        return ConceptoPorActividad.objects.filter(actividad = self).order_by('id')
+
+class Concepto(models.Model):
+    nombre = models.CharField(max_length=500, verbose_name='nombre')
+    def __unicode__(self):
+        return self.nombre
+
+class ConceptoPorActividad(models.Model):
+    actividad = models.ForeignKey(Actividad)
+    concepto = models.ForeignKey(Concepto)
+
+    def __unicode__(self):
+        return self.actividad.nombre + ' - '  + self.concepto.nombre
+
+    def get_grupos(self):
+        return Grupo.objects.filter(concepto_por_actividad=self, grupo_padre=None).order_by('id')
 
 class EstadoDeAvance(models.Model):
     fecha = models.DateField(verbose_name=u'fecha')
@@ -281,11 +296,29 @@ class EstadoDeAvance(models.Model):
     actividad = models.ForeignKey(Actividad)
 
     def __unicode__(self):
-        return self.nombre
+        return str(self.fecha) + ' - ' + str(self.meta) + ' - ' + str(self.avance_actual)
 
 def crear_ruta_archivo_tablero_control(instance, filename):
     randomstr = 7*99251
     return "archivos_actividades/%s-%s"%(randomstr, filename.encode('ascii','ignore'))
+
+class Grupo(models.Model):
+    nombre = models.CharField(max_length=255, verbose_name='nombre')
+    descripcion = models.CharField(max_length=255, verbose_name='descripcion')
+    concepto_por_actividad = models.ForeignKey(ConceptoPorActividad)
+    grupo_padre = models.ForeignKey("self", null=True, blank=True)
+
+    def __unicode__(self):
+        if (self.grupo_padre != None):
+            return str(self.grupo_padre) + " - " + self.nombre
+        else:
+            return self.concepto_por_actividad.actividad.nombre + ", " + self.concepto_por_actividad.concepto.nombre + " - " + self.nombre
+
+    def get_grupos(self):
+        return Grupo.objects.filter(grupo_padre=self).order_by('id')
+
+    def get_archivos(self):
+        return Archivo.objects.filter(grupo=self).order_by('id')
 
 class Archivo(models.Model):
     nombre = models.CharField(max_length=255, verbose_name='nombre')
@@ -295,21 +328,3 @@ class Archivo(models.Model):
 
     def __unicode__(self):
         return self.nombre
-
-class Grupo(models.Model):
-    nombre = models.CharField(max_length=255, verbose_name='nombre')
-    descripcion = models.CharField(max_length=255, verbose_name='descripcion')
-    actividad = models.ForeignKey(Actividad)
-    grupo_padre = models.ForeignKey("self", null=True, blank=True)
-
-    def __unicode__(self):
-        if (self.grupo_padre != None):
-            return str(self.grupo_padre) + " - " + self.nombre
-        else:
-            return self.actividad.nombre + " - " + self.nombre
-
-    def get_grupos(self):
-        return Grupo.objects.filter(grupo_padre=self).order_by('id')
-
-    def get_archivos(self):
-        return Archivo.objects.filter(grupo=self).order_by('id')

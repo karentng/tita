@@ -18,9 +18,9 @@ urlpatterns += patterns('',
     url(r'^login/$', 'django.contrib.auth.views.login', {'template_name':'login.html'}, name='login'),
     url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page':'home'}, name='logout'),
     url(r'^cambiar-pass/$', 'django.contrib.auth.views.password_change', {'template_name':'cambiar-pass.html', 'post_change_redirect':'home'}, name='cambiar_pass'),
-    
+
     url(r'^admin/', include(admin.site.urls)),
-    
+
     #url(r'^$', TemplateView.as_view(template_name='info/index.html'), name='home'),
     url(r'^$', TemplateView.as_view(template_name='index.html'), name='home'),
     url(r'^antecedentes/$', TemplateView.as_view(template_name='info/antecedentes.html'), name="info_antecedentes"),
@@ -29,8 +29,8 @@ urlpatterns += patterns('',
     url(r'^requisitos/$',TemplateView.as_view(template_name='info/requisitos.html'), name="info_requisitos"),
     url(r'^registrarse/$',TemplateView.as_view(template_name='info/registrarse.html'), name="info_registrarse"),
     url(r'^contactenos/$',TemplateView.as_view(template_name='info/contactenos.html'), name="info_contactenos"),
-    url(r'^tablero_control/$',TemplateView.as_view(template_name='dashboard/tablero_control.html'), name="tablero_control"),
-    
+    #url(r'^tablero_control/$',TemplateView.as_view(template_name='dashboard/tablero_control.html'), name="tablero_control"),
+
 
     url('', include('convocat.urls')),
     url('', include('estudiante.urls')),
