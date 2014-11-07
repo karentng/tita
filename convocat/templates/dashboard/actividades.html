@@ -28,7 +28,7 @@
             padding:19px;
             margin-bottom:20px;
             background-color:#fbfbfb;
-            border:1px solid #999;
+            border:0px solid #999;
             -webkit-border-radius:4px;
             -moz-border-radius:4px;
             border-radius:4px;
@@ -93,17 +93,11 @@
             <a href="#modal-dialog-grupo" class="btn btn-success" data-toggle="modal">Adicionar Grupo</a>
             <a href="#modal-dialog-archivo" class="btn btn-success" data-toggle="modal">Adicionar Archivo</a>
         </div>
-
-        <!--<ul>
-            <li>
-                <span><i class="fa fa-folder-open-o"></i> {{actividad.nombre}} &ndash; {{actividad.descripcion}}</span>-->
-                <ul>
-                    {% for grupo in actividad.get_grupos %}
-                        {%include "dashboard/grupos_tree.html" %}
-                    {% endfor %}
-                </ul>
-            <!--</li>
-        </ul>-->
+        <ul>
+            {% for grupo in concepto_por_actividad.get_grupos %}
+                {%include "dashboard/grupos_tree.html" %}
+            {% endfor %}
+        </ul>
     </div>
 
     <div class="modal fade" id="modal-dialog-archivo">
@@ -134,7 +128,7 @@
                 <div class="modal-body">
                     <form class="form-horizontal" method="post" action={% url 'tableroControlGuardarGrupo' %}>{% csrf_token %}
                         {% bootstrap_form formGrupo layout="horizontal" %}
-                        <button class="btn btn-sm btn-primary pull-right" type="submit">Guardar</button>
+                        <button class="btn btn-sm btn-primary pull-left" type="submit">Guardar</button>
                     </form>
                     <br/><br/>
                 </div>

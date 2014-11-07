@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load bootstrap3 %}
 
 {% block titulo %}
 	Tit@ - Tablero de Control
@@ -9,86 +10,40 @@
 {% endblock %}
 
 {% block css %}
-<link href="{{STATIC_URL}}plugins/DataTables-1.9.4/css/data-table.css" rel="stylesheet" />
-<link href="{{STATIC_URL}}plugins/morris/morris.css" rel="stylesheet" />
-
-<link href="{{STATIC_URL}}plugins/jquery-file-upload/blueimp-gallery/blueimp-gallery.min.css" rel="stylesheet" />
-<link href="{{STATIC_URL}}plugins/jquery-file-upload/css/jquery.fileupload.css" rel="stylesheet" />
-<link href="{{STATIC_URL}}plugins/jquery-file-upload/css/jquery.fileupload-ui.css" rel="stylesheet" />
-<link href="{{STATIC_URL}}plugins/isotope/isotope.css" rel="stylesheet" />
-<link href="{{STATIC_URL}}plugins/lightbox/css/lightbox.css" rel="stylesheet" />
-
+    {{estado_avance_form.media}}
+    <link href="{{STATIC_URL}}css/file-tree.css" rel="stylesheet" />
+    </style>
 {% endblock %}
 
 {% block js %}
-<script src="{{STATIC_URL}}plugins/DataTables-1.9.4/js/jquery.dataTables.js"></script>
-<script src="{{STATIC_URL}}plugins/DataTables-1.9.4/js/data-table.js"></script>
-
-<script src="{{STATIC_URL}}plugins/flot/jquery.flot.min.js"></script>
-<script src="{{STATIC_URL}}plugins/flot/jquery.flot.pie.min.js"></script>
-<script src="{{STATIC_URL}}plugins/flot/jquery.flot.categories.js"></script>
-
-
-<script src="{{STATIC_URL}}plugins/morris/raphael.min.js"></script>
-<script src="{{STATIC_URL}}plugins/morris/morris.js"></script>
-<script src="{{STATIC_URL}}js/chart-morris.demo.js"></script>
-
-<script src="{{STATIC_URL}}plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="{{STATIC_URL}}plugins/jquery-cookie/jquery.cookie.js"></script>
-
-<script src="{{STATIC_URL}}plugins/jquery-file-upload/js/vendor/jquery.ui.widget.js"></script>
-<script src="{{STATIC_URL}}plugins/jquery-file-upload/js/vendor/tmpl.min.js"></script>
-<script src="{{STATIC_URL}}plugins/jquery-file-upload/js/vendor/load-image.min.js"></script>
-<script src="{{STATIC_URL}}plugins/jquery-file-upload/js/vendor/canvas-to-blob.min.js"></script>
-<script src="{{STATIC_URL}}plugins/jquery-file-upload/blueimp-gallery/jquery.blueimp-gallery.min.js"></script>
-<script src="{{STATIC_URL}}plugins/jquery-file-upload/js/jquery.iframe-transport.js"></script>
-<script src="{{STATIC_URL}}plugins/jquery-file-upload/js/jquery.fileupload.js"></script>
-<script src="{{STATIC_URL}}plugins/jquery-file-upload/js/jquery.fileupload-process.js"></script>
-<script src="{{STATIC_URL}}plugins/jquery-file-upload/js/jquery.fileupload-image.js"></script>
-<script src="{{STATIC_URL}}plugins/jquery-file-upload/js/jquery.fileupload-audio.js"></script>
-<script src="{{STATIC_URL}}plugins/jquery-file-upload/js/jquery.fileupload-video.js"></script>
-<script src="{{STATIC_URL}}plugins/jquery-file-upload/js/jquery.fileupload-validate.js"></script>
-<script src="{{STATIC_URL}}plugins/jquery-file-upload/js/jquery.fileupload-ui.js"></script>
-<!--[if (gte IE 8)&(lt IE 10)]>
-	<script src="{{STATIC_URL}}plugins/jquery-file-upload/js/cors/jquery.xdr-transport.js"></script>
-<![endif]-->
-<script src="{{STATIC_URL}}js/form-multiple-upload.demo.min.js"></script>
-
-<script src="{{STATIC_URL}}plugins/isotope/jquery.isotope.min.js"></script>
-<script src="{{STATIC_URL}}plugins/lightbox/js/lightbox-2.6.min.js"></script>
-<script src="{{STATIC_URL}}js/gallery.demo.min.js"></script>
-
-<script src="{{STATIC_URL}}/plugins/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
-<script src="{{STATIC_URL}}/plugins/bootstrap3-editable/inputs-ext/address/address.js"></script>
-<script src="{{STATIC_URL}}/plugins/bootstrap3-editable/inputs-ext/typeaheadjs/lib/typeahead.js"></script>
-<script src="{{STATIC_URL}}/plugins/bootstrap3-editable/inputs-ext/typeaheadjs/typeaheadjs.js"></script>
-<script src="{{STATIC_URL}}/plugins/bootstrap3-editable/inputs-ext/wysihtml5/wysihtml5.js"></script>
-<script src="{{STATIC_URL}}/plugins/bootstrap-wysihtml5/lib/js/wysihtml5-0.3.0.js"></script>
-<script src="{{STATIC_URL}}/plugins/bootstrap-wysihtml5/src/bootstrap-wysihtml5.js"></script>
-<script src="{{STATIC_URL}}/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-<script src="{{STATIC_URL}}/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
-<script src="{{STATIC_URL}}/plugins/select2/select2.min.js"></script>
-<script src="{{STATIC_URL}}/plugins/mockjax/jquery.mockjax.js"></script>
-<script src="{{STATIC_URL}}/plugins/moment/moment.min.js"></script>
-<script src="{{STATIC_URL}}/js/form-editable.js"></script>
 
 {% endblock %}
 
 {% block js_ready %}
-<script>
-    $(document).ready(function() {
-        App.init();
-        MorrisChart.init();
-        FormMultipleUpload.init();
-        Gallery.init();
-        FormEditable.init();
-    });
-</script>
+    <script>
+        $(document).ready(function() {
+            App.init();
+
+            $(function () {
+                $('.tree li:has(ul)').addClass('parent_li').find(' > span').attr('title', 'Cerrar carpeta');
+                $('.tree li.parent_li > span').on('click', function (e) {
+                    var children = $(this).parent('li.parent_li').find(' > ul > li');
+                    if (children.is(":visible")) {
+                        children.hide('fast');
+                        $(this).attr('title', 'Abrir carpeta').find(' > i').addClass('fa-folder-o').removeClass('fa-folder-open-o');
+                    } else {
+                        children.show('fast');
+                        $(this).attr('title', 'Cerrar carpeta').find(' > i').addClass('fa-folder-open-o').removeClass('fa-folder-o');
+                    }
+                    e.stopPropagation();
+                });
+            });
+        });
+    </script>
 {% endblock %}
 
 {% block miga_pan %}
 	<li><a href="javascript:;">Tablero de Control</a></li>
-	
 {% endblock %}
 
 {% block titulo_contenido %}
@@ -96,92 +51,23 @@
 {% endblock %}
 
 {% block contenido %}
-
     <div class="row" align="center">
         <div class="col-xs-12">
-            <a href="javascript:;" class="btn btn-inverse" style="margin-bottom:5px" data-toggle="tooltip" data-placement="top" title="Actividad 1.  Curso de formación  y acompañamiento a formadores de formadores  para apropiación de pedagogía en el uso efectivo de las TIC">
-                <i class="fa fa-twitter fa-2x"></i>
-                <br>
-                <small>Version 1</small>
-            </a>
-            <a href="javascript:;" class="btn btn-inverse" style="margin-bottom:5px" data-toggle="tooltip" data-placement="top" title="Twitter">
-                <i class="fa fa-twitter fa-2x"></i>
-                <br>
-                <small>Version 3.0</small>
-            </a>
-            <a href="javascript:;" class="btn btn-primary" style="margin-bottom:5px" data-toggle="tooltip" data-placement="top" title="Twitter">
-                <i class="fa fa-twitter fa-2x"></i>
-                <br>
-                <small>Version 3.0</small>
-            </a>
-            <a href="javascript:;" class="btn btn-inverse" style="margin-bottom:5px" data-toggle="tooltip" data-placement="top" title="Twitter">
-                <i class="fa fa-twitter fa-2x"></i>
-                <br>
-                <small>Version 3.0</small>
-            </a>
-            <a href="javascript:;" class="btn btn-inverse" style="margin-bottom:5px" data-toggle="tooltip" data-placement="top" title="Twitter">
-                <i class="fa fa-twitter fa-2x"></i>
-                <br>
-                <small>Version 3.0</small>
-            </a>
-            <a href="javascript:;" class="btn btn-inverse" style="margin-bottom:5px" data-toggle="tooltip" data-placement="top" title="Twitter">
-                <i class="fa fa-twitter fa-2x"></i>
-                <br>
-                <small>Version 3.0</small>
-            </a>
-            <a href="javascript:;" class="btn btn-inverse" style="margin-bottom:5px" data-toggle="tooltip" data-placement="top" title="Twitter">
-                <i class="fa fa-twitter fa-2x"></i>
-                <br>
-                <small>Version 3.0</small>
-            </a>
-            <a href="javascript:;" class="btn btn-inverse" style="margin-bottom:5px" data-toggle="tooltip" data-placement="top" title="Twitter">
-                <i class="fa fa-twitter fa-2x"></i>
-                <br>
-                <small>Version 3.0</small>
-            </a>
-            <a href="javascript:;" class="btn btn-inverse" style="margin-bottom:5px" data-toggle="tooltip" data-placement="top" title="Twitter">
-                <i class="fa fa-twitter fa-2x"></i>
-                <br>
-                <small>Version 3.0</small>
-            </a>
-            <a href="javascript:;" class="btn btn-inverse" style="margin-bottom:5px" data-toggle="tooltip" data-placement="top" title="Twitter">
-                <i class="fa fa-twitter fa-2x"></i>
-                <br>
-                <small>Version 3.0</small>
-            </a>
-            <a href="javascript:;" class="btn btn-inverse" style="margin-bottom:5px" data-toggle="tooltip" data-placement="top" title="Twitter">
-                <i class="fa fa-twitter fa-2x"></i>
-                <br>
-                <small>Version 3.0</small>
-            </a>
-            <a href="javascript:;" class="btn btn-inverse" style="margin-bottom:5px" data-toggle="tooltip" data-placement="top" title="Twitter">
-                <i class="fa fa-twitter fa-2x"></i>
-                <br>
-                <small>Version 3.0</small>
-            </a>
-            <a href="javascript:;" class="btn btn-inverse" style="margin-bottom:5px" data-toggle="tooltip" data-placement="top" title="Twitter">
-                <i class="fa fa-twitter fa-2x"></i>
-                <br>
-                <small>Version 3.0</small>
-            </a>
-            <a href="javascript:;" class="btn btn-inverse" style="margin-bottom:5px" data-toggle="tooltip" data-placement="top" title="Twitter">
-                <i class="fa fa-twitter fa-2x"></i>
-                <br>
-                <small>Version 3.0</small>
-            </a>
-            <a href="javascript:;" class="btn btn-inverse" style="margin-bottom:5px" data-toggle="tooltip" data-placement="top" title="Twitter">
-                <i class="fa fa-twitter fa-2x"></i>
-                <br>
-                <small>Version 3.0</small>
-            </a>
-            <a href="javascript:;" class="btn btn-inverse" style="margin-bottom:5px" data-toggle="tooltip" data-placement="top" title="Twitter">
-                <i class="fa fa-twitter fa-2x"></i>
-                <br>
-                <small>Version 3.0</small>
-            </a>
+            {% for actividad in actividades %}
+                <a href="{% url 'tablero_control' actividad.id %}" class="btn {% if actividad.id == actividad_seleccionada.id %} btn-primary {% else %} btn-inverse {% endif %}"
+                    style="margin-bottom:5px" data-toggle="tooltip" data-placement="bottom" title="{{actividad.nombre}} - {{actividad.descripcion}}">
+                    <!--<i class="fa fa-bar-chart-o fa-2x"></i>-->
+                    <small>Actividad</small><br/>
+                    <span class="fa-stack fa-1x ">
+                      <i class="fa fa-circle fa-stack-2x"></i>
+                      <i class="fa fa-inverse fa-stack-1x text-{% if actividad.id == actividad_seleccionada.id %}primary{% else %}inverse{% endif %}"><small>{{forloop.counter}}</small></i>
+                    </span>
+                    <br>
+
+                </a>
+            {% endfor %}
         </div>
     </div>
-
 	<div class="row">
 		<div class="col-md-12">
 			<div class="panel panel-primary" id="inscritos">
@@ -189,464 +75,94 @@
 					<div class="panel-heading-btn">
 						<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
 					</div>
-					<h4 class="panel-title">Estado de Avance del Proyecto</h4>
+					<h4 class="panel-title">Estado de Avance de la {{actividad_seleccionada.nombre}}</h4>
 				</div>
 				<div class="panel-body">
-					<p>
-						<span class="m-r-5">Modo de edici&oacute;n:</span> 
-						<a href="tablero_control" class="btn btn-primary btn-xs active" data-editable="popup">Popup</a>
-						<a href="tablero_control?c=inline" class="btn btn-primary btn-xs" data-editable="inline">Inline</a>
-					</p>
-					<div class="table-responsive">
-                        <table class="table table-striped table-bordered">
-                            <thead>
-								<tr>
-                                    <th>
-                                        <center>Fecha</center>
-                                    </th>
-                                    <th>
-                                        <center>Meta</center>
-                                    </th>
-                                    <th>
-                                        <center>Avance Actual</center>
-                                    </th>
-                                    <th>
-                                        <center>Presupuesto Actividad</center>
-                                    </th>
-                                    <th>
-                                        <center>Presupuesto Ejecutado</center>
-                                    </th>
-                                    <th>
-                                        <center>Ejecución Financiera</center>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="odd gradeX">
-                                	<td><a href="#" class="campofecha" data-type="combodate" data-value="2014-05-15" data-format="YYYY-MM-DD" data-viewformat="DD/MM/YYYY" data-template="D / MMM / YYYY" data-pk="1" data-title="Fecha"></a></td>
-                                    <td><a href="#" class="campometa" data-type="text" data-pk="1" data-title="Meta">90%</a></td>
-                                    <td><a href="#" class="campoavance" data-type="text" data-pk="1" data-title="Meta">50%</a></td>
-                                    <td><a href="#" class="campopresupuestoactividad" data-type="text" data-pk="1" data-title="Meta">30</a></td>
-                                    <td><a href="#" class="campopresupuestoejecutado" data-type="text" data-pk="1" data-title="Meta">38</a></td>
-                                    <td><a href="#" class="campoejecucionfinanciara" data-type="text" data-pk="1" data-title="Meta">78%</a></td>
-                                </tr>
-                                <tr class="odd gradeX">
-                                	<td><a href="#" class="campofecha" data-type="combodate" data-value="2014-01-23" data-format="YYYY-MM-DD" data-viewformat="DD/MM/YYYY" data-template="D / MMM / YYYY" data-pk="1" data-title="Fecha"></a></td>
-                                    <td><a href="#" class="campometa" data-type="text" data-pk="1" data-title="Meta">95%</a></td>
-                                    <td><a href="#" class="campoavance" data-type="text" data-pk="1" data-title="Meta">30%</a></td>
-                                    <td><a href="#" class="campopresupuestoactividad" data-type="text" data-pk="1" data-title="Meta">56</a></td>
-                                    <td><a href="#" class="campopresupuestoejecutado" data-type="text" data-pk="1" data-title="Meta">42</a></td>
-                                    <td><a href="#" class="campoejecucionfinanciara" data-type="text" data-pk="1" data-title="Meta">33%</a></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <form class="form-inline">
+                        <div class="form-group"><label class="control-label" style="width:200px">Fecha</label></div>
+                        <div class="form-group"><label class="control-label" style="width:100px">Meta</label></div>
+                        <div class="form-group"><label class="control-label" style="width:100px">Avance Actual</label></div>
+                        <div class="form-group"><label class="control-label" style="width:200px">Presupuesto para la Actividad</label></div>
+                        <div class="form-group"><label class="control-label" style="width:150px">Presupuesto Ejecutado</label></div>
+                        <div class="form-group"><label class="control-label" style="width:150px">Ejecuci&oacute;n Financiera</label></div>
+                    </form>
+                    <form class="form-inline">
+                        <div class="form-group"><input type="text" value="{{estado_de_avance.fecha}}" title="" size="23" class="form-control"></div>
+                        <div class="form-group"><input type="text" value="{{estado_de_avance.meta}}%" style="width:100px" class="form-control"></div>
+                        <div class="form-group"><input type="text" value="{{estado_de_avance.avance_actual}}%" style="width:100px" class="form-control"></div>
+                        <div class="form-group"><input type="text" value="{{estado_de_avance.presupuesto_actividad}}" style="width:200px" class="form-control"></div>
+                        <div class="form-group"><input type="text" value="{{estado_de_avance.presupuesto_ejecutado}}%" style="width:150px" class="form-control"></div>
+                        <div class="form-group"><input type="text" value="{{estado_de_avance.ejecucion_financiera}}%" style="width:150px" class="form-control"></div>
+                    </form>
+                    <br/>
+                    <form class="form-inline" action={% url 'tableroControlGuardarEstadoDeAvance' %} method="POST">
+                        {% csrf_token %}
+                        {% bootstrap_form estado_avance_form %}
+                        <button class="btn btn-sm btn-primary" type="submit">Guardar</button>
+                    </form>
 				</div>
 			</div>
 		</div>
 	</div>
-
     <div class="row">
         <div class="col-md-12">
             <ul class="nav nav-tabs">
-                <li class=""><a href="#default-tab-1" data-toggle="tab">INSCRIPCIÓN</a></li>
-                <li class=""><a href="#default-tab-2" data-toggle="tab">RESULTADOS PROCESO</a></li>
-                <li class=""><a href="#default-tab-3" data-toggle="tab">EVIDENCIAS</a></li>
-                <li class="active"><a href="#default-tab-4" data-toggle="tab">ARCHIVOS</a></li>
+                {% for concepto_por_actividad in actividad_seleccionada.get_conceptos_por_actividad %}
+                    <li class="{% if forloop.counter == 1 %}active{% else %}{% endif %}"><a href="#tab-{{concepto_por_actividad.id}}" data-toggle="tab">{{concepto_por_actividad.concepto.nombre}}</a></li>
+                {% endfor %}
             </ul>
             <div class="tab-content">
-                <div class="tab-pane fade" id="default-tab-1">
-                    <div id="morris-bar-chart" class="height-sm"></div>
-                </div>
-                <div class="tab-pane fade" id="default-tab-2">
-                    <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Username</th>
-                                        <th>Email Address</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Nicky Almera</td>
-                                        <td>nicky@hotmail.com</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Edmund Wong</td>
-                                        <td>edmund@yahoo.com</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Harvinder Singh</td>
-                                        <td>harvinder@gmail.com</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Terry Khoo</td>
-                                        <td>terry@gmail.com</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                </div>
-                <div class="tab-pane fade" id="default-tab-3">
-                    <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Username</th>
-                                        <th>Email Address</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Nicky Almera</td>
-                                        <td>nicky@hotmail.com</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Edmund Wong</td>
-                                        <td>edmund@yahoo.com</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Harvinder Singh</td>
-                                        <td>harvinder@gmail.com</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Terry Khoo</td>
-                                        <td>terry@gmail.com</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                </div>
-                <div class="tab-pane fade active in" id="default-tab-4">
-					<div id="content-fileupload">
-						<h1 class="page-header">Carga de archivos de soporte de asistencia</h1>
-						<div class="panel panel-inverse">
-							<!--<div class="panel-heading">
-								<h4 class="panel-title">Archivos de soporte de asistencia</h4>
-							</div>-->
-							<div class="panel-body">
-								<form enctype="multipart/form-data" method="POST" action="{{STATIC_URL}}global/plugins/jquery-file-upload/server/php/" id="fileupload" class="">
-									<div class="row fileupload-buttonbar">
-										<div class="col-md-7 ui-sortable">
-											<span class="btn btn-success fileinput-button">
-												<i class="fa fa-plus"></i>
-												<span>Adicionar archivos</span>
-												<input type="file" multiple="" name="files[]">
-											</span>
-											<button class="btn btn-primary start" type="submit">
-												<i class="fa fa-upload"></i>
-												<span>Iniciar carga</span>
-											</button>
-											<button class="btn btn-warning cancel" type="reset">
-												<i class="fa fa-ban"></i>
-												<span>Cancelar carga</span>
-											</button>
-											<button class="btn btn-danger delete" type="button">
-												<i class="glyphicon glyphicon-trash"></i>
-												<span>Borrar</span>
-											</button>
-											<span class="fileupload-process" style=""></span>
-										</div>
-										<div class="col-md-5 fileupload-progress fade ui-sortable">
-											<div aria-valuemax="100" aria-valuemin="0" role="progressbar" class="progress progress-striped active">
-												<div style="width:0%;" class="progress-bar progress-bar-success"></div>
-											</div>
-											<div class="progress-extended">&nbsp;</div>
-										</div>
-									</div>
-									<table class="table table-striped" role="presentation"><tbody class="files"></tbody></table>
-								</form>
-								<div class="note note-info">
-									<ul>
-										<li>El tamaño maximo de archivos es de <strong>5 MB</strong></li>
-										<li>Solo los archivos con extensión (<strong>JPG, GIF, PNG</strong>) son permitidos</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls" data-filter=":even">
-						<div class="slides"></div>
-						<h3 class="title"></h3>
-						<a class="prev">‹</a>
-						<a class="next">›</a>
-						<a class="close">×</a>
-						<a class="play-pause"></a>
-						<ol class="indicator"></ol>
-					</div>
-					<div id="content-gallery">
-						<!--<h4 class="page-header">Soportes Cargados</h4>-->
-						<div id="options" class="m-b-10">
-							<span class="gallery-option-set" id="filter" data-option-key="filter">
-								<a href="#show-all" class="btn btn-default btn-xs active" data-option-value="*">
-									Mostrar todas
-								</a>
-								<a href="#gallery-group-1" class="btn btn-default btn-xs" data-option-value=".gallery-group-1">
-								   Grupo 1
-								</a>
-								<a href="#gallery-group-2" class="btn btn-default btn-xs" data-option-value=".gallery-group-2">
-									Grupo 2
-								</a>
-								<a href="#gallery-group-3" class="btn btn-default btn-xs" data-option-value=".gallery-group-3">
-									Grupo 3
-								</a>
-								<a href="#gallery-group-4" class="btn btn-default btn-xs" data-option-value=".gallery-group-4">
-									Grupo 4
-								</a>
-							</span>
-						</div>
-						<div id="gallery" class="gallery">
-							<div class="image gallery-group-1">
-								<div class="image-inner">
-									<a href="{{STATIC_URL}}/documents/terminos_proyecto_tita.pdf" data-lightbox="gallery-group-1">
-										<img src="{{STATIC_URL}}/img/icons/Adobe_PDF_icon.png" alt="" />
-									</a>
-								</div>
-								<div class="image-info">
-									<h5 class="title">Documento 1</h5>
-									<div class="pull-left">
-										<small>por</small> <a href="javascript:;">Sean Ngu</a>
-									</div>
-									<div class="pull-right">
-										<small>16-07-2014</small>
-									</div>
-								</div>
-							</div>
-							<div class="image gallery-group-1">
-								<div class="image-inner">
-									<a href="{{STATIC_URL}}img/gallery/gallery-2.jpg" data-lightbox="gallery-group-1">
-										<img src="{{STATIC_URL}}img/gallery/gallery-2.jpg" alt="" />
-									</a>
-								</div>
-								<div class="image-info">
-									<h5 class="title">Documento 2</h5>
-									<div class="pull-left">
-										<small>por</small> <a href="javascript:;">Camryn Wong</a>
-									</div>
-									<div class="pull-right">
-										<small>16-07-2014</small>
-									</div>
-								</div>
-							</div>
-							<div class="image gallery-group-1">
-								<div class="image-inner">
-									<a href="{{STATIC_URL}}img/gallery/gallery-3.jpg" data-lightbox="gallery-group-1">
-										<img src="{{STATIC_URL}}img/gallery/gallery-3.jpg" alt="" />
-									</a>
-								</div>
-								<div class="image-info">
-									<h5 class="title">Documento 3</h5>
-									<div class="pull-left">
-										<small>por</small> <a href="javascript:;">Lelouch Wong</a>
-									</div>
-									<div class="pull-right">
-										<small>16-07-2014</small>
-									</div>
-								</div>
-							</div>
-							<div class="image gallery-group-2">
-								<div class="image-inner">
-									<a href="{{STATIC_URL}}img/gallery/gallery-4.jpg" data-lightbox="gallery-group-2">
-										<img src="{{STATIC_URL}}img/gallery/gallery-4.jpg" alt="" />
-									</a>
-								</div>
-								<div class="image-info">
-									<h5 class="title">Documento 4</h5>
-									<div class="pull-left">
-										<small>por</small> <a href="javascript:;">Richard Leong</a>
-									</div>
-									<div class="pull-right">
-										<small>16-07-2014</small>
-									</div>
-								</div>
-							</div>
-							<div class="image gallery-group-2">
-								<div class="image-inner">
-									<a href="{{STATIC_URL}}img/gallery/gallery-5.jpg" data-lightbox="gallery-group-2">
-										<img src="{{STATIC_URL}}img/gallery/gallery-5.jpg" alt="" />
-									</a>
-								</div>
-								<div class="image-info">
-									<h5 class="title">Documento 5</h5>
-									<div class="pull-left">
-										<small>por</small> <a href="javascript:;">Derrick Wong</a>
-									</div>
-									<div class="pull-right">
-										<small>16-07-2014</small>
-									</div>
-								</div>
-							</div>
-							<div class="image gallery-group-3">
-								<div class="image-inner">
-									<a href="{{STATIC_URL}}img/gallery/gallery-6.jpg" data-lightbox="gallery-group-3">
-										<img src="{{STATIC_URL}}img/gallery/gallery-6.jpg" alt="" />
-									</a>
-								</div>
-								<div class="image-info">
-									<h5 class="title">Documento 6</h5>
-									<div class="pull-left">
-										<small>por</small> <a href="javascript:;">Apple Tong</a>
-									</div>
-									<div class="pull-right">
-										<small>16-07-2014</small>
-									</div>
-								</div>
-							</div>
-							<div class="image gallery-group-3">
-								<div class="image-inner">
-									<a href="{{STATIC_URL}}img/gallery/gallery-7.jpg" data-lightbox="gallery-group-3">
-										<img src="{{STATIC_URL}}img/gallery/gallery-7.jpg" alt="" />
-									</a>
-								</div>
-								<div class="image-info">
-									<h5 class="title">Documento 7</h5>
-									<div class="pull-left">
-										<small>por</small> <a href="javascript:;">Thomas Wong</a>
-									</div>
-									<div class="pull-right">
-										<small>16-07-2014</small>
-									</div>
-								</div>
-							</div>
-							<div class="image gallery-group-4">
-								<div class="image-inner">
-									<a href="{{STATIC_URL}}img/gallery/gallery-8.jpg" data-lightbox="gallery-group-4">
-										<img src="{{STATIC_URL}}img/gallery/gallery-8.jpg" alt="" />
-									</a>
-								</div>
-								<div class="image-info">
-									<h5 class="title">Documento 8</h5>
-									<div class="pull-left">
-										<small>por</small> <a href="javascript:;">Andy Wong</a>
-									</div>
-									<div class="pull-right">
-										<small>16-07-2014</small>
-									</div>
-								</div>
-							</div>
-							<div class="image gallery-group-4">
-								<div class="image-inner">
-									<a href="{{STATIC_URL}}img/gallery/gallery-9.jpg" data-lightbox="gallery-group-4">
-										<img src="{{STATIC_URL}}img/gallery/gallery-9.jpg" alt="" />
-									</a>
-								</div>
-								<div class="image-info">
-									<h5 class="title">Documento 9</h5>
-									<div class="pull-left">
-										<small>por</small> <a href="javascript:;">William Tan</a>
-									</div>
-									<div class="pull-right">
-										<small>16-07-2014</small>
-									</div>
-								</div>
-							</div>
-							<div class="image gallery-group-4">
-								<div class="image-inner">
-									<a href="{{STATIC_URL}}img/gallery/gallery-10.jpg" data-lightbox="gallery-group-4">
-										<img src="{{STATIC_URL}}img/gallery/gallery-10.jpg" alt="" />
-									</a>
-								</div>
-								<div class="image-info">
-									<h5 class="title">Documento 10</h5>
-									<div class="pull-left">
-										<small>por</small> <a href="javascript:;">David King</a>
-									</div>
-									<div class="pull-right">
-										<small>16-07-2014</small>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
-				</div>
+                {% for concepto_por_actividad in actividad_seleccionada.get_conceptos_por_actividad %}
+                    <div class="tab-pane fade {% if forloop.counter == 1 %}active in{% else %}{% endif %}" id="tab-{{concepto_por_actividad.id}}">
+                        <div class="tree">
+                            <div class="row">
+                                <a href="#modal-dialog-grupo" class="btn btn-success" data-toggle="modal">Adicionar Grupo</a>
+                                <a href="#modal-dialog-archivo" class="btn btn-success" data-toggle="modal">Adicionar Archivo</a>
+                            </div>
+                            <ul>
+                                {% for grupo in concepto_por_actividad.get_grupos %}
+                                    {%include "dashboard/grupos_tree.html" %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="modal fade" id="modal-dialog-archivo">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <h4 class="modal-title">Adicionar Archivo</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form enctype="multipart/form-data" class="form-horizontal" method="post" action={% url 'tableroControlGuardarArchivo' %}>{% csrf_token %}
+                                            {% bootstrap_form formArchivo layout="horizontal" %}
+                                            <button class="btn btn-sm btn-primary pull-right" type="submit">Guardar</button>
+                                        </form>
+                                        <br/><br/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="modal-dialog-grupo">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <h4 class="modal-title">Adicionar Grupo</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form class="form-horizontal" method="post" action={% url 'tableroControlGuardarGrupo' %}>{% csrf_token %}
+                                            {% bootstrap_form formGrupo layout="horizontal" %}
+                                            <button class="btn btn-sm btn-primary pull-left" type="submit">Guardar</button>
+                                        </form>
+                                        <br/><br/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </div>
-</div>
-{% verbatim %}
-<script id="template-upload" type="text/x-tmpl">
-    {% for (var i=0, file; file=o.files[i]; i++) { %}
-		<tr class="template-upload fade">
-			<td class="col-md-1">
-				<span class="preview"></span>
-			</td>
-			<td>
-				<p class="name">{%=file.name%}</p>
-				<strong class="error text-danger"></strong>
-			</td>
-			<td>
-				<p class="size">Processing...</p>
-				<div class="progress progress-striped active"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
-			</td>
-			<td>
-				{% if (!i && !o.options.autoUpload) { %}
-					<button class="btn btn-primary btn-sm start" disabled>
-						<i class="fa fa-upload"></i>
-						<span>Start</span>
-					</button>
-				{% } %}
-				{% if (!i) { %}
-					<button class="btn btn-white btn-sm cancel">
-						<i class="fa fa-ban"></i>
-						<span>Cancel</span>
-					</button>
-				{% } %}
-			</td>
-		</tr>
-	{% } %}
-</script>
-<script id="template-download" type="text/x-tmpl">
-	{% for (var i=0, file; file=o.files[i]; i++) { %}
-		<tr class="template-download fade">
-			<td>
-				<span class="preview">
-					{% if (file.thumbnailUrl) { %}
-						<a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img src="{%=file.thumbnailUrl%}"></a>
-					{% } %}
-				</span>
-			</td>
-			<td>
-				<p class="name">
-					{% if (file.url) { %}
-						<a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
-					{% } else { %}
-						<span>{%=file.name%}</span>
-					{% } %}
-				</p>
-				{% if (file.error) { %}
-					<div><span class="label label-danger">Error</span> {%=file.error%}</div>
-				{% } %}
-			</td>
-			<td>
-				<span class="size">{%=o.formatFileSize(file.size)%}</span>
-			</td>
-			<td>
-				{% if (file.deleteUrl) { %}
-					<button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
-						<i class="glyphicon glyphicon-trash"></i>
-						<span>Delete</span>
-					</button>
-					<input type="checkbox" name="delete" value="1" class="toggle">
-				{% } else { %}
-					<button class="btn btn-warning cancel">
-						<i class="glyphicon glyphicon-ban-circle"></i>
-						<span>Cancel</span>
-					</button>
-				{% } %}
-			</td>
-		</tr>
-	{% } %}
-</script>
-{% endverbatim %}
-
+    <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
 {% endblock %}
-
-

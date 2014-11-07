@@ -138,10 +138,38 @@ def actividades(request, id_actividad):
         id_actividad=1
 
     actividad = Actividad.objects.get(id=id_actividad)
+    concepto = Concepto.objects.get(id=1)
     request.session['actividad_tablero_control']=id_actividad
+    print(actividad)
+    print(concepto)
+
+    concepto_por_actividad = ConceptoPorActividad.objects.get(actividad=actividad, concepto=concepto)
+    print(concepto_por_actividad)
 
     return render(request, 'dashboard/actividades.html', {
+        'concepto_por_actividad' : concepto_por_actividad,
         'actividad' : actividad,
+        'formArchivo': ArchivoForm(),
+        'formGrupo': GrupoForm()
+    })
+
+def tablero_control(request, id_actividad):
+    if id_actividad=='':
+        id_actividad=1
+
+    actividad_seleccionada = Actividad.objects.get(id=id_actividad)
+    actividades = Actividad.objects.all().order_by('id')
+    estado_de_avance = EstadoDeAvance.objects.filter(actividad=actividad_seleccionada)
+    print(estado_de_avance)
+
+    if len(estado_de_avance) > 0:
+        estado_de_avance = estado_de_avance.latest('id')
+
+    return render(request, 'dashboard/tablero_control.html', {
+        'actividades' : actividades,
+        'actividad_seleccionada' : actividad_seleccionada,
+        'estado_de_avance' : estado_de_avance,
+        'estado_avance_form' : EstadoDeAvanceForm(),
         'formArchivo': ArchivoForm(),
         'formGrupo': GrupoForm()
     })
@@ -152,6 +180,16 @@ def guardarArchivo(request):
         form.save()
 
     return HttpResponseRedirect('actividades/' + str(request.session['actividad_tablero_control']))
+
+def guardarEstadoDeAvance(request):
+    actividad = Actividad.objects.get(id=request.session['actividad_tablero_control'])
+    form = EstadoDeAvanceForm(request.POST)
+    if form.is_valid():
+        estado_de_avance = form.save(commit=False)
+        estado_de_avance.actividad = actividad
+        estado_de_avance.save()
+
+    return HttpResponseRedirect( str(request.session['actividad_tablero_control']))
 
 def guardarGrupo(request):
     form = GrupoForm(request.POST, request.FILES)
