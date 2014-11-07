@@ -43,18 +43,12 @@ class Formador(models.Model):
     apellido1 = models.CharField( max_length=255, verbose_name='primer apellido')
     apellido2 = models.CharField( max_length=255, blank=True, verbose_name='segundo apellido')
     aspirante = models.ForeignKey(Aspirante, verbose_name='aspirante', null=True, blank=True)   
-    usuario = models.OneToOneField(User)
+    usuario = models.ForeignKey(User)
 
     def __unicode__(self):
         return (u"%s %s %s %s"%(self.nombre1,self.nombre2 or '', self.apellido1, self.apellido2 or '')).strip() or "-"
 
-class Curso(models.Model):
-    descripcion = models.CharField(max_length=255, verbose_name=u'descripción del curso')
-    institucion = models.ForeignKey(InstitucionEducativa, verbose_name='institucion', null=True, blank=True)
-    formador = models.ForeignKey(Formador)
 
-    def __unicode__(self):
-        return (u"Curso: %s - Formador: %s"%(self.descripcion,self.formador))
 
 
 
@@ -104,7 +98,7 @@ class Estudiante(models.Model):
     nivel_educativo = models.IntegerField(choices=NIVEL_EDUCATIVO, verbose_name="último nivel educativo aprobado *")
     acta_compromiso = models.NullBooleanField()
 
-    curso = models.ForeignKey(Curso, verbose_name='curso *', null=True, blank=True)
+    #curso = models.ForeignKey(Curso, verbose_name='curso *', null=True, blank=True)
 
     aprobo = models.NullBooleanField()
     cohorte = models.IntegerField(default=1) #cambiar de acuerdo al cohorte que se este realizando
@@ -116,6 +110,15 @@ class Estudiante(models.Model):
         mihash = (self.numero_documento*44383)%1000000007
         clave = "%d-%d"%(self.id, mihash)
         return clave
+
+class Curso(models.Model):
+    descripcion = models.CharField(max_length=255, verbose_name=u'Nombre')
+    institucion = models.ForeignKey(InstitucionEducativa, verbose_name='institucion', null=True, blank=True)
+    formador = models.ForeignKey(Formador)
+    estudiantes = models.ManyToManyField(Estudiante, blank=True, verbose_name='Estudiantes')
+
+    def __unicode__(self):
+        return (u"Curso: %s - Formador: %s"%(self.descripcion,self.formador))
 
 """   
 class Horario(models.Model):

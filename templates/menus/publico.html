@@ -11,6 +11,9 @@
 		<b class="caret pull-right"></b>
 	</a>
 	<ul class="sub-menu">
+		<li {% if opcion_menu == 'encuesta_nuevo_estudiante' %} class="active" {% endif %}>
+			<a href="{% url 'encuesta_nuevo_estudiante' %}"><i class="fa fa-smile-o"></i> Nueva Alumnos</a>
+		</li>
 		<li {% if opcion_menu == 'encuesta_estudiante' %} class="active" {% endif %}>
 			<a href="{% url 'encuesta_estudiante' %}"><i class="fa fa-child"></i><i class="fa fa-child"></i> Alumnos</a>
 		</li>

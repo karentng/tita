@@ -93,7 +93,12 @@ def reporteME(request):
     students = Estudiante.objects.filter(acta_compromiso=True).select_related('estudiante.InfoLaboral__estudiante')
     for estudiante in students:
         estudiantes.append(
-            {"id": estudiante.id, "item": cont, "nombre": estudiante, "institucion":InfoLaboral.objects.get(estudiante=estudiante).get_sede_display, "nivel":estudiante.get_nivel_educativo_display}
+            {"id": estudiante.id,
+            "item": cont,
+            "nombre": estudiante,
+            "cedula": estudiante.numero_documento,
+            "jornada": InfoLaboral.objects.get(estudiante=estudiante).get_jornada_display,
+            "institucion":InfoLaboral.objects.get(estudiante=estudiante).get_sede_display,}
         )
         cont = cont + 1
     print "------------------"

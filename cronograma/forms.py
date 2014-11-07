@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django import forms
-from campus.models import Clase, AcompanamientoInSitu, SoporteClase, SoporteAcompanamiento
+from campus.models import Clase, AcompanamientoInSitu, SoporteClase, SoporteAcompanamiento, Curso, Formador
 from datetimewidget.widgets import DateTimeWidget
 from datetimewidget.widgets import DateWidget
 from django.forms import ModelForm, Textarea, HiddenInput, TextInput, Select, CheckboxSelectMultiple, FileInput, ClearableFileInput
@@ -92,3 +92,15 @@ class DocumentosSoporteAcompanamientoForm(forms.ModelForm):
             'archivo' : MyFileInput(),
 
         }
+
+class CursoForm(forms.ModelForm):
+    class Meta:
+        model = Curso
+
+        
+
+class FormadorForm(forms.ModelForm):
+    class Meta:
+        model = Formador
+
+        
