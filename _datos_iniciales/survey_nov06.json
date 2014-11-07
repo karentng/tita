@@ -903,7 +903,8 @@
     "survey": 4, 
     "question_type": "radio"
   },
-  {
+},
+{
   "pk": 523, 
   "model": "survey.question", 
   "fields": {
@@ -915,4 +916,5 @@
     "survey": 4, 
     "question_type": "text"
   }
+}
 ]
