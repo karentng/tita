@@ -1,0 +1,907 @@
+[
+{
+  "pk": 4, 
+  "model": "survey.survey", 
+  "fields": {
+    "name": "Encuesta a nuevos estudiantes", 
+    "description": ":-o"
+  }
+},
+{
+  "pk": 394, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Jornada en la que estudias:", 
+    "required": true, 
+    "number": "01", 
+    "choices": "Ma\u00f1ana\r\nTarde", 
+    "survey": 4, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 395, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Nombre de tu instituci\u00f3n educativa:", 
+    "required": true, 
+    "number": "02", 
+    "choices": "INEM JORGE ISAACS\r\nCECILIA MU\u00d1OZ RICAURTE\r\nLAS AMERICAS\r\nCAMILO TORRES\r\nCENTRO EDUCATIVO DEL NORTE\r\nFRAY DOMINGO DE LAS CASAS\r\nPABLO EMILIO\r\nANTONIO JOSE CAMACHO\r\nREPUBLICA DEL PERU\r\nMARCO FIDEL SUAREZ\r\nOLGA LUCIA LLOREDA\r\nNORMAL SUPERIOR FARALLONES DE CALI\r\nJOAQUIN DE CAYZEDO Y CUERO\r\nGOLONDRINAS\r\nANTONIO BARBERENA\r\nCARLOS HOLGUIN MALLARINO\r\nNI\u00d1O JESUS DE ATOCHA\r\nMIGUEL DE POMBO\r\nMANUEL MARIA MALLARINO\r\nLAURA VICU\u00d1A\r\nLOS PINOS\r\nCARLOS HOLGUIN SARDI\r\nEL DIAMANTE\r\nJUAN PABLO II\r\nEUSTAQUIO PALACIOS\r\nLUIS LOPEZ MESA\r\nCELANESE\r\nMANUEL MARIA BUENAVENTURA\r\nMARISCAL JORGE ROBLEDO\r\nMIGUEL ANTONIO CARO\r\nGENERAL ANZOATEGUI\r\nTULIO ENRIQUE TASCON\r\nSANTIAGO RENGIFO\r\nSOFIA CAMARGO\r\nJOSE MARIA CARBONELL\r\nHONORIO VILLEGAS\r\nIE BOYACA\r\nMARICE SINISTERRA\r\nFENALCO ASTURIAS\r\nVIJES\r\nLICEO DEPARTAMENTAL\r\nIETI COMUNA 17\r\nCELMIRA BUENO DE OREJUELA", 
+    "survey": 4, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 396, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Tus nombre(s) y apellidos: ", 
+    "required": true, 
+    "number": "03", 
+    "choices": "", 
+    "survey": 4, 
+    "question_type": "text"
+  }
+},
+{
+  "pk": 397, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Curso en el que est\u00e1s: ", 
+    "required": true, 
+    "number": "04", 
+    "choices": "", 
+    "survey": 4, 
+    "question_type": "text"
+  }
+},
+{
+  "pk": 398, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Edad: \r\n", 
+    "required": true, 
+    "number": "05", 
+    "choices": "", 
+    "survey": 4, 
+    "question_type": "text"
+  }
+},
+{
+  "pk": 399, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "D\u00eda", 
+    "required": true, 
+    "number": "0601", 
+    "choices": "1\r\n2\r\n3\r\n4\r\n5\r\n6\r\n7\r\n8\r\n9\r\n10\r\n11\r\n12\r\n13\r\n14\r\n15\r\n16\r\n17\r\n18\r\n19\r\n20\r\n21\r\n22\r\n23\r\n24\r\n25\r\n26\r\n27\r\n28\r\n29\r\n30\r\n31", 
+    "survey": 4, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 400, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Mes", 
+    "required": true, 
+    "number": "0602", 
+    "choices": "Enero\r\nFebrero\r\nMarzo\r\nAbril\r\nMayo\r\nJunio\r\nJulio\r\nAgosto\r\nSeptiembre\r\nOctubre\r\nNoviembre\r\nDiciembre", 
+    "survey": 4, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 401, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "A\u00f1o", 
+    "required": true, 
+    "number": "0603", 
+    "choices": "1914\r\n1915\r\n1916\r\n1917\r\n1918\r\n1919\r\n1920\r\n1921\r\n1922\r\n1923\r\n1924\r\n1925\r\n1926\r\n1927\r\n1928\r\n1929\r\n1930\r\n1931\r\n1932\r\n1933\r\n1934\r\n1935\r\n1936\r\n1937\r\n1938\r\n1939\r\n1940\r\n1941\r\n1942\r\n1943\r\n1944\r\n1945\r\n1946\r\n1947\r\n1948\r\n1949\r\n1950\r\n1951\r\n1952\r\n1953\r\n1954\r\n1955\r\n1956\r\n1957\r\n1958\r\n1959\r\n1960\r\n1961\r\n1962\r\n1963\r\n1964\r\n1965\r\n1966\r\n1967\r\n1968\r\n1969\r\n1970\r\n1971\r\n1972\r\n1973\r\n1974\r\n1975\r\n1976\r\n1977\r\n1978\r\n1979\r\n1980\r\n1981\r\n1982\r\n1983\r\n1984\r\n1985\r\n1986\r\n1987\r\n1988\r\n1989\r\n1990\r\n1991\r\n1992\r\n1993\r\n1994\r\n1995\r\n1996\r\n1997\r\n1998\r\n1999\r\n2000\r\n2001\r\n2002\r\n2003\r\n2004\r\n2005\r\n2006\r\n2007\r\n2008\r\n2009\r\n2010", 
+    "survey": 4, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 402, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "\u00bfEn qu\u00e9 ciudad naciste?", 
+    "required": true, 
+    "number": "07", 
+    "choices": "", 
+    "survey": 4, 
+    "question_type": "text"
+  }
+},
+{
+  "pk": 403, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Actualmente \u00bfen qu\u00e9 barrio vives?", 
+    "required": true, 
+    "number": "08", 
+    "choices": "", 
+    "survey": 4, 
+    "question_type": "text"
+  }
+},
+{
+  "pk": 404, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "1. Actualmente \u00bfcon qu\u00e9 frecuencia utilizas el computador? Marca s\u00f3lo una respuesta. ", 
+    "required": true, 
+    "number": "09", 
+    "choices": "De 4 a 7 d\u00edas a la semana.  \r\nDe 2 a 3 d\u00edas a la semana.\r\n1 d\u00eda a la semana. \r\nCasi nunca.\r\nNunca. ", 
+    "survey": 4, 
+    "question_type": "radio"
+  }
+},
+{
+  "pk": 405, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "2. Actualmente \u00bfcon qu\u00e9 frecuencia te conectas a Internet? Marca s\u00f3lo una respuesta. \r\n", 
+    "required": true, 
+    "number": "10", 
+    "choices": "De 4 a 7 d\u00edas a la semana.\r\nDe 2 a 3 d\u00edas a la semana.\r\n1 d\u00eda a la semana. \r\nCasi nunca.\r\nNunca. ", 
+    "survey": 4, 
+    "question_type": "radio"
+  }
+},
+{
+  "pk": 406, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Encuentras informaci\u00f3n interesante que no conoc\u00edas.\t\t\t\t\t\t\t\t\t\t\t\t\t", 
+    "required": true, 
+    "number": "1101", 
+    "choices": "Definitivamente s\u00ed\r\nA veces\t\t\r\nNunca me pasa eso", 
+    "survey": 4, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 407, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Aprendes cosas que no te hab\u00edan ense\u00f1ado en las clases. ", 
+    "required": true, 
+    "number": "1102", 
+    "choices": "Definitivamente s\u00ed\r\nA veces\t\t\r\nNunca me pasa eso", 
+    "survey": 4, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 408, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Terminas haciendo cosas que no tienen que ver con la tarea.\t\t\t\t\t\t\t\t\t\t\t", 
+    "required": true, 
+    "number": "1103", 
+    "choices": "Definitivamente s\u00ed\r\nA veces\t\t\r\nNunca me pasa eso", 
+    "survey": 4, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 409, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "4.  \u00bfC\u00f3mo crees que ser\u00edan tus clases si se utilizara Internet? Puedes marcar varias opciones.", 
+    "required": true, 
+    "number": "12", 
+    "choices": "Ser\u00edan m\u00e1s interesantes.\r\nLe entender\u00edas m\u00e1s al profesor.\r\nDar\u00eda lo mismo.\r\nSer\u00eda m\u00e1s dif\u00edcil aprender.\r\nMe distraer\u00eda con m\u00e1s facilidad.", 
+    "survey": 4, 
+    "question_type": "select-multiple"
+  }
+},
+{
+  "pk": 410, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Matem\u00e1ticas - F\u00edsica\r\n", 
+    "required": true, 
+    "number": "1301", 
+    "choices": "1\r\n2\r\n3", 
+    "survey": 4, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 411, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Ingl\u00e9s\r\n", 
+    "required": true, 
+    "number": "1302", 
+    "choices": "1\r\n2\r\n3", 
+    "survey": 4, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 412, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Tecnolog\u00eda e Inform\u00e0tica\r\n", 
+    "required": true, 
+    "number": "1303", 
+    "choices": "1\r\n2\r\n3", 
+    "survey": 4, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 413, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Ciencias Sociales - Filosof\u00eda\r\n", 
+    "required": true, 
+    "number": "1304", 
+    "choices": "1\r\n2\r\n3", 
+    "survey": 4, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 414, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Biolog\u00eda - Qu\u00edmica\r\n", 
+    "required": true, 
+    "number": "1305", 
+    "choices": "1\r\n2\r\n3", 
+    "survey": 4, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 415, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Educaci\u00f3n F\u00edsica\r\n", 
+    "required": true, 
+    "number": "1306", 
+    "choices": "1\r\n2\r\n3", 
+    "survey": 4, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 416, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Lengua Castellana\r\n", 
+    "required": true, 
+    "number": "1307", 
+    "choices": "1\r\n2\r\n3", 
+    "survey": 4, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 417, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Artes\r\n", 
+    "required": true, 
+    "number": "1308", 
+    "choices": "1\r\n2\r\n3", 
+    "survey": 4, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 418, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "6. Para tus clases y hacer las tareas \u00bfqu\u00e9 programas inform\u00e1ticos usas? Puedes marcar varias opciones.", 
+    "required": true, 
+    "number": "14", 
+    "choices": "Procesador de texto (Ejemplo: Word, Apache OpenOffice Writer, LibreOffice Writer).\r\nHoja de c\u00e1lculo (Ejemplo: Excel, Apache OpenOffice Calc, LibreOffice Calc, StartOffice Calc).\r\nProgramas para hacer presentaciones (Ejemplo: Power Point, Prezi, Apache OpenOffice Impress).\r\nProgramas de dibujo (Ejemplo: Corel Draw, Adobe Flash, Microsoft Paint).\r\nProgramas para editar im\u00e1genes y fotograf\u00edas (Ejemplo: Adobe Photoshop, GIMP).\r\nNinguno. ", 
+    "survey": 4, 
+    "question_type": "select-multiple"
+  }
+},
+{
+  "pk": 419, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Enciclopedias o diccionarios digitales como ENCARTA. \t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t", 
+    "required": true, 
+    "number": "1501", 
+    "choices": "Siempre\r\nA veces\r\nNunca", 
+    "survey": 4, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 420, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Revistas y peri\u00f3dicos en Internet. \t\t\t\t\t\t\t\t\t\t\t", 
+    "required": true, 
+    "number": "1502", 
+    "choices": "Siempre\r\nA veces\r\nNunca", 
+    "survey": 4, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 421, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Sitios de consulta como Wikipedia. \t\t\t\t\t\t\t\t\t\t\t", 
+    "required": true, 
+    "number": "1503", 
+    "choices": "Siempre\r\nA veces\r\nNunca", 
+    "survey": 4, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 422, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Sitios de tareas como el Rinc\u00f3n del Vago. \t\t\t\t\t\t\t\t\t\t\t", 
+    "required": true, 
+    "number": "1504", 
+    "choices": "Siempre\r\nA veces\r\nNunca", 
+    "survey": 4, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 423, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Videos en You Tube. \t\t\t\t\t\t\t\t\t\t\t\r\n", 
+    "required": true, 
+    "number": "1505", 
+    "choices": "Siempre\r\nA veces\r\nNunca", 
+    "survey": 4, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 424, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Cursos en Internet. \t\t\t\t\t\t\t\t\t\t", 
+    "required": true, 
+    "number": "1506", 
+    "choices": "Siempre\r\nA veces\r\nNunca", 
+    "survey": 4, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 425, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Plataforma virtual de aprendizaje como Moodle, Blackboard, Atutor, etc.\t", 
+    "required": true, 
+    "number": "1507", 
+    "choices": "Siempre\r\nA veces\r\nNunca", 
+    "survey": 4, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 426, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "8. \u00bfEn qu\u00e9 sitios te conectas a Internet? Puedes marcar varias opciones.", 
+    "required": false, 
+    "number": "16", 
+    "choices": "En tu casa.\r\nEn la casa de tus amigos o familiares.\r\nEn tu colegio.\r\nEn un lugar de acceso p\u00fablico gratuito.  \r\nEn un lugar de acceso p\u00fablico con costo como un caf\u00e9 Internet. \r\nEn cualquier parte a trav\u00e9s de Internet m\u00f3vil.", 
+    "survey": 4, 
+    "question_type": "select-multiple"
+  }
+},
+{
+  "pk": 427, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Computador\t\t\r\n", 
+    "required": true, 
+    "number": "1701", 
+    "choices": "Me ayuda a pasar el tiempo\r\nMe permite registrar momentos\r\nMe informa\r\nMe ense\u00f1a\r\nMe permite conocer otros pa\u00edses, otras culturas\r\nMe comunico con amigos y otras personas\r\nNo lo uso\r\nNo tengo", 
+    "survey": 4, 
+    "question_type": "select-multiple"
+  }
+},
+{
+  "pk": 428, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Lo uso para otra cosa. Dinos \u00bfcu\u00e1l?", 
+    "required": false, 
+    "number": "170101", 
+    "choices": "", 
+    "survey": 4, 
+    "question_type": "text"
+  }
+},
+{
+  "pk": 429, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Internet\t\t\r\n", 
+    "required": true, 
+    "number": "1702", 
+    "choices": "Me ayuda a pasar el tiempo\r\nMe permite registrar momentos\r\nMe informa\r\nMe ense\u00f1a\r\nMe permite conocer otros pa\u00edses, otras culturas\r\nMe comunico con amigos y otras personas\r\nNo lo uso\r\nNo tengo", 
+    "survey": 4, 
+    "question_type": "select-multiple"
+  }
+},
+{
+  "pk": 430, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Lo uso para otra cosa. Dinos \u00bfcu\u00e1l?", 
+    "required": false, 
+    "number": "170201", 
+    "choices": "", 
+    "survey": 4, 
+    "question_type": "text"
+  }
+},
+{
+  "pk": 431, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Tablet\t\t\r\n", 
+    "required": true, 
+    "number": "1703", 
+    "choices": "Me ayuda a pasar el tiempo\r\nMe permite registrar momentos\r\nMe informa\r\nMe ense\u00f1a\r\nMe permite conocer otros pa\u00edses, otras culturas\r\nMe comunico con amigos y otras personas\r\nNo lo uso\r\nNo tengo", 
+    "survey": 4, 
+    "question_type": "select-multiple"
+  }
+},
+{
+  "pk": 432, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Lo uso para otra cosa. Dinos \u00bfcu\u00e1l?", 
+    "required": false, 
+    "number": "170301", 
+    "choices": "", 
+    "survey": 4, 
+    "question_type": "text"
+  }
+},
+{
+  "pk": 433, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Celular\t\t\r\n", 
+    "required": true, 
+    "number": "1704", 
+    "choices": "Me ayuda a pasar el tiempo\r\nMe permite registrar momentos\r\nMe informa\r\nMe ense\u00f1a\r\nMe permite conocer otros pa\u00edses, otras culturas\r\nMe comunico con amigos y otras personas\r\nNo lo uso\r\nNo tengo", 
+    "survey": 4, 
+    "question_type": "select-multiple"
+  }
+},
+{
+  "pk": 434, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Lo uso para otra cosa. Dinos \u00bfcu\u00e1l?", 
+    "required": false, 
+    "number": "170401", 
+    "choices": "", 
+    "survey": 4, 
+    "question_type": "text"
+  }
+},
+{
+  "pk": 435, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Videojuegos\t\t\r\n", 
+    "required": true, 
+    "number": "1705", 
+    "choices": "Me ayuda a pasar el tiempo\r\nMe permite registrar momentos\r\nMe informa\r\nMe ense\u00f1a\r\nMe permite conocer otros pa\u00edses, otras culturas\r\nMe comunico con amigos y otras personas\r\nNo lo uso\r\nNo tengo", 
+    "survey": 4, 
+    "question_type": "select-multiple"
+  }
+},
+{
+  "pk": 436, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Lo uso para otra cosa. Dinos \u00bfcu\u00e1l?", 
+    "required": false, 
+    "number": "170501", 
+    "choices": "", 
+    "survey": 4, 
+    "question_type": "text"
+  }
+},
+{
+  "pk": 437, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "C\u00e1mara fotogr\u00e1fica digital\t\t\r\n", 
+    "required": true, 
+    "number": "1706", 
+    "choices": "Me ayuda a pasar el tiempo\r\nMe permite registrar momentos\r\nMe informa\r\nMe ense\u00f1a\r\nMe permite conocer otros pa\u00edses, otras culturas\r\nMe comunico con amigos y otras personas\r\nNo lo uso\r\nNo tengo", 
+    "survey": 4, 
+    "question_type": "select-multiple"
+  }
+},
+{
+  "pk": 438, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Lo uso para otra cosa. Dinos \u00bfcu\u00e1l?", 
+    "required": false, 
+    "number": "170601", 
+    "choices": "", 
+    "survey": 4, 
+    "question_type": "text"
+  }
+},
+{
+  "pk": 439, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "C\u00e1mara de video\t\t\r\n", 
+    "required": true, 
+    "number": "1707", 
+    "choices": "Me ayuda a pasar el tiempo\r\nMe permite registrar momentos\r\nMe informa\r\nMe ense\u00f1a\r\nMe permite conocer otros pa\u00edses, otras culturas\r\nMe comunico con amigos y otras personas\r\nNo lo uso\r\nNo tengo", 
+    "survey": 4, 
+    "question_type": "select-multiple"
+  }
+},
+{
+  "pk": 440, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Lo uso para otra cosa. Dinos \u00bfcu\u00e1l?", 
+    "required": false, 
+    "number": "170701", 
+    "choices": "", 
+    "survey": 4, 
+    "question_type": "text"
+  }
+},
+{
+  "pk": 441, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Grabadora digital\t\t\r\n", 
+    "required": true, 
+    "number": "1708", 
+    "choices": "Me ayuda a pasar el tiempo\r\nMe permite registrar momentos\r\nMe informa\r\nMe ense\u00f1a\r\nMe permite conocer otros pa\u00edses, otras culturas\r\nMe comunico con amigos y otras personas\r\nNo lo uso\r\nNo tengo", 
+    "survey": 4, 
+    "question_type": "select-multiple"
+  }
+},
+{
+  "pk": 442, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Lo uso para otra cosa. Dinos \u00bfcu\u00e1l?", 
+    "required": false, 
+    "number": "170801", 
+    "choices": "", 
+    "survey": 4, 
+    "question_type": "text"
+  }
+},
+{
+  "pk": 443, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "DVD/Blue-ray\t\t\r\n", 
+    "required": true, 
+    "number": "1709", 
+    "choices": "Me ayuda a pasar el tiempo\r\nMe permite registrar momentos\r\nMe informa\r\nMe ense\u00f1a\r\nMe permite conocer otros pa\u00edses, otras culturas\r\nMe comunico con amigos y otras personas\r\nNo lo uso\r\nNo tengo", 
+    "survey": 4, 
+    "question_type": "select-multiple"
+  }
+},
+{
+  "pk": 444, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Lo uso para otra cosa. Dinos \u00bfcu\u00e1l?", 
+    "required": false, 
+    "number": "170901", 
+    "choices": "", 
+    "survey": 4, 
+    "question_type": "text"
+  }
+},
+{
+  "pk": 445, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Televisor\t\t\r\n", 
+    "required": true, 
+    "number": "1720", 
+    "choices": "Me ayuda a pasar el tiempo\r\nMe permite registrar momentos\r\nMe informa\r\nMe ense\u00f1a\r\nMe permite conocer otros pa\u00edses, otras culturas\r\nMe comunico con amigos y otras personas\r\nNo lo uso\r\nNo tengo", 
+    "survey": 4, 
+    "question_type": "select-multiple"
+  }
+},
+{
+  "pk": 446, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Lo uso para otra cosa. Dinos \u00bfcu\u00e1l?", 
+    "required": false, 
+    "number": "172001", 
+    "choices": "", 
+    "survey": 4, 
+    "question_type": "text"
+  }
+},
+{
+  "pk": 447, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Radio\t\t\r\n", 
+    "required": true, 
+    "number": "1721", 
+    "choices": "Me ayuda a pasar el tiempo\r\nMe permite registrar momentos\r\nMe informa\r\nMe ense\u00f1a\r\nMe permite conocer otros pa\u00edses, otras culturas\r\nMe comunico con amigos y otras personas\r\nNo lo uso\r\nNo tengo", 
+    "survey": 4, 
+    "question_type": "select-multiple"
+  }
+},
+{
+  "pk": 448, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Lo uso para otra cosa. Dinos \u00bfcu\u00e1l?", 
+    "required": false, 
+    "number": "172101", 
+    "choices": "", 
+    "survey": 4, 
+    "question_type": "text"
+  }
+},
+{
+  "pk": 449, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Otro dispositivo. \u00bfCu\u00e1l?", 
+    "required": false, 
+    "number": "1722", 
+    "choices": "", 
+    "survey": 4, 
+    "question_type": "text"
+  }
+},
+{
+  "pk": 454, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "10. \u00bfA qu\u00e9 redes sociales perteneces? Puedes marcar varias opciones.  \t\t\t\t\t", 
+    "required": false, 
+    "number": "18", 
+    "choices": "Instagram \r\nYou Tube\r\nGoogle+\r\nWhatsApp", 
+    "survey": 4, 
+    "question_type": "select-multiple"
+  }
+},
+{
+  "pk": 455, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "11 \u00bfCon qui\u00e9n compartes la informaci\u00f3n que encuentras en Internet? Puedes marcar varias opciones. ", 
+    "required": true, 
+    "number": "19", 
+    "choices": "Con tus padres. \r\nCon tus hermanos.\r\nCon tus amigos.\r\nCon tus profesores.\r\nCon tus compa\u00f1eros de estudio. \r\nCon nadie. ", 
+    "survey": 4, 
+    "question_type": "select-multiple"
+  }
+},
+{
+  "pk": 456, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "12. \u00bfCon qui\u00e9n aprendes a usar el computador y la Internet? Puedes marcar varias opciones.", 
+    "required": true, 
+    "number": "20", 
+    "choices": "Solo, cacharreando o averiguando en Internet. \r\nCon tus padres. \r\nCon tus hermanos.\r\nCon tus amigos. \r\nCon tus profesores.\r\nCon tus compa\u00f1eros de estudio. \r\nHaciendo cursos.", 
+    "survey": 4, 
+    "question_type": "select-multiple"
+  }
+},
+{
+  "pk": 457, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "\u00bfCu\u00e1les?\r\n", 
+    "required": false, 
+    "number": "2001", 
+    "choices": "", 
+    "survey": 4, 
+    "question_type": "text"
+  }
+},
+{
+  "pk": 458, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "13. Cuando usas Internet \u00bfcon qui\u00e9n prefieres hacerlo? Marca con s\u00f3lo una respuesta. \r\n", 
+    "required": true, 
+    "number": "21", 
+    "choices": "Solo. \r\nCon tus padres o tus profesores. \r\nCon tus hermanos, amigos o compa\u00f1eros de estudio.", 
+    "survey": 4, 
+    "question_type": "radio"
+  }
+},
+{
+  "pk": 459, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "14. \u00bfQu\u00e9 te gustar\u00eda hacer o aprender a hacer con Internet? Puedes marcar varias opciones.", 
+    "required": false, 
+    "number": "22", 
+    "choices": "Desarrollar programas inform\u00e1ticos.\t\t\t\t\t\t\t\t\t\t\t\t\r\nConstruir p\u00e1ginas web.\t\t\t\t\t\t\t\t\t\t\t\r\nCrear videos y pel\u00edculas.\t\t\t\t\t\t\t\t\t\t\t\r\nCrear mejores fotograf\u00edas.\t\t\t\t\t\t\t\t\t\t\t\t\r\nEscribir historias y cuentos.\t\t\t\t\t\t\t\t\t\t\t\r\nHacer un video y subirlo a You Tube.\t\t\t\t\t\t\t\t\t\t\t\t\r\nDise\u00f1ar un videojuego.\t\t\t\t\t\t\t\t\t\t\t\r\nConstruir un blog, un diario, un peri\u00f3dico, un programa de radio y m\u00fasica.\t\t\t\t\t\t\t\t\t\t\t\t\r\nAprender un idioma que no conozco.\t\t\t\t\t\t\t\t\t\t\t\r\nHacer amigos de mi edad.\t\t\t\t\t\t\t\t\t\t\t\r\nComponer m\u00fasica utilizando software especializado.\r\nIntercambiar objetos.\t\t\t\t\t\t\t\t\t\t\t\t\r\nVender o comprar creaciones propias (m\u00fasica, dibujos, cuentos, im\u00e1genes, artes).", 
+    "survey": 4, 
+    "question_type": "select-multiple"
+  }
+},
+{
+  "pk": 460, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Otra cosa. \u00bfCu\u00e1l?", 
+    "required": false, 
+    "number": "2201", 
+    "choices": "", 
+    "survey": 4, 
+    "question_type": "text"
+  }
+},
+{
+  "pk": 461, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Primer Dispositivo que Lamentar\u00eda", 
+    "required": true, 
+    "number": "2301", 
+    "choices": "Celular.\r\nComputador. \r\nTablet. \r\nConexi\u00f3n a Internet.\r\nDVD o Blue-ray.\r\nRadio. \r\nTelevisor. \r\nVideo beam.", 
+    "survey": 4, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 462, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Segundo Dispositivo que Lamentar\u00eda", 
+    "required": true, 
+    "number": "2302", 
+    "choices": "Celular.\r\nComputador. \r\nTablet. \r\nConexi\u00f3n a Internet.\r\nDVD o Blue-ray.\r\nRadio. \r\nTelevisor. \r\nVideo beam.", 
+    "survey": 4, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 463, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "Tercer Dispositivo que Lamentar\u00eda", 
+    "required": true, 
+    "number": "2303", 
+    "choices": "Celular.\r\nComputador. \r\nTablet. \r\nConexi\u00f3n a Internet.\r\nDVD o Blue-ray.\r\nRadio. \r\nTelevisor. \r\nVideo beam.", 
+    "survey": 4, 
+    "question_type": "select"
+  }
+},
+{
+  "pk": 464, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "16. Suponiendo que el escenario descrito al inicio es real, \u00bfqu\u00e9 crees que suceder\u00eda con el desempe\u00f1o y el comportamiento de tus compa\u00f1eros en clase? Marca s\u00f3lo una respuesta.\t\t\t\t\t\t\t\t\t\t\t\t\t\t", 
+    "required": true, 
+    "number": "24", 
+    "choices": "No creo que el desempe\u00f1o escolar y el comportamiento de los estudiantes cambien mucho.\r\nCreo que el desempe\u00f1o escolar \u00a0puede mejorar, pero el comportamiento (atenci\u00f3n, concentraci\u00f3n, disciplina) puede deteriorarse.\t\r\nCreo que el desempe\u00f1o escolar no necesariamente mejorar\u00e1, pero el comportamiento (atenci\u00f3n, concentraci\u00f3n, disciplina) puede mejorar.\r\nCreo que el desempe\u00f1o escolar y el comportamiento de los estudiantes pueden mejorar mucho.", 
+    "survey": 4, 
+    "question_type": "radio"
+  }
+},
+{
+  "pk": 465, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "17. Suponiendo que el escenario descrito al inicio es real, \u00bfqu\u00e9 crees que suceder\u00eda con la comunicaci\u00f3n entre los padres de familia y la instituci\u00f3n educativa? Marca s\u00f3lo una respuesta.\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t", 
+    "required": true, 
+    "number": "25", 
+    "choices": "Creo que habr\u00e1 una comunicaci\u00f3n m\u00e1s fluida y continua con los padres de familia, ellos estar\u00e1n mejor enterados de lo que pasa con nosotros.\r\nNo creo que esto cambie mucho. Los padres y acudientes interesados en sus hijos mantienen comunicaci\u00f3n constante con los profesores, con o sin un programa de computador que sirva para ello. Los que no est\u00e1n interesados no cambiar\u00e1n, aunque tengan el un programa de computador para comunicarse con la instituci\u00f3n educativa.\r\nUn programa de computador que sirva para que los padres de familia se comuniquen con la instituci\u00f3n educativa, permitir\u00e1 que ellos est\u00e9n al tanto del desempe\u00f1o escolar de nosotros y muy probablemente eso implicar\u00e1 para los docentes mayor dedicaci\u00f3n de tiempo para responder a \u00a0un n\u00famero creciente de consultas de los padres.\r\nEsto no va a funcionar porque los padres no est\u00e1n capacitados para manejar este tipo de programas o no cuentan con la dotaci\u00f3n tecnol\u00f3gica necesaria para aprovecharlos.", 
+    "survey": 4, 
+    "question_type": "radio"
+  }
+},
+{
+  "pk": 466, 
+  "model": "survey.question", 
+  "fields": {
+    "category": null, 
+    "text": "18. \u00bfTe gust\u00f3 responder esta encuesta en computador?   \r\n", 
+    "required": true, 
+    "number": "26", 
+    "choices": "S\u00ed\r\nNo\r\nEs igual a si la hubiese respondido en papel", 
+    "survey": 4, 
+    "question_type": "radio"
+  }
+}
+]

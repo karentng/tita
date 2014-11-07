@@ -1,0 +1,317 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% load mytags %}
+{% block css %}
+    {{datosBasicosForm.media}}
+    <style>
+        label.control-label {
+            font-weight: bold;
+            
+        }
+
+        .bordered {
+            border-style: dotted;
+            border-width: 1px;
+            padding: 3px;
+            border-radius: 3px;
+            border-color: gray;
+            padding: 5px 10px 5px 10px;
+        }
+
+
+    </style>
+
+    {{form.media}}
+{% endblock %}
+
+{%block menu %}
+    {% include "menus/publico.html" with opcion_menu='encuesta_nuevo_estudiante' visible=11 %}
+{% endblock %}
+
+
+{% block titulo_contenido %}    <label align="center">
+        <b>PROYECTO DESARROLLO Y EDUCACIÓN DIGITAL PARA TODOS CALI, VALLE DEL CAUCA, OCCIDENTE</b>
+        <br>
+        ENCUESTA SOBRE PERCEPCIONES Y HÁBITOS ACERCA DEL USO DE LAS TIC EN LOS PROCESOS DE ENSEÑANZA Y APRENDIZAJE
+        <br>
+        <h4><b>CUESTIONARIO PARA ESTUDIANTES</b></h4>
+        <br>
+        <b style="font-size:13px;">
+            La información que nos brindas en este cuestionario es confidencial y se utilizará exclusivamente con fines académicos.
+        </b>                                                                                   
+
+    </label>
+{% endblock %}
+
+{% block contenido %}
+
+{% if form.errors %}
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        Faltan algunas preguntas por responder. Verifique los campos en color Rojo
+    </div>
+{% endif %}
+
+
+<form method="POST" onsubmit="deshabilitarBoton()"> {% csrf_token %}
+    {% mypanel 'Información Personal y Socioeconómica Básica' %}
+        <div class="form-horizontal">
+            {% bootstrap_field form.question_01 layout="horizontal" label_class="col-md-5" %}
+            {% bootstrap_field form.question_02 layout="horizontal" label_class="col-md-5" %}
+            {% bootstrap_field form.question_03 layout="horizontal" label_class="col-md-5" %}
+            {% bootstrap_field form.question_04 layout="horizontal" label_class="col-md-5" %}
+            {% bootstrap_field form.question_05 layout="horizontal" label_class="col-md-5" field_class="col-md-2" %}
+            <div class="row">
+                <div class="col-md-2 col-md-offset-2">
+                    <label class="control-label">
+                        Fecha de Nacimiento: 
+                    </label>
+                </div>
+                <div class="col-md-1">
+                    {% bootstrap_field form.question_0601 layout="vertical" label_class="col-md-5"%}
+                </div>
+                <div class="col-md-1 col-md-offset-1">
+                    {% bootstrap_field form.question_0602 layout="vertical" label_class="col-md-5" %}
+                </div>
+                <div class="col-md-1 col-md-offset-1">
+                    {% bootstrap_field form.question_0603 layout="vertical" label_class="col-md-5" %}
+                </div>
+            </div>
+            <br>
+            {% bootstrap_field form.question_07 layout="horizontal" label_class="col-md-5" %}
+            {% bootstrap_field form.question_08 layout="horizontal" label_class="col-md-5" %}
+        </div>
+    {% endmypanel %}
+
+    
+    {% mypanel 'Uso Actual del Computador e Internet' %}
+        {% bootstrap_field form.question_09 form_group_class='form-group bordered' %}
+        {% bootstrap_field form.question_10 form_group_class='form-group bordered' %}
+    {% endmypanel %}
+    
+    {% mypanel 'Percepciones Sobre el Uso de las TIC en los Procesos de Enseñanza y Aprendizaje' %}
+        <div class="bordered">
+            <label class="control-label">
+                3. ¿Qué pasa cuando haces tus tareas usando Internet? Debes responder todas las preguntas.
+            </label>
+            {% bootstrap_field form.question_1101 %}
+            {% bootstrap_field form.question_1102 %}
+            {% bootstrap_field form.question_1103 %}
+        </div>
+        <br>
+        {% bootstrap_field form.question_12 form_group_class='form-group bordered' %}
+        <div class="bordered">
+            <label class="control-label">
+               5. ¿Qué tanto te serviría utilizar Internet en las siguientes materias? Califica de 1 a 3 de la siguiente forma: si crees que te serviría mucho marcas 3, si crees que te serviría un poco marcas 2 y si crees que te serviría muy poquito o nada marcas 1.  
+            </label>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-horizontal">
+                        {% for field in camposMaterias1 %}
+                            {% bootstrap_field field layout="horizontal" label_class="col-md-6" field_class="col-md-3"  %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-horizontal">
+                        {% for field in camposMaterias2 %}
+                            {% bootstrap_field field layout="horizontal" label_class="col-md-6" field_class="col-md-3"  %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endmypanel %}
+    
+    {% mypanel 'Hábitos Sobre el Uso de las TIC en los Procesos de Enseñanza y Aprendizaje' %}
+        {% bootstrap_field form.question_14 form_group_class='form-group bordered' %}
+        <div class="bordered">
+            <label class="control-label">
+               7. ¿Cuáles de estos recursos utilizas para hacer tus tareas y cada cuánto los usas? Debes responder todas las preguntas.
+            </label>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-horizontal">
+                        {% for field in camposRecursos1 %}
+                            {% bootstrap_field field layout="horizontal" label_class="col-md-8" field_class="col-md-3"  %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-horizontal">
+                        {% for field in camposRecursos2 %}
+                            {% bootstrap_field field layout="horizontal" label_class="col-md-8" field_class="col-md-3"  %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        {% bootstrap_field form.question_16 form_group_class='form-group bordered' %}
+    {% endmypanel %}
+    
+    {% mypanel 'Hábitos Sobre el Uso de las TIC en la Vida Cotidiana' %}
+        <div class="bordered">
+            <label class="control-label">
+                9.  De los siguientes dispositivos y medios de comunicación, si los tienes en casa, ¿para qué te sirven cada uno de ellos? Puedes marcar varias respuestas para cada dispositivo o medio de comunicación. 
+            </label>
+            <br>
+            <div class="row">
+                <div class="col-md-6">
+                    {% bootstrap_field form.question_1701 layout="horizontal" field_class="col-md-5" %}
+                </div>
+                <div class="col-md-6">
+                    {% bootstrap_field form.question_1702 layout="horizontal" field_class="col-md-5" %}
+                </div>
+            </div> 
+            <div class="row">
+                <div class="col-md-6">
+                    {% bootstrap_field form.question_170101 layout="horizontal" label_class="col-md-4" field_class="col-md-4" %}
+                </div>
+                <div class="col-md-6">
+                    {% bootstrap_field form.question_170201 layout="horizontal" label_class="col-md-4" field_class="col-md-4" %}
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6">
+                    {% bootstrap_field form.question_1703 layout="horizontal" field_class="col-md-5" %}
+                </div>
+                <div class="col-md-6">
+                    {% bootstrap_field form.question_1704 layout="horizontal" field_class="col-md-5" %}
+                </div>
+            </div> 
+            <div class="row">
+                <div class="col-md-6">
+                    {% bootstrap_field form.question_170301 layout="horizontal" label_class="col-md-4" field_class="col-md-4" %}
+                </div>
+                <div class="col-md-6">
+                    {% bootstrap_field form.question_170401 layout="horizontal" label_class="col-md-4" field_class="col-md-4" %}
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6">
+                    {% bootstrap_field form.question_1705 layout="horizontal" field_class="col-md-5" %}
+                </div>
+                <div class="col-md-6">
+                    {% bootstrap_field form.question_1706 layout="horizontal" field_class="col-md-5" %}
+                </div>
+            </div> 
+            <div class="row">
+                <div class="col-md-6">
+                    {% bootstrap_field form.question_170501 layout="horizontal" label_class="col-md-4" field_class="col-md-4" %}
+                </div>
+                <div class="col-md-6">
+                    {% bootstrap_field form.question_170601 layout="horizontal" label_class="col-md-4" field_class="col-md-4" %}
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6">
+                    {% bootstrap_field form.question_1707 layout="horizontal" field_class="col-md-5" %}
+                </div>
+                <div class="col-md-6">
+                    {% bootstrap_field form.question_1708 layout="horizontal" field_class="col-md-5" %}
+                </div>
+            </div> 
+            <div class="row">
+                <div class="col-md-6">
+                    {% bootstrap_field form.question_170701 layout="horizontal" label_class="col-md-4" field_class="col-md-4" %}
+                </div>
+                <div class="col-md-6">
+                    {% bootstrap_field form.question_170801 layout="horizontal" label_class="col-md-4" field_class="col-md-4" %}
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6">
+                    {% bootstrap_field form.question_1709 layout="horizontal" field_class="col-md-5" %}
+                </div>
+                <div class="col-md-6">
+                    {% bootstrap_field form.question_1720 layout="horizontal" field_class="col-md-5" %}
+                </div>
+            </div> 
+            <div class="row">
+                <div class="col-md-6">
+                    {% bootstrap_field form.question_170901 layout="horizontal" label_class="col-md-4" field_class="col-md-4" %}
+                </div>
+                <div class="col-md-6">
+                    {% bootstrap_field form.question_172001 layout="horizontal" label_class="col-md-4" field_class="col-md-4" %}
+                </div>
+            </div>            
+            <br>
+            <div class="row">
+                <div class="col-md-6">
+                    {% bootstrap_field form.question_1721 layout="horizontal" field_class="col-md-5" %}
+                </div>
+                <br>
+                <div class="col-md-6">
+                    {% bootstrap_field form.question_1722 layout="horizontal" label_class="col-md-5" field_class="col-md-5" %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    {% bootstrap_field form.question_172101 layout="horizontal" label_class="col-md-5" field_class="col-md-5" %}
+                </div>
+            </div>  
+        </div>
+        <br>
+        <div class="bordered">
+            {% bootstrap_field form.question_18 %}
+            {% bootstrap_field form.question_1801 %}
+        </div>
+        <br>
+        {% bootstrap_field form.question_19 form_group_class='form-group bordered' %}        
+        <div class="bordered">
+            {% bootstrap_field form.question_20 %}
+            {% bootstrap_field form.question_2001 %}
+        </div>
+        <br>
+        {% bootstrap_field form.question_21 form_group_class='form-group bordered' %} 
+        
+    {% endmypanel %}
+
+    {% mypanel 'Expectativas Sobre el Uso de las TIC' %}
+        <div class="bordered">
+            {% bootstrap_field form.question_22 %}
+            {% bootstrap_field form.question_2201 %}
+        </div>
+        <br>
+        <div class="bordered">
+            <label class="control-label">
+                15. De los siguientes dispositivos o medios de comunicación escoge tres que lamentarías perder. Califica de 1 a 3 qué tan importante es para ti cada uno de esos tres dispositivos que lamentarías perder. Si es el más importante le pones 3, si es menos importante que el anterior le pones 2 y si es el menos importante de los tres le pones 1.  
+            </label>
+            
+            {% bootstrap_field form.question_2301 %}
+            {% bootstrap_field form.question_2302 %}
+            {% bootstrap_field form.question_2303 %}
+
+        </div>                                                           
+
+    {% endmypanel %}
+
+    {% mypanel 'Simulación de Escenarios' %}
+        <label>
+            Imagínate que en tu salón de clases todos los estudiantes tienen acceso a un computador con Internet, el cual cuenta con un programa en el que los estudiantes pueden hacer sus tareas, presentar exámenes y comunicarse con sus compañeros y docentes. Los docentes por su parte, también tienen un computador con un programa que les permite monitorear y ver lo que hace cada estudiante en su computador, calificar los exámenes en línea y entregar resultados de manera inmediata. Además, para dictar sus clases tienen un tablero interactivo con el que pueden hacer cosas como las que se realizan en un computador. Este programa de computador que tienen los docentes también permitirá que ellos se puedan comunicar permanentemente con los padres de familia, de tal forma que ellos siempre podrán estar informados de lo que pasa con sus hijos en la institución educativa.
+        </label>
+            {% bootstrap_field form.question_24 form_group_class='form-group bordered' %} 
+            {% bootstrap_field form.question_25 form_group_class='form-group bordered' %} 
+            {% bootstrap_field form.question_26 form_group_class='form-group bordered' %} 
+    {% endmypanel %}
+    <br>
+    <script>
+        function deshabilitarBoton() {
+            $('#btnEnviar').text('Enviando... Por favor espere').attr('disabled','disabled'); //.addClass('hidden').after("<span>Guardando. Por favor espere...</span>");
+        }
+
+    </script>
+    <center><button id="btnEnviar" type="submit" class="btn btn-success btn-lg">Enviar Encuesta</button></center>
+    
+    
+</form>
+
+
+{% endblock %}
