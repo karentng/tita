@@ -5,10 +5,6 @@
 	Tit@ - Tablero de Control
 {% endblock %}
 
-{% block menu %}
-	{% include "menus/publico.html" with opcion_menu=13 %}
-{% endblock %}
-
 {% block css %}
     {{estado_avance_form.media}}
     <link href="{{STATIC_URL}}css/file-tree.css" rel="stylesheet" />
