@@ -23,7 +23,7 @@
     <li class="active">Estudiantes</li>
 {% endblock %}
 
-{% block titulo_contenido %} Clase del {{clase.fecha_programada}}  {% endblock %}
+{% block titulo_contenido %} Clase del {{clase.fecha_inicio}}  {% endblock %}
 
 {% block contenido %}
 
@@ -37,10 +37,13 @@
         <div class="col-md-6">
             {%bootstrap_form form %}
         </div>
+        {%comment%}
         <div class="col-md-6">
             <strong>Soportes de clase</strong>
             {%bootstrap_formset soportesFormset display_label=False %}
         </div>
+        {%endcomment%}
+        <br><br><br><br><br><br><br><br>
         <button type="submit" class="btn btn-lg btn-primary">Guardar</button>
     </form>
 </div>

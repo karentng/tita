@@ -3,6 +3,7 @@ from django.views.generic.base import TemplateView
 from django.contrib import admin
 from django.conf import settings
 
+
 urlpatterns = patterns('cronograma.views',
     url(r'^programacion/cronograma_diplomado$',      'diplomado', name='cronograma_diplomado'),
     url(r'^programacion/cronograma_diplomado_modificar$',      'diplomado_modificar', name='cronograma_diplomado_modificar'),
@@ -20,6 +21,9 @@ urlpatterns = patterns('cronograma.views',
     url(r'^programacion/listaestudiantes/(?P<id>\d+)$',      'lista_estudiantes', name='lista_estudiantes'),
     url(r'^programacion/cancelarclase/(?P<id>\d+)$',      'cancelar_clase_acompanamiento', name='cancelar_clase'),
     url(r'^programacion/gestion$',      'gestion', name='gestion'),
+    #url(r'^programacion/controlasistencia$',      'asistencia', name='asistencia'),
+    #url(r'^programacion/controlasistencia/(\d+)/clases/(\d+)/asistencia$',       'asistencia', name="asistencia"),
+    url(r'programacion/(\d+)/clases/(\d+)/asistencia$',       'asistencia', name="asistencia"),
 
     
     

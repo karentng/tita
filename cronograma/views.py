@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from cronograma.forms import *
-from campus.forms import ActividadForm
+from campus.forms import ActividadForm, AsistenciaForm
 from campus.models import Clases, AcompanamientoInSitus, Estudiante, Cursos
 import json
 from django.shortcuts import redirect, render, render_to_response
@@ -8,6 +8,7 @@ from datetime import datetime, date, timedelta
 from math import ceil
 import datetime 
 from campus.views import user_group
+from django.shortcuts import render, redirect, get_list_or_404, get_object_or_404
 
 def cronograma(request):
     # if this is a POST request we need to process the form data
@@ -712,6 +713,7 @@ def subirsoportes(request):
 
     identificador = request.GET['v']
     clase = Clases.objects.get(id=identificador)
+    curso = clase.curso
 
     if request.method == 'POST':
         
@@ -735,6 +737,7 @@ def subirsoportes(request):
         'user_group': user_group(request),
         'opcion_menu': 3,
         'clase' : clase.id,
+        'curso' : curso.id,
     })
 
 def subirsoportesacompanamiento(request):
@@ -835,6 +838,7 @@ def reporte_formadores(request, limit=100):
     return render(request, 'gestion_formador.html', {'formador_list': formador_list,  'user_group': user_group(request),
         'opcion_menu': 5, },
         )
+    
 def lista_estudiantes(request, id):
     grupo = user_group(request)
     if grupo == None:
@@ -1026,4 +1030,38 @@ def gestion(request):
     return render(request, 'contenidogestion.html', {'user_group': user_group(request),
         'opcion_menu': 5, 'curso_list':curso_list, 'formador_list': formador_list,},
         )
+
+def asistencia(request, curso_id, clase_id):
+    curso = get_object_or_404(Cursos, id=curso_id)
+    clase = get_object_or_404(Clases, id=clase_id)
+
+    if request.method=='POST':
+        form = AsistenciaForm(request.POST, instance=clase)
+        #soportesFormset = SoportesFormset(request.POST, request.FILES, instance=clase)
+        #advertencia: no trate de copiar este codigo, trabaja de manera inusual
+        if form.is_valid() : 
+            form.save()
+        #if soportesFormset.is_valid() : 
+            #result = soportesFormset.save()
+            #print "result=",result
+        
+        #print "valido1=", form.is_valid(), "valido2=", soportesFormset.is_valid()
+
+        #if form.is_valid() and soportesFormset.is_valid():
+            #return redirect('asistencia', curso_id, clase_id)
+            return redirect('home')
+
+
+    else :
+        form = AsistenciaForm(instance=clase)
+        #soportesFormset = SoportesFormset(instance=clase)
+
+    return render(request, 'asistencia.html', {
+        'clase':clase,
+        'curso': curso,
+        'form': form,
+        'user_group': user_group(request),
+        'opcion_menu': 5,
+        #'soportesFormset' : soportesFormset,
+    })
 
