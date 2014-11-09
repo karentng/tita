@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load bootstrap3 %}
 
-{% block titulo %} Panel de Control {% endblock %}
+{% block titulo %} Cancelar Clase {% endblock %}
 
 {% block menu %}
     {% include "menus/publico.html" with opcion_menu=3 %}
@@ -26,17 +26,17 @@
 
 {% block miga_pan %}
     <li><a href="{% url 'home' %}">Inicio</a></li>
-    <li class="active">Panel de Control</li>
+    <li class="active">Cancelar Clase</li>
 {% endblock %}
 
-{% block titulo_contenido %}Panel de Control{% endblock %}
+{% block titulo_contenido %}Cancelar Clase{% endblock %}
 
-{% block titulo_panel %}<i class="fa fa-lightbulb-o"></i> Panel de Control{% endblock %}
+{% block titulo_panel %}<i class="fa fa-lightbulb-o"></i> Cancelar Clase{% endblock %}
 {% block contenido_panel %}
 
 
-    <h4><b>Soportes</b></h4>
-    Se recomienda que comprima todos los archivos en una carpeta <b>ZIP</b>, o añadirlo todo a un documento y subirlo en formato <b>PDF</b>.
+    
+    Se recomienda que después de cancelar la clase <b>añada</b> una nueva para reponerla.
     </h5>
     <br>
 
@@ -45,23 +45,23 @@
         <table class="table table-hover">
             <tr>
                 <td style="width:300px; padding-right:30px;">
-                    <strong>Adjunte la certificación:</strong><br>
+                    <strong>Motivos de cancelación de la clase:</strong><br>
                      
                 </td>
-                <td style="width:400px">{{form.archivo }}</td>
-                 <td style="width:60px"><button class="btn btn-sm btn-primary" type="submit"><i class="fa fa-upload"></i>  Subir Archivo</button></td> 
+                <td style="width:400px"><textarea class="form-control" cols="40" id="motivos" name="motivos" placeholder="Escriba aquí los Motivos de Cancelación de la Clase" rows="4" title=""></textarea></td>
+                 
             </tr>
 
 
         </table>
+        <center>
+            <button class="btn btn-info btn-lg m-r-5" type="submit">  Cancelar</button>
+        </center>
+        
 
         <br>
     </form>
     <br>
-    <center>
-    <a href="{% url 'actividad' clase %} " class="btn btn-success btn-lg m-r-5">Asistencia y Actividades</a>
-    <a href="{% url 'lista_estudiantes' clase %} " class="btn btn-info btn-lg m-r-5">Ver Lista de Estudiantes</a>
-    </center>
+    
     
 {% endblock %}
-

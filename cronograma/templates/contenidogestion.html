@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block titulo %} Gestión {% endblock %}
+
+{% block menu %}
+    {% include "menus/publico.html" with opcion_menu=3 %}
+{% endblock %}
+
+{% block css %}
+    <link href="{{STATIC_URL}}plugins/bootstrap-wizard/css/bwizard.min.css" rel="stylesheet" />
+    {{form.media}} {# agrega los js y css necesarios para el bootstrap3 datetimepicker #}
+{% endblock %}
+
+{% block js %}
+    {% if solo_lectura%}
+    <script>
+        $(function(){
+            $("select").attr("disabled", "disabled");
+            $("input").attr("readonly", "readonly");
+        });
+    </script>
+
+    {% endif %}
+{% endblock %}
+
+{% block miga_pan %}
+    <li><a href="{% url 'home' %}">Inicio</a></li>
+    <li class="active">Gestión de Formadores y Cursos</li>
+{% endblock %}
+
+{% block titulo_contenido %}Gestión de Formadores y Cursos{% endblock %}
+
+{% block titulo_panel %}<i class="fa fa-lightbulb-o"></i> Gestión de Formadores y Cursos{% endblock %}
+{% block contenido_panel %}
+    <br>
+    <br>
+    <center>
+    <div class="col-md-5 col-sm-6 col-centered ui-sortable">
+                        <div class="widget widget-state bg-blue">
+                            <div class="state-icon"><i class="fa fa-pencil-square-o"></i></div>
+                            <div class="state-info">
+                                <h4>Gestión<br> de Formadores
+                                </h4>
+                            </div>
+                            <div class="state-link">
+                                <a href="{% url 'gestion_formador' %} " ><i class="fa fa-arrow-circle-o-right"></i>Haga clic aquí</a>
+                            </div>
+                        </div>
+                    </div>
+    <div class="col-md-5 col-sm-6 col-centered ui-sortable">
+                        <div class="widget widget-state bg-green">
+                            <div class="state-icon"><i class="fa fa-users"></i></div>
+                            <div class="state-info">
+                                <h4>Gestión<br> de Cursos.
+                                </h4>
+                            </div>
+                            <div class="state-link">
+                                <a href="{% url 'gestion_cursos' %} " ><i class="fa fa-arrow-circle-o-right"></i>Haga clic aquí</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                  
+    </center>
+    
+{% endblock %}
+

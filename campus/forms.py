@@ -28,7 +28,8 @@ class SoporteClaseForm(forms.ModelForm):
 
 SoportesFormset = inlineformset_factory(Clase, SoporteClase, form=SoporteClaseForm)# ,  can_delete=False)
 
+
 class ActividadForm(forms.ModelForm):
     class Meta:
         model = Actividad
-        fields = ('descripcion',)
+        fields = ('asistencia', 'actividad1', 'actividad2', 'actividad3', 'actividad4')

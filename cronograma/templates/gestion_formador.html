@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load bootstrap3 %}
 
-{% block titulo %} Gestión de Cursos {% endblock %}
+{% block titulo %} Gestión de Formadores {% endblock %}
 
 {% block menu %}
     {% include "menus/publico.html" with opcion_menu=20 %}
@@ -28,16 +28,16 @@
 
 {% block miga_pan %}
     <li><a href="{% url 'home' %}">Inicio</a></li>
-    <li class="active">Gestión de Cursos</li>
+    <li class="active">Gestión de Formadores</li>
 {% endblock %}
 
-{% block titulo_contenido %}Gestión de Cursos{% endblock %}
+{% block titulo_contenido %}Gestión de Formadores{% endblock %}
 
 {% block previo_contenido_panel %}
     
 {% endblock %}
 
-{% block titulo_panel %}<i class="fa fa-user"></i> Ver Cursos{% endblock %}
+{% block titulo_panel %}<i class="fa fa-user"></i> Ver Formadores{% endblock %}
 {% block contenido_panel %}
 
     
@@ -46,13 +46,10 @@
                     <tr>
                         <thead>
                             <td class="info">
-                                Curso
+                                Nombre
                             </td>
                             <td class="info">
-                                Institución
-                            </td>
-                            <td class="info">
-                                Formador
+                                Apellido
                             </td>
                             <td class="info">
                                 -
@@ -60,21 +57,19 @@
                            
                         </thead>
                     </tr>
-            {% for curso in curso_list %}
+            {% for formador in formador_list %}
                     <tr>
                         <tbody>
                             <td >
-                                {{ curso.descripcion }}
+                                {{ formador.nombre1 }} {{ formador.nombre2 }}
                             </td>
                             <td >
-                                {{ curso.institucion }}
+                                {{ formador.apellido1 }} {{ formador.apellido2 }}
                             </td>
-                            <td >
-                                {{ curso.formador }}
-                            </td>
+                            
                             <td >
                                
-                                <a href= "{% url 'detalle_curso' curso.id  %}"  >Ver detalles</a>
+                                <a href= "{% url 'detalle_formador' formador.id  %}"  >Ver detalles</a>
                                 
                             </td>
                         
@@ -83,7 +78,7 @@
                     </tr>
                 </table><br>
 
-                <a href= "{% url 'add_curso' %} " class="btn btn-lg btn-primary pull-right" >Añadir un curso</a>
+                <a href= "{% url 'add_formador' %} " class="btn btn-lg btn-primary pull-right" >Añadir un formador</a>
 
 
                 
@@ -92,6 +87,4 @@
                 
 
 {% endblock %}
-
-
 

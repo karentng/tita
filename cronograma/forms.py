@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django import forms
-from campus.models import Clase, AcompanamientoInSitu, SoporteClase, SoporteAcompanamiento, Curso, Formador
+from campus.models import Clases, AcompanamientoInSitus, SoporteClase, SoporteAcompanamiento, Cursos, Formador
 from datetimewidget.widgets import DateTimeWidget
 from datetimewidget.widgets import DateWidget
 from django.forms import ModelForm, Textarea, HiddenInput, TextInput, Select, CheckboxSelectMultiple, FileInput, ClearableFileInput
@@ -9,7 +9,7 @@ from django.forms import ModelForm, Textarea, HiddenInput, TextInput, Select, Ch
 
 class EventosDiplomadoForm(forms.ModelForm):
     class Meta:
-        model = Clase
+        model = Clases
 
         fields = ('nombre', 'curso', 'fecha_inicio', 'duracion', 'descripcion')
 
@@ -21,9 +21,9 @@ class EventosDiplomadoForm(forms.ModelForm):
 
 class EventosAcompanamientoForm(forms.ModelForm):
     class Meta:
-        model = AcompanamientoInSitu
+        model = AcompanamientoInSitus
 
-        fields = ('nombre', 'institucion', 'fecha_inicio','duracion', 'descripcion')
+        fields = ('nombre', 'curso', 'fecha_inicio','duracion', 'descripcion')
         widgets = {
             'fecha_inicio': DateTimeWidget(options={'format': 'dd/mm/yyyy hh:ii','autoclose': 'true','startView':'4','minuteStep':'30',},usel10n=False, bootstrap_version=3),
             #'fecha_inicio': DateWidget(usel10n=False, bootstrap_version=3, options={'format': 'yyyy-mm-dd', 'startView':4, 'language':'es'}),
@@ -95,7 +95,7 @@ class DocumentosSoporteAcompanamientoForm(forms.ModelForm):
 
 class CursoForm(forms.ModelForm):
     class Meta:
-        model = Curso
+        model = Cursos
 
         
 
