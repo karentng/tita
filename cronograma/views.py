@@ -748,6 +748,7 @@ def subirsoportesacompanamiento(request):
 
     identificador = request.GET['v']
     acompanamiento= AcompanamientoInSitus.objects.get(id=identificador)
+    curso = acompanamiento.curso
 
     if request.method == 'POST':
        
@@ -765,10 +766,12 @@ def subirsoportesacompanamiento(request):
         form = DocumentosSoporteAcompanamientoForm()
 
         
-    return render(request, 'diplomado_soportes.html', {
+    return render(request, 'cronograma_soportes.html', {
         'form': form,
         'user_group': user_group(request),
         'opcion_menu': 4,
+        'clase' : acompanamiento.id,
+        'curso' : curso.id,
     })
 
 def curso(request):
@@ -845,6 +848,20 @@ def lista_estudiantes(request, id):
         return redirect('home')
 
     clase = Clases.objects.get(id=id)
+    curso = clase.curso
+    clasenombre = clase.nombre
+    cursonombre = curso.descripcion
+    estudiante_list = curso.estudiantes.all()
+    
+    return render(request, 'lista_estudiantes.html', {'estudiante_list': estudiante_list,  'user_group': user_group(request),
+        'opcion_menu': 5, 'curso':cursonombre, 'clase':clasenombre},
+        )
+def lista_acompanamiento(request, id):
+    grupo = user_group(request)
+    if grupo == None:
+        return redirect('home')
+
+    clase = AcompanamientoInSitus.objects.get(id=id)
     curso = clase.curso
     clasenombre = clase.nombre
     cursonombre = curso.descripcion
@@ -1057,6 +1074,40 @@ def asistencia(request, curso_id, clase_id):
         #soportesFormset = SoportesFormset(instance=clase)
 
     return render(request, 'asistencia.html', {
+        'clase':clase,
+        'curso': curso,
+        'form': form,
+        'user_group': user_group(request),
+        'opcion_menu': 5,
+        #'soportesFormset' : soportesFormset,
+    })
+
+def asistencia_acompanamiento(request, curso_id, clase_id):
+    curso = get_object_or_404(Cursos, id=curso_id)
+    clase = get_object_or_404(AcompanamientoInSitus, id=clase_id)
+
+    if request.method=='POST':
+        form = AsistenciaForm(request.POST, instance=clase)
+        #soportesFormset = SoportesFormset(request.POST, request.FILES, instance=clase)
+        #advertencia: no trate de copiar este codigo, trabaja de manera inusual
+        if form.is_valid() : 
+            form.save()
+        #if soportesFormset.is_valid() : 
+            #result = soportesFormset.save()
+            #print "result=",result
+        
+        #print "valido1=", form.is_valid(), "valido2=", soportesFormset.is_valid()
+
+        #if form.is_valid() and soportesFormset.is_valid():
+            #return redirect('asistencia', curso_id, clase_id)
+            return redirect('home')
+
+
+    else :
+        form = AsistenciaForm(instance=clase)
+        #soportesFormset = SoportesFormset(instance=clase)
+
+    return render(request, 'asistencia_acompanamiento.html', {
         'clase':clase,
         'curso': curso,
         'form': form,

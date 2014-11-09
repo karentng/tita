@@ -19,11 +19,13 @@ urlpatterns = patterns('cronograma.views',
     url(r'^programacion/detalleformador/(?P<id>\d+)$',      'detalle_formador', name='detalle_formador'),
     url(r'^programacion/actividad/(?P<id>\d+)$',      'actividad', name='actividad'),
     url(r'^programacion/listaestudiantes/(?P<id>\d+)$',      'lista_estudiantes', name='lista_estudiantes'),
+    url(r'^programacion/listaestudiantesacompanamiento/(?P<id>\d+)$',      'lista_acompanamiento', name='lista_acompanamiento'),
     url(r'^programacion/cancelarclase/(?P<id>\d+)$',      'cancelar_clase_acompanamiento', name='cancelar_clase'),
     url(r'^programacion/gestion$',      'gestion', name='gestion'),
     #url(r'^programacion/controlasistencia$',      'asistencia', name='asistencia'),
     #url(r'^programacion/controlasistencia/(\d+)/clases/(\d+)/asistencia$',       'asistencia', name="asistencia"),
     url(r'programacion/(\d+)/clases/(\d+)/asistencia$',       'asistencia', name="asistencia"),
+     url(r'programacion/(\d+)/clases/(\d+)/asistenciaacompanamiento$',       'asistencia_acompanamiento', name="asistencia_acompanamiento"),
 
     
     
