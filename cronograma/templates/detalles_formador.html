@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block titulo %} Detalles Formador {% endblock %}
+
+{% block menu %}
+    {% include "menus/publico.html" with opcion_menu=20 %}
+{% endblock %}
+
+{% block css %}
+    
+    <!--- ñiiipi -->
+    {{form.media}} {# agrega los js y css necesarios para el bootstrap3 datetimepicker y select2 #}
+    <!--- :D -->
+{% endblock %}
+
+{% block js %}
+    {% if solo_lectura%}
+    <script>
+        $(function(){
+            $("select").attr("disabled", "disabled");
+            $("input").attr("readonly", "readonly");
+        });
+    </script>
+
+    {% endif %}
+{% endblock %}
+
+{% block miga_pan %}
+    <li><a href="{% url 'home' %}">Inicio</a></li>
+    <li class="active">Detalles Formador</li>
+{% endblock %}
+
+{% block titulo_contenido %}Detalles Formador{% endblock %}
+
+{% block previo_contenido_panel %}
+    
+{% endblock %}
+
+{% block titulo_panel %}<i class="fa fa-user"></i> Detalles Formador{% endblock %}
+{% block contenido_panel %}
+
+                               
+      
+
+                <form class="form-horizontal" method="post">{% csrf_token %}
+                    {% bootstrap_form form layout="horizontal" %}
+                <a href= "{% url 'gestion_formador' %}"><button name = "boton" id = "1" class="btn btn-lg btn-warning pull-right" type="submit" value="0">Modificar</button></a>         
+                
+                <a href= "{% url 'gestion_formador' %} " class="btn btn-lg btn-primary pull-right" >Volver</a>
+                </form>
+                    
+                
+                
+
+{% endblock %}
