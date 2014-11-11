@@ -80,11 +80,16 @@ def asistencia(request, curso_id, clase_id):
         'form': form,
         #'soportesFormset' : soportesFormset,
     })
-
+'''
 def actividades(request, curso_id, clase_id):
     curso = get_object_or_404(Cursos, id=curso_id)
     clase = get_object_or_404(Clases, id=clase_id)
 
+<<<<<<< HEAD
+    grupo = user_group(request)
+    if grupo == None:
+        return redirect('home')
+=======
     if request.method=='POST':
         form = ActividadForm(request.POST, instance=clase)
         #soportesFormset = SoportesFormset(request.POST, request.FILES, instance=clase)
@@ -96,15 +101,23 @@ def actividades(request, curso_id, clase_id):
             #print "result=",result
 
         #print "valido1=", form.is_valid(), "valido2=", soportesFormset.is_valid()
+>>>>>>> 6046c5ec159e61d1d7f631f5d74718878928761b
 
-        #if form.is_valid() and soportesFormset.is_valid():
-            #return redirect('asistencia', curso_id, clase_id)
-            return redirect('home')
+    if request.method == 'POST':
+        
+        form = ActividadForm(request.POST, request.FILES)
+        
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.clase = clase
+            obj.save()
+            
+            return redirect('cronograma_diplomado')
 
+    else:
+        
 
-    else :
-        form = ActividadForm(instance=clase)
-        #soportesFormset = SoportesFormset(instance=clase)
+        form = ActividadForm()
 
     return render(request, 'calificar_actividades.html', {
         'clase':clase,
@@ -112,7 +125,7 @@ def actividades(request, curso_id, clase_id):
         'form': form,
         #'soportesFormset' : soportesFormset,
     })
-
+'''
 
 def calificar_actividades(request, curso_id, clase_id):
     clase = get_object_or_404(Clase, id=clase_id)

@@ -18,8 +18,8 @@
 
 {% block miga_pan %}
     <li><a href="{% url 'home' %}">Inicio</a></li>
-    <li><a href="{% url 'listar_cursos_profesor' %}">Cursos</a></li>
-    <li><a href="{% url 'listar_clases_curso' curso.id%}">Clases</a></li>
+    <li><a href="{% url 'home' %}">Cursos</a></li>
+    <li><a href="{% url 'home' %}">Clases</a></li>
     <li class="active">Estudiantes</li>
 {% endblock %}
 
@@ -29,7 +29,9 @@
 
 <ul class="nav nav-tabs">
     <li class="active"><a href="#"><h5>Asistencia</h5></a></li>
-    <li><a href="{% url 'calificar_actividades' clase.curso_id clase.id  %}"><h5>Actividades</h5></a></li>
+    {%comment%}<li><a href="{% url 'actividad' clase.id  %}"><h5>Actividades</h5></a></li>{%endcomment%}
+    <li><a href="{% url 'actividad' clase.id  %}"><h5>Actividades</h5></a></li>
+
 </ul>
 <div class="tab-content">
 
