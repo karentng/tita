@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django import forms
-from campus.models import Clases, AcompanamientoInSitus, SoporteClase, SoporteAcompanamiento, Cursos, Formador, Estudiante
+from campus.models import Clases, AcompanamientoInSitus, SoporteClases, SoporteAcompanamiento, Cursos, Formador, Estudiante
 from datetimewidget.widgets import DateTimeWidget
 from datetimewidget.widgets import DateWidget
 from django.forms import ModelForm, Textarea, HiddenInput, TextInput, Select, CheckboxSelectMultiple, FileInput, ClearableFileInput
@@ -110,7 +110,7 @@ class MyFileInput(ClearableFileInput):
 
 class DocumentosSoporteForm(forms.ModelForm):
     class Meta:
-        model = SoporteClase
+        model = SoporteClases
         exclude = ('clase',)
         widgets = {
             'archivo' : MyFileInput(),

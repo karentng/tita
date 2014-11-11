@@ -9,6 +9,7 @@ from datetime import datetime, date, timedelta
 from math import ceil
 import datetime 
 from campus.views import user_group
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_list_or_404, get_object_or_404
 
 def cronograma(request):
@@ -316,12 +317,14 @@ def cronograma(request):
         cursovar = Cursos.objects.get(id=i.curso.id)
         cursos = str(cursovar.descripcion)
 
+        print "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+cursos
+
         events.append({
             'id': i.id,
             'nombre': i.nombre,
-            'curso': i.curso.descripcion,
+            'curso': cursos,
             #'institucion': i.institucion,
-            'descripcion': i.descripcion,
+            'descripcion': cursos,
             'hora_inicio': hora_inicio,
             'hora_finalizacion': hora_finalizacion,
             'diasEvento': diasEvento,
@@ -357,6 +360,16 @@ def diplomado(request):
     grupo = user_group(request)
     if grupo == None:
         return redirect('home')
+
+    if grupo == "Formador":
+        username = request.user
+        formador = Formador.objects.get(usuario=username.id)
+        curso = Cursos.objects.get(formador=formador.id)
+        
+        eventos = Clases.objects.filter(curso=curso)
+
+    if grupo == "Coordinador":
+        eventos = Clases.objects.all()
 
     if request.method == 'POST':
         form = EventosDiplomadoForm(request.POST)
@@ -627,7 +640,7 @@ def diplomado(request):
     else:
         form = EventosDiplomadoForm(initial={'nombre': 'Sesion'}) 
 
-    eventos = Clases.objects.all()
+    #eventos = Clases.objects.all()
     #
     events = []
     for i in eventos:
@@ -848,7 +861,7 @@ def formador(request):
         if form.is_valid():
             objeto = form.save()
             
-            return redirect('home')
+            return redirect('gestion_formador')
     else :
         form = FormadorForm()
 
@@ -1007,7 +1020,7 @@ def actividad(request, id):
 
     grupo = user_group(request)
     if grupo == None:
-        return redirect('home')
+        return redirect('cronograma_diplomado_soportes')
 
     if request.method == 'POST':
         
@@ -1043,7 +1056,7 @@ def actividadacompanamiento(request, id):
 
     grupo = user_group(request)
     if grupo == None:
-        return redirect('home')
+        return redirect('cronograma_acompanamiento_soportes')
 
     if request.method == 'POST':
         
@@ -1149,7 +1162,10 @@ def asistencia(request, curso_id, clase_id):
 
         #if form.is_valid() and soportesFormset.is_valid():
             #return redirect('asistencia', curso_id, clase_id)
-            return redirect('home')
+
+            ide = "?v="+str(clase_id)
+
+            return redirect('cronograma_diplomado')
 
 
     else :
@@ -1183,7 +1199,10 @@ def asistencia_acompanamiento(request, curso_id, clase_id):
 
         #if form.is_valid() and soportesFormset.is_valid():
             #return redirect('asistencia', curso_id, clase_id)
-            return redirect('home')
+
+            ide = "?v="+str(clase_id)
+
+            return redirect('cronograma_acompanamiento')
 
 
     else :
