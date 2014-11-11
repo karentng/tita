@@ -293,6 +293,7 @@ class EstadoDeAvance(models.Model):
     presupuesto_actividad = models.FloatField(verbose_name='presupuesto de la actividad')
     presupuesto_ejecutado = models.FloatField(verbose_name='presupuesto ejecutado')
     ejecucion_financiera = models.FloatField(verbose_name='ejecucion financiera')
+    observacion = models.CharField(max_length=500, blank=True, null=True, verbose_name='observacion')
     actividad = models.ForeignKey(Actividad)
 
     def __unicode__(self):
@@ -312,7 +313,7 @@ class Grupo(models.Model):
         if (self.grupo_padre != None):
             return str(self.grupo_padre) + " - " + self.nombre
         else:
-            return self.concepto_por_actividad.actividad.nombre + ", " + self.concepto_por_actividad.concepto.nombre + " - " + self.nombre
+            return self.nombre
 
     def get_grupos(self):
         return Grupo.objects.filter(grupo_padre=self).order_by('id')
@@ -322,7 +323,7 @@ class Grupo(models.Model):
 
 class Archivo(models.Model):
     nombre = models.CharField(max_length=255, verbose_name='nombre')
-    ruta = models.FileField(upload_to=crear_ruta_archivo_tablero_control, blank=True, null=True)
+    ruta = models.FileField(upload_to=crear_ruta_archivo_tablero_control)
     descripcion = models.CharField(max_length=255, verbose_name='descripcion')
     grupo = models.ForeignKey("Grupo")
 

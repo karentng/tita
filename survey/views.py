@@ -20,7 +20,7 @@ def codigo_encuesta_session(request):
 def codigo_encuesta(request):
     codigo = codigo_encuesta_session(request)
     if codigo:
-        return redirect('encuesta_estudiante')
+        return redirect('encuesta_nuevo_estudiante')
     mensaje = ""
     if request.method == 'POST':
         form = CodigoEncuestaForm(request.POST)
@@ -28,7 +28,7 @@ def codigo_encuesta(request):
             clave = form.cleaned_data['registro']
             if clave == '98765234567': # clave de acceso
                 request.session['codigo_encuesta']=clave
-                return redirect('encuesta_estudiante')
+                return redirect('encuesta_nuevo_estudiante')
             else :
                 mensaje = "Código inválido"
     else:
@@ -160,11 +160,11 @@ def encuesta_estudiante(request):
     })
 
 def encuesta_nuevo_estudiante(request):
-    #codigo = codigo_encuesta_session(request)
-    #print "--------------------"
-    #print codigo 
-    #if not codigo:
-    #    return codigo_encuesta(request)
+    codigo = codigo_encuesta_session(request)
+    print "--------------------"
+    print codigo 
+    if not codigo:
+        return codigo_encuesta(request)
     survey = Survey.objects.get(id=4)
     category_items = list(survey.category_set.all())    
     

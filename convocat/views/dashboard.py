@@ -162,10 +162,12 @@ def tablero_control(request, id_actividad):
     if id_actividad=='':
         id_actividad=1
 
+    request.session['actividad_tablero_control'] = id_actividad
+
     actividad_seleccionada = Actividad.objects.get(id=id_actividad)
     actividades = Actividad.objects.all().order_by('id')
     estado_de_avance = EstadoDeAvance.objects.filter(actividad=actividad_seleccionada)
-    print(estado_de_avance)
+    print(actividad_seleccionada)
 
     if len(estado_de_avance) > 0:
         estado_de_avance = estado_de_avance.latest('id')
@@ -184,10 +186,11 @@ def guardarArchivo(request):
     if form.is_valid():
         form.save()
 
-    return HttpResponseRedirect('actividades/' + str(request.session['actividad_tablero_control']))
+    return HttpResponseRedirect(str(request.session['actividad_tablero_control']))
 
 def guardarEstadoDeAvance(request):
     actividad = Actividad.objects.get(id=request.session['actividad_tablero_control'])
+    print(actividad)
     form = EstadoDeAvanceForm(request.POST)
     if form.is_valid():
         estado_de_avance = form.save(commit=False)
@@ -196,9 +199,39 @@ def guardarEstadoDeAvance(request):
 
     return HttpResponseRedirect( str(request.session['actividad_tablero_control']))
 
-def guardarGrupo(request):
-    form = GrupoForm(request.POST, request.FILES)
-    if form.is_valid():
-        form.save()
+def eliminarGrupo(request, id_grupo):
+    grupo = Grupo.objects.get(id=id_grupo)
+    grupo.delete()
 
-    return HttpResponseRedirect('actividades/' + str(request.session['actividad_tablero_control']))
+    return HttpResponseRedirect( '../' + str(request.session['actividad_tablero_control']))
+
+def eliminarArchivo(request, id_archivo):
+    archivo = Archivo.objects.get(id=id_archivo)
+    print(archivo)
+    archivo.delete()
+
+    return HttpResponseRedirect( '../' + str(request.session['actividad_tablero_control']))
+
+def guardarGrupo(request, id_concepto_por_actividad):
+    form = GrupoForm(request.POST, request.FILES)
+    concepto_por_actividad = ConceptoPorActividad.objects.get(id=id_concepto_por_actividad)
+
+    if form.is_valid():
+        grupo = form.save(commit=False)
+        grupo.concepto_por_actividad = concepto_por_actividad
+        grupo.save()
+
+    return HttpResponseRedirect( '../' + str(request.session['actividad_tablero_control']))
+
+def obtenerGruposPorConceptoActividad(request, id_concepto_por_actividad):
+    concepto_por_actividad = ConceptoPorActividad.objects.get(id=id_concepto_por_actividad)
+    grupos = Grupo.objects.filter(concepto_por_actividad=concepto_por_actividad)
+
+    out = []
+    out.append('<option selected="selected" value="">---------</option>')
+
+    for grupo in grupos:
+        out.append("<option value='" + str(grupo.id) + "'>" + str(grupo) + "</option>")
+
+    return HttpResponse(' '.join(out))
+

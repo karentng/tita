@@ -24,7 +24,7 @@ def logged_user(request):
     elif grupo == 'Formador':
         return redirect('cronograma_diplomado') # mientras se definen las opciones que tendrá
     else: #grupo == 'Alcaldia'
-        return redirect('tablero_control')
+        return redirect('tablero_control/')
 
 # Create your views here.
 
@@ -57,12 +57,12 @@ def asistencia(request, curso_id, clase_id):
         form = AsistenciaForm(request.POST, instance=clase)
         #soportesFormset = SoportesFormset(request.POST, request.FILES, instance=clase)
         #advertencia: no trate de copiar este codigo, trabaja de manera inusual
-        if form.is_valid() : 
+        if form.is_valid() :
             form.save()
-        #if soportesFormset.is_valid() : 
+        #if soportesFormset.is_valid() :
             #result = soportesFormset.save()
             #print "result=",result
-        
+
         #print "valido1=", form.is_valid(), "valido2=", soportesFormset.is_valid()
 
         #if form.is_valid() and soportesFormset.is_valid():
@@ -85,9 +85,23 @@ def actividades(request, curso_id, clase_id):
     curso = get_object_or_404(Cursos, id=curso_id)
     clase = get_object_or_404(Clases, id=clase_id)
 
+<<<<<<< HEAD
     grupo = user_group(request)
     if grupo == None:
         return redirect('home')
+=======
+    if request.method=='POST':
+        form = ActividadForm(request.POST, instance=clase)
+        #soportesFormset = SoportesFormset(request.POST, request.FILES, instance=clase)
+        #advertencia: no trate de copiar este codigo, trabaja de manera inusual
+        if form.is_valid() :
+            form.save()
+        #if soportesFormset.is_valid() :
+            #result = soportesFormset.save()
+            #print "result=",result
+
+        #print "valido1=", form.is_valid(), "valido2=", soportesFormset.is_valid()
+>>>>>>> 6046c5ec159e61d1d7f631f5d74718878928761b
 
     if request.method == 'POST':
         
@@ -126,7 +140,7 @@ def calificar_actividades(request, curso_id, clase_id):
         else :
             pass
 
-    
+
 
     return render(request, 'calificar_actividades.html', {
         'clase' : clase,
