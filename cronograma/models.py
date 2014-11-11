@@ -2,8 +2,9 @@
 from django.db import models
 from dateutil.relativedelta import relativedelta
 from datetime import datetime
+from campus.models import Estudiante, Formador
 
-
+'''
 class EventosAcompanamiento(models.Model):
 
     SEDES = (
@@ -84,5 +85,38 @@ class EventosDiplomado(models.Model):
     
     def __unicode__(self):
         return self.nombre
+
+
+
+       '''
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

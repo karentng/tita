@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block titulo %} Lista de Estudiantes {% endblock %}
+
+{% block menu %}
+    {% include "menus/publico.html" with opcion_menu=3 %}
+{% endblock %}
+
+{% block css %}
+    <link href="{{STATIC_URL}}plugins/bootstrap-wizard/css/bwizard.min.css" rel="stylesheet" />
+    {{form.media}} {# agrega los js y css necesarios para el bootstrap3 datetimepicker #}
+{% endblock %}
+
+{% block js %}
+    {% if solo_lectura%}
+    <script>
+        $(function(){
+            $("select").attr("disabled", "disabled");
+            $("input").attr("readonly", "readonly");
+        });
+    </script>
+
+    {% endif %}
+{% endblock %}
+
+{% block miga_pan %}
+    <li><a href="{% url 'home' %}">Inicio</a></li>
+    <li class="active">Lista de Estudiantes</li>
+{% endblock %}
+
+{% block titulo_contenido %}Curso {{curso}}{% endblock %}
+
+{% block titulo_panel %}<i class="fa fa-lightbulb-o"></i> Clase : {{clase}}{% endblock %}
+{% block contenido_panel %}
+<h4>Lista de Estudiantes<br><br></h4>
+
+ <table class="table table-hover">
+            <tr>
+                <thead>
+                <td >
+                    Estudiante                     
+                </td>
+                <td >
+                    Firma                     
+                </td>
+            </tr>
+            </thead>          
+
+{%for estudiante in estudiante_list%}
+            <tr>
+                <tbody>
+                <td >
+                    {{estudiante.nombre1}} {{estudiante.apellido1}}                     
+                </td>
+                <td >
+                                        
+                </td>
+            </tbody>
+            </tr> 
+{%endfor%}
+</table>
+
+
+
+    
+{% endblock %}

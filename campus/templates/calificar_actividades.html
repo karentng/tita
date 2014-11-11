@@ -34,14 +34,7 @@
     
     <div class="col-md-7 col-md-offset-5">
         <div class="panel  {% if actividad_form.errors %} panel-danger {%else%} panel-inverse {% endif %}">
-            <div class="panel-heading">
-                <h3 class="panel-title">
-                    <a class="accordion-toggle" data-toggle="collapse" href="#collapseOne">
-                        <i class="fa fa-plus-circle pull-right"></i> 
-                        Crear Actividad
-                    </a>
-                </h3>
-            </div>
+            
             <div id="collapseOne" class="panel-collapse collapse {% if actividad_form.errors %} in {% endif %}">
                 <div class="panel-body" style="border-width:1px; border-color:black; border-style:solid">
                     <form method="POST" class="form-horizontal"> {% csrf_token %}

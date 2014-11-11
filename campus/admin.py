@@ -6,5 +6,6 @@ from campus.models import *
 
 admin.site.register(Estudiante)
 admin.site.register(Formador)
-admin.site.register(Clase)
-admin.site.register(Curso)
+admin.site.register(Clases)
+admin.site.register(Cursos)
+admin.site.register(Actividad)
