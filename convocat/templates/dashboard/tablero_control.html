@@ -17,6 +17,20 @@
 
 {% block js_ready %}
     <script>
+        function confirmacionBorrarArchivo(id_archivo) {
+            $('#confirmacionBorrarArchivo').modal({ backdrop: 'static', keyboard: false }).one('click', '#borrarArchivoButton', function (e) {
+                $("#formBorrarArchivo").attr("action", "{% url 'tableroControlEliminarArchivo' '' %}" + id_archivo);
+                $("#formBorrarArchivo").submit();
+            });
+        }
+
+        function confirmacionBorrarGrupo(id_grupo) {
+            $('#confirmacionBorrarGrupo').modal({ backdrop: 'static', keyboard: false }).one('click', '#borrarGrupoButton', function (e) {
+                $("#formBorrarGrupo").attr("action", "{% url 'tableroControlEliminarGrupo' '' %}" + id_grupo);
+                $("#formBorrarGrupo").submit();
+            });
+        }
+
         $(document).ready(function() {
             App.init();
 
@@ -34,6 +48,20 @@
                     e.stopPropagation();
                 });
             });
+
+            $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+                var id_concepto_actividad = e.target["href"].split("-").pop();
+                $('#formGuardarGrupo').attr("action", "{% url 'tableroControlGuardarGrupo' '' %}" + id_concepto_actividad);
+
+                $.get("{% url 'tableroControlObtenerGruposPorConceptoActividad' '' %}" + id_concepto_actividad, function(data) {
+                    $("#id_grupo_padre").html(data);
+                    $("#id_grupo").html(data);
+                });
+            });
+
+            $(function () {
+                $('#conceptos_tabs a:first').tab('show')
+            })
         });
     </script>
 {% endblock %}
@@ -47,16 +75,51 @@
 {% endblock %}
 
 {% block contenido %}
+    <div class="modal fade" id="confirmacionBorrarArchivo">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Eliminar Archivo</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="formBorrarArchivo" class="form-horizontal" method="post" action="">
+                        {% csrf_token %}
+                        <h5>Realmente desea borrar el archivo?</h5>
+                        <button type="button" type="submit" class="btn btn-primary pull-right" id="borrarArchivoButton">Borrar</button>
+                    </form>
+                </div>
+                <br/><br/>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="confirmacionBorrarGrupo">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Eliminar Grupo</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="formBorrarGrupo" class="form-horizontal" method="post" action="">
+                        {% csrf_token %}
+                        <h5>Realmente desea borrar el grupo?</h5>
+                        <button type="button" type="submit" class="btn btn-primary pull-right" id="borrarGrupoButton">Borrar</button>
+                    </form>
+                </div>
+                <br/><br/>
+            </div>
+        </div>
+    </div>
     <div class="row" align="center">
         <div class="col-xs-12">
             {% for actividad in actividades %}
-                <a href="{% url 'tablero_control' actividad.id %}" class="btn {% if actividad.id == actividad_seleccionada.id %} btn-primary {% else %} btn-inverse {% endif %}"
+                <a href="{% url 'tablero_control' actividad.id %}" class="btn btn-{% if actividad.id == actividad_seleccionada.id %}success{% else %}inverse{% endif %}"
                     style="margin-bottom:5px" data-toggle="tooltip" data-placement="bottom" title="{{actividad.nombre}} - {{actividad.descripcion}}">
-                    <!--<i class="fa fa-bar-chart-o fa-2x"></i>-->
                     <small>Actividad</small><br/>
                     <span class="fa-stack fa-1x ">
                       <i class="fa fa-circle fa-stack-2x"></i>
-                      <i class="fa fa-inverse fa-stack-1x text-{% if actividad.id == actividad_seleccionada.id %}primary{% else %}inverse{% endif %}"><small>{{forloop.counter}}</small></i>
+                      <i class="fa fa-inverse fa-stack-1x text-{% if actividad.id == actividad_seleccionada.id %}success{% else %}inverse{% endif %}"><small>{{forloop.counter}}</small></i>
                     </span>
                     <br>
 
@@ -75,26 +138,30 @@
 				</div>
 				<div class="panel-body">
                     <form class="form-inline">
-                        <div class="form-group"><label class="control-label" style="width:200px">Fecha</label></div>
-                        <div class="form-group"><label class="control-label" style="width:100px">Meta</label></div>
-                        <div class="form-group"><label class="control-label" style="width:100px">Avance Actual</label></div>
-                        <div class="form-group"><label class="control-label" style="width:200px">Presupuesto para la Actividad</label></div>
-                        <div class="form-group"><label class="control-label" style="width:150px">Presupuesto Ejecutado</label></div>
-                        <div class="form-group"><label class="control-label" style="width:150px">Ejecuci&oacute;n Financiera</label></div>
+                        <div class="form-group"><label class="control-label" style="width:185px">Fecha</label></div>
+                        <div class="form-group"><label class="control-label" style="width:90px">Meta</label></div>
+                        <div class="form-group"><label class="control-label" style="width:90px">Avance Actual</label></div>
+                        <div class="form-group"><label class="control-label" style="width:180px">Presupuesto para la Actividad</label></div>
+                        <div class="form-group"><label class="control-label" style="width:140px">Presupuesto Ejecutado</label></div>
+                        <div class="form-group"><label class="control-label" style="width:130px">Ejecuci&oacute;n Financiera</label></div>
+                        <div class="form-group"><label class="control-label" style="width:140px">Observaci&oacute;n</label></div>
                     </form>
                     <form class="form-inline">
-                        <div class="form-group"><input type="text" value="{{estado_de_avance.fecha}}" title="" size="23" class="form-control"></div>
-                        <div class="form-group"><input type="text" value="{{estado_de_avance.meta}}%" style="width:100px" class="form-control"></div>
-                        <div class="form-group"><input type="text" value="{{estado_de_avance.avance_actual}}%" style="width:100px" class="form-control"></div>
-                        <div class="form-group"><input type="text" value="{{estado_de_avance.presupuesto_actividad}}" style="width:200px" class="form-control"></div>
-                        <div class="form-group"><input type="text" value="{{estado_de_avance.presupuesto_ejecutado}}%" style="width:150px" class="form-control"></div>
-                        <div class="form-group"><input type="text" value="{{estado_de_avance.ejecucion_financiera}}%" style="width:150px" class="form-control"></div>
+                        <div class="form-group"><input type="text" value="{{estado_de_avance.fecha}}" title="" size="21" class="form-control"></div>
+                        <div class="form-group"><input type="text" value="{{estado_de_avance.meta}}%" style="width:90px" class="form-control"></div>
+                        <div class="form-group"><input type="text" value="{{estado_de_avance.avance_actual}}%" style="width:90px" class="form-control"></div>
+                        <div class="form-group"><input type="text" value="{{estado_de_avance.presupuesto_actividad}}" style="width:180px" class="form-control"></div>
+                        <div class="form-group"><input type="text" value="{{estado_de_avance.presupuesto_ejecutado}}%" style="width:140px" class="form-control"></div>
+                        <div class="form-group"><input type="text" value="{{estado_de_avance.ejecucion_financiera}}%" style="width:130px" class="form-control"></div>
+                        <div class="form-group"><input type="text" value="{% if estado_de_avance.observacion != None %}{{estado_de_avance.observacion}}{% else %}{% endif %}" style="width:140px" class="form-control"></div>
                     </form>
                     <br/>
                     <form class="form-inline" action={% url 'tableroControlGuardarEstadoDeAvance' %} method="POST">
                         {% csrf_token %}
                         {% bootstrap_form estado_avance_form %}
-                        <button class="btn btn-sm btn-primary" type="submit">Guardar</button>
+                        <button class="btn btn-sm btn-primary" type="submit">
+                            <i class="fa fa-save"></i>
+                        </button>
                     </form>
 				</div>
 			</div>
@@ -102,18 +169,20 @@
 	</div>
     <div class="row">
         <div class="col-md-12">
-            <ul class="nav nav-tabs">
+            <ul class="nav nav-tabs" id="conceptos_tabs">
                 {% for concepto_por_actividad in actividad_seleccionada.get_conceptos_por_actividad %}
-                    <li class="{% if forloop.counter == 1 %}active{% else %}{% endif %}"><a href="#tab-{{concepto_por_actividad.id}}" data-toggle="tab">{{concepto_por_actividad.concepto.nombre}}</a></li>
+                    <li><a href="#tab-{{concepto_por_actividad.id}}" data-toggle="tab">{{concepto_por_actividad.concepto.nombre}}</a></li>
                 {% endfor %}
             </ul>
             <div class="tab-content">
                 {% for concepto_por_actividad in actividad_seleccionada.get_conceptos_por_actividad %}
-                    <div class="tab-pane fade {% if forloop.counter == 1 %}active in{% else %}{% endif %}" id="tab-{{concepto_por_actividad.id}}">
+                    <div class="tab-pane fade" id="tab-{{concepto_por_actividad.id}}">
                         <div class="tree">
                             <div class="row">
                                 <a href="#modal-dialog-grupo" class="btn btn-success" data-toggle="modal">Adicionar Grupo</a>
-                                <a href="#modal-dialog-archivo" class="btn btn-success" data-toggle="modal">Adicionar Archivo</a>
+                                {% if concepto_por_actividad.get_grupos|length > 0 %}
+                                    <a href="#modal-dialog-archivo" class="btn btn-success" data-toggle="modal">Adicionar Archivo</a>
+                                {% endif %}
                             </div>
                             <ul>
                                 {% for grupo in concepto_por_actividad.get_grupos %}
@@ -121,42 +190,44 @@
                                 {% endfor %}
                             </ul>
                         </div>
-                        <div class="modal fade" id="modal-dialog-archivo">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                        <h4 class="modal-title">Adicionar Archivo</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form enctype="multipart/form-data" class="form-horizontal" method="post" action={% url 'tableroControlGuardarArchivo' %}>{% csrf_token %}
-                                            {% bootstrap_form formArchivo layout="horizontal" %}
-                                            <button class="btn btn-sm btn-primary pull-right" type="submit">Guardar</button>
-                                        </form>
-                                        <br/><br/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal fade" id="modal-dialog-grupo">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                        <h4 class="modal-title">Adicionar Grupo</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form class="form-horizontal" method="post" action={% url 'tableroControlGuardarGrupo' %}>{% csrf_token %}
-                                            {% bootstrap_form formGrupo layout="horizontal" %}
-                                            <button class="btn btn-sm btn-primary pull-left" type="submit">Guardar</button>
-                                        </form>
-                                        <br/><br/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal-dialog-grupo">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Adicionar Grupo</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="formGuardarGrupo" class="form-horizontal" method="post" action={% url 'tableroControlGuardarGrupo' '1' %}>
+                        {% csrf_token %}
+                        {% bootstrap_form formGrupo layout="horizontal" %}
+                        <button class="btn btn-sm btn-primary pull-right" type="submit">Guardar</button>
+                    </form>
+                    <br/><br/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal-dialog-archivo">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Adicionar Archivo</h4>
+                </div>
+                <div class="modal-body">
+                    <form enctype="multipart/form-data" class="form-horizontal" method="post" action={% url 'tableroControlGuardarArchivo' %}>
+                        {% csrf_token %}
+                        {% bootstrap_form formArchivo layout="horizontal" %}
+                        <button class="btn btn-sm btn-primary pull-right" type="submit">Guardar</button>
+                    </form>
+                    <br/><br/>
+                </div>
             </div>
         </div>
     </div>
