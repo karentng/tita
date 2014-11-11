@@ -52,7 +52,7 @@
     border:0
 }
 .tree li:last-child::before {
-    height:57px
+    height:25px
 }
 .tree li.parent_li>span:hover, .tree li.parent_li>span:hover+ul li span {
     background:#eee;
