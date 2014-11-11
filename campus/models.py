@@ -177,6 +177,9 @@ class Cursos(models.Model):
     formador = models.ForeignKey(Formador)
     estudiantes = models.ManyToManyField(Estudiante, blank=True, verbose_name='Estudiantes')
 
+    def __unicode__(self):
+        return (u"%s - %s "%(self.descripcion,self.formador))
+
 class Curso(models.Model):
     descripcion = models.CharField(max_length=255, verbose_name=u'Nombre')
     institucion = models.ForeignKey(InstitucionEducativa, verbose_name='institucion', null=True, blank=True)
@@ -184,7 +187,7 @@ class Curso(models.Model):
     estudiantes = models.ManyToManyField(Estudiante, blank=True, verbose_name='Estudiantes')
 
     def __unicode__(self):
-        return (u"Curso: %s - Formador: %s"%(self.descripcion,self.formador))
+        return (u"Curso: %s - Formador: %s - Institución: %s"%(self.descripcion,self.formador,self.institucion))
 
 """   
 class Horario(models.Model):
@@ -310,7 +313,7 @@ class AcompanamientoInSitu(models.Model):
 class Clases(models.Model):
 
     
-    nombre = models.CharField(max_length=255, help_text='Seleccione el numero de sesión (ej: 1)')
+    nombre = models.CharField(max_length=255)
     fecha_inicio = models.DateTimeField(verbose_name=u'fecha y hora de inicio')
     #institucion = models.IntegerField(choices=SEDES, max_length=2, verbose_name="institución", null=True, blank=True)
     modificado = models.DateTimeField(auto_now=True)
@@ -323,7 +326,7 @@ class Clases(models.Model):
 class AcompanamientoInSitus(models.Model):
 
     
-    nombre = models.CharField(max_length=255, help_text='Seleccione el numero de sesión (ej: 1)')
+    nombre = models.CharField(max_length=255)
     fecha_inicio = models.DateTimeField(verbose_name=u'fecha y hora de inicio')
     #institucion = models.IntegerField(choices=SEDES, max_length=2, verbose_name="institución", null=True, blank=True)
     modificado = models.DateTimeField(auto_now=True)
@@ -356,7 +359,6 @@ class SoporteClases(models.Model):
 class Actividad(models.Model):
     clase = models.ForeignKey(Clases)
     estudiante = models.ForeignKey(Estudiante)
-    asistencia = models.BooleanField()
     actividad1 = models.BooleanField()
     actividad2 = models.BooleanField()
     actividad3 = models.BooleanField()

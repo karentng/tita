@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django import forms
-from campus.models import Clases, AcompanamientoInSitus, SoporteClase, SoporteAcompanamiento, Cursos, Formador
+from campus.models import Clases, AcompanamientoInSitus, SoporteClase, SoporteAcompanamiento, Cursos, Formador, Estudiante
 from datetimewidget.widgets import DateTimeWidget
 from datetimewidget.widgets import DateWidget
 from django.forms import ModelForm, Textarea, HiddenInput, TextInput, Select, CheckboxSelectMultiple, FileInput, ClearableFileInput
@@ -13,13 +13,46 @@ class EventosDiplomadoForm(forms.ModelForm):
 
         fields = ('nombre', 'curso', 'fecha_inicio', 'duracion', 'descripcion')
 
+
+
         widgets = {
+
             'fecha_inicio': DateTimeWidget(options={'format': 'dd/mm/yyyy hh:ii','autoclose': 'true','startView':'4','minuteStep':'30',},usel10n=False, bootstrap_version=3),
             #'fecha_finalizacion': DateTimeWidget(options={'format': 'dd/mm/yyyy hh:ii','autoclose': 'true','startView':'4','minuteStep':'30',},usel10n=False, bootstrap_version=3),
-         	'descripcion': forms.Textarea(attrs={'rows': 4})
+         	'descripcion': forms.Textarea(attrs={'rows': 4}),
+            'nombre': forms.TextInput(attrs={'readonly':'readonly'})
+        }
+
+class EventosDiplomadoMForm(forms.ModelForm):
+    class Meta:
+        model = Clases
+
+        fields = ('nombre', 'curso', 'fecha_inicio', 'duracion', 'descripcion')
+
+
+
+        widgets = {
+
+            'fecha_inicio': DateTimeWidget(options={'format': 'dd/mm/yyyy hh:ii','autoclose': 'true','startView':'4','minuteStep':'30',},usel10n=False, bootstrap_version=3),
+            #'fecha_finalizacion': DateTimeWidget(options={'format': 'dd/mm/yyyy hh:ii','autoclose': 'true','startView':'4','minuteStep':'30',},usel10n=False, bootstrap_version=3),
+            'descripcion': forms.Textarea(attrs={'rows': 4}),
+            #'nombre': forms.TextInput(attrs={'readonly':'readonly'})
         }
 
 class EventosAcompanamientoForm(forms.ModelForm):
+    class Meta:
+        model = AcompanamientoInSitus
+
+        fields = ('nombre', 'curso', 'fecha_inicio','duracion', 'descripcion')
+        widgets = {
+            'fecha_inicio': DateTimeWidget(options={'format': 'dd/mm/yyyy hh:ii','autoclose': 'true','startView':'4','minuteStep':'30',},usel10n=False, bootstrap_version=3),
+            #'fecha_inicio': DateWidget(usel10n=False, bootstrap_version=3, options={'format': 'yyyy-mm-dd', 'startView':4, 'language':'es'}),
+            #'fecha_finalizacion': DateTimeWidget(options={'format': 'dd/mm/yyyy hh:ii','autoclose': 'true','startView':'4','minuteStep':'30',},usel10n=False, bootstrap_version=3),
+            'descripcion': forms.Textarea(attrs={'rows': 4}),
+            'nombre': forms.TextInput(attrs={'readonly':'readonly'})
+        }
+
+class EventosAcompanamientoMForm(forms.ModelForm):
     class Meta:
         model = AcompanamientoInSitus
 
@@ -96,6 +129,12 @@ class DocumentosSoporteAcompanamientoForm(forms.ModelForm):
 class CursoForm(forms.ModelForm):
     class Meta:
         model = Cursos
+        fields = ('descripcion','institucion','formador','estudiantes',)
+        widgets = {'estudiantes': forms.CheckboxSelectMultiple()}
+
+        
+
+
 
         
 

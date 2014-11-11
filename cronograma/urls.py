@@ -17,7 +17,7 @@ urlpatterns = patterns('cronograma.views',
     url(r'^programacion/detallecurso/(?P<id>\d+)$',      'detalle_curso', name='detalle_curso'),
     url(r'^programacion/gestionformador$',      'reporte_formadores', name='gestion_formador'),
     url(r'^programacion/detalleformador/(?P<id>\d+)$',      'detalle_formador', name='detalle_formador'),
-    url(r'^programacion/actividad/(?P<id>\d+)$',      'actividad', name='actividad'),
+    
     url(r'^programacion/listaestudiantes/(?P<id>\d+)$',      'lista_estudiantes', name='lista_estudiantes'),
     url(r'^programacion/listaestudiantesacompanamiento/(?P<id>\d+)$',      'lista_acompanamiento', name='lista_acompanamiento'),
     url(r'^programacion/cancelarclase/(?P<id>\d+)$',      'cancelar_clase_diplomado', name='cancelar_clase'),
@@ -28,6 +28,7 @@ urlpatterns = patterns('cronograma.views',
     url(r'programacion/(\d+)/clases/(\d+)/asistencia$',       'asistencia', name="asistencia"),
      url(r'programacion/(\d+)/clases/(\d+)/asistenciaacompanamiento$',       'asistencia_acompanamiento', name="asistencia_acompanamiento"),
 
-    
+    url(r'^programacion/actividad/(?P<id>\d+)$',      'actividad', name='actividad'),
+    url(r'^programacion/actividad2/(?P<id>\d+)$',      'actividadacompanamiento', name='actividad_acompanamiento'),
     
 )
