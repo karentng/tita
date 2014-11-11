@@ -8,6 +8,10 @@
 {% block css %}
     {{estado_avance_form.media}}
     <link href="{{STATIC_URL}}css/file-tree.css" rel="stylesheet" />
+    <style type="text/css">
+        /*.input-group div {
+            width: 158px
+        }*/
     </style>
 {% endblock %}
 
@@ -33,6 +37,9 @@
 
         $(document).ready(function() {
             App.init();
+
+            $('div[class="input-group date"]').attr('style', 'width:160px');
+            $("#id_ruta").attr("required", "required");
 
             $(function () {
                 $('.tree li:has(ul)').addClass('parent_li').find(' > span').attr('title', 'Cerrar carpeta');

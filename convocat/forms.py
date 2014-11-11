@@ -178,7 +178,7 @@ class GrupoForm(forms.ModelForm):
 
 class EstadoDeAvanceForm(forms.ModelForm):
     #fecha = forms.DateField(label='', widget=forms.TextInput(attrs={'size':14}))
-    fecha = forms.DateField(label='', widget=DateWidget(usel10n=False, bootstrap_version=3, attrs={'size':10}, options={'format': 'yyyy-mm-dd', 'startView':2, 'language':'es'}))
+    fecha = forms.DateField(label='', widget=DateWidget(usel10n=False, bootstrap_version=3, attrs={'size':10, 'style':'width:110px'}, options={'format': 'yyyy-mm-dd', 'startView':2, 'language':'es'}))
     meta = forms.FloatField(label='', widget=forms.NumberInput(attrs={'style':'width:90px'}))
     avance_actual = forms.FloatField(label='', widget=forms.NumberInput(attrs={'style':'width:90px'}))
     presupuesto_actividad = forms.FloatField(label='', widget=forms.NumberInput(attrs={'style':'width:180px'}))

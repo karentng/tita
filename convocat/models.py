@@ -323,7 +323,7 @@ class Grupo(models.Model):
 
 class Archivo(models.Model):
     nombre = models.CharField(max_length=255, verbose_name='nombre')
-    ruta = models.FileField(upload_to=crear_ruta_archivo_tablero_control)
+    ruta = models.FileField(upload_to=crear_ruta_archivo_tablero_control, null=False, blank=False)
     descripcion = models.CharField(max_length=255, verbose_name='descripcion')
     grupo = models.ForeignKey("Grupo")
 
