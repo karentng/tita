@@ -50,7 +50,9 @@
             });
 
             $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+                localStorage.setItem('lastTab', e.target["id"]);
                 var id_concepto_actividad = e.target["href"].split("-").pop();
+
                 $('#formGuardarGrupo').attr("action", "{% url 'tableroControlGuardarGrupo' '' %}" + id_concepto_actividad);
 
                 $.get("{% url 'tableroControlObtenerGruposPorConceptoActividad' '' %}" + id_concepto_actividad, function(data) {
@@ -60,7 +62,19 @@
             });
 
             $(function () {
-                $('#conceptos_tabs a:first').tab('show')
+                var lastTab = localStorage.getItem('lastTab');
+                console.log('lastTab: ' + lastTab);
+                if (lastTab != undefined && lastTab != null && lastTab != '') {
+                    if($('#'+lastTab).length > 0) {
+                        $('#'+lastTab).tab('show');
+                    }
+                    else {
+                        $('#conceptos_tabs a:first').tab('show');
+                    }
+                }
+                else {
+                    $('#conceptos_tabs a:first').tab('show');
+                }
             })
         });
     </script>
@@ -171,7 +185,7 @@
         <div class="col-md-12">
             <ul class="nav nav-tabs" id="conceptos_tabs">
                 {% for concepto_por_actividad in actividad_seleccionada.get_conceptos_por_actividad %}
-                    <li><a href="#tab-{{concepto_por_actividad.id}}" data-toggle="tab">{{concepto_por_actividad.concepto.nombre}}</a></li>
+                    <li><a id="tab-id-{{concepto_por_actividad.id}}" href="#tab-{{concepto_por_actividad.id}}" data-toggle="tab">{{concepto_por_actividad.concepto.nombre}}</a></li>
                 {% endfor %}
             </ul>
             <div class="tab-content">
