@@ -265,6 +265,11 @@ class Actividad(models.Model):
     def __unicode__(self):
         return self.nombre
 
+    def get_ultimo_estado_de_avance(self):
+        ultimo_estado_de_avance = EstadoDeAvance.objects.filter(actividad=self).latest('id')
+        print ultimo_estado_de_avance
+        return ultimo_estado_de_avance
+
     def get_estados_de_avance(self):
         return EstadoDeAvance.objects.filter(actividad = self).order_by('id')
 
