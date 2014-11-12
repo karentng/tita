@@ -1189,7 +1189,7 @@ def asistencia(request, curso_id, clase_id):
 
             ide = "?v="+str(clase_id)
 
-            return redirect('cronograma_diplomado')
+            return HttpResponseRedirect('../../../cronograma_diplomado_soportes%s' %ide)
 
 
     else :
@@ -1226,7 +1226,7 @@ def asistencia_acompanamiento(request, curso_id, clase_id):
 
             ide = "?v="+str(clase_id)
 
-            return redirect('cronograma_acompanamiento')
+            return HttpResponseRedirect('../../../cronograma_acompanamiento_soportes%s' %ide)
 
 
     else :
