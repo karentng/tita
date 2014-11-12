@@ -139,11 +139,17 @@
                     style="margin-bottom:5px" data-toggle="tooltip" data-placement="bottom" title="{{actividad.nombre}} - {{actividad.descripcion}}">
                     <small>Actividad</small><br/>
                     <span class="fa-stack fa-1x ">
-                      <i class="fa fa-circle fa-stack-2x"></i>
-                      <i class="fa fa-inverse fa-stack-1x text-{% if actividad.id == actividad_seleccionada.id %}success{% else %}inverse{% endif %}"><small>{{forloop.counter}}</small></i>
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fa fa-inverse fa-stack-1x text-{% if actividad.id == actividad_seleccionada.id %}success{% else %}inverse{% endif %}"><small>{{forloop.counter}}</small></i>
                     </span>
                     <br>
-
+                    <small>
+                        {% if actividad.get_ultimo_estado_de_avance %}
+                            {{actividad.get_ultimo_estado_de_avance.avance_actual}}%
+                        {% else %}
+                            0.0%
+                        {% endif %}
+                    </small><br/>
                 </a>
             {% endfor %}
         </div>
@@ -180,7 +186,7 @@
                     <form class="form-inline" action={% url 'tableroControlGuardarEstadoDeAvance' %} method="POST">
                         {% csrf_token %}
                         {% bootstrap_form estado_avance_form %}
-                        <button class="btn btn-sm btn-primary" type="submit">
+                        <button class="btn btn-sm btn-primary" type="submit" title="Guardar estado de avance">
                             <i class="fa fa-save"></i>
                         </button>
                     </form>
