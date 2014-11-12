@@ -39,16 +39,27 @@ class InstitucionEducativa(models.Model):
 
 #Corresponde a los formadores de formadores
 class Formador(models.Model):    
-    nombre1 = models.CharField( max_length=255, verbose_name='primer nombre')
-    nombre2 = models.CharField( max_length=255, blank=True, verbose_name='segundo nombre')
-    apellido1 = models.CharField( max_length=255, verbose_name='primer apellido')
-    apellido2 = models.CharField( max_length=255, blank=True, verbose_name='segundo apellido')
-    aspirante = models.ForeignKey(Aspirante, verbose_name='aspirante', null=True, blank=True)   
+    TUTORES=(
+    ('Tutor 1', 'Tutor 1: Juan Francisco Lopez'),
+    ('Tutor 2', 'Tutor 2: Roberto Rodriguez'),
+    ('Tutor 3', 'Tutor 3: Martha Quintero'),
+   )
+
+    JORNADA=(
+    ('Manana', 'Mañana'),
+    ('Tarde', 'Tarde'),
+    ('Ambas', 'Ambas'),
+   )
+
+    nombre1 = models.CharField( max_length=255, verbose_name='nombres')
+    apellido1 = models.CharField( max_length=255, verbose_name='apellidos')
+    jornada = models.CharField( max_length=255, choices=JORNADA)
+    tutor = models.CharField( max_length=255, choices=TUTORES)
+    #aspirante = models.ForeignKey(Aspirante, verbose_name='aspirante', null=True, blank=True)   
     usuario = models.ForeignKey(User)
 
     def __unicode__(self):
-        return (u"%s %s %s %s"%(self.nombre1,self.nombre2 or '', self.apellido1, self.apellido2 or '')).strip() or "-"
-
+        return (u"%s %s"%(self.nombre1,self.apellido1))
 
 
 
@@ -115,70 +126,33 @@ class Estudiante(models.Model):
 class Cursos(models.Model):
 
     SEDES = (
-        ('INEM JORGE ISAACS',
-            ((1, 'Principal INEM JORGE ISAACS'),
-            (2,  'Satelite CECILIA MUÑOZ RICAURTE'),
-            (3,  'Satelite LAS AMERICAS'),
-            (4,  'Satelite CAMILO TORRES'),
-            (5,  'Satelite CENTRO EDUCATIVO DEL NORTE'),
-            (6,  'Satelite FRAY DOMINGO DE LAS CASAS'),
-            (7,  'Satelite PABLO EMILIO'))),
-        ('ANTONIO JOSE CAMACHO',
-            ((8, 'Principal ANTONIO JOSE CAMACHO'),
-            (9, 'Satelite REPUBLICA DEL PERU'),
-            (10, 'Satelite MARCO FIDEL SUAREZ'),
-            (11, 'Satelite OLGA LUCIA LLOREDA'))),
-        ('NORMAL. SUPERIOR SANTIAGO DE CALI',
-            ((12, 'Principal NORMAL. SUPERIOR SANTIAGO DE CALI'),
-            (13,  'Satelite JOAQUIN DE CAYZEDO Y CUERO'))),
-        ('GOLONDRINAS PRINCIPAL',
-            ((14, 'Principal GOLONDRINAS PRINCIPAL'),
-            (15,  'Satelite ANTONIO BARBERENA'))),
-        ('CARLOS HOLGUIN MALLARINO',
-            ((16, 'Principal CARLOS HOLGUIN MALLARINO'),
-            (17,  'Satelite NIÑO JESUS DE ATOCHA'),
-            (18,  'Satelite MIGUEL DE POMBO'))),
-        ('MANUEL MARIA MALLARINO',
-            ((19, 'Principal MANUEL MARIA MALLARINO'),
-            (20, 'Satelite LAURA VICUÑA'),
-            (21, 'Satelite LOS PINOS'),
-            (22, 'Satelite CARLOS HOLGUIN SARDI'))),
-        ('EL DIAMANTE',
-            ((23, 'Principal EL DIAMANTE'),
-            (24, 'Satelite JUAN PABLO II'))),
-        ('EUSTAQUIO PALACIOS',
-            ((25, 'Principal EUSTAQUIO PALACIOS'),
-            (26, 'Satelite    LUIS LOPEZ MESA'),
-            (27, 'Satelite    CELANESE'),
-            (28, 'Satelite    MANUEL MARIA BUENAVENTURA'),
-            (29, 'Satelite    MARISCAL JORGE ROBLEDO'),
-            (30, 'Satelite    MIGUEL ANTONIO CARO'),
-            (31, 'Satelite    GENERAL ANZOATEGUI'),
-            (32, 'Satelite    TULIO ENRIQUE TASCON'),
-            (33, 'Satelite    SANTIAGO RENGIFO'),
-            (34, 'Satelite    SOFIA CAMARGO'))),
-        ('JOSE MARIA CARBONELL',
-            ((35, 'Principal JOSE MARIA CARBONELL'),
-            (36, 'Satelite HONORIO VILLEGAS'))),
-        ('MARICE SINISTERRA',
-            ((38, 'Principal MARICE SINISTERRA'),
-            (39, 'Satelite FENALCO ASTURIAS'))),
-        (37, 'Principal IE BOYACA'),
-        (40, 'Principal YUMBO-IE MAYOR DE YUMBO - SEDE PRINCIPAL'),
-        (41, 'Principal YUMBO-IE JOSÉ MARÍA CÓRDOBA - SEDE PRINCIPAL'),
-        (42, 'Principal YUMBO-IE TITAN - SEDE PRINCIPAL'),
-        (43, 'Principal YUMBO-IE CEAT GENERAL PIERO MARIOTTI - SEDE JOHN F. KENNEDY'),
-        (44, 'Principal YUMBO-IE MANUEL MARÍA SÁNCHEZ - SEDE PRINCIPAL'),
-        (45, 'Principal YUMBO-IE ROSA ZÁRATE DE PEÑA - SEDE PRINCIPAL'),
-        (46, 'Principal VIJES')
+        ('INEM JORGE ISAACS','INEM JORGE ISAACS'),
+        ('ANTONIO JOSE CAMACHO','ANTONIO JOSE CAMACHO'),
+        ('NORMAL. SUPERIOR SANTIAGO DE CALI', 'NORMAL. SUPERIOR SANTIAGO DE CALI'),
+        ('GOLONDRINAS PRINCIPAL','GOLONDRINAS PRINCIPAL'),
+        ('CARLOS HOLGUIN MALLARINO','CARLOS HOLGUIN MALLARINO'),
+        ('MANUEL MARIA MALLARINO', 'Principal MANUEL MARIA MALLARINO'),
+        ('EL DIAMANTE', 'EL DIAMANTE'),
+        ('EUSTAQUIO PALACIOS','EUSTAQUIO PALACIOS'),
+        ('JOSE MARIA CARBONELL','JOSE MARIA CARBONELL'),
+        ('MARICE SINISTERRA','MARICE SINISTERRA'),
+        ('Principal IE BOYACA', 'Principal IE BOYACA'),
+        ('Principal YUMBO-IE MAYOR DE YUMBO - SEDE PRINCIPAL', 'Principal YUMBO-IE MAYOR DE YUMBO - SEDE PRINCIPAL'),
+        ('Principal YUMBO-IE JOSE MARiA CÓRDOBA - SEDE PRINCIPAL', 'Principal YUMBO-IE JOSÉ MARÍA CÓRDOBA - SEDE PRINCIPAL'),
+        ('Principal YUMBO-IE TITAN - SEDE PRINCIPAL', 'Principal YUMBO-IE TITAN - SEDE PRINCIPAL'),
+        ('Principal YUMBO-IE CEAT GENERAL PIERO MARIOTTI - SEDE JOHN F. KENNEDY', 'Principal YUMBO-IE CEAT GENERAL PIERO MARIOTTI - SEDE JOHN F. KENNEDY'),
+        ('Principal YUMBO-IE MANUEL MARIA SÁNCHEZ - SEDE PRINCIPAL', 'Principal YUMBO-IE MANUEL MARÍA SÁNCHEZ - SEDE PRINCIPAL'),
+        ('Principal YUMBO-IE ROSA ZARATE DE PENA - SEDE PRINCIPAL', 'Principal YUMBO-IE ROSA ZÁRATE DE PEÑA - SEDE PRINCIPAL'),
+        ('Principal VIJES', 'Principal VIJES')
     )
     descripcion = models.CharField(max_length=255, verbose_name=u'Nombre')
-    institucion = models.IntegerField(choices=SEDES, max_length=2, verbose_name="institución")
-    formador = models.ForeignKey(Formador)
+    institucion = models.CharField(choices=SEDES, max_length=200, verbose_name="institución")
+    formador = models.ManyToManyField(Formador)
     estudiantes = models.ManyToManyField(Estudiante, blank=True, verbose_name='Estudiantes')
 
     def __unicode__(self):
         return (u"%s - %s "%(self.descripcion,self.formador))
+
 
 class Curso(models.Model):
     descripcion = models.CharField(max_length=255, verbose_name=u'Nombre')

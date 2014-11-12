@@ -906,11 +906,16 @@ def lista_estudiantes(request, id):
     curso = clase.curso
     clasenombre = clase.nombre
     cursonombre = curso.descripcion
+    clasefecha = clase.fecha_inicio
+
+    formadores = curso.formador.all()
+
     estudiante_list = curso.estudiantes.all()
     
     return render(request, 'lista_estudiantes.html', {'estudiante_list': estudiante_list,  'user_group': user_group(request),
-        'opcion_menu': 5, 'curso':cursonombre, 'clase':clasenombre},
+        'opcion_menu': 5, 'curso':cursonombre, 'clase':clasenombre, 'clase_fecha':clasefecha, 'formador1':formadores[0],'formador2':formadores[1]},
         )
+    
 def lista_acompanamiento(request, id):
     grupo = user_group(request)
     if grupo == None:
@@ -921,9 +926,12 @@ def lista_acompanamiento(request, id):
     clasenombre = clase.nombre
     cursonombre = curso.descripcion
     estudiante_list = curso.estudiantes.all()
+    clasefecha = clase.fecha_inicio
+
+    formadores = curso.formador.all()
     
     return render(request, 'lista_estudiantes.html', {'estudiante_list': estudiante_list,  'user_group': user_group(request),
-        'opcion_menu': 5, 'curso':cursonombre, 'clase':clasenombre},
+        'opcion_menu': 5, 'curso':cursonombre, 'clase':clasenombre, 'clase_fecha':clasefecha, 'formador1':formadores[0],'formador2':formadores[1]},
         )
 '''
 def detalle_curso(request, id, limit=100):
