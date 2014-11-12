@@ -147,12 +147,11 @@ class Cursos(models.Model):
     )
     descripcion = models.CharField(max_length=255, verbose_name=u'Nombre')
     institucion = models.CharField(choices=SEDES, max_length=200, verbose_name="institución")
-    formador1 = models.ForeignKey(Formador, related_name="formador1")
-    formador2 = models.ForeignKey(Formador, related_name="formador2")
+    formador1 = models.ForeignKey(Formador, related_name="formador1",verbose_name="formador no. 1")
+    formador2 = models.ForeignKey(Formador, related_name="formador2",verbose_name="formador no. 2")
     estudiantes = models.ManyToManyField(Estudiante, blank=True, verbose_name='Estudiantes')
 
-    def __unicode__(self):
-        return (u"%s - %s y %s"%(self.descripcion,self.formador1, self.formador2))
+    
 
 
 class Curso(models.Model):
@@ -267,7 +266,9 @@ class Clase(models.Model):
     asistentes = models.ManyToManyField(Estudiante, blank=True, verbose_name='Seleccione las personas que asistieron a la clase')
     descripcion = models.CharField( max_length=1000, null=True, blank=True, verbose_name="descripción")
     #soportes = models.FileField(upload_to=crear_ruta_archivo, blank=True, null=True)
- 
+
+    
+
     def __unicode__(self):
         return unicode(self.nombre)
 
@@ -298,6 +299,10 @@ class Clases(models.Model):
     descripcion = models.CharField( max_length=1000, null=True, blank=True, verbose_name="descripción")
     estado = models.BooleanField(default=True)
 
+    def save(self, *args, **kwargs):
+        super(Clases,self).save(*args, **kwargs)
+        SoporteClases.objects.create(clase=self)
+
 class AcompanamientoInSitus(models.Model):
 
     
@@ -310,6 +315,10 @@ class AcompanamientoInSitus(models.Model):
     asistentes = models.ManyToManyField(Estudiante, blank=True, verbose_name='Seleccione las personas que asistieron a la clase')
     descripcion = models.CharField( max_length=1000, null=True, blank=True, verbose_name="descripción")
     estado = models.BooleanField(default=True)
+
+    def save(self, *args, **kwargs):
+        super(AcompanamientoInSitus,self).save(*args, **kwargs)
+        SoporteAcompanamiento.objects.create(acompanamiento=self)
 
 """
 class Asistencia(models.Model):

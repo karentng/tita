@@ -2,6 +2,7 @@
 from django import forms
 from django.forms.models import inlineformset_factory
 from campus.models import *
+import os.path
 
 class NoModificableFileInput(forms.widgets.ClearableFileInput):
     template_with_initial = '%(initial)s'

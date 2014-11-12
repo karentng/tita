@@ -772,23 +772,27 @@ def subirsoportes(request):
     identificador = request.GET['v']
     clase = Clases.objects.get(id=identificador)
     curso = clase.curso
+    soporteclases = SoporteClases.objects.get(clase=clase.id)
 
     if request.method == 'POST':
         
-        form = DocumentosSoporteForm(request.POST, request.FILES)
+        form = DocumentosSoporteForm(request.POST, request.FILES, instance=soporteclases)
         
         if form.is_valid():
             obj = form.save(commit=False)
             obj.clase = clase
             obj.save()
             
-            return redirect('cronograma_diplomado')
+            ide = "?v="+str(clase.id)
+
+            return HttpResponseRedirect('cronograma_diplomado_soportes%s' %ide)
+            
+            #return HttpRedirect('cronograma_diplomado_soportes%s' %ide)
 
     else:
         
 
-        form = DocumentosSoporteForm()
-
+        form = DocumentosSoporteForm(instance=soporteclases)
         
     return render(request, 'diplomado_soportes.html', {
         'form': form,
@@ -807,21 +811,28 @@ def subirsoportesacompanamiento(request):
     identificador = request.GET['v']
     acompanamiento= AcompanamientoInSitus.objects.get(id=identificador)
     curso = acompanamiento.curso
+    soporteclases = SoporteAcompanamiento.objects.get(acompanamiento=acompanamiento.id)
 
     if request.method == 'POST':
        
-        form = DocumentosSoporteAcompanamientoForm(request.POST, request.FILES)
+        form = DocumentosSoporteAcompanamientoForm(request.POST, request.FILES, instance=soporteclases)
         
         if form.is_valid():
             obj = form.save(commit=False)
             obj.acompanamiento = acompanamiento
             obj.save()
             
-            return redirect('cronograma_acompanamiento')
+            return render(request, 'cronograma_soportes.html', {
+                'form': form,
+                'user_group': user_group(request),
+                'opcion_menu': 4,
+                'clase' : acompanamiento.id,
+                'curso' : curso.id,
+            })
 
     else:
         
-        form = DocumentosSoporteAcompanamientoForm()
+        form = DocumentosSoporteAcompanamientoForm(instance=soporteclases)
 
         
     return render(request, 'cronograma_soportes.html', {

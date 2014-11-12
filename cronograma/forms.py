@@ -45,7 +45,7 @@ class EventosAcompanamientoForm(forms.ModelForm):
 
         fields = ('nombre', 'curso', 'fecha_inicio','duracion', 'descripcion')
         widgets = {
-            'fecha_inicio': DateTimeWidget(options={'format': 'dd/mm/yyyy hh:ii','autoclose': 'true','startView':'4','minuteStep':'30',},usel10n=False, bootstrap_version=3),
+            'fecha_inicio': DateTimeWidget(options={'format': 'dd/mm/yyyy hh:ii','startView':'4','minuteStep':'30',},usel10n=False, bootstrap_version=3),
             #'fecha_inicio': DateWidget(usel10n=False, bootstrap_version=3, options={'format': 'yyyy-mm-dd', 'startView':4, 'language':'es'}),
             #'fecha_finalizacion': DateTimeWidget(options={'format': 'dd/mm/yyyy hh:ii','autoclose': 'true','startView':'4','minuteStep':'30',},usel10n=False, bootstrap_version=3),
             'descripcion': forms.Textarea(attrs={'rows': 4}),
@@ -58,7 +58,7 @@ class EventosAcompanamientoMForm(forms.ModelForm):
 
         fields = ('nombre', 'curso', 'fecha_inicio','duracion', 'descripcion')
         widgets = {
-            'fecha_inicio': DateTimeWidget(options={'format': 'dd/mm/yyyy hh:ii','autoclose': 'true','startView':'4','minuteStep':'30',},usel10n=False, bootstrap_version=3),
+            'fecha_inicio': DateTimeWidget(options={'format': 'dd/mm/yyyy hh:ii','startView':'4','minuteStep':'30',},usel10n=False, bootstrap_version=3),
             #'fecha_inicio': DateWidget(usel10n=False, bootstrap_version=3, options={'format': 'yyyy-mm-dd', 'startView':4, 'language':'es'}),
             #'fecha_finalizacion': DateTimeWidget(options={'format': 'dd/mm/yyyy hh:ii','autoclose': 'true','startView':'4','minuteStep':'30',},usel10n=False, bootstrap_version=3),
             'descripcion': forms.Textarea(attrs={'rows': 4})
@@ -69,18 +69,12 @@ from django.utils.encoding import force_text, python_2_unicode_compatible
 from django.utils.safestring import mark_safe
 from django.utils.html import conditional_escape, format_html
 from django.forms import CheckboxInput
-
+import os.path
 class MyFileInput(ClearableFileInput):
-    #initial_text = ugettext_lazy('Currently')
-    #input_text = ugettext_lazy('Change')
-    clear_checkbox_label = 'Quitar' #ugettext_lazy('Clear')
-
-    #template_with_initial = '%(initial_text)s: %(initial)s %(clear_template)s<br />%(input_text)s: %(input)s'
-
+    
+    clear_checkbox_label = 'Eliminar' #ugettext_lazy('Clear')
     template_with_clear = '%(clear)s <label class="text-danger" style="cursor:pointer" for="%(clear_checkbox_id)s">%(clear_checkbox_label)s</label>'
-
     url_markup_template = '<a target="_blank" href="{0}">{1}</a>'
-
 
     def render(self, name, value, attrs=None):
         substitutions = {
@@ -89,6 +83,7 @@ class MyFileInput(ClearableFileInput):
             'clear_template': '',
             'clear_checkbox_label': self.clear_checkbox_label,
         }
+
         template = '%(input)s'
         substitutions['input'] = super(ClearableFileInput, self).render(name, value, attrs)
 
@@ -97,7 +92,7 @@ class MyFileInput(ClearableFileInput):
             substitutions['initial'] = format_html(self.url_markup_template,
                                                    value.url,
                                                    os.path.basename(value.name))
-            if not self.is_required:
+            if self.is_required:
                 checkbox_name = self.clear_checkbox_name(name)
                 checkbox_id = self.clear_checkbox_id(checkbox_name)
                 substitutions['clear_checkbox_name'] = conditional_escape(checkbox_name)
