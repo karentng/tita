@@ -682,8 +682,8 @@ def diplomado(request):
         'opcion_menu': 3,
     })
 
-def diplomado_modificar(request):
 
+def diplomado_modificar(request):
     grupo = user_group(request)
     if grupo == None:
         return redirect('home')
@@ -840,6 +840,7 @@ def curso(request):
         if form.is_valid():
             objeto = form.save()
             
+
             return redirect('gestion_cursos')
     else :
         form = CursoForm()
@@ -859,7 +860,17 @@ def formador(request):
     if request.method == 'POST':
         form = FormadorForm(request.POST)
         if form.is_valid():
-            objeto = form.save()
+            objeto = form.save(commit=False)
+            formador = Formador.objects.filter(usuario=objeto.usuario)
+            if not formador:
+                objeto.save()
+            else:
+                form = FormadorForm(request.POST)
+                return render(request, 'formador.html', {
+                    'form': form,
+                    'user_group': user_group(request),
+                    'opcion_menu': 5,
+                })
             
             return redirect('gestion_formador')
     else :
@@ -915,7 +926,7 @@ def lista_estudiantes(request, id):
     return render(request, 'lista_estudiantes.html', {'estudiante_list': estudiante_list,  'user_group': user_group(request),
         'opcion_menu': 5, 'curso':cursonombre, 'clase':clasenombre, 'clase_fecha':clasefecha, 'formador1':formadores[0],'formador2':formadores[1]},
         )
-    
+
 def lista_acompanamiento(request, id):
     grupo = user_group(request)
     if grupo == None:
