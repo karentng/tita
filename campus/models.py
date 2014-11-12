@@ -152,7 +152,7 @@ class Cursos(models.Model):
     estudiantes = models.ManyToManyField(Estudiante, blank=True, verbose_name='Estudiantes')
 
     def _unicode_(self):
--        return (u"%s - %s y %s"%(self.descripcion,self.formador1, self.formador2))
+        return (u"%s - %s y %s"%(self.descripcion,self.formador1, self.formador2))
 
 
 class Curso(models.Model):
