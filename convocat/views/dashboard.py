@@ -167,8 +167,6 @@ def tablero_control(request, id_actividad):
     actividad_seleccionada = Actividad.objects.get(id=id_actividad)
     actividades = Actividad.objects.all().order_by('id')
 
-    #estado_de_avance = EstadoDeAvance.objects.filter(actividad=actividad_seleccionada).latest('id')
-
     estado_de_avance = EstadoDeAvance.objects.filter(actividad=actividad_seleccionada)
 
     if len(estado_de_avance) > 0:
