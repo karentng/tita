@@ -26,10 +26,11 @@
 
 {% block miga_pan %}
     <li><a href="{% url 'home' %}">Inicio</a></li>
-    <li class="active">Modificación de Curso</li>
+    <li><a href="{% url 'cronograma_acompanamiento' %}">Programación acompañamiento</a></li>
+    <li class="active">Modificación de Visita</li>
 {% endblock %}
 
-{% block titulo_contenido %}Modificación de Curso{% endblock %}
+{% block titulo_contenido %}Modificación de Visita{% endblock %}
 
 {% block titulo_panel %}<i class="fa fa-lightbulb-o"></i> Modificación{% endblock %}
 {% block contenido_panel %}

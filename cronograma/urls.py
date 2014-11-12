@@ -25,7 +25,7 @@ urlpatterns = patterns('cronograma.views',
     url(r'^programacion/gestion$',      'gestion', name='gestion'),
     #url(r'^programacion/controlasistencia$',      'asistencia', name='asistencia'),
     #url(r'^programacion/controlasistencia/(\d+)/clases/(\d+)/asistencia$',       'asistencia', name="asistencia"),
-    url(r'programacion/(\d+)/clases/(\d+)/asistencia$',       'asistencia', name="asistencia"),
+    url(r'programacion/(\d+)/clases/(\d+)/asistenciadiplomado$',       'asistencia', name="asistencia"),
      url(r'programacion/(\d+)/clases/(\d+)/asistenciaacompanamiento$',       'asistencia_acompanamiento', name="asistencia_acompanamiento"),
 
     url(r'^programacion/actividad/(?P<id>\d+)$',      'actividad', name='actividad'),
