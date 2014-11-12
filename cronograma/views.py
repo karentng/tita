@@ -1115,21 +1115,21 @@ def cancelar_clase_acompanamiento(request, id):
 
     postFormatoDict = request.POST.dict() #obtuvimos el post
     post = str(postFormatoDict)
-
+    clase = AcompanamientoInSitus.objects.get(id=id)
     motivos = ""
     if "motivos" in post:
         global motivos
         motivos = request.POST['motivos']
                    
-        clase = AcompanamientoInSitus.objects.get(id=id)
+        
         clase.nombre = "CANCELADA "+clase.nombre
         clase.descripcion = motivos + clase.descripcion
         clase.estado = False
         clase.save()
         return redirect('cronograma_acompanamiento')
     
-    return render(request, 'cancelarsesion.html', {'user_group': user_group(request),
-        'opcion_menu': 5,},
+    return render(request, 'cancelarvisita.html', {'user_group': user_group(request),
+        'opcion_menu': 5,'var':clase.id,},
         )
 
 def cancelar_clase_diplomado(request, id):
@@ -1139,13 +1139,13 @@ def cancelar_clase_diplomado(request, id):
 
     postFormatoDict = request.POST.dict() #obtuvimos el post
     post = str(postFormatoDict)
-
+    clase = Clases.objects.get(id=id)
     motivos = ""
     if "motivos" in post:
         global motivos
         motivos = request.POST['motivos']
                    
-        clase = Clases.objects.get(id=id)
+        
         clase.nombre = "CANCELADA "+clase.nombre
         clase.descripcion = motivos 
         clase.estado = False
@@ -1153,7 +1153,7 @@ def cancelar_clase_diplomado(request, id):
         return redirect('cronograma_diplomado')
     
     return render(request, 'cancelarsesion.html', {'user_group': user_group(request),
-        'opcion_menu': 5,},
+        'opcion_menu': 5,'var':clase.id,},
         )
 
 def gestion(request):

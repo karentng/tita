@@ -26,10 +26,11 @@
 
 {% block miga_pan %}
     <li><a href="{% url 'home' %}">Inicio</a></li>
-    <li class="active">Modificación de Curso</li>
+    <li><a href="{% url 'cronograma_diplomado' %}">Programación diplomado</a></li>
+    <li class="active">Modificación de Clase</li>
 {% endblock %}
 
-{% block titulo_contenido %}Modificación de Curso{% endblock %}
+{% block titulo_contenido %}Modificación de Clase{% endblock %}
 
 {% block titulo_panel %}<i class="fa fa-lightbulb-o"></i> Modificación{% endblock %}
 {% block contenido_panel %}
