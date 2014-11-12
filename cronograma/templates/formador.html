@@ -28,7 +28,9 @@
 
 {% block miga_pan %}
     <li><a href="{% url 'home' %}">Inicio</a></li>
-    <li class="active">Formador</li>
+    <li ><a href="{% url 'gestion' %}">Gestion</a></li>
+    <li ><a href="{% url 'gestion_formador' %}">Gestion de Formadores</a></li>
+    <li class="active"> Añadir un formador</li>
 {% endblock %}
 
 {% block titulo_contenido %}Formadores{% endblock %}

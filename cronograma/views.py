@@ -11,6 +11,7 @@ import datetime
 from campus.views import user_group
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_list_or_404, get_object_or_404
+from django.db.models import Q
 
 def cronograma(request):
     # if this is a POST request we need to process the form data
@@ -22,7 +23,7 @@ def cronograma(request):
     if grupo == "Formador":
         username = request.user
         formador = Formador.objects.get(usuario=username.id)
-        curso = Cursos.objects.get(formador=formador.id)
+        curso = Cursos.objects.get(Q(formador1=formador.id) | Q(formador2=formador.id))
         
         eventos = AcompanamientoInSitus.objects.filter(curso=curso)
 
@@ -354,7 +355,7 @@ def menor10(val):
         return "0"+str(val)
     return str(val)
 
-from django.db.models import Q
+
 
 def diplomado(request):
     # if this is a POST request we need to process the form data
