@@ -129,7 +129,7 @@ class DocumentosSoporteAcompanamientoForm(forms.ModelForm):
 class CursoForm(forms.ModelForm):
     class Meta:
         model = Cursos
-        fields = ('descripcion','institucion','formador','estudiantes',)
+        fields = ('descripcion','institucion','formador1','formador2', 'estudiantes',)
         widgets = {'estudiantes': forms.CheckboxSelectMultiple()}
 
                 

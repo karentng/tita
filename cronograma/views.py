@@ -354,6 +354,7 @@ def menor10(val):
         return "0"+str(val)
     return str(val)
 
+from django.db.models import Q
 
 def diplomado(request):
     # if this is a POST request we need to process the form data
@@ -364,7 +365,8 @@ def diplomado(request):
     if grupo == "Formador":
         username = request.user
         formador = Formador.objects.get(usuario=username.id)
-        curso = Cursos.objects.get(formador=formador.id)
+        
+        curso = Cursos.objects.get(Q(formador1=formador.id) | Q(formador2=formador.id))
         
         eventos = Clases.objects.filter(curso=curso)
 
@@ -919,12 +921,13 @@ def lista_estudiantes(request, id):
     cursonombre = curso.descripcion
     clasefecha = clase.fecha_inicio
 
-    formadores = curso.formador.all()
+    formador1 = curso.formador1
+    formador2 = curso.formador2
 
     estudiante_list = curso.estudiantes.all()
     
     return render(request, 'lista_estudiantes.html', {'estudiante_list': estudiante_list,  'user_group': user_group(request),
-        'opcion_menu': 5, 'curso':cursonombre, 'clase':clasenombre, 'clase_fecha':clasefecha, 'formador1':formadores[0],'formador2':formadores[1]},
+        'opcion_menu': 5, 'curso':cursonombre, 'clase':clasenombre, 'clase_fecha':clasefecha, 'formador1':formador1,'formador2':formador2},
         )
 
 def lista_acompanamiento(request, id):
@@ -939,10 +942,11 @@ def lista_acompanamiento(request, id):
     estudiante_list = curso.estudiantes.all()
     clasefecha = clase.fecha_inicio
 
-    formadores = curso.formador.all()
+    formador1 = curso.formador1
+    formador2 = curso.formador2
     
     return render(request, 'lista_estudiantes.html', {'estudiante_list': estudiante_list,  'user_group': user_group(request),
-        'opcion_menu': 5, 'curso':cursonombre, 'clase':clasenombre, 'clase_fecha':clasefecha, 'formador1':formadores[0],'formador2':formadores[1]},
+        'opcion_menu': 5, 'curso':cursonombre, 'clase':clasenombre, 'clase_fecha':clasefecha, 'formador1':formador1,'formador2':formador2},
         )
 '''
 def detalle_curso(request, id, limit=100):
