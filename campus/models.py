@@ -337,7 +337,7 @@ class SoporteClase(models.Model):
     archivo = models.FileField(upload_to=crear_ruta_archivo)
 
 class SoporteClases(models.Model):
-    clase = models.ForeignKey(Clases)
+    clase = models.ForeignKey(Clases, primary_key=True)
     archivo = models.FileField(upload_to=crear_ruta_archivo)
     
 
@@ -364,7 +364,7 @@ def crear_ruta_archivo2(instance, filename):
     return "soportes_acompanamiento/%s_fecha%s/%s"%(instance.acompanamiento.nombre, randomstr, filename.encode('ascii','ignore'))
 
 class SoporteAcompanamiento(models.Model):
-    acompanamiento = models.ForeignKey(AcompanamientoInSitus)
+    acompanamiento = models.ForeignKey(AcompanamientoInSitus, primary_key=True)
     archivo = models.FileField(upload_to=crear_ruta_archivo2)
 
 

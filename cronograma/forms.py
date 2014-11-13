@@ -4,6 +4,7 @@ from campus.models import Clases, AcompanamientoInSitus, SoporteClases, SoporteA
 from datetimewidget.widgets import DateTimeWidget
 from datetimewidget.widgets import DateWidget
 from django.forms import ModelForm, Textarea, HiddenInput, TextInput, Select, CheckboxSelectMultiple, FileInput, ClearableFileInput
+from django.db.models import Q
 
 
 
@@ -120,8 +121,32 @@ class DocumentosSoporteAcompanamientoForm(forms.ModelForm):
             'archivo' : MyFileInput(),
 
         }
+'''
+class EstadoDeAvanceForm(forms.ModelForm):
+    #fecha = forms.DateField(label='', widget=forms.TextInput(attrs={'size':14}))
+    fecha = forms.DateField(label='', widget=DateWidget(usel10n=False, bootstrap_version=3, attrs={'size':10, 'style':'width:110px'}, options={'format': 'yyyy-mm-dd', 'startView':2, 'language':'es'}))
+    meta = forms.FloatField(label='', widget=forms.NumberInput(attrs={'style':'width:90px'}))
+    avance_actual = forms.FloatField(label='', widget=forms.NumberInput(attrs={'style':'width:90px'}))
+    presupuesto_actividad = forms.FloatField(label='', widget=forms.NumberInput(attrs={'style':'width:180px'}))
+    presupuesto_ejecutado = forms.FloatField(label='', widget=forms.NumberInput(attrs={'style':'width:140px'}))
+    ejecucion_financiera = forms.FloatField(label='', widget=forms.NumberInput(attrs={'style':'width:130px'}))
+    observacion = forms.CharField(label='', widget=forms.TextInput(attrs={'style':'width:140px'}))
+
+    class Meta:
+        model = EstadoDeAvance
+        exclude = ('actividad',)
+        '''
 
 class CursoForm(forms.ModelForm):
+    #formador1 = forms.CharField(label='', widget=forms.TextInput(attrs={'style':'width:140px'}),queryset=Formador.objects.get(id=1))
+    #self.fields["formador1"].queryset = Formador.objects.filter(id=1)
+
+    def __init__(self, *args, **kwargs):
+        super(CursoForm, self).__init__(*args, **kwargs)
+        
+        self.fields['formador1'].queryset = self.fields['formador1'].queryset.exclude( Q(formador1 = Cursos.objects.all()) | Q( formador2 =  Cursos.objects.all()))
+        self.fields['formador2'].queryset = self.fields['formador2'].queryset.exclude( Q(formador1 = Cursos.objects.all()) | Q( formador2 =  Cursos.objects.all()))
+
     class Meta:
         model = Cursos
         fields = ('descripcion','institucion','formador1','formador2', 'estudiantes',)
