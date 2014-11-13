@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block titulo %} Lista de Estudiantes{% endblock %}
+
+{% block menu %}
+    {% include "menus/publico.html" with opcion_menu=10 %}
+{% endblock %}
+
+{% block css %}
+    <link href="{{STATIC_URL}}plugins/bootstrap-wizard/css/bwizard.min.css" rel="stylesheet" />
+    {{form.media}} {# agrega los js y css necesarios para el bootstrap3 datetimepicker #}
+{% endblock %}
+
+{% block js %}
+    
+{% endblock %}
+
+{% block miga_pan %}
+    <li><a href="{% url 'home' %}">Inicio</a></li>
+    <li><a href="{% url 'cronograma_acompanamiento' %}">Programacion acompañamiento</a></li>
+    <li><a href="{% url 'cronograma_acompanamiento_soportes' %}?v={{clase.id}}">Panel de Control Formadores</a></li>
+    <li class="active">Asistencia</li>
+{% endblock %}
+
+{% block titulo_contenido %} Asistencia{% endblock %}
+
+{% block titulo_panel %}<i class="fa fa-lightbulb-o"></i>Asistencia de Maestros Estudiantes: {{clase.nombre}}{% endblock %}
+{% block contenido_panel %}
+
+
+
+<h5>Fecha: {{clase.fecha_inicio}}</h5></a><br>
+    
+
+    <form method="POST" enctype="multipart/form-data"> {% csrf_token %}
+        <div class="col-md-6">
+            {%bootstrap_form form %}
+        </div>
+
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <center><button type="submit" class="btn btn-lg btn-primary">Guardar</button><center>
+    </form>
+</div>
+
+{% endblock %}
+
+
+

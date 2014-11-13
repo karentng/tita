@@ -25,14 +25,26 @@
 {% endblock %}
 
 {% block miga_pan %}
+
     <li><a href="{% url 'home' %}">Inicio</a></li>
-    <li class="active">Panel de Control</li>
+    <li><a href="{% url 'cronograma_diplomado' %}">Programacion diplomado</a></li>
+    <li class="active">Panel de Control Formadores</li>
 {% endblock %}
+
 
 {% block titulo_contenido %}Panel de Control{% endblock %}
 
+
+
 {% block titulo_panel %}<i class="fa fa-lightbulb-o"></i> Panel de Control{% endblock %}
 {% block contenido_panel %}
+{% if x == 1 %}
+
+        <div class="alert alert-success fade in m-b-15">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            Se subió correctamente el archivo
+        </div>
+{% endif %}
 
 
     <h4><b>Soportes</b></h4>
@@ -44,7 +56,7 @@
         <br><br>
         <table class="table table-hover">
             <tr>
-                <td style="width:300px; padding-right:30px;">
+                <td >
                     <strong>Adjunte la certificación:</strong><br>
                      
                 </td>
@@ -59,7 +71,8 @@
     </form>
     <br>
     <center>
-    <a href="{% url 'asistencia' curso clase %} " class="btn btn-success btn-lg m-r-5">Asistencia y Actividades</a>
+    <a href="{% url 'asistencia' curso clase %} " class="btn btn-success btn-lg m-r-5">Asistencia</a>
+    <a href="{% url 'actividad' clase %} " class="btn btn-success btn-lg m-r-5">Actividades</a>
     <a href="{% url 'lista_estudiantes' clase %} " class="btn btn-info btn-lg m-r-5">Ver Lista de Estudiantes</a>
     </center>
     

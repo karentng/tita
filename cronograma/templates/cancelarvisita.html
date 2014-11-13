@@ -30,9 +30,9 @@
 
 {% block miga_pan %}
     <li><a href="{% url 'home' %}">Inicio</a></li>
-    <li><a href="{% url 'cronograma_diplomado' %}">Programación diplomado</a></li>
+    <li><a href="{% url 'cronograma_acompanamiento' %}">Programación diplomado</a></li>
 
-    <li><a href="{% url 'cronograma_diplomado_modificar' %}?idCurso={{var}}">Modificación de Clase</a></li>
+    <li><a href="{% url 'cronograma_acompanamiento_modificar' %}?idCurso={{var}}">Modificación de Clase</a></li>
     <li class="active">Cancelar Clase</li>
 {% endblock %}
 

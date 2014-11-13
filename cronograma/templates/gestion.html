@@ -28,6 +28,7 @@
 
 {% block miga_pan %}
     <li><a href="{% url 'home' %}">Inicio</a></li>
+    <li ><a href="{% url 'gestion' %}">Gestión</a></li>
     <li class="active">Gestión de Cursos</li>
 {% endblock %}
 
@@ -52,7 +53,7 @@
                                 Institución
                             </td>
                             <td class="info">
-                                Formador
+                                Formadores
                             </td>
                             <td class="info">
                                 -
@@ -70,7 +71,8 @@
                                 {{ curso.institucion }}
                             </td>
                             <td >
-                                {{ curso.formador }}
+                                {{ curso.formador1 }} <br>
+                                {{ curso.formador2 }}
                             </td>
                             <td >
                                

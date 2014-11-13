@@ -1,67 +1,172 @@
-{% extends "base.html" %}
-{% load bootstrap3 %}
 
-{% block titulo %} Lista de Estudiantes {% endblock %}
 
-{% block menu %}
-    {% include "menus/publico.html" with opcion_menu=3 %}
-{% endblock %}
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="es">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <title>Tit@: Desarrollo y Educaci&oacute;n Digital Para Todos.</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="Proyecto TITA - Formación docente en pedagogía mediada con tecnologías de la información y la comunicación" name="description" />
+    <meta content="Cedesoft" name="author" />
 
-{% block css %}
-    <link href="{{STATIC_URL}}plugins/bootstrap-wizard/css/bwizard.min.css" rel="stylesheet" />
-    {{form.media}} {# agrega los js y css necesarios para el bootstrap3 datetimepicker #}
-{% endblock %}
+    <link rel="icon" type="image/png" href="{{STATIC_URL}}img/favicon.png">
 
-{% block js %}
-    {% if solo_lectura%}
+    <script src="{{STATIC_URL}}plugins/jquery-1.8.2/jquery-1.8.2.min.js"></script>
+    <!-- ================== BEGIN BASE CSS STYLE ================== -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link href="{{STATIC_URL}}plugins/jquery-ui-1.10.4/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
+    <link href="{{STATIC_URL}}plugins/bootstrap-3.1.1/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="{{STATIC_URL}}plugins/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="{{STATIC_URL}}css/animate.min.css" rel="stylesheet" />
+    <link href="{{STATIC_URL}}css/style.css?v=1" rel="stylesheet" />
+    <link href="{{STATIC_URL}}css/style-responsive.min.css" rel="stylesheet" />
+    <style>
+        b.titulo {
+            color:rgb(30,85,146);
+            font-weight:900;
+            font-size:25px;
+            margin-top:20px;
+            text-overflow:ellipsis;
+            white-space: nowrap;
+            width:auto;
+        }
+
+        .in {
+            background-color:white
+        }
+
+        .row-centered {
+            text-align:center;
+        }
+        .col-centered {
+            display:inline-block;
+            float:none;
+            /* reset the text-align */
+            text-align:left;
+            /* inline-block space fix */
+            margin-right:-4px;
+        }
+    </style>
+    <!-- ================== END BASE CSS STYLE ================== -->
+</head>
+<body class="in">
+    <!-- begin #page-container -->
+    <div id="page-container" {# class="fade" #} >
+        <!-- begin #header -->
+        <div id="header" class="header navbar navbar-default navbar-fixed-top">
+            <!-- begin container-fluid -->
+            <div class="container-fluid">
+                <!-- begin mobile sidebar expand / collapse button -->
+                <div class="navbar-header">
+                    <b class="titulo">TIT@ <small>DESARROLLO Y EDUCACIÓN DIGITAL PARA TODOS</small></b>
+                </div>
+                <!-- end mobile sidebar expand / collapse button -->
+            </div>
+            <!-- end container-fluid -->
+        </div>
+        <!-- end #header -->
+        <!-- begin #content -->
+        <div id="content" style="background-color:white">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-1">
+                        <div style="margin-top:10px;">
+                            <img class="img-responsive" src="{{STATIC_URL}}img/tita-small.png?v=2" alt=""
+                                style=" border-radius:10px;"/>
+                        </div>
+                    </div>
+                    <div class="col-md-11" style="background-color:#225894;">
+                        <h3 style="color:white;">
+                            {{curso}} - {{clase}} </h3>
+                            <h4 style="color:white;"><br> Formador(es): {{formador1}} - {{formador2}}</h4>
+                            <h5 class="pull-right" style="color:white;">Fecha de la clase: {{clase_fecha}}</h5>
+                        </h3>
+                    </div>
+                </div>
+                <br/><br/><br/>
+
+                <h4>Lista de Maestros Estudiantes</H4>
+
+                <br/><br/>
+
+                <div class="col-md-8" >
+               
+                    <table class="table table-hover">
+                        <tr>
+                            <thead>
+                            <td >
+                                Estudiante                     
+                            </td>
+                            <td >
+                                Firma                     
+                            </td>
+                        </tr>
+                        </thead>          
+
+                    {%for estudiante in estudiante_list%}
+                        <tr>
+                            <tbody>
+                            <td >
+                                {{estudiante.nombre1}} {{estudiante.apellido1}}                     
+                            </td>
+                            <td >
+                                                    
+                            </td>
+                        </tbody>
+                        </tr> 
+                    {%endfor%}
+                    </table>
+
+
+                </div>
+            </div>
+            <hr>
+            <img class="img-responsive center-block" src="{{STATIC_URL}}img/footer.png?v=2"  style="width:80%; border-radius:10px;" >
+            <h6 class="text-center">Contacto: <a href="mailto:titaedpt@gmail.com">titaedpt@gmail.com</a></h6>
+        </div>
+        <!-- end #content -->
+    </div>
+    <!-- end page container -->
+
+    <!-- ================== BEGIN BASE JS ================== -->
+
+    <script src="{{STATIC_URL}}plugins/jquery-ui-1.10.4/ui/minified/jquery-ui.min.js"></script>
+    <script src="{{STATIC_URL}}plugins/bootstrap-3.1.1/js/bootstrap.min.js"></script>
+    <!--[if lt IE 9]>
+        <script src="{{STATIC_URL}}crossbrowserjs/html5shiv.js"></script>
+        <script src="{{STATIC_URL}}crossbrowserjs/respond.min.js"></script>
+        <script src="{{STATIC_URL}}crossbrowserjs/excanvas.min.js"></script>
+    <![endif]-->
+    <script src="{{STATIC_URL}}plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- ================== END BASE JS ================== -->
+
+    <!-- ================== BEGIN PAGE LEVEL JS ================== -->
+    <script src="{{STATIC_URL}}js/apps.min.js"></script>
+    <!-- ================== END PAGE LEVEL JS ================== -->
+        <!-- Bloque de javascript para las plantillas que heredan -->
+    {% block js %}
+    {% endblock %}
+    <!-- Fin Bloque javascript -->
+    {% block js_ready %}
     <script>
-        $(function(){
-            $("select").attr("disabled", "disabled");
-            $("input").attr("readonly", "readonly");
+        $(document).ready(function() {
+            App.init();
         });
+        {% comment %}
+        function mensaje(titulo, mensaje){
+            $.gritter.add({
+                title: titulo,
+                text: mensaje,
+                sticky: false,
+                time: ''
+            });
+            return false;
+        }
+        {% endcomment %}
     </script>
-
-    {% endif %}
-{% endblock %}
-
-{% block miga_pan %}
-    <li><a href="{% url 'home' %}">Inicio</a></li>
-    <li class="active">Lista de Estudiantes</li>
-{% endblock %}
-
-{% block titulo_contenido %}Curso {{curso}}{% endblock %}
-
-{% block titulo_panel %}<i class="fa fa-lightbulb-o"></i> Clase : {{clase}}{% endblock %}
-{% block contenido_panel %}
-<h4>Lista de Estudiantes<br><br></h4>
-
- <table class="table table-hover">
-            <tr>
-                <thead>
-                <td >
-                    Estudiante                     
-                </td>
-                <td >
-                    Firma                     
-                </td>
-            </tr>
-            </thead>          
-
-{%for estudiante in estudiante_list%}
-            <tr>
-                <tbody>
-                <td >
-                    {{estudiante.nombre1}} {{estudiante.apellido1}}                     
-                </td>
-                <td >
-                                        
-                </td>
-            </tbody>
-            </tr> 
-{%endfor%}
-</table>
-
-
-
-    
-{% endblock %}
+    {% endblock %}
+</body>
+</html>

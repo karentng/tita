@@ -2,7 +2,7 @@
     min-height:20px;
     padding:19px;
     margin-bottom:20px;
-    background-color:#fbfbfb;
+    background-color:#ffffff;
     border:0px solid #999;
     -webkit-border-radius:4px;
     -moz-border-radius:4px;
@@ -52,7 +52,7 @@
     border:0
 }
 .tree li:last-child::before {
-    height:45px
+    height:25px
 }
 .tree li.parent_li>span:hover, .tree li.parent_li>span:hover+ul li span {
     background:#eee;

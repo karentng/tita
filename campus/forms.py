@@ -2,6 +2,8 @@
 from django import forms
 from django.forms.models import inlineformset_factory
 from campus.models import *
+import os.path
+from django.db.models import Q
 
 class NoModificableFileInput(forms.widgets.ClearableFileInput):
     template_with_initial = '%(initial)s'
@@ -32,10 +34,15 @@ SoportesFormset = inlineformset_factory(Clase, SoporteClase, form=SoporteClaseFo
 class ActividadForm(forms.ModelForm):
     class Meta:
         model = Actividad
-        #fields = ('asistencia', 'actividad1', 'actividad2', 'actividad3', 'actividad4')
-        '''widgets = {'asistencia': forms.CheckboxSelectMultiple()}
+        '''fields = ('actividad1','actividad2',)
+        widgets = {'actividad1': forms.CheckboxSelectMultiple(),
+                   'actividad2': forms.CheckboxSelectMultiple()}
+
+        
 
     def __init__(self, *args, **kwargs):
         super(ActividadForm, self).__init__(*args, **kwargs)
-        laclase = self.actividad.clase
-        self.fields['asistencia'].queryset = laclase.cursos.estudiantes.all()'''
+        actividad = self.instance
+        self.fields['estudiantes'].queryset = actividad.clase.curso.estudiantes.all()
+
+        '''

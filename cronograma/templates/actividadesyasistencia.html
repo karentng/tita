@@ -26,7 +26,9 @@
 
 {% block miga_pan %}
     <li><a href="{% url 'home' %}">Inicio</a></li>
-    <li class="active">Actividades y Asistencia</li>
+    <li><a href="{% url 'cronograma_diplomado' %}">Programacion acompañamiento</a></li>
+    <li><a href="{% url 'cronograma_diplomado_soportes' %}?v={{clase}}">Panel de Control Formadores</a></li>
+    <li class="active">Actividades</li>
 {% endblock %}
 
 {% block titulo_contenido %}Actividades y Asistencia{% endblock %}
@@ -38,25 +40,22 @@
     <table class="table table-hover">
                 <tr>
                     <td >Estudiante </td>    
-                    <td >Asistencia</td>
                     <td >Actividad 1</td>
                     <td >Actividad 2</td>
                     <td >Actividad 3</td>
                     <td >Actividad 4</td>
-                    <td >Confirmar</td>
+                   
                      
                 </tr>
                 {% for estudiante in estudiante_list %}
                 <tr>
                     <td >{{estudiante.nombre1}} {{estudiante.apellido1}} </td>    
-                    <td >{{form.asistencia}}</td>
                     <td >{{form.actividad1}}</td>
                     <td >{{form.actividad2}}</td>
                     <td >{{form.actividad3}}</td>
                     <td >{{form.actividad4}}</td>
                     
-                    <td ><a href="javascript:;"  class="btn btn-sm btn-primary"  value="{{estudiante.id}} " name = "boton"><i class="fa fa-2x fa-check"></i> </a></td>
-
+                   
                     
                 </tr>
                 {% endfor%}

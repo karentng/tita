@@ -1,5 +1,10 @@
 <li>
     <span><i class="fa fa-folder-open-o"></i> {{grupo.nombre}}</span>
+    {% if grupo.get_grupos|length == 0 and grupo.get_archivos|length == 0 %}
+        <!--<a class="btn text-danger" title="Eliminar" href="{% url 'tableroControlEliminarGrupo' grupo.id %}">-->
+        <a class="btn text-danger" title="Eliminar" onclick="confirmacionBorrarGrupo('{{grupo.id}}')">
+        <i class="fa fa-trash-o"></i></a>
+    {% endif %}
     <ul>
         {% for subgrupo in grupo.get_grupos %}
             {%with grupo=subgrupo template_name="dashboard/grupos_tree.html" %}
@@ -12,6 +17,9 @@
             <li>
                 <a href="{{STATIC_URL}}../media/{{archivo.ruta}}" target="_blank">
                     <span><i class="fa fa-file-o"></i>  {{archivo.nombre}} &ndash; {{archivo.descripcion}}</span>
+                    <!--<a class="btn text-danger" title="Eliminar" href="{% url 'tableroControlEliminarArchivo' archivo.id %}">-->
+                    <a class="btn text-danger" title="Eliminar" onclick="confirmacionBorrarArchivo('{{archivo.id}}')">
+                    <i class="fa fa-trash-o"></i></a>
                 </a>
             </li>
         {% endfor %}
