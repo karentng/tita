@@ -23,9 +23,16 @@ def cronograma(request):
     if grupo == "Formador":
         username = request.user
         formador = Formador.objects.get(usuario=username.id)
-        curso = Cursos.objects.get(Q(formador1=formador.id) | Q(formador2=formador.id))
+
+        try:
+            curso = get_object_or_404(Cursos, Q(formador1=formador.id) | Q(formador2=formador.id))
+            eventos = AcompanamientoInSitus.objects.filter(curso=curso)
+
+        except Cursos.DoesNotExist:
+            pass
+        #curso = Cursos.objects.get(Q(formador1=formador.id) | Q(formador2=formador.id))
         
-        eventos = AcompanamientoInSitus.objects.filter(curso=curso)
+        #eventos = AcompanamientoInSitus.objects.filter(curso=curso)
 
     if grupo == "Coordinador":
         eventos = AcompanamientoInSitus.objects.all()
@@ -366,10 +373,15 @@ def diplomado(request):
     if grupo == "Formador":
         username = request.user
         formador = Formador.objects.get(usuario=username.id)
+        try:
+            curso = get_object_or_404(Cursos, Q(formador1=formador.id) | Q(formador2=formador.id))
+            eventos = Clases.objects.filter(curso=curso)
+
+        except Cursos.DoesNotExist:
+            pass
+        #curso = Cursos.objects.get(Q(formador1=formador.id) | Q(formador2=formador.id))
         
-        curso = Cursos.objects.get(Q(formador1=formador.id) | Q(formador2=formador.id))
         
-        eventos = Clases.objects.filter(curso=curso)
 
     if grupo == "Coordinador":
         eventos = Clases.objects.all()

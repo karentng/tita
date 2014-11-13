@@ -294,9 +294,9 @@ class Clases(models.Model):
     fecha_inicio = models.DateTimeField(verbose_name=u'fecha y hora de inicio')
     #institucion = models.IntegerField(choices=SEDES, max_length=2, verbose_name="institución", null=True, blank=True)
     modificado = models.DateTimeField(auto_now=True)
-    duracion = models.PositiveSmallIntegerField(help_text='Seleccione el numero de horas (ej: 1)')
+    duracion = models.PositiveIntegerField(help_text='Seleccione el numero de horas (ej: 1)')
     curso = models.ForeignKey(Cursos)
-    asistentes = models.ManyToManyField(Estudiante, blank=True, verbose_name='Seleccione las personas que asistieron a la clase')
+    asistentes = models.ManyToManyField(Estudiante, verbose_name='Seleccione las personas que asistieron a la clase', default=True)
     descripcion = models.CharField( max_length=1000, null=True, blank=True, verbose_name="descripción")
     estado = models.BooleanField(default=True)
 
@@ -311,9 +311,9 @@ class AcompanamientoInSitus(models.Model):
     fecha_inicio = models.DateTimeField(verbose_name=u'fecha y hora de inicio')
     #institucion = models.IntegerField(choices=SEDES, max_length=2, verbose_name="institución", null=True, blank=True)
     modificado = models.DateTimeField(auto_now=True)
-    duracion = PositiveSmallIntegerField(help_text='Seleccione el numero de horas (ej: 1)')
+    duracion = models.PositiveIntegerField(help_text='Seleccione el numero de horas (ej: 1)')
     curso = models.ForeignKey(Cursos)
-    asistentes = models.ManyToManyField(Estudiante, blank=True, verbose_name='Seleccione las personas que asistieron a la clase')
+    asistentes = models.ManyToManyField(Estudiante, verbose_name='Seleccione las personas que asistieron a la clase', default=True)
     descripcion = models.CharField( max_length=1000, null=True, blank=True, verbose_name="descripción")
     estado = models.BooleanField(default=True)
 
