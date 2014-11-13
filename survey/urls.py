@@ -17,6 +17,7 @@ urlpatterns = patterns('',
     url(r'docente$', 'survey.views.encuesta_docente', name='encuesta_docente'),
     url(r'estudiante$', 'survey.views.encuesta_estudiante', name='encuesta_estudiante'),
     url(r'nuevoEstudiante$', 'survey.views.encuesta_nuevo_estudiante', name='encuesta_nuevo_estudiante'),
+    url(r'nuevoMaestro$', 'survey.views.encuesta_nuevo_maestro', name='encuesta_nuevo_maestro'),
 
     url(r'finalizada$', TemplateView.as_view(template_name='finalizada.html'), name="encuesta_finalizada"),
 
