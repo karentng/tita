@@ -785,7 +785,14 @@ def subirsoportes(request):
             
             ide = "?v="+str(clase.id)
 
-            return HttpResponseRedirect('cronograma_diplomado_soportes%s' %ide)
+            return render(request, 'diplomado_soportes.html', {
+            'form': form,
+            'user_group': user_group(request),
+            'opcion_menu': 3,
+            'clase' : clase.id,
+            'curso' : curso.id,
+            'x':1,
+        })
             
             #return HttpRedirect('cronograma_diplomado_soportes%s' %ide)
 
@@ -828,6 +835,7 @@ def subirsoportesacompanamiento(request):
                 'opcion_menu': 4,
                 'clase' : acompanamiento.id,
                 'curso' : curso.id,
+                'x':1,
             })
 
     else:
