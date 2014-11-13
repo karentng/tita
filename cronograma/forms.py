@@ -138,9 +138,6 @@ class EstadoDeAvanceForm(forms.ModelForm):
         '''
 
 class CursoForm(forms.ModelForm):
-    #formador1 = forms.CharField(label='', widget=forms.TextInput(attrs={'style':'width:140px'}),queryset=Formador.objects.get(id=1))
-    #self.fields["formador1"].queryset = Formador.objects.filter(id=1)
-
     def __init__(self, *args, **kwargs):
         super(CursoForm, self).__init__(*args, **kwargs)
         
@@ -155,6 +152,11 @@ class CursoForm(forms.ModelForm):
                 
 
 class FormadorForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(FormadorForm, self).__init__(*args, **kwargs)
+        self.fields['usuario'].queryset = self.fields['usuario'].queryset.exclude(formador = Formador.objects.all())
+
     class Meta:
         model = Formador
         fields = ('nombre1','apellido1','jornada','tutor','usuario',)
