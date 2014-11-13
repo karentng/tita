@@ -151,7 +151,7 @@ class Cursos(models.Model):
     formador2 = models.ForeignKey(Formador, related_name="formador2",verbose_name="formador no. 2")
     estudiantes = models.ManyToManyField(Estudiante, blank=True, verbose_name='Estudiantes')
 
-    def _unicode_(self):
+    def __unicode__(self):
         return (u"%s - %s y %s"%(self.descripcion,self.formador1, self.formador2))
 
 
