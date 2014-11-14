@@ -119,12 +119,12 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title">Eliminar Grupo</h4>
+                    <h4 class="modal-title">Eliminar Carpeta</h4>
                 </div>
                 <div class="modal-body">
                     <form id="formBorrarGrupo" class="form-horizontal" method="post" action="">
                         {% csrf_token %}
-                        <h5>Realmente desea borrar el grupo?</h5>
+                        <h5>Realmente desea borrar la carpeta?</h5>
                         <button type="button" type="submit" class="btn btn-primary pull-right" id="borrarGrupoButton">Borrar</button>
                     </form>
                 </div>
@@ -206,7 +206,7 @@
                     <div class="tab-pane fade" id="tab-{{concepto_por_actividad.id}}">
                         <div class="tree">
                             <div class="row">
-                                <a href="#modal-dialog-grupo" class="btn btn-success" data-toggle="modal">Adicionar Grupo</a>
+                                <a href="#modal-dialog-grupo" class="btn btn-success" data-toggle="modal">Adicionar Carpeta</a>
                                 {% if concepto_por_actividad.get_grupos|length > 0 %}
                                     <a href="#modal-dialog-archivo" class="btn btn-success" data-toggle="modal">Adicionar Archivo</a>
                                 {% endif %}
@@ -227,7 +227,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title">Adicionar Grupo</h4>
+                    <h4 class="modal-title">Adicionar Carpeta</h4>
                 </div>
                 <div class="modal-body">
                     <form id="formGuardarGrupo" class="form-horizontal" method="post" action={% url 'tableroControlGuardarGrupo' '1' %}>

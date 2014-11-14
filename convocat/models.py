@@ -312,7 +312,7 @@ class Grupo(models.Model):
     nombre = models.CharField(max_length=255, verbose_name='nombre')
     descripcion = models.CharField(max_length=255, verbose_name='descripcion')
     concepto_por_actividad = models.ForeignKey(ConceptoPorActividad)
-    grupo_padre = models.ForeignKey("self", null=True, blank=True)
+    grupo_padre = models.ForeignKey("self", null=True, blank=True, verbose_name=u'Carpeta padre')
 
     def __unicode__(self):
         if (self.grupo_padre != None):
@@ -328,9 +328,9 @@ class Grupo(models.Model):
 
 class Archivo(models.Model):
     nombre = models.CharField(max_length=255, verbose_name='nombre')
-    ruta = models.FileField(upload_to=crear_ruta_archivo_tablero_control, null=False, blank=False)
+    ruta = models.FileField(upload_to=crear_ruta_archivo_tablero_control, null=False, blank=False, verbose_name=u'Archivo')
     descripcion = models.CharField(max_length=255, verbose_name='descripcion')
-    grupo = models.ForeignKey("Grupo")
+    grupo = models.ForeignKey("Grupo", verbose_name=u'Carpeta')
 
     def __unicode__(self):
         return self.nombre
