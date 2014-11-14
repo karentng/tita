@@ -18,6 +18,7 @@ def codigo_encuesta_session(request):
     return codigo
 
 def codigo_encuesta(request):
+    print(request)
     codigo = codigo_encuesta_session(request)
     if codigo:
         return redirect('encuesta_nuevo_estudiante')
@@ -29,6 +30,12 @@ def codigo_encuesta(request):
             if clave == '98765234567': # clave de acceso
                 request.session['codigo_encuesta']=clave
                 return redirect('encuesta_nuevo_estudiante')
+            if clave == '98765234566': # clave de acceso
+                request.session['codigo_encuesta']=clave
+                return redirect('encuesta_padre')
+            if clave == '98765234565': # clave de acceso
+                request.session['codigo_encuesta']=clave
+                return redirect('encuesta_nuevo_maestro')
             else :
                 mensaje = "Código inválido"
     else:
@@ -45,7 +52,7 @@ def encuesta_padre(request):
         return codigo_encuesta(request)
 
     survey = Survey.objects.get(id=1)
-    
+
     if request.method == 'POST':
         form = ResponseForm(request.POST, survey=survey)
         if form.is_valid():
@@ -68,7 +75,7 @@ def encuesta_padre(request):
 
     return render(request, 'encuesta_padre.html', {
         'form': form,
-        
+
         'camposMaterias1': camposMaterias[:10],
         'camposMaterias2': camposMaterias[10:],
         'camposDispositivos1': camposDispositivos[:2],
@@ -85,8 +92,8 @@ def encuesta_docente(request):
     if not codigo:
         return codigo_encuesta(request)
     survey = Survey.objects.get(id=2)
-    category_items = list(survey.category_set.all())    
-    
+    category_items = list(survey.category_set.all())
+
     if request.method == 'POST':
         form = ResponseForm(request.POST, survey=survey)
         if form.is_valid():
@@ -124,12 +131,12 @@ def encuesta_docente(request):
 def encuesta_estudiante(request):
     codigo = codigo_encuesta_session(request)
     print "--------------------"
-    print codigo 
+    print codigo
     if not codigo:
         return codigo_encuesta(request)
     survey = Survey.objects.get(id=3)
-    category_items = list(survey.category_set.all())    
-    
+    category_items = list(survey.category_set.all())
+
     if request.method == 'POST':
         form = ResponseForm(request.POST, survey=survey)
         if form.is_valid():
@@ -162,12 +169,12 @@ def encuesta_estudiante(request):
 def encuesta_nuevo_estudiante(request):
     codigo = codigo_encuesta_session(request)
     print "--------------------"
-    print codigo 
+    print codigo
     if not codigo:
         return codigo_encuesta(request)
     survey = Survey.objects.get(id=4)
-    category_items = list(survey.category_set.all())    
-    
+    category_items = list(survey.category_set.all())
+
     if request.method == 'POST':
         form = ResponseForm(request.POST, survey=survey)
         if form.is_valid():
@@ -193,12 +200,12 @@ def encuesta_nuevo_estudiante(request):
 def encuesta_nuevo_maestro(request):
     codigo = codigo_encuesta_session(request)
     print "--------------------"
-    print codigo 
+    print codigo
     if not codigo:
         return codigo_encuesta(request)
     survey = Survey.objects.get(id=5)
-    category_items = list(survey.category_set.all())    
-    
+    category_items = list(survey.category_set.all())
+
     if request.method == 'POST':
         form = ResponseForm(request.POST, survey=survey)
         if form.is_valid():
