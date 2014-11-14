@@ -147,8 +147,8 @@ class Cursos(models.Model):
     )
     descripcion = models.CharField(max_length=255, verbose_name=u'Nombre')
     institucion = models.CharField(choices=SEDES, max_length=200, verbose_name="institución")
-    formador1 = models.ForeignKey(Formador, related_name="formador1")
-    formador2 = models.ForeignKey(Formador, related_name="formador2")
+    formador1 = models.ForeignKey(Formador, related_name="formador1",verbose_name="formador no. 1")
+    formador2 = models.ForeignKey(Formador, related_name="formador2",verbose_name="formador no. 2")
     estudiantes = models.ManyToManyField(Estudiante, blank=True, verbose_name='Estudiantes')
 
     def __unicode__(self):
@@ -267,7 +267,9 @@ class Clase(models.Model):
     asistentes = models.ManyToManyField(Estudiante, blank=True, verbose_name='Seleccione las personas que asistieron a la clase')
     descripcion = models.CharField( max_length=1000, null=True, blank=True, verbose_name="descripción")
     #soportes = models.FileField(upload_to=crear_ruta_archivo, blank=True, null=True)
- 
+
+    
+
     def __unicode__(self):
         return unicode(self.nombre)
 
@@ -292,11 +294,15 @@ class Clases(models.Model):
     fecha_inicio = models.DateTimeField(verbose_name=u'fecha y hora de inicio')
     #institucion = models.IntegerField(choices=SEDES, max_length=2, verbose_name="institución", null=True, blank=True)
     modificado = models.DateTimeField(auto_now=True)
-    duracion = models.IntegerField(help_text='Seleccione el numero de horas (ej: 1)')
+    duracion = models.PositiveIntegerField(help_text='Seleccione el numero de horas (ej: 1)')
     curso = models.ForeignKey(Cursos)
-    asistentes = models.ManyToManyField(Estudiante, blank=True, verbose_name='Seleccione las personas que asistieron a la clase')
+    asistentes = models.ManyToManyField(Estudiante, verbose_name='Seleccione las personas que asistieron a la clase', default=True)
     descripcion = models.CharField( max_length=1000, null=True, blank=True, verbose_name="descripción")
     estado = models.BooleanField(default=True)
+
+    def save(self, *args, **kwargs):
+        super(Clases,self).save(*args, **kwargs)
+        SoporteClases.objects.create(clase=self)
 
 class AcompanamientoInSitus(models.Model):
 
@@ -305,11 +311,15 @@ class AcompanamientoInSitus(models.Model):
     fecha_inicio = models.DateTimeField(verbose_name=u'fecha y hora de inicio')
     #institucion = models.IntegerField(choices=SEDES, max_length=2, verbose_name="institución", null=True, blank=True)
     modificado = models.DateTimeField(auto_now=True)
-    duracion = models.IntegerField(help_text='Seleccione el numero de horas (ej: 1)')
+    duracion = models.PositiveIntegerField(help_text='Seleccione el numero de horas (ej: 1)')
     curso = models.ForeignKey(Cursos)
-    asistentes = models.ManyToManyField(Estudiante, blank=True, verbose_name='Seleccione las personas que asistieron a la clase')
+    asistentes = models.ManyToManyField(Estudiante, verbose_name='Seleccione las personas que asistieron a la clase', default=True)
     descripcion = models.CharField( max_length=1000, null=True, blank=True, verbose_name="descripción")
     estado = models.BooleanField(default=True)
+
+    def save(self, *args, **kwargs):
+        super(AcompanamientoInSitus,self).save(*args, **kwargs)
+        SoporteAcompanamiento.objects.create(acompanamiento=self)
 
 """
 class Asistencia(models.Model):
@@ -327,7 +337,7 @@ class SoporteClase(models.Model):
     archivo = models.FileField(upload_to=crear_ruta_archivo)
 
 class SoporteClases(models.Model):
-    clase = models.ForeignKey(Clases)
+    clase = models.ForeignKey(Clases, primary_key=True)
     archivo = models.FileField(upload_to=crear_ruta_archivo)
     
 
@@ -354,7 +364,7 @@ def crear_ruta_archivo2(instance, filename):
     return "soportes_acompanamiento/%s_fecha%s/%s"%(instance.acompanamiento.nombre, randomstr, filename.encode('ascii','ignore'))
 
 class SoporteAcompanamiento(models.Model):
-    acompanamiento = models.ForeignKey(AcompanamientoInSitus)
+    acompanamiento = models.ForeignKey(AcompanamientoInSitus, primary_key=True)
     archivo = models.FileField(upload_to=crear_ruta_archivo2)
 
 

@@ -189,3 +189,34 @@ def encuesta_nuevo_estudiante(request):
         'camposRecursos1': camposRecursos[:4],
         'camposRecursos2': camposRecursos[4:]
     })
+
+def encuesta_nuevo_maestro(request):
+    #codigo = codigo_encuesta_session(request)
+    #print "--------------------"
+    #print codigo 
+    #if not codigo:
+    #    return codigo_encuesta(request)
+    survey = Survey.objects.get(id=5)
+    category_items = list(survey.category_set.all())    
+    
+    if request.method == 'POST':
+        form = ResponseForm(request.POST, survey=survey)
+        if form.is_valid():
+            form.save()
+            return redirect('encuesta_finalizada')
+        else:
+            print "error llenando", form.errors
+    else :
+        form = ResponseForm(survey=survey)
+
+
+    camposHerramientas = [form['question_25%02d'%x] for x in xrange(1,18) ]
+    camposDispositivos = [form['question_38%02d'%x] for x in xrange(1,9) ]
+
+    return render(request, 'encuesta_nuevo_maestro.html', {
+        'form': form,
+        'camposHerramientas1': camposHerramientas[:9],
+        'camposHerramientas2': camposHerramientas[9:],
+        'camposDispositivos1': camposDispositivos[:4],
+        'camposDispositivos2': camposDispositivos[4:],
+    })
