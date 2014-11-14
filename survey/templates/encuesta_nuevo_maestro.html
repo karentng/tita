@@ -111,7 +111,7 @@
                     {% bootstrap_field form.question_1601 layout="horizontal" label_class="col-md-3" field_class="col-md-8" %}
                 </div>
                 <div class="col-md-4">
-                    {% bootstrap_field form.question_160101 layout="horizontal" label_class="col-md-3" field_class="col-md-8" %}
+                    {% bootstrap_field form.question_160101 layout="horizontal" label_class="col-md-3" field_class="col-md-4" %}
                 </div>
             </div>
             <br>
@@ -120,7 +120,7 @@
                     {% bootstrap_field form.question_1602 layout="horizontal" label_class="col-md-3" field_class="col-md-8" %}
                 </div>
                 <div class="col-md-4">
-                    {% bootstrap_field form.question_160201 layout="horizontal" label_class="col-md-3" field_class="col-md-3" %}
+                    {% bootstrap_field form.question_160201 layout="horizontal" label_class="col-md-3" field_class="col-md-4" %}
                 </div>
             </div>
             <br>
@@ -129,7 +129,7 @@
                     {% bootstrap_field form.question_1603 layout="horizontal" label_class="col-md-3" field_class="col-md-8" %}
                 </div>
                 <div class="col-md-4">
-                    {% bootstrap_field form.question_160301 layout="horizontal" label_class="col-md-3" field_class="col-md-3" %}
+                    {% bootstrap_field form.question_160301 layout="horizontal" label_class="col-md-3" field_class="col-md-4" %}
                 </div>
             </div>
             <br>
@@ -138,7 +138,7 @@
                     {% bootstrap_field form.question_1604 layout="horizontal" label_class="col-md-3" field_class="col-md-8" %}
                 </div>
                 <div class="col-md-4">
-                    {% bootstrap_field form.question_160401 layout="horizontal" label_class="col-md-3" field_class="col-md-3" %}
+                    {% bootstrap_field form.question_160401 layout="horizontal" label_class="col-md-3" field_class="col-md-4" %}
                 </div>
             </div>
             <br>
@@ -147,7 +147,7 @@
                     {% bootstrap_field form.question_1605 layout="horizontal" label_class="col-md-3" field_class="col-md-8" %}
                 </div>
                 <div class="col-md-4">
-                    {% bootstrap_field form.question_160501 layout="horizontal" label_class="col-md-3" field_class="col-md-3" %}
+                    {% bootstrap_field form.question_160501 layout="horizontal" label_class="col-md-3" field_class="col-md-4" %}
                 </div>
             </div> 
             <br>
@@ -335,24 +335,12 @@
         <br>
         <div class="bordered">
             <label class="control-label">
-                26. De los siguientes dispositivos o medios de comunicación escoja tres que lamentaría perder. Califique de 1 a 3 qué tan importante es para usted cada uno de esos tres dispositivos que lamentaría perder. Si es el más importante le pone 3, si es menos importante que el anterior le pone 2 y si es el menos importante de los tres le pone 1.
+                26. De los siguientes dispositivos escoja tres que lamentaría perder. Seleccione los tres dispositivos que lamentaría perder según qué tan importantes son para usted cada uno de ellos. Es decir, seleccione en primer lugar el que sea más importante, en segundo lugar el que sea un poco menos importante que el anterior y en último lugar el menos importante de los tres dispositivos.
             </label>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-horizontal">
-                        {% for field in camposDispositivos1 %}
-                            {% bootstrap_field field layout="horizontal" label_class="col-md-6" field_class="col-md-3"  %}
-                        {% endfor %}
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-horizontal">
-                        {% for field in camposDispositivos2 %}
-                            {% bootstrap_field field layout="horizontal" label_class="col-md-6" field_class="col-md-3"  %}
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
+            <br>
+            {% bootstrap_field form.question_3801 %}
+            {% bootstrap_field form.question_3802 %}
+            {% bootstrap_field form.question_3803 %}
         </div>                                                           
 
     {% endmypanel %}
