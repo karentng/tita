@@ -132,6 +132,50 @@
             </div>
         </div>
     </div>
+    <div class="modal modal-message fade in" id="tablaEstadosDeAvance" aria-hidden="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Historial de estados de avance</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="col-md-4">Fecha</th>
+                                    <th>Meta</th>
+                                    <th>Avance Actual</th>
+                                    <th class="col-md-3">Presupuesto para la Actividad</th>
+                                    <th>Presupuesto Ejecutado</th>
+                                    <th>Ejecuci&oacute;n Financiera</th>
+                                    <th>Observaci&oacute;n</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for estado_de_avance in actividad_seleccionada.get_estados_de_avance %}
+                                <tr class="odd gradeX">
+                                    <td>{{estado_de_avance.fecha}}</td>
+                                    <td>{{estado_de_avance.meta}}%</td>
+                                    <td>{{estado_de_avance.avance_actual}}%</td>
+                                    <td>{{estado_de_avance.presupuesto_actividad}}</td>
+                                    <td>{{estado_de_avance.presupuesto_ejecutado}}%</td>
+                                    <td>{{estado_de_avance.ejecucion_financiera}}%</td>
+                                    <td>{% if estado_de_avance.observacion != None %}
+                                            {{estado_de_avance.observacion}}
+                                        {% else %}
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row" align="center">
         <div class="col-xs-12">
             {% for actividad in actividades %}
@@ -159,7 +203,8 @@
 			<div class="panel panel-primary" id="inscritos">
 				<div class="panel-heading">
 					<div class="panel-heading-btn">
-						<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                        <a class="btn btn-xs btn-info" data-toggle="modal" href="#tablaEstadosDeAvance">Ver todos los avances</a>
+						<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
 					</div>
 					<h4 class="panel-title">Estado de Avance de la {{actividad_seleccionada.nombre}}</h4>
 				</div>
