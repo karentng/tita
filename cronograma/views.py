@@ -1070,6 +1070,8 @@ def detalle_formador(request, id):
 def actividad(request, id):
     #
     clase = get_object_or_404(Clases, id=id)
+    print "--------"
+    print clase.id 
     curso = clase.curso
     estudiante_list = curso.estudiantes.all()
 
@@ -1084,9 +1086,13 @@ def actividad(request, id):
         if form.is_valid():
             obj = form.save(commit=False)
             obj.clase = clase
+            print "aaaa"
+            print obj
             obj.save()
             
-            return redirect('actividades.html')
+            return redirect('actividad')
+        else:
+            print "aaaaaasss"
 
     else:        
 
