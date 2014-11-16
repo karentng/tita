@@ -9,15 +9,20 @@ class NoModificableFileInput(forms.widgets.ClearableFileInput):
     template_with_initial = '%(initial)s'
 
 class AsistenciaForm(forms.ModelForm):
-    class Meta:
-        model = Clases
-        fields = ('asistentes',)
-        widgets = {'asistentes': forms.CheckboxSelectMultiple()}
-
     def __init__(self, *args, **kwargs):
         super(AsistenciaForm, self).__init__(*args, **kwargs)
+        #asistentes = forms.ModelMultipleChoiceField(initial=True, widget=forms.CheckboxSelectMultiple())
         laclase = self.instance
-        self.fields['asistentes'].queryset = laclase.curso.estudiantes.all()
+        self.fields['asistentes'].queryset = laclase.curso.estudiantes.all()    
+
+    class Meta:
+        model = Clases
+        fields = ('asistentes','observacion')
+        #ModelMultipleChoiceField(Numbers.objects.all(), required=True, widget=forms.CheckboxSelectMultiple(), label='Select No')
+        widgets = {'asistentes': forms.CheckboxSelectMultiple(),
+                   'observacion': forms.Textarea(attrs={'rows': 4})}
+
+    
 
 #AsistenciaFormset = modelformset_factory(Asistencia)
 

@@ -78,6 +78,7 @@ class MyFileInput(ClearableFileInput):
     url_markup_template = '<a target="_blank" href="{0}">{1}</a>'
 
     def render(self, name, value, attrs=None):
+        
         substitutions = {
             'initial_text': self.initial_text,
             'input_text': self.input_text,
@@ -93,12 +94,12 @@ class MyFileInput(ClearableFileInput):
             substitutions['initial'] = format_html(self.url_markup_template,
                                                    value.url,
                                                    os.path.basename(value.name))
-            if self.is_required:
+            if  self.is_required:
                 checkbox_name = self.clear_checkbox_name(name)
                 checkbox_id = self.clear_checkbox_id(checkbox_name)
                 substitutions['clear_checkbox_name'] = conditional_escape(checkbox_name)
                 substitutions['clear_checkbox_id'] = conditional_escape(checkbox_id)
-                substitutions['clear'] = CheckboxInput(attrs={'onclick':'if(confirm("Seguro que desea quitar este archivo?")){  $("form").submit() } else return false;' } ).render(checkbox_name, False, attrs={'id': checkbox_id, 'style':'display:none'})
+                substitutions['clear'] = CheckboxInput(attrs={'onclick':'if(confirm("Seguro que desea quitar este archivo?")){  $("form").submit().submit() } else return false;' } ).render(checkbox_name, False, attrs={'id': checkbox_id, 'style':'display:none'})
                 substitutions['clear_template'] = self.template_with_clear % substitutions
 
         return mark_safe(template % substitutions)
@@ -121,21 +122,6 @@ class DocumentosSoporteAcompanamientoForm(forms.ModelForm):
             'archivo' : MyFileInput(),
 
         }
-'''
-class EstadoDeAvanceForm(forms.ModelForm):
-    #fecha = forms.DateField(label='', widget=forms.TextInput(attrs={'size':14}))
-    fecha = forms.DateField(label='', widget=DateWidget(usel10n=False, bootstrap_version=3, attrs={'size':10, 'style':'width:110px'}, options={'format': 'yyyy-mm-dd', 'startView':2, 'language':'es'}))
-    meta = forms.FloatField(label='', widget=forms.NumberInput(attrs={'style':'width:90px'}))
-    avance_actual = forms.FloatField(label='', widget=forms.NumberInput(attrs={'style':'width:90px'}))
-    presupuesto_actividad = forms.FloatField(label='', widget=forms.NumberInput(attrs={'style':'width:180px'}))
-    presupuesto_ejecutado = forms.FloatField(label='', widget=forms.NumberInput(attrs={'style':'width:140px'}))
-    ejecucion_financiera = forms.FloatField(label='', widget=forms.NumberInput(attrs={'style':'width:130px'}))
-    observacion = forms.CharField(label='', widget=forms.TextInput(attrs={'style':'width:140px'}))
-
-    class Meta:
-        model = EstadoDeAvance
-        exclude = ('actividad',)
-        '''
 
 class CursoForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
