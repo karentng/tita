@@ -138,10 +138,10 @@ class Cursos(models.Model):
         ('MARICE SINISTERRA','MARICE SINISTERRA'),
         ('Principal IE BOYACA', 'Principal IE BOYACA'),
         ('Principal YUMBO-IE MAYOR DE YUMBO - SEDE PRINCIPAL', 'Principal YUMBO-IE MAYOR DE YUMBO - SEDE PRINCIPAL'),
-        ('Principal YUMBO-IE JOSE MARiA CÓRDOBA - SEDE PRINCIPAL', 'Principal YUMBO-IE JOSÉ MARÍA CÓRDOBA - SEDE PRINCIPAL'),
+        ('Principal YUMBO-IE JOSE MARiA CORDOBA - SEDE PRINCIPAL', 'Principal YUMBO-IE JOSÉ MARÍA CÓRDOBA - SEDE PRINCIPAL'),
         ('Principal YUMBO-IE TITAN - SEDE PRINCIPAL', 'Principal YUMBO-IE TITAN - SEDE PRINCIPAL'),
         ('Principal YUMBO-IE CEAT GENERAL PIERO MARIOTTI - SEDE JOHN F. KENNEDY', 'Principal YUMBO-IE CEAT GENERAL PIERO MARIOTTI - SEDE JOHN F. KENNEDY'),
-        ('Principal YUMBO-IE MANUEL MARIA SÁNCHEZ - SEDE PRINCIPAL', 'Principal YUMBO-IE MANUEL MARÍA SÁNCHEZ - SEDE PRINCIPAL'),
+        ('Principal YUMBO-IE MANUEL MARIA SANCHEZ - SEDE PRINCIPAL', 'Principal YUMBO-IE MANUEL MARÍA SÁNCHEZ - SEDE PRINCIPAL'),
         ('Principal YUMBO-IE ROSA ZARATE DE PENA - SEDE PRINCIPAL', 'Principal YUMBO-IE ROSA ZÁRATE DE PEÑA - SEDE PRINCIPAL'),
         ('Principal VIJES', 'Principal VIJES')
     )
@@ -266,6 +266,7 @@ class Clase(models.Model):
     curso = models.ForeignKey(Cursos)
     asistentes = models.ManyToManyField(Estudiante, blank=True, verbose_name='Seleccione las personas que asistieron a la clase')
     descripcion = models.CharField( max_length=1000, null=True, blank=True, verbose_name="descripción")
+
     #soportes = models.FileField(upload_to=crear_ruta_archivo, blank=True, null=True)
 
     
@@ -296,13 +297,27 @@ class Clases(models.Model):
     modificado = models.DateTimeField(auto_now=True)
     duracion = models.PositiveIntegerField(help_text='Seleccione el numero de horas (ej: 1)')
     curso = models.ForeignKey(Cursos)
-    asistentes = models.ManyToManyField(Estudiante, verbose_name='Seleccione las personas que asistieron a la clase', default=True)
+    asistentes = models.ManyToManyField(Estudiante, verbose_name='Seleccione las personas que asistieron a la clase')
     descripcion = models.CharField( max_length=1000, null=True, blank=True, verbose_name="descripción")
     estado = models.BooleanField(default=True)
+    observacion = models.CharField( max_length=1500, null=True, blank=True, verbose_name="observaciones")
 
     def save(self, *args, **kwargs):
         super(Clases,self).save(*args, **kwargs)
         SoporteClases.objects.create(clase=self)
+
+class ClasesFechas(models.Model):
+    clase = models.OneToOneField(Clases)
+    fecha1 = models.DateField()
+    fecha2 = models.DateField()
+    fecha3 = models.DateField()
+    fecha4 = models.DateField()
+    fecha5 = models.DateField()
+    fecha6 = models.DateField()
+    fecha7 = models.DateField()
+    fecha8 = models.DateField()
+    fecha9 = models.DateField()
+    fecha10 = models.DateField()
 
 class AcompanamientoInSitus(models.Model):
 
@@ -313,9 +328,10 @@ class AcompanamientoInSitus(models.Model):
     modificado = models.DateTimeField(auto_now=True)
     duracion = models.PositiveIntegerField(help_text='Seleccione el numero de horas (ej: 1)')
     curso = models.ForeignKey(Cursos)
-    asistentes = models.ManyToManyField(Estudiante, verbose_name='Seleccione las personas que asistieron a la clase', default=True)
+    asistentes = models.ManyToManyField(Estudiante, verbose_name='Seleccione las personas que asistieron a la clase')
     descripcion = models.CharField( max_length=1000, null=True, blank=True, verbose_name="descripción")
     estado = models.BooleanField(default=True)
+    observacion = models.CharField( max_length=1500, null=True, blank=True, verbose_name="observaciones")
 
     def save(self, *args, **kwargs):
         super(AcompanamientoInSitus,self).save(*args, **kwargs)
@@ -348,6 +364,12 @@ class Actividad(models.Model):
     actividad2 = models.BooleanField()
     actividad3 = models.BooleanField()
     actividad4 = models.BooleanField()
+    actividad5 = models.BooleanField()
+    actividad6 = models.BooleanField()
+    actividad7 = models.BooleanField()
+    actividad8 = models.BooleanField()
+    actividad9 = models.BooleanField()
+    actividad10 = models.BooleanField()
 
 
 class CalificacionActividad(models.Model):

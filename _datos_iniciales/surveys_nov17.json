@@ -2423,7 +2423,7 @@
     "text": "\u00bfCu\u00e1l es su ocupaci\u00f3n principal actual?", 
     "required": true, 
     "number": "13", 
-    "choices": "Empresario.\t\t\t\t\t\t\t\t\t\t\t\t\t\r\nOficios del hogar (tareas dom\u00e9sticas del propio hogar).\r\nArtista (productor en \u00e1reas como pintura, m\u00fasica, escritura, escultura, artesan\u00eda, actuaci\u00f3n).\r\nT\u00e9cnico (trabajador asalariado o independiente con calificaci\u00f3n t\u00e9cnica, por ejemplo, \r\nelectricista, mec\u00e1nico, soldador, panadero).\r\nObrero (trabajador no calificado y asalariado, por ejemplo, obrero de construcci\u00f3n o de una f\u00e1brica.\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\r\nArtesano (carpintero, costurera, sastre, zapatero).\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\r\nTrabajador informal.\r\nEmpleado de servicios personales (trabajadoras del hogar, vigilantes, conductor asalariado, mensajero).\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\r\nL\u00edder comunitario(a).\r\nProfesional (trabajador asalariado o independiente con nivel educativo profesional o superior, por ejemplo, ingeniero, arquitecto, administrador de empresas, matem\u00e1tico, bi\u00f3logo).\r\nComerciante (propietario de tienda de comestibles o de peque\u00f1o negocio de venta de productos o servicios)\r\nEstudiante\r\nJubilado.\t\t\t\t\t\t\t\t\t\t\t\t\t\t\r\nDesempleado.", 
+    "choices": "Empresario.\t\t\t\t\t\t\t\t\t\t\t\t\t\r\nOficios del hogar (tareas dom\u00e9sticas del propio hogar).\r\nArtista (productor en \u00e1reas como pintura, m\u00fasica, escritura, escultura, artesan\u00eda, actuaci\u00f3n).\r\nT\u00e9cnico (trabajador asalariado o independiente con calificaci\u00f3n t\u00e9cnica, por ejemplo, electricista, mec\u00e1nico, soldador, panadero).\r\nObrero (trabajador no calificado y asalariado, por ejemplo, obrero de construcci\u00f3n o de una f\u00e1brica.\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\r\nArtesano (carpintero, costurera, sastre, zapatero).\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\r\nTrabajador informal.\r\nEmpleado de servicios personales (trabajadoras del hogar, vigilantes, conductor asalariado, mensajero).\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\r\nL\u00edder comunitario(a).\r\nProfesional (trabajador asalariado o independiente con nivel educativo profesional o superior, por ejemplo, ingeniero, arquitecto, administrador de empresas, matem\u00e1tico, bi\u00f3logo).\r\nComerciante (propietario de tienda de comestibles o de peque\u00f1o negocio de venta de productos o servicios)\r\nEstudiante\r\nJubilado.\t\t\t\t\t\t\t\t\t\t\t\t\t\t\r\nDesempleado.", 
     "survey": 6, 
     "question_type": "select"
   }
@@ -2865,7 +2865,7 @@
     "text": "Software especializado.", 
     "required": true, 
     "number": "2613", 
-    "choices": "Siempre\r\nA veces\r\nNunca\r\nNo s\u00e9 quSiempre\r\nA veces\r\nNunca\r\nNo s\u00e9 qu\u00e9 es esto\u00e9 es esto", 
+    "choices": "Siempre\r\nA veces\r\nNunca\r\nNo s\u00e9 qu\u00e9 es esto", 
     "survey": 6, 
     "question_type": "select"
   }
@@ -3070,7 +3070,7 @@
   "model": "survey.question", 
   "fields": {
     "category": null, 
-    "text": "Otro", 
+    "text": "Otro. \u00bfCu\u00e1l?", 
     "required": false, 
     "number": "2912", 
     "choices": "", 
@@ -3222,19 +3222,6 @@
   }
 },
 {
-  "pk": 649, 
-  "model": "survey.question", 
-  "fields": {
-    "category": null, 
-    "text": "Lo uso para otra cosa. Mencione \u00bfcu\u00e1l?\t", 
-    "required": false, 
-    "number": "291201", 
-    "choices": "", 
-    "survey": 6, 
-    "question_type": "text"
-  }
-},
-{
   "pk": 656, 
   "model": "survey.question", 
   "fields": {
@@ -3294,7 +3281,7 @@
     "text": "20. \u00bfQu\u00e9 le gustar\u00eda hacer o aprender a hacer con Internet? Puede marcar varias opciones.\t\t\t", 
     "required": false, 
     "number": "34", 
-    "choices": "Desarrollar programas inform\u00e1ticos.\t\t\t\t\t\t\t\t\r\nConstruir p\u00e1ginas web.\t\t\t\t\t\t\r\nConstruir un espacio virtual en el que pueda interactuar con mis hijos. \r\nCrear videos y pel\u00edculas. \t\t\t\t\t\t\t\r\nCrear mejores fotograf\u00edas. \t\t\t\t\t\t\t\r\nEscribir historias y cuentos. \t\t\t\t\t\t\t\r\nHacer un video y subirlo a You Tube. \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\r\nDise\u00f1ar un videojuego. \t\t\t\t\t\t\t\t\t\t\t\t\r\nConstruir un blog, un diario, un peri\u00f3dico, un programa de radio y m\u00fasica.\r\nAprender un idioma que no conozco. \t\t\t\t\t\t\t\t\t\t\t\t\r\nHacer amigos de mi edad. \t\t\t\t\t\t\t\t\t\t\t\tComponer m\u00fasica utilizando software especializado. \t\t\t\t\t\t\t\t\t\t\t\tIntercambiar objetos. \t\t\t\t\t\t\t\t\t\t\t\t\r\nVender o comprar creaciones propias (m\u00fasica, dibujos, cuentos,\r\nim\u00e1genes, artes). ", 
+    "choices": "Desarrollar programas inform\u00e1ticos.\t\t\t\t\t\t\t\t\r\nConstruir p\u00e1ginas web.\t\t\t\t\t\t\r\nConstruir un espacio virtual en el que pueda interactuar con mis hijos. \r\nCrear videos y pel\u00edculas. \t\t\t\t\t\t\t\r\nCrear mejores fotograf\u00edas. \t\t\t\t\t\t\t\r\nEscribir historias y cuentos. \t\t\t\t\t\t\t\r\nHacer un video y subirlo a You Tube. \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\r\nDise\u00f1ar un videojuego. \t\t\t\t\t\t\t\t\t\t\t\t\r\nConstruir un blog, un diario, un peri\u00f3dico, un programa de radio y m\u00fasica.\r\nAprender un idioma que no conozco. \t\t\t\t\t\t\t\t\t\t\t\t\r\nHacer amigos de mi edad.\r\nComponer m\u00fasica utilizando software especializado. \r\nIntercambiar objetos. \t\t\t\t\t\t\t\t\t\t\t\t\r\nVender o comprar creaciones propias (m\u00fasica, dibujos, cuentos, im\u00e1genes, artes). ", 
     "survey": 6, 
     "question_type": "select-multiple"
   }

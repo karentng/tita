@@ -22,7 +22,7 @@ def cronograma(request):
 
     if grupo == "Formador":
         username = request.user
-        formador = Formador.objects.get(usuario=username.id)
+        formador = get_object_or_404(Formador, usuario=username.id)
 
         try:
             curso = get_object_or_404(Cursos, Q(formador1=formador.id) | Q(formador2=formador.id))
@@ -372,7 +372,7 @@ def diplomado(request):
 
     if grupo == "Formador":
         username = request.user
-        formador = Formador.objects.get(usuario=username.id)
+        formador = get_object_or_404(Formador, usuario=username.id)
         try:
             curso = get_object_or_404(Cursos, Q(formador1=formador.id) | Q(formador2=formador.id))
             eventos = Clases.objects.filter(curso=curso)
@@ -805,11 +805,7 @@ def subirsoportes(request):
             'curso' : curso.id,
             'x':1,
         })
-            
-            #return HttpRedirect('cronograma_diplomado_soportes%s' %ide)
-
-    else:
-        
+    else:   
 
         form = DocumentosSoporteForm(instance=soporteclases)
         
@@ -1070,6 +1066,8 @@ def detalle_formador(request, id):
 def actividad(request, id):
     #
     clase = get_object_or_404(Clases, id=id)
+    print "--------"
+    print clase.id 
     curso = clase.curso
     estudiante_list = curso.estudiantes.all()
 
@@ -1084,9 +1082,13 @@ def actividad(request, id):
         if form.is_valid():
             obj = form.save(commit=False)
             obj.clase = clase
+            print "aaaa"
+            print obj
             obj.save()
             
-            return redirect('actividades.html')
+            return redirect('actividad')
+        else:
+            print "aaaaaasss"
 
     else:        
 

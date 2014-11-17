@@ -32,7 +32,7 @@ def codigo_encuesta(request):
                 return redirect('encuesta_nuevo_estudiante')
             if clave == '98765234566': # clave de acceso
                 request.session['codigo_encuesta']=clave
-                return redirect('encuesta_padre')
+                return redirect('encuesta_nuevo_padre')
             if clave == '98765234565': # clave de acceso
                 request.session['codigo_encuesta']=clave
                 return redirect('encuesta_nuevo_maestro')
@@ -231,8 +231,8 @@ def encuesta_nuevo_padre(request):
     if not codigo:
         return codigo_encuesta(request)
     survey = Survey.objects.get(id=6)
-    category_items = list(survey.category_set.all())    
-    
+    category_items = list(survey.category_set.all())
+
     if request.method == 'POST':
         form = ResponseForm(request.POST, survey=survey)
         if form.is_valid():

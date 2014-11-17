@@ -9,15 +9,20 @@ class NoModificableFileInput(forms.widgets.ClearableFileInput):
     template_with_initial = '%(initial)s'
 
 class AsistenciaForm(forms.ModelForm):
-    class Meta:
-        model = Clases
-        fields = ('asistentes',)
-        widgets = {'asistentes': forms.CheckboxSelectMultiple()}
-
     def __init__(self, *args, **kwargs):
         super(AsistenciaForm, self).__init__(*args, **kwargs)
+        #asistentes = forms.ModelMultipleChoiceField(initial=True, widget=forms.CheckboxSelectMultiple())
         laclase = self.instance
-        self.fields['asistentes'].queryset = laclase.curso.estudiantes.all()
+        self.fields['asistentes'].queryset = laclase.curso.estudiantes.all()    
+
+    class Meta:
+        model = Clases
+        fields = ('asistentes','observacion')
+        #ModelMultipleChoiceField(Numbers.objects.all(), required=True, widget=forms.CheckboxSelectMultiple(), label='Select No')
+        widgets = {'asistentes': forms.CheckboxSelectMultiple(),
+                   'observacion': forms.Textarea(attrs={'rows': 4})}
+
+    
 
 #AsistenciaFormset = modelformset_factory(Asistencia)
 
@@ -34,13 +39,13 @@ SoportesFormset = inlineformset_factory(Clase, SoporteClase, form=SoporteClaseFo
 class ActividadForm(forms.ModelForm):
     class Meta:
         model = Actividad
-        '''fields = ('actividad1','actividad2',)
-        widgets = {'actividad1': forms.CheckboxSelectMultiple(),
-                   'actividad2': forms.CheckboxSelectMultiple()}
+        exclude = ('clase','estudiante',)
+        '''widgets = {'actividad1': forms.CheckboxSelectMultiple(),
+                   'actividad2': forms.CheckboxSelectMultiple()}'''
 
         
 
-    def __init__(self, *args, **kwargs):
+    '''def __init__(self, *args, **kwargs):
         super(ActividadForm, self).__init__(*args, **kwargs)
         actividad = self.instance
         self.fields['estudiantes'].queryset = actividad.clase.curso.estudiantes.all()
