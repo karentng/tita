@@ -19,7 +19,7 @@ class AsistenciaForm(forms.ModelForm):
         model = Clases
         fields = ('asistentes','observacion')
         #ModelMultipleChoiceField(Numbers.objects.all(), required=True, widget=forms.CheckboxSelectMultiple(), label='Select No')
-        widgets = {'asistentes': forms.CheckboxSelectMultiple(),
+        widgets = {'asistentes': forms.CheckboxSelectMultiple(attrs={"checked":""}),
                    'observacion': forms.Textarea(attrs={'rows': 4})}
 
     
