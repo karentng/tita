@@ -311,7 +311,7 @@ class Actividad(models.Model):
     clase = models.ForeignKey(Clases)
     nombre = models.CharField(max_length=155, blank=False, null=False)
     fecha = models.DateField()
-    estudiantes = models.ManyToManyField(Estudiante)
+    estudiantes = models.ManyToManyField(Estudiante, blank=True)
 
     def __unicode__(self):
         return (u"%s (%s)"%(self.nombre, self.fecha)).strip() or "-"

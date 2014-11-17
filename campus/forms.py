@@ -57,6 +57,11 @@ class ActividadForm(forms.ModelForm):
 
         '''
 class ActividadAsistenciaForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        idCurso = kwargs.pop('idCurso')
+        super(ActividadAsistenciaForm, self).__init__(*args, **kwargs)
+        self.fields['estudiantes'].queryset = idCurso.estudiantes.all()
+
     class Meta:
         model = Actividad
         fields = ('estudiantes',)

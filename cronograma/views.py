@@ -1105,7 +1105,6 @@ def actividad(request, id):
             obj.save()
             obj.estudiantes = curso.estudiantes.all()
             obj.save()
-            #form.save_m2m()
             
             return redirect('actividad', id)
         else:
@@ -1128,20 +1127,17 @@ def actividad(request, id):
 def asistenciaClases(request, idC, idA):
     clase = get_object_or_404(Clases, id=idC)
     actividad = Actividad.objects.get(id=idA)
+    idCurso = clase.curso
 
     if request.method == 'POST':
-        
-        form = ActividadAsistenciaForm(request.POST, instance=actividad)
-        
+        form = ActividadAsistenciaForm(request.POST, instance=actividad, idCurso=idCurso)
         if form.is_valid():
             obj = form.save()
-            
-            return redirect('asistenciaClases', idA)
+            return redirect('asistenciaClases', idC, idA)
 
     else:        
-        form = ActividadForm()
+        form = ActividadAsistenciaForm(idCurso=idCurso, instance=actividad)
 
-    form = ActividadAsistenciaForm(instance=actividad)
     return render(request, 'asistenciaClases.html', {
         'clase':clase.id,
         'form': form,
