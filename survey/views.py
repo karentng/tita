@@ -130,8 +130,6 @@ def encuesta_docente(request):
 
 def encuesta_estudiante(request):
     codigo = codigo_encuesta_session(request)
-    print "--------------------"
-    print codigo
     if not codigo:
         return codigo_encuesta(request)
     survey = Survey.objects.get(id=3)
@@ -168,8 +166,6 @@ def encuesta_estudiante(request):
 
 def encuesta_nuevo_estudiante(request):
     codigo = codigo_encuesta_session(request)
-    print "--------------------"
-    print codigo
     if not codigo:
         return codigo_encuesta(request)
     survey = Survey.objects.get(id=4)
@@ -199,8 +195,6 @@ def encuesta_nuevo_estudiante(request):
 
 def encuesta_nuevo_maestro(request):
     codigo = codigo_encuesta_session(request)
-    print "--------------------"
-    print codigo
     if not codigo:
         return codigo_encuesta(request)
     survey = Survey.objects.get(id=5)
