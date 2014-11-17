@@ -1000,25 +1000,38 @@ def detalle_curso(request, id):
     if request.method == 'POST':
 
         get = request.POST['boton']
-        print "!!!!!!!!!!!!!!!!"+str(get)
+        #print "!!!!!!!!!!!!!!!!"+str(get)
         
         if get == "0":
 
-            form = CursoForm(request.POST, instance=curso)
+            form = CursoMForm(request.POST, instance=curso)
             if form.is_valid():
                 objeto = form.save()
+
+                formador = Cursos.objects.all().exclude(id = curso.id)
+                for i in formador:
+                    if objeto.formador1 == i.formador1 or objeto.formador2 == i.formador1 or objeto.formador2 == i.formador1 or objeto.formador2 == i.formador2 :
+                        print "hola mundo paila"
+                        form = CursoMForm(instance=curso)
+                        return render(request, 'detalles_curso.html', {
+                            'form': form, 
+                            'user_group': user_group(request),
+                            'x': 1,
+                        })
+            
                 objeto.save()
+
                 return redirect('gestion_cursos')
 
         if get == "2":
-            form = CursoForm(instance=curso)
+            form = CursoMForm(instance=curso)
 
         if get == "1":
             curso = Cursos.objects.get(id=id)
             curso.delete()
             return redirect('gestion_cursos')
     else:
-        form = CursoForm(instance=curso)
+        form = CursoMForm(instance=curso)
 
     return render(request, 'detalles_curso.html', {
         'form': form, 

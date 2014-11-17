@@ -39,6 +39,13 @@
 
 {% block titulo_panel %}<i class="fa fa-user"></i> Detalles Curso{% endblock %}
 {% block contenido_panel %}
+{% if x == 1 %}
+
+        <div class="alert alert-warning fade in m-b-15">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            Uno de los formadores seleccionados ya fue asignado a otro curso.
+        </div>
+{% endif %}
 
                                
       
