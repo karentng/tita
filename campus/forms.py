@@ -39,13 +39,13 @@ SoportesFormset = inlineformset_factory(Clase, SoporteClase, form=SoporteClaseFo
 class ActividadForm(forms.ModelForm):
     class Meta:
         model = Actividad
-        '''fields = ('actividad1','actividad2',)
-        widgets = {'actividad1': forms.CheckboxSelectMultiple(),
-                   'actividad2': forms.CheckboxSelectMultiple()}
+        exclude = ('clase','estudiante',)
+        '''widgets = {'actividad1': forms.CheckboxSelectMultiple(),
+                   'actividad2': forms.CheckboxSelectMultiple()}'''
 
         
 
-    def __init__(self, *args, **kwargs):
+    '''def __init__(self, *args, **kwargs):
         super(ActividadForm, self).__init__(*args, **kwargs)
         actividad = self.instance
         self.fields['estudiantes'].queryset = actividad.clase.curso.estudiantes.all()
