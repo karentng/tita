@@ -54,7 +54,7 @@
                 {% for estudiante in estudiante_list %}
                 <tr>
                     <td >{{estudiante.nombre1}} {{estudiante.apellido1}} </td>    
-                    <td >{{form.actividad1}}</td>
+                    <td >{{form.actividad1}}{{% bootstrap_field form.actividad1 %}</td>
                     <td >{{form.actividad2}}</td>
                     <td >{{form.actividad3}}</td>
                     <td >{{form.actividad4}}</td>
