@@ -228,8 +228,6 @@ def encuesta_nuevo_maestro(request):
 
 def encuesta_nuevo_padre(request):
     codigo = codigo_encuesta_session(request)
-    print "--------------------"
-    print codigo 
     if not codigo:
         return codigo_encuesta(request)
     survey = Survey.objects.get(id=6)
@@ -247,7 +245,7 @@ def encuesta_nuevo_padre(request):
 
 
     camposMaterias = [form['question_18%02d'%x] for x in xrange(1,9) ]
-    camposHerramientas = [form['question_26%02d'%x] for x in xrange(1,14) ]
+    camposHerramientas = [form['question_26%02d'%x] for x in xrange(1,15) ]
 
     return render(request, 'encuesta_nuevo_padre.html', {
         'form': form,
