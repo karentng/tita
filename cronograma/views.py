@@ -973,9 +973,10 @@ def lista_acompanamiento(request, id):
 
     formador1 = curso.formador1
     formador2 = curso.formador2
+    institucion = curso.institucion
     
     return render(request, 'lista_estudiantes.html', {'estudiante_list': estudiante_list,  'user_group': user_group(request),
-        'opcion_menu': 5, 'curso':cursonombre, 'clase':clasenombre, 'clase_fecha':clasefecha, 'formador1':formador1,'formador2':formador2},
+        'opcion_menu': 5, 'curso':cursonombre, 'institucion':institucion, 'clase':clasenombre, 'clase_fecha':clasefecha, 'formador1':formador1,'formador2':formador2},
         )
 '''
 def detalle_curso(request, id, limit=100):
