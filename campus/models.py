@@ -302,22 +302,19 @@ class Clases(models.Model):
     estado = models.BooleanField(default=True)
     observacion = models.CharField( max_length=1500, null=True, blank=True, verbose_name="observaciones")
 
+
     def save(self, *args, **kwargs):
         super(Clases,self).save(*args, **kwargs)
         SoporteClases.objects.create(clase=self)
 
-class ClasesFechas(models.Model):
-    clase = models.OneToOneField(Clases)
-    fecha1 = models.DateField()
-    fecha2 = models.DateField()
-    fecha3 = models.DateField()
-    fecha4 = models.DateField()
-    fecha5 = models.DateField()
-    fecha6 = models.DateField()
-    fecha7 = models.DateField()
-    fecha8 = models.DateField()
-    fecha9 = models.DateField()
-    fecha10 = models.DateField()
+class Actividad(models.Model):
+    clase = models.ForeignKey(Clases)
+    nombre = models.CharField(max_length=155, blank=False, null=False)
+    fecha = models.DateField()
+    estudiantes = models.ManyToManyField(Estudiante)
+
+    def __unicode__(self):
+        return (u"%s (%s)"%(self.nombre, self.fecha)).strip() or "-"
 
 class AcompanamientoInSitus(models.Model):
 
@@ -355,22 +352,6 @@ class SoporteClase(models.Model):
 class SoporteClases(models.Model):
     clase = models.ForeignKey(Clases, primary_key=True)
     archivo = models.FileField(upload_to=crear_ruta_archivo)
-    
-
-class Actividad(models.Model):
-    clase = models.ForeignKey(Clases)
-    estudiante = models.ForeignKey(Estudiante)
-    actividad1 = models.BooleanField()
-    actividad2 = models.BooleanField()
-    actividad3 = models.BooleanField()
-    actividad4 = models.BooleanField()
-    actividad5 = models.BooleanField()
-    actividad6 = models.BooleanField()
-    actividad7 = models.BooleanField()
-    actividad8 = models.BooleanField()
-    actividad9 = models.BooleanField()
-    actividad10 = models.BooleanField()
-
 
 class CalificacionActividad(models.Model):
     class Meta:

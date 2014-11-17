@@ -30,5 +30,8 @@ urlpatterns = patterns('cronograma.views',
 
     url(r'^programacion/actividad/(?P<id>\d+)$',      'actividad', name='actividad'),
     url(r'^programacion/actividad2/(?P<id>\d+)$',      'actividadacompanamiento', name='actividad_acompanamiento'),
+
+    url(r'programacion/actividad/asistenciaClases/(\d+)/(\d+)$', 'asistenciaClases', name="asistenciaClases"),
+
     
 )

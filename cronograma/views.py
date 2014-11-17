@@ -1,8 +1,8 @@
 #encoding: utf-8
 from django.shortcuts import render
 from cronograma.forms import *
-from campus.forms import ActividadForm, AsistenciaForm
-from campus.models import Clases, AcompanamientoInSitus, Estudiante, Cursos
+from campus.forms import ActividadForm, AsistenciaForm, ActividadAsistenciaForm
+from campus.models import Clases, AcompanamientoInSitus, Estudiante, Cursos, Actividad
 import json
 from django.shortcuts import redirect, render, render_to_response
 from datetime import datetime, date, timedelta
@@ -1087,8 +1087,8 @@ def actividad(request, id):
     #
     clase = get_object_or_404(Clases, id=id)
     print "--------"
-    print clase.id 
     curso = clase.curso
+    actividades = Actividad.objects.filter(clase=clase)
     estudiante_list = curso.estudiantes.all()
 
     grupo = user_group(request)
@@ -1102,27 +1102,50 @@ def actividad(request, id):
         if form.is_valid():
             obj = form.save(commit=False)
             obj.clase = clase
-            print "aaaa"
-            print obj
             obj.save()
+            obj.estudiantes = curso.estudiantes.all()
+            obj.save()
+            #form.save_m2m()
             
-            return redirect('actividad')
+            return redirect('actividad', id)
         else:
             print "aaaaaasss"
 
     else:        
-
         form = ActividadForm()
 
     return render(request, 'actividadesyasistencia.html', {
         'clase':clase.id,
+        'id': id,
         'curso': curso.id,
         'form': form,
         'user_group': user_group(request),
         'opcion_menu': 5,
-        'estudiante_list':estudiante_list
+        'estudiante_list':estudiante_list,
+        'actividades': actividades
+    })
 
+def asistenciaClases(request, idC, idA):
+    clase = get_object_or_404(Clases, id=idC)
+    actividad = Actividad.objects.get(id=idA)
+
+    if request.method == 'POST':
         
+        form = ActividadAsistenciaForm(request.POST, instance=actividad)
+        
+        if form.is_valid():
+            obj = form.save()
+            
+            return redirect('asistenciaClases', idA)
+
+    else:        
+        form = ActividadForm()
+
+    form = ActividadAsistenciaForm(instance=actividad)
+    return render(request, 'asistenciaClases.html', {
+        'clase':clase.id,
+        'form': form,
+        'idC': idC
     })
 
 def actividadacompanamiento(request, id):

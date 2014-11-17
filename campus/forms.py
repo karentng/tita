@@ -4,6 +4,7 @@ from django.forms.models import inlineformset_factory
 from campus.models import *
 import os.path
 from django.db.models import Q
+from convocat.forms import MyDateWidget
 
 class NoModificableFileInput(forms.widgets.ClearableFileInput):
     template_with_initial = '%(initial)s'
@@ -39,9 +40,13 @@ SoportesFormset = inlineformset_factory(Clase, SoporteClase, form=SoporteClaseFo
 class ActividadForm(forms.ModelForm):
     class Meta:
         model = Actividad
-        exclude = ('clase','estudiante',)
+        exclude = ('clase','estudiantes')
         '''widgets = {'actividad1': forms.CheckboxSelectMultiple(),
                    'actividad2': forms.CheckboxSelectMultiple()}'''
+        widgets = {
+            # 'fecha_nacimiento': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
+            'fecha' : MyDateWidget()
+        }
 
         
 
@@ -51,3 +56,10 @@ class ActividadForm(forms.ModelForm):
         self.fields['estudiantes'].queryset = actividad.clase.curso.estudiantes.all()
 
         '''
+class ActividadAsistenciaForm(forms.ModelForm):
+    class Meta:
+        model = Actividad
+        fields = ('estudiantes',)
+        widgets = {
+            'estudiantes': forms.CheckboxSelectMultiple()
+        }

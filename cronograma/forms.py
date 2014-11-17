@@ -73,7 +73,7 @@ from django.forms import CheckboxInput
 import os.path
 class MyFileInput(ClearableFileInput):
     
-    clear_checkbox_label = '' #ugettext_lazy('Clear')
+    clear_checkbox_label = 'Eliminar' #ugettext_lazy('Clear')
     template_with_clear = '%(clear)s <label class="text-danger" style="cursor:pointer" for="%(clear_checkbox_id)s">%(clear_checkbox_label)s</label>'
     url_markup_template = '<a target="_blank" href="{0}">{1}</a>'
 
@@ -101,7 +101,6 @@ class MyFileInput(ClearableFileInput):
                 substitutions['clear_checkbox_id'] = conditional_escape(checkbox_id)
                 substitutions['clear'] = CheckboxInput(attrs={'onclick':'if(confirm("Seguro que desea quitar este archivo?")){  $("form").submit().submit() } else return false;' } ).render(checkbox_name, False, attrs={'id': checkbox_id, 'style':'display:none'})
                 substitutions['clear_template'] = self.template_with_clear % substitutions
-
 
         return mark_safe(template % substitutions)
 
@@ -134,7 +133,7 @@ class CursoForm(forms.ModelForm):
     class Meta:
         model = Cursos
         fields = ('descripcion','institucion','formador1','formador2', 'estudiantes',)
-        widgets = {'estudiantes': forms.CheckboxSelectMultiple(attrs={'size':'10'})}
+        widgets = {'estudiantes': forms.CheckboxSelectMultiple()}
 
 class CursoMForm(forms.ModelForm):
     

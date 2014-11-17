@@ -33,44 +33,36 @@
 
 {% block titulo_contenido %}Actividades y Asistencia{% endblock %}
 
-{% block titulo_panel %}<i class="fa fa-lightbulb-o"></i> Actividades y Asistencia{% endblock %}
+{% block titulo_panel %}<i class="fa fa-lightbulb-o"></i> Actividades{% endblock %}
 {% block contenido_panel %}
 
-<form class="form-horizontal"  enctype="multipart/form-data" method="post">{% csrf_token %}
-    <table class="table table-hover">
-                <tr>
-                    <td >Estudiante </td>    
-                    <td >Act 1</td>
-                    <td >Act 2</td>
-                    <td >Act 3</td>
-                    <td >Act 4</td>
-                    <td >Act 5</td>
-                    <td >Act 6</td>
-                    <td >Act 7</td>
-                    <td >Act 8</td>
-                    <td >Act 9</td>
-                    <td >Act 10</td>
-                </tr>
-                {% for estudiante in estudiante_list %}
-                <tr>
-                    <td >{{estudiante.nombre1}} {{estudiante.apellido1}} </td>    
-                    <td >{{form.actividad1}}{{% bootstrap_field form.actividad1 %}</td>
-                    <td >{{form.actividad2}}</td>
-                    <td >{{form.actividad3}}</td>
-                    <td >{{form.actividad4}}</td>
-                    <td >{{form.actividad5}}</td>
-                    <td >{{form.actividad6}}</td>
-                    <td >{{form.actividad7}}</td>
-                    <td >{{form.actividad8}}</td>
-                    <td >{{form.actividad9}}</td>
-                    <td >{{form.actividad10}}</td>
-                </tr>
-                {% endfor%}
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3" align="center">
+        <b>Actividades Actuales</b>
+    </div>
+    <div class="col-sm-6 col-sm-offset-3" align="center">
+            
+        {% for actividad in actividades %}
+            <div class="row" style="margin-bottom:5px">
+                <div class="col-xs-6">
+                    {{actividad}}
+                </div>
+                <div class="col-xs-6">
+                    <a href= "{% url 'asistenciaClases' id actividad.id %} " class="btn btn-xs btn-inverse" >Asistencia</a>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-xs-12">No hay actividades definidas para este curso.</div>
+        {% endfor %}
+    </div>
+</div>
 
+<form class="form-horizontal" method="post">{% csrf_token %}
+    {% bootstrap_form form layout="horizontal" %}
 
-    </table>
+    <br>
 
-    <button class="btn btn-lg btn-primary pull-right" type="submit">Finalizar </button>
-    
-    </form>
+    <center><button name = "boton" class="btn btn-inverse m-r-5" type="submit" value ="0">Programar <i class="fa fa-angle-right"></i></center>
+    <br><br>
+</form>
 {% endblock %}
