@@ -792,10 +792,13 @@ def subirsoportes(request):
         
         if form.is_valid():
             obj = form.save(commit=False)
-            obj.clase = clase
-            obj.save()
+            #soporte.clase = clase
+            soporteclases.archivo = obj.archivo
+            soporteclases.save()
             
             ide = "?v="+str(clase.id)
+
+            form = DocumentosSoporteForm(instance=soporteclases)
 
             return render(request, 'diplomado_soportes.html', {
             'form': form,
@@ -836,6 +839,8 @@ def subirsoportesacompanamiento(request):
             obj = form.save(commit=False)
             obj.acompanamiento = acompanamiento
             obj.save()
+
+            form = DocumentosSoporteAcompanamientoForm(instance=soporteclases)
             
             return render(request, 'cronograma_soportes.html', {
                 'form': form,
