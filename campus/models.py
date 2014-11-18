@@ -316,6 +316,8 @@ class Actividad(models.Model):
     def __unicode__(self):
         return (u"%s (%s)"%(self.nombre, self.fecha)).strip() or "-"
 
+
+
 class AcompanamientoInSitus(models.Model):
 
     
@@ -333,6 +335,15 @@ class AcompanamientoInSitus(models.Model):
     def save(self, *args, **kwargs):
         super(AcompanamientoInSitus,self).save(*args, **kwargs)
         SoporteAcompanamiento.objects.create(acompanamiento=self)
+
+class ActividadAcompanamiento(models.Model):
+    clase = models.ForeignKey(AcompanamientoInSitus)
+    nombre = models.CharField(max_length=155, blank=False, null=False)
+    fecha = models.DateField()
+    estudiantes = models.ManyToManyField(Estudiante, blank=True)
+
+    def __unicode__(self):
+        return (u"%s (%s)"%(self.nombre, self.fecha)).strip() or "-"
 
 """
 class Asistencia(models.Model):

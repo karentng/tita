@@ -1,7 +1,7 @@
 #encoding: utf-8
 from django.shortcuts import render
 from cronograma.forms import *
-from campus.forms import ActividadForm, AsistenciaForm, ActividadAsistenciaForm
+from campus.forms import *
 from campus.models import Clases, AcompanamientoInSitus, Estudiante, Cursos, Actividad
 import json
 from django.shortcuts import redirect, render, render_to_response
@@ -1133,7 +1133,7 @@ def asistenciaClases(request, idC, idA):
         form = ActividadAsistenciaForm(request.POST, instance=actividad, idCurso=idCurso)
         if form.is_valid():
             obj = form.save()
-            return redirect('asistenciaClases', idC, idA)
+            return redirect('actividad', idC)
 
     else:        
         form = ActividadAsistenciaForm(idCurso=idCurso, instance=actividad)
@@ -1141,44 +1141,69 @@ def asistenciaClases(request, idC, idA):
     return render(request, 'asistenciaClases.html', {
         'clase':clase.id,
         'form': form,
-        'idC': idC
+        'idC': idC,
+         'user_group': user_group(request),
+    })
+
+def asistenciaClases2(request, idC, idA):
+    clase = get_object_or_404(AcompanamientoInSitus, id=idC)
+    actividad = Actividad.objects.get(id=idA)
+    idCurso = clase.curso
+
+    if request.method == 'POST':
+        form = ActividadAsistenciaAcompanamientoForm(request.POST, instance=actividad, idCurso=idCurso)
+        if form.is_valid():
+            obj = form.save()
+            return redirect('actividad_acompanamiento', idC)
+
+    else:        
+        form = ActividadAsistenciaAcompanamientoForm(idCurso=idCurso, instance=actividad)
+
+    return render(request, 'asistenciaclases2.html', {
+        'clase':clase.id,
+        'form': form,
+        'idC': idC,
+        'user_group': user_group(request),
     })
 
 def actividadacompanamiento(request, id):
-    #
     clase = get_object_or_404(AcompanamientoInSitus, id=id)
+    print "--------"
     curso = clase.curso
+    actividades = ActividadAcompanamiento.objects.filter(clase=clase)
     estudiante_list = curso.estudiantes.all()
 
     grupo = user_group(request)
     if grupo == None:
-        return redirect('cronograma_acompanamiento_soportes')
+        return redirect('cronograma_diplomado_soportes')
 
     if request.method == 'POST':
         
-        form = ActividadForm(request.POST)
+        form = ActividadAcompanamientoForm(request.POST)
         
         if form.is_valid():
             obj = form.save(commit=False)
             obj.clase = clase
             obj.save()
+            obj.estudiantes = curso.estudiantes.all()
+            obj.save()
             
-            return redirect('actividades.html')
+            return redirect('actividad_acompanamiento', id)
+        else:
+            print "aaaaaasss"
 
     else:        
+        form = ActividadAcompanamientoForm()
 
-        form = ActividadForm()
-
-    return render(request, 'actividadesyasistencia.html', {
+    return render(request, 'actividadacompanamiento.html', {
         'clase':clase.id,
+        'id': id,
         'curso': curso.id,
         'form': form,
         'user_group': user_group(request),
         'opcion_menu': 5,
-        'estudiante_list':estudiante_list
-
-        
-    })
+        'estudiante_list':estudiante_list,
+        'actividades': actividades})
 
 def cancelar_clase_acompanamiento(request, id):
     grupo = user_group(request)

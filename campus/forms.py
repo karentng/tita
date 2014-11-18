@@ -48,6 +48,30 @@ class ActividadForm(forms.ModelForm):
             'fecha' : MyDateWidget()
         }
 
+class ActividadAcompanamientoForm(forms.ModelForm):
+    class Meta:
+        model = ActividadAcompanamiento
+        exclude = ('clase','estudiantes')
+        '''widgets = {'actividad1': forms.CheckboxSelectMultiple(),
+                   'actividad2': forms.CheckboxSelectMultiple()}'''
+        widgets = {
+            # 'fecha_nacimiento': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
+            'fecha' : MyDateWidget()
+        }
+
+class ActividadAsistenciaAcompanamientoForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        idCurso = kwargs.pop('idCurso')
+        super(ActividadAsistenciaAcompanamientoForm, self).__init__(*args, **kwargs)
+        self.fields['estudiantes'].queryset = idCurso.estudiantes.all()
+
+    class Meta:
+        model = ActividadAcompanamiento
+        fields = ('estudiantes',)
+        widgets = {
+            'estudiantes': forms.CheckboxSelectMultiple()
+        }
+
         
 
     '''def __init__(self, *args, **kwargs):

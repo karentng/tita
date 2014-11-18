@@ -27,7 +27,7 @@
 {% block miga_pan %}
     <li><a href="{% url 'home' %}">Inicio</a></li>
     <li><a href="{% url 'cronograma_diplomado' %}">Programacion acompañamiento</a></li>
-    <li><a href="{% url 'cronograma_diplomado_soportes' %}?v={{clase}}">Panel de Control Formadores</a></li>
+    <li><a href="{% url 'cronograma_acompanamiento_soportes' %}?v={{clase}}">Panel de Control Formadores</a></li>
     <li class="active">Actividades</li>
 {% endblock %}
 
@@ -48,7 +48,7 @@
                     {{actividad}}
                 </div>
                 <div class="col-xs-6">
-                    <a href= "{% url 'asistenciaClases' id actividad.id %} " class="btn btn-xs btn-inverse" >Calificar</a>
+                    <a href= "{% url 'asistenciaClases2' id actividad.id %} " class="btn btn-xs btn-inverse" >Calificar</a>
                 </div>
             </div>
             {% empty %}
