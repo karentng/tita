@@ -1,0 +1,89 @@
+[
+{
+  "pk": 1, 
+  "model": "auth.group", 
+  "fields": {
+    "name": "Coordinador", 
+    "permissions": [
+      202, 
+      203, 
+      204, 
+      79, 
+      80, 
+      81, 
+      82, 
+      83, 
+      84, 
+      199, 
+      200, 
+      201, 
+      196, 
+      197, 
+      198, 
+      70, 
+      71, 
+      72, 
+      64, 
+      65, 
+      66, 
+      61, 
+      62, 
+      63, 
+      136, 
+      137, 
+      138, 
+      205, 
+      206, 
+      207
+    ]
+  }
+},
+{
+  "pk": 2, 
+  "model": "auth.group", 
+  "fields": {
+    "name": "Formador", 
+    "permissions": [
+      82, 
+      83, 
+      84, 
+      136, 
+      137, 
+      138, 
+      205, 
+      206, 
+      207
+    ]
+  }
+},
+{
+  "pk": 3, 
+  "model": "auth.group", 
+  "fields": {
+    "name": "Alcaldia", 
+    "permissions": []
+  }
+},
+{
+  "pk": 6, 
+  "model": "auth.user", 
+  "fields": {
+    "username": "campusadmin", 
+    "first_name": "campusadmin", 
+    "last_name": "campusadmin", 
+    "is_active": true, 
+    "is_superuser": false, 
+    "is_staff": true, 
+    "last_login": "2014-11-18T16:08:04.874", 
+    "groups": [], 
+    "user_permissions": [
+      10, 
+      11, 
+      12
+    ], 
+    "password": "pbkdf2_sha256$12000$y9WqzpdGfj8I$GFj9wCNJHN8rFjPvaQbqoGBsdA0a9LEeL+kcGY7sUww=", 
+    "email": "", 
+    "date_joined": "2014-11-18T16:06:43"
+  }
+}
+]
