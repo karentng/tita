@@ -4,6 +4,7 @@ from django.forms.models import inlineformset_factory
 from campus.models import *
 import os.path
 from django.db.models import Q
+from convocat.forms import MyDateWidget
 
 class NoModificableFileInput(forms.widgets.ClearableFileInput):
     template_with_initial = '%(initial)s'
@@ -19,7 +20,7 @@ class AsistenciaForm(forms.ModelForm):
         model = Clases
         fields = ('asistentes','observacion')
         #ModelMultipleChoiceField(Numbers.objects.all(), required=True, widget=forms.CheckboxSelectMultiple(), label='Select No')
-        widgets = {'asistentes': forms.CheckboxSelectMultiple(),
+        widgets = {'asistentes': forms.CheckboxSelectMultiple(attrs={"checked":""}),
                    'observacion': forms.Textarea(attrs={'rows': 4})}
 
     
@@ -39,9 +40,37 @@ SoportesFormset = inlineformset_factory(Clase, SoporteClase, form=SoporteClaseFo
 class ActividadForm(forms.ModelForm):
     class Meta:
         model = Actividad
-        exclude = ('clase','estudiante',)
+        exclude = ('clase','estudiantes')
         '''widgets = {'actividad1': forms.CheckboxSelectMultiple(),
                    'actividad2': forms.CheckboxSelectMultiple()}'''
+        widgets = {
+            # 'fecha_nacimiento': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
+            'fecha' : MyDateWidget()
+        }
+
+class ActividadAcompanamientoForm(forms.ModelForm):
+    class Meta:
+        model = ActividadAcompanamiento
+        exclude = ('clase','estudiantes')
+        '''widgets = {'actividad1': forms.CheckboxSelectMultiple(),
+                   'actividad2': forms.CheckboxSelectMultiple()}'''
+        widgets = {
+            # 'fecha_nacimiento': DateTimePicker(options={'format':'YYYY-MM-DD',  'pickTime':False}),
+            'fecha' : MyDateWidget()
+        }
+
+class ActividadAsistenciaAcompanamientoForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        idCurso = kwargs.pop('idCurso')
+        super(ActividadAsistenciaAcompanamientoForm, self).__init__(*args, **kwargs)
+        self.fields['estudiantes'].queryset = idCurso.estudiantes.all()
+
+    class Meta:
+        model = ActividadAcompanamiento
+        fields = ('estudiantes',)
+        widgets = {
+            'estudiantes': forms.CheckboxSelectMultiple()
+        }
 
         
 
@@ -51,3 +80,15 @@ class ActividadForm(forms.ModelForm):
         self.fields['estudiantes'].queryset = actividad.clase.curso.estudiantes.all()
 
         '''
+class ActividadAsistenciaForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        idCurso = kwargs.pop('idCurso')
+        super(ActividadAsistenciaForm, self).__init__(*args, **kwargs)
+        self.fields['estudiantes'].queryset = idCurso.estudiantes.all()
+
+    class Meta:
+        model = Actividad
+        fields = ('estudiantes',)
+        widgets = {
+            'estudiantes': forms.CheckboxSelectMultiple()
+        }

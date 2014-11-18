@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block titulo %} Asistencia {% endblock %}
+
+{% block menu %}
+    {% include "menus/publico.html" with opcion_menu=3 %}
+{% endblock %}
+
+{% block css %}
+    <link href="{{STATIC_URL}}plugins/bootstrap-wizard/css/bwizard.min.css" rel="stylesheet" />
+    {{form.media}} {# agrega los js y css necesarios para el bootstrap3 datetimepicker #}
+{% endblock %}
+
+{% block js %}
+    {% if solo_lectura%}
+    <script>
+        $(function(){
+            $("select").attr("disabled", "disabled");
+            $("input").attr("readonly", "readonly");
+        });
+    </script>
+
+    {% endif %}
+{% endblock %}
+
+{% block miga_pan %}
+    <li><a href="{% url 'home' %}">Inicio</a></li>
+    <li><a href="{% url 'cronograma_diplomado' %}">Programacion acompañamiento</a></li>
+    <li><a href="{% url 'cronograma_diplomado_soportes' %}?v={{clase}}">Panel de Control Formadores</a></li>
+    <li><a href="{% url 'actividad' idC %}">Actividad</a></li>
+    <li class="active">Actividades</li>
+{% endblock %}
+
+{% block titulo_contenido %}Asistencia{% endblock %}
+
+{% block titulo_panel %}<i class="fa fa-lightbulb-o"></i> Asistencia{% endblock %}
+{% block contenido_panel %}
+
+    <form class="form-horizontal" method="post">{% csrf_token %}
+        {% bootstrap_form form layout="horizontal" %}
+
+        <br>
+
+        <center>
+            
+            <button name = "boton" class="btn btn-inverse m-r-5" type="submit" value ="0">Registrar </button>
+        </center>
+        <br><br>
+    </form>
+{% endblock %}
