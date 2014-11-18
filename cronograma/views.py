@@ -50,8 +50,9 @@ def cronograma(request):
 
             repetir_hasta = datetime.datetime.now()
 
-            contador = 1                
-            if 'repetir-'in post: 
+            contador = 1
+            repetirfecha = request.POST['repetirfecha']                
+            if 'repetir-'in post and repetirfecha != "":
 
                 global repetir_hasta
                 repetir_fecha = request.POST['repetirfecha']
@@ -400,9 +401,9 @@ def diplomado(request):
 
             repetir_hasta = datetime.datetime.now()
 
-            contador = 1     
-                
-            if 'repetir-'in post: 
+            contador = 1 
+            repetirfecha = request.POST['repetirfecha']                
+            if 'repetir-'in post and repetirfecha != "":    
 
                 global repetir_hasta
                 repetir_fecha = request.POST['repetirfecha']
