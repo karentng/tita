@@ -5,6 +5,7 @@ from datetimewidget.widgets import DateTimeWidget
 from datetimewidget.widgets import DateWidget
 from django.forms import ModelForm, Textarea, HiddenInput, TextInput, Select, CheckboxSelectMultiple, FileInput, ClearableFileInput
 from django.db.models import Q
+from django.contrib.auth.models import User
 
 
 
@@ -148,8 +149,8 @@ class FormadorForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(FormadorForm, self).__init__(*args, **kwargs)
-        self.fields['usuario'].queryset = self.fields['usuario'].queryset.exclude(formador = Formador.objects.all())
-
+        #self.fields['usuario'].queryset = self.fields['usuario'].queryset.exclude(formador = Formador.objects.all())
+        self.fields['usuario'].queryset = self.fields['usuario'].queryset.filter(id__in = User.objects.filter(groups__id=2)).exclude(formador = Formador.objects.all())
     class Meta:
         model = Formador
         fields = ('nombre1','apellido1','jornada','tutor','usuario',)
