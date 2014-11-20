@@ -52,6 +52,18 @@
     <!-- ================== END BASE CSS STYLE ================== -->
 </head>
 <body class="in">
+
+    {% if request.GET.x %}
+        <div class="alert alert-warning fade in m-b-15">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <strong>
+            <center>
+            Lo sentimos, el usuario aún no ha sido asociado a ningún curso. Por favor intente más tarde.
+        </center>
+    </strong>
+        </div>
+    {% endif %}
+
     <!-- begin #page-loader -->
     {#<div id="page-loader" class="fade in"><span class="spinner"></span></div>#}
     <!-- end #page-loader -->

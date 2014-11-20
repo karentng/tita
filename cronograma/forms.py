@@ -74,7 +74,7 @@ from django.forms import CheckboxInput
 import os.path
 class MyFileInput(ClearableFileInput):
     
-    clear_checkbox_label = 'Eliminar' #ugettext_lazy('Clear')
+    clear_checkbox_label = '' #ugettext_lazy('Clear')
     template_with_clear = '%(clear)s <label class="text-danger" style="cursor:pointer" for="%(clear_checkbox_id)s">%(clear_checkbox_label)s</label>'
     url_markup_template = '<a target="_blank" href="{0}">{1}</a>'
 

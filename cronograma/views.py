@@ -14,8 +14,10 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_list_or_404, get_object_or_404
 from django.db.models import Q
 
+
 def cronograma(request):
     # if this is a POST request we need to process the form data
+    eventos = AcompanamientoInSitus.objects.all()
     grupo = user_group(request)
 
     if grupo == None:
@@ -23,17 +25,31 @@ def cronograma(request):
 
     if grupo == "Formador":
         username = request.user
-        formador = get_object_or_404(Formador, usuario=username.id)
-
         try:
-            curso = get_object_or_404(Cursos, Q(formador1=formador.id) | Q(formador2=formador.id))
-            eventos = AcompanamientoInSitus.objects.filter(curso=curso)
+            formador = Formador.objects.get(usuario=username.id)
+        except Formador.DoesNotExist:
+            formador = None 
 
-        except Cursos.DoesNotExist:
-            pass
-        #curso = Cursos.objects.get(Q(formador1=formador.id) | Q(formador2=formador.id))
-        
-        #eventos = AcompanamientoInSitus.objects.filter(curso=curso)
+        if formador == None:
+            print "El formador no existe"
+            return redirect('home')
+        else:
+
+            try:
+                #curso = get_object_or_404(Cursos, Q(formador1=formador.id) | Q(formador2=formador.id))
+                curso = Cursos.objects.get(Q(formador1=formador.id) | Q(formador2=formador.id))
+                #eventos = AcompanamientoInSitus.objects.filter(curso=curso)
+
+            except Cursos.DoesNotExist:
+                curso = None
+            
+            if curso == None:
+                print "El formador no está asociado a ningun curso de acompanamiento"
+                mensaje = "/?x=1"
+                return redirect('..%s' %mensaje)
+
+            else:
+                eventos = AcompanamientoInSitus.objects.filter(curso=curso)
 
     if grupo == "Coordinador":
         eventos = AcompanamientoInSitus.objects.all()
@@ -327,7 +343,7 @@ def cronograma(request):
         cursovar = Cursos.objects.get(id=i.curso.id)
         cursos = str(cursovar.descripcion)
 
-        print "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+cursos
+        #print "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+cursos
 
         events.append({
             'id': i.id,
@@ -368,22 +384,50 @@ def menor10(val):
 
 def diplomado(request):
     # if this is a POST request we need to process the form data
+    eventos = Clases.objects.all()
     grupo = user_group(request)
     if grupo == None:
         return redirect('home')
 
     if grupo == "Formador":
         username = request.user
-        formador = get_object_or_404(Formador, usuario=username.id)
         try:
-            curso = get_object_or_404(Cursos, Q(formador1=formador.id) | Q(formador2=formador.id))
-            eventos = Clases.objects.filter(curso=curso)
+            formador = Formador.objects.get(usuario=username.id)
+            #formador = get_object_or_404(Formador, usuario=username.id)
+        except Formador.DoesNotExist:
+            formador = None 
+
+        if formador == None:
+            print "El formador no existe"
+            return redirect('home')
+        else:
+
+            try:
+                curso = Cursos.objects.get(Q(formador1=formador.id) | Q(formador2=formador.id))
+               
+            except Cursos.DoesNotExist:
+                curso = None
+            
+            if curso == None:
+                print "El formador no está asociado a ningun curso de diplomado"
+                mensaje = "/?x=1"
+                return redirect('..%s' %mensaje)
+            else:
+                eventos = Clases.objects.filter(curso=curso)
+        '''
+
+        try:
+            #curso = get_object_or_404(Cursos, Q(formador1=formador.id) | Q(formador2=formador.id))
+            curso = Cursos.objects.get(Q(formador1=formador.id) | Q(formador2=formador.id))
+            #eventos = AcompanamientoInSitus.objects.filter(curso=curso)
 
         except Cursos.DoesNotExist:
-            pass
-        #curso = Cursos.objects.get(Q(formador1=formador.id) | Q(formador2=formador.id))
+            curso = None
         
+        if curso == None:
+            print "holamundo, no esta asociado a nada lalalalalla!!!!!!!!!!!!!!!!!!!"
         
+        '''
 
     if grupo == "Coordinador":
         eventos = Clases.objects.all()
@@ -802,6 +846,10 @@ def subirsoportes(request):
 
             form = DocumentosSoporteForm(instance=soporteclases)
 
+            x = "?v="+str(clase.id)
+
+            return HttpResponseRedirect('cronograma_diplomado_soportes%s' %x)
+            '''
             return render(request, 'diplomado_soportes.html', {
             'form': form,
             'user_group': user_group(request),
@@ -809,7 +857,7 @@ def subirsoportes(request):
             'clase' : clase.id,
             'curso' : curso.id,
             'x':1,
-        })
+        })'''
     else:   
 
         form = DocumentosSoporteForm(instance=soporteclases)
@@ -843,7 +891,12 @@ def subirsoportesacompanamiento(request):
             obj.save()
 
             form = DocumentosSoporteAcompanamientoForm(instance=soporteclases)
+
+            x = "?v="+str(acompanamiento.id)
+
+            return HttpResponseRedirect('cronograma_acompanamiento_soportes%s' %x)
             
+            '''
             return render(request, 'cronograma_soportes.html', {
                 'form': form,
                 'user_group': user_group(request),
@@ -852,6 +905,7 @@ def subirsoportesacompanamiento(request):
                 'curso' : curso.id,
                 'x':1,
             })
+            '''
 
     else:
         
