@@ -1144,6 +1144,7 @@ def asistenciaClases(request, idC, idA):
         'form': form,
         'idC': idC,
          'user_group': user_group(request),
+         'actividad': actividad
     })
 
 def asistenciaClases2(request, idC, idA):

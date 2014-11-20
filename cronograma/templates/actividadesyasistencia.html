@@ -38,9 +38,9 @@
 
 <div class="row">
     <div class="col-sm-6 col-sm-offset-3" align="center">
-        <b>Actividades Actuales</b>
+        <b>Actividades Actuales del Curso</b>
     </div>
-    <div class="col-sm-6 col-sm-offset-3" align="center">
+    <div class="col-sm-6 col-sm-offset-3" align="center" style="margin-top:10px">
             
         {% for actividad in actividades %}
             <div class="row" style="margin-bottom:5px">
@@ -48,7 +48,7 @@
                     {{actividad}}
                 </div>
                 <div class="col-xs-6">
-                    <a href= "{% url 'asistenciaClases' id actividad.id %} " class="btn btn-xs btn-inverse" >Calificar</a>
+                    <a href= "{% url 'asistenciaClases' id actividad.id %} " class="btn btn-xs btn-inverse" >Calificar Asistencia</a>
                 </div>
             </div>
             {% empty %}

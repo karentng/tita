@@ -46,18 +46,26 @@
             Uno de los formadores seleccionados ya fue asignado a otro curso.
         </div>
 {% endif %}
-
-                               
-      
-
-                <form class="form-horizontal" method="post">{% csrf_token %}
-                    {% bootstrap_form form layout="horizontal" %}
-                <a href= "{% url 'gestion_cursos' %}"><button name = "boton" id = "1" class="btn btn-lg btn-warning pull-right" type="submit" value="0">Modificar</button></a>         
-                <a href= "{% url 'gestion_cursos' %}"><button name = "boton" id = "1" onclick=mensajeConfirmacion() class="btn btn-lg btn-danger pull-right" type="submit" value="1">Eliminar</button></a>
-                <a href= "{% url 'gestion_cursos' %} " class="btn btn-lg btn-primary pull-right" >Volver</a>
-                </form>
-                    
-                
-                
-
+    <form class="form-horizontal" method="post">{% csrf_token %}
+        {% bootstrap_field form.descripcion layout="horizontal" %}
+        {% bootstrap_field form.institucion layout="horizontal" %}
+        {% bootstrap_field form.formador1 layout="horizontal" %}
+        {% bootstrap_field form.formador2 layout="horizontal" %}
+        <div style="width:auto;height:200px;overflow-y:scroll;overflow-x:hidden; margin-bottom:10px">
+            {% bootstrap_field form.estudiantes layout="horizontal" %}
+        </div>
+            
+        
+        <a href= "{% url 'gestion_cursos' %}">
+            <button name = "boton" id = "1" class="btn btn-lg btn-warning pull-right" type="submit" value="0">
+                Modificar
+            </button>
+        </a>
+        <a href= "{% url 'gestion_cursos' %}">
+            <button name = "boton" id = "1" onclick=mensajeConfirmacion() class="btn btn-lg btn-danger pull-right" type="submit" value="1">
+                Eliminar
+            </button>
+        </a>
+        <a href= "{% url 'gestion_cursos' %} " class="btn btn-lg btn-primary pull-right" >Volver</a>
+    </form>
 {% endblock %}
