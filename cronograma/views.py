@@ -3,6 +3,7 @@ from django.shortcuts import render
 from cronograma.forms import *
 from campus.forms import *
 from campus.models import Clases, AcompanamientoInSitus, Estudiante, Cursos, Actividad
+from estudiante.models import InfoLaboral
 import json
 from django.shortcuts import redirect, render, render_to_response
 from datetime import datetime, date, timedelta
@@ -868,6 +869,9 @@ def subirsoportesacompanamiento(request):
 def curso(request):
 
     grupo = user_group(request)
+    est = Estudiante.objects.all()
+    infos = InfoLaboral.objects.filter(estudiante__in=est)
+
     if grupo == None:
         return redirect('home')
 
@@ -885,6 +889,7 @@ def curso(request):
         'form': form,
         'user_group': user_group(request),
         'opcion_menu': 5,
+        'infos': infos
     })
 
 def formador(request):

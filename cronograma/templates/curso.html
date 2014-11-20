@@ -63,8 +63,18 @@
         {% bootstrap_field form.institucion layout="horizontal" %}
         {% bootstrap_field form.formador1 layout="horizontal" %}
         {% bootstrap_field form.formador2 layout="horizontal" %}
+        
         <div style="width:auto;height:200px;overflow-y:scroll;overflow-x:hidden; margin-bottom:10px">
             {% bootstrap_field form.estudiantes layout="horizontal" %}
+        </div>
+
+        <div class="row">
+            <div class="col-xs-6">
+                <b>Información de las Jornadas e Instituciones por Estudiantes</b><br>
+                {% for info in infos %}
+                    {{forloop.counter}}) {{info.estudiante}} ({{info.get_sede_display}} - {{info.get_jornada_display}})<br>
+                {% endfor %}
+            </div>
         </div>
 
         {% if solo_lectura %}
