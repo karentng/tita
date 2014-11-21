@@ -148,7 +148,7 @@ class Cursos(models.Model):
     descripcion = models.CharField(max_length=255, verbose_name=u'Nombre')
     institucion = models.CharField(choices=SEDES, max_length=200, verbose_name="institución")
     formador1 = models.ForeignKey(Formador, related_name="formador1",verbose_name="formador no. 1")
-    formador2 = models.ForeignKey(Formador, related_name="formador2",verbose_name="formador no. 2")
+    formador2 = models.ForeignKey(Formador, related_name="formador2",verbose_name="formador no. 2", blank=True, null=True)
     estudiantes = models.ManyToManyField(Estudiante, blank=True, verbose_name='Estudiantes')
 
     def __unicode__(self):
