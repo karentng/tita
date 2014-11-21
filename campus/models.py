@@ -305,10 +305,12 @@ class Clases(models.Model):
     estado = models.BooleanField(default=True)
     observacion = models.CharField( max_length=1500, null=True, blank=True, verbose_name="observaciones")
 
-
+    '''
     def save(self, *args, **kwargs):
         super(Clases,self).save(*args, **kwargs)
         SoporteClases.objects.create(clase=self)
+    '''
+    
 
 class Actividad(models.Model):
     clase = models.ForeignKey(Clases)
@@ -334,10 +336,11 @@ class AcompanamientoInSitus(models.Model):
     descripcion = models.CharField( max_length=1000, null=True, blank=True, verbose_name="descripción")
     estado = models.BooleanField(default=True)
     observacion = models.CharField( max_length=1500, null=True, blank=True, verbose_name="observaciones")
-
+    '''
     def save(self, *args, **kwargs):
         super(AcompanamientoInSitus,self).save(*args, **kwargs)
         SoporteAcompanamiento.objects.create(acompanamiento=self)
+    '''
 
 class ActividadAcompanamiento(models.Model):
     clase = models.ForeignKey(AcompanamientoInSitus)

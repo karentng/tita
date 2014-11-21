@@ -179,7 +179,9 @@ def cronograma(request):
                         objetoi.duracion=objeto.duracion
                         objetoi.descripcion=objeto.descripcion
                         
-                        objetoi.save()
+                        objetoi.save() 
+                        SoporteAcompanamiento.objects.create(acompanamiento=objetoi)
+
                                                    
 
                 if repetir == "2":
@@ -273,6 +275,7 @@ def cronograma(request):
                         objetoi.descripcion=objeto.descripcion
                         
                         objetoi.save()
+                        SoporteAcompanamiento.objects.create(acompanamiento=objetoi)
                 
                 if repetir == "3":
 
@@ -313,11 +316,15 @@ def cronograma(request):
                         objetoi.descripcion=objeto.descripcion
                         
                         objetoi.save()
+                        SoporteAcompanamiento.objects.create(acompanamiento=objetoi)
+
 
             
             objeto.nombre=(objeto.nombre)+" 1"
             #objeto.tipo = "2"
             objeto.save()
+            SoporteAcompanamiento.objects.create(acompanamiento=objeto)
+
 
             return redirect('cronograma_acompanamiento')
     else:
@@ -384,8 +391,6 @@ def menor10(val):
     if val < 10:
         return "0"+str(val)
     return str(val)
-
-
 
 def diplomado(request):
     # if this is a POST request we need to process the form data
@@ -565,6 +570,7 @@ def diplomado(request):
                         objetoi.descripcion=objeto.descripcion
                         #objetoi.tipo=objeto.tipo
                         objetoi.save()
+                        SoporteClases.objects.create(clase=objetoi)
                                                    
 
                 if repetir == "2":
@@ -659,6 +665,7 @@ def diplomado(request):
                         objetoi.descripcion=objeto.descripcion
                         #objetoi.tipo=objeto.tipo
                         objetoi.save()
+                        SoporteClases.objects.create(clase=objetoi)
                 
                 if repetir == "3":
 
@@ -702,11 +709,14 @@ def diplomado(request):
                         objetoi.descripcion=objeto.descripcion
                         #objetoi.tipo=objeto.tipo
                         objetoi.save()
+                        SoporteClases.objects.create(clase=objetoi)
 
 
             objeto.nombre = str(objeto.nombre) + " 1"
             #objeto.tipo = "1"
             objeto.save()
+            SoporteClases.objects.create(clase=objeto)
+           
             return redirect('cronograma_diplomado')
     else:
         form = EventosDiplomadoForm(initial={'nombre': 'Sesion'}) 
@@ -752,7 +762,6 @@ def diplomado(request):
         'user_group': user_group(request),
         'opcion_menu': 3,
     })
-
 
 def diplomado_modificar(request):
     grupo = user_group(request)
@@ -848,9 +857,11 @@ def subirsoportes(request):
         
         if form.is_valid():
             obj = form.save(commit=False)
+            #obj.clase = Clases.objects.get(clase=clase.id)
+            obj.save()
             #soporte.clase = clase
-            soporteclases.archivo = obj.archivo
-            soporteclases.save()
+            #soporteclases.archivo = obj.archivo
+            #soporteclases.save()
             
             ide = "?v="+str(clase.id)
 
@@ -1088,15 +1099,6 @@ def lista_acompanamiento(request, id):
     return render(request, 'lista_estudiantes.html', {'estudiante_list': estudiante_list,  'user_group': user_group(request),
         'opcion_menu': 5, 'curso':cursonombre, 'institucion':institucion, 'clase':clasenombre, 'clase_fecha':clasefecha, 'formador1':formador1,'formador2':formador2},
         )
-'''
-def detalle_curso(request, id, limit=100):
-
-    curso = Cursos.objects.get(id=id)
-    estudiante_list = curso.estudiantes.all()
-    
-    return render(request, 'detalles_curso.html', { 'user_group': user_group(request),
-        'opcion_menu': 5, 'curso':curso, 'estudiante_list':estudiante_list},
-        )'''
 
 def detalle_curso(request, id):
 
