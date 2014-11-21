@@ -40,9 +40,12 @@ class InstitucionEducativa(models.Model):
 #Corresponde a los formadores de formadores
 class Formador(models.Model):    
     TUTORES=(
-    ('Tutor 1', 'Tutor 1: Juan Francisco Lopez'),
-    ('Tutor 2', 'Tutor 2: Roberto Rodriguez'),
-    ('Tutor 3', 'Tutor 3: Martha Quintero'),
+    ('Tutor 1', 'Tutor 1: ADRIANA MARIA VELEZ JONES'),
+    ('Tutor 2', 'Tutor 2: ROBERTO FERRO HERRERA'),
+    ('Tutor 3', 'Tutor 3: KARINA SANDOVAL ZAPATA'),
+    ('Tutor 4', 'Tutor 4: MAYRA MOSQUERA MORALES'),
+    ('Tutor 5', 'Tutor 5: DIANA FERNANDA JARAMILLO ESCOBAR'),
+
    )
 
     JORNADA=(
@@ -54,7 +57,7 @@ class Formador(models.Model):
     nombre1 = models.CharField( max_length=255, verbose_name='nombres')
     apellido1 = models.CharField( max_length=255, verbose_name='apellidos')
     jornada = models.CharField( max_length=255, choices=JORNADA)
-    tutor = models.CharField( max_length=255, choices=TUTORES)
+    tutor = models.CharField( max_length=255, choices=TUTORES, verbose_name='Mentor')
     #aspirante = models.ForeignKey(Aspirante, verbose_name='aspirante', null=True, blank=True)   
     usuario = models.ForeignKey(User)
 
