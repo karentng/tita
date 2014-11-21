@@ -40,11 +40,11 @@ class InstitucionEducativa(models.Model):
 #Corresponde a los formadores de formadores
 class Formador(models.Model):    
     TUTORES=(
-    ('Tutor 1', 'Tutor 1: ADRIANA MARIA VELEZ JONES'),
-    ('Tutor 2', 'Tutor 2: ROBERTO FERRO HERRERA'),
-    ('Tutor 3', 'Tutor 3: KARINA SANDOVAL ZAPATA'),
-    ('Tutor 4', 'Tutor 4: MAYRA MOSQUERA MORALES'),
-    ('Tutor 5', 'Tutor 5: DIANA FERNANDA JARAMILLO ESCOBAR'),
+    ('1', 'Mentor 1: ADRIANA MARIA VELEZ JONES'),
+    ('2', 'Mentor 2: ROBERTO FERRO HERRERA'),
+    ('3', 'Mentor 3: KARINA SANDOVAL ZAPATA'),
+    ('4', 'Mentor 4: MAYRA MOSQUERA MORALES'),
+    ('5', 'Mentor 5: DIANA FERNANDA JARAMILLO ESCOBAR'),
 
    )
 

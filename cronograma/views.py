@@ -37,7 +37,7 @@ def cronograma(request):
 
             try:
                 #curso = get_object_or_404(Cursos, Q(formador1=formador.id) | Q(formador2=formador.id))
-                curso = Cursos.objects.get(Q(formador1=formador.id) | Q(formador2=formador.id))
+                curso = Cursos.objects.filter(Q(formador1=formador.id) | Q(formador2=formador.id))
                 #eventos = AcompanamientoInSitus.objects.filter(curso=curso)
 
             except Cursos.DoesNotExist:
@@ -49,7 +49,12 @@ def cronograma(request):
                 return redirect('..%s' %mensaje)
 
             else:
-                eventos = AcompanamientoInSitus.objects.filter(curso=curso)
+                #eventos = AcompanamientoInSitus.objects.filter(curso=curso)
+                eventos = []
+                for i in curso:
+                    x = AcompanamientoInSitus.objects.filter(curso=i)
+                    for i in range(0,len(x)):
+                        eventos.append(x[i])
 
     if grupo == "Coordinador":
         eventos = AcompanamientoInSitus.objects.all()
@@ -403,7 +408,7 @@ def diplomado(request):
         else:
 
             try:
-                curso = Cursos.objects.get(Q(formador1=formador.id) | Q(formador2=formador.id))
+                curso = Cursos.objects.filter(Q(formador1=formador.id) | Q(formador2=formador.id))
                
             except Cursos.DoesNotExist:
                 curso = None
@@ -412,8 +417,13 @@ def diplomado(request):
                 print "El formador no está asociado a ningun curso de diplomado"
                 mensaje = "/?x=1"
                 return redirect('..%s' %mensaje)
+            
             else:
-                eventos = Clases.objects.filter(curso=curso)
+                eventos = []
+                for i in curso:
+                    x = Clases.objects.filter(curso=i)
+                    for i in range(0,len(x)):
+                        eventos.append(x[i])
         '''
 
         try:
@@ -1107,18 +1117,17 @@ def detalle_curso(request, id):
             form = CursoMForm(request.POST, instance=curso)
             if form.is_valid():
                 objeto = form.save()
-
+                '''
                 formador = Cursos.objects.all().exclude(id = curso.id)
                 for i in formador:
                     if objeto.formador1 == i.formador1 or objeto.formador2 == i.formador1 or objeto.formador2 == i.formador1 or objeto.formador2 == i.formador2 :
-                        print "hola mundo paila"
                         form = CursoMForm(instance=curso)
                         return render(request, 'detalles_curso.html', {
                             'form': form, 
                             'user_group': user_group(request),
                             'x': 1,
                         })
-            
+                '''
                 objeto.save()
 
                 return redirect('gestion_cursos')
