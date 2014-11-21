@@ -920,7 +920,7 @@ def subirsoportesacompanamiento(request):
         'curso' : curso.id,
     })
 
-def curso(request):
+def prev_add_curso(request):
 
     grupo = user_group(request)
     est = Estudiante.objects.all()
@@ -930,14 +930,49 @@ def curso(request):
         return redirect('home')
 
     if request.method == 'POST':
-        form = CursoForm(request.POST)
+        form = EstudiantesCurso(request.POST)
+        if form.is_valid():
+            jornada = form.cleaned_data['jornadas']
+            sede = form.cleaned_data['sedes']
+
+            response = redirect('add_curso')
+            response['Location'] += '?sede='+sede+'&jornada='+jornada
+            return response
+            #return redirect('gestion_cursos', sede, jornada)
+    else :
+        form = EstudiantesCurso()
+
+    return render(request, 'prev_curso.html', {
+        'form': form,
+        'user_group': user_group(request),
+        'opcion_menu': 5,
+        'infos': infos
+    })
+
+def curso(request):
+
+    sede = request.GET.get('sede')
+    jornada = request.GET.get('jornada')
+
+    if not sede or not jornada:
+        return redirect('prev_add_curso')
+
+    grupo = user_group(request)
+    est = Estudiante.objects.all()
+    infos = InfoLaboral.objects.filter(estudiante__in=est)
+
+    if grupo == None:
+        return redirect('home')
+
+    if request.method == 'POST':
+        form = CursoForm(request.POST, sede=sede, jornada=jornada)
         if form.is_valid():
             objeto = form.save()
             
 
-            return redirect('gestion_cursos')
+            return redirect('add_curso')
     else :
-        form = CursoForm()
+        form = CursoForm(sede=sede, jornada=jornada)
 
     return render(request, 'curso.html', {
         'form': form,

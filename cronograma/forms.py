@@ -6,6 +6,7 @@ from datetimewidget.widgets import DateWidget
 from django.forms import ModelForm, Textarea, HiddenInput, TextInput, Select, CheckboxSelectMultiple, FileInput, ClearableFileInput
 from django.db.models import Q
 from django.contrib.auth.models import User
+from estudiante.models import JORNADAS, SEDES, InfoLaboral
 
 
 
@@ -126,11 +127,17 @@ class DocumentosSoporteAcompanamientoForm(forms.ModelForm):
 
 class CursoForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
+        jornada = kwargs.pop('jornada', None)
+        sede = kwargs.pop('sede', None)
         super(CursoForm, self).__init__(*args, **kwargs)
-        
         self.fields['formador1'].queryset = self.fields['formador1'].queryset.exclude( Q(formador1 = Cursos.objects.all()) | Q( formador2 =  Cursos.objects.all()))
         self.fields['formador2'].queryset = self.fields['formador2'].queryset.exclude( Q(formador1 = Cursos.objects.all()) | Q( formador2 =  Cursos.objects.all()))
-
+        if sede and jornada :
+            estudiantes = InfoLaboral.objects.filter(sede=sede, jornada=jornada).values('estudiante')
+            ids = []
+            for est in estudiantes:
+                ids.append(est['estudiante'])
+            self.fields['estudiantes'].queryset = Estudiante.objects.filter(id__in=ids)#self.fields['estudiantes'].queryset.exclude( Q(formador1 = Cursos.objects.all()) | Q( formador2 =  Cursos.objects.all()))
     class Meta:
         model = Cursos
         fields = ('descripcion','institucion','formador1','formador2', 'estudiantes',)
@@ -155,4 +162,6 @@ class FormadorForm(forms.ModelForm):
         model = Formador
         fields = ('nombre1','apellido1','jornada','tutor','usuario',)
 
-        
+class EstudiantesCurso(forms.Form):
+    sedes = forms.ChoiceField(widget=forms.Select(), choices=SEDES)
+    jornadas = forms.ChoiceField(widget=forms.Select(), choices=JORNADAS)
