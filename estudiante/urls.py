@@ -14,4 +14,6 @@ urlpatterns = patterns('estudiante.views',
     url(r'^estudiante/acta_compromiso$',      'acta_compromiso', name="acta_compromisoDE"),
     url(r'^estudiante/imprimir_acta_compromiso$',      'imprimir_actaDE', name="imprimir_actaDE"),
     url(r'^estudiante/finalizar/(\d+)$',      'finalizar', name="finalizar_DE"),
+    url(r'^estudiante/numeroInscripcionEstudiante/(\d+)$',      'numeroInscripcionEstudiante', name="numeroInscripcionEstudiante"),
+    
 )
