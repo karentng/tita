@@ -7,6 +7,7 @@ from django.forms import ModelForm, Textarea, HiddenInput, TextInput, Select, Ch
 from django.db.models import Q
 from django.contrib.auth.models import User
 from estudiante.models import JORNADAS, SEDES, InfoLaboral
+from django_select2 import AutoModelSelect2Field, Select2MultipleWidget, Select2Widget
 
 
 
@@ -133,7 +134,7 @@ class CursoForm(forms.ModelForm):
         #self.fields['formador1'].queryset = self.fields['formador1'].queryset.exclude( Q(formador1 = Cursos.objects.all()) | Q( formador2 =  Cursos.objects.all()))
         #self.fields['formador2'].queryset = self.fields['formador2'].queryset.exclude( Q(formador1 = Cursos.objects.all()) | Q( formador2 =  Cursos.objects.all()))
         if sede and jornada :
-            estudiantes = InfoLaboral.objects.filter(sede=sede, jornada=jornada).values('estudiante')
+            estudiantes = InfoLaboral.objects.filter(sede__in=sede, jornada=jornada).values('estudiante')
             ids = []
             for est in estudiantes:
                 ids.append(est['estudiante'])
@@ -163,5 +164,5 @@ class FormadorForm(forms.ModelForm):
         fields = ('nombre1','apellido1','jornada','tutor','usuario',)
 
 class EstudiantesCurso(forms.Form):
-    sedes = forms.ChoiceField(widget=forms.Select(), choices=SEDES)
+    sedes = forms.MultipleChoiceField(widget=Select2MultipleWidget(), choices=SEDES)
     jornadas = forms.ChoiceField(widget=forms.Select(), choices=JORNADAS)

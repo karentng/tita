@@ -954,10 +954,13 @@ def prev_add_curso(request):
         form = EstudiantesCurso(request.POST)
         if form.is_valid():
             jornada = form.cleaned_data['jornadas']
-            sede = form.cleaned_data['sedes']
-
+            sds = form.cleaned_data['sedes']
+            sedes = "?sedes="
+            for sede in sds:
+                sedes+=sede+","
+            sedes = sedes[:-1]
             response = redirect('add_curso')
-            response['Location'] += '?sede='+sede+'&jornada='+jornada
+            response['Location'] += sedes+'&jornada='+jornada
             return response
             #return redirect('gestion_cursos', sede, jornada)
     else :
@@ -972,8 +975,9 @@ def prev_add_curso(request):
 
 def curso(request):
 
-    sede = request.GET.get('sede')
+    sede = request.GET.get('sedes')
     jornada = request.GET.get('jornada')
+    sede = sede.split(',');
 
     if not sede or not jornada:
         return redirect('prev_add_curso')
