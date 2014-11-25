@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-inverse" id="inscritos">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                </div>
+                <h4 class="panel-title">Maestros Estudiantes Inscritos</h4>
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table id="data-table" class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Nombres y Apellidos</th>
+                                <th>Cédula</th>
+                                <th>Institución Educativa</th>
+                                <th>Jornada</th>
+                                <th>Datos ME</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for estudiante in estudiantes %}
+                            <tr class="odd gradeX">
+                                <td>{{estudiante.item}}</td>
+                                <td>{{estudiante.nombre}}</td>
+                                <td>{{estudiante.cedula}}</td>
+                                <td>{{estudiante.institucion}}</td>
+                                <td>{{estudiante.jornada}}</td>
+                                <td>
+                                    <a href="{% url 'impresionME' estudiante.id %}" target="_blank"><button class="btn btn-primary">Detalles</button></a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

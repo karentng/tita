@@ -1,6 +1,7 @@
 # encoding:utf-8
-import random, string, os
+import random, string, os, datetime
 from django.db import models
+from django.contrib.auth.models import User
 from dateutil.relativedelta import relativedelta
 from datetime import date
 
@@ -271,7 +272,7 @@ class Actividad(models.Model):
         return ultimo_estado_de_avance
 
     def get_estados_de_avance(self):
-        return EstadoDeAvance.objects.filter(actividad = self).order_by('id')
+        return EstadoDeAvance.objects.filter(actividad = self).order_by('-id')
 
     def get_conceptos_por_actividad(self):
         return ConceptoPorActividad.objects.filter(actividad = self).order_by('id')
@@ -289,9 +290,10 @@ class ConceptoPorActividad(models.Model):
         return self.actividad.nombre + ' - '  + self.concepto.nombre
 
     def get_grupos(self):
-        return Grupo.objects.filter(concepto_por_actividad=self, grupo_padre=None).order_by('id')
+        return Grupo.objects.filter(concepto_por_actividad=self, grupo_padre=None, activo=True).order_by('id')
 
 class EstadoDeAvance(models.Model):
+    usuario = models.ForeignKey(User)
     fecha = models.DateField(verbose_name=u'fecha')
     meta = models.FloatField(verbose_name='meta')
     avance_actual = models.FloatField(verbose_name='avance actual')
@@ -304,15 +306,13 @@ class EstadoDeAvance(models.Model):
     def __unicode__(self):
         return str(self.fecha) + ' - ' + str(self.meta) + ' - ' + str(self.avance_actual)
 
-def crear_ruta_archivo_tablero_control(instance, filename):
-    randomstr = 7*99251
-    return "archivos_actividades/%s-%s"%(randomstr, filename.encode('ascii','ignore'))
-
 class Grupo(models.Model):
+    usuario = models.ForeignKey(User)
     nombre = models.CharField(max_length=255, verbose_name='nombre')
-    descripcion = models.CharField(max_length=255, verbose_name='descripcion')
+    descripcion = models.CharField(max_length=255, verbose_name='descripcion', null=True, blank=True)
     concepto_por_actividad = models.ForeignKey(ConceptoPorActividad)
     grupo_padre = models.ForeignKey("self", null=True, blank=True, verbose_name=u'Carpeta padre')
+    activo = models.BooleanField(default=True,)
 
     def __unicode__(self):
         if (self.grupo_padre != None):
@@ -321,16 +321,27 @@ class Grupo(models.Model):
             return self.nombre
 
     def get_grupos(self):
-        return Grupo.objects.filter(grupo_padre=self).order_by('id')
+        return Grupo.objects.filter(grupo_padre=self, activo=True).order_by('id')
 
     def get_archivos(self):
-        return Archivo.objects.filter(grupo=self).order_by('id')
+        return Archivo.objects.filter(grupo=self, activo=True).order_by('id')
+
+def crear_ruta_archivo_tablero_control(instance, filename):
+    randomstr = 7*99251
+    return "archivos_actividades/%s/%s-%s"%(instance.usuario_id, randomstr, filename.encode('ascii','ignore'))
 
 class Archivo(models.Model):
+    usuario = models.ForeignKey(User)
     nombre = models.CharField(max_length=255, verbose_name='nombre')
     ruta = models.FileField(upload_to=crear_ruta_archivo_tablero_control, null=False, blank=False, verbose_name=u'Archivo')
-    descripcion = models.CharField(max_length=255, verbose_name='descripcion')
+    descripcion = models.CharField(max_length=255, verbose_name='descripcion', null=True, blank=True,)
     grupo = models.ForeignKey("Grupo", verbose_name=u'Carpeta')
+    activo = models.BooleanField(default=True,)
 
     def __unicode__(self):
         return self.nombre
+
+class HistoricoDeArchivo(models.Model):
+    usuario = models.ForeignKey(User)
+    archivo = models.ForeignKey(Archivo)
+    fecha = models.DateField(default = datetime.datetime.now(),)

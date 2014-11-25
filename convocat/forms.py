@@ -170,11 +170,12 @@ class DocumentosSoporteForm(forms.ModelForm):
 class ArchivoForm(forms.ModelForm):
     class Meta:
         model = Archivo
+        exclude = ('activo','usuario')
 
 class GrupoForm(forms.ModelForm):
     class Meta:
         model = Grupo
-        exclude = ('concepto_por_actividad',)
+        exclude = ('concepto_por_actividad', 'activo', 'usuario')
 
 class EstadoDeAvanceForm(forms.ModelForm):
     #fecha = forms.DateField(label='', widget=forms.TextInput(attrs={'size':14}))
@@ -188,4 +189,4 @@ class EstadoDeAvanceForm(forms.ModelForm):
 
     class Meta:
         model = EstadoDeAvance
-        exclude = ('actividad',)
+        exclude = ('actividad','usuario')

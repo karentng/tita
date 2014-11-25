@@ -8,13 +8,10 @@ from campus.models import Estudiante
 from estudiante.models import InfoLaboral, FormacionAcademicaME, CertificacionTIC
 from campus.views import user_group
 
-import json
 
+import json, datetime
 
-def dashboard(request):
-    grupo = user_group(request)
-    if grupo == None:
-        return redirect('home')
+def retornar_datos_reporte_convocatoria_1():
     mejores = Aspirante.objects.order_by('-puntuacion_hv')
     if len(mejores) > 60:
         mejores = mejores[:60]
@@ -68,7 +65,7 @@ def dashboard(request):
 
         munis[posicion]['cantidad'] = i['dcount']
 
-    return render(request, 'dashboard/dashboard.html', {
+    return {
         'mejores':mejores,
 
         'inscritos': inscritos,
@@ -78,16 +75,22 @@ def dashboard(request):
         'total_aprobados':total_aprobados,
         'total_rechazados':total_inscritos - total_aprobados,
         'maximo':maximo,
-        'user_group': user_group(request),
         'municipios':json.dumps(munis),
         'municipiosA':json.dumps(munisAprobados),
         'opcion_menu': 1
-    })
+    }
 
-def reporteME(request):
+def dashboard(request):
     grupo = user_group(request)
     if grupo == None:
         return redirect('home')
+
+    datos_convocatoria_1 = retornar_datos_reporte_convocatoria_1()
+    datos_convocatoria_1['user_group'] = user_group(request)
+
+    return render(request, 'dashboard/dashboard.html', datos_convocatoria_1)
+
+def listaMaestrosEstudiantesInscritos():
     estudiantes = []
     cont = 1
     students = Estudiante.objects.filter(acta_compromiso=True).select_related('estudiante.InfoLaboral__estudiante')
@@ -101,6 +104,14 @@ def reporteME(request):
             "institucion":InfoLaboral.objects.get(estudiante=estudiante).get_sede_display,}
         )
         cont = cont + 1
+
+    return estudiantes
+
+def reporteME(request):
+    grupo = user_group(request)
+    if grupo == None:
+        return redirect('home')
+    estudiantes = listaMaestrosEstudiantesInscritos()
     print "------------------"
     print type(user_group(request))
     return render(request, 'dashboard/reporteME.html', {
@@ -172,19 +183,36 @@ def tablero_control(request, id_actividad):
     if len(estado_de_avance) > 0:
         estado_de_avance = estado_de_avance.latest('id')
 
-    return render(request, 'dashboard/tablero_control.html', {
+    nuevo_estado_de_avance = estado_de_avance.__dict__.copy()
+    nuevo_estado_de_avance['fecha'] = datetime.datetime.now()
+
+    grupo_de_usuario = user_group(request)
+    print(grupo_de_usuario)
+    usuario_puede_editar = False
+
+    usuario_puede_editar = ((grupo_de_usuario == 'Coordinador' and int(id_actividad) < 14) or (grupo_de_usuario == 'Alcaldia' and int(id_actividad) > 13))
+
+    datos_tablero_control = {
         'actividades' : actividades,
+        'estudiantes' : listaMaestrosEstudiantesInscritos(),
         'actividad_seleccionada' : actividad_seleccionada,
         'estado_de_avance' : estado_de_avance,
-        'estado_avance_form' : EstadoDeAvanceForm(),
+        'estado_avance_form' : EstadoDeAvanceForm(initial=nuevo_estado_de_avance),
         'formArchivo': ArchivoForm(),
-        'formGrupo': GrupoForm()
-    })
+        'formGrupo': GrupoForm(),
+        'usuario_puede_editar': usuario_puede_editar
+    }
+
+    datos_tablero_control.update(retornar_datos_reporte_convocatoria_1())
+
+    return render(request, 'dashboard/tablero_control.html', datos_tablero_control)
 
 def guardarArchivo(request):
     form = ArchivoForm(request.POST, request.FILES)
     if form.is_valid():
-        form.save()
+        archivo = form.save(commit=False)
+        archivo.usuario = request.user
+        archivo.save()
 
     return HttpResponseRedirect(str(request.session['actividad_tablero_control']))
 
@@ -195,20 +223,26 @@ def guardarEstadoDeAvance(request):
     if form.is_valid():
         estado_de_avance = form.save(commit=False)
         estado_de_avance.actividad = actividad
+        estado_de_avance.usuario = request.user
         estado_de_avance.save()
 
     return HttpResponseRedirect( str(request.session['actividad_tablero_control']))
 
 def eliminarGrupo(request, id_grupo):
     grupo = Grupo.objects.get(id=id_grupo)
-    grupo.delete()
+    grupo.activo = False
+    grupo.save()
 
     return HttpResponseRedirect( '../' + str(request.session['actividad_tablero_control']))
 
 def eliminarArchivo(request, id_archivo):
     archivo = Archivo.objects.get(id=id_archivo)
-    print(archivo)
-    archivo.delete()
+    archivo.activo = False
+    archivo.save()
+    historico_de_archivo = HistoricoDeArchivo()
+    historico_de_archivo.archivo = archivo
+    historico_de_archivo.usuario = request.user
+    historico_de_archivo.save()
 
     return HttpResponseRedirect( '../' + str(request.session['actividad_tablero_control']))
 
@@ -219,6 +253,7 @@ def guardarGrupo(request, id_concepto_por_actividad):
     if form.is_valid():
         grupo = form.save(commit=False)
         grupo.concepto_por_actividad = concepto_por_actividad
+        grupo.usuario = request.user
         grupo.save()
 
     return HttpResponseRedirect( '../' + str(request.session['actividad_tablero_control']))

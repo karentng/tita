@@ -8,15 +8,121 @@
 {% block css %}
     {{estado_avance_form.media}}
     <link href="{{STATIC_URL}}css/file-tree.css" rel="stylesheet" />
-    <style type="text/css">
-        /*.input-group div {
-            width: 158px
-        }*/
-    </style>
+    <link href="{{STATIC_URL}}plugins/DataTables-1.9.4/css/data-table.css" rel="stylesheet" />
 {% endblock %}
 
 {% block js %}
+    <script src="{{STATIC_URL}}plugins/DataTables-1.9.4/js/jquery.dataTables.js"></script>
+    <script src="{{STATIC_URL}}plugins/DataTables-1.9.4/js/data-table.js"></script>
 
+    <script src="{{STATIC_URL}}plugins/flot/jquery.flot.min.js"></script>
+    <script src="{{STATIC_URL}}plugins/flot/jquery.flot.pie.min.js"></script>
+    <script src="{{STATIC_URL}}plugins/flot/jquery.flot.categories.js"></script>
+    <script type="text/javascript">
+        $('#data-table2').dataTable( {
+            "sDom": "<'row'<'col-md-6 col-sm-6'l><'col-md-6 col-sm-6'f>r>t<'row'<'col-md-6 col-sm-6'i><'col-md-6 col-sm-6'p>>",
+            "sPaginationType": "bootstrap",
+            "oLanguage": {
+                "sLengthMenu": "_MENU_ registros por página"
+            }
+        });
+        $('#data-table3').dataTable( {
+            "sDom": "<'row'<'col-md-6 col-sm-6'l><'col-md-6 col-sm-6'f>r>t<'row'<'col-md-6 col-sm-6'i><'col-md-6 col-sm-6'p>>",
+            "sPaginationType": "bootstrap",
+            "oLanguage": {
+                "sLengthMenu": "_MENU_ registros por página"
+            }
+        });
+
+        var purple = '#727cb6';
+
+
+        if ($('#bar-chart').length !== 0) {
+            var municipios = (("{{municipios}}").replace(/&(l|g|quo)t;/g, function(a,b){
+                    return {
+                        l   : '<',
+                        g   : '>',
+                        quo : '"'
+                    }[b];
+                }));
+
+            municipios = JSON.parse( municipios );
+            console.log(municipios);
+            var data = [];
+            for (i in municipios){
+                var aux = municipios[i];
+                data[i] = [aux.nombre, aux.cantidad]
+            }
+            //var data = [ ["January", 10], ["February", 8], ["March", 4], ["April", 13], ["May", 17], ["June", 9] ];
+            $.plot("#bar-chart", [ {data: data, color: purple} ], {
+                series: {
+                    bars: {
+                        show: true,
+                        barWidth: 0.4,
+                        align: 'center',
+                        fill: true,
+                        fillColor: purple,
+                        zero: true
+                    }
+                },
+                xaxis: {
+                    mode: "categories",
+                    tickColor: '#ddd',
+                    tickLength: 0
+                },
+                grid: {
+                    borderWidth: 0
+                }
+            });
+        }
+
+        if ($('#aprobados-chart').length !== 0) {
+            var municipios = (("{{municipiosA}}").replace(/&(l|g|quo)t;/g, function(a,b){
+                    return {
+                        l   : '<',
+                        g   : '>',
+                        quo : '"'
+                    }[b];
+                }));
+
+            municipios = JSON.parse(municipios);
+            //console.log(municipios);
+            var data = [];
+            for (i in municipios){
+                var aux = municipios[i];
+                data[i] = [aux.nombre, aux.cantidad]
+            }
+            //var data = [ ["January", 10], ["February", 8], ["March", 4], ["April", 13], ["May", 17], ["June", 9] ];
+            $.plot("#aprobados-chart", [ {data: data, color: purple} ], {
+                series: {
+                    bars: {
+                        show: true,
+                        barWidth: 0.4,
+                        align: 'center',
+                        fill: true,
+                        fillColor: purple,
+                        zero: true
+                    }
+                },
+                xaxis: {
+                    mode: "categories",
+                    tickColor: '#ddd',
+                    tickLength: 0
+                },
+                grid: {
+                    borderWidth: 0
+                }
+            });
+        }
+
+        function mostrar(num){
+            var paneles = ["#inscritos", "#aprobados", "#rechazados", "#mejores"];
+            for(i in paneles){
+                $(paneles[i]).hide();
+            }
+            $(paneles[num]).show();
+        }
+    </script>
 {% endblock %}
 
 {% block js_ready %}
@@ -157,10 +263,10 @@
                                 {% for estado_de_avance in actividad_seleccionada.get_estados_de_avance %}
                                 <tr class="odd gradeX">
                                     <td>{{estado_de_avance.fecha}}</td>
-                                    <td>{{estado_de_avance.meta}}%</td>
+                                    <td>{{estado_de_avance.meta}}</td>
                                     <td>{{estado_de_avance.avance_actual}}%</td>
                                     <td>{{estado_de_avance.presupuesto_actividad}}</td>
-                                    <td>{{estado_de_avance.presupuesto_ejecutado}}%</td>
+                                    <td>{{estado_de_avance.presupuesto_ejecutado}}</td>
                                     <td>{{estado_de_avance.ejecucion_financiera}}%</td>
                                     <td>{% if estado_de_avance.observacion != None %}
                                             {{estado_de_avance.observacion}}
@@ -220,21 +326,23 @@
                     </form>
                     <form class="form-inline">
                         <div class="form-group"><input type="text" value="{{estado_de_avance.fecha}}" title="" size="21" class="form-control"></div>
-                        <div class="form-group"><input type="text" value="{{estado_de_avance.meta}}%" style="width:90px" class="form-control"></div>
+                        <div class="form-group"><input type="text" value="{{estado_de_avance.meta}}" style="width:90px" class="form-control"></div>
                         <div class="form-group"><input type="text" value="{{estado_de_avance.avance_actual}}%" style="width:90px" class="form-control"></div>
                         <div class="form-group"><input type="text" value="{{estado_de_avance.presupuesto_actividad}}" style="width:180px" class="form-control"></div>
-                        <div class="form-group"><input type="text" value="{{estado_de_avance.presupuesto_ejecutado}}%" style="width:140px" class="form-control"></div>
+                        <div class="form-group"><input type="text" value="{{estado_de_avance.presupuesto_ejecutado}}" style="width:140px" class="form-control"></div>
                         <div class="form-group"><input type="text" value="{{estado_de_avance.ejecucion_financiera}}%" style="width:130px" class="form-control"></div>
                         <div class="form-group"><input type="text" value="{% if estado_de_avance.observacion != None %}{{estado_de_avance.observacion}}{% else %}{% endif %}" style="width:140px" class="form-control"></div>
                     </form>
-                    <br/>
-                    <form class="form-inline" action={% url 'tableroControlGuardarEstadoDeAvance' %} method="POST">
-                        {% csrf_token %}
-                        {% bootstrap_form estado_avance_form %}
-                        <button class="btn btn-sm btn-primary" type="submit" title="Guardar estado de avance">
-                            <i class="fa fa-save"></i>
-                        </button>
-                    </form>
+                    {% if usuario_puede_editar %}
+                        <h6>Ingresar nuevo estado de avance</h6>
+                        <form class="form-inline" action={% url 'tableroControlGuardarEstadoDeAvance' %} method="POST">
+                            {% csrf_token %}
+                            {% bootstrap_form estado_avance_form %}
+                            <button class="btn btn-sm btn-primary" type="submit" title="Guardar estado de avance">
+                                <i class="fa fa-save"></i>
+                            </button>
+                        </form>
+                    {% endif %}
 				</div>
 			</div>
 		</div>
@@ -249,19 +357,29 @@
             <div class="tab-content">
                 {% for concepto_por_actividad in actividad_seleccionada.get_conceptos_por_actividad %}
                     <div class="tab-pane fade" id="tab-{{concepto_por_actividad.id}}">
-                        <div class="tree">
-                            <div class="row">
-                                <a href="#modal-dialog-grupo" class="btn btn-success" data-toggle="modal">Adicionar Carpeta</a>
-                                {% if concepto_por_actividad.get_grupos|length > 0 %}
-                                    <a href="#modal-dialog-archivo" class="btn btn-success" data-toggle="modal">Adicionar Archivo</a>
-                                {% endif %}
-                            </div>
-                            <ul>
-                                {% for grupo in concepto_por_actividad.get_grupos %}
-                                    {%include "dashboard/grupos_tree.html" %}
-                                {% endfor %}
-                            </ul>
-                        </div>
+                        {% if concepto_por_actividad.id == 1 %}
+                             {%include "dashboard/resultados_convocatoria_1.html" %}
+                        {% else %}
+                            {% if concepto_por_actividad.id == 9 %}
+                                {%include "dashboard/resultado_incripcion_maestros_estudiantes.html" %}
+                            {% else %}
+                                <div class="tree">
+                                    {% if usuario_puede_editar %}
+                                        <div class="row">
+                                            <a href="#modal-dialog-grupo" class="btn btn-success" data-toggle="modal">Adicionar Carpeta</a>
+                                            {% if concepto_por_actividad.get_grupos|length > 0 %}
+                                                <a href="#modal-dialog-archivo" class="btn btn-success" data-toggle="modal">Adicionar Archivo</a>
+                                            {% endif %}
+                                        </div>
+                                    {% endif %}
+                                    <ul>
+                                        {% for grupo in concepto_por_actividad.get_grupos %}
+                                            {%include "dashboard/grupos_tree.html" %}
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% endif %}
+                        {% endif %}
                     </div>
                 {% endfor %}
             </div>
