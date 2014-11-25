@@ -92,22 +92,30 @@ def reporteME(request):
     cont = 1
     students = Estudiante.objects.filter(acta_compromiso=True).select_related('estudiante.InfoLaboral__estudiante')
     for estudiante in students:
+        jornada = ""
+        institucion = ""
+        try:
+            il = InfoLaboral.objects.get(estudiante=estudiante)
+            jornada = il.get_jornada_display
+            institucion = il.get_sede_display
+        except Exception:
+            jornada = "---"
+            institucion = "---"
         estudiantes.append(
             {"id": estudiante.id,
             "item": cont,
             "nombre": estudiante,
             "cedula": estudiante.numero_documento,
-            "jornada": InfoLaboral.objects.get(estudiante=estudiante).get_jornada_display,
-            "institucion":InfoLaboral.objects.get(estudiante=estudiante).get_sede_display,}
+            "jornada": jornada,
+            "institucion": institucion,
+            }
         )
         cont = cont + 1
-    print "------------------"
-    print type(user_group(request))
+    
     return render(request, 'dashboard/reporteME.html', {
         'estudiantes': estudiantes,
         'user_group': user_group(request),
         'opcion_menu': 2
-        #'municipios':json.dumps(munis),
     })
 
 def obtener_estudiante(valor):
