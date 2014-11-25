@@ -3,6 +3,7 @@ from django.shortcuts import render
 from cronograma.forms import *
 from campus.forms import *
 from campus.models import Clases, AcompanamientoInSitus, Estudiante, Cursos, Actividad
+from estudiante.models import InfoLaboral
 import json
 from django.shortcuts import redirect, render, render_to_response
 from datetime import datetime, date, timedelta
@@ -13,8 +14,10 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_list_or_404, get_object_or_404
 from django.db.models import Q
 
+
 def cronograma(request):
     # if this is a POST request we need to process the form data
+    eventos = AcompanamientoInSitus.objects.all()
     grupo = user_group(request)
 
     if grupo == None:
@@ -22,17 +25,36 @@ def cronograma(request):
 
     if grupo == "Formador":
         username = request.user
-        formador = get_object_or_404(Formador, usuario=username.id)
-
         try:
-            curso = get_object_or_404(Cursos, Q(formador1=formador.id) | Q(formador2=formador.id))
-            eventos = AcompanamientoInSitus.objects.filter(curso=curso)
+            formador = Formador.objects.get(usuario=username.id)
+        except Formador.DoesNotExist:
+            formador = None 
 
-        except Cursos.DoesNotExist:
-            pass
-        #curso = Cursos.objects.get(Q(formador1=formador.id) | Q(formador2=formador.id))
-        
-        #eventos = AcompanamientoInSitus.objects.filter(curso=curso)
+        if formador == None:
+            print "El formador no existe"
+            return redirect('home')
+        else:
+
+            try:
+                #curso = get_object_or_404(Cursos, Q(formador1=formador.id) | Q(formador2=formador.id))
+                curso = Cursos.objects.filter(Q(formador1=formador.id) | Q(formador2=formador.id))
+                #eventos = AcompanamientoInSitus.objects.filter(curso=curso)
+
+            except Cursos.DoesNotExist:
+                curso = None
+            
+            if curso == None:
+                print "El formador no está asociado a ningun curso de acompanamiento"
+                mensaje = "/?x=1"
+                return redirect('..%s' %mensaje)
+
+            else:
+                #eventos = AcompanamientoInSitus.objects.filter(curso=curso)
+                eventos = []
+                for i in curso:
+                    x = AcompanamientoInSitus.objects.filter(curso=i)
+                    for i in range(0,len(x)):
+                        eventos.append(x[i])
 
     if grupo == "Coordinador":
         eventos = AcompanamientoInSitus.objects.all()
@@ -157,7 +179,9 @@ def cronograma(request):
                         objetoi.duracion=objeto.duracion
                         objetoi.descripcion=objeto.descripcion
                         
-                        objetoi.save()
+                        objetoi.save() 
+                        SoporteAcompanamiento.objects.create(acompanamiento=objetoi)
+
                                                    
 
                 if repetir == "2":
@@ -251,6 +275,7 @@ def cronograma(request):
                         objetoi.descripcion=objeto.descripcion
                         
                         objetoi.save()
+                        SoporteAcompanamiento.objects.create(acompanamiento=objetoi)
                 
                 if repetir == "3":
 
@@ -291,11 +316,15 @@ def cronograma(request):
                         objetoi.descripcion=objeto.descripcion
                         
                         objetoi.save()
+                        SoporteAcompanamiento.objects.create(acompanamiento=objetoi)
+
 
             
             objeto.nombre=(objeto.nombre)+" 1"
             #objeto.tipo = "2"
             objeto.save()
+            SoporteAcompanamiento.objects.create(acompanamiento=objeto)
+
 
             return redirect('cronograma_acompanamiento')
     else:
@@ -326,7 +355,7 @@ def cronograma(request):
         cursovar = Cursos.objects.get(id=i.curso.id)
         cursos = str(cursovar.descripcion)
 
-        print "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+cursos
+        #print "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+cursos
 
         events.append({
             'id': i.id,
@@ -363,26 +392,57 @@ def menor10(val):
         return "0"+str(val)
     return str(val)
 
-
-
 def diplomado(request):
     # if this is a POST request we need to process the form data
+    eventos = Clases.objects.all()
     grupo = user_group(request)
     if grupo == None:
         return redirect('home')
 
     if grupo == "Formador":
         username = request.user
-        formador = get_object_or_404(Formador, usuario=username.id)
         try:
-            curso = get_object_or_404(Cursos, Q(formador1=formador.id) | Q(formador2=formador.id))
-            eventos = Clases.objects.filter(curso=curso)
+            formador = Formador.objects.get(usuario=username.id)
+            #formador = get_object_or_404(Formador, usuario=username.id)
+        except Formador.DoesNotExist:
+            formador = None 
+
+        if formador == None:
+            print "El formador no existe"
+            return redirect('home')
+        else:
+
+            try:
+                curso = Cursos.objects.filter(Q(formador1=formador.id) | Q(formador2=formador.id))
+               
+            except Cursos.DoesNotExist:
+                curso = None
+            
+            if curso == None:
+                print "El formador no está asociado a ningun curso de diplomado"
+                mensaje = "/?x=1"
+                return redirect('..%s' %mensaje)
+            
+            else:
+                eventos = []
+                for i in curso:
+                    x = Clases.objects.filter(curso=i)
+                    for i in range(0,len(x)):
+                        eventos.append(x[i])
+        '''
+
+        try:
+            #curso = get_object_or_404(Cursos, Q(formador1=formador.id) | Q(formador2=formador.id))
+            curso = Cursos.objects.get(Q(formador1=formador.id) | Q(formador2=formador.id))
+            #eventos = AcompanamientoInSitus.objects.filter(curso=curso)
 
         except Cursos.DoesNotExist:
-            pass
-        #curso = Cursos.objects.get(Q(formador1=formador.id) | Q(formador2=formador.id))
+            curso = None
         
+        if curso == None:
+            print "holamundo, no esta asociado a nada lalalalalla!!!!!!!!!!!!!!!!!!!"
         
+        '''
 
     if grupo == "Coordinador":
         eventos = Clases.objects.all()
@@ -510,6 +570,7 @@ def diplomado(request):
                         objetoi.descripcion=objeto.descripcion
                         #objetoi.tipo=objeto.tipo
                         objetoi.save()
+                        SoporteClases.objects.create(clase=objetoi)
                                                    
 
                 if repetir == "2":
@@ -604,6 +665,7 @@ def diplomado(request):
                         objetoi.descripcion=objeto.descripcion
                         #objetoi.tipo=objeto.tipo
                         objetoi.save()
+                        SoporteClases.objects.create(clase=objetoi)
                 
                 if repetir == "3":
 
@@ -647,11 +709,14 @@ def diplomado(request):
                         objetoi.descripcion=objeto.descripcion
                         #objetoi.tipo=objeto.tipo
                         objetoi.save()
+                        SoporteClases.objects.create(clase=objetoi)
 
 
             objeto.nombre = str(objeto.nombre) + " 1"
             #objeto.tipo = "1"
             objeto.save()
+            SoporteClases.objects.create(clase=objeto)
+           
             return redirect('cronograma_diplomado')
     else:
         form = EventosDiplomadoForm(initial={'nombre': 'Sesion'}) 
@@ -697,7 +762,6 @@ def diplomado(request):
         'user_group': user_group(request),
         'opcion_menu': 3,
     })
-
 
 def diplomado_modificar(request):
     grupo = user_group(request)
@@ -793,14 +857,20 @@ def subirsoportes(request):
         
         if form.is_valid():
             obj = form.save(commit=False)
+            #obj.clase = Clases.objects.get(clase=clase.id)
+            obj.save()
             #soporte.clase = clase
-            soporteclases.archivo = obj.archivo
-            soporteclases.save()
+            #soporteclases.archivo = obj.archivo
+            #soporteclases.save()
             
             ide = "?v="+str(clase.id)
 
             form = DocumentosSoporteForm(instance=soporteclases)
 
+            x = "?v="+str(clase.id)
+
+            return HttpResponseRedirect('cronograma_diplomado_soportes%s' %x)
+            '''
             return render(request, 'diplomado_soportes.html', {
             'form': form,
             'user_group': user_group(request),
@@ -808,7 +878,7 @@ def subirsoportes(request):
             'clase' : clase.id,
             'curso' : curso.id,
             'x':1,
-        })
+        })'''
     else:   
 
         form = DocumentosSoporteForm(instance=soporteclases)
@@ -842,7 +912,12 @@ def subirsoportesacompanamiento(request):
             obj.save()
 
             form = DocumentosSoporteAcompanamientoForm(instance=soporteclases)
+
+            x = "?v="+str(acompanamiento.id)
+
+            return HttpResponseRedirect('cronograma_acompanamiento_soportes%s' %x)
             
+            '''
             return render(request, 'cronograma_soportes.html', {
                 'form': form,
                 'user_group': user_group(request),
@@ -851,6 +926,7 @@ def subirsoportesacompanamiento(request):
                 'curso' : curso.id,
                 'x':1,
             })
+            '''
 
     else:
         
@@ -865,26 +941,69 @@ def subirsoportesacompanamiento(request):
         'curso' : curso.id,
     })
 
-def curso(request):
+def prev_add_curso(request):
 
     grupo = user_group(request)
+    est = Estudiante.objects.all()
+    infos = InfoLaboral.objects.filter(estudiante__in=est)
+
     if grupo == None:
         return redirect('home')
 
     if request.method == 'POST':
-        form = CursoForm(request.POST)
+        form = EstudiantesCurso(request.POST)
+        if form.is_valid():
+            jornada = form.cleaned_data['jornadas']
+            sds = form.cleaned_data['sedes']
+            sedes = "?sedes="
+            for sede in sds:
+                sedes+=sede+","
+            sedes = sedes[:-1]
+            response = redirect('add_curso')
+            response['Location'] += sedes+'&jornada='+jornada
+            return response
+            #return redirect('gestion_cursos', sede, jornada)
+    else :
+        form = EstudiantesCurso()
+
+    return render(request, 'prev_curso.html', {
+        'form': form,
+        'user_group': user_group(request),
+        'opcion_menu': 5,
+        'infos': infos
+    })
+
+def curso(request):
+
+    sede = request.GET.get('sedes')
+    jornada = request.GET.get('jornada')
+    sede = sede.split(',');
+
+    if not sede or not jornada:
+        return redirect('prev_add_curso')
+
+    grupo = user_group(request)
+    est = Estudiante.objects.all()
+    infos = InfoLaboral.objects.filter(estudiante__in=est)
+
+    if grupo == None:
+        return redirect('home')
+
+    if request.method == 'POST':
+        form = CursoForm(request.POST, sede=sede, jornada=jornada)
         if form.is_valid():
             objeto = form.save()
             
 
-            return redirect('gestion_cursos')
+            return redirect('add_curso')
     else :
-        form = CursoForm()
+        form = CursoForm(sede=sede, jornada=jornada)
 
     return render(request, 'curso.html', {
         'form': form,
         'user_group': user_group(request),
         'opcion_menu': 5,
+        'infos': infos
     })
 
 def formador(request):
@@ -984,15 +1103,6 @@ def lista_acompanamiento(request, id):
     return render(request, 'lista_estudiantes.html', {'estudiante_list': estudiante_list,  'user_group': user_group(request),
         'opcion_menu': 5, 'curso':cursonombre, 'institucion':institucion, 'clase':clasenombre, 'clase_fecha':clasefecha, 'formador1':formador1,'formador2':formador2},
         )
-'''
-def detalle_curso(request, id, limit=100):
-
-    curso = Cursos.objects.get(id=id)
-    estudiante_list = curso.estudiantes.all()
-    
-    return render(request, 'detalles_curso.html', { 'user_group': user_group(request),
-        'opcion_menu': 5, 'curso':curso, 'estudiante_list':estudiante_list},
-        )'''
 
 def detalle_curso(request, id):
 
@@ -1013,18 +1123,17 @@ def detalle_curso(request, id):
             form = CursoMForm(request.POST, instance=curso)
             if form.is_valid():
                 objeto = form.save()
-
+                '''
                 formador = Cursos.objects.all().exclude(id = curso.id)
                 for i in formador:
                     if objeto.formador1 == i.formador1 or objeto.formador2 == i.formador1 or objeto.formador2 == i.formador1 or objeto.formador2 == i.formador2 :
-                        print "hola mundo paila"
                         form = CursoMForm(instance=curso)
                         return render(request, 'detalles_curso.html', {
                             'form': form, 
                             'user_group': user_group(request),
                             'x': 1,
                         })
-            
+                '''
                 objeto.save()
 
                 return redirect('gestion_cursos')
@@ -1144,6 +1253,7 @@ def asistenciaClases(request, idC, idA):
         'form': form,
         'idC': idC,
          'user_group': user_group(request),
+         'actividad': actividad
     })
 
 def asistenciaClases2(request, idC, idA):

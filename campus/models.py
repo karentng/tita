@@ -40,9 +40,12 @@ class InstitucionEducativa(models.Model):
 #Corresponde a los formadores de formadores
 class Formador(models.Model):    
     TUTORES=(
-    ('Tutor 1', 'Tutor 1: Juan Francisco Lopez'),
-    ('Tutor 2', 'Tutor 2: Roberto Rodriguez'),
-    ('Tutor 3', 'Tutor 3: Martha Quintero'),
+    ('1', 'Mentor 1: ADRIANA MARIA VELEZ JONES'),
+    ('2', 'Mentor 2: ROBERTO FERRO HERRERA'),
+    ('3', 'Mentor 3: KARINA SANDOVAL ZAPATA'),
+    ('4', 'Mentor 4: MAYRA MOSQUERA MORALES'),
+    ('5', 'Mentor 5: DIANA FERNANDA JARAMILLO ESCOBAR'),
+
    )
 
     JORNADA=(
@@ -54,7 +57,7 @@ class Formador(models.Model):
     nombre1 = models.CharField( max_length=255, verbose_name='nombres')
     apellido1 = models.CharField( max_length=255, verbose_name='apellidos')
     jornada = models.CharField( max_length=255, choices=JORNADA)
-    tutor = models.CharField( max_length=255, choices=TUTORES)
+    tutor = models.CharField( max_length=255, choices=TUTORES, verbose_name='Mentor')
     #aspirante = models.ForeignKey(Aspirante, verbose_name='aspirante', null=True, blank=True)   
     usuario = models.ForeignKey(User)
 
@@ -148,7 +151,7 @@ class Cursos(models.Model):
     descripcion = models.CharField(max_length=255, verbose_name=u'Nombre')
     institucion = models.CharField(choices=SEDES, max_length=200, verbose_name="institución")
     formador1 = models.ForeignKey(Formador, related_name="formador1",verbose_name="formador no. 1")
-    formador2 = models.ForeignKey(Formador, related_name="formador2",verbose_name="formador no. 2")
+    formador2 = models.ForeignKey(Formador, related_name="formador2",verbose_name="formador no. 2", blank=True, null=True)
     estudiantes = models.ManyToManyField(Estudiante, blank=True, verbose_name='Estudiantes')
 
     def __unicode__(self):
@@ -302,10 +305,12 @@ class Clases(models.Model):
     estado = models.BooleanField(default=True)
     observacion = models.CharField( max_length=1500, null=True, blank=True, verbose_name="observaciones")
 
-
+    '''
     def save(self, *args, **kwargs):
         super(Clases,self).save(*args, **kwargs)
         SoporteClases.objects.create(clase=self)
+    '''
+    
 
 class Actividad(models.Model):
     clase = models.ForeignKey(Clases)
@@ -331,10 +336,11 @@ class AcompanamientoInSitus(models.Model):
     descripcion = models.CharField( max_length=1000, null=True, blank=True, verbose_name="descripción")
     estado = models.BooleanField(default=True)
     observacion = models.CharField( max_length=1500, null=True, blank=True, verbose_name="observaciones")
-
+    '''
     def save(self, *args, **kwargs):
         super(AcompanamientoInSitus,self).save(*args, **kwargs)
         SoporteAcompanamiento.objects.create(acompanamiento=self)
+    '''
 
 class ActividadAcompanamiento(models.Model):
     clase = models.ForeignKey(AcompanamientoInSitus)

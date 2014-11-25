@@ -259,3 +259,9 @@ def soportes(request):
 
 
 
+def numeroInscripcionEstudiante(request, num):
+    estudiante = Estudiante.objects.get(numero_documento=num)
+    numero = estudiante.numero_inscripcion()
+    return render(request, 'numeroInscripcionEstudiante.html', {
+        'numero': numero,
+    })
