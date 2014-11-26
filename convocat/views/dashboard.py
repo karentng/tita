@@ -99,8 +99,14 @@ def listaMaestrosEstudiantesInscritos():
         institucion = ""
         try:
             il = InfoLaboral.objects.get(estudiante=estudiante)
-            jornada = il.get_jornada_display
-            institucion = il.get_sede_display
+            try:
+                jornada = il.get_jornada_display
+            except Exception:
+                jornada = "---"
+            try:
+                institucion = il.get_sede_display
+            except Exception:
+                institucion = "---"
         except Exception:
             jornada = "---"
             institucion = "---"
