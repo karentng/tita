@@ -152,7 +152,10 @@ def obtener_estudiante(valor):
 def impresionME(request, id_estudiante):
     try :
         estudiante = Estudiante.objects.get(id=id_estudiante)
-        infoLaboral = InfoLaboral.objects.get(estudiante=estudiante)
+        infoLaboral = InfoLaboral.objects.filter(estudiante=estudiante)
+        print(infoLaboral)
+        if len(infoLaboral) > 0:
+            infoLaboral = infoLaboral[0]
         certificacionTIC = CertificacionTIC.objects.filter(estudiante=estudiante)
         formacionAcademicaME = FormacionAcademicaME.objects.filter(estudiante=estudiante)
 
@@ -163,6 +166,7 @@ def impresionME(request, id_estudiante):
 			'certificacionTIC' : certificacionTIC
 		})
     except Exception as ex:
+        print(ex)
         return redirect('reporteME')
 
 def actividades(request, id_actividad):
