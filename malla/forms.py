@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from django import forms
 from malla.models import *
-#from bootstrap3_datetime.widgets import DateTimePicker
 from datetimewidget.widgets import DateWidget
 from django.forms import ModelForm, Textarea, HiddenInput, TextInput, Select, CheckboxSelectMultiple, FileInput, ClearableFileInput
 from django.forms.models import inlineformset_factory
@@ -24,30 +23,10 @@ class InformacionContactoForm(forms.ModelForm):
         model = ContratistaInfoContacto
         fields = ('celularppal', 'celularsec', 'telfijoppal', 'telfijosec', 'email', 'twitter', 'facebook', 'personacontacto', 'numerocontacto',)
 
-'''
-class InformacionAcademicaForm(forms.ModelForm):
-    class Meta:
-        model = MonitorInfoAcademica
-        fields = ('programa', 'jornada', 'semestre', 'promedioacum', 'nummaterias', 'codigo',)
-'''
-
 class AreasConocimientoForm(forms.ModelForm):
     class Meta:
         model = ContratistaAreasConocimiento
         fields = ('cienciasnaturales', 'fisica', 'quimica', 'biologia', 'matematica', 'trigonometria', 'algebra', 'logica', 'geometria', 'electronica', 'espanol', 'ingles', 'cienciassociales', 'filosofia', 'artistica', 'etica', 'cienciaseconomicas', 'educacionfisica', 'tecnologia', 'pedagogia', 'dibujotecnico',)
-
-'''
-class HorariosDisponiblesForm(forms.ModelForm):
-    class Meta:
-        model = HorariosDisponibles
-        fields = ('lunesmanana', 'lunestarde', 'martesmanana', 'martestarde', 'miercolesmanana', 'miercolestarde', 'juevesmanana', 'juevestarde', 'viernesmanana', 'viernestarde',)
-
-
-class ComponenteForm(forms.ModelForm):
-    class Meta:
-        model = Componente
-        fields = ('nombre', 'descripcion', 'valoraprobadocomp', 'persona')
-'''
 
 class RequerimientoForm(forms.ModelForm):
     class Meta:
@@ -59,17 +38,6 @@ class RequerimientoForm(forms.ModelForm):
             'descripcion_req' : Textarea(attrs={'rows': 3}),
             #'justificacion_req' : Textarea(attrs={'rows': 3}),
         }
-
-'''
-class RetoForm(forms.ModelForm):
-    class Meta:
-        model = Reto
-        fields = ('nombre', 'descripcion', 'valor', 'proponente')
-        widgets = {
-            'descripcion' : Textarea(attrs={'rows': 3}),
-            
-        }
-'''
 
 class ReclamacionForm(forms.ModelForm):
     class Meta:
@@ -134,7 +102,6 @@ class MyFileInput(ClearableFileInput):
                 substitutions['clear_template'] = self.template_with_clear % substitutions
 
         return mark_safe(template % substitutions)
-
 
 class DocumentosSoporteForm(forms.ModelForm):
     class Meta:

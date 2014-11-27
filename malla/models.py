@@ -112,25 +112,6 @@ class ContratistaInfoContacto(models.Model):
     def __unicode__(self):
         return self.email
 
-'''
-class MonitorInfoAcademica(models.Model):
-
-
-    
-    monitor = models.OneToOneField(MonitorInfoPersonal, primary_key=True)
-    programa = models.CharField( choices=PROGRAMAS, max_length=3, verbose_name='programa académico')
-    jornada = models.CharField(max_length=5, null=True, choices=[('D', 'Diurna'), ('N', 'Nocturna')], verbose_name='jornada de estudio')
-    semestre = models.IntegerField()
-    promedioacum = models.FloatField( verbose_name='promedio acumulado')
-    nummaterias = models.IntegerField(verbose_name='número de materias que está viendo según su tabulado')
-    semestre = models.IntegerField(verbose_name='número de semestre en que se encuentra')
-    codigo = models.BigIntegerField(verbose_name='código de estudiante')
-
-    
-    def __unicode__(self):
-        return self.programa
-'''
-
 class ContratistaAreasConocimiento(models.Model):
     
     monitor = models.OneToOneField(ContratistaInfoPersonal, primary_key=True)
@@ -163,36 +144,6 @@ def crear_ruta_archivo(instance, filename):
 class ContratistaDocumentosSoporte(models.Model):
     monitor = models.OneToOneField(ContratistaInfoPersonal, primary_key=True)
     soportes = models.FileField(upload_to=crear_ruta_archivo, blank=True, null=True)   
-
-'''
-Esto ya no se va a usar pero por si algo dejemoslo comentado
-class HorariosDisponibles(models.Model):
-
-    monitor = models.OneToOneField(MonitorInfoPersonal, primary_key=True)
-    lunesmanana = models.BooleanField(verbose_name='')
-    lunestarde = models.BooleanField(verbose_name='')
-    martesmanana = models.BooleanField(verbose_name='')
-    martestarde = models.BooleanField(verbose_name='')
-    miercolesmanana = models.BooleanField(verbose_name='')
-    miercolestarde = models.BooleanField(verbose_name='')
-    juevesmanana = models.BooleanField(verbose_name='')
-    juevestarde = models.BooleanField(verbose_name='')
-    viernesmanana = models.BooleanField(verbose_name='')
-    viernestarde = models.BooleanField(verbose_name='')
-'''
-
-'''
-Esto ya no se va a usar pero por si algo dejemoslo comentado
-class Componente(models.Model):
-    
-    nombre = models.CharField( max_length=255)
-    descripcion = models.CharField( max_length=255, null=True, blank=True)
-    valoraprobadocomp = models.IntegerField(null=True, blank=True, verbose_name="valor aprobado al componente")
-    persona = models.CharField( max_length=255, verbose_name="nombre de la persona que lo aprueba", null=True, blank=True)
-
-    def __unicode__(self):
-        return (u"%s %s"%(self.nombre,self.descripcion ))  
-'''  
 
 class Requerimiento(models.Model):
 
@@ -272,18 +223,6 @@ class Lista(models.Model):
 
     def __unicode__(self):
         return (u"%s %s"%(self.asignacion,self.requerimiento ))
-
-'''
-Esto ya no se va a usar pero por si algo dejemoslo comentado
-class Reto(models.Model):
-    
-    nombre = models.CharField( max_length=255)
-    descripcion = models.CharField( max_length=2550, null=True, blank=True)
-    valor = models.IntegerField(null=True, blank=True, verbose_name="valor (en puntos)")
-    proponente = models.CharField( max_length=255, verbose_name="nombre de la persona que lo propone", null=True, blank=True)
-    def __unicode__(self):
-        return (u"%s %s"%(self.nombre,self.descripcion ))
-'''
 
 class Reclamacion(models.Model):
 

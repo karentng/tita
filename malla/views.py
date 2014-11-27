@@ -39,27 +39,6 @@ def datosContacto(request):
         'form': form,
     })
 
-def datosAcademicos(request):
-    identificador = request.GET['v']
-    monitor = MonitorInfoPersonal.objects.get(id=identificador)
-
-    if request.method == 'POST':
-        form = InformacionAcademicaForm(request.POST)
-        if form.is_valid():
-            objeto = form.save(commit=False)
-            objeto.monitor = monitor
-            objeto.save()
-            ide = "?v="+str(monitor.id)
-            
-            return HttpResponseRedirect('areasconocimiento%s' % ide)
-    else :
-        form = InformacionAcademicaForm()
-
-    return render(request, 'datosacademicos.html', {
-        'form': form,
-    })
-
-
 def areasConocimiento(request):
     identificador = request.GET['v']
     monitor = ContratistaInfoPersonal.objects.get(id=identificador)
@@ -80,41 +59,6 @@ def areasConocimiento(request):
         'form': form,
     })
 
-def horarios(request):
-    identificador = request.GET['v']
-    monitor = MonitorInfoPersonal.objects.get(id=identificador)
-    if request.method == 'POST':
-        form =HorariosDisponiblesForm(request.POST)
-        if form.is_valid():
-            objeto = form.save(commit=False)
-            objeto.monitor = monitor
-            objeto.save()
-            ide = "?v="+str(monitor.id)
-            
-            return HttpResponseRedirect('soportes%s' % ide)
-    else :
-        form = HorariosDisponiblesForm()
-
-    return render(request, 'horarios_disponibilidad.html', {
-        'form': form,
-    })
-
-
-def componente(request):
-    if request.method == 'POST':
-        form = ComponenteForm(request.POST)
-        if form.is_valid():
-            objeto = form.save()
-            objeto.save()
-            
-            return redirect('home')
-    else :
-        form = ComponenteForm()
-
-    return render(request, 'componente.html', {
-        'form': form,
-    })
-
 def requerimiento(request):
     if request.method == 'POST':
         form = RequerimientoForm(request.POST)
@@ -127,21 +71,6 @@ def requerimiento(request):
         form = RequerimientoForm()
 
     return render(request, 'requerimiento.html', {
-        'form': form,
-    })
-
-def reto(request):
-    if request.method == 'POST':
-        form = RetoForm(request.POST)
-        if form.is_valid():
-            objeto = form.save()
-            objeto.save()
-            
-            return redirect('home')
-    else :
-        form = RetoForm()
-
-    return render(request, 'reto.html', {
         'form': form,
     })
 
@@ -212,7 +141,3 @@ def reporte_lista(request, limit=100):
     
     return render(request, 'reportelista.html', {'lista_list': lista_list})
 
-def modificar_lista(request, limit=100):
-    lista_list = Lista.objects.all()    
-    
-    return render(request, 'reportelista.html', {'lista_list': lista_list})
