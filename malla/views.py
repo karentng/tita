@@ -21,7 +21,7 @@ def datosBasicos(request):
 
 def datosContacto(request):
     identificador = request.GET['v']
-    monitor = MonitorInfoPersonal.objects.get(id=identificador)
+    monitor = ContratistaInfoPersonal.objects.get(id=identificador)
 
     if request.method == 'POST':
         form = InformacionContactoForm(request.POST)
@@ -31,7 +31,7 @@ def datosContacto(request):
             objeto.save()
             ide = "?v="+str(monitor.id)
 
-            return HttpResponseRedirect('infoacademica%s' % ide)
+            return HttpResponseRedirect('areasconocimiento%s' % ide)
     else :
         form = InformacionContactoForm()
 
@@ -62,7 +62,7 @@ def datosAcademicos(request):
 
 def areasConocimiento(request):
     identificador = request.GET['v']
-    monitor = MonitorInfoPersonal.objects.get(id=identificador)
+    monitor = ContratistaInfoPersonal.objects.get(id=identificador)
 
     if request.method == 'POST':
         form =AreasConocimientoForm(request.POST)
@@ -72,7 +72,7 @@ def areasConocimiento(request):
             objeto.save()
             ide = "?v="+str(monitor.id)
             
-            return HttpResponseRedirect('horarios%s' % ide)
+            return HttpResponseRedirect('soportes%s' % ide)
     else :
         form = AreasConocimientoForm()
 
@@ -163,7 +163,7 @@ def reclamacion(request):
 def soportes(request):
 
     identificador = request.GET['v']
-    monitor = MonitorInfoPersonal.objects.get(id=identificador)
+    monitor = ContratistaInfoPersonal.objects.get(id=identificador)
 
     if request.method == 'POST':
         print "as"

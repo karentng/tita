@@ -13,48 +13,54 @@ def MyDateWidget():
 
 class InformacionBasicaForm(forms.ModelForm):
     class Meta:
-        model = MonitorInfoPersonal
-        fields = ('numero_documento', 'nombre1', 'nombre2', 'apellido1', 'apellido2','sexo', 'fecha_nacimiento', 'barrio', 'direccion', 'estrato', 'sector', 'sectordesplazamiento',)
+        model = ContratistaInfoPersonal
+        fields = ('numero_documento', 'nombre1', 'nombre2', 'apellido1', 'apellido2','sexo', 'fecha_nacimiento', 'direccion')#, 'estrato',)# 'sector', 'sectordesplazamiento',)
         widgets = {
             'fecha_nacimiento' : MyDateWidget()
         }
 
 class InformacionContactoForm(forms.ModelForm):
     class Meta:
-        model = MonitorInfoContacto
+        model = ContratistaInfoContacto
         fields = ('celularppal', 'celularsec', 'telfijoppal', 'telfijosec', 'email', 'twitter', 'facebook', 'personacontacto', 'numerocontacto',)
 
+'''
 class InformacionAcademicaForm(forms.ModelForm):
     class Meta:
         model = MonitorInfoAcademica
         fields = ('programa', 'jornada', 'semestre', 'promedioacum', 'nummaterias', 'codigo',)
+'''
 
 class AreasConocimientoForm(forms.ModelForm):
     class Meta:
-        model = AreasConocimiento
+        model = ContratistaAreasConocimiento
         fields = ('cienciasnaturales', 'fisica', 'quimica', 'biologia', 'matematica', 'trigonometria', 'algebra', 'logica', 'geometria', 'electronica', 'espanol', 'ingles', 'cienciassociales', 'filosofia', 'artistica', 'etica', 'cienciaseconomicas', 'educacionfisica', 'tecnologia', 'pedagogia', 'dibujotecnico',)
 
+'''
 class HorariosDisponiblesForm(forms.ModelForm):
     class Meta:
         model = HorariosDisponibles
         fields = ('lunesmanana', 'lunestarde', 'martesmanana', 'martestarde', 'miercolesmanana', 'miercolestarde', 'juevesmanana', 'juevestarde', 'viernesmanana', 'viernestarde',)
 
+
 class ComponenteForm(forms.ModelForm):
     class Meta:
         model = Componente
         fields = ('nombre', 'descripcion', 'valoraprobadocomp', 'persona')
+'''
 
 class RequerimientoForm(forms.ModelForm):
     class Meta:
         model = Requerimiento
-        fields = ('estado_req', 'fecha_rec', 'fecha_eje', 'fisico_fir', 'componente', 'descripcion_req', 'justificacion_req', 'no_monitores', 'lugar_req', 'valor_estimado_req', 'responsable', 'email_responsable', 'celular_responsable')
+        fields = ('estado_req', 'fecha_rec', 'fecha_eje', 'fisico_fir',  'descripcion_req', 'no_contratistas', 'lugar_req', 'responsable', 'email_responsable', 'celular_responsable')
         widgets = {
             'fecha_rec' : MyDateWidget(),
             'fecha_eje' : MyDateWidget(),
             'descripcion_req' : Textarea(attrs={'rows': 3}),
-            'justificacion_req' : Textarea(attrs={'rows': 3}),
+            #'justificacion_req' : Textarea(attrs={'rows': 3}),
         }
 
+'''
 class RetoForm(forms.ModelForm):
     class Meta:
         model = Reto
@@ -63,6 +69,7 @@ class RetoForm(forms.ModelForm):
             'descripcion' : Textarea(attrs={'rows': 3}),
             
         }
+'''
 
 class ReclamacionForm(forms.ModelForm):
     class Meta:
@@ -77,7 +84,7 @@ class ReclamacionForm(forms.ModelForm):
 class ListaForm(forms.ModelForm):
     class Meta:
         model = Lista
-        fields = ('asignacion', 'requerimiento', 'fecha', 'colegio', 'profesor', 'monitor', 'materia', 'espacio', 'condicion', 'tipo', 'idasigncancel', 'horas', 'observaciones')
+        fields = ('asignacion', 'requerimiento', 'fecha', 'colegio', 'profesor', 'contratista', 'materia', 'espacio', 'condicion', 'tipo', 'idasigncancel', 'horas', 'observaciones')
         widgets = {
             'fecha' : MyDateWidget(),
             'observaciones' : Textarea(attrs={'rows': 3}),
@@ -131,7 +138,7 @@ class MyFileInput(ClearableFileInput):
 
 class DocumentosSoporteForm(forms.ModelForm):
     class Meta:
-        model = DocumentosSoporte
+        model = ContratistaDocumentosSoporte
         exclude = ('monitor',)
         widgets = {
             'soportes' : MyFileInput(),
