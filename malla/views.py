@@ -141,3 +141,18 @@ def reporte_lista(request, limit=100):
     
     return render(request, 'reportelista.html', {'lista_list': lista_list})
 
+def monitor(request):
+    if request.method == 'POST':
+        form = MonitorForm(request.POST)
+        if form.is_valid():
+            objeto = form.save()
+            ide = objeto.id
+            ide = "?v="+str(ide)
+                       
+            return HttpResponseRedirect('home')
+    else :
+        form = MonitorForm()
+
+    return render(request, 'monitor.html', {
+        'form': form,
+    })

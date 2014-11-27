@@ -12,4 +12,5 @@ urlpatterns = patterns('malla.views',
     url(r'^malla/soportes$', 'soportes', name='soportes'),
     url(r'^malla/lista$', 'lista', name='lista'),
     url(r'^malla/reportelista$', 'reporte_lista', name='reporte_lista'),
+    url(r'^malla/monitor$', 'monitor', name='monitor'),
 )

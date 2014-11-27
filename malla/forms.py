@@ -9,7 +9,6 @@ from django_select2 import AutoModelSelect2Field, Select2MultipleWidget
 def MyDateWidget():
     return DateWidget(usel10n=False, bootstrap_version=3, options={'format': 'yyyy-mm-dd', 'startView':4, 'language':'es'})
 
-
 class InformacionBasicaForm(forms.ModelForm):
     class Meta:
         model = ContratistaInfoPersonal
@@ -108,6 +107,16 @@ class DocumentosSoporteForm(forms.ModelForm):
         model = ContratistaDocumentosSoporte
         exclude = ('monitor',)
         widgets = {
+            'soportes' : MyFileInput(),
+
+        }
+
+class MonitorForm(forms.ModelForm):
+    class Meta:
+        model = Monitor
+        fields = ('numero_documento', 'nombres', 'apellidos','celularppal', 'email', 'soportes')#, 'estrato',)# 'sector', 'sectordesplazamiento',)
+        widgets = {
+            'fecha_nacimiento' : MyDateWidget(),
             'soportes' : MyFileInput(),
 
         }

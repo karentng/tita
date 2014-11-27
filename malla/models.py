@@ -4,12 +4,19 @@ from campus.models import Formador
 from django.contrib.auth.models import User
 from estudiante.models import SEDES
 
+def crear_ruta_archivo_monitor(instance, filename):
+    randomstr = instance.monitor.numero_documento
+    return "malla_soportes_monitores/%s-%s/%s"%(instance.monitor_id, randomstr, filename.encode('ascii','ignore'))
+
 class Monitor(models.Model):
     numero_documento = models.BigIntegerField(unique=True, verbose_name='número documento')
-    nombre1 = models.CharField( max_length=255, verbose_name='primer nombre')
-    nombre2 = models.CharField( max_length=255, blank=True, verbose_name='segundo nombre')
-    apellido1 = models.CharField( max_length=255, verbose_name='primer apellido')
-    apellido2 = models.CharField( max_length=255, blank=True, verbose_name='segundo apellido')
+    nombres = models.CharField( max_length=255, verbose_name='nombres')
+    #nombre2 = models.CharField( max_length=255, blank=True, verbose_name='segundo nombre')
+    apellidos = models.CharField( max_length=255, verbose_name='apellidos')
+    #apellido2 = models.CharField( max_length=255, blank=True, verbose_name='segundo apellido')
+    celularppal = models.BigIntegerField(verbose_name=u'no. celular')
+    email = models.EmailField()
+    soportes = models.FileField(upload_to=crear_ruta_archivo_monitor, blank=True, null=True, help_text='Adjunte la certificación de: DE-10, Tabulado, Recibo de pago, Fotocopia de la cédula y RUT. Se recomienda que comprima todos los archivos en una carpeta ZIP, o añadirlo todo a un documento y subirlo en formato PDF.') 
 
 class ContratistaInfoPersonal(models.Model):
     PROGRAMAS = (
@@ -138,8 +145,8 @@ class ContratistaAreasConocimiento(models.Model):
     dibujotecnico = models.BooleanField(verbose_name='dibujo técnico') 
 
 def crear_ruta_archivo(instance, filename):
-    randomstr = instance.monitor.numero_documento
-    return "malla_soportes/%s-%s/%s"%(instance.monitor_id, randomstr, filename.encode('ascii','ignore'))
+    randomstr = instance.contratista.numero_documento
+    return "malla_soportes_contratistas/%s-%s/%s"%(instance.contratista_id, randomstr, filename.encode('ascii','ignore'))
 
 class ContratistaDocumentosSoporte(models.Model):
     monitor = models.OneToOneField(ContratistaInfoPersonal, primary_key=True)
