@@ -994,9 +994,10 @@ def curso(request):
         if form.is_valid():
             objeto = form.save()
             
-            response = redirect('add_curso')
+            '''response = redirect('add_curso')
             response['Location'] +="?sedes="+ sedes+'&jornada='+jornada
-            return response
+            return response'''
+            return redirect('gestion_cursos')
     else :
         form = CursoForm(sede=sede, jornada=jornada)
 
