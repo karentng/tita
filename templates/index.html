@@ -9,7 +9,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="Proyecto TITA - Formación docente en pedagogía mediada con tecnologías de la información y la comunicación" name="description" />
     <meta content="Cedesoft" name="author" />
-    
+
     <link rel="icon" type="image/png" href="{{STATIC_URL}}img/favicon.png">
 
     <script src="{{STATIC_URL}}plugins/jquery-1.8.2/jquery-1.8.2.min.js"></script> {# jquery aqui porque algunos plugins lo usan directamente #}
@@ -25,17 +25,17 @@
         b.titulo {
             color:rgb(30,85,146);
             font-weight:900;
-            font-size:25px; 
-            margin-top:20px; 
+            font-size:25px;
+            margin-top:20px;
             text-overflow:ellipsis;
             white-space: nowrap;
             width:auto;
         }
-        
+
         .in {
 			background-color:white
 		}
-		
+
 		/* centered columns styles */
 		.row-centered {
 			text-align:center;
@@ -67,7 +67,7 @@
     <!-- begin #page-loader -->
     {#<div id="page-loader" class="fade in"><span class="spinner"></span></div>#}
     <!-- end #page-loader -->
-    
+
     <!-- begin #page-container -->
     <div id="page-container" {# class="fade" #} >
         <!-- begin #header -->
@@ -128,7 +128,7 @@
 				<div class="row">
 					<div class="col-lg-2">
 						<div style="margin-top:10px;">
-							<img class="img-responsive" src="https://dl.dropboxusercontent.com/u/5610373/tita-small.png" alt="" />
+							<img class="img-responsive" src="{{STATIC_URL}}img/tita-small.png" alt="" />
 						</div>
 					</div>
 					<div class="col-md-8" style="background-color:#225894;">
@@ -144,7 +144,7 @@
 						<div class="widget widget-state bg-green">
 							<div class="state-icon"><i class="fa fa-users"></i></div>
 							<div class="state-info">
-								<h4>CONVOCATORIA PARA DOCENTES<br/><br/>Segunda cohorte<br/></h4>	
+								<h4>CONVOCATORIA PARA DOCENTES<br/><br/>Segunda cohorte<br/></h4>
 							</div>
 							<div class="state-link">
 								<a href="http://convocatoria2.titaedpt.com.co/inscripcion/iniciar-inscripcion">Haga clic aqui <i class="fa fa-arrow-circle-o-right"></i></a>
@@ -180,7 +180,7 @@
 			<br/>
 			<br/>
 			<hr>
-			<img class="img-responsive center-block" src="{{STATIC_URL}}img/footer.png?v=2"  style="width:85%; border-radius:10px;" >
+			<img class="img-responsive center-block" src="{{STATIC_URL}}img/footer_3.png?v=2"  style="width:85%; border-radius:10px;" >
 			<h6 class="text-center">Contacto: <a href="mailto:titaedpt@gmail.com">titaedpt@gmail.com</a></h6>
         </div>
         <!-- end #content -->
@@ -189,9 +189,9 @@
         <!-- end scroll to top btn -->
     </div>
     <!-- end page container -->
-    
+
     <!-- ================== BEGIN BASE JS ================== -->
-    
+
     <script src="{{STATIC_URL}}plugins/jquery-ui-1.10.4/ui/minified/jquery-ui.min.js"></script>
     <script src="{{STATIC_URL}}plugins/bootstrap-3.1.1/js/bootstrap.min.js"></script>
     <!--[if lt IE 9]>
@@ -201,7 +201,7 @@
     <![endif]-->
     <script src="{{STATIC_URL}}plugins/slimscroll/jquery.slimscroll.min.js"></script>
     <!-- ================== END BASE JS ================== -->
-    
+
     <!-- ================== BEGIN PAGE LEVEL JS ================== -->
     <script src="{{STATIC_URL}}js/apps.min.js"></script>
     <!-- ================== END PAGE LEVEL JS ================== -->
