@@ -250,7 +250,59 @@
 						
                     </div>
                 </div>
+
             </div>
+
+        </div>
+
+                    <div class="panel panel-inverse">
+		    <div class="panel-heading">
+		        <div class="panel-heading-btn">
+		            <div class="panel-heading-btn">
+                    <a class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-collapse" data-original-title="" title=""><i class="fa fa-minus"></i></a>
+                </div>
+		            
+		        </div>
+		        <h4 class="panel-title">Filtrar Eventos en Calendario</h4>
+
+
+		    </div>
+		    <div class="panel-body p-0">
+		        <div class="horizontal-box">
+		            <div class="col-md-12 p-15 bg-silver " >
+		            	
+		            	<form  method="post" >
+								 {% csrf_token %}
+								 {% bootstrap_form form2 layout="vertical" %}
+								 
+							<script type="text/javascript">
+
+			            		$("#id_sedes").change(function(){
+									var aux = $(this).val();
+																	
+			            			$("#id_sedes").attr("value",aux);
+			            			var aux2 = $(this).find(":selected").text();
+			            		
+			            			var url = "/programacion/cronograma_diplomado?sede="+encodeURI(aux2)+"";
+
+			            			$("#id_boton").html("<a href= "+url+" class="+"'btn btn-primary'"+">Filtrar</a>");
+			            			console.log(aux2);
+			            		})
+		            			
+		            		</script>
+
+		            			<div id="id_boton">
+								 
+								</div>
+								 
+						</form>
+						<br>
+						
+                    </div>
+                </div>
+            </div>
+        </div>
+
         </div>
     {% endif %}
         <div class="panel panel-inverse">

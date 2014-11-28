@@ -13,6 +13,7 @@ from campus.views import user_group
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_list_or_404, get_object_or_404
 from django.db.models import Q
+from heapq import merge
 
 
 def cronograma(request):
@@ -57,9 +58,25 @@ def cronograma(request):
                         eventos.append(x[i])
 
     if grupo == "Coordinador":
-        eventos = AcompanamientoInSitus.objects.all()
+        if request.method == 'GET' and 'sede' in request.GET:
+            sede = request.GET.get('sede')
+            
+            if sede != None:
+                eventos = []                
+                try:
+                    curso = Cursos.objects.filter(institucion=sede)
+                    for c in curso:
+                        x = AcompanamientoInSitus.objects.filter(curso = c)
+                    #eventos.append(x)
+                        eventos = list(merge(eventos, x))
+                except Exception, e:
+                    eventos = []          
+
+        else:
+            eventos = AcompanamientoInSitus.objects.all()
 
     if request.method == 'POST':
+        form2 = FiltroCronograma(request.POST)
         form = EventosAcompanamientoForm(request.POST)
                 
         if form.is_valid():
@@ -330,6 +347,7 @@ def cronograma(request):
     else:
 
         form = EventosAcompanamientoForm(initial={'nombre': 'Visita'})
+        form2 = FiltroCronograma()
 
 
     
@@ -381,9 +399,11 @@ def cronograma(request):
     
     return render(request, 'cronograma.html', {
         'formAcompanamiento': form,
+
         'eventos': json.dumps(events),
         'user_group': user_group(request),
         'opcion_menu': 4,
+        'form2':form2,
     })
 
 
@@ -445,9 +465,25 @@ def diplomado(request):
         '''
 
     if grupo == "Coordinador":
-        eventos = Clases.objects.all()
+        if request.method == 'GET' and 'sede' in request.GET:
+            sede = request.GET.get('sede')
+            
+            if sede != None:
+                eventos = []                
+                try:
+                    curso = Cursos.objects.filter(institucion=sede)
+                    for c in curso:
+                        x = Clases.objects.filter(curso = c)
+                    #eventos.append(x)
+                        eventos = list(merge(eventos, x))
+                except Exception, e:
+                    eventos = []          
+
+        else:
+            eventos = Clases.objects.all()
 
     if request.method == 'POST':
+        form2 = FiltroCronograma(request.POST)
         form = EventosDiplomadoForm(request.POST)
         if form.is_valid():
             objeto = Clases()
@@ -720,6 +756,7 @@ def diplomado(request):
             return redirect('cronograma_diplomado')
     else:
         form = EventosDiplomadoForm(initial={'nombre': 'Sesion'}) 
+        form2 = FiltroCronograma()
 
     #eventos = Clases.objects.all()
     #
@@ -761,6 +798,7 @@ def diplomado(request):
         'eventos': json.dumps(events),
         'user_group': user_group(request),
         'opcion_menu': 3,
+        'form2':form2,
     })
 
 def diplomado_modificar(request):

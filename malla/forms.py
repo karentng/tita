@@ -64,26 +64,22 @@ from django.utils.encoding import force_text, python_2_unicode_compatible
 from django.utils.safestring import mark_safe
 from django.utils.html import conditional_escape, format_html
 from django.forms import CheckboxInput
-
+import os.path
 class MyFileInput(ClearableFileInput):
-    #initial_text = ugettext_lazy('Currently')
-    #input_text = ugettext_lazy('Change')
-    clear_checkbox_label = 'Quitar' #ugettext_lazy('Clear')
-
-    #template_with_initial = '%(initial_text)s: %(initial)s %(clear_template)s<br />%(input_text)s: %(input)s'
-
+    
+    clear_checkbox_label = '' #ugettext_lazy('Clear')
     template_with_clear = '%(clear)s <label class="text-danger" style="cursor:pointer" for="%(clear_checkbox_id)s">%(clear_checkbox_label)s</label>'
-
     url_markup_template = '<a target="_blank" href="{0}">{1}</a>'
 
-
     def render(self, name, value, attrs=None):
+        
         substitutions = {
             'initial_text': self.initial_text,
             'input_text': self.input_text,
             'clear_template': '',
             'clear_checkbox_label': self.clear_checkbox_label,
         }
+
         template = '%(input)s'
         substitutions['input'] = super(ClearableFileInput, self).render(name, value, attrs)
 
@@ -92,15 +88,16 @@ class MyFileInput(ClearableFileInput):
             substitutions['initial'] = format_html(self.url_markup_template,
                                                    value.url,
                                                    os.path.basename(value.name))
-            if not self.is_required:
+            if  self.is_required:
                 checkbox_name = self.clear_checkbox_name(name)
                 checkbox_id = self.clear_checkbox_id(checkbox_name)
                 substitutions['clear_checkbox_name'] = conditional_escape(checkbox_name)
                 substitutions['clear_checkbox_id'] = conditional_escape(checkbox_id)
-                substitutions['clear'] = CheckboxInput(attrs={'onclick':'if(confirm("Seguro que desea quitar este archivo?")){  $("form").submit() } else return false;' } ).render(checkbox_name, False, attrs={'id': checkbox_id, 'style':'display:none'})
+                substitutions['clear'] = CheckboxInput(attrs={'onclick':'if(confirm("Seguro que desea quitar este archivo?")){  $("form").submit().submit() } else return false;' } ).render(checkbox_name, False, attrs={'id': checkbox_id, 'style':'display:none'})
                 substitutions['clear_template'] = self.template_with_clear % substitutions
 
         return mark_safe(template % substitutions)
+
 
 class DocumentosSoporteForm(forms.ModelForm):
     class Meta:
