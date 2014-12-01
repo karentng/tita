@@ -2,7 +2,7 @@
 from django.core.management.base import BaseCommand, CommandError
 from django.template import Template, Context
 import smtplib
-from campus.models import Estudiante, Municipio
+from campus.models import Estudiante, Municipio, Cursos
 from estudiante.models import InfoLaboral, FormacionAcademicaME, CertificacionTIC
 import csv
 
@@ -10,7 +10,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         archivo = open("MaestrosEstudiante.csv","w") 
         writer = csv.writer(archivo, delimiter=';')
-        writer.writerow(["Nombre Completo", u"Cédula".encode('iso-8859-1'),
+        writer.writerow(["Grupos", "Nombre Completo", u"Cédula".encode('iso-8859-1'),
             u"Género".encode('iso-8859-1'), u"Correo Personal".encode('iso-8859-1'), "Correo Institucional", "Municipio",
             u"Teléfono Fijo".encode('iso-8859-1'), "Celular", u"Dirección".encode('iso-8859-1'), "Nivel Educativo",
             u"Secretaría de Educación".encode('iso-8859-1'),"Sede", "Cargo", "Zona", "Jornada", "Asignaturas",
@@ -58,8 +58,13 @@ class Command(BaseCommand):
                 decreto_docente+= " - "+"D.L 2277 de 1979"
             else:
                 decreto_docente+= " - "+"D.L 1278 de 2002"
+
+            curs = Cursos.objects.filter(estudiantes=aspirante)
+            cursos = ""
+            for i in curs:
+                cursos+= i.descripcion.encode('iso-8859-1')+" - "
             
-            arreglo = [nombre, num_doc, aspirante.sexo, aspirante.email, aspirante.email_institucional,
+            arreglo = [cursos, nombre, num_doc, aspirante.sexo, aspirante.email, aspirante.email_institucional,
             municipio.nombre.encode('iso-8859-1'), aspirante.telefono, aspirante.celular,
             aspirante.direccion.encode('iso-8859-1'), aspirante.get_nivel_educativo_display().encode('iso-8859-1'),
             infoLaboral.secretaria_educacion.nombre,
