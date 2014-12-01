@@ -60,6 +60,10 @@ def areasConocimiento(request):
     })
 
 def requerimiento(request):
+    grupo = user_group(request)
+    if grupo == None:
+        return redirect('home')
+
     if request.method == 'POST':
         form = RequerimientoForm(request.POST)
         if form.is_valid():
@@ -75,6 +79,10 @@ def requerimiento(request):
     })
 
 def reclamacion(request):
+    grupo = user_group(request)
+    if grupo == None:
+        return redirect('home')
+
     if request.method == 'POST':
         form = ReclamacionForm(request.POST)
         if form.is_valid():
@@ -115,6 +123,9 @@ def soportes(request):
     })
 
 def lista(request):
+    grupo = user_group(request)
+    if grupo == None:
+        return redirect('home')
 
     username = ""
     if request.user.is_authenticated():
@@ -137,11 +148,19 @@ def lista(request):
     })
 
 def reporte_lista(request, limit=100):
+    grupo = user_group(request)
+    if grupo == None:
+        return redirect('home')
+
     lista_list = Lista.objects.all()    
     
     return render(request, 'reportelista.html', {'lista_list': lista_list})
 
 def monitor(request):
+    grupo = user_group(request)
+    if grupo == None:
+        return redirect('home')
+
     if request.method == 'POST':
         form = MonitorForm(request.POST)
         if form.is_valid():

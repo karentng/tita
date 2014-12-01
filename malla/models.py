@@ -3,6 +3,7 @@ from django.db import models
 from campus.models import Formador
 from django.contrib.auth.models import User
 from estudiante.models import SEDES
+from campus.views import user_group
 
 def crear_ruta_archivo_monitor(instance, filename):
     randomstr = instance.monitor.numero_documento
@@ -88,6 +89,19 @@ class ContratistaInfoPersonal(models.Model):
         ('66', 'Psicología'),
         ('67', 'Salud Ocupacional'),
     )
+
+    UNIVERSIDADES = (
+        ("Universidad del Valle", "Universidad del Valle"),
+        ("Universidad Javeriana", "Universidad Javeriana"),
+        ("Universidad Icesi", "Universidad Icesi"),
+        ("Universidad San buenaventura", "Universidad San buenaventura"),
+        ("Universidad Autonoma", "Universidad Autonoma"),
+        ("Universidad Santiago de Cali", "Universidad Santiago de Cali"),
+        ("Universidad Libre", "Universidad Libre"),
+        ("Universidad Cooperativa", "Universidad Cooperativa"),
+        ("Universidad San Martin", "Universidad San Martin"),
+        ("Otra", "Otra")
+        )
     numero_documento = models.BigIntegerField(unique=True, verbose_name='número documento')
     nombre1 = models.CharField( max_length=255, verbose_name='primer nombre')
     nombre2 = models.CharField( max_length=255, blank=True, verbose_name='segundo nombre')
@@ -97,6 +111,7 @@ class ContratistaInfoPersonal(models.Model):
     fecha_nacimiento = models.DateField(verbose_name='fecha de nacimiento', help_text='Formato año-mes-día (ej: 1988-04-30)')
     #barrio = models.CharField( max_length=100, verbose_name='barrio de residencia')
     direccion = models.CharField( max_length=100, verbose_name='dirección')
+    universidad = models.CharField(max_length=255, choices=UNIVERSIDADES)
     programa_academico = models.CharField( choices=PROGRAMAS, max_length=3, verbose_name='programa académico', help_text='Si no encuentra el programa que estudió, seleccione el que más se relacione.')
     #estrato = models.CharField( choices=[('1','1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5'), ('6', '6')], max_length=1, verbose_name='estrato')
     #sector = models.CharField( choices=[('1','Sur'), ('2', 'Oriente'), ('3', 'Distrito de Agua Blanca'), ('4', 'Norte Oriente'), ('5', 'Norte Occidente')], max_length=1, verbose_name='sector en que vive')
