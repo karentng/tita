@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block titulo %} Finalizar Contratista {% endblock %}
+
+{% block menu %}
+    {% include "menus/publico.html" with opcion_menu=15 %}
+{% endblock %}
+
+{% block css %}
+    <link href="{{STATIC_URL}}plugins/bootstrap-wizard/css/bwizard.min.css" rel="stylesheet" />
+    <!--- ñiiipi -->
+    {{form.media}} {# agrega los js y css necesarios para el bootstrap3 datetimepicker y select2 #}
+    <!--- :D -->
+{% endblock %}
+
+{% block js %}
+    {% if solo_lectura%}
+    <script>
+        $(function(){
+            $("select").attr("disabled", "disabled");
+            $("input").attr("readonly", "readonly");
+        });
+    </script>
+
+    {% endif %}
+{% endblock %}
+
+{% block miga_pan %}
+    <li><a href="{% url 'home' %}">Inicio</a></li>
+    <li class="active">Finalizar Contratista</li>
+{% endblock %}
+
+{% block titulo_contenido %}Finalizar de Contratista{% endblock %}
+{% block titulo_panel %}<i class="fa fa-user"></i> Finalizar Creación de Contratista{% endblock %}
+{% block contenido_panel %}
+	<center><p><h5>Formulario finalizado !</h5></p>
+	<a href="{% url 'inicioContratista' %}"><button class="btn btn-primary">Volver</button></a></center>
+{% endblock %}

@@ -1,8 +1,7 @@
-
 {% extends "base.html" %}
 {% load bootstrap3 %}
 
-{% block titulo %} Listas {% endblock %}
+{% block titulo %} Requerimientos {% endblock %}
 
 {% block menu %}
     {% include "menus/publico.html" with opcion_menu=20 %}
@@ -29,44 +28,47 @@
 
 {% block miga_pan %}
     <li><a href="{% url 'home' %}">Inicio</a></li>
-    <li class="active">Listas</li>
+    <li class="active">Requerimientos</li>
 {% endblock %}
 
-{% block titulo_contenido %}Lista de Listas{% endblock %}
+{% block titulo_contenido %}Lista de Requerimientos{% endblock %}
 
 {% block previo_contenido_panel %}
     
 {% endblock %}
 
-{% block titulo_panel %}<i class="fa fa-user"></i> Ver Listas{% endblock %}
+{% block titulo_panel %}<i class="fa fa-user"></i> Ver Requerimientos{% endblock %}
 {% block contenido_panel %}
 
     <table  class = "table">
         <tr>
             <thead>
                 <td class="info">
-                    Asignación
+                    Estado
                 </td>
                 <td class="info">
-                    Profesor
+                    Fecha Recibido
                 </td>
                 <td class="info">
-                    Monitor
+                    Fecha Ejecución
                 </td>
                 <td class="info">
-                    Institución
+                    Descripción
                 </td>
                 <td class="info">
-                    Asignatura
+                    Número de Contratistas
                 </td>
                 <td class="info">
-                    Espacio
+                    Lugar
                 </td>
                 <td class="info">
-                    Condición
+                    Responsable
                 </td>
                 <td class="info">
-                    Tipo
+                    Email del responsable
+                </td>
+                <td class="info">
+                    Celular del responsable
                 </td>
                 <td class="info">
                     Modificar
@@ -76,38 +78,41 @@
                 </td>
             </thead>
         </tr>
-        {% for lista in lista_list %}
+        {% for requerimiento in requerimientos %}
         <tr>
             <tbody>
                 <td >
-                    {{ lista.asignacion }}
+                    {{ requerimiento.estado_req }}
                 </td>
                 <td >
-                    {{ lista.profesor }}
+                    {{ requerimiento.fecha_rec }}
                 </td>
                 <td >
-                    {{ lista.monitor }}
+                    {{ requerimiento.fecha_eje }}
                 </td>
                 <td >
-                    {{ lista.colegio }}
+                    {{ requerimiento.descripcion_req }}
                 </td>
                 <td >
-                    {{ lista.materia }}
+                    {{ requerimiento.no_contratistas }}
                 </td>
                 <td >
-                    {{ lista.espacio }}
+                    {{ requerimiento.lugar_req }}
                 </td>
                 <td >
-                    {{ lista.condicion }}
+                    {{ requerimiento.responsable }}
                 </td>
                 <td >
-                    {{ lista.tipo }}
+                    {{ requerimiento.email_responsable }}
                 </td>
                 <td >
-                    <a href="{% url 'lista' lista.id %}" class="btn btn-warning btn-icon btn-circle btn-lg"><i class="fa fa- fa-edit"></i></a>
+                    {{ requerimiento.celular_responsable }}
                 </td>
                 <td >
-                    <a href="{% url 'eliminar_lista' lista.id %}" onclick="return confirm('¿Desea eliminar la lista seleccionada?')" class="btn btn-danger btn-icon btn-circle btn-lg"><i class="fa fa-times"></i></a>
+                    <a href="{% url 'requerimiento' requerimiento.id %}" class="btn btn-warning btn-icon btn-circle btn-lg"><i class="fa fa- fa-edit"></i></a>
+                </td>
+                <td >
+                    <a href="{% url 'eliminar_requerimiento' requerimiento.id %}" onclick="return confirm('¿Desea eliminar la lista seleccionada?')" class="btn btn-danger btn-icon btn-circle btn-lg"><i class="fa fa-times"></i></a>
                 </td>
         {% endfor %}
         </tbody>

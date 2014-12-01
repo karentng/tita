@@ -3,6 +3,10 @@ from malla.forms import *
 from django.http import HttpResponse, HttpResponseRedirect
 from malla.models import *
 
+def inicioContratista(request):
+    return render(request, 'inicioContratista.html', {
+    })
+
 def datosBasicos(request):
     if request.method == 'POST':
         form = InformacionBasicaForm(request.POST)
@@ -59,24 +63,39 @@ def areasConocimiento(request):
         'form': form,
     })
 
-def requerimiento(request):
+def requerimiento(request, id=None):
     grupo = user_group(request)
     if grupo == None:
         return redirect('home')
+    try:
+        requerimiento = Requerimiento.objects.get(id=id)
+    except Exception:
+        requerimiento = None
 
     if request.method == 'POST':
-        form = RequerimientoForm(request.POST)
+        form = RequerimientoForm(request.POST, instance=requerimiento)
         if form.is_valid():
             objeto = form.save()
             objeto.save()
             
             return redirect('home')
     else :
-        form = RequerimientoForm()
+        form = RequerimientoForm(instance=requerimiento)
 
     return render(request, 'requerimiento.html', {
         'form': form,
     })
+
+def listar_requerimientos(request):
+    requerimientos = Requerimiento.objects.all()
+    return render(request, 'listar_requerimientos.html', {
+        'requerimientos': requerimientos,
+    })
+
+def eliminar_requerimiento(request, id):
+    req = Requerimiento.objects.get(id=id)
+    req.delete()
+    return redirect('listar_requerimientos')
 
 def reclamacion(request):
     grupo = user_group(request)
@@ -111,7 +130,7 @@ def soportes(request):
             obj.monitor = monitor
             obj.save()
             print "sdfs"
-            return redirect('home')
+            return redirect('finalizar_contratista')
 
     else:
         print "asdafdsa"
@@ -122,10 +141,18 @@ def soportes(request):
         'form': form,
     })
 
-def lista(request):
+def finalizar_contratista(request):
+    return render(request, 'finalizar_contratista.html', {
+    })
+
+def lista(request, id=None):
     grupo = user_group(request)
     if grupo == None:
         return redirect('home')
+    try:
+        lista_obj = Lista.objects.get(id=id)
+    except Exception:
+        lista_obj = None
 
     username = ""
     if request.user.is_authenticated():
@@ -133,7 +160,7 @@ def lista(request):
         username = request.user.username
 
     if request.method == 'POST':
-        form = ListaForm(request.POST)
+        form = ListaForm(request.POST, instance=lista_obj)
         if form.is_valid():
             objeto = form.save(commit=False)
             objeto.usuario = username
@@ -141,11 +168,19 @@ def lista(request):
             
             return redirect('home')
     else :
-        form = ListaForm()
+        form = ListaForm(instance=lista_obj)
 
     return render(request, 'lista.html', {
         'form': form,
     })
+def eliminar_lista(request, id):
+    lista = Lista.objects.get(id=id)
+    lista.delete()
+    return redirect('reporte_lista')
+
+def modificar_lista(request, id):
+    print id
+
 
 def reporte_lista(request, limit=100):
     grupo = user_group(request)
