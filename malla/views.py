@@ -191,22 +191,49 @@ def reporte_lista(request, limit=100):
     
     return render(request, 'reportelista.html', {'lista_list': lista_list})
 
-def monitor(request):
+def monitor(request, id=None):
     grupo = user_group(request)
     if grupo == None:
         return redirect('home')
 
+    try:
+        monitor_obj = Monitor.objects.get(id=id)
+    except Exception:
+        monitor_obj = None
+
     if request.method == 'POST':
-        form = MonitorForm(request.POST)
+        form = MonitorForm(request.POST, instance=monitor_obj)
         if form.is_valid():
             objeto = form.save()
             ide = objeto.id
             ide = "?v="+str(ide)
                        
-            return HttpResponseRedirect('home')
+            return redirect('home')
     else :
-        form = MonitorForm()
+        form = MonitorForm(instance=monitor_obj)
 
     return render(request, 'monitor.html', {
         'form': form,
     })
+
+def listar_monitores(request):
+    monitores = Monitor.objects.all()
+    return render(request, 'listar_monitores.html', {
+        'monitores': monitores,
+    })
+
+def eliminar_monitor(request, id):
+    monitor = Monitor.objects.get(id=id)
+    monitor.delete()
+    return redirect('listar_monitores')
+
+def listar_contratistas(request):
+    contratistas = ContratistaInfoPersonal.objects.all()
+    return render(request, 'listar_contratistas.html', {
+        'contratistas': contratistas,
+    })
+
+def eliminar_contratista(request, id):
+    contratista = ContratistaInfoPersonal.objects.get(id=id)
+    contratista.delete()
+    return redirect('listar_contratistas')

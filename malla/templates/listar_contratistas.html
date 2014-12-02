@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block titulo %} Contratistas {% endblock %}
+
+{% block menu %}
+    {% include "menus/publico.html" with opcion_menu=20 %}
+{% endblock %}
+
+{% block css %}
+    
+    <!--- ñiiipi -->
+    {{form.media}} {# agrega los js y css necesarios para el bootstrap3 datetimepicker y select2 #}
+    <!--- :D -->
+{% endblock %}
+
+{% block js %}
+    {% if solo_lectura%}
+    <script>
+        $(function(){
+            $("select").attr("disabled", "disabled");
+            $("input").attr("readonly", "readonly");
+        });
+    </script>
+
+    {% endif %}
+{% endblock %}
+
+{% block miga_pan %}
+    <li><a href="{% url 'home' %}">Inicio</a></li>
+    <li class="active">Contratistas</li>
+{% endblock %}
+
+{% block titulo_contenido %}Lista de Contratistas{% endblock %}
+
+{% block previo_contenido_panel %}
+    
+{% endblock %}
+
+{% block titulo_panel %}<i class="fa fa-user"></i> Ver Contratistas{% endblock %}
+{% block contenido_panel %}
+
+    <table  class = "table">
+        <tr>
+            <thead>
+                <td class="info">
+                    Número de Documento
+                </td>
+                <td class="info">
+                    Nombre Completo
+                </td>
+                <td class="info">
+                    Sexo
+                </td>
+                <td class="info">
+                    Universidad
+                </td>
+                <td class="info">
+                    Programa Académico
+                </td>
+                <td class="info">
+                    Modificar
+                </td>
+                <td class="info">
+                    Eliminar
+                </td>
+            </thead>
+        </tr>
+        {% for contratista in contratistas %}
+        <tr>
+            <tbody>
+                <td >
+                    {{ contratista.numero_documento }}
+                </td>
+                <td >
+                    {{ contratista }}
+                </td>
+                <td >
+                    {{ contratista.sexo }}
+                </td>
+                <td >
+                    {{ contratista.get_universidad_display }}
+                </td>
+                <td >
+                    {{ contratista.get_programa_academico_display }}
+                </td>
+                <td >
+                    <a href="{% url 'home' %}" class="btn btn-warning btn-icon btn-circle btn-lg"><i class="fa fa- fa-edit"></i></a>
+                </td>
+                <td >
+                    <a href="{% url 'eliminar_contratista' contratista.id %}" onclick="return confirm('¿Desea eliminar la lista seleccionada?')" class="btn btn-danger btn-icon btn-circle btn-lg"><i class="fa fa-times"></i></a>
+                </td>
+        {% endfor %}
+        </tbody>
+        </tr>
+    </table><br>  
+{% endblock %}
