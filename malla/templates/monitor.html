@@ -33,11 +33,7 @@
 
 {% block titulo_contenido %}Formulario de Registro de Monitores{% endblock %}
 
-{% block previo_contenido_panel %}
-    {% include "wizard.html" with wizard_stage=5 %}
-{% endblock %}
-
-{% block titulo_panel %}<i class="fa fa-user"></i> Horarios Disponibles{% endblock %}
+{% block titulo_panel %}<i class="fa fa-user"></i> Datos Personales{% endblock %}
 {% block contenido_panel %}
 
     {% if request.POST %}
@@ -47,40 +43,18 @@
         </div>
     {% endif %}
 
-    
-    <h5>En esta sección nos dará a conocer en que horarios podría ofrecer apoyo docente en las instituciones educativas.
-    <br><br>
-    </h5>
+
     <br><br>
 
 
     <form class="form-horizontal" method="post">{% if solo_lectura %} {% else %} {% csrf_token %} {% endif %}
-        
-        <table class="table">
-            <thead>
-                <tr><td>Día/Horario</td><td>Mañana</td><td>Tarde</td>
-                </tr>
-                
-            </thead>
-            <tbody>
-                <tr><td>Lunes</td><td>{{form.lunesmanana}}</td><td>{{form.lunestarde}}</td>
-                </tr>
-                <tr><td>Martes</td><td>{{form.martesmanana}}</td><td>{{form.martestarde}}</td>
-                </tr>
-                <tr><td>Miercoles</td><td>{{form.miercolesmanana}}</td><td>{{form.miercolestarde}}</td>
-                </tr>
-                <tr><td>Jueves</td><td>{{form.juevesmanana}}</td><td>{{form.juevestarde}}</td>
-                </tr>
-                <tr><td>Viernes</td><td>{{form.viernesmanana}}</td><td>{{form.viernestarde}}</td>
-                </tr>
-            </tbody>
-
-        </table>
+        {% bootstrap_form form layout="horizontal" %}
 
         {% if solo_lectura %}
-            <a id="siguiente" href="{% url 'soportes' %}" class="btn btn-lg btn-primary pull-right">Siguiente <i class="fa fa-angle-right"></i></a>
+            <a id="siguiente" href="{% url 'datos_contacto' %}" class="btn btn-lg btn-primary pull-right">Siguiente <i class="fa fa-angle-right"></i></a>
         {% else %}
-            <button class="btn btn-lg btn-primary pull-right" type="submit">Siguiente <i class="fa fa-angle-right"></i></button>
+            <button class="btn btn-lg btn-primary pull-right" type="submit">Guardar </button>
         {% endif %}
     </form>
 {% endblock %}
+

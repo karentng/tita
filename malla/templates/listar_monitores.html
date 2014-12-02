@@ -1,8 +1,7 @@
-
 {% extends "base.html" %}
 {% load bootstrap3 %}
 
-{% block titulo %} Listas {% endblock %}
+{% block titulo %} Monitores {% endblock %}
 
 {% block menu %}
     {% include "menus/publico.html" with opcion_menu=20 %}
@@ -29,44 +28,35 @@
 
 {% block miga_pan %}
     <li><a href="{% url 'home' %}">Inicio</a></li>
-    <li class="active">Listas</li>
+    <li class="active">Monitores</li>
 {% endblock %}
 
-{% block titulo_contenido %}Lista de Listas{% endblock %}
+{% block titulo_contenido %}Lista de Monitores{% endblock %}
 
 {% block previo_contenido_panel %}
     
 {% endblock %}
 
-{% block titulo_panel %}<i class="fa fa-user"></i> Ver Listas{% endblock %}
+{% block titulo_panel %}<i class="fa fa-user"></i> Ver Monitores{% endblock %}
 {% block contenido_panel %}
 
     <table  class = "table">
         <tr>
             <thead>
                 <td class="info">
-                    Asignación
+                    Número de Documento
                 </td>
                 <td class="info">
-                    Profesor
+                    Nombres
                 </td>
                 <td class="info">
-                    Monitor
+                    Apellidos
                 </td>
                 <td class="info">
-                    Institución
+                    Celular
                 </td>
                 <td class="info">
-                    Asignatura
-                </td>
-                <td class="info">
-                    Espacio
-                </td>
-                <td class="info">
-                    Condición
-                </td>
-                <td class="info">
-                    Tipo
+                    Email
                 </td>
                 <td class="info">
                     Modificar
@@ -76,38 +66,29 @@
                 </td>
             </thead>
         </tr>
-        {% for lista in lista_list %}
+        {% for monitor in monitores %}
         <tr>
             <tbody>
                 <td >
-                    {{ lista.asignacion }}
+                    {{ monitor.numero_documento }}
                 </td>
                 <td >
-                    {{ lista.profesor }}
+                    {{ monitor.nombres }}
                 </td>
                 <td >
-                    {{ lista.monitor }}
+                    {{ monitor.apellidos }}
                 </td>
                 <td >
-                    {{ lista.colegio }}
+                    {{ monitor.celularppal }}
                 </td>
                 <td >
-                    {{ lista.materia }}
+                    {{ monitor.email }}
                 </td>
                 <td >
-                    {{ lista.espacio }}
+                    <a href="{% url 'monitor' monitor.id %}" class="btn btn-warning btn-icon btn-circle btn-lg"><i class="fa fa- fa-edit"></i></a>
                 </td>
                 <td >
-                    {{ lista.condicion }}
-                </td>
-                <td >
-                    {{ lista.tipo }}
-                </td>
-                <td >
-                    <a href="{% url 'lista' lista.id %}" class="btn btn-warning btn-icon btn-circle btn-lg"><i class="fa fa- fa-edit"></i></a>
-                </td>
-                <td >
-                    <a href="{% url 'eliminar_lista' lista.id %}" onclick="return confirm('¿Desea eliminar la lista seleccionada?')" class="btn btn-danger btn-icon btn-circle btn-lg"><i class="fa fa-times"></i></a>
+                    <a href="{% url 'eliminar_monitor' monitor.id %}" onclick="return confirm('¿Desea eliminar la lista seleccionada?')" class="btn btn-danger btn-icon btn-circle btn-lg"><i class="fa fa-times"></i></a>
                 </td>
         {% endfor %}
         </tbody>

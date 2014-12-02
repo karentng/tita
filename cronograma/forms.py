@@ -166,3 +166,28 @@ class FormadorForm(forms.ModelForm):
 class EstudiantesCurso(forms.Form):
     sedes = forms.MultipleChoiceField(widget=Select2MultipleWidget(), choices=SEDES)
     jornadas = forms.ChoiceField(widget=forms.Select(), choices=JORNADAS)
+
+class FiltroCronograma(forms.Form):
+    #sedes = forms.MultipleChoiceField(widget=Select2MultipleWidget(), choices=SEDES)
+    SEDES = (
+        ('INEM JORGE ISAACS','INEM JORGE ISAACS'),
+        ('ANTONIO JOSE CAMACHO','ANTONIO JOSE CAMACHO'),
+        ('NORMAL. SUPERIOR SANTIAGO DE CALI', 'NORMAL. SUPERIOR SANTIAGO DE CALI'),
+        ('GOLONDRINAS PRINCIPAL','GOLONDRINAS PRINCIPAL'),
+        ('CARLOS HOLGUIN MALLARINO','CARLOS HOLGUIN MALLARINO'),
+        ('MANUEL MARIA MALLARINO', 'Principal MANUEL MARIA MALLARINO'),
+        ('EL DIAMANTE', 'EL DIAMANTE'),
+        ('EUSTAQUIO PALACIOS','EUSTAQUIO PALACIOS'),
+        ('JOSE MARIA CARBONELL','JOSE MARIA CARBONELL'),
+        ('MARICE SINISTERRA','MARICE SINISTERRA'),
+        ('Principal IE BOYACA', 'Principal IE BOYACA'),
+        ('Principal YUMBO-IE MAYOR DE YUMBO - SEDE PRINCIPAL', 'Principal YUMBO-IE MAYOR DE YUMBO - SEDE PRINCIPAL'),
+        ('Principal YUMBO-IE JOSE MARiA CORDOBA - SEDE PRINCIPAL', 'Principal YUMBO-IE JOSÉ MARÍA CÓRDOBA - SEDE PRINCIPAL'),
+        ('Principal YUMBO-IE TITAN - SEDE PRINCIPAL', 'Principal YUMBO-IE TITAN - SEDE PRINCIPAL'),
+        ('Principal YUMBO-IE CEAT GENERAL PIERO MARIOTTI - SEDE JOHN F. KENNEDY', 'Principal YUMBO-IE CEAT GENERAL PIERO MARIOTTI - SEDE JOHN F. KENNEDY'),
+        ('Principal YUMBO-IE MANUEL MARIA SANCHEZ - SEDE PRINCIPAL', 'Principal YUMBO-IE MANUEL MARÍA SÁNCHEZ - SEDE PRINCIPAL'),
+        ('Principal YUMBO-IE ROSA ZARATE DE PENA - SEDE PRINCIPAL', 'Principal YUMBO-IE ROSA ZÁRATE DE PEÑA - SEDE PRINCIPAL'),
+        ('Principal VIJES', 'Principal VIJES')
+    )
+    sedes = forms.ChoiceField(widget=Select(), choices=SEDES)
+    #jornadas = forms.ChoiceField(widget=forms.Select(), choices=JORNADAS)
