@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render, render_to_response, get_list_or_404, get_object_or_404
 from django.core import serializers
-from django.http import HttpResponse, HttpResponseRedirect
+from django.core.paginator import Paginator
+from django.http import HttpResponse, HttpRequest, HttpResponseRedirect, QueryDict
 from convocat.models import *
 from convocat.forms import *
 from django.db.models import Count, Q
@@ -189,7 +190,17 @@ def actividades(request, id_actividad):
         'formGrupo': GrupoForm()
     })
 
+def validar_grupo_coordinador_secretaria(request):
+    grupo = user_group(request)
+    if grupo == 'Coordinador' or grupo == 'Secretaria' or grupo == 'Tablero de control publico':
+        return True
+    else:
+        return False
+
 def tablero_control(request, id_actividad):
+    if validar_grupo_coordinador_secretaria(request) == False:
+        return redirect('home')
+
     if id_actividad=='':
         id_actividad=1
 
@@ -210,17 +221,21 @@ def tablero_control(request, id_actividad):
     print(grupo_de_usuario)
     usuario_puede_editar = False
 
-    usuario_puede_editar = ((grupo_de_usuario == 'Coordinador' and int(id_actividad) < 14) or (grupo_de_usuario == 'Alcaldia' and int(id_actividad) > 13))
+    usuario_puede_editar = ((grupo_de_usuario == 'Coordinador' and int(id_actividad) < 14) or (grupo_de_usuario == 'Secretaria' and int(id_actividad) > 13))
+
+    estudiantes = Estudiante.objects.all()
+    #estudiantesPaginator = Paginator(estudiantes, 5)
 
     datos_tablero_control = {
         'actividades' : actividades,
-        'estudiantes' : listaMaestrosEstudiantesInscritos(),
+        'estudiantes' : estudiantes,#estudiantesPaginator.page(1),
         'actividad_seleccionada' : actividad_seleccionada,
         'estado_de_avance' : estado_de_avance,
         'estado_avance_form' : EstadoDeAvanceForm(initial=nuevo_estado_de_avance),
         'formArchivo': ArchivoForm(),
         'formGrupo': GrupoForm(),
-        'usuario_puede_editar': usuario_puede_editar
+        'usuario_puede_editar': usuario_puede_editar,
+        'user_group': user_group(request),
     }
 
     datos_tablero_control.update(retornar_datos_reporte_convocatoria_1())
@@ -228,6 +243,9 @@ def tablero_control(request, id_actividad):
     return render(request, 'dashboard/tablero_control.html', datos_tablero_control)
 
 def guardarArchivo(request):
+    if validar_grupo_coordinador_secretaria(request) == False:
+        return redirect('home')
+
     form = ArchivoForm(request.POST, request.FILES)
     if form.is_valid():
         archivo = form.save(commit=False)
@@ -237,6 +255,9 @@ def guardarArchivo(request):
     return HttpResponseRedirect(str(request.session['actividad_tablero_control']))
 
 def guardarEstadoDeAvance(request):
+    if validar_grupo_coordinador_secretaria(request) == False:
+        return redirect('home')
+
     actividad = Actividad.objects.get(id=request.session['actividad_tablero_control'])
     print(actividad)
     form = EstadoDeAvanceForm(request.POST)
@@ -249,6 +270,9 @@ def guardarEstadoDeAvance(request):
     return HttpResponseRedirect( str(request.session['actividad_tablero_control']))
 
 def eliminarGrupo(request, id_grupo):
+    if validar_grupo_coordinador_secretaria(request) == False:
+        return redirect('home')
+
     grupo = Grupo.objects.get(id=id_grupo)
     grupo.activo = False
     grupo.save()
@@ -256,6 +280,9 @@ def eliminarGrupo(request, id_grupo):
     return HttpResponseRedirect( '../' + str(request.session['actividad_tablero_control']))
 
 def eliminarArchivo(request, id_archivo):
+    if validar_grupo_coordinador_secretaria(request) == False:
+        return redirect('home')
+
     archivo = Archivo.objects.get(id=id_archivo)
     archivo.activo = False
     archivo.save()
@@ -267,6 +294,9 @@ def eliminarArchivo(request, id_archivo):
     return HttpResponseRedirect( '../' + str(request.session['actividad_tablero_control']))
 
 def guardarGrupo(request, id_concepto_por_actividad):
+    if validar_grupo_coordinador_secretaria(request) == False:
+        return redirect('home')
+
     form = GrupoForm(request.POST, request.FILES)
     concepto_por_actividad = ConceptoPorActividad.objects.get(id=id_concepto_por_actividad)
 
@@ -279,6 +309,9 @@ def guardarGrupo(request, id_concepto_por_actividad):
     return HttpResponseRedirect( '../' + str(request.session['actividad_tablero_control']))
 
 def obtenerGruposPorConceptoActividad(request, id_concepto_por_actividad):
+    if validar_grupo_coordinador_secretaria(request) == False:
+        return redirect('home')
+
     concepto_por_actividad = ConceptoPorActividad.objects.get(id=id_concepto_por_actividad)
     grupos = Grupo.objects.filter(concepto_por_actividad=concepto_por_actividad)
 

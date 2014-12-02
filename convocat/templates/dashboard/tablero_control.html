@@ -127,6 +127,25 @@
 
 {% block js_ready %}
     <script>
+        function mostrarBarraDeCArga() {
+            $('#pleaseWaitDialog').modal({ backdrop: 'static', keyboard: false }).one('click', '#borrarGrupoButton', function (e) {
+            });
+        }
+
+        $('#pleaseWaitDialog').on('shown.bs.modal', function () {
+            var progress = setInterval(function() {
+                var $bar = $('.bar');
+
+                if ($bar.width()==500) {
+                    $bar.width(0);
+                } else {
+                    $bar.width($bar.width()+50);
+                }
+
+                $bar.text($bar.width()/5 + "%");
+            }, 1000);
+        })
+
         function confirmacionBorrarArchivo(id_archivo) {
             $('#confirmacionBorrarArchivo').modal({ backdrop: 'static', keyboard: false }).one('click', '#borrarArchivoButton', function (e) {
                 $("#formBorrarArchivo").attr("action", "{% url 'tableroControlEliminarArchivo' '' %}" + id_archivo);
@@ -188,7 +207,31 @@
                 else {
                     $('#conceptos_tabs a:first').tab('show');
                 }
-            })
+            });
+
+            var tableSP = $('#tabla-super-poderosa').dataTable( {
+                "scrollY": 200,
+                "scrollX": true,
+                "paging": true,
+                "sPaginationType": "bootstrap",
+                "oLanguage": {
+                    "sLengthMenu": "_MENU_ registros por página"
+                }
+            } );
+
+            $('a.toggle-vis').on( 'click', function (e) {
+                e.preventDefault();
+                var bVis = tableSP.fnSettings().aoColumns[$(this).attr('data-column')].bVisible;
+                tableSP.fnSetColumnVis( $(this).attr('data-column'), !bVis);
+            } );
+
+            $('#tabla-super-poderosa tfoot th').each( function () {
+                var title = $('#tabla-super-poderosa thead th').eq( $(this).index() ).text();
+                $(this).html( '<input type="text" width="100" placeholder="'+title+'" />' ).on( 'keyup change', function (e) {
+                    tableSP.fnFilter(e.target.value, $(this).index());
+                    tableSP.fnDraw();
+                } );
+            } );
         });
     </script>
 {% endblock %}
@@ -202,6 +245,22 @@
 {% endblock %}
 
 {% block contenido %}
+    <div class="modal fade" id="pleaseWaitDialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Cargando...</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="progress">
+                        <div class="progress-bar bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="confirmacionBorrarArchivo">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -285,7 +344,7 @@
     <div class="row" align="center">
         <div class="col-xs-12">
             {% for actividad in actividades %}
-                <a href="{% url 'tablero_control' actividad.id %}" class="btn btn-{% if actividad.id == actividad_seleccionada.id %}success{% else %}inverse{% endif %}"
+                <a href="{% url 'tablero_control' actividad.id %}" class="btn btn-{% if actividad.id == actividad_seleccionada.id %}success{% else %}inverse{% endif %}" onclick="mostrarBarraDeCArga();"
                     style="margin-bottom:5px" data-toggle="tooltip" data-placement="bottom" title="{{actividad.nombre}} - {{actividad.descripcion}}">
                     <small>Actividad</small><br/>
                     <span class="fa-stack fa-1x ">
@@ -361,7 +420,7 @@
                              {%include "dashboard/resultados_convocatoria_1.html" %}
                         {% else %}
                             {% if concepto_por_actividad.id == 9 %}
-                                {%include "dashboard/resultado_incripcion_maestros_estudiantes.html" %}
+                                {%include "dashboard/multireporte_maestro_estudiante.html" %}
                             {% else %}
                                 <div class="tree">
                                     {% if usuario_puede_editar %}

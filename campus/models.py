@@ -3,7 +3,7 @@
 from django.db import models
 from convocat.models import Municipio, Aspirante
 from django.contrib.auth.models import User
-from estudiante.models import Cargo, Grado, Asignatura, SecretariaEducacion, CertificacionTIC
+from estudiante.models import Cargo, Grado, Asignatura, SecretariaEducacion, CertificacionTIC, InfoLaboral
 
 """" esto se esta usando en algun lado???
 GRADOS = (
@@ -38,7 +38,7 @@ class InstitucionEducativa(models.Model):
         return (u"%s"%self.nombre)
 
 #Corresponde a los formadores de formadores
-class Formador(models.Model):    
+class Formador(models.Model):
     TUTORES=(
     ('1', 'Mentor 1: ADRIANA MARIA VELEZ JONES'),
     ('2', 'Mentor 2: ROBERTO FERRO HERRERA'),
@@ -58,7 +58,7 @@ class Formador(models.Model):
     apellido1 = models.CharField( max_length=255, verbose_name='apellidos')
     jornada = models.CharField( max_length=255, choices=JORNADA)
     tutor = models.CharField( max_length=255, choices=TUTORES, verbose_name='Mentor')
-    #aspirante = models.ForeignKey(Aspirante, verbose_name='aspirante', null=True, blank=True)   
+    #aspirante = models.ForeignKey(Aspirante, verbose_name='aspirante', null=True, blank=True)
     usuario = models.ForeignKey(User)
 
     def __unicode__(self):
@@ -83,9 +83,9 @@ class HorarioClase(models.Model):
     grado = models.ForeignKey(Grado)
 """
 
-#Corresponde a los Maestros Estudiantes 
+#Corresponde a los Maestros Estudiantes
 class Estudiante(models.Model):
-    
+
     NIVEL_EDUCATIVO = (
         (1, 'Sin título'),
         (2, 'Bachiller académico con profundización en pedagogía'),
@@ -117,7 +117,7 @@ class Estudiante(models.Model):
 
     aprobo = models.NullBooleanField()
     cohorte = models.IntegerField(default=1) #cambiar de acuerdo al cohorte que se este realizando
-    
+
     def __unicode__(self):
         return (u"%s %s %s %s"%(self.nombre1,self.nombre2 or '', self.apellido1, self.apellido2 or '')).strip() or "-"
 
@@ -125,6 +125,9 @@ class Estudiante(models.Model):
         mihash = (self.numero_documento*44383)%1000000007
         clave = "%d-%d"%(self.id, mihash)
         return clave
+
+    def infoLaboral(self):
+        return  InfoLaboral.objects.filter(estudiante=self).latest('id')
 
 class Cursos(models.Model):
 
@@ -167,7 +170,7 @@ class Curso(models.Model):
     def __unicode__(self):
         return (u"Curso: %s - Formador: %s - Institución: %s"%(self.descripcion,self.formador,self.institucion))
 
-"""   
+"""
 class Horario(models.Model):
     DIAS = (
         (1, 'Lunes'),
@@ -272,7 +275,7 @@ class Clase(models.Model):
 
     #soportes = models.FileField(upload_to=crear_ruta_archivo, blank=True, null=True)
 
-    
+
 
     def __unicode__(self):
         return unicode(self.nombre)
@@ -293,7 +296,7 @@ class AcompanamientoInSitu(models.Model):
 
 class Clases(models.Model):
 
-    
+
     nombre = models.CharField(max_length=255)
     fecha_inicio = models.DateTimeField(verbose_name=u'fecha y hora de inicio')
     #institucion = models.IntegerField(choices=SEDES, max_length=2, verbose_name="institución", null=True, blank=True)
@@ -310,7 +313,7 @@ class Clases(models.Model):
         super(Clases,self).save(*args, **kwargs)
         SoporteClases.objects.create(clase=self)
     '''
-    
+
 
 class Actividad(models.Model):
     clase = models.ForeignKey(Clases)
@@ -325,7 +328,7 @@ class Actividad(models.Model):
 
 class AcompanamientoInSitus(models.Model):
 
-    
+
     nombre = models.CharField(max_length=255)
     fecha_inicio = models.DateTimeField(verbose_name=u'fecha y hora de inicio')
     #institucion = models.IntegerField(choices=SEDES, max_length=2, verbose_name="institución", null=True, blank=True)
@@ -373,7 +376,7 @@ class SoporteClases(models.Model):
 class CalificacionActividad(models.Model):
     class Meta:
         unique_together = [('estudiante','actividad'),]
-        
+
     estudiante = models.ForeignKey(Estudiante)
     actividad = models.ForeignKey(Actividad)
     nota = models.FloatField()
@@ -392,4 +395,4 @@ class SoporteAcompanamiento(models.Model):
 
 
 
-    
+
