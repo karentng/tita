@@ -236,6 +236,7 @@ def tablero_control(request, id_actividad):
         'formGrupo': GrupoForm(),
         'usuario_puede_editar': usuario_puede_editar,
         'user_group': user_group(request),
+        'opcion_menu': 13,
     }
 
     datos_tablero_control.update(retornar_datos_reporte_convocatoria_1())
