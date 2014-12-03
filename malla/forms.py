@@ -48,6 +48,24 @@ class ReclamacionForm(forms.ModelForm):
             
         }
 
+class ReclamacionModificarForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(ReclamacionModificarForm, self).__init__(*args, **kwargs)
+        #instance = getattr(self, 'instance', None)
+        self.fields['colegio'].widget.attrs['disabled'] = True
+    class Meta:
+        model = Reclamacion
+        fields = ('colegio', 'jornada', 'fecha', 'supervisor', 'descripcion', 'estado')
+        widgets = {
+            'fecha' : MyDateWidget(),
+            'descripcion' : Textarea(attrs={'rows': 3, 'readonly':'readonly'}),
+            #'colegio' : TextInput(attrs={'readonly':'readonly'}),
+            'jornada' : TextInput(attrs={'readonly':'readonly'}),
+            'supervisor' : TextInput(attrs={'readonly':'readonly'}),
+            
+        }
+
+
 class ListaForm(forms.ModelForm):
     class Meta:
         model = Lista

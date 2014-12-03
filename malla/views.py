@@ -107,29 +107,59 @@ def eliminar_requerimiento(request, id):
     req.delete()
     return redirect('listar_requerimientos')
 
-def reclamacion(request):
+def reclamacion(request, id=None):
     grupo = user_group(request)
     if grupo == None:
         return redirect('home')
 
-    username = ""
-    if request.user.is_authenticated():
-        global username 
-        username = request.user.username
+    numero_documento = request.user.username
+    contratista = Contratista.objects.get(numero_documento=numero_documento)
 
     if request.method == 'POST':
         form = ReclamacionForm(request.POST)
         if form.is_valid():
-            objeto = form.save()
-            objeto.persona = username
+            objeto = form.save(commit=False)
+            objeto.persona = contratista
+            
+            objeto.estado = 'PR'
             objeto.save()
             
-            return redirect('home')
+            return redirect('listar_reclamaciones')
     else :
         form = ReclamacionForm()
 
     return render(request, 'reclamacion.html', {
         'form': form,
+        'user_group': user_group(request),
+        'opcion_menu': 5,
+    })
+
+def reclamacion_modificar(request, id):
+    grupo = user_group(request)
+    if grupo == None:
+        return redirect('home')
+
+    #numero_documento = request.user.username
+    #contratista = Contratista.objects.get(numero_documento=numero_documento)
+    reclamacion = Reclamacion.objects.get(id = id)
+
+    if request.method == 'POST':
+        form = ReclamacionModificarForm(request.POST, instance=reclamacion)
+        if form.is_valid():
+            objeto = form.save(commit=False)
+            #objeto.persona = contratista
+            #if objecto.estado != None:
+            #    objeto.estado = 'PR'
+            objeto.save()
+            
+            return redirect('listar_reclamaciones')
+    else :
+        form = ReclamacionModificarForm(instance=reclamacion)
+
+    return render(request, 'reclamacion.html', {
+        'form': form,
+        'user_group': user_group(request),
+        'opcion_menu': 6,
     })
 
 def soportes(request):
@@ -284,6 +314,21 @@ def eliminar_contratista(request, id):
 
 def listar_reclamaciones(request):
     contratistas = Reclamacion.objects.all()
+
+    return render(request, 'listar_reclamaciones.html', {
+        'contratistas': contratistas,
+        'user_group': user_group(request),
+        'opcion_menu': 6,
+    })
+
+def listar_reclamaciones_contratista(request):
+
+    numero_documento = request.user.username
+    contratista = Contratista.objects.get(numero_documento=numero_documento)
+    try:
+        contratistas = Reclamacion.objects.filter(contratista=contratista)
+    except:
+        contratistas = []
 
     return render(request, 'listar_reclamaciones.html', {
         'contratistas': contratistas,

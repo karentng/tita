@@ -19,6 +19,9 @@ class Monitor(models.Model):
     email = models.EmailField()
     soportes = models.FileField(upload_to=crear_ruta_archivo_monitor, blank=True, null=True, help_text='Adjunte la certificación de: DE-10, Tabulado, Recibo de pago, Fotocopia de la cédula y RUT. Se recomienda que comprima todos los archivos en una carpeta ZIP, o añadirlo todo a un documento y subirlo en formato PDF.') 
 
+    def __unicode__(self):
+        return (u"%s %s"%(self.nombres,self.apellidos))
+
 class Contratista(models.Model):
     PROGRAMAS = (
         ("1", 'Arquitectura'),

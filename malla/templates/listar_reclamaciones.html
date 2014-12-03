@@ -64,9 +64,12 @@
                 <td class="info">
                     Estado
                 </td>
+                {% if user_group == "Operario_malla" %}
                 <td class="info">
                     Modificar
                 </td>
+                {%endif%}
+
             </thead>
         </tr>
         {% for contratista in contratistas %}
@@ -76,7 +79,7 @@
                     {{ contratista.persona }}
                 </td>
                 <td >
-                    {{ contratista.colegio }}
+                    {{ contratista.get_colegio_display }}
                 </td>
                 <td >
                     {{ contratista.jornada }}
@@ -91,14 +94,18 @@
                     {{ contratista.descripcion }}
                 </td>
                 <td >
-                    {{ contratista.estado }}
+                    {{ contratista.get_estado_display }}
                 </td>                
-
+                {% if user_group == "Operario_malla" %}
                 <td >
-                    <a href="{% url 'home' %}" class="btn btn-warning btn-icon btn-circle btn-lg"><i class="fa fa- fa-edit"></i></a>
+                    <a href="{% url 'reclamacion_modificar' contratista.id %}" class="btn btn-warning btn-icon btn-circle btn-lg"><i class="fa fa- fa-edit"></i></a>
                 </td>
+                {%endif%}
         {% endfor %}
         </tbody>
         </tr>
     </table><br>  
+    {% if user_group == "Contratista_malla" %}
+    <a href= "{% url 'reclamacion' %} " class="btn btn-lg btn-primary pull-right" >Añadir una reclamación</a>
+    {%endif%}
 {% endblock %}
