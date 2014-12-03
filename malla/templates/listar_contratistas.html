@@ -85,7 +85,7 @@
                     {{ contratista.get_programa_academico_display }}
                 </td>
                 <td >
-                    <a href="{% url 'home' %}" class="btn btn-warning btn-icon btn-circle btn-lg"><i class="fa fa- fa-edit"></i></a>
+                    <a href="{% url 'modificarContratista' contratista.id %}" class="btn btn-warning btn-icon btn-circle btn-lg"><i class="fa fa- fa-edit"></i></a>
                 </td>
                 <td >
                     <a href="{% url 'eliminar_contratista' contratista.id %}" onclick="return confirm('¿Desea eliminar la lista seleccionada?')" class="btn btn-danger btn-icon btn-circle btn-lg"><i class="fa fa-times"></i></a>

@@ -119,6 +119,7 @@ class Contratista(models.Model):
     #estrato = models.CharField( choices=[('1','1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5'), ('6', '6')], max_length=1, verbose_name='estrato')
     #sector = models.CharField( choices=[('1','Sur'), ('2', 'Oriente'), ('3', 'Distrito de Agua Blanca'), ('4', 'Norte Oriente'), ('5', 'Norte Occidente')], max_length=1, verbose_name='sector en que vive')
     #sectordesplazamiento = models.CharField( choices=[('1','Sur'), ('2', 'Oriente'), ('3', 'Distrito de Agua Blanca'), ('4', 'Norte Oriente'), ('5', 'Norte Occidente')], max_length=1, verbose_name='sector en que estaría dispuesto a desplazarse')
+    finalizado = models.NullBooleanField()
     def __unicode__(self):
         return (u"%s %s %s %s"%(self.nombre1,self.nombre2 or '', self.apellido1, self.apellido2 or '')).strip() or "-"
 
@@ -260,17 +261,3 @@ class Reclamacion(models.Model):
     estado = models.CharField( choices=[('PR','Por Revisión'), ('P', 'Procede'), ('NP','No Procede')], max_length=3, verbose_name='estado',blank=True)
     def __unicode__(self):
         return (u"%s %s"%(self.colegio,self.jornada ))
-
-
-
-
-
-
-    
-
-
-
-
-
-    
-	

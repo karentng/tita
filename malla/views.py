@@ -7,17 +7,27 @@ def inicioContratista(request):
     return render(request, 'inicioContratista.html', {'user_group': user_group(request),'opcion_menu': 2,
     })
 
+def get_contratista(request):
+    valor = request.session.get('id_contratista')
+    try:
+        valor = Contratista.objects.get(id=valor)
+    except Exception:
+        return None
+    return valor
+
 def datosBasicos(request):
+    contratista = get_contratista(request)
+
     if request.method == 'POST':
-        form = InformacionBasicaForm(request.POST)
+        form = InformacionBasicaForm(request.POST, instance=contratista)
         if form.is_valid():
             objeto = form.save()
             ide = objeto.id
-            ide = "?v="+str(ide)
+            request.session['id_contratista'] = ide
                        
-            return HttpResponseRedirect('infocontacto%s' % ide)
+            return HttpResponseRedirect('infocontacto')
     else :
-        form = InformacionBasicaForm()
+        form = InformacionBasicaForm(instance=contratista)
 
     return render(request, 'datosbasicos.html', {
         'form': form,
@@ -26,20 +36,25 @@ def datosBasicos(request):
     })
 
 def datosContacto(request):
-    identificador = request.GET['v']
-    monitor = Contratista.objects.get(id=identificador)
+    monitor = get_contratista(request)
+    if not monitor:
+        return redirect('inicioContratista')
+
+    try:
+        datos = ContratistaInfoContacto.objects.get(monitor=monitor)
+    except Exception:
+        datos = None
 
     if request.method == 'POST':
-        form = InformacionContactoForm(request.POST)
+        form = InformacionContactoForm(request.POST, instance=datos)
         if form.is_valid():
             objeto = form.save(commit=False)
             objeto.monitor = monitor
             objeto.save()
-            ide = "?v="+str(monitor.id)
 
-            return HttpResponseRedirect('areasconocimiento%s' % ide)
+            return HttpResponseRedirect('areasconocimiento')
     else :
-        form = InformacionContactoForm()
+        form = InformacionContactoForm(instance=datos)
 
     return render(request, 'datoscontacto.html', {
         'form': form,
@@ -48,20 +63,25 @@ def datosContacto(request):
     })
 
 def areasConocimiento(request):
-    identificador = request.GET['v']
-    monitor = Contratista.objects.get(id=identificador)
+    monitor = get_contratista(request)
+    if not monitor:
+        return redirect('inicioContratista')
+
+    try:
+        datos = ContratistaAreasConocimiento.objects.get(monitor=monitor)
+    except Exception:
+        datos = None
 
     if request.method == 'POST':
-        form =AreasConocimientoForm(request.POST)
+        form =AreasConocimientoForm(request.POST, instance=datos)
         if form.is_valid():
             objeto = form.save(commit=False)
             objeto.monitor = monitor
             objeto.save()
-            ide = "?v="+str(monitor.id)
             
-            return HttpResponseRedirect('soportes%s' % ide)
+            return HttpResponseRedirect('soportes')
     else :
-        form = AreasConocimientoForm()
+        form = AreasConocimientoForm(instance=datos)
 
     return render(request, 'areasconocimiento.html', {
         'form': form,
@@ -163,26 +183,22 @@ def reclamacion_modificar(request, id):
     })
 
 def soportes(request):
-
-    identificador = request.GET['v']
-    monitor = Contratista.objects.get(id=identificador)
+    monitor = get_contratista(request)
+    if not monitor:
+        return redirect('inicioContratista')
 
     if request.method == 'POST':
-        print "as"
         form = DocumentosSoporteForm(request.POST, request.FILES)
         
         if form.is_valid():
             obj = form.save(commit=False)
             obj.monitor = monitor
             obj.save()
-            print "sdfs"
             return redirect('finalizar_contratista')
 
     else:
-        print "asdafdsa"
         form = DocumentosSoporteForm()
 
-        
     return render(request, 'soportes.html', {
         'form': form,
         'user_group': user_group(request),
@@ -190,6 +206,14 @@ def soportes(request):
     })
 
 def finalizar_contratista(request):
+    monitor = get_contratista(request)
+    if not monitor:
+        return redirect('inicioContratista')
+
+    monitor.finalizado = True
+    monitor.save()
+    del request.session['id_contratista']
+
     return render(request, 'finalizar_contratista.html', {
         'user_group': user_group(request),
         'opcion_menu': 1,
@@ -306,6 +330,10 @@ def listar_contratistas(request):
         'user_group': user_group(request),
         'opcion_menu': 2,
     })
+
+def modificarContratista(request, id):
+    request.session['id_contratista'] = id
+    return redirect('datos_basicos')
 
 def eliminar_contratista(request, id):
     contratista = Contratista.objects.get(id=id)
