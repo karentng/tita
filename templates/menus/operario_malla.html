@@ -1,0 +1,24 @@
+<li>
+    <a href="{% url 'home' %}"><i class="fa fa-info"></i> <span>Inicio</span></a>
+</li>
+{# Contratistas #}
+<li {% if opcion_menu == 2 %} class="active" {% endif %}>
+    <a href="{% url 'listar_contratistas' %}"><i class="fa fa-2x fa-flag-o"></i> <span>Contratistas</span></a>
+</li>
+{# Monitores #}
+<li {% if opcion_menu == 3 %} class="active" {% endif %}>
+        <a href="{% url 'listar_monitores' %}"><i class="fa fa-users"></i> <span>Monitores</span></a>
+</li>
+{# Requerimientos #}
+
+<li {% if opcion_menu == 4 %} class="active" {% endif %}>
+        <a href="{% url 'listar_requerimientos' %}"><i class="fa fa fa-folder-o"></i> <span>Requerimientos</span></a>
+</li>
+{# Listas #}
+<li {% if opcion_menu == 5 %} class="active" {% endif %}>
+        <a href="{% url 'reporte_lista' %}"><i class="fa fa fa-university"></i>  <span>Listas</span></a>
+</li>
+{# Reclamaciones #}
+<li {% if opcion_menu == 6 %} class="active" {% endif %}>
+        <a href="{% url 'home' %}"><i class="fa fa-suitcase"></i>  <span>Reclamaciones</span></a>
+</li>

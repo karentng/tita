@@ -19,7 +19,7 @@ class Monitor(models.Model):
     email = models.EmailField()
     soportes = models.FileField(upload_to=crear_ruta_archivo_monitor, blank=True, null=True, help_text='Adjunte la certificación de: DE-10, Tabulado, Recibo de pago, Fotocopia de la cédula y RUT. Se recomienda que comprima todos los archivos en una carpeta ZIP, o añadirlo todo a un documento y subirlo en formato PDF.') 
 
-class ContratistaInfoPersonal(models.Model):
+class Contratista(models.Model):
     PROGRAMAS = (
         ("1", 'Arquitectura'),
         ('2', 'Comunicación Social - Periodismo'),
@@ -120,7 +120,7 @@ class ContratistaInfoPersonal(models.Model):
         return (u"%s %s %s %s"%(self.nombre1,self.nombre2 or '', self.apellido1, self.apellido2 or '')).strip() or "-"
 
 class ContratistaInfoContacto(models.Model):
-    monitor = models.OneToOneField(ContratistaInfoPersonal, primary_key=True)
+    monitor = models.OneToOneField(Contratista, primary_key=True)
     celularppal = models.BigIntegerField(verbose_name=u'celular principal')
     celularsec = models.BigIntegerField(null=True, blank=True, verbose_name=u'celular secundario')
     telfijoppal = models.BigIntegerField(null=True, blank=True, verbose_name=u'teléfono fijo principal')
@@ -136,7 +136,7 @@ class ContratistaInfoContacto(models.Model):
 
 class ContratistaAreasConocimiento(models.Model):
     
-    monitor = models.OneToOneField(ContratistaInfoPersonal, primary_key=True)
+    monitor = models.OneToOneField(Contratista, primary_key=True)
     cienciasnaturales = models.BooleanField(verbose_name='ciencias naturales')
     fisica = models.BooleanField(verbose_name='física')
     quimica = models.BooleanField(verbose_name='química')
@@ -164,7 +164,7 @@ def crear_ruta_archivo(instance, filename):
     return "malla_soportes_contratistas/%s-%s/%s"%(instance.contratista_id, randomstr, filename.encode('ascii','ignore'))
 
 class ContratistaDocumentosSoporte(models.Model):
-    monitor = models.OneToOneField(ContratistaInfoPersonal, primary_key=True)
+    monitor = models.OneToOneField(Contratista, primary_key=True)
     soportes = models.FileField(upload_to=crear_ruta_archivo, blank=True, null=True)   
 
 class Requerimiento(models.Model):
@@ -232,7 +232,7 @@ class Lista(models.Model):
     fecha = models.DateField(verbose_name='fecha de lista', help_text='Formato año-mes-día (ej: 1988-04-30)')
     colegio = models.IntegerField(choices=SEDES, max_length=1000, verbose_name="institución")
     profesor = models.ForeignKey(Formador)
-    contratista = models.ForeignKey(ContratistaInfoPersonal)
+    contratista = models.ForeignKey(Contratista)
     materia = models.CharField(choices=AREAS, max_length=1000, verbose_name="asignatura")
     espacio = models.CharField( max_length=255, blank=True, help_text='numero de salón')
     condicion = models.CharField(choices=CONDICION, max_length=1000, verbose_name="condición")
@@ -248,6 +248,7 @@ class Lista(models.Model):
 
 class Reclamacion(models.Model):
 
+    persona = models.ForeignKey(Contratista)
     colegio = models.IntegerField(choices=SEDES, max_length=1000, verbose_name="institución")
     jornada = models.CharField(max_length=5, null=True, choices=[('D', 'Diurna'), ('N', 'Nocturna')])
     fecha = models.DateField(verbose_name='fecha', help_text='Formato año-mes-día (ej: 1988-04-30)')

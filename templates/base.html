@@ -140,6 +140,10 @@
                         {% include "menus/alcaldia.html" %}
                     {% elif user_group == "Formador" %}
                         {% include "menus/formador.html" %}
+                    {% elif user_group == "Operario_malla" %}
+                        {% include "menus/operario_malla.html" %}
+                    {% elif user_group == "Contratista_malla" %}
+                        {% include "menus/contratista_malla.html" %}
                     {% else %}
                         {% include "menus/publico.html" %}
                     {% endif %}

@@ -113,4 +113,7 @@
         </tbody>
         </tr>
     </table><br>  
+    {% if user_group == "Operario_malla" %}
+    <a href= "{% url 'lista' %} " class="btn btn-lg btn-primary pull-right" >Añadir una lista</a>
+    {%endif%}
 {% endblock %}

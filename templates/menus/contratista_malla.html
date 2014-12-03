@@ -1,0 +1,11 @@
+<li>
+    <a href="{% url 'home' %}"><i class="fa fa-info"></i> <span>Inicio</span></a>
+</li>
+{# Listas #}
+<li {% if opcion_menu == 1 %} class="active" {% endif %}>
+        <a href="{% url 'reporte_lista' %}"><i class="fa fa fa-university"></i>  <span>Listas</span></a>
+</li>
+{# Reclamaciones #}
+<li {% if opcion_menu == 2 %} class="active" {% endif %}>
+        <a href="{% url 'home' %}"><i class="fa fa-suitcase"></i>  <span>Reclamaciones</span></a>
+</li>
