@@ -31,5 +31,5 @@ urlpatterns = patterns('malla.views',
     url(r'^malla/listar-monitores$', 'listar_monitores', name='listar_monitores'),
 
     url(r'^malla/listar-contratistas$', 'listar_contratistas', name='listar_contratistas'),
-
+    url(r'^malla/modificar-contratista/(\d+)$', 'modificarContratista', name='modificarContratista'),
 )
