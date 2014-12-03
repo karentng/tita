@@ -9,16 +9,19 @@ urlpatterns = patterns('malla.views',
     url(r'^malla/infobasica/(\d+)$', 'datosBasicos', name='datos_basicos'), # modificar aun no esta listo, falta cambiar a session
     url(r'^malla/infocontacto$', 'datosContacto', name='datos_contacto'),
     url(r'^malla/areasconocimiento$', 'areasConocimiento', name='areas_conocimiento'),
-    url(r'^malla/reclamacion$', 'reclamacion', name='reclamacion'),
     url(r'^malla/soportes$', 'soportes', name='soportes'),
     url(r'^malla/finalizar_contratista$', 'finalizar_contratista', name='finalizar_contratista'),
 
     url(r'^malla/eliminar-contratista/(\d+)$', 'eliminar_contratista', name='eliminar_contratista'),
 
+    url(r'^malla/reclamacion$', 'reclamacion', name='reclamacion'),
+    url(r'^malla/listar_reclamaciones$', 'listar_reclamaciones', name='listar_reclamaciones'),
+
     url(r'^malla/lista$', 'lista', name='lista'),
     url(r'^malla/lista/(\d+)$', 'lista', name='lista'),
     url(r'^malla/eliminar-lista/(\d+)$', 'eliminar_lista', name='eliminar_lista'),
     url(r'^malla/reportelista$', 'reporte_lista', name='reporte_lista'),
+    url(r'^malla/reportelistacontratista$', 'lista_contratista', name='lista_contratista'),
 
     url(r'^malla/requerimiento$', 'requerimiento', name='requerimiento'),
     url(r'^malla/requerimiento/(\d+)$', 'requerimiento', name='requerimiento'),

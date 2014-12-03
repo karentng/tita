@@ -4,13 +4,13 @@ from django.http import HttpResponse, HttpResponseRedirect
 from malla.models import *
 
 def inicioContratista(request):
-    return render(request, 'inicioContratista.html', {
+    return render(request, 'inicioContratista.html', {'user_group': user_group(request),'opcion_menu': 2,
     })
 
 def get_contratista(request):
     valor = request.session.get('id_contratista')
     try:
-        valor = ContratistaInfoPersonal.objects.get(id=valor)
+        valor = Contratista.objects.get(id=valor)
     except Exception:
         return None
     return valor
@@ -31,6 +31,8 @@ def datosBasicos(request):
 
     return render(request, 'datosbasicos.html', {
         'form': form,
+        'user_group': user_group(request),
+        'opcion_menu': 2,
     })
 
 def datosContacto(request):
@@ -56,6 +58,8 @@ def datosContacto(request):
 
     return render(request, 'datoscontacto.html', {
         'form': form,
+        'user_group': user_group(request),
+        'opcion_menu': 2,
     })
 
 def areasConocimiento(request):
@@ -81,6 +85,8 @@ def areasConocimiento(request):
 
     return render(request, 'areasconocimiento.html', {
         'form': form,
+        'user_group': user_group(request),
+        'opcion_menu': 2,
     })
 
 def requerimiento(request, id=None):
@@ -98,18 +104,22 @@ def requerimiento(request, id=None):
             objeto = form.save()
             objeto.save()
             
-            return redirect('home')
+            return redirect('listar_requerimientos')
     else :
         form = RequerimientoForm(instance=requerimiento)
 
     return render(request, 'requerimiento.html', {
         'form': form,
+        'user_group': user_group(request),
+        'opcion_menu': 4,
     })
 
 def listar_requerimientos(request):
     requerimientos = Requerimiento.objects.all()
     return render(request, 'listar_requerimientos.html', {
         'requerimientos': requerimientos,
+        'user_group': user_group(request),
+        'opcion_menu': 4,
     })
 
 def eliminar_requerimiento(request, id):
@@ -122,10 +132,16 @@ def reclamacion(request):
     if grupo == None:
         return redirect('home')
 
+    username = ""
+    if request.user.is_authenticated():
+        global username 
+        username = request.user.username
+
     if request.method == 'POST':
         form = ReclamacionForm(request.POST)
         if form.is_valid():
             objeto = form.save()
+            objeto.persona = username
             objeto.save()
             
             return redirect('home')
@@ -155,6 +171,8 @@ def soportes(request):
 
     return render(request, 'soportes.html', {
         'form': form,
+        'user_group': user_group(request),
+        'opcion_menu': 2,
     })
 
 def finalizar_contratista(request):
@@ -167,6 +185,8 @@ def finalizar_contratista(request):
     del request.session['id_contratista']
 
     return render(request, 'finalizar_contratista.html', {
+        'user_group': user_group(request),
+        'opcion_menu': 1,
     })
 
 def lista(request, id=None):
@@ -190,12 +210,14 @@ def lista(request, id=None):
             objeto.usuario = username
             objeto.save()
             
-            return redirect('home')
+            return redirect('reporte_lista')
     else :
         form = ListaForm(instance=lista_obj)
 
     return render(request, 'lista.html', {
         'form': form,
+        'user_group': user_group(request),
+        'opcion_menu': 5,
     })
 def eliminar_lista(request, id):
     lista = Lista.objects.get(id=id)
@@ -213,7 +235,24 @@ def reporte_lista(request, limit=100):
 
     lista_list = Lista.objects.all()    
     
-    return render(request, 'reportelista.html', {'lista_list': lista_list})
+    return render(request, 'reportelista.html', {'lista_list': lista_list, 'user_group': user_group(request),
+        'opcion_menu': 5,})
+
+def lista_contratista(request, limit=100):
+    grupo = user_group(request)
+    if grupo == None:
+        return redirect('home')
+
+    numero_documento = request.user.username
+
+    contratista = Contratista.objects.get(numero_documento=numero_documento)
+    try:
+        lista_list = Lista.objects.filter(contratista=contratista)
+    except:
+        lista_list = []
+    
+    return render(request, 'reportelista.html', {'lista_list': lista_list, 'user_group': user_group(request),
+        'opcion_menu': 1,})
 
 def monitor(request, id=None):
     grupo = user_group(request)
@@ -232,18 +271,21 @@ def monitor(request, id=None):
             ide = objeto.id
             ide = "?v="+str(ide)
                        
-            return redirect('home')
+            return redirect('listar_monitores')
     else :
         form = MonitorForm(instance=monitor_obj)
 
     return render(request, 'monitor.html', {
-        'form': form,
+        'form': form, 'user_group': user_group(request),
+        'opcion_menu': 3,
     })
 
 def listar_monitores(request):
     monitores = Monitor.objects.all()
     return render(request, 'listar_monitores.html', {
         'monitores': monitores,
+        'user_group': user_group(request),
+        'opcion_menu': 3,
     })
 
 def eliminar_monitor(request, id):
@@ -252,9 +294,11 @@ def eliminar_monitor(request, id):
     return redirect('listar_monitores')
 
 def listar_contratistas(request):
-    contratistas = ContratistaInfoPersonal.objects.all()
+    contratistas = Contratista.objects.all()
     return render(request, 'listar_contratistas.html', {
         'contratistas': contratistas,
+        'user_group': user_group(request),
+        'opcion_menu': 2,
     })
 
 def modificarContratista(request, id):
@@ -262,6 +306,15 @@ def modificarContratista(request, id):
     return redirect('datos_basicos')
 
 def eliminar_contratista(request, id):
-    contratista = ContratistaInfoPersonal.objects.get(id=id)
+    contratista = Contratista.objects.get(id=id)
     contratista.delete()
     return redirect('listar_contratistas')
+
+def listar_reclamaciones(request):
+    contratistas = Reclamacion.objects.all()
+
+    return render(request, 'listar_reclamaciones.html', {
+        'contratistas': contratistas,
+        'user_group': user_group(request),
+        'opcion_menu': 2,
+    })
