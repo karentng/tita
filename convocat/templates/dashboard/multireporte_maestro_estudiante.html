@@ -1,0 +1,140 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-inverse" id="inscritos">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                </div>
+                <h4 class="panel-title">Columnas: por favor haga clic en la columna que desea ocultar o mostrar</h4>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <a class="toggle-vis" data-column="0">#</a> |
+                    <a class="toggle-vis" data-column="1">Nombres y Apellidos</a> |
+                    <a class="toggle-vis" data-column="2">Cédula</a> |
+                    <a class="toggle-vis" data-column="3">Institución Educativa</a> |
+                    <a class="toggle-vis" data-column="4">Jornada</a> |
+                    <a class="toggle-vis" data-column="5">Genero</a> |
+                    <a class="toggle-vis" data-column="6">Email</a> |
+                    <a class="toggle-vis" data-column="7">Email institucional</a> |
+                    <a class="toggle-vis" data-column="8">Municipio de residencia</a> |
+                    <a class="toggle-vis" data-column="9">Dirección</a> |
+                    <a class="toggle-vis" data-column="10">Teléfono fijo</a> |
+                    <a class="toggle-vis" data-column="11">Número de celular</a> |
+                    <a class="toggle-vis" data-column="12">Último nivel educativo aprobado</a> |
+                    <a class="toggle-vis" data-column="13">Secretaria educacion</a> |
+                    <a class="toggle-vis" data-column="14">Sede</a> |
+                    <a class="toggle-vis" data-column="15">Cargo</a> |
+                    <a class="toggle-vis" data-column="16">Zona</a> |
+                    <a class="toggle-vis" data-column="17">Decreto profesional docente</a> |
+                    <a class="toggle-vis" data-column="18">Grados</a> |
+                    <a class="toggle-vis" data-column="19">Poblacion étnica que atiende</a> |
+                    <a class="toggle-vis" data-column="20">Tipo de nombramiento</a> |
+                    <a class="toggle-vis" data-column="21">Tipo etnoeducador</a> |
+                    <a class="toggle-vis" data-column="22">Asignaturas</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-inverse" id="inscritos">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                </div>
+                <h4 class="panel-title">Maestros Estudiantes Inscritos</h4>
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive" style="height:600px; overflow-y:auto; overflow-x:auto;">
+                    <table id="tabla-super-poderosa" class="table table-striped" width="100%">
+                        <thead>
+                            <tr role="row">
+                                <th>#</th>
+                                <th>Nombres y Apellidos</th>
+                                <th>Cédula</th>
+                                <th>Institución Educativa</th>
+                                <th>Jornada</th>
+                                <th>Genero</th>
+                                <th>Email</th>
+                                <th>Email institucional</th>
+                                <th>Municipio de residencia</th>
+                                <th>Dirección</th>
+                                <th>Teléfono fijo</th>
+                                <th>Número de celular</th>
+                                <th>Último nivel educativo aprobado</th>
+                                <th>Secretaria educacion</th>
+                                <th>Sede</th>
+                                <th>Cargo</th>
+                                <th>Zona</th>
+                                <th>Decreto profesional docente</th>
+                                <th>Grados</th>
+                                <th>Poblacion étnica que atiende</th>
+                                <th>Tipo de nombramiento</th>
+                                <th>Tipo etnoeducador</th>
+                                <th>Asignaturas</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr role="row">
+                                <th>#</th>
+                                <th>Nombres y Apellidos</th>
+                                <th>Cédula</th>
+                                <th>Institución Educativa</th>
+                                <th>Jornada</th>
+                                <th>Genero</th>
+                                <th>Email</th>
+                                <th>Email institucional</th>
+                                <th>Municipio de residencia</th>
+                                <th>Dirección</th>
+                                <th>Teléfono fijo</th>
+                                <th>Número de celular</th>
+                                <th>Último nivel educativo aprobado</th>
+                                <th>Secretaria educacion</th>
+                                <th>Sede</th>
+                                <th>Cargo</th>
+                                <th>Zona</th>
+                                <th>Decreto profesional docente</th>
+                                <th>Grados</th>
+                                <th>Poblacion étnica que atiende</th>
+                                <th>Tipo de nombramiento</th>
+                                <th>Tipo etnoeducador</th>
+                                <th>Asignaturas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for estudiante in estudiantes %}
+                                <tr class="odd gradeX" role="row">
+                                    <td>{{forloop.counter}}</td>
+                                    <td>{{estudiante}}</td>
+                                    <td>{{estudiante.numero_documento}}</td>
+                                    <td>{{estudiante.infoLaboral.get_sede_display}}</td>
+                                    <td>{{estudiante.infoLaboral.get_jornada_display}}</td>
+                                    <td>{{estudiante.get_sexo_display}}</td>
+                                    <td>{{estudiante.email}}</td>
+                                    <td>{{estudiante.email_institucional}}</td>
+                                    <td>{{estudiante.municipio}}</td>
+                                    <td>{{estudiante.direccion}}</td>
+                                    <td>{{estudiante.telefono}}</td>
+                                    <td>{{estudiante.celular}}</td>
+                                    <td>{{estudiante.get_nivel_educativo_display}}</td>
+                                    <td>{{estudiante.infoLaboral.secretaria_educacion}}</td>
+                                    <td>{{estudiante.infoLaboral.get_sede_display}}</td>
+                                    <td>{{estudiante.infoLaboral.get_cargo_display}}</td>
+                                    <td>{{estudiante.infoLaboral.get_zona_display}}</td>
+                                    <td>{{estudiante.infoLaboral.get_decreto_docente_display}}</td>
+                                    <td>{% for grado in estudiante.infoLaboral.grados.all %} {{ grado }} {% endfor %}</td>
+                                    <td>{{estudiante.infoLaboral.poblacion_etnica}}</td>
+                                    <td>{{estudiante.infoLaboral.get_nombramiento_display}}</td>
+                                    <td>{{estudiante.infoLaboral.get_tipo_etnoeducador_display}}</td>
+                                    <td>{% for asignatura in estudiante.infoLaboral.asignaturas.all %}
+                                            {{ asignatura }}
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -20,7 +20,7 @@ def logged_user(request):
     if grupo == None:
         return redirect('home')
     elif grupo == 'Coordinador':
-        return redirect('dashboard')
+        return redirect('tablero_control/')
     elif grupo == 'Formador':
         return redirect('cronograma_diplomado') # mientras se definen las opciones que tendrá
     else: #grupo == 'Alcaldia'
@@ -104,18 +104,18 @@ def actividades(request, curso_id, clase_id):
 >>>>>>> 6046c5ec159e61d1d7f631f5d74718878928761b
 
     if request.method == 'POST':
-        
+
         form = ActividadForm(request.POST, request.FILES)
-        
+
         if form.is_valid():
             obj = form.save(commit=False)
             obj.clase = clase
             obj.save()
-            
+
             return redirect('cronograma_diplomado')
 
     else:
-        
+
 
         form = ActividadForm()
 
