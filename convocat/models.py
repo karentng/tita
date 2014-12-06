@@ -316,7 +316,7 @@ class Grupo(models.Model):
 
     def __unicode__(self):
         if (self.grupo_padre != None):
-            return str(self.grupo_padre) + " - " + self.nombre
+            return self.grupo_padre.nombre + " - " + self.nombre
         else:
             return self.nombre
 

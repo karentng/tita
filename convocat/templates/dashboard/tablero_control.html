@@ -128,8 +128,7 @@
 {% block js_ready %}
     <script>
         function mostrarBarraDeCArga() {
-            $('#pleaseWaitDialog').modal({ backdrop: 'static', keyboard: false }).one('click', '#borrarGrupoButton', function (e) {
-            });
+            $('#pleaseWaitDialog').modal({ backdrop: 'static', keyboard: false });
         }
 
         $('#pleaseWaitDialog').on('shown.bs.modal', function () {
@@ -210,9 +209,16 @@
             });
 
             var tableSP = $('#tabla-super-poderosa').dataTable( {
-                "scrollY": 200,
-                "scrollX": true,
+                //"sScrollX": "100%",
+                //"sScrollXInner": "100%",
+                //"sScrollY": "100%",
+                //"sScrollYInner": "100%",
+                "bAutoWidth": true,
+                //"sScrollX": "100%",
+                //"sScrollXInner": "100%",
                 "paging": true,
+                'sDom': 't',
+                'bScrollCollapse':true,
                 "sPaginationType": "bootstrap",
                 "oLanguage": {
                     "sLengthMenu": "_MENU_ registros por página"
@@ -417,7 +423,10 @@
                 {% for concepto_por_actividad in actividad_seleccionada.get_conceptos_por_actividad %}
                     <div class="tab-pane fade" id="tab-{{concepto_por_actividad.id}}">
                         {% if concepto_por_actividad.id == 1 %}
-                             {%include "dashboard/resultados_convocatoria_1.html" %}
+                            {% comment "Optional note" %}
+                               {%include "dashboard/multireporte_resultado_convocatoria.html" %}
+                            {% endcomment %}
+                            {%include "dashboard/resultados_convocatoria_1.html" %}
                         {% else %}
                             {% if concepto_por_actividad.id == 9 %}
                                 {%include "dashboard/multireporte_maestro_estudiante.html" %}

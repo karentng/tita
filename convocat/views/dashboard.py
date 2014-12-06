@@ -224,11 +224,17 @@ def tablero_control(request, id_actividad):
     usuario_puede_editar = ((grupo_de_usuario == 'Coordinador' and int(id_actividad) < 14) or (grupo_de_usuario == 'Secretaria' and int(id_actividad) > 13))
 
     estudiantes = Estudiante.objects.all()
-    #estudiantesPaginator = Paginator(estudiantes, 5)
+    estudiantesPaginator = Paginator(estudiantes, 10)
+
+    aspirantes = Aspirante.objects.all()
+    print"*************************"
+    print aspirantes[0].nacionalidad
+    aspirantesPaginator = Paginator(estudiantes, 10)
 
     datos_tablero_control = {
         'actividades' : actividades,
-        'estudiantes' : estudiantes,#estudiantesPaginator.page(1),
+        'estudiantes' : estudiantesPaginator.page(1),
+        'aspirantes' : aspirantes,#aspirantesPaginator.page(1),
         'actividad_seleccionada' : actividad_seleccionada,
         'estado_de_avance' : estado_de_avance,
         'estado_avance_form' : EstadoDeAvanceForm(initial=nuevo_estado_de_avance),
