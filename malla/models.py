@@ -4,10 +4,18 @@ from campus.models import Formador
 from django.contrib.auth.models import User
 from estudiante.models import SEDES
 from campus.views import user_group
+from datetime import datetime, timedelta, date
+from django.core.exceptions import ValidationError
 
 def crear_ruta_archivo_monitor(instance, filename):
     randomstr = instance.monitor.numero_documento
     return "malla_soportes_monitores/%s-%s/%s"%(instance.monitor_id, randomstr, filename.encode('ascii','ignore'))
+
+def mayor_edad(value):
+    value = datetime.combine(value, datetime.min.time())
+    fecha = datetime.now()-value
+    if fecha.days <  6390:
+        raise ValidationError('Es menor de edad')
 
 class Monitor(models.Model):
     numero_documento = models.BigIntegerField(unique=True, verbose_name='número documento')
@@ -17,6 +25,7 @@ class Monitor(models.Model):
     #apellido2 = models.CharField( max_length=255, blank=True, verbose_name='segundo apellido')
     celularppal = models.BigIntegerField(verbose_name=u'no. celular')
     email = models.EmailField()
+    direccion = models.TextField(blank=True, null=True)
     soportes = models.FileField(upload_to=crear_ruta_archivo_monitor, blank=True, null=True, help_text='Adjunte la certificación de: DE-10, Tabulado, Recibo de pago, Fotocopia de la cédula y RUT. Se recomienda que comprima todos los archivos en una carpeta ZIP, o añadirlo todo a un documento y subirlo en formato PDF.') 
 
     def __unicode__(self):
@@ -103,15 +112,17 @@ class Contratista(models.Model):
         ("Universidad Libre", "Universidad Libre"),
         ("Universidad Cooperativa", "Universidad Cooperativa"),
         ("Universidad San Martin", "Universidad San Martin"),
+        ("SENA", "SENA"),
         ("Otra", "Otra")
         )
+
     numero_documento = models.BigIntegerField(unique=True, verbose_name='número documento')
     nombre1 = models.CharField( max_length=255, verbose_name='primer nombre')
     nombre2 = models.CharField( max_length=255, blank=True, verbose_name='segundo nombre')
     apellido1 = models.CharField( max_length=255, verbose_name='primer apellido')
     apellido2 = models.CharField( max_length=255, blank=True, verbose_name='segundo apellido')
     sexo = models.CharField( choices=[('M','Hombre'), ('F', 'Mujer')], max_length=1, verbose_name='sexo')
-    fecha_nacimiento = models.DateField(verbose_name='fecha de nacimiento', help_text='Formato año-mes-día (ej: 1988-04-30)')
+    fecha_nacimiento = models.DateField(verbose_name='fecha de nacimiento', help_text='Formato año-mes-día (ej: 1988-04-30)', validators=[mayor_edad])
     #barrio = models.CharField( max_length=100, verbose_name='barrio de residencia')
     direccion = models.CharField( max_length=100, verbose_name='dirección')
     universidad = models.CharField(max_length=255, choices=UNIVERSIDADES)
@@ -164,12 +175,15 @@ class ContratistaAreasConocimiento(models.Model):
     dibujotecnico = models.BooleanField(verbose_name='dibujo técnico') 
 
 def crear_ruta_archivo(instance, filename):
-    randomstr = instance.contratista.numero_documento
-    return "malla_soportes_contratistas/%s-%s/%s"%(instance.contratista_id, randomstr, filename.encode('ascii','ignore'))
+    randomstr = instance.monitor.numero_documento
+    return "malla_soportes_contratistas/%s-%s/%s"%(instance.monitor_id, randomstr, filename.encode('ascii','ignore'))
 
 class ContratistaDocumentosSoporte(models.Model):
     monitor = models.OneToOneField(Contratista, primary_key=True)
-    soportes = models.FileField(upload_to=crear_ruta_archivo, blank=True, null=True)   
+    eps_sisben = models.FileField(upload_to=crear_ruta_archivo, blank=True, null=True)
+    matricula = models.FileField(upload_to=crear_ruta_archivo, blank=True, null=True)
+    rut = models.FileField(upload_to=crear_ruta_archivo, blank=True, null=True)
+    hv = models.FileField(upload_to=crear_ruta_archivo, blank=True, null=True)
 
 class Requerimiento(models.Model):
 
@@ -208,7 +222,7 @@ class Lista(models.Model):
         ('Especial', 'Especial'),
         )
 
-    AREAS =(
+    '''AREAS =(
         ('Ciencias Naturales', 'Ciencias Naturales'),
         ('Fisica', 'Física'),
         ('Quimica', 'Química'),
@@ -229,7 +243,7 @@ class Lista(models.Model):
         ('Educacion Fisica', 'Educación Física'),
         ('Tecnologia y Sistemas', 'Tecnología y Sistemas'),
         ('Pedagogia', 'Pedagogía'),
-        ( 'Dibujo Tecnico', 'Dibujo Técnico'),)
+        ( 'Dibujo Tecnico', 'Dibujo Técnico'),)'''
 
     asignacion = models.IntegerField(verbose_name='asignación')
     requerimiento = models.ForeignKey(Requerimiento)
@@ -237,11 +251,9 @@ class Lista(models.Model):
     colegio = models.IntegerField(choices=SEDES, max_length=1000, verbose_name="institución")
     profesor = models.ForeignKey(Formador)
     contratista = models.ForeignKey(Contratista)
-    materia = models.CharField(choices=AREAS, max_length=1000, verbose_name="asignatura")
     espacio = models.CharField( max_length=255, blank=True, help_text='numero de salón')
     condicion = models.CharField(choices=CONDICION, max_length=1000, verbose_name="condición")
     tipo = models.CharField(choices=TIPO, max_length=1000, verbose_name="tipo")
-    idasigncancel = models.IntegerField(null = True, blank = True, verbose_name="id asignación cancelada", help_text='Éste campo solo se llena en caso de que haya otra lista de tipo "No programada", en este caso se pondría el Id de la asignación cancelada.')
     horas = models.IntegerField()
     observaciones = models.CharField( max_length=2550, blank=True)
     usuario = models.CharField( max_length=2550, blank=True)
