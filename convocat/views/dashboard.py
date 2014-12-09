@@ -227,13 +227,11 @@ def tablero_control(request, id_actividad):
     estudiantesPaginator = Paginator(estudiantes, 10)
 
     aspirantes = Aspirante.objects.all()
-    print"*************************"
-    print aspirantes[0].nacionalidad
     aspirantesPaginator = Paginator(estudiantes, 10)
 
     datos_tablero_control = {
         'actividades' : actividades,
-        'estudiantes' : estudiantesPaginator.page(1),
+        'estudiantes' : estudiantes,#estudiantesPaginator.page(1),
         'aspirantes' : aspirantes,#aspirantesPaginator.page(1),
         'actividad_seleccionada' : actividad_seleccionada,
         'estado_de_avance' : estado_de_avance,

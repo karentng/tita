@@ -5,10 +5,11 @@
                 <div class="panel-heading-btn">
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                 </div>
-                <h4 class="panel-title">Columnas: por favor haga clic en la columna que desea ocultar o mostrar</h4>
+                <h4 class="panel-title">Maestros Aspirantes Inscritos</h4>
             </div>
             <div class="panel-body">
                 <div class="row">
+                    <h6>Por favor haga clic en la columna que desea ocultar o mostrar</h6>
                     <a class="toggle-vis" data-column="0">#</a> |
                     <a class="toggle-vis" data-column="1">Nombres y Apellidos</a> |
                     <a class="toggle-vis" data-column="2">Cédula</a> |
@@ -27,19 +28,16 @@
                     <a class="toggle-vis" data-column="15">Municipio Institución</a> |
                     <a class="toggle-vis" data-column="16">Jornada</a> |
                     <a class="toggle-vis" data-column="17">Puntuacion Final</a> |
-                </div>
-            </div>
-        </div>
-
-        <div class="panel panel-inverse" id="inscritos">
-            <div class="panel-heading">
-                <div class="panel-heading-btn">
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                </div>
-                <h4 class="panel-title">Maestros Aspirantes Inscritos</h4>
-            </div>
-            <div class="panel-body">
-                <div class="table-responsive" style="height:600px; overflow-y:auto; overflow-x:auto;">
+                    <a class="toggle-vis" data-column="18">Conocimiento y manejo de herramientas ofimáticas</a> |
+                    <a class="toggle-vis" data-column="19">Conocimiento y manejo de herramientas  Web 2</a> |
+                    <a class="toggle-vis" data-column="20">Conocimiento herramientas de edición multimedia</a> |
+                    <a class="toggle-vis" data-column="21">Experiencia en desarrollo de contenidos educativos digitales</a> |
+                    <a class="toggle-vis" data-column="22">Experiencia en desarrollo de libros de texto digital</a> |
+                    <a class="toggle-vis" data-column="23">Experiencia en procesos de e-learning</a> |
+                    <a class="toggle-vis" data-column="24">Experiencia en gestión de proyectos educativos TIC</a> |
+                    <a class="toggle-vis" data-column="25">Experiencia en desarrollo de elementos de evaluación de competencias</a>
+                </div><br/>
+                <div class="table-responsive" style="height:500px; overflow-y:auto; overflow-x:auto;">
                     <table id="tabla-super-poderosa" class="table table-striped table-bordered" width="100%">
                         <thead>
                             <tr role="row">
@@ -61,28 +59,14 @@
                                 <th>Municipio Institución</th>
                                 <th>Jornada</th>
                                 <th>Puntuacion Final</th>
-                            </tr>
-                        </thead>
-                        <tfoot>
-                            <tr role="row">
-                                <th>#</th>
-                                <th>Nombres y Apellidos</th>
-                                <th>Cédula</th>
-                                <th>Genero</th>
-                                <th>Nacionalidad</th>
-                                <th>Fecha de Nacimiento</th>
-                                <th>Municipio de Nacimiento</th>
-                                <th>Dirección</th>
-                                <th>Municipio</th>
-                                <th>Teléfono</th>
-                                <th>Celular</th>
-                                <th>Email</th>
-                                <th>Puntuacion hv</th>
-                                <th>Aceptado</th>
-                                <th>Institucion Actual</th>
-                                <th>Municipio Institución</th>
-                                <th>Jornada</th>
-                                <th>Puntuacion Final</th>
+                                <th>Conocimiento y manejo de herramientas ofimáticas</th>
+                                <th>Conocimiento y manejo de herramientas  Web 2</th>
+                                <th>Conocimiento herramientas de edición multimedia</th>
+                                <th>Experiencia en desarrollo de contenidos educativos digitales</th>
+                                <th>Experiencia en desarrollo de libros de texto digital</th>
+                                <th>Experiencia en procesos de e-learning</th>
+                                <th>Experiencia en gestión de proyectos educativos TIC</th>
+                                <th>Experiencia en desarrollo de elementos de evaluación de competencias</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -106,6 +90,16 @@
                                     <td>{{aspirante.municipio_institucion}}</td>
                                     <td>{{aspirante.get_jornada_display}}</td>
                                     <td>{{aspirante.puntuacion_final}}</td>
+                                    {% with conocimientosEspecificos=aspirante.conocimientosEspecificos %}
+                                        <td>{{conocimientosEspecificos.get_conocimiento1_display}}</td>
+                                        <td>{{conocimientosEspecificos.get_conocimiento2_display}}</td>
+                                        <td>{{conocimientosEspecificos.get_conocimiento3_display}}</td>
+                                        <td>{{conocimientosEspecificos.get_conocimiento4_display}}</td>
+                                        <td>{{conocimientosEspecificos.get_conocimiento5_display}}</td>
+                                        <td>{{conocimientosEspecificos.get_conocimiento6_display}}</td>
+                                        <td>{{conocimientosEspecificos.get_conocimiento7_display}}</td>
+                                        <td>{{conocimientosEspecificos.get_conocimiento8_display}}</td>
+                                    {% endwith %}
                                 </tr>
                             {% endfor %}
                         </tbody>
