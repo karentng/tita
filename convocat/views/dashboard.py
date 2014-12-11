@@ -5,7 +5,7 @@ from django.http import HttpResponse, HttpRequest, HttpResponseRedirect, QueryDi
 from convocat.models import *
 from convocat.forms import *
 from django.db.models import Count, Q
-from campus.models import Estudiante
+from campus.models import Estudiante, Cursos, Clases
 from estudiante.models import InfoLaboral, FormacionAcademicaME, CertificacionTIC
 from campus.views import user_group
 
@@ -94,7 +94,8 @@ def dashboard(request):
 def listaMaestrosEstudiantesInscritos():
     estudiantes = []
     cont = 1
-    students = Estudiante.objects.filter(acta_compromiso=True).select_related('estudiante.InfoLaboral__estudiante')
+    students = Estudiante.objects.filter(acta_compromiso=True).select_related('estudiante.InfoLaboral__estudiante').select_related('Cursos__estudiantes')
+    c = 0
     for estudiante in students:
         jornada = ""
         institucion = ""
@@ -111,6 +112,14 @@ def listaMaestrosEstudiantesInscritos():
         except Exception:
             jornada = "---"
             institucion = "---"
+
+        try:
+            curso = Cursos.objects.get(estudiantes=estudiante)
+            horas = Clases.objects.filter(asistentes=estudiante, curso=curso).count()*5
+        except Exception:
+            curso = "---"
+            horas = "---"
+
         estudiantes.append(
             {"id": estudiante.id,
             "item": cont,
@@ -118,10 +127,11 @@ def listaMaestrosEstudiantesInscritos():
             "cedula": estudiante.numero_documento,
             "jornada": jornada,
             "institucion": institucion,
+            "curso": curso,
+            "horas": horas
             }
         )
         cont = cont + 1
-
     return estudiantes
 
 def reporteME(request):
