@@ -5,7 +5,7 @@ from django.http import HttpResponse, HttpRequest, HttpResponseRedirect, QueryDi
 from convocat.models import *
 from convocat.forms import *
 from django.db.models import Count, Q
-from campus.models import Estudiante, Cursos, Clases
+from campus.models import Estudiante, Cursos, Clases, SoporteClases
 from estudiante.models import InfoLaboral, FormacionAcademicaME, CertificacionTIC
 from campus.views import user_group
 
@@ -115,7 +115,14 @@ def listaMaestrosEstudiantesInscritos():
 
         try:
             curso = Cursos.objects.get(estudiantes=estudiante)
-            horas = Clases.objects.filter(asistentes=estudiante, curso=curso).count()*5
+            clases = Clases.objects.filter(asistentes=estudiante, curso=curso)
+            horas = 0
+            for clase in clases:
+                try:
+                    SoporteClases.objects.get(clase=clase)
+                    horas = horas + 5
+                except Exception:
+                    1
         except Exception:
             curso = "---"
             horas = "---"
