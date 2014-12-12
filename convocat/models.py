@@ -348,6 +348,7 @@ class Archivo(models.Model):
 class HistoricoDeArchivo(models.Model):
     usuario = models.ForeignKey(User)
     archivo = models.ForeignKey(Archivo)
+    observacion = models.CharField(max_length=255, verbose_name='observacion', null=False, blank=False,)
     fecha = models.DateField(default = datetime.datetime.now(),)
 
 class VariablePorSede(models.Model):

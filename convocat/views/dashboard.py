@@ -336,6 +336,7 @@ def eliminarArchivo(request, id_archivo):
     historico_de_archivo = HistoricoDeArchivo()
     historico_de_archivo.archivo = archivo
     historico_de_archivo.usuario = request.user
+    historico_de_archivo.observacion = request.POST.get("observacion")
     historico_de_archivo.save()
 
     return HttpResponseRedirect( '../' + str(request.session['actividad_tablero_control']))
@@ -360,7 +361,7 @@ def obtenerGruposPorConceptoActividad(request, id_concepto_por_actividad):
         return redirect('home')
 
     concepto_por_actividad = ConceptoPorActividad.objects.get(id=id_concepto_por_actividad)
-    grupos = Grupo.objects.filter(concepto_por_actividad=concepto_por_actividad)
+    grupos = Grupo.objects.filter(concepto_por_actividad=concepto_por_actividad, activo=True)
 
     out = []
     out.append('<option selected="selected" value="">---------</option>')

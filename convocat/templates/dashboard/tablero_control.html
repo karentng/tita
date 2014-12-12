@@ -165,6 +165,11 @@
                     <form id="formBorrarArchivo" class="form-horizontal" method="post" action="">
                         {% csrf_token %}
                         <h5>Realmente desea borrar el archivo?</h5>
+                        <div class="form-group">
+                            <label for="id_observacion" class="col-md-2 control-label ui-sortable">Observación</label>
+                            <div class="col-md-4 ui-sortable"><input type="text" title="" placeholder="Observación" name="observacion" maxlength="255" id="id_observacion" class="form-control">
+                            </div>
+                        </div>
                         <button type="button" type="submit" class="btn btn-primary pull-right" id="borrarArchivoButton">Borrar</button>
                     </form>
                 </div>
