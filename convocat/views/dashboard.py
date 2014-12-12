@@ -235,26 +235,27 @@ def tablero_control(request, id_actividad):
     nuevo_estado_de_avance['fecha'] = datetime.datetime.now()
 
     grupo_de_usuario = user_group(request)
-    print(grupo_de_usuario)
-    usuario_puede_editar = False
 
     usuario_puede_editar = ((grupo_de_usuario == 'Coordinador' and int(id_actividad) < 14) or (grupo_de_usuario == 'Secretaria' and int(id_actividad) > 13))
 
     estudiantes = Estudiante.objects.all()
-    estudiantesPaginator = Paginator(estudiantes, 10)
-
     aspirantes = Aspirante.objects.all()
-    aspirantesPaginator = Paginator(estudiantes, 10)
+    variablesPorSede = VariablePorSede.objects.all()
+    variablesPorAula = VariablePorAula.objects.all()
 
     datos_tablero_control = {
         'actividades' : actividades,
-        'estudiantes' : estudiantes,#estudiantesPaginator.page(1),
-        'aspirantes' : aspirantes,#aspirantesPaginator.page(1),
+        'estudiantes' : estudiantes,
+        'aspirantes' : aspirantes,
+        'variablesPorSede' : variablesPorSede,
+        'variablesPorAula' : variablesPorAula,
         'actividad_seleccionada' : actividad_seleccionada,
         'estado_de_avance' : estado_de_avance,
         'estado_avance_form' : EstadoDeAvanceForm(initial=nuevo_estado_de_avance),
         'formArchivo': ArchivoForm(),
         'formGrupo': GrupoForm(),
+        'formVariablesPorAula' : VariablePorAulaForm(),
+        'formVariablesPorSede' : VariablePorSedeForm(),
         'usuario_puede_editar': usuario_puede_editar,
         'user_group': user_group(request),
     }
@@ -263,6 +264,30 @@ def tablero_control(request, id_actividad):
     datos_tablero_control['opcion_menu'] = 13
 
     return render(request, 'dashboard/tablero_control.html', datos_tablero_control)
+
+def guardarVariablesPorSede(request):
+    if validar_grupo_coordinador_secretaria(request) == False:
+        return redirect('home')
+
+    form = VariablePorSedeForm(request.POST, request.FILES)
+    if form.is_valid():
+        variablePorSede = form.save(commit=False)
+        variablePorSede.usuario = request.user
+        variablePorSede.save()
+
+    return HttpResponseRedirect(str(request.session['actividad_tablero_control']))
+
+def guardarVariablesPorAula(request):
+    if validar_grupo_coordinador_secretaria(request) == False:
+        return redirect('home')
+
+    form = VariablePorAulaForm(request.POST, request.FILES)
+    if form.is_valid():
+        variablePorAula = form.save(commit=False)
+        variablePorAula.usuario = request.user
+        variablePorAula.save()
+
+    return HttpResponseRedirect(str(request.session['actividad_tablero_control']))
 
 def guardarArchivo(request):
     if validar_grupo_coordinador_secretaria(request) == False:

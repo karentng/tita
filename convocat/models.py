@@ -359,9 +359,10 @@ class VariablePorSede(models.Model):
 
 class VariablePorAula(models.Model):
     sede = models.IntegerField(choices=SEDES, max_length=2)
+    aula = models.CharField(max_length=255, verbose_name=u'aula')
     usuario = models.ForeignKey(User)
     fecha = models.DateField(default = datetime.datetime.now(),)
     equipos_tda = models.IntegerField(default = 0, null=False, blank=False, verbose_name=u'número de equipos tda')
-    computadores_docentes = models.IntegerField(default = 0, null=False, blank=False, verbose_name=u'número de computadores docentes')
+    computadores_docentes = models.IntegerField(default = 0, null=False, blank=False, verbose_name=u'número de computadores para docentes')
     video_proyectores = models.IntegerField(default = 0, null=False, blank=False, verbose_name=u'número de video proyectores')
     access_point = models.IntegerField(default = 0, null=False, blank=False, verbose_name=u'número de access point')
