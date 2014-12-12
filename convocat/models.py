@@ -2,6 +2,7 @@
 import random, string, os, datetime
 from django.db import models
 from django.contrib.auth.models import User
+from estudiante.models import SEDES
 from dateutil.relativedelta import relativedelta
 from datetime import date
 
@@ -348,3 +349,19 @@ class HistoricoDeArchivo(models.Model):
     usuario = models.ForeignKey(User)
     archivo = models.ForeignKey(Archivo)
     fecha = models.DateField(default = datetime.datetime.now(),)
+
+class VariablePorSede(models.Model):
+    sede = models.IntegerField(choices=SEDES, max_length=2)
+    usuario = models.ForeignKey(User)
+    fecha = models.DateField(default = datetime.datetime.now(),)
+    numero_switch = models.IntegerField(default = 0, null=False, blank=False, verbose_name=u'número de switch')
+    numero_ups = models.IntegerField(default = 0, null=False, blank=False, verbose_name=u'número de ups')
+
+class VariablePorAula(models.Model):
+    sede = models.IntegerField(choices=SEDES, max_length=2)
+    usuario = models.ForeignKey(User)
+    fecha = models.DateField(default = datetime.datetime.now(),)
+    equipos_tda = models.IntegerField(default = 0, null=False, blank=False, verbose_name=u'número de equipos tda')
+    computadores_docentes = models.IntegerField(default = 0, null=False, blank=False, verbose_name=u'número de computadores docentes')
+    video_proyectores = models.IntegerField(default = 0, null=False, blank=False, verbose_name=u'número de video proyectores')
+    access_point = models.IntegerField(default = 0, null=False, blank=False, verbose_name=u'número de access point')

@@ -315,21 +315,29 @@
                             {% if concepto_por_actividad.id == 9 %}
                                 {%include "dashboard/multireporte_maestro_estudiante.html" %}
                             {% else %}
-                                <div class="tree">
-                                    {% if usuario_puede_editar %}
-                                        <div class="row">
-                                            <a href="#modal-dialog-grupo" class="btn btn-success" data-toggle="modal">Adicionar Carpeta</a>
-                                            {% if concepto_por_actividad.get_grupos|length > 0 %}
-                                                <a href="#modal-dialog-archivo" class="btn btn-success" data-toggle="modal">Adicionar Archivo</a>
+                                {% if concepto_por_actividad.id == 42 %}
+                                    {%include "dashboard/variables_por_sede.html" %}
+                                {% else %}
+                                    {% if concepto_por_actividad.id == 46 %}
+                                        {%include "dashboard/variables_por_aula.html" %}
+                                    {% else %}
+                                        <div class="tree">
+                                            {% if usuario_puede_editar %}
+                                                <div class="row">
+                                                    <a href="#modal-dialog-grupo" class="btn btn-success" data-toggle="modal">Adicionar Carpeta</a>
+                                                    {% if concepto_por_actividad.get_grupos|length > 0 %}
+                                                        <a href="#modal-dialog-archivo" class="btn btn-success" data-toggle="modal">Adicionar Archivo</a>
+                                                    {% endif %}
+                                                </div>
                                             {% endif %}
+                                            <ul>
+                                                {% for grupo in concepto_por_actividad.get_grupos %}
+                                                    {%include "dashboard/grupos_tree.html" %}
+                                                {% endfor %}
+                                            </ul>
                                         </div>
                                     {% endif %}
-                                    <ul>
-                                        {% for grupo in concepto_por_actividad.get_grupos %}
-                                            {%include "dashboard/grupos_tree.html" %}
-                                        {% endfor %}
-                                    </ul>
-                                </div>
+                                {% endif %}
                             {% endif %}
                         {% endif %}
                     </div>

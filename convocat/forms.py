@@ -190,3 +190,13 @@ class EstadoDeAvanceForm(forms.ModelForm):
     class Meta:
         model = EstadoDeAvance
         exclude = ('actividad','usuario')
+
+class VariablePorSede(forms.ModelForm):
+    class Meta:
+        model = VariablePorSede
+        exclude = ('fecha','usuario')
+
+class VariablePorAula(forms.ModelForm):
+    class Meta:
+        model = VariablePorAula
+        exclude = ('fecha','usuario')
