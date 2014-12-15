@@ -5,7 +5,7 @@ from django.http import HttpResponse, HttpRequest, HttpResponseRedirect, QueryDi
 from convocat.models import *
 from convocat.forms import *
 from django.db.models import Count, Q
-from campus.models import Estudiante
+from campus.models import Estudiante, Cursos, Clases, SoporteClases
 from estudiante.models import InfoLaboral, FormacionAcademicaME, CertificacionTIC
 from campus.views import user_group
 
@@ -94,7 +94,8 @@ def dashboard(request):
 def listaMaestrosEstudiantesInscritos():
     estudiantes = []
     cont = 1
-    students = Estudiante.objects.filter(acta_compromiso=True).select_related('estudiante.InfoLaboral__estudiante')
+    students = Estudiante.objects.filter(acta_compromiso=True).select_related('estudiante.InfoLaboral__estudiante').select_related('Cursos__estudiantes')
+    c = 0
     for estudiante in students:
         jornada = ""
         institucion = ""
@@ -111,6 +112,21 @@ def listaMaestrosEstudiantesInscritos():
         except Exception:
             jornada = "---"
             institucion = "---"
+
+        try:
+            curso = Cursos.objects.get(estudiantes=estudiante)
+            clases = Clases.objects.filter(asistentes=estudiante, curso=curso)
+            horas = 0
+            for clase in clases:
+                try:
+                    SoporteClases.objects.get(clase=clase)
+                    horas = horas + 5
+                except Exception:
+                    1
+        except Exception:
+            curso = "---"
+            horas = "---"
+
         estudiantes.append(
             {"id": estudiante.id,
             "item": cont,
@@ -118,10 +134,11 @@ def listaMaestrosEstudiantesInscritos():
             "cedula": estudiante.numero_documento,
             "jornada": jornada,
             "institucion": institucion,
+            "curso": curso,
+            "horas": horas
             }
         )
         cont = cont + 1
-
     return estudiantes
 
 def reporteME(request):
@@ -218,22 +235,27 @@ def tablero_control(request, id_actividad):
     nuevo_estado_de_avance['fecha'] = datetime.datetime.now()
 
     grupo_de_usuario = user_group(request)
-    print(grupo_de_usuario)
-    usuario_puede_editar = False
 
     usuario_puede_editar = ((grupo_de_usuario == 'Coordinador' and int(id_actividad) < 14) or (grupo_de_usuario == 'Secretaria' and int(id_actividad) > 13))
 
     estudiantes = Estudiante.objects.all()
-    #estudiantesPaginator = Paginator(estudiantes, 5)
+    aspirantes = Aspirante.objects.all()
+    variablesPorSede = VariablePorSede.objects.all()
+    variablesPorAula = VariablePorAula.objects.all()
 
     datos_tablero_control = {
         'actividades' : actividades,
-        'estudiantes' : estudiantes,#estudiantesPaginator.page(1),
+        'estudiantes' : estudiantes,
+        'aspirantes' : aspirantes,
+        'variablesPorSede' : variablesPorSede,
+        'variablesPorAula' : variablesPorAula,
         'actividad_seleccionada' : actividad_seleccionada,
         'estado_de_avance' : estado_de_avance,
         'estado_avance_form' : EstadoDeAvanceForm(initial=nuevo_estado_de_avance),
         'formArchivo': ArchivoForm(),
         'formGrupo': GrupoForm(),
+        'formVariablesPorAula' : VariablePorAulaForm(),
+        'formVariablesPorSede' : VariablePorSedeForm(),
         'usuario_puede_editar': usuario_puede_editar,
         'user_group': user_group(request),
     }
@@ -242,6 +264,30 @@ def tablero_control(request, id_actividad):
     datos_tablero_control['opcion_menu'] = 13
 
     return render(request, 'dashboard/tablero_control.html', datos_tablero_control)
+
+def guardarVariablesPorSede(request):
+    if validar_grupo_coordinador_secretaria(request) == False:
+        return redirect('home')
+
+    form = VariablePorSedeForm(request.POST, request.FILES)
+    if form.is_valid():
+        variablePorSede = form.save(commit=False)
+        variablePorSede.usuario = request.user
+        variablePorSede.save()
+
+    return HttpResponseRedirect(str(request.session['actividad_tablero_control']))
+
+def guardarVariablesPorAula(request):
+    if validar_grupo_coordinador_secretaria(request) == False:
+        return redirect('home')
+
+    form = VariablePorAulaForm(request.POST, request.FILES)
+    if form.is_valid():
+        variablePorAula = form.save(commit=False)
+        variablePorAula.usuario = request.user
+        variablePorAula.save()
+
+    return HttpResponseRedirect(str(request.session['actividad_tablero_control']))
 
 def guardarArchivo(request):
     if validar_grupo_coordinador_secretaria(request) == False:
@@ -290,6 +336,7 @@ def eliminarArchivo(request, id_archivo):
     historico_de_archivo = HistoricoDeArchivo()
     historico_de_archivo.archivo = archivo
     historico_de_archivo.usuario = request.user
+    historico_de_archivo.observacion = request.POST.get("observacion")
     historico_de_archivo.save()
 
     return HttpResponseRedirect( '../' + str(request.session['actividad_tablero_control']))
@@ -314,7 +361,7 @@ def obtenerGruposPorConceptoActividad(request, id_concepto_por_actividad):
         return redirect('home')
 
     concepto_por_actividad = ConceptoPorActividad.objects.get(id=id_concepto_por_actividad)
-    grupos = Grupo.objects.filter(concepto_por_actividad=concepto_por_actividad)
+    grupos = Grupo.objects.filter(concepto_por_actividad=concepto_por_actividad, activo=True)
 
     out = []
     out.append('<option selected="selected" value="">---------</option>')

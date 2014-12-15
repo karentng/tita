@@ -67,13 +67,13 @@ class ReclamacionModificarForm(forms.ModelForm):
 
 
 class ListaForm(forms.ModelForm):
+    horas = forms.IntegerField(initial=5)
     class Meta:
         model = Lista
-        fields = ('asignacion', 'requerimiento', 'fecha', 'colegio', 'profesor', 'contratista', 'materia', 'espacio', 'condicion', 'tipo', 'idasigncancel', 'horas', 'observaciones')
+        fields = ('asignacion', 'requerimiento', 'fecha', 'colegio', 'profesor', 'contratista', 'espacio', 'condicion', 'tipo', 'horas', 'observaciones')
         widgets = {
             'fecha' : MyDateWidget(),
             'observaciones' : Textarea(attrs={'rows': 3}),
-            
         }
 
 
@@ -122,14 +122,16 @@ class DocumentosSoporteForm(forms.ModelForm):
         model = ContratistaDocumentosSoporte
         exclude = ('monitor',)
         widgets = {
-            'soportes' : MyFileInput(),
-
+            'eps_sisben' : MyFileInput(),
+            'matricula' : MyFileInput(),
+            'rut' : MyFileInput(),
+            'hv' : MyFileInput(),
         }
 
 class MonitorForm(forms.ModelForm):
     class Meta:
         model = Monitor
-        fields = ('numero_documento', 'nombres', 'apellidos','celularppal', 'email', 'soportes')#, 'estrato',)# 'sector', 'sectordesplazamiento',)
+        fields = ('numero_documento', 'nombres', 'apellidos','celularppal', 'email', 'direccion', 'soportes')#, 'estrato',)# 'sector', 'sectordesplazamiento',)
         widgets = {
             'fecha_nacimiento' : MyDateWidget(),
             'soportes' : MyFileInput(),

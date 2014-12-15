@@ -18,133 +18,13 @@
     <script src="{{STATIC_URL}}plugins/flot/jquery.flot.min.js"></script>
     <script src="{{STATIC_URL}}plugins/flot/jquery.flot.pie.min.js"></script>
     <script src="{{STATIC_URL}}plugins/flot/jquery.flot.categories.js"></script>
-    <script type="text/javascript">
-        $('#data-table2').dataTable( {
-            "sDom": "<'row'<'col-md-6 col-sm-6'l><'col-md-6 col-sm-6'f>r>t<'row'<'col-md-6 col-sm-6'i><'col-md-6 col-sm-6'p>>",
-            "sPaginationType": "bootstrap",
-            "oLanguage": {
-                "sLengthMenu": "_MENU_ registros por página"
-            }
-        });
-        $('#data-table3').dataTable( {
-            "sDom": "<'row'<'col-md-6 col-sm-6'l><'col-md-6 col-sm-6'f>r>t<'row'<'col-md-6 col-sm-6'i><'col-md-6 col-sm-6'p>>",
-            "sPaginationType": "bootstrap",
-            "oLanguage": {
-                "sLengthMenu": "_MENU_ registros por página"
-            }
-        });
-
-        var purple = '#727cb6';
-
-
-        if ($('#bar-chart').length !== 0) {
-            var municipios = (("{{municipios}}").replace(/&(l|g|quo)t;/g, function(a,b){
-                    return {
-                        l   : '<',
-                        g   : '>',
-                        quo : '"'
-                    }[b];
-                }));
-
-            municipios = JSON.parse( municipios );
-            console.log(municipios);
-            var data = [];
-            for (i in municipios){
-                var aux = municipios[i];
-                data[i] = [aux.nombre, aux.cantidad]
-            }
-            //var data = [ ["January", 10], ["February", 8], ["March", 4], ["April", 13], ["May", 17], ["June", 9] ];
-            $.plot("#bar-chart", [ {data: data, color: purple} ], {
-                series: {
-                    bars: {
-                        show: true,
-                        barWidth: 0.4,
-                        align: 'center',
-                        fill: true,
-                        fillColor: purple,
-                        zero: true
-                    }
-                },
-                xaxis: {
-                    mode: "categories",
-                    tickColor: '#ddd',
-                    tickLength: 0
-                },
-                grid: {
-                    borderWidth: 0
-                }
-            });
-        }
-
-        if ($('#aprobados-chart').length !== 0) {
-            var municipios = (("{{municipiosA}}").replace(/&(l|g|quo)t;/g, function(a,b){
-                    return {
-                        l   : '<',
-                        g   : '>',
-                        quo : '"'
-                    }[b];
-                }));
-
-            municipios = JSON.parse(municipios);
-            //console.log(municipios);
-            var data = [];
-            for (i in municipios){
-                var aux = municipios[i];
-                data[i] = [aux.nombre, aux.cantidad]
-            }
-            //var data = [ ["January", 10], ["February", 8], ["March", 4], ["April", 13], ["May", 17], ["June", 9] ];
-            $.plot("#aprobados-chart", [ {data: data, color: purple} ], {
-                series: {
-                    bars: {
-                        show: true,
-                        barWidth: 0.4,
-                        align: 'center',
-                        fill: true,
-                        fillColor: purple,
-                        zero: true
-                    }
-                },
-                xaxis: {
-                    mode: "categories",
-                    tickColor: '#ddd',
-                    tickLength: 0
-                },
-                grid: {
-                    borderWidth: 0
-                }
-            });
-        }
-
-        function mostrar(num){
-            var paneles = ["#inscritos", "#aprobados", "#rechazados", "#mejores"];
-            for(i in paneles){
-                $(paneles[i]).hide();
-            }
-            $(paneles[num]).show();
-        }
-    </script>
 {% endblock %}
 
 {% block js_ready %}
     <script>
         function mostrarBarraDeCArga() {
-            $('#pleaseWaitDialog').modal({ backdrop: 'static', keyboard: false }).one('click', '#borrarGrupoButton', function (e) {
-            });
+            $('#pleaseWaitDialog').modal({ backdrop: 'static', keyboard: false });
         }
-
-        $('#pleaseWaitDialog').on('shown.bs.modal', function () {
-            var progress = setInterval(function() {
-                var $bar = $('.bar');
-
-                if ($bar.width()==500) {
-                    $bar.width(0);
-                } else {
-                    $bar.width($bar.width()+50);
-                }
-
-                $bar.text($bar.width()/5 + "%");
-            }, 1000);
-        })
 
         function confirmacionBorrarArchivo(id_archivo) {
             $('#confirmacionBorrarArchivo').modal({ backdrop: 'static', keyboard: false }).one('click', '#borrarArchivoButton', function (e) {
@@ -210,9 +90,8 @@
             });
 
             var tableSP = $('#tabla-super-poderosa').dataTable( {
-                "scrollY": 200,
-                "scrollX": true,
                 "paging": true,
+                'bScrollCollapse':true,
                 "sPaginationType": "bootstrap",
                 "oLanguage": {
                     "sLengthMenu": "_MENU_ registros por página"
@@ -225,13 +104,27 @@
                 tableSP.fnSetColumnVis( $(this).attr('data-column'), !bVis);
             } );
 
-            $('#tabla-super-poderosa tfoot th').each( function () {
+            $('#tabla-super-poderosa thead th').each( function () {
                 var title = $('#tabla-super-poderosa thead th').eq( $(this).index() ).text();
-                $(this).html( '<input type="text" width="100" placeholder="'+title+'" />' ).on( 'keyup change', function (e) {
+                $(this).html( '<label class="control-label"><b>'+title+'</b></label><input type="text" width="100" placeholder="" />' ).on( 'keyup change', function (e) {
                     tableSP.fnFilter(e.target.value, $(this).index());
                     tableSP.fnDraw();
                 } );
             } );
+
+            $('#pleaseWaitDialog').on('shown.bs.modal', function () {
+                var progress = setInterval(function() {
+                    var $bar = $('.bar');
+
+                    if ($bar.width()==500) {
+                        $bar.width(0);
+                    } else {
+                        $bar.width($bar.width()+50);
+                    }
+
+                    $bar.text($bar.width()/5 + "%");
+                }, 1000);
+            });
         });
     </script>
 {% endblock %}
@@ -249,7 +142,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3>Cargando...</h3>
+                    <h4>Cargando...</h4>
                 </div>
                 <div class="modal-body">
                     <div class="progress">
@@ -272,6 +165,11 @@
                     <form id="formBorrarArchivo" class="form-horizontal" method="post" action="">
                         {% csrf_token %}
                         <h5>Realmente desea borrar el archivo?</h5>
+                        <div class="form-group">
+                            <label for="id_observacion" class="col-md-2 control-label ui-sortable">Observación</label>
+                            <div class="col-md-4 ui-sortable"><input type="text" title="" placeholder="Observación" name="observacion" maxlength="255" id="id_observacion" class="form-control">
+                            </div>
+                        </div>
                         <button type="button" type="submit" class="btn btn-primary pull-right" id="borrarArchivoButton">Borrar</button>
                     </form>
                 </div>
@@ -417,26 +315,34 @@
                 {% for concepto_por_actividad in actividad_seleccionada.get_conceptos_por_actividad %}
                     <div class="tab-pane fade" id="tab-{{concepto_por_actividad.id}}">
                         {% if concepto_por_actividad.id == 1 %}
-                             {%include "dashboard/resultados_convocatoria_1.html" %}
+                            {%include "dashboard/multireporte_resultado_convocatoria.html" %}
                         {% else %}
                             {% if concepto_por_actividad.id == 9 %}
                                 {%include "dashboard/multireporte_maestro_estudiante.html" %}
                             {% else %}
-                                <div class="tree">
-                                    {% if usuario_puede_editar %}
-                                        <div class="row">
-                                            <a href="#modal-dialog-grupo" class="btn btn-success" data-toggle="modal">Adicionar Carpeta</a>
-                                            {% if concepto_por_actividad.get_grupos|length > 0 %}
-                                                <a href="#modal-dialog-archivo" class="btn btn-success" data-toggle="modal">Adicionar Archivo</a>
+                                {% if concepto_por_actividad.id == 42 %}
+                                    {%include "dashboard/variables_por_sede.html" %}
+                                {% else %}
+                                    {% if concepto_por_actividad.id == 46 %}
+                                        {%include "dashboard/variables_por_aula.html" %}
+                                    {% else %}
+                                        <div class="tree">
+                                            {% if usuario_puede_editar %}
+                                                <div class="row">
+                                                    <a href="#modal-dialog-grupo" class="btn btn-success" data-toggle="modal">Adicionar Carpeta</a>
+                                                    {% if concepto_por_actividad.get_grupos|length > 0 %}
+                                                        <a href="#modal-dialog-archivo" class="btn btn-success" data-toggle="modal">Adicionar Archivo</a>
+                                                    {% endif %}
+                                                </div>
                                             {% endif %}
+                                            <ul>
+                                                {% for grupo in concepto_por_actividad.get_grupos %}
+                                                    {%include "dashboard/grupos_tree.html" %}
+                                                {% endfor %}
+                                            </ul>
                                         </div>
                                     {% endif %}
-                                    <ul>
-                                        {% for grupo in concepto_por_actividad.get_grupos %}
-                                            {%include "dashboard/grupos_tree.html" %}
-                                        {% endfor %}
-                                    </ul>
-                                </div>
+                                {% endif %}
                             {% endif %}
                         {% endif %}
                     </div>
