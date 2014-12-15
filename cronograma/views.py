@@ -1078,7 +1078,7 @@ def formador(request):
     })
 
 def reporte_cursos(request, limit=100):
-    curso_list = Cursos.objects.all() 
+    curso_list = Cursos.objects.all().order_by('descripcion') 
     #estudiante_list = [curso_list.lenght]
     #estudiante_list = curso_list[0].estudiantes.all()
     #estudiante_list = [curso_list.lenght]
