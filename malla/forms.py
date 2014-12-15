@@ -131,9 +131,12 @@ class DocumentosSoporteForm(forms.ModelForm):
 class MonitorForm(forms.ModelForm):
     class Meta:
         model = Monitor
-        fields = ('numero_documento', 'nombres', 'apellidos','celularppal', 'email', 'direccion', 'soportes')#, 'estrato',)# 'sector', 'sectordesplazamiento',)
         widgets = {
             'fecha_nacimiento' : MyDateWidget(),
             'soportes' : MyFileInput(),
-
+            'd10' : MyFileInput(),
+            'tabulado' : MyFileInput(),
+            'recibo' : MyFileInput(),
+            'cedula' : MyFileInput(),
+            'rut' : MyFileInput(),
         }

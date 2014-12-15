@@ -190,4 +190,4 @@ class FiltroCronograma(forms.Form):
         ('Principal VIJES', 'Principal VIJES')
     )
     sedes = forms.ChoiceField(widget=Select(), choices=SEDES)
-    #jornadas = forms.ChoiceField(widget=forms.Select(), choices=JORNADAS)
+    grupos = forms.ChoiceField(choices=(('0', 'Todos'),)+tuple((str(x.id), x) for x in Cursos.objects.all().order_by('descripcion')))
