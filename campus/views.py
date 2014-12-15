@@ -22,7 +22,11 @@ def logged_user(request):
     elif grupo == 'Coordinador':
         return redirect('tablero_control/')
     elif grupo == 'Formador':
-        return redirect('cronograma_diplomado') # mientras se definen las opciones que tendrá
+        return redirect('cronograma_diplomado')
+    elif grupo == 'Operario_malla':
+        return redirect('listar_contratistas') 
+    elif grupo == 'Contratista_malla':
+        return redirect('lista_contratista') 
     else: #grupo == 'Alcaldia'
         return redirect('tablero_control/')
 
