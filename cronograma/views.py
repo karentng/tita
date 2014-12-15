@@ -449,36 +449,21 @@ def diplomado(request):
                     x = Clases.objects.filter(curso=i)
                     for i in range(0,len(x)):
                         eventos.append(x[i])
-        '''
-
-        try:
-            #curso = get_object_or_404(Cursos, Q(formador1=formador.id) | Q(formador2=formador.id))
-            curso = Cursos.objects.get(Q(formador1=formador.id) | Q(formador2=formador.id))
-            #eventos = AcompanamientoInSitus.objects.filter(curso=curso)
-
-        except Cursos.DoesNotExist:
-            curso = None
-        
-        if curso == None:
-            print "holamundo, no esta asociado a nada lalalalalla!!!!!!!!!!!!!!!!!!!"
-        
-        '''
-
-    if grupo == "Coordinador":
-        if request.method == 'GET' and 'sede' in request.GET:
+    elif grupo == "Coordinador":
+        if request.method == 'GET' and 'sede' in request.method and 'grupo' in request.method:
             sede = request.GET.get('sede')
+            grupo = request.GET.get('grupo')
             
-            if sede != None:
-                eventos = []                
-                try:
-                    curso = Cursos.objects.filter(institucion=sede)
-                    for c in curso:
-                        x = Clases.objects.filter(curso = c)
-                    #eventos.append(x)
-                        eventos = list(merge(eventos, x))
-                except Exception, e:
-                    eventos = []          
+            eventos = []
 
+            if grupo == '0':
+                curso = Cursos.objects.filter(institucion=sede)
+            else:
+                curso = Cursos.objects.filter(institucion=sede, id=grupo)
+
+            for c in curso:
+                x = Clases.objects.filter(curso = c)
+                eventos = list(merge(eventos, x))
         else:
             eventos = Clases.objects.all()
 
@@ -800,6 +785,21 @@ def diplomado(request):
         'opcion_menu': 3,
         'form2':form2,
     })
+
+def filtro_diplomado(request):
+    if request.method == 'POST':
+        form = FiltroCronograma(request.POST)
+        if form.is_valid():
+            sede = form.cleaned_data['sedes']
+            grupo = form.cleaned_data['grupos']
+
+            response = redirect('cronograma_diplomado')
+            response['Location'] += "?sede="+sede+'&grupo='+grupo
+            return response
+        else:
+            return redirect('cronograma_diplomado')    
+    else:
+        return redirect('cronograma_diplomado')
 
 def diplomado_modificar(request):
     grupo = user_group(request)
