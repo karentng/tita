@@ -20,13 +20,15 @@ def mayor_edad(value):
 class Monitor(models.Model):
     numero_documento = models.BigIntegerField(unique=True, verbose_name='número documento')
     nombres = models.CharField( max_length=255, verbose_name='nombres')
-    #nombre2 = models.CharField( max_length=255, blank=True, verbose_name='segundo nombre')
     apellidos = models.CharField( max_length=255, verbose_name='apellidos')
-    #apellido2 = models.CharField( max_length=255, blank=True, verbose_name='segundo apellido')
     celularppal = models.BigIntegerField(verbose_name=u'no. celular')
     email = models.EmailField()
     direccion = models.TextField(blank=True, null=True)
-    soportes = models.FileField(upload_to=crear_ruta_archivo_monitor, blank=True, null=True, help_text='Adjunte la certificación de: DE-10, Tabulado, Recibo de pago, Fotocopia de la cédula y RUT. Se recomienda que comprima todos los archivos en una carpeta ZIP, o añadirlo todo a un documento y subirlo en formato PDF.') 
+    d10 = models.FileField(upload_to=crear_ruta_archivo_monitor, blank=True, null=True, help_text='Adjunte la certificación del: DE-10')
+    tabulado = models.FileField(upload_to=crear_ruta_archivo_monitor, blank=True, null=True, help_text='Adjunte la certificación del: Tabulado')
+    recibo = models.FileField(upload_to=crear_ruta_archivo_monitor, blank=True, null=True, help_text='Adjunte la certificación del: Recibo de Pago')
+    cedula = models.FileField(upload_to=crear_ruta_archivo_monitor, blank=True, null=True, help_text='Adjunte la certificación del: Cédula')
+    rut = models.FileField(upload_to=crear_ruta_archivo_monitor, blank=True, null=True, help_text='Adjunte la certificación del: RUT')
 
     def __unicode__(self):
         return (u"%s %s"%(self.nombres,self.apellidos))
