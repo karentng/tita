@@ -808,6 +808,11 @@ def diplomado_modificar(request):
 
     idCurso = request.GET.get('idCurso')
     curso = Clases.objects.filter(id=idCurso)[0]
+    try:
+        url = SoporteClases.objects.get(clase = curso)
+    except:
+        url = "#"
+    #print str(url.archivo)+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
     
     if request.method == 'POST':
 
@@ -837,7 +842,7 @@ def diplomado_modificar(request):
     return render(request, 'diplomado_modificar.html', {
         'form': form, 
         'user_group': user_group(request),
-        'opcion_menu': 3, 'curso': var
+        'opcion_menu': 3, 'curso': var, 'url':url.archivo,
     })
 
 def acompanamiento_modificar(request):
@@ -848,6 +853,11 @@ def acompanamiento_modificar(request):
 
     idCurso = request.GET.get('idCurso')
     curso = AcompanamientoInSitus.objects.filter(id=idCurso)[0]
+
+    
+    url = SoporteAcompanamiento.objects.get(acompanamiento = curso)
+    
+
     if request.method == 'POST':
 
         get = request.POST['boton']
@@ -875,7 +885,9 @@ def acompanamiento_modificar(request):
         'form': form, 
         'user_group': user_group(request),
         'opcion_menu': 4,
-        'curso':idCurso
+        'curso':idCurso,
+        'url':url.archivo,
+    
     })
 
 def subirsoportes(request):
