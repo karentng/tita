@@ -2,6 +2,9 @@ from django.shortcuts import redirect, render, render_to_response, get_object_or
 from malla.forms import *
 from django.http import HttpResponse, HttpResponseRedirect
 from malla.models import *
+from django.core.management import call_command
+from django.core.files import File 
+from malla.management.commands.lista_contratista import Command
 
 def inicioContratista(request):
     return render(request, 'inicioContratista.html', {'user_group': user_group(request),'opcion_menu': 2,
@@ -219,6 +222,14 @@ def finalizar_contratista(request):
         'opcion_menu': 1,
     })
 
+def lista_asignaturas(request):
+    if request.method == 'POST':
+        idProfesor = request.POST.get('idProfesor')
+        profesor = Formador.objects.get(idProfesor)
+        return []
+    else:
+        return redirect('lista');
+
 def lista(request, id=None):
     grupo = user_group(request)
     if grupo == None:
@@ -363,3 +374,15 @@ def listar_reclamaciones_contratista(request):
         'user_group': user_group(request),
         'opcion_menu': 2,
     })
+
+def lista_reporte_contratista(request):
+    # descomentar  linea 380 y 381 (2 de abajo) para que genere el archivo y luego lo descargue. Hacer que si ya existe, lo elimine antes.
+    #c = Command()
+    #c.handle()
+
+    archivo = open('ReporteListaContratistas.csv', "r") 
+    archivo = File(archivo) 
+
+    response = HttpResponse(archivo, content_type='application/vnd.ms-excel')
+    response['Content-Disposition'] = 'attachment; filename="MaestrosEstudiante.csv"'
+    return response
