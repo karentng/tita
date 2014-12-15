@@ -1151,6 +1151,7 @@ def detalle_curso(request, id):
         return redirect('home')
 
     curso = Cursos.objects.get(id=id)
+    #clase = Clases.objects.filter(curso=curso.id)
 
 
     if request.method == 'POST':
@@ -1191,8 +1192,30 @@ def detalle_curso(request, id):
     return render(request, 'detalles_curso.html', {
         'form': form, 
         'user_group': user_group(request),
-        'opcion_menu': 4,
+        'opcion_menu': 5,
+        'curso':curso.id,
     })
+
+def reporte_conformacion_curso(request, id):
+    grupo = user_group(request)
+    if grupo == None:
+        return redirect('home')
+
+    #clase = Clases.objects.get(id=id)
+    curso = Cursos.objects.get(id=id)
+    #clasenombre = clase.nombre
+    cursonombre = curso.descripcion
+    #clasefecha = clase.fecha_inicio
+
+    formador1 = curso.formador1
+    formador2 = curso.formador2
+    institucion = curso.institucion
+
+    estudiante_list = curso.estudiantes.all()
+    
+    return render(request, 'lista_estudiantes.html', {'estudiante_list': estudiante_list,  'user_group': user_group(request),
+        'opcion_menu': 5, 'curso':cursonombre, 'formador1':formador1,'formador2':formador2, 'institucion':institucion},
+        )
 
 def detalle_formador(request, id):
 
