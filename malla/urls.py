@@ -15,13 +15,16 @@ urlpatterns = patterns('malla.views',
     url(r'^malla/eliminar-contratista/(\d+)$', 'eliminar_contratista', name='eliminar_contratista'),
 
     url(r'^malla/reclamacion$', 'reclamacion', name='reclamacion'),
+    url(r'^malla/reclamacion_modificar/(\d+)$', 'reclamacion_modificar', name='reclamacion_modificar'),
     url(r'^malla/listar_reclamaciones$', 'listar_reclamaciones', name='listar_reclamaciones'),
+    url(r'^malla/listar_reclamaciones_contratista$', 'listar_reclamaciones_contratista', name='listar_reclamaciones_contratista'),
 
     url(r'^malla/lista$', 'lista', name='lista'),
     url(r'^malla/lista/(\d+)$', 'lista', name='lista'),
     url(r'^malla/eliminar-lista/(\d+)$', 'eliminar_lista', name='eliminar_lista'),
     url(r'^malla/reportelista$', 'reporte_lista', name='reporte_lista'),
     url(r'^malla/reportelistacontratista$', 'lista_contratista', name='lista_contratista'),
+    url(r'^malla/lista_asignaturas$', 'lista_asignaturas', name='lista_asignaturas'),
 
     url(r'^malla/requerimiento$', 'requerimiento', name='requerimiento'),
     url(r'^malla/requerimiento/(\d+)$', 'requerimiento', name='requerimiento'),
@@ -35,4 +38,6 @@ urlpatterns = patterns('malla.views',
 
     url(r'^malla/listar-contratistas$', 'listar_contratistas', name='listar_contratistas'),
     url(r'^malla/modificar-contratista/(\d+)$', 'modificarContratista', name='modificarContratista'),
+
+    url(r'^malla/reporte-listas-contratistas$', 'lista_reporte_contratista', name='lista_reporte_contratista'),
 )

@@ -54,9 +54,9 @@
 		for (j in aux.diasEvento){
 			dia = aux.diasEvento[j]
 			{% if user_group == "Coordinador" %}
-			var url = "{% url 'cronograma_diplomado_modificar' %}"+"?idCurso="+aux.id;
+				var url = "{% url 'cronograma_diplomado_modificar' %}"+"?idCurso="+aux.id;
 			{% elif user_group == "Formador" %}
-			var url = "{% url 'cronograma_diplomado_soportes' %}"+"?v="+aux.id;
+				var url = "{% url 'cronograma_diplomado_soportes' %}"+"?v="+aux.id;
 			{% endif %}
 			datos.push({
 				title: aux.nombre,
@@ -159,15 +159,18 @@
 </script>
 
 <script language="JavaScript">
-			<!--
-			var era;
-			var previo=null;
-			function uncheckRadio(rbutton){
-			if(previo &&previo!=rbutton){previo.era=false;}
-			if(rbutton.checked==true && rbutton.era==true){rbutton.checked=false;}
-			rbutton.era=rbutton.checked;
-			previo=rbutton;
-			}
+	var era;
+	var previo=null;
+	function uncheckRadio(rbutton){
+		if(previo &&previo!=rbutton){
+			previo.era=false;
+		}
+		if(rbutton.checked==true && rbutton.era==true){
+			rbutton.checked=false;
+		}
+		rbutton.era=rbutton.checked;
+		previo=rbutton;
+	}
 </script>
 
 {% endblock %}
@@ -186,130 +189,90 @@
 {% endblock %}
 
 
-
 {% block contenido %}
-
-
-	<div >
-	{% if user_group == "Coordinador" %}
-        
-                    
-	<div class="panel panel-inverse">
+	{% if user_group == "Coordinador" %}     
+		<div class="panel panel-inverse">
 		    <div class="panel-heading">
 		        <div class="panel-heading-btn">
 		            <div class="panel-heading-btn">
-                    <a class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-collapse" data-original-title="" title=""><i class="fa fa-minus"></i></a>
-                </div>
+	                <a class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-collapse" data-original-title="" title=""><i class="fa fa-minus"></i></a>
+	            </div>
 		            
 		        </div>
 		        <h4 class="panel-title">Añadir un evento</h4>
-		        
-
 		    </div>
 		    <div class="panel-body p-0">
 		        <div class="horizontal-box">
 		            <div class="col-md-12 p-15 bg-silver " >
-		            	
 		            	<form  method="post" >
-								 {% csrf_token %}
-								 {% bootstrap_form formDiplomado layout="vertical" %}
-								 <input type= "radio" name= "repetir-" value="1" onclick="uncheckRadio(this)"> Repetir el evento todos los días<br>
-								 <input type= "radio" name= "repetir-" value="2" onclick="uncheckRadio(this)"> Repetir el evento cada semana<br>
-								 <input type= "radio" name= "repetir-" value="3" onclick="uncheckRadio(this)"> Repetir el evento cada mes<br><br>
+							{% csrf_token %}
+							{% bootstrap_form formDiplomado layout="vertical" %}
+							<input type= "radio" name= "repetir-" value="1" onclick="uncheckRadio(this)"> Repetir el evento todos los días<br>
+							<input type= "radio" name= "repetir-" value="2" onclick="uncheckRadio(this)"> Repetir el evento cada semana<br>
+							<input type= "radio" name= "repetir-" value="3" onclick="uncheckRadio(this)"> Repetir el evento cada mes<br><br>
 
-								 <div class="form-group"><label class="control-label" for="id_fecha_inicio_0">Repetir hasta:</label>
-				                    <div id="931bae735b2949a88d1448594baafcc8" class="input-group date">
-				                    	<input class="form-control" id="id_fecha_inicio_0" name="repetirfecha" readonly="" required="false" title="" type="text">
-				                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-									<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-									</div>
-									<script type="text/javascript">
-									$("#931bae735b2949a88d1448594baafcc8").datetimepicker({
-									    format : 'yyyy-mm-dd',
-									    startDate : '',
-									    endDate : '',
-									    weekStart : 0,
-									    daysOfWeekDisabled : [],
-									    autoclose : true,
-									    startView : 4,
-									    minView : 2,
-									    maxView : 4,
-									    todayBtn : false,
-									    todayHighlight : false,
-									    minuteStep : 5,
-									    pickerPosition : 'bottom-right',
-									    showMeridian : false,
-									    clearBtn : true,
-									    language : 'es',
-									}).find('input').addClass("form-control");
-									</script>
-				                    </div><br>
-								 <button class="btn btn-primary" type="submit">Programar</button>
+							<div class="form-group"><label class="control-label" for="id_fecha_inicio_0">Repetir hasta:</label>
+							<div id="931bae735b2949a88d1448594baafcc8" class="input-group date">
+								<input class="form-control" id="id_fecha_inicio_0" name="repetirfecha" readonly="" required="false" title="" type="text">
+							<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+							<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+							</div>
+							<script type="text/javascript">
+								$("#931bae735b2949a88d1448594baafcc8").datetimepicker({
+								    format : 'yyyy-mm-dd',
+								    startDate : '',
+								    endDate : '',
+								    weekStart : 0,
+								    daysOfWeekDisabled : [],
+								    autoclose : true,
+								    startView : 4,
+								    minView : 2,
+								    maxView : 4,
+								    todayBtn : false,
+								    todayHighlight : false,
+								    minuteStep : 5,
+								    pickerPosition : 'bottom-right',
+								    showMeridian : false,
+								    clearBtn : true,
+								    language : 'es',
+								}).find('input').addClass("form-control");
+							</script>
+							</div><br>
+							<button class="btn btn-primary" type="submit">Programar</button>
 						</form>
 						<br>
-						
-                    </div>
-                </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
 
-            </div>
-
-        </div>
-
-                    <div class="panel panel-inverse">
+	    <div class="panel panel-inverse">
 		    <div class="panel-heading">
 		        <div class="panel-heading-btn">
 		            <div class="panel-heading-btn">
-                    <a class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-collapse" data-original-title="" title=""><i class="fa fa-minus"></i></a>
-                </div>
+	                <a class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-collapse" data-original-title="" title=""><i class="fa fa-minus"></i></a>
+	            </div>
 		            
 		        </div>
 		        <h4 class="panel-title">Filtrar Eventos en Calendario</h4>
-
-
 		    </div>
 		    <div class="panel-body p-0">
 		        <div class="horizontal-box">
 		            <div class="col-md-12 p-15 bg-silver " >
-		            	
-		            	<form  method="post" >
-								 {% csrf_token %}
-								 {% bootstrap_form form2 layout="vertical" %}
-								 
-							<script type="text/javascript">
-
-			            		$("#id_sedes").change(function(){
-									var aux = $(this).val();
-																	
-			            			$("#id_sedes").attr("value",aux);
-			            			var aux2 = $(this).find(":selected").text();
-			            		
-			            			var url = "/programacion/cronograma_diplomado?sede="+encodeURI(aux2)+"";
-
-			            			$("#id_boton").html("<a href= "+url+" class="+"'btn btn-primary'"+">Filtrar</a>");
-			            			console.log(aux2);
-			            		})
-		            			
-		            		</script>
-
-		            			<div id="id_boton">
-								 
-								</div>
-								 
+		            	<form method="post" action="{% url 'filtro_diplomado' %}" >
+							{% csrf_token %}
+							{% bootstrap_form form2 layout="vertical" %}
+		            		<button class="btn btn-primary" type="submit">Filtrar</button>
 						</form>
 						<br>
-						
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
     {% endif %}
         <div class="panel panel-inverse">
             <div class="panel-heading">
 		        <div class="panel-heading-btn">
-		            
-		            
 		        </div>
 		        <h4 class="panel-title">Calendario</h4>
 		    </div>
@@ -319,5 +282,4 @@
 		        </div>
 		    </div>
 		</div>
-	</div>
 {% endblock %}

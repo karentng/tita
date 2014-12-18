@@ -119,7 +119,7 @@ class Estudiante(models.Model):
     cohorte = models.IntegerField(default=1) #cambiar de acuerdo al cohorte que se este realizando
 
     def __unicode__(self):
-        return (u"%s %s %s %s"%(self.nombre1,self.nombre2 or '', self.apellido1, self.apellido2 or '')).strip() or "-"
+        return (u"%s %s %s %s (CC: %s)"%(self.nombre1,self.nombre2 or '', self.apellido1, self.apellido2 or '', self.numero_documento)).strip() or "-"
 
     def numero_inscripcion(self):
         mihash = (self.numero_documento*44383)%1000000007

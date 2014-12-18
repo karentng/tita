@@ -6,6 +6,7 @@ from django.conf import settings
 
 urlpatterns = patterns('cronograma.views',
     url(r'^programacion/cronograma_diplomado$',      'diplomado', name='cronograma_diplomado'),
+    url(r'^programacion/filtro_diplomado$',      'filtro_diplomado', name='filtro_diplomado'),
     url(r'^programacion/cronograma_diplomado_modificar$',      'diplomado_modificar', name='cronograma_diplomado_modificar'),
     url(r'^programacion/cronograma_acompanamiento_modificar$',      'acompanamiento_modificar', name='cronograma_acompanamiento_modificar'),
     url(r'^programacion/cronograma_acompanamiento$',      'cronograma', name='cronograma_acompanamiento'),
@@ -35,5 +36,5 @@ urlpatterns = patterns('cronograma.views',
     url(r'programacion/actividad/asistenciaClases/(\d+)/(\d+)$', 'asistenciaClases', name="asistenciaClases"),
     url(r'programacion/actividad/asistenciaClases2/(\d+)/(\d+)$', 'asistenciaClases2', name="asistenciaClases2"),
 
-    
+    url(r'^programacion/reporte_curso/(?P<id>\d+)$',      'reporte_conformacion_curso', name='reporte_conformacion_curso'),
 )

@@ -2,6 +2,7 @@
 import random, string, os, datetime
 from django.db import models
 from django.contrib.auth.models import User
+from estudiante.models import SEDES
 from dateutil.relativedelta import relativedelta
 from datetime import date
 
@@ -66,6 +67,9 @@ class Aspirante(models.Model):
     def __unicode__(self):
         #return (u"%s %s %s %s"%(self.nombre1,self.nombre2 or '', self.apellido1, self.apellido2 or '')).strip() or "-"
         return (u"%s %s %s"%(self.nombre1,self.nombre2 or '', self.apellido1)).strip() or "-"
+
+    def conocimientosEspecificos(self):
+        return ConocimientosEspecificos.objects.filter(aspirante=self).latest('id')
 
     def calcular_puntaje(self):
         def maximo_puntaje(objetos):
@@ -316,7 +320,7 @@ class Grupo(models.Model):
 
     def __unicode__(self):
         if (self.grupo_padre != None):
-            return str(self.grupo_padre) + " - " + self.nombre
+            return self.grupo_padre.nombre + " - " + self.nombre
         else:
             return self.nombre
 
@@ -344,4 +348,22 @@ class Archivo(models.Model):
 class HistoricoDeArchivo(models.Model):
     usuario = models.ForeignKey(User)
     archivo = models.ForeignKey(Archivo)
+    observacion = models.CharField(max_length=255, verbose_name='observacion', null=False, blank=False,)
     fecha = models.DateField(default = datetime.datetime.now(),)
+
+class VariablePorSede(models.Model):
+    sede = models.IntegerField(choices=SEDES, max_length=2)
+    usuario = models.ForeignKey(User)
+    fecha = models.DateField(default = datetime.datetime.now(),)
+    numero_switch = models.IntegerField(default = 0, null=False, blank=False, verbose_name=u'número de switch')
+    numero_ups = models.IntegerField(default = 0, null=False, blank=False, verbose_name=u'número de ups')
+
+class VariablePorAula(models.Model):
+    sede = models.IntegerField(choices=SEDES, max_length=2)
+    aula = models.CharField(max_length=255, verbose_name=u'aula')
+    usuario = models.ForeignKey(User)
+    fecha = models.DateField(default = datetime.datetime.now(),)
+    equipos_tda = models.IntegerField(default = 0, null=False, blank=False, verbose_name=u'número de equipos tda')
+    computadores_docentes = models.IntegerField(default = 0, null=False, blank=False, verbose_name=u'número de computadores para docentes')
+    video_proyectores = models.IntegerField(default = 0, null=False, blank=False, verbose_name=u'número de video proyectores')
+    access_point = models.IntegerField(default = 0, null=False, blank=False, verbose_name=u'número de access point')

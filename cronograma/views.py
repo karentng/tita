@@ -449,36 +449,21 @@ def diplomado(request):
                     x = Clases.objects.filter(curso=i)
                     for i in range(0,len(x)):
                         eventos.append(x[i])
-        '''
-
-        try:
-            #curso = get_object_or_404(Cursos, Q(formador1=formador.id) | Q(formador2=formador.id))
-            curso = Cursos.objects.get(Q(formador1=formador.id) | Q(formador2=formador.id))
-            #eventos = AcompanamientoInSitus.objects.filter(curso=curso)
-
-        except Cursos.DoesNotExist:
-            curso = None
-        
-        if curso == None:
-            print "holamundo, no esta asociado a nada lalalalalla!!!!!!!!!!!!!!!!!!!"
-        
-        '''
-
-    if grupo == "Coordinador":
-        if request.method == 'GET' and 'sede' in request.GET:
+    elif grupo == "Coordinador":
+        if request.method == 'GET' and 'sede' in request.method and 'grupo' in request.method:
             sede = request.GET.get('sede')
+            grupo = request.GET.get('grupo')
             
-            if sede != None:
-                eventos = []                
-                try:
-                    curso = Cursos.objects.filter(institucion=sede)
-                    for c in curso:
-                        x = Clases.objects.filter(curso = c)
-                    #eventos.append(x)
-                        eventos = list(merge(eventos, x))
-                except Exception, e:
-                    eventos = []          
+            eventos = []
 
+            if grupo == '0':
+                curso = Cursos.objects.filter(institucion=sede)
+            else:
+                curso = Cursos.objects.filter(institucion=sede, id=grupo)
+
+            for c in curso:
+                x = Clases.objects.filter(curso = c)
+                eventos = list(merge(eventos, x))
         else:
             eventos = Clases.objects.all()
 
@@ -801,6 +786,21 @@ def diplomado(request):
         'form2':form2,
     })
 
+def filtro_diplomado(request):
+    if request.method == 'POST':
+        form = FiltroCronograma(request.POST)
+        if form.is_valid():
+            sede = form.cleaned_data['sedes']
+            grupo = form.cleaned_data['grupos']
+
+            response = redirect('cronograma_diplomado')
+            response['Location'] += "?sede="+sede+'&grupo='+grupo
+            return response
+        else:
+            return redirect('cronograma_diplomado')    
+    else:
+        return redirect('cronograma_diplomado')
+
 def diplomado_modificar(request):
     grupo = user_group(request)
     if grupo == None:
@@ -808,6 +808,11 @@ def diplomado_modificar(request):
 
     idCurso = request.GET.get('idCurso')
     curso = Clases.objects.filter(id=idCurso)[0]
+    try:
+        url = SoporteClases.objects.get(clase = curso)
+    except:
+        url = "#"
+    #print str(url.archivo)+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
     
     if request.method == 'POST':
 
@@ -837,7 +842,7 @@ def diplomado_modificar(request):
     return render(request, 'diplomado_modificar.html', {
         'form': form, 
         'user_group': user_group(request),
-        'opcion_menu': 3, 'curso': var
+        'opcion_menu': 3, 'curso': var, 'url':url.archivo,
     })
 
 def acompanamiento_modificar(request):
@@ -848,6 +853,11 @@ def acompanamiento_modificar(request):
 
     idCurso = request.GET.get('idCurso')
     curso = AcompanamientoInSitus.objects.filter(id=idCurso)[0]
+
+    
+    url = SoporteAcompanamiento.objects.get(acompanamiento = curso)
+    
+
     if request.method == 'POST':
 
         get = request.POST['boton']
@@ -875,7 +885,9 @@ def acompanamiento_modificar(request):
         'form': form, 
         'user_group': user_group(request),
         'opcion_menu': 4,
-        'curso':idCurso
+        'curso':idCurso,
+        'url':url.archivo,
+    
     })
 
 def subirsoportes(request):
@@ -1078,7 +1090,7 @@ def formador(request):
     })
 
 def reporte_cursos(request, limit=100):
-    curso_list = Cursos.objects.all() 
+    curso_list = Cursos.objects.all().order_by('descripcion') 
     #estudiante_list = [curso_list.lenght]
     #estudiante_list = curso_list[0].estudiantes.all()
     #estudiante_list = [curso_list.lenght]
@@ -1151,6 +1163,7 @@ def detalle_curso(request, id):
         return redirect('home')
 
     curso = Cursos.objects.get(id=id)
+    #clase = Clases.objects.filter(curso=curso.id)
 
 
     if request.method == 'POST':
@@ -1191,8 +1204,30 @@ def detalle_curso(request, id):
     return render(request, 'detalles_curso.html', {
         'form': form, 
         'user_group': user_group(request),
-        'opcion_menu': 4,
+        'opcion_menu': 5,
+        'curso':curso.id,
     })
+
+def reporte_conformacion_curso(request, id):
+    grupo = user_group(request)
+    if grupo == None:
+        return redirect('home')
+
+    #clase = Clases.objects.get(id=id)
+    curso = Cursos.objects.get(id=id)
+    #clasenombre = clase.nombre
+    cursonombre = curso.descripcion
+    #clasefecha = clase.fecha_inicio
+
+    formador1 = curso.formador1
+    formador2 = curso.formador2
+    institucion = curso.institucion
+
+    estudiante_list = curso.estudiantes.all()
+    
+    return render(request, 'lista_estudiantes.html', {'estudiante_list': estudiante_list,  'user_group': user_group(request),
+        'opcion_menu': 5, 'curso':cursonombre, 'formador1':formador1,'formador2':formador2, 'institucion':institucion},
+        )
 
 def detalle_formador(request, id):
 

@@ -85,7 +85,9 @@
                             <h4 style="color:white;"><br> 
                                 Institución: {{institucion}}<br>
                                 Formador(es): {{formador1}} - {{formador2}}</h4>
+                            {% if user_group == "Formador" %}
                             <h5 class="pull-right" style="color:white;">Fecha de la clase: {{clase_fecha}}</h5>
+                            {%endif%}
                         </h3>
                     </div>
                 </div>
@@ -106,9 +108,11 @@
                             <td >
                                 Cédula                     
                             </td>
+                            {% if user_group == "Formador" %}
                             <td >
                                 Firma                     
                             </td>
+                            {%endif%}
                         </tr>
                         </thead>          
 
@@ -121,9 +125,11 @@
                             <td >
                                 {{estudiante.numero_documento}}                
                             </td>
+                            {% if user_group == "Formador" %}
                             <td >
-                                                    
+                                                     
                             </td>
+                            {%endif%}
                         </tbody>
                         </tr> 
                     {%endfor%}

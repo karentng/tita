@@ -51,10 +51,7 @@
                     Profesor
                 </td>
                 <td class="info">
-                    Monitor
-                </td>
-                <td class="info">
-                    Institución
+                    Contratista
                 </td>
                 <td class="info">
                     Asignatura
@@ -65,8 +62,12 @@
                 <td class="info">
                     Condición
                 </td>
+                
                 <td class="info">
-                    Tipo
+                    Usuario
+                </td>
+                <td class="info">
+                    Fecha
                 </td>
                 <td class="info">
                     Modificar
@@ -86,10 +87,7 @@
                     {{ lista.profesor }}
                 </td>
                 <td >
-                    {{ lista.monitor }}
-                </td>
-                <td >
-                    {{ lista.colegio }}
+                    {{ lista.contratista }}
                 </td>
                 <td >
                     {{ lista.materia }}
@@ -100,8 +98,12 @@
                 <td >
                     {{ lista.condicion }}
                 </td>
+               
                 <td >
-                    {{ lista.tipo }}
+                    {{ lista.usuario }}
+                </td>
+                <td >
+                    {{ lista.fecha }}
                 </td>
                 <td >
                     <a href="{% url 'lista' lista.id %}" class="btn btn-warning btn-icon btn-circle btn-lg"><i class="fa fa- fa-edit"></i></a>

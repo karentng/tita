@@ -24,6 +24,13 @@
     </script>
 
     {% endif %}
+    <script type="text/javascript">
+        $("#id_profesor").on("change", function(){
+            $.post('', {idProfesor:this.value}, function(data){
+
+            });
+        });
+    </script>
 {% endblock %}
 
 {% block miga_pan %}
@@ -51,7 +58,22 @@
 
 
     <form class="form-horizontal" method="post">{% if solo_lectura %} {% else %} {% csrf_token %} {% endif %}
-        {% bootstrap_form form layout="horizontal" %}
+
+        {% bootstrap_field form.asignacion layout="horizontal" %}
+        {% bootstrap_field form.requerimiento layout="horizontal" %}
+        {% bootstrap_field form.fecha layout="horizontal" %}
+        {% bootstrap_field form.colegio layout="horizontal" %}
+        {% bootstrap_field form.profesor layout="horizontal" %}
+        <ul>
+            <li></li>
+        </ul>
+        {% bootstrap_field form.contratista layout="horizontal" %}
+        {% bootstrap_field form.espacio layout="horizontal" %}
+        {% bootstrap_field form.condicion layout="horizontal" %}
+        {% bootstrap_field form.tipo layout="horizontal" %}
+        {% bootstrap_field form.horas layout="horizontal" %}
+        {% bootstrap_field form.observaciones layout="horizontal" %}
+
 
         {% if solo_lectura %}
             

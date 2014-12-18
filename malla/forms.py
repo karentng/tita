@@ -48,14 +48,32 @@ class ReclamacionForm(forms.ModelForm):
             
         }
 
+class ReclamacionModificarForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(ReclamacionModificarForm, self).__init__(*args, **kwargs)
+        #instance = getattr(self, 'instance', None)
+        self.fields['colegio'].widget.attrs['disabled'] = True
+    class Meta:
+        model = Reclamacion
+        fields = ('colegio', 'jornada', 'fecha', 'supervisor', 'descripcion', 'estado')
+        widgets = {
+            'fecha' : MyDateWidget(),
+            'descripcion' : Textarea(attrs={'rows': 3, 'readonly':'readonly'}),
+            #'colegio' : TextInput(attrs={'readonly':'readonly'}),
+            'jornada' : TextInput(attrs={'readonly':'readonly'}),
+            'supervisor' : TextInput(attrs={'readonly':'readonly'}),
+            
+        }
+
+
 class ListaForm(forms.ModelForm):
+    horas = forms.IntegerField(initial=5)
     class Meta:
         model = Lista
-        fields = ('asignacion', 'requerimiento', 'fecha', 'colegio', 'profesor', 'contratista', 'materia', 'espacio', 'condicion', 'tipo', 'idasigncancel', 'horas', 'observaciones')
+        fields = ('asignacion', 'requerimiento', 'fecha', 'colegio', 'profesor', 'contratista', 'espacio', 'condicion', 'tipo', 'horas', 'observaciones')
         widgets = {
             'fecha' : MyDateWidget(),
             'observaciones' : Textarea(attrs={'rows': 3}),
-            
         }
 
 
@@ -104,16 +122,21 @@ class DocumentosSoporteForm(forms.ModelForm):
         model = ContratistaDocumentosSoporte
         exclude = ('monitor',)
         widgets = {
-            'soportes' : MyFileInput(),
-
+            'eps_sisben' : MyFileInput(),
+            'matricula' : MyFileInput(),
+            'rut' : MyFileInput(),
+            'hv' : MyFileInput(),
         }
 
 class MonitorForm(forms.ModelForm):
     class Meta:
         model = Monitor
-        fields = ('numero_documento', 'nombres', 'apellidos','celularppal', 'email', 'soportes')#, 'estrato',)# 'sector', 'sectordesplazamiento',)
         widgets = {
             'fecha_nacimiento' : MyDateWidget(),
             'soportes' : MyFileInput(),
-
+            'd10' : MyFileInput(),
+            'tabulado' : MyFileInput(),
+            'recibo' : MyFileInput(),
+            'cedula' : MyFileInput(),
+            'rut' : MyFileInput(),
         }

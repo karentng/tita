@@ -46,15 +46,11 @@
                 <td class="info">
                     Estado
                 </td>
-                <td class="info">
-                    Fecha Recibido
-                </td>
+                
                 <td class="info">
                     Fecha Ejecución
                 </td>
-                <td class="info">
-                    Descripción
-                </td>
+                
                 <td class="info">
                     Número de Contratistas
                 </td>
@@ -82,22 +78,18 @@
         <tr>
             <tbody>
                 <td >
-                    {{ requerimiento.estado_req }}
+                    {{ requerimiento.get_estado_req_display }}
                 </td>
-                <td >
-                    {{ requerimiento.fecha_rec }}
-                </td>
+                
                 <td >
                     {{ requerimiento.fecha_eje }}
                 </td>
-                <td >
-                    {{ requerimiento.descripcion_req }}
-                </td>
+                
                 <td >
                     {{ requerimiento.no_contratistas }}
                 </td>
                 <td >
-                    {{ requerimiento.lugar_req }}
+                    {{ requerimiento.get_lugar_req_display }}
                 </td>
                 <td >
                     {{ requerimiento.responsable }}

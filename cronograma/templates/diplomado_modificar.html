@@ -52,9 +52,19 @@
     <form class="form-horizontal" method="post">{% csrf_token %}
         {% bootstrap_form form layout="horizontal" %}
 
-        <br>
+        <br><br>
+        <center>
 
-        <center><a href="{% url 'cancelar_clase' curso %} " class="btn btn-inverse m-r-5"><i class="fa fa-times"></i>Cancelar Sesión</a></center>
+        <a href="{% url 'cancelar_clase' curso %} " class="btn btn-inverse m-r-5"><i class="fa fa-times"></i>Cancelar Sesión</a>
+
+        
+
+        <br><br><br>
+
+        Ver soporte: 
+        
+        <a target="_blank" href="/media/{{url}}" >Descargar Soporte de la Clase</a>
+    </center>
         <br><br>
 
 

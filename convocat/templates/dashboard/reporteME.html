@@ -9,17 +9,25 @@
 {% endblock %}
 
 {% block css %}
-<link href="{{STATIC_URL}}plugins/DataTables-1.9.4/css/data-table.css" rel="stylesheet" />
+    <link href="{{STATIC_URL}}js/datatables/jquery.dataTables.css" rel="stylesheet" />
+    <link href="{{STATIC_URL}}js/datatables/TableTools.css" rel="stylesheet" />
 {% endblock %}
 
 {% block js %}
-<script src="{{STATIC_URL}}plugins/DataTables-1.9.4/js/jquery.dataTables.js"></script>
-<script src="{{STATIC_URL}}plugins/DataTables-1.9.4/js/data-table.js"></script>
+
+<script src="{{STATIC_URL}}js/datatables/jquery.dataTables.js"></script>
+<script src="{{STATIC_URL}}js/datatables/TableTools.min.js"></script>
+
 
 <script src="{{STATIC_URL}}plugins/flot/jquery.flot.min.js"></script>
 <script src="{{STATIC_URL}}plugins/flot/jquery.flot.pie.min.js"></script>
 <script src="{{STATIC_URL}}plugins/flot/jquery.flot.categories.js"></script>
 <script type="text/javascript">
+    $(document).ready(function() {
+        $('#data-table').dataTable( {
+            "dom": 'T<"clear">lfrtip',
+        });
+    });
 
 	var purple = '#727cb6';
 
