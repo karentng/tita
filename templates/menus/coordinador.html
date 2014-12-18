@@ -1,7 +1,9 @@
 <li>
     <a href="{% url 'home' %}"><i class="fa fa-info"></i> <span>Inicio</span></a>
 </li>
-
+<li {% if opcion_menu == 23 %} class="active" {% endif %}>
+    <a href="{% url 'resumen_proyecto' %}"><i class="fa fa-align-left"></i> <span>Resumen del Proyecto</span></a>
+</li>
 <li {% if opcion_menu == 13 %} class="active" {% endif %}>
     <a href="{% url 'tablero_control' '' %}"><i class="fa fa-align-left"></i> <span>Tablero de Control</span></a>
 </li>

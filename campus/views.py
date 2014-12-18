@@ -20,15 +20,15 @@ def logged_user(request):
     if grupo == None:
         return redirect('home')
     elif grupo == 'Coordinador':
-        return redirect('tablero_control/')
+        return redirect('resumen_proyecto')
     elif grupo == 'Formador':
         return redirect('cronograma_diplomado')
     elif grupo == 'Operario_malla':
-        return redirect('listar_contratistas') 
+        return redirect('listar_contratistas')
     elif grupo == 'Contratista_malla':
-        return redirect('lista_contratista') 
-    else: #grupo == 'Alcaldia'
-        return redirect('tablero_control/')
+        return redirect('lista_contratista')
+    elif grupo == 'Secretaria':
+        return redirect('resumen_proyecto')
 
 # Create your views here.
 

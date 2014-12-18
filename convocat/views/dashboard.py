@@ -231,7 +231,9 @@ def resumen_proyecto(request):
         'resumen_proyecto' : resumen_proyecto,
         'nuevo_resumen_proyecto' : nuevo_resumen_proyecto,
         'resumen_proyecto_all' : resumen_proyecto_all,
-        'resumenProyectoForm' : ResumenProyectoForm()
+        'resumenProyectoForm' : ResumenProyectoForm(),
+        'opcion_menu' : 23,
+        'user_group': user_group(request),
     })
 
 def guardarResumenProyecto(request):
