@@ -200,3 +200,10 @@ class VariablePorAulaForm(forms.ModelForm):
     class Meta:
         model = VariablePorAula
         exclude = ('fecha','usuario')
+
+class ResumenProyectoForm(forms.ModelForm):
+    fecha = forms.DateField(label='', widget=DateWidget(usel10n=False, bootstrap_version=3, attrs={'size':5, 'style':'width:210px'}, options={'format': 'yyyy-mm-dd', 'startView':2, 'language':'es'}))
+
+    class Meta:
+        model = ResumenProyecto
+        exclude = ('usuario',)
