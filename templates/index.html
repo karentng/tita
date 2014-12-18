@@ -19,7 +19,7 @@
     <link href="{{STATIC_URL}}plugins/bootstrap-3.1.1/css/bootstrap.min.css" rel="stylesheet" />
     <link href="{{STATIC_URL}}plugins/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" />
     <link href="{{STATIC_URL}}css/animate.min.css" rel="stylesheet" />
-    <link href="{{STATIC_URL}}css/style.css?v=1" rel="stylesheet" />
+    <link href="{{STATIC_URL}}css/style.min.css?v=1" rel="stylesheet" />
     <link href="{{STATIC_URL}}css/style-responsive.min.css" rel="stylesheet" />
     <style>
         b.titulo {
@@ -33,21 +33,21 @@
         }
 
         .in {
-			background-color:white
-		}
+            background-color:white
+        }
 
-		/* centered columns styles */
-		.row-centered {
-			text-align:center;
-		}
-		.col-centered {
-			display:inline-block;
-			float:none;
-			/* reset the text-align */
-			text-align:left;
-			/* inline-block space fix */
-			margin-right:-4px;
-		}
+        /* centered columns styles */
+        .row-centered {
+            text-align:center;
+        }
+        .col-centered {
+            display:inline-block;
+            float:none;
+            /* reset the text-align */
+            text-align:left;
+            /* inline-block space fix */
+            margin-right:-4px;
+        }
     </style>
     <!-- ================== END BASE CSS STYLE ================== -->
 </head>
@@ -124,64 +124,97 @@
         <!-- end #header -->
         <!-- begin #content -->
         <div id="content" style="background-color:white">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-lg-2">
-						<div style="margin-top:10px;">
-							<img class="img-responsive" src="{{STATIC_URL}}img/tita-small.png" alt="" />
-						</div>
-					</div>
-					<div class="col-md-8" style="background-color:#225894;">
-						<h2 style="color:white;">Formaci&oacute;n Docente en Pedagog&iacute;a mediada con TIC<h6><br/><br/><br/></h6></h2>
-					</div>
-				</div>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<div class="row row-centered">
-					<div class="col-md-3 col-sm-6 col-centered">
-						<div class="widget widget-state bg-green">
-							<div class="state-icon"><i class="fa fa-users"></i></div>
-							<div class="state-info">
-								<h4>CONVOCATORIA PARA DOCENTES<br/><br/>Segunda cohorte<br/></h4>
-							</div>
-							<div class="state-link">
-								<a href="http://convocatoria2.titaedpt.com.co/inscripcion/iniciar-inscripcion">Haga clic aqui <i class="fa fa-arrow-circle-o-right"></i></a>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3 col-sm-6 col-centered">
-						<div class="widget widget-state bg-blue">
-							<div class="state-icon"><i class="fa fa-pencil-square-o"></i></div>
-							<div class="state-info">
-								<h4>INSCRIPCI&Oacute;N AL PROGRAMA<br/> DE FORMACI&Oacute;N DOCENTE<br/> EN PEDAGOG&Iacute;A MEDIADA POR TIC.
-								</h4>
-							</div>
-							<div class="state-link">
-								<a href="{% url 'iniciar_DE' %}">Haga clic aqui <i class="fa fa-arrow-circle-o-right"></i></a>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3 col-sm-6 col-centered">
-						<div class="widget widget-state bg-red">
-							<div class="state-icon"><i class="fa fa-list-alt"></i></div>
-							<div class="state-info">
-								<h4>ENCUESTA A:<br/>PROFESORES, ESTUDIANTES <br/>Y PADRES DE FAMILIA</h4>
-							</div>
-							<div class="state-link">
-								<a href="{% url 'encuesta_nuevo_estudiante' %}">Haga clic aqui <i class="fa fa-arrow-circle-o-right"></i></a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<br/>
-			<br/>
-			<br/>
-			<hr>
-			<img class="img-responsive center-block" src="{{STATIC_URL}}img/footer_3.png?v=2"  style="width:85%; border-radius:10px;" >
-			<h6 class="text-center">Contacto: <a href="mailto:titaedpt@gmail.com">titaedpt@gmail.com</a></h6>
+            <div class="container-fluid">
+            <br>                
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="widget widget-state bg-green">
+                            <div class="state-icon"><i class="fa fa-users"></i></div>
+                            <div class="state-info">
+                                <h4>CONVOCATORIA PARA DOCENTES<br/><br/>Segunda cohorte<br/></h4>
+                            </div>
+                            <div class="state-link">
+                                <a href="http://convocatoria2.titaedpt.com.co/inscripcion/iniciar-inscripcion">Haga clic aqui <i class="fa fa-arrow-circle-o-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="widget widget-state bg-blue">
+                            <div class="state-icon"><i class="fa fa-pencil-square-o"></i></div>
+                            <div class="state-info">
+                                <h4>INSCRIPCI&Oacute;N AL PROGRAMA<br/> DE FORMACI&Oacute;N DOCENTE<br/> EN PEDAGOG&Iacute;A MEDIADA POR TIC.
+                                </h4>
+                            </div>
+                            <div class="state-link">
+                                <a href="{% url 'iniciar_DE' %}">Haga clic aqui <i class="fa fa-arrow-circle-o-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="widget widget-state bg-red">
+                            <div class="state-icon"><i class="fa fa-list-alt"></i></div>
+                            <div class="state-info">
+                                <h4>ENCUESTA A:<br/>PROFESORES, ESTUDIANTES <br/>Y PADRES DE FAMILIA</h4>
+                            </div>
+                            <div class="state-link">
+                                <a href="{% url 'encuesta_nuevo_estudiante' %}">Haga clic aqui <i class="fa fa-arrow-circle-o-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-10">
+                        <div id="client" class=" has-bg bg-black" data-scrollview="true">
+                        <!-- begin content-bg -->                            
+                            <!-- end content-bg -->
+                            <!-- begin container -->
+                            <div class=" fadeInUp contentAnimated" data-animation="true" data-animation-type="fadeInUp">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div style="margin-top:10px;">
+                                            <img class="img-responsive" src="{{STATIC_URL}}img/logo_transparente.png" alt="logo" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <a class="content-title" style="font-size:30px; color:blue;">Cali|Vive</a><a style="font-size:35px; color:red;"> digital</a>
+                                        <h2 style="color:white;">Formaci&oacute;n Docente en Pedagog&iacute;a mediada con TIC mediada con tecnolog&iacute;as de la informaci&oacute;n y la comunicaci&oacute;n.</h2>
+                                        <br>
+                                        <br>
+                                    </div>
+                                </div>
+                                <!-- begin carousel -->
+                                <div class="carousel testimonials slide" data-ride="carousel" id="testimonials">
+                                    <!-- begin carousel-inner -->
+                                    <div class="carousel-inner text-center">
+                                        <!-- begin item -->
+                                        <div class="item active content-bg" style="color:white; font-size:25px;">
+                                            <img class="img-responsive" src="{{STATIC_URL}}img/Banner1.jpg" style="width:100%; height: 100%;" alt="Client">
+                                        </div>
+                                        <!-- end item -->
+                                        <!-- begin item -->
+                                        <div class="item content-bg">                                            
+                                            <img class="img-responsive" src="{{STATIC_URL}}img/Banner2.jpg" style="width:100%; height: 100%;" alt="Client">
+                                        </div>
+                                        <!-- end item -->
+                                        <!-- begin item -->
+                                        <div class="item content-bg">
+                                            <img class="img-responsive" src="{{STATIC_URL}}img/Banner3.jpg" style="width:100%; height: 100%;" alt="Client">
+                                        </div>
+                                        <!-- end item -->
+                                    </div>
+                                    <!-- end carousel-inner -->
+                                    <!-- begin carousel-indicators -->
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#testimonials" data-slide-to="0" class="active"></li>
+                                        <li data-target="#testimonials" data-slide-to="1" class=""></li>
+                                        <li data-target="#testimonials" data-slide-to="2" class=""></li>
+                                    </ol>
+                                    <!-- end carousel-indicators -->
+                                </div>
+                                <!-- end carousel -->
+                            </div>
+                            <!-- end containter -->
+                        </div>
+                    </div>
+                 </div>   
+            </div>
+            <hr>
+            <img class="img-responsive center-block" src="{{STATIC_URL}}img/footer_3.png?v=2"  style="width:85%; border-radius:10px;" >
+            <h6 class="text-center">Contacto: <a href="mailto:titaedpt@gmail.com">titaedpt@gmail.com</a></h6>
         </div>
         <!-- end #content -->
         <!-- begin scroll to top btn -->
