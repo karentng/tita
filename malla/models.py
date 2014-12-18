@@ -273,5 +273,6 @@ class Reclamacion(models.Model):
     supervisor = models.ForeignKey(Monitor)
     descripcion = models.CharField( max_length=2550, null=True, blank=True)
     estado = models.CharField( choices=[('PR','Por Revisión'), ('P', 'Procede'), ('NP','No Procede')], max_length=3, verbose_name='estado',blank=True)
+    observaciones = models.CharField( max_length=2550, null=True, blank=True)
     def __unicode__(self):
         return (u"%s %s"%(self.colegio,self.jornada ))

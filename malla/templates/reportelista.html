@@ -54,9 +54,6 @@
                     Contratista
                 </td>
                 <td class="info">
-                    Asignatura
-                </td>
-                <td class="info">
                     Espacio
                 </td>
                 <td class="info">
@@ -69,12 +66,14 @@
                 <td class="info">
                     Fecha
                 </td>
+                {% if user_group == "Operario_malla" %}
                 <td class="info">
                     Modificar
                 </td>
                 <td class="info">
                     Eliminar
                 </td>
+                {%endif%}
             </thead>
         </tr>
         {% for lista in lista_list %}
@@ -90,9 +89,6 @@
                     {{ lista.contratista }}
                 </td>
                 <td >
-                    {{ lista.materia }}
-                </td>
-                <td >
                     {{ lista.espacio }}
                 </td>
                 <td >
@@ -105,12 +101,14 @@
                 <td >
                     {{ lista.fecha }}
                 </td>
+                {% if user_group == "Operario_malla" %}
                 <td >
                     <a href="{% url 'lista' lista.id %}" class="btn btn-warning btn-icon btn-circle btn-lg"><i class="fa fa- fa-edit"></i></a>
                 </td>
                 <td >
                     <a href="{% url 'eliminar_lista' lista.id %}" onclick="return confirm('¿Desea eliminar la lista seleccionada?')" class="btn btn-danger btn-icon btn-circle btn-lg"><i class="fa fa-times"></i></a>
                 </td>
+                {%endif%}
         {% endfor %}
         </tbody>
         </tr>

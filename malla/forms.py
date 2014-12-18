@@ -55,13 +55,14 @@ class ReclamacionModificarForm(forms.ModelForm):
         self.fields['colegio'].widget.attrs['disabled'] = True
     class Meta:
         model = Reclamacion
-        fields = ('colegio', 'jornada', 'fecha', 'supervisor', 'descripcion', 'estado')
+        fields = ('colegio', 'jornada', 'fecha', 'supervisor', 'descripcion', 'estado', 'observaciones')
         widgets = {
             'fecha' : MyDateWidget(),
             'descripcion' : Textarea(attrs={'rows': 3, 'readonly':'readonly'}),
             #'colegio' : TextInput(attrs={'readonly':'readonly'}),
             'jornada' : TextInput(attrs={'readonly':'readonly'}),
             'supervisor' : TextInput(attrs={'readonly':'readonly'}),
+            'observaciones' : Textarea(attrs={'rows': 3,}),
             
         }
 
