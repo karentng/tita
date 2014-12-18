@@ -107,7 +107,6 @@ class MyFileInput(ClearableFileInput):
 
         return mark_safe(template % substitutions)
 
-
 class DocumentosSoporteForm(forms.ModelForm):
     class Meta:
         model = SoporteClases
@@ -149,9 +148,7 @@ class CursoMForm(forms.ModelForm):
     class Meta:
         model = Cursos
         fields = ('descripcion','institucion','formador1','formador2', 'estudiantes',)
-        widgets = {'estudiantes': forms.CheckboxSelectMultiple()}
-
-                
+        widgets = {'estudiantes': forms.CheckboxSelectMultiple()}            
 
 class FormadorForm(forms.ModelForm):
 

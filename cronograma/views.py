@@ -801,6 +801,21 @@ def filtro_diplomado(request):
     else:
         return redirect('cronograma_diplomado')
 
+def filtro_acompanamiento(request):
+    if request.method == 'POST':
+        form = FiltroCronograma(request.POST)
+        if form.is_valid():
+            sede = form.cleaned_data['sedes']
+            grupo = form.cleaned_data['grupos']
+
+            response = redirect('cronograma_acompanamiento')
+            response['Location'] += "?sede="+sede+'&grupo='+grupo
+            return response
+        else:
+            return redirect('cronograma_acompanamiento')    
+    else:
+        return redirect('cronograma_acompanamiento')
+
 def diplomado_modificar(request):
     grupo = user_group(request)
     if grupo == None:
