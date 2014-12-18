@@ -1090,7 +1090,17 @@ def formador(request):
     })
 
 def reporte_cursos(request, limit=100):
+
+    curso_list = Cursos.objects.all() 
+    
+    for i in curso_list:
+        numero_curso = i.descripcion[6:] 
+        numero_curso = menor10(int(numero_curso))
+        i.descripcion = i.descripcion[:6]+numero_curso
+        i.save()
+
     curso_list = Cursos.objects.all().order_by('descripcion') 
+    
     #estudiante_list = [curso_list.lenght]
     #estudiante_list = curso_list[0].estudiantes.all()
     #estudiante_list = [curso_list.lenght]

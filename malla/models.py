@@ -256,7 +256,7 @@ class Lista(models.Model):
     espacio = models.CharField( max_length=255, blank=True, help_text='numero de salón')
     condicion = models.CharField(choices=CONDICION, max_length=1000, verbose_name="condición")
     tipo = models.CharField(choices=TIPO, max_length=1000, verbose_name="tipo")
-    horas = models.IntegerField()
+    horas = models.IntegerField(default=5)
     observaciones = models.CharField( max_length=2550, blank=True)
     usuario = models.CharField( max_length=2550, blank=True)
     fecha_modificado = models.DateTimeField(auto_now=True)
