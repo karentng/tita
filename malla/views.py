@@ -412,7 +412,26 @@ def lista_reporte_contratista(request):
     response['Content-Disposition'] = 'attachment; filename="ReporteListaContratistas.csv"'
     return response
 
-def reporte_contratistas(request):
-    return render(request, 'reporte_contratistas.html', {
-        
+def detalles_contratista(request, id_contratista):
+    contratista = Contratista.objects.get(id=id_contratista)
+
+    formcontratista = InformacionBasicaForm(instance=contratista)
+    contacto = InformacionContactoForm(instance=contratista)
+    try:
+        areas_conocimientos = ContratistaAreasConocimiento.objects.get(monitor=contratista)
+    except Exception:
+        areas_conocimientos = None
+    areas = AreasConocimientoForm(instance=areas_conocimientos)
+    try:
+        documentos_soportes = ContratistaDocumentosSoporte.objects.get(monitor=contratista)
+    except Exception:
+        documentos_soportes = None
+    soportes = DocumentosSoporteForm(instance=documentos_soportes)
+    return render(request, 'detalles_contratista.html', {
+        'persona': contratista,
+        'contratista': formcontratista,
+        'contacto': contacto,
+        'areas': areas,
+        'soportes': soportes,
+        'solo_lectura': "Si"
     })

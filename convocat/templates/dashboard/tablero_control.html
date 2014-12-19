@@ -107,7 +107,7 @@
 
             $('#tabla-super-poderosa thead th').each( function () {
                 var title = $('#tabla-super-poderosa thead th').eq( $(this).index() ).text();
-                $(this).html( '<label class="control-label"><b>'+title+'</b></label><input type="text" width="100" placeholder="" />' ).on( 'keyup change', function (e) {
+                $(this).html( '<label class="control-label"><b>'+title+'</b></label><input onclick="function(){}" type="text" width="100" placeholder="" />' ).on( 'keyup change', function (e) {
                     tableSP.fnFilter(e.target.value, $(this).index());
                     tableSP.fnDraw();
                 } );

@@ -214,6 +214,30 @@ def validar_grupo_coordinador_secretaria(request):
     else:
         return False
 
+def acta_seguimiento(request):
+    acta_seguimiento_all = ActaDeSeguimiento.objects.filter().order_by('-id')
+
+    return render(request, 'dashboard/acta_seguimiento.html', {
+        'acta_seguimiento_all' : acta_seguimiento_all,
+        'actaDeSeguimientoForm' : ActaDeSeguimientoForm(),
+        'opcion_menu' : 24,
+        'user_group': user_group(request),
+    })
+
+def guardarActaSeguimiento(request):
+    if validar_grupo_coordinador_secretaria(request) == False:
+        return redirect('home')
+
+    form = ActaDeSeguimientoForm(request.POST, request.FILES)
+    print(form.errors)
+    if form.is_valid():
+        actaSeguimiento = form.save(commit=False)
+        actaSeguimiento.usuario = request.user
+        actaSeguimiento.save()
+        return redirect('acta_seguimiento')
+    else:
+        return redirect('home')
+
 def resumen_proyecto(request):
     resumen_proyecto_all = ResumenProyecto.objects.filter().order_by('-fecha')
 
@@ -254,7 +278,7 @@ def tablero_control(request, id_actividad):
         return redirect('home')
 
     if id_actividad=='':
-        id_actividad=1
+        id_actividad='1'
 
     request.session['actividad_tablero_control'] = id_actividad
 
@@ -273,11 +297,12 @@ def tablero_control(request, id_actividad):
 
     usuario_puede_editar = ((grupo_de_usuario == 'Coordinador' and int(id_actividad) < 14) or (grupo_de_usuario == 'Secretaria' and int(id_actividad) > 13))
 
-    estudiantesMulti = Estudiante.objects.all()
-    aspirantesMulti = Aspirante.objects.all()
-    variablesPorSede = VariablePorSede.objects.all()
-    variablesPorAula = VariablePorAula.objects.all()
-    estudiantes = listaMaestrosEstudiantesInscritos()
+    #variable = something if condition else something_else
+    estudiantesMulti = Estudiante.objects.all() if id_actividad == '4' else []
+    aspirantesMulti = Aspirante.objects.all() if id_actividad == '1' else []
+    variablesPorSede = VariablePorSede.objects.all() if id_actividad == '15' else []
+    variablesPorAula = VariablePorAula.objects.all() if id_actividad == '15' else []
+    estudiantes = listaMaestrosEstudiantesInscritos() if id_actividad == '4' else []
 
     datos_tablero_control = {
         'actividades' : actividades,

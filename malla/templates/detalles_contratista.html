@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block titulo %} Detalles del Contratista {% endblock %}
+
+{% block menu %}
+    {% include "menus/publico.html" with opcion_menu=16 %}
+{% endblock %}
+
+{% block css %}
+    
+    <!--- ñiiipi -->
+    {{form.media}} {# agrega los js y css necesarios para el bootstrap3 datetimepicker y select2 #}
+    {{contratista.media}}
+    {{contacto.media}}
+    {{areas.media}}
+    {{soportes.media}}
+    <!--- :D -->
+{% endblock %}
+
+{% block js %}
+    {% if solo_lectura%}
+    <script>
+        $(function(){
+        	$("checkbox").attr("disabled", "disabled");
+            $("select").attr("disabled", "disabled");
+            $("input").attr("disabled", "disabled");
+        });
+    </script>
+
+    {% endif %}
+{% endblock %}
+
+{% block miga_pan %}
+    <li><a href="{% url 'home' %}">Inicio</a></li>
+    <li class="active">Detalles del Contratista</li>
+{% endblock %}
+
+{% block titulo_contenido %}Detalles del Contratista{% endblock %}
+
+{% block previo_contenido_panel %}
+    
+{% endblock %}
+
+{% block titulo_panel %}<i class="fa fa-user"></i> {{persona}}{% endblock %}
+{% block contenido_panel %}
+
+    {% if request.POST %}
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            Faltan algunos campos por ingresar correctamente. Verifique los campos en color Rojo
+        </div>
+    {% endif %}
+
+    <br><br>
+    <div class="row">
+    	<div class="col-xs-12">
+    		<p><b>Información básica del Contratista</b></p>
+    		{% bootstrap_form contratista layout="horizontal" %}
+    	</div>
+
+    	<div class="col-xs-12" style="margin-top:20px">
+    		<p><b>Información de contacto del Contratista</b></p>
+    		{% bootstrap_form contacto layout="horizontal" %}
+    	</div>
+
+		<div class="col-xs-12" style="margin-top:20px">
+    		<p><b>Información de áreas de conocimiento del Contratista</b></p>
+    		{% bootstrap_form areas layout="horizontal" %}
+    	</div>
+		
+		<div class="col-xs-12" style="margin-top:20px">
+    		<p><b>Soportes del Contratista</b></p>
+    		{% bootstrap_form soportes layout="horizontal" %}
+    	</div>
+    </div>
+{% endblock %}
+
