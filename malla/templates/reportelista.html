@@ -114,6 +114,7 @@
         </tr>
     </table><br>  
     {% if user_group == "Operario_malla" %}
+    <center><a href= "{% url 'lista_reporte_contratista' %} " class="btn btn btn-primary pull" >Descargar CVS</a></center><br>
     <a href= "{% url 'lista' %} " class="btn btn-lg btn-primary pull-right" >Añadir una lista</a>
     {%endif%}
 {% endblock %}
