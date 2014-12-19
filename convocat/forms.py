@@ -207,3 +207,8 @@ class ResumenProyectoForm(forms.ModelForm):
     class Meta:
         model = ResumenProyecto
         exclude = ('usuario',)
+
+class ActaDeSeguimientoForm(forms.ModelForm):
+    class Meta:
+        model = ActaDeSeguimiento
+        exclude = ('fecha','usuario','activo')
