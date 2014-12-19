@@ -32,6 +32,7 @@ def iniciar(request):
     return render(request, 'inscripcion/iniciar_inscripcion.html', {
         'mensaje':mensaje,
         'form' : form,
+        'opcion_menu' : 0,
         'user_group': user_group(request)
     })
 
@@ -62,6 +63,12 @@ def inscripcion(request):
         form = EstudianteForm(request.POST, instance=estudiante)
         if form.is_valid():
             objeto = form.save()
+            objeto.nombre1 = objeto.nombre1.upper()
+            objeto.nombre2 = objeto.nombre2.upper()
+            objeto.apellido1 = objeto.apellido1.upper()
+            objeto.apellido2 = objeto.apellido2.upper()
+            objeto.direccion = objeto.direccion.upper()
+            objeto.save()
             clave = objeto.numero_inscripcion()
             request.session['clave_estudiante'] = clave
             print "clave=",clave

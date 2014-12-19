@@ -12,7 +12,7 @@ def MyDateWidget():
 class InformacionBasicaForm(forms.ModelForm):
     class Meta:
         model = Contratista
-        fields = ('numero_documento', 'nombre1', 'nombre2', 'apellido1', 'apellido2','sexo', 'fecha_nacimiento', 'direccion', 'universidad','programa_academico')#, 'estrato',)# 'sector', 'sectordesplazamiento',)
+        fields = ('numero_documento', 'nombre1', 'nombre2', 'apellido1', 'apellido2','sexo', 'fecha_nacimiento', 'direccion', 'universidad','programa_academico')
         widgets = {
             'fecha_nacimiento' : MyDateWidget()
         }

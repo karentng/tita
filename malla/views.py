@@ -25,6 +25,12 @@ def datosBasicos(request):
         form = InformacionBasicaForm(request.POST, instance=contratista)
         if form.is_valid():
             objeto = form.save()
+            objeto.nombre1 = objeto.nombre1.upper()
+            objeto.nombre2 = objeto.nombre2.upper()
+            objeto.apellido1 = objeto.apellido1.upper()
+            objeto.apellido2 = objeto.apellido2.upper()
+            objeto.direccion = objeto.direccion.upper()
+            objeto.save()
             ide = objeto.id
             request.session['id_contratista'] = ide
                        
@@ -386,3 +392,8 @@ def lista_reporte_contratista(request):
     response = HttpResponse(archivo, content_type='application/vnd.ms-excel')
     response['Content-Disposition'] = 'attachment; filename="ReporteListaContratistas.csv"'
     return response
+
+def reporte_contratistas(request):
+    return render(request, 'reporte_contratistas.html', {
+        
+    })
