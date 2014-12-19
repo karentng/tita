@@ -215,7 +215,7 @@ def validar_grupo_coordinador_secretaria(request):
         return False
 
 def acta_seguimiento(request):
-    acta_seguimiento_all = ActaDeSeguimiento.objects.filter().order_by('-fecha')
+    acta_seguimiento_all = ActaDeSeguimiento.objects.filter().order_by('-id')
 
     return render(request, 'dashboard/acta_seguimiento.html', {
         'acta_seguimiento_all' : acta_seguimiento_all,
