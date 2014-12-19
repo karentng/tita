@@ -19,7 +19,7 @@ def retornar_datos_reporte_convocatoria_1():
 
     inscritos = Aspirante.objects.all()
     total_inscritos = inscritos.count()
-    aprobados = Aspirante.objects.filter(Q(puntuacion_final__gte = 99) & ~Q(puntuacion_final= None))
+    aprobados = Aspirante.objects.filter(Q(puntuacion_final = 100) & ~Q(puntuacion_final= None))
     total_aprobados = aprobados.count()
     rechazados = Aspirante.objects.filter(puntuacion_final__lt = 1)
     if len(mejores):

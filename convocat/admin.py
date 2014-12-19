@@ -18,9 +18,6 @@ def readonly(self, request, obj=None):
             [field.name for field in self.opts.local_many_to_many]
         )
 
-
-
-
 class AcademicaInline(admin.TabularInline):
     model = FormacionAcademica
     get_readonly_fields = readonly
