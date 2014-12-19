@@ -20,6 +20,8 @@ urlpatterns = patterns('',
     url(r'nuevoMaestro$', 'survey.views.encuesta_nuevo_maestro', name='encuesta_nuevo_maestro'),
     url(r'nuevoPadre$', 'survey.views.encuesta_nuevo_padre', name='encuesta_nuevo_padre'),
 
+    url(r'reporte/(\d+)$', 'survey.views.reporte_encuesta', name='reporte_encuesta'),
+
     url(r'finalizada$', TemplateView.as_view(template_name='finalizada.html'), name="encuesta_finalizada"),
 
 	# Uncomment the admin/doc line below to enable admin documentation:

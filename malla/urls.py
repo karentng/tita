@@ -13,6 +13,7 @@ urlpatterns = patterns('malla.views',
     url(r'^malla/finalizar_contratista$', 'finalizar_contratista', name='finalizar_contratista'),
 
     url(r'^malla/eliminar-contratista/(\d+)$', 'eliminar_contratista', name='eliminar_contratista'),
+    url(r'^malla/detalles_contratista/(\d+)$', 'detalles_contratista', name='detalles_contratista'),
 
     url(r'^malla/reclamacion$', 'reclamacion', name='reclamacion'),
     url(r'^malla/reclamacion_modificar/(\d+)$', 'reclamacion_modificar', name='reclamacion_modificar'),

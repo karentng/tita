@@ -64,6 +64,9 @@
                 <td class="info">
                     Estado
                 </td>
+                <td class="info">
+                    Observaciones
+                </td>
                 {% if user_group == "Operario_malla" %}
                 <td class="info">
                     Modificar
@@ -95,6 +98,9 @@
                 </td>
                 <td >
                     {{ contratista.get_estado_display }}
+                </td>
+                <td >
+                    {{ contratista.observaciones }}
                 </td>                
                 {% if user_group == "Operario_malla" %}
                 <td >

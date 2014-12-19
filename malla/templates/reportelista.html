@@ -35,7 +35,36 @@
 {% block titulo_contenido %}Lista de Listas{% endblock %}
 
 {% block previo_contenido_panel %}
-    
+
+    <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <div class="panel-heading-btn">
+                    <a class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-collapse" data-original-title="" title=""><i class="fa fa-minus"></i></a>
+                </div>
+                    
+                </div>
+                <h4 class="panel-title">Descargar Archivo CVS Horas Acumuladas Contratista</h4>
+
+
+            </div>
+            <div class="panel-body p-0">
+                <div class="horizontal-box">
+                    <div class="col-md-12 p-15 bg-silver " >
+                        
+                        <form  method="post" >
+                                 {% csrf_token %}
+
+                                 {% bootstrap_form form layout="horizontal" %}     <br><br><br><br>                       
+                                <center><button class="btn btn-primary" type="submit">Descargar CVS</button></center>
+                                 
+                        </form>
+                        <br>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
 {% endblock %}
 
 {% block titulo_panel %}<i class="fa fa-user"></i> Ver Listas{% endblock %}
@@ -54,9 +83,6 @@
                     Contratista
                 </td>
                 <td class="info">
-                    Asignatura
-                </td>
-                <td class="info">
                     Espacio
                 </td>
                 <td class="info">
@@ -69,12 +95,14 @@
                 <td class="info">
                     Fecha
                 </td>
+                {% if user_group == "Operario_malla" %}
                 <td class="info">
                     Modificar
                 </td>
                 <td class="info">
                     Eliminar
                 </td>
+                {%endif%}
             </thead>
         </tr>
         {% for lista in lista_list %}
@@ -90,9 +118,6 @@
                     {{ lista.contratista }}
                 </td>
                 <td >
-                    {{ lista.materia }}
-                </td>
-                <td >
                     {{ lista.espacio }}
                 </td>
                 <td >
@@ -105,17 +130,21 @@
                 <td >
                     {{ lista.fecha }}
                 </td>
+                {% if user_group == "Operario_malla" %}
                 <td >
                     <a href="{% url 'lista' lista.id %}" class="btn btn-warning btn-icon btn-circle btn-lg"><i class="fa fa- fa-edit"></i></a>
                 </td>
                 <td >
                     <a href="{% url 'eliminar_lista' lista.id %}" onclick="return confirm('¿Desea eliminar la lista seleccionada?')" class="btn btn-danger btn-icon btn-circle btn-lg"><i class="fa fa-times"></i></a>
                 </td>
+                {%endif%}
         {% endfor %}
         </tbody>
         </tr>
     </table><br>  
     {% if user_group == "Operario_malla" %}
+    
+
     <a href= "{% url 'lista' %} " class="btn btn-lg btn-primary pull-right" >Añadir una lista</a>
     {%endif%}
 {% endblock %}

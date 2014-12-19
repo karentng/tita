@@ -256,7 +256,7 @@ class Lista(models.Model):
     espacio = models.CharField( max_length=255, blank=True, help_text='numero de salón')
     condicion = models.CharField(choices=CONDICION, max_length=1000, verbose_name="condición")
     tipo = models.CharField(choices=TIPO, max_length=1000, verbose_name="tipo")
-    horas = models.IntegerField()
+    horas = models.IntegerField(default=5)
     observaciones = models.CharField( max_length=2550, blank=True)
     usuario = models.CharField( max_length=2550, blank=True)
     fecha_modificado = models.DateTimeField(auto_now=True)
@@ -273,5 +273,6 @@ class Reclamacion(models.Model):
     supervisor = models.ForeignKey(Monitor)
     descripcion = models.CharField( max_length=2550, null=True, blank=True)
     estado = models.CharField( choices=[('PR','Por Revisión'), ('P', 'Procede'), ('NP','No Procede')], max_length=3, verbose_name='estado',blank=True)
+    observaciones = models.CharField( max_length=2550, null=True, blank=True)
     def __unicode__(self):
         return (u"%s %s"%(self.colegio,self.jornada ))
