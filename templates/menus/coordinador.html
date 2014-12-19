@@ -30,7 +30,7 @@
 <li {% if opcion_menu == 5 %} class="active" {% endif %}>
         <a href="{% url 'gestion' %}"><i class="fa fa-suitcase"></i>  <span>Gestion de Cursos</span></a>
 </li>
-
+{# Convocatorias #}
 <li class="has-sub {% if opcion_menu >= 0 and opcion_menu < 3 %} active {% endif %}">
     <a href="javascript:;">
         <i class="fa fa-2x fa-folder-o"></i> <span>Convocatoria - Cohorte 1</span>
@@ -51,7 +51,7 @@
     </ul>
 </li>
 
-<li class="has-sub">
+<li class="has-sub {% if opcion_menu == 6 %} active {% endif %}">
     <a href="javascript:;">
         <i class="fa fa-2x fa-folder-o"></i> <span>Convocatoria - Cohorte 2</span>
         <b class="caret pull-right"></b>
@@ -59,6 +59,9 @@
     <ul class="sub-menu">
         <li>
             <a href="http://convocatoria2.titaedpt.com.co/inscripcion/iniciar-inscripcion"><i class="fa fa fa-university"></i> Convocatoria Docentes2</a>
+        </li>
+        <li {% if opcion_menu == 6 %} class="active" {% endif %}>
+            <a href="{% url 'dashboard2' %}"><i class="fa fa-2x fa-flag-o"></i> <span>Resultado Convocatoria 2</span></a>
         </li>
     </ul>
 </li>
