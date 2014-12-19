@@ -26,13 +26,24 @@
 			<a href="{% url 'encuesta_nuevo_maestro' %}"><i class="fa fa-mortar-board"></i> Maestros Estudiantes</a>
 		</li>
 	</ul>
+</li><!--{# url 'reporte_encuesta' #}-->
+<li class="has-sub {% if opcion_menu == 8 %} active {% endif %}">
+	<a href="javascript:;">
+		<i class="fa fa-2x fa-files-o"></i> <span>Reporte Encuestas</span>
+		<b class="caret pull-right"></b>
+	</a>
+	<ul class="sub-menu">
+		<li class="">
+			<a href="{% url 'reporte_encuesta' 5 %}"><i class="fa fa-child"></i><i class="fa fa-child"></i> Alumnos</a>
+		</li>
+		<li class="">
+			<a href="{% url 'reporte_encuesta' 6 %}"><i class="fa fa-umbrella"></i> Padres de Familia</a>
+		</li>
+		<li class="">
+			<a href="{% url 'reporte_encuesta' 4 %}"><i class="fa fa-mortar-board"></i> Maestros Estudiantes</a>
+		</li>
+	</ul>
 </li>
-
-
-
-
-
-
 
 {% comment %}
 Lo de aqui para abajo es anterior, no se usa, pero si en algún momento se necesita, aquí quedan los enlaces
