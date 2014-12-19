@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block titulo %}
+    Tit@ - Resumen del Proyecto
+{% endblock %}
+
+{% block css %}
+    {{resumenProyectoForm.media}}
+    <link href="{{STATIC_URL}}css/file-tree.css" rel="stylesheet" />
+    <link href="{{STATIC_URL}}plugins/DataTables-1.9.4/css/data-table.css" rel="stylesheet" />
+{% endblock %}
+
+{% block js %}
+    <script src="{{STATIC_URL}}plugins/DataTables-1.9.4/js/jquery.dataTables.js"></script>
+    <script src="{{STATIC_URL}}plugins/DataTables-1.9.4/js/data-table.js"></script>
+    <script src="{{STATIC_URL}}plugins/parsley/dist/parsley.min.js"></script>
+{% endblock %}
+
+{% block js_ready %}
+    <script>
+        $(document).ready(function() {
+            App.init();
+        });
+    </script>
+{% endblock %}
+
+{% block miga_pan %}
+    <li><a href="javascript:;">Resumen del Proyecto</a></li>
+{% endblock %}
+
+{% block titulo_contenido %}
+    Resumen del Proyecto
+{% endblock %}
+
+{% block contenido %}
+    <div class="modal modal-message fade" id="panelAdicionarAvance">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4>Adicionar avance</h4>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{% url 'resumenProyectoGuardarResumenProyecto' %}" class="form-horizontal">
+                        {% csrf_token %}
+                        {%with resumen_proyecto=nuevo_resumen_proyecto form_editable=True template_name="dashboard/form_resumen_proyecto.html" %}
+                            {%include template_name%}
+                        {%endwith%}
+                        <div class="form-group">
+                            <div class="col-md-12 col-md-offset-5 ui-sortable">
+                                <button title="Guardar" type="submit" class="btn btn-sm btn-primary">Guardar</button>
+                            </div>
+                        </div>
+                    </form>
+                    <br/><br/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal modal-message fade" id="panelTodosAvances">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4>Todos los avances</h4>
+                </div>
+                <div class="modal-body">
+                    {% for proyecto in resumen_proyecto_all %}
+                        {%with resumen_proyecto=proyecto template_name="dashboard/form_resumen_proyecto.html" %}
+                            <hr/>
+                            <form method="POST" action="" class="form-horizontal">
+                                {%include template_name%}
+                            </form>
+                        {%endwith%}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary" id="inscritos">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Resumen del Proyecto</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <a href="#panelAdicionarAvance" class="btn btn-success" data-toggle="modal">Adicionar avance</a>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="#panelTodosAvances" class="btn btn-info pull-right" data-toggle="modal">Ver todos los avances</a>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="col-md-12">
+                        <form method="POST" action="" class="form-horizontal">
+                            {%include "dashboard/form_resumen_proyecto.html" %}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+{% endblock %}

@@ -214,6 +214,41 @@ def validar_grupo_coordinador_secretaria(request):
     else:
         return False
 
+def resumen_proyecto(request):
+    resumen_proyecto_all = ResumenProyecto.objects.filter().order_by('-fecha')
+
+    if len(resumen_proyecto_all) > 0:
+        resumen_proyecto = resumen_proyecto_all.latest('id')
+        nuevo_resumen_proyecto = resumen_proyecto.__dict__.copy()
+    else:
+        resumen_proyecto = ResumenProyecto()
+        nuevo_resumen_proyecto = ResumenProyecto().__dict__.copy()
+
+    nuevo_resumen_proyecto['fecha'] = datetime.datetime.now()
+
+    return render(request, 'dashboard/resumen_proyecto.html', {
+        'form_editable' : False,
+        'resumen_proyecto' : resumen_proyecto,
+        'nuevo_resumen_proyecto' : nuevo_resumen_proyecto,
+        'resumen_proyecto_all' : resumen_proyecto_all,
+        'resumenProyectoForm' : ResumenProyectoForm(),
+        'opcion_menu' : 23,
+        'user_group': user_group(request),
+    })
+
+def guardarResumenProyecto(request):
+    if validar_grupo_coordinador_secretaria(request) == False:
+        return redirect('home')
+
+    form = ResumenProyectoForm(request.POST)
+    if form.is_valid():
+        resumenProyecto = form.save(commit=False)
+        resumenProyecto.usuario = request.user
+        resumenProyecto.save()
+        return redirect('resumen_proyecto')
+    else:
+        return redirect('home')
+
 def tablero_control(request, id_actividad):
     if validar_grupo_coordinador_secretaria(request) == False:
         return redirect('home')
@@ -238,15 +273,17 @@ def tablero_control(request, id_actividad):
 
     usuario_puede_editar = ((grupo_de_usuario == 'Coordinador' and int(id_actividad) < 14) or (grupo_de_usuario == 'Secretaria' and int(id_actividad) > 13))
 
-    estudiantes = Estudiante.objects.all()
-    aspirantes = Aspirante.objects.all()
+    estudiantesMulti = Estudiante.objects.all()
+    aspirantesMulti = Aspirante.objects.all()
     variablesPorSede = VariablePorSede.objects.all()
     variablesPorAula = VariablePorAula.objects.all()
+    estudiantes = listaMaestrosEstudiantesInscritos()
 
     datos_tablero_control = {
         'actividades' : actividades,
         'estudiantes' : estudiantes,
-        'aspirantes' : aspirantes,
+        'estudiantesMulti' : estudiantesMulti,
+        'aspirantesMulti' : aspirantesMulti,
         'variablesPorSede' : variablesPorSede,
         'variablesPorAula' : variablesPorAula,
         'actividad_seleccionada' : actividad_seleccionada,

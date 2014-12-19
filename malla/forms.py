@@ -12,7 +12,7 @@ def MyDateWidget():
 class InformacionBasicaForm(forms.ModelForm):
     class Meta:
         model = Contratista
-        fields = ('numero_documento', 'nombre1', 'nombre2', 'apellido1', 'apellido2','sexo', 'fecha_nacimiento', 'direccion', 'universidad','programa_academico')#, 'estrato',)# 'sector', 'sectordesplazamiento',)
+        fields = ('numero_documento', 'nombre1', 'nombre2', 'apellido1', 'apellido2','sexo', 'fecha_nacimiento', 'direccion', 'universidad','programa_academico')
         widgets = {
             'fecha_nacimiento' : MyDateWidget()
         }
@@ -55,13 +55,14 @@ class ReclamacionModificarForm(forms.ModelForm):
         self.fields['colegio'].widget.attrs['disabled'] = True
     class Meta:
         model = Reclamacion
-        fields = ('colegio', 'jornada', 'fecha', 'supervisor', 'descripcion', 'estado')
+        fields = ('colegio', 'jornada', 'fecha', 'supervisor', 'descripcion', 'estado', 'observaciones')
         widgets = {
             'fecha' : MyDateWidget(),
             'descripcion' : Textarea(attrs={'rows': 3, 'readonly':'readonly'}),
             #'colegio' : TextInput(attrs={'readonly':'readonly'}),
             'jornada' : TextInput(attrs={'readonly':'readonly'}),
             'supervisor' : TextInput(attrs={'readonly':'readonly'}),
+            'observaciones' : Textarea(attrs={'rows': 3,}),
             
         }
 
@@ -140,3 +141,7 @@ class MonitorForm(forms.ModelForm):
             'cedula' : MyFileInput(),
             'rut' : MyFileInput(),
         }
+
+class FiltroReporte(forms.Form):
+    fecha_inicial = forms.DateField(widget=MyDateWidget())
+    fecha_final = forms.DateField(widget=MyDateWidget())

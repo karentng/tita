@@ -267,7 +267,7 @@
 		            	<form  method="post" >
 								 {% csrf_token %}
 								 {% bootstrap_form form2 layout="vertical" %}
-								 
+							{%comment%}	 
 							<script type="text/javascript">
 
 			            		$("#id_sedes").change(function(){
@@ -283,6 +283,8 @@
 			            		})
 		            			
 		            		</script>
+		            		{%endcomment%}
+		            		<button class="btn btn-primary" type="submit">Filtrar</button>
 
 		            			<div id="id_boton">
 								 

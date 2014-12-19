@@ -367,3 +367,33 @@ class VariablePorAula(models.Model):
     computadores_docentes = models.IntegerField(default = 0, null=False, blank=False, verbose_name=u'número de computadores para docentes')
     video_proyectores = models.IntegerField(default = 0, null=False, blank=False, verbose_name=u'número de video proyectores')
     access_point = models.IntegerField(default = 0, null=False, blank=False, verbose_name=u'número de access point')
+
+class ResumenProyecto(models.Model):
+    usuario = models.ForeignKey(User)
+    fecha = models.DateField(default = datetime.datetime.now(),verbose_name='fecha')
+
+    avance_actual = models.FloatField(verbose_name='avance actual')
+    observaciones = models.CharField(max_length=255, verbose_name='observaciones')
+    presupuesto_total = models.FloatField(verbose_name='presupuesto total')
+    presupuesto_ejecutado_total = models.FloatField(verbose_name='presupuesto ejecutado total')
+
+    total_maestros_estudiantes_formados_meta = models.FloatField(verbose_name='total de maestros estudiantes formados meta')
+    numero_actividades_realizadas_meta = models.FloatField(verbose_name='número de actividades realizadas meta')
+    total_maestros_formadores_contratados_meta = models.FloatField(verbose_name='total de maestros formadores contratados meta')
+    total_sedes_adecuadas_meta = models.FloatField(verbose_name='total de sedes adecuadas meta')
+    total_sedes_equipadas_meta = models.FloatField(verbose_name='total de sedes equipadas meta')
+    total_licencias_adquiridas_meta = models.FloatField(verbose_name='total de licencias adquiridas meta')
+
+    total_maestros_estudiantes_formados_avance = models.FloatField(verbose_name='total de maestros estudiantes formados avance')
+    numero_actividades_realizadas_avance = models.FloatField(verbose_name='número de actividades realizadas avance')
+    total_maestros_formadores_contratados_avance = models.FloatField(verbose_name='total de maestros formadores contratados avance')
+    total_sedes_adecuadas_avance = models.FloatField(verbose_name='total de sedes adecuadas avance')
+    total_sedes_equipadas_avance = models.FloatField(verbose_name='total de sedes equipadas avance')
+    total_licencias_adquiridas_avance = models.FloatField(verbose_name='total de licencias adquiridas avance')
+
+    total_maestros_estudiantes_formados_ejecucion = models.FloatField(verbose_name='total de maestros estudiantes formados ejecucion')
+    numero_actividades_realizadas_ejecucion = models.FloatField(verbose_name='número de actividades realizadas ejecucion')
+    total_maestros_formadores_contratados_ejecucion = models.FloatField(verbose_name='total de maestros formadores contratados ejecucion')
+    total_sedes_adecuadas_ejecucion = models.FloatField(verbose_name='total de sedes adecuadas ejecucion')
+    total_sedes_equipadas_ejecucion = models.FloatField(verbose_name='total de sedes equipadas ejecucion')
+    total_licencias_adquiridas_ejecucion = models.FloatField(verbose_name='total de licencias adquiridas ejecucion')

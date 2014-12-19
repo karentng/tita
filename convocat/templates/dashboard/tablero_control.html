@@ -14,6 +14,7 @@
 {% block js %}
     <script src="{{STATIC_URL}}plugins/DataTables-1.9.4/js/jquery.dataTables.js"></script>
     <script src="{{STATIC_URL}}plugins/DataTables-1.9.4/js/data-table.js"></script>
+    <script src="{{STATIC_URL}}plugins/parsley/dist/parsley.min.js"></script>
 
     <script src="{{STATIC_URL}}plugins/flot/jquery.flot.min.js"></script>
     <script src="{{STATIC_URL}}plugins/flot/jquery.flot.pie.min.js"></script>
@@ -162,12 +163,13 @@
                     <h4 class="modal-title">Eliminar Archivo</h4>
                 </div>
                 <div class="modal-body">
-                    <form id="formBorrarArchivo" class="form-horizontal" method="post" action="">
+                    <form id="formBorrarArchivo" class="form-horizontal" method="post" action="" data-parsley-validate="true" novalidate="">
                         {% csrf_token %}
                         <h5>Realmente desea borrar el archivo?</h5>
                         <div class="form-group">
                             <label for="id_observacion" class="col-md-2 control-label ui-sortable">Observación</label>
-                            <div class="col-md-4 ui-sortable"><input type="text" title="" placeholder="Observación" name="observacion" maxlength="255" id="id_observacion" class="form-control">
+                            <div class="col-md-4 ui-sortable">
+                                <input type="text" title="" placeholder="Observación" name="observacion" maxlength="255" id="id_observacion" class="form-control parsley-error" data-parsley-required="true">
                             </div>
                         </div>
                         <button type="button" type="submit" class="btn btn-primary pull-right" id="borrarArchivoButton">Borrar</button>
@@ -326,21 +328,25 @@
                                     {% if concepto_por_actividad.id == 46 %}
                                         {%include "dashboard/variables_por_aula.html" %}
                                     {% else %}
-                                        <div class="tree">
-                                            {% if usuario_puede_editar %}
-                                                <div class="row">
-                                                    <a href="#modal-dialog-grupo" class="btn btn-success" data-toggle="modal">Adicionar Carpeta</a>
-                                                    {% if concepto_por_actividad.get_grupos|length > 0 %}
-                                                        <a href="#modal-dialog-archivo" class="btn btn-success" data-toggle="modal">Adicionar Archivo</a>
-                                                    {% endif %}
-                                                </div>
-                                            {% endif %}
-                                            <ul>
-                                                {% for grupo in concepto_por_actividad.get_grupos %}
-                                                    {%include "dashboard/grupos_tree.html" %}
-                                                {% endfor %}
-                                            </ul>
-                                        </div>
+                                        {% if concepto_por_actividad.id == 12 %}
+                                            {%include "dashboard/resultado_incripcion_maestros_estudiantes.html" %}
+                                        {% else %}
+                                            <div class="tree">
+                                                {% if usuario_puede_editar %}
+                                                    <div class="row">
+                                                        <a href="#modal-dialog-grupo" class="btn btn-success" data-toggle="modal">Adicionar Carpeta</a>
+                                                        {% if concepto_por_actividad.get_grupos|length > 0 %}
+                                                            <a href="#modal-dialog-archivo" class="btn btn-success" data-toggle="modal">Adicionar Archivo</a>
+                                                        {% endif %}
+                                                    </div>
+                                                {% endif %}
+                                                <ul>
+                                                    {% for grupo in concepto_por_actividad.get_grupos %}
+                                                        {%include "dashboard/grupos_tree.html" %}
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        {% endif %}
                                     {% endif %}
                                 {% endif %}
                             {% endif %}

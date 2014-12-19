@@ -107,7 +107,6 @@ class MyFileInput(ClearableFileInput):
 
         return mark_safe(template % substitutions)
 
-
 class DocumentosSoporteForm(forms.ModelForm):
     class Meta:
         model = SoporteClases
@@ -133,12 +132,17 @@ class CursoForm(forms.ModelForm):
         super(CursoForm, self).__init__(*args, **kwargs)
         #self.fields['formador1'].queryset = self.fields['formador1'].queryset.exclude( Q(formador1 = Cursos.objects.all()) | Q( formador2 =  Cursos.objects.all()))
         #self.fields['formador2'].queryset = self.fields['formador2'].queryset.exclude( Q(formador1 = Cursos.objects.all()) | Q( formador2 =  Cursos.objects.all()))
+        #self.fields['estudiantes'].queryset = self.fields['estudiantes'].queryset.exclude(estudiantes = Cursos.objects.all())
         if sede and jornada :
             estudiantes = InfoLaboral.objects.filter(sede__in=sede, jornada=jornada).values('estudiante')
             ids = []
+
+            estu = Cursos.objects.values('estudiantes')
+
             for est in estudiantes:
                 ids.append(est['estudiante'])
-            self.fields['estudiantes'].queryset = Estudiante.objects.filter(id__in=ids)#self.fields['estudiantes'].queryset.exclude( Q(formador1 = Cursos.objects.all()) | Q( formador2 =  Cursos.objects.all()))
+            self.fields['estudiantes'].queryset = Estudiante.objects.filter(id__in=ids)
+            #self.fields['estudiantes'].queryset = Estudiante.objects.filter(id__in=ids).exclude(id__in=estu) 
     class Meta:
         model = Cursos
         fields = ('descripcion','institucion','formador1','formador2', 'estudiantes',)
@@ -149,9 +153,7 @@ class CursoMForm(forms.ModelForm):
     class Meta:
         model = Cursos
         fields = ('descripcion','institucion','formador1','formador2', 'estudiantes',)
-        widgets = {'estudiantes': forms.CheckboxSelectMultiple()}
-
-                
+        widgets = {'estudiantes': forms.CheckboxSelectMultiple()}            
 
 class FormadorForm(forms.ModelForm):
 

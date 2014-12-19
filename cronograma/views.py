@@ -801,6 +801,21 @@ def filtro_diplomado(request):
     else:
         return redirect('cronograma_diplomado')
 
+def filtro_acompanamiento(request):
+    if request.method == 'POST':
+        form = FiltroCronograma(request.POST)
+        if form.is_valid():
+            sede = form.cleaned_data['sedes']
+            grupo = form.cleaned_data['grupos']
+
+            response = redirect('cronograma_acompanamiento')
+            response['Location'] += "?sede="+sede+'&grupo='+grupo
+            return response
+        else:
+            return redirect('cronograma_acompanamiento')    
+    else:
+        return redirect('cronograma_acompanamiento')
+
 def diplomado_modificar(request):
     grupo = user_group(request)
     if grupo == None:
@@ -1090,7 +1105,17 @@ def formador(request):
     })
 
 def reporte_cursos(request, limit=100):
+
+    curso_list = Cursos.objects.all() 
+    
+    for i in curso_list:
+        numero_curso = i.descripcion[6:] 
+        numero_curso = menor10(int(numero_curso))
+        i.descripcion = i.descripcion[:6]+numero_curso
+        i.save()
+
     curso_list = Cursos.objects.all().order_by('descripcion') 
+    
     #estudiante_list = [curso_list.lenght]
     #estudiante_list = curso_list[0].estudiantes.all()
     #estudiante_list = [curso_list.lenght]
