@@ -377,12 +377,12 @@ def listar_reclamaciones_contratista(request):
 
 def lista_reporte_contratista(request):
     # descomentar  linea 380 y 381 (2 de abajo) para que genere el archivo y luego lo descargue. Hacer que si ya existe, lo elimine antes.
-    #c = Command()
-    #c.handle()
+    c = Command()
+    c.handle()
 
     archivo = open('ReporteListaContratistas.csv', "r") 
     archivo = File(archivo) 
 
     response = HttpResponse(archivo, content_type='application/vnd.ms-excel')
-    response['Content-Disposition'] = 'attachment; filename="MaestrosEstudiante.csv"'
+    response['Content-Disposition'] = 'attachment; filename="ReporteListaContratistas.csv"'
     return response

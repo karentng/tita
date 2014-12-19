@@ -2,24 +2,67 @@
 from django.core.management.base import BaseCommand, CommandError
 from django.template import Template, Context
 import smtplib
-from campus.models import Estudiante, Municipio, Cursos
-from estudiante.models import InfoLaboral, FormacionAcademicaME, CertificacionTIC
+from malla.models import Requerimiento, Contratista, ContratistaInfoContacto, Lista
 import csv
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
         archivo = open("ReporteListaContratistas.csv","w") 
-        writer = csv.writer(archivo, delimiter=';')
-        # columnas
-        writer.writerow(["Grupos", "Nombre Completo", u"Cédula".encode('latin-1'),
-            u"Género".encode('latin-1'), u"Correo Personal".encode('latin-1'), "Correo Institucional", "Municipio",
-            u"Teléfono Fijo".encode('latin-1'), "Celular", u"Dirección".encode('latin-1'), "Nivel Educativo",
-            u"Secretaría de Educación".encode('latin-1'),"Sede", "Cargo", "Zona", "Jornada", "Asignaturas",
-            "Grados", "Decreto Docente", "Nombramiento", "Tipo Etnoeducador",
-            u"Formación Académica".encode('latin-1'), "Certificaciones TIC"])
+        writer = csv.writer(archivo, delimiter=';')      
 
-        aspirantes = Estudiante.objects.all()
-        for aspirante in aspirantes:
+        requerimientos = Requerimiento.objects.all()
+
+        string = ""
+        arreglo = []
+
+        arreglo.append("Nombres")
+        arreglo.append("Apellidos")
+        arreglo.append("No. Documento")
+        arreglo.append("Celular")
+        arreglo.append("Direccion".encode('latin-1'))
+        
+        for i in requerimientos:
+
+            arreglo.append(i.descripcion_req.encode('latin-1'))
+
+        arreglo.append("Total Horas")
+        # columnas
+        writer.writerow(arreglo)
+             
+
+        contratistas = Contratista.objects.all()
+        for contratista in contratistas:
+
+            nombres = str(contratista.nombre1) +" "+ str(contratista.nombre2)
+            apellidos = str(contratista.apellido1) +" "+ str(contratista.apellido2)
+            numero_doc = contratista.numero_documento
+
+            celular = ContratistaInfoContacto.objects.get(monitor = contratista).celularppal
+            direccion = contratista.direccion
+
+            arreglo = []
+            arreglo.append(nombres.encode('latin-1'))
+            arreglo.append(apellidos.encode('latin-1'))
+            arreglo.append(numero_doc)
+            arreglo.append(celular)
+            arreglo.append(direccion.encode('latin-1'))
+
+
+            global requerimientos
+            x = len(requerimientos)
             
-            arreglo = ['campo1', 'campo2']
+            for i in requerimientos:
+                try:
+                    lista = Lista.objects.get(contratista=contratista,  requerimiento= i).horas
+                    arreglo.append(lista)
+                except:
+                    lista = 0
+                    arreglo.append(lista)
+                    continue
+            total = 0
+            for i in range(5, len(arreglo)):
+                total = int(arreglo[i])+total
+
+            arreglo.append(total)           
+
             writer.writerow(arreglo)
