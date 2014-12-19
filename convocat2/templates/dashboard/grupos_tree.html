@@ -1,0 +1,30 @@
+<li>
+    <span><i class="fa fa-folder-open-o"></i> {{grupo.nombre}}</span>
+        {% if grupo.get_grupos|length == 0 and grupo.get_archivos|length == 0 %}
+            {% if usuario_puede_editar %}
+                <a class="btn text-danger" title="Eliminar" onclick="confirmacionBorrarGrupo('{{grupo.id}}')">
+                <i class="fa fa-trash-o"></i></a>
+            {% endif %}
+        {% endif %}
+    <ul>
+        {% for subgrupo in grupo.get_grupos %}
+            {%with grupo=subgrupo template_name="dashboard/grupos_tree.html" %}
+                {%include template_name%}
+            {%endwith%}
+        {% endfor %}
+    </ul>
+    <ul>
+        {% for archivo in grupo.get_archivos %}
+            <li>
+                <a href="{{STATIC_URL}}../media/{{archivo.ruta}}" target="_blank">
+                    <span><i class="fa fa-file-o"></i>  {{archivo.nombre}} &ndash; {{archivo.descripcion}}</span>
+                    {% if usuario_puede_editar %}
+                        <a class="btn text-danger" title="Eliminar" onclick="confirmacionBorrarArchivo('{{archivo.id}}')">
+                        <i class="fa fa-trash-o"></i></a>
+                    {% endif %}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</li>
+

@@ -133,7 +133,7 @@ class DocumentosSoporteForm(forms.ModelForm):
             'ensenanza_tic_profesores' : MyFileInput(),
             'ensenanza_tic_formadores' : MyFileInput(),
         }
-
+"""
 class ArchivoForm(forms.ModelForm):
     class Meta:
         model = Archivo
@@ -167,3 +167,4 @@ class VariablePorAulaForm(forms.ModelForm):
     class Meta:
         model = VariablePorAula
         exclude = ('fecha','usuario')
+"""

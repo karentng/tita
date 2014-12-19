@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block titulo %} Formulario Aspirante {% endblock %}
+
+{% block menu %}
+    {% include "menus/publico.html" with opcion_menu=6 %}
+{% endblock %}
+
+{% block css %}
+    
+    <link href="{{STATIC_URL}}plugins/bootstrap-wizard/css/bwizard.min.css" rel="stylesheet" />
+    {{form.media}} {# agrega los js y css necesarios para el bootstrap3 datetimepicker #}
+{% endblock %}
+
+{% block js %}
+    <script>
+    $(function() {
+        window.modificado = false;
+        $('input, select').change(function() {
+            window.modificado = true;
+        });
+        $('a#siguiente').click(function() {
+            if(window.modificado) {
+                var res = confirm("No ha hecho click en el botón agregar.\nSi continúa perderá los datos del formulario."+
+                    "\n\nPresione Cancelar para volver al formulario y Agregar los datos");
+                return res;
+            }
+        });
+
+        {% if solo_lectura %}
+            $("select").attr("disabled", "disabled");
+            $("input").attr("readonly", "readonly");
+        {% endif %}
+    });
+    </script>
+{% endblock %}
+
+{% block miga_pan %}
+    <li><a href="{% url 'home' %}">Inicio</a></li>
+    <li class="active">Formulario de Registro</li>
+{% endblock %}
+
+{% block titulo_contenido %}Formulario de Registro de Aspirantes{% endblock %}
+
+
+
+{% block previo_contenido_panel %}
+    {% include "inscripcion/_wizard.html" with wizard_stage=7 %}
+{% endblock %}
+
+
+{% block titulo_panel %}<i class="fa fa-institution alias"></i> Otra Experiencia Laboral{% endblock %}
+{% block contenido_panel %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Entidad</th>
+            <th>Tipo de Entidad</th>
+            <th>Teléfono</th>
+            <th>Email</th>
+            <th>Cargo</th>
+            <th>Inicio</th>
+            <th>Terminación</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for exp in experiencias %}
+            <tr>
+                <td>{{exp.entidad}}</td>
+                <td>{{exp.get_tipo_entidad_display}}</td>
+                <td>{{exp.telefono}}</td>
+                <td>{{exp.email}}</td>
+                <td>{{exp.cargo}}</td>
+                <td>{{exp.fecha_inicio}}</td>
+                <td>{{exp.fecha_fin}}</td>
+                {% if solo_lectura %}
+                <td></td>
+                {% else %}
+                <td>
+                    <a href="{% url 'eliminarExperienciaOtra' exp.id %}" onclick="return confirm('Seguro que desea eliminar esta entrada?')" class="text-danger">Eliminar</a>
+                </td>
+                {% endif %}
+            </tr>
+        {% empty %}
+            <tr><td>No se ha agregado ninguna entrada.</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% if solo_lectura %}
+    {% else %}
+    <div class="well well-sm">
+        <h4>Agregar Otras Experiencias Laborales</h4>
+        <form class="form-horizontal" method="post">{% if solo_lectura %}{% else %}{% csrf_token %}{% endif %}
+            {% bootstrap_form form layout="horizontal" horizontal_label_class='col-md-5' horizontal_field_class='col-md-5' %}
+            <div class="row">
+                <div class="col-md-3 col-md-offset-2">
+                    <button class="btn btn-primary" type="submit"><i class="fa fa-plus"></i>  Agregar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    {% endif %}
+    <a href="{% url 'experienciaEnsenanza' %}" class="btn btn-lg btn-default pull-left"> <i class="fa fa-angle-left"></i> Anterior</a>
+    {% if solo_lectura %}
+        <a id="siguiente" href="{% url 'finalizada' %}" class="btn btn-lg btn-primary pull-right">Siguiente  <i class="fa fa-angle-right"></i></a>
+    {% else %}
+        <a id="siguiente" href="{% url 'finalizar' %}" class="btn btn-lg btn-primary pull-right">Siguiente <i class="fa fa-angle-right"></i></a>
+    {% endif %}
+{% endblock %}

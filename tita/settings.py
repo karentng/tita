@@ -53,6 +53,7 @@ INSTALLED_APPS = (
     'bootstrap3_datetime',
 
     'convocat',
+    'convocat2',
     'estudiante',
     'campus',
     'survey',

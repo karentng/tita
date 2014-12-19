@@ -1,0 +1,396 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block titulo %}
+	Tit@ - Tablero de Control
+{% endblock %}
+
+{% block css %}
+    {{estado_avance_form.media}}
+    <link href="{{STATIC_URL}}css/file-tree.css" rel="stylesheet" />
+    <link href="{{STATIC_URL}}plugins/DataTables-1.9.4/css/data-table.css" rel="stylesheet" />
+{% endblock %}
+
+{% block js %}
+    <script src="{{STATIC_URL}}plugins/DataTables-1.9.4/js/jquery.dataTables.js"></script>
+    <script src="{{STATIC_URL}}plugins/DataTables-1.9.4/js/data-table.js"></script>
+    <script src="{{STATIC_URL}}plugins/parsley/dist/parsley.min.js"></script>
+
+    <script src="{{STATIC_URL}}plugins/flot/jquery.flot.min.js"></script>
+    <script src="{{STATIC_URL}}plugins/flot/jquery.flot.pie.min.js"></script>
+    <script src="{{STATIC_URL}}plugins/flot/jquery.flot.categories.js"></script>
+{% endblock %}
+
+{% block js_ready %}
+    <script>
+        function mostrarBarraDeCArga() {
+            $('#pleaseWaitDialog').modal({ backdrop: 'static', keyboard: false });
+        }
+
+        function confirmacionBorrarArchivo(id_archivo) {
+            $('#confirmacionBorrarArchivo').modal({ backdrop: 'static', keyboard: false }).one('click', '#borrarArchivoButton', function (e) {
+                $("#formBorrarArchivo").attr("action", "{% url 'tableroControlEliminarArchivo' '' %}" + id_archivo);
+                $("#formBorrarArchivo").submit();
+            });
+        }
+
+        function confirmacionBorrarGrupo(id_grupo) {
+            $('#confirmacionBorrarGrupo').modal({ backdrop: 'static', keyboard: false }).one('click', '#borrarGrupoButton', function (e) {
+                $("#formBorrarGrupo").attr("action", "{% url 'tableroControlEliminarGrupo' '' %}" + id_grupo);
+                $("#formBorrarGrupo").submit();
+            });
+        }
+
+        $(document).ready(function() {
+            App.init();
+
+            $('div[class="input-group date"]').attr('style', 'width:160px');
+            $("#id_ruta").attr("required", "required");
+
+            $(function () {
+                $('.tree li:has(ul)').addClass('parent_li').find(' > span').attr('title', 'Cerrar carpeta');
+                $('.tree li.parent_li > span').on('click', function (e) {
+                    var children = $(this).parent('li.parent_li').find(' > ul > li');
+                    if (children.is(":visible")) {
+                        children.hide('fast');
+                        $(this).attr('title', 'Abrir carpeta').find(' > i').addClass('fa-folder-o').removeClass('fa-folder-open-o');
+                    } else {
+                        children.show('fast');
+                        $(this).attr('title', 'Cerrar carpeta').find(' > i').addClass('fa-folder-open-o').removeClass('fa-folder-o');
+                    }
+                    e.stopPropagation();
+                });
+            });
+
+            $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+                localStorage.setItem('lastTab', e.target["id"]);
+                var id_concepto_actividad = e.target["href"].split("-").pop();
+
+                $('#formGuardarGrupo').attr("action", "{% url 'tableroControlGuardarGrupo' '' %}" + id_concepto_actividad);
+
+                $.get("{% url 'tableroControlObtenerGruposPorConceptoActividad' '' %}" + id_concepto_actividad, function(data) {
+                    $("#id_grupo_padre").html(data);
+                    $("#id_grupo").html(data);
+                });
+            });
+
+            $(function () {
+                var lastTab = localStorage.getItem('lastTab');
+                console.log('lastTab: ' + lastTab);
+                if (lastTab != undefined && lastTab != null && lastTab != '') {
+                    if($('#'+lastTab).length > 0) {
+                        $('#'+lastTab).tab('show');
+                    }
+                    else {
+                        $('#conceptos_tabs a:first').tab('show');
+                    }
+                }
+                else {
+                    $('#conceptos_tabs a:first').tab('show');
+                }
+            });
+
+            var tableSP = $('#tabla-super-poderosa').dataTable( {
+                "paging": true,
+                'bScrollCollapse':true,
+                "sPaginationType": "bootstrap",
+                "oLanguage": {
+                    "sLengthMenu": "_MENU_ registros por página"
+                }
+            } );
+
+            $('a.toggle-vis').on( 'click', function (e) {
+                e.preventDefault();
+                var bVis = tableSP.fnSettings().aoColumns[$(this).attr('data-column')].bVisible;
+                tableSP.fnSetColumnVis( $(this).attr('data-column'), !bVis);
+            } );
+
+            $('#tabla-super-poderosa thead th').each( function () {
+                var title = $('#tabla-super-poderosa thead th').eq( $(this).index() ).text();
+                $(this).html( '<label class="control-label"><b>'+title+'</b></label><input type="text" width="100" placeholder="" />' ).on( 'keyup change', function (e) {
+                    tableSP.fnFilter(e.target.value, $(this).index());
+                    tableSP.fnDraw();
+                } );
+            } );
+
+            $('#pleaseWaitDialog').on('shown.bs.modal', function () {
+                var progress = setInterval(function() {
+                    var $bar = $('.bar');
+
+                    if ($bar.width()==500) {
+                        $bar.width(0);
+                    } else {
+                        $bar.width($bar.width()+50);
+                    }
+
+                    $bar.text($bar.width()/5 + "%");
+                }, 1000);
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block miga_pan %}
+	<li><a href="javascript:;">Tablero de Control</a></li>
+{% endblock %}
+
+{% block titulo_contenido %}
+	Tablero de Control
+{% endblock %}
+
+{% block contenido %}
+    <div class="modal fade" id="pleaseWaitDialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Cargando...</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="progress">
+                        <div class="progress-bar bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="confirmacionBorrarArchivo">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Eliminar Archivo</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="formBorrarArchivo" class="form-horizontal" method="post" action="" data-parsley-validate="true" novalidate="">
+                        {% csrf_token %}
+                        <h5>Realmente desea borrar el archivo?</h5>
+                        <div class="form-group">
+                            <label for="id_observacion" class="col-md-2 control-label ui-sortable">Observación</label>
+                            <div class="col-md-4 ui-sortable">
+                                <input type="text" title="" placeholder="Observación" name="observacion" maxlength="255" id="id_observacion" class="form-control parsley-error" data-parsley-required="true">
+                            </div>
+                        </div>
+                        <button type="button" type="submit" class="btn btn-primary pull-right" id="borrarArchivoButton">Borrar</button>
+                    </form>
+                </div>
+                <br/><br/>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="confirmacionBorrarGrupo">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Eliminar Carpeta</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="formBorrarGrupo" class="form-horizontal" method="post" action="">
+                        {% csrf_token %}
+                        <h5>Realmente desea borrar la carpeta?</h5>
+                        <button type="button" type="submit" class="btn btn-primary pull-right" id="borrarGrupoButton">Borrar</button>
+                    </form>
+                </div>
+                <br/><br/>
+            </div>
+        </div>
+    </div>
+    <div class="modal modal-message fade in" id="tablaEstadosDeAvance" aria-hidden="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Historial de estados de avance</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="col-md-4">Fecha</th>
+                                    <th>Meta</th>
+                                    <th>Avance Actual</th>
+                                    <th class="col-md-3">Presupuesto para la Actividad</th>
+                                    <th>Presupuesto Ejecutado</th>
+                                    <th>Ejecuci&oacute;n Financiera</th>
+                                    <th>Observaci&oacute;n</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for estado_de_avance in actividad_seleccionada.get_estados_de_avance %}
+                                <tr class="odd gradeX">
+                                    <td>{{estado_de_avance.fecha}}</td>
+                                    <td>{{estado_de_avance.meta}}</td>
+                                    <td>{{estado_de_avance.avance_actual}}%</td>
+                                    <td>{{estado_de_avance.presupuesto_actividad}}</td>
+                                    <td>{{estado_de_avance.presupuesto_ejecutado}}</td>
+                                    <td>{{estado_de_avance.ejecucion_financiera}}%</td>
+                                    <td>{% if estado_de_avance.observacion != None %}
+                                            {{estado_de_avance.observacion}}
+                                        {% else %}
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" align="center">
+        <div class="col-xs-12">
+            {% for actividad in actividades %}
+                <a href="{% url 'tablero_control' actividad.id %}" class="btn btn-{% if actividad.id == actividad_seleccionada.id %}success{% else %}inverse{% endif %}" onclick="mostrarBarraDeCArga();"
+                    style="margin-bottom:5px" data-toggle="tooltip" data-placement="bottom" title="{{actividad.nombre}} - {{actividad.descripcion}}">
+                    <small>Actividad</small><br/>
+                    <span class="fa-stack fa-1x ">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fa fa-inverse fa-stack-1x text-{% if actividad.id == actividad_seleccionada.id %}success{% else %}inverse{% endif %}"><small>{{forloop.counter}}</small></i>
+                    </span>
+                    <br>
+                    <small>
+                        {% if actividad.get_ultimo_estado_de_avance %}
+                            {{actividad.get_ultimo_estado_de_avance.avance_actual}}%
+                        {% else %}
+                            0.0%
+                        {% endif %}
+                    </small><br/>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-primary" id="inscritos">
+				<div class="panel-heading">
+					<div class="panel-heading-btn">
+                        <a class="btn btn-xs btn-info" data-toggle="modal" href="#tablaEstadosDeAvance">Ver todos los avances</a>
+						<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+					</div>
+					<h4 class="panel-title">Estado de Avance de la {{actividad_seleccionada.nombre}}</h4>
+				</div>
+				<div class="panel-body">
+                    <form class="form-inline">
+                        <div class="form-group"><label class="control-label" style="width:185px">Fecha</label></div>
+                        <div class="form-group"><label class="control-label" style="width:90px">Meta</label></div>
+                        <div class="form-group"><label class="control-label" style="width:90px">Avance Actual</label></div>
+                        <div class="form-group"><label class="control-label" style="width:180px">Presupuesto para la Actividad</label></div>
+                        <div class="form-group"><label class="control-label" style="width:140px">Presupuesto Ejecutado</label></div>
+                        <div class="form-group"><label class="control-label" style="width:130px">Ejecuci&oacute;n Financiera</label></div>
+                        <div class="form-group"><label class="control-label" style="width:140px">Observaci&oacute;n</label></div>
+                    </form>
+                    <form class="form-inline">
+                        <div class="form-group"><input type="text" value="{{estado_de_avance.fecha}}" title="" size="21" class="form-control"></div>
+                        <div class="form-group"><input type="text" value="{{estado_de_avance.meta}}" style="width:90px" class="form-control"></div>
+                        <div class="form-group"><input type="text" value="{{estado_de_avance.avance_actual}}%" style="width:90px" class="form-control"></div>
+                        <div class="form-group"><input type="text" value="{{estado_de_avance.presupuesto_actividad}}" style="width:180px" class="form-control"></div>
+                        <div class="form-group"><input type="text" value="{{estado_de_avance.presupuesto_ejecutado}}" style="width:140px" class="form-control"></div>
+                        <div class="form-group"><input type="text" value="{{estado_de_avance.ejecucion_financiera}}%" style="width:130px" class="form-control"></div>
+                        <div class="form-group"><input type="text" value="{% if estado_de_avance.observacion != None %}{{estado_de_avance.observacion}}{% else %}{% endif %}" style="width:140px" class="form-control"></div>
+                    </form>
+                    {% if usuario_puede_editar %}
+                        <h6>Ingresar nuevo estado de avance</h6>
+                        <form class="form-inline" action={% url 'tableroControlGuardarEstadoDeAvance' %} method="POST">
+                            {% csrf_token %}
+                            {% bootstrap_form estado_avance_form %}
+                            <button class="btn btn-sm btn-primary" type="submit" title="Guardar estado de avance">
+                                <i class="fa fa-save"></i>
+                            </button>
+                        </form>
+                    {% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="nav nav-tabs" id="conceptos_tabs">
+                {% for concepto_por_actividad in actividad_seleccionada.get_conceptos_por_actividad %}
+                    <li><a id="tab-id-{{concepto_por_actividad.id}}" href="#tab-{{concepto_por_actividad.id}}" data-toggle="tab">{{concepto_por_actividad.concepto.nombre}}</a></li>
+                {% endfor %}
+            </ul>
+            <div class="tab-content">
+                {% for concepto_por_actividad in actividad_seleccionada.get_conceptos_por_actividad %}
+                    <div class="tab-pane fade" id="tab-{{concepto_por_actividad.id}}">
+                        {% if concepto_por_actividad.id == 1 %}
+                            {%include "dashboard/multireporte_resultado_convocatoria.html" %}
+                        {% else %}
+                            {% if concepto_por_actividad.id == 9 %}
+                                {%include "dashboard/multireporte_maestro_estudiante.html" %}
+                            {% else %}
+                                {% if concepto_por_actividad.id == 42 %}
+                                    {%include "dashboard/variables_por_sede.html" %}
+                                {% else %}
+                                    {% if concepto_por_actividad.id == 46 %}
+                                        {%include "dashboard/variables_por_aula.html" %}
+                                    {% else %}
+                                        {% if concepto_por_actividad.id == 12 %}
+                                            {%include "dashboard/resultado_incripcion_maestros_estudiantes.html" %}
+                                        {% else %}
+                                            <div class="tree">
+                                                {% if usuario_puede_editar %}
+                                                    <div class="row">
+                                                        <a href="#modal-dialog-grupo" class="btn btn-success" data-toggle="modal">Adicionar Carpeta</a>
+                                                        {% if concepto_por_actividad.get_grupos|length > 0 %}
+                                                            <a href="#modal-dialog-archivo" class="btn btn-success" data-toggle="modal">Adicionar Archivo</a>
+                                                        {% endif %}
+                                                    </div>
+                                                {% endif %}
+                                                <ul>
+                                                    {% for grupo in concepto_por_actividad.get_grupos %}
+                                                        {%include "dashboard/grupos_tree.html" %}
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal-dialog-grupo">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Adicionar Carpeta</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="formGuardarGrupo" class="form-horizontal" method="post" action={% url 'tableroControlGuardarGrupo' '1' %}>
+                        {% csrf_token %}
+                        {% bootstrap_form formGrupo layout="horizontal" %}
+                        <button class="btn btn-sm btn-primary pull-right" type="submit">Guardar</button>
+                    </form>
+                    <br/><br/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal-dialog-archivo">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Adicionar Archivo</h4>
+                </div>
+                <div class="modal-body">
+                    <form enctype="multipart/form-data" class="form-horizontal" method="post" action={% url 'tableroControlGuardarArchivo' %}>
+                        {% csrf_token %}
+                        {% bootstrap_form formArchivo layout="horizontal" %}
+                        <button class="btn btn-sm btn-primary pull-right" type="submit">Guardar</button>
+                    </form>
+                    <br/><br/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+{% endblock %}

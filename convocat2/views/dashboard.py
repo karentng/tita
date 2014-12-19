@@ -78,7 +78,7 @@ def retornar_datos_reporte_convocatoria_2():
         'maximo':maximo,
         'municipios':json.dumps(munis),
         'municipiosA':json.dumps(munisAprobados),
-        'opcion_menu': 1
+        'opcion_menu': 6
     }
 
 def dashboard(request):
@@ -86,10 +86,11 @@ def dashboard(request):
     if grupo == None:
         return redirect('home')
 
-    datos_convocatoria_1 = retornar_datos_reporte_convocatoria_2()
-    datos_convocatoria_1['user_group'] = user_group(request)
+    datos_convocatoria_2 = retornar_datos_reporte_convocatoria_2()
+    datos_convocatoria_2['user_group'] = user_group(request)
 
-    return render(request, 'dashboard/dashboard.html', datos_convocatoria_1)
+    return render(request, 'dashboard/dashboard2.html', datos_convocatoria_2)
+
 
 def listaMaestrosEstudiantesInscritos():
     estudiantes = []

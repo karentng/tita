@@ -1,0 +1,66 @@
+{% load bootstrap3 %}
+
+<div class="modal fade" id="panelAdicionarVariablePorAula">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4>Adicionar Variable por Aula</h4>
+            </div>
+            <div class="modal-body">
+                <form id="formGuardarVariablesPorAula" class="form-horizontal" method="post" action={% url 'tableroControlGuardarVariablesPorAula' %}>
+                    {% csrf_token %}
+                    {% bootstrap_form formVariablesPorAula layout="horizontal" %}
+                    <button class="btn btn-sm btn-primary pull-right" type="submit">Guardar</button><br/><br/>
+                </form>
+                <br/><br/>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-inverse" id="inscritos">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                </div>
+                <h4 class="panel-title">Variables por Aula</h4>
+            </div>
+            <div class="panel-body">
+                {% if usuario_puede_editar %}
+                    <div class="row">
+                        <a href="#panelAdicionarVariablePorAula" class="btn btn-success" data-toggle="modal">Adicionar variable por aula</a>
+                    </div><br/>
+                {% endif %}
+                <div class="table-responsive">
+                    <table id="tabla-variables-por-aula" class="table table-striped table-bordered" width="100%">
+                        <thead>
+                            <tr role="row">
+                                <th>Sede</th>
+                                <th>Aula</th>
+                                <th>Número de equipos tda</th>
+                                <th>Número de computadores para docentes</th>
+                                <th>Número de video proyectores</th>
+                                <th>Número de access point</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for variablePorAula in variablesPorAula %}
+                                <tr class="odd gradeX" role="row">
+                                    <td>{{variablePorAula.get_sede_display}}</td>
+                                    <td>{{variablePorAula.aula}}</td>
+                                    <td>{{variablePorAula.equipos_tda}}</td>
+                                    <td>{{variablePorAula.computadores_docentes}}</td>
+                                    <td>{{variablePorAula.video_proyectores}}</td>
+                                    <td>{{variablePorAula.access_point}}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block titulo %} Formulario Aspirante {% endblock %}
+
+{% block menu %}
+    {% include "menus/publico.html" with opcion_menu=6 %}
+{% endblock %}
+
+{% block css %}
+    <link href="{{STATIC_URL}}plugins/bootstrap-wizard/css/bwizard.min.css" rel="stylesheet" />
+    <!--- ñiiipi -->
+    {{form.media}} {# agrega los js y css necesarios para el bootstrap3 datetimepicker y select2 #}
+    <!--- :D -->
+{% endblock %}
+
+
+{% block miga_pan %}
+    <li><a href="{% url 'home' %}">Inicio</a></li>
+    <li class="active">Formulario de Registro</li>
+{% endblock %}
+
+{% block titulo_contenido %}Formulario de Registro de Aspirantes{% endblock %}
+
+{% block titulo_panel %}<i class="fa fa-key"></i> Inscripción Finalizada{% endblock %}
+{% block contenido_panel %}
+<div class="row">
+    <div class="col-md-10 col-md-offset-1"style="font-size:15px">
+        <h4 align="center"><b> Su inscripción ha sido finalizada</b></h4>
+        <br>
+        <p style="text-align: justify"> 
+            Su hoja de vida ha sido ingresada a la lista de candidatos.
+            <br><br>
+            Le notificaremos por correo electrónico sobre los siguientes pasos en la convocatoria
+            <br><br>
+            <!-- {{puntaje}} -->
+            Gracias por su tiempo!
+        </p>
+        <br>
+        <center>
+            <a href="{% url 'home' %}" class="btn btn-lg btn-default"><i class="fa fa-file-text"></i> Volver al Inicio</a> 
+        </center>
+    </div>
+</div>
+        <br>
+    
+{% endblock %}

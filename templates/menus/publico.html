@@ -2,11 +2,7 @@
 <li {% if opcion_menu == 1 %} class="active" {% endif %}>
 	<a href="{% url 'home' %}"><i class="fa fa-info"></i> <span>Inicio</span></a>
 </li>
-<!--
-<li {% if opcion_menu == 10 %} class="active" {% endif %}>
-	<a href="{% url 'iniciar_DE' %}"><i class="fa fa-2x fa-mortar-board"></i> <span>Inscripcion de Maestros</span></a>
-</li>
--->
+
 <li class="has-sub {% if opcion_menu >= 'encuesta_' and opcion_menu < 'encuestz' %} active {% endif %}">
 	<a href="javascript:;">
 		<i class="fa fa-2x fa-dot-circle-o"></i> <span>Encuestas</span>
@@ -16,9 +12,6 @@
 		<li {% if opcion_menu == 'encuesta_nuevo_estudiante' %} class="active" {% endif %}>
 			<a href="{% url 'encuesta_nuevo_estudiante' %}"><i class="fa fa-child"></i><i class="fa fa-child"></i> Alumnos</a>
 		</li>
-		<!--li {% if opcion_menu == 'encuesta_estudiante' %} class="active" {% endif %}>
-			<a href="{% url 'encuesta_estudiante' %}"><i class="fa fa-child"></i><i class="fa fa-child"></i> Alumnos</a>
-		</li-->
 		<li {% if opcion_menu == 'encuesta_nuevo_padre' %} class="active" {% endif %}>
 			<a href="{% url 'encuesta_nuevo_padre' %}"><i class="fa fa-umbrella"></i> Padres de Familia</a>
 		</li>
@@ -45,53 +38,16 @@
 	</ul>
 </li>
 
-{% comment %}
-Lo de aqui para abajo es anterior, no se usa, pero si en algún momento se necesita, aquí quedan los enlaces
-<li {% if opcion_menu == 2 %} class="active" {% endif %}>
-	<a href="{% url 'info_antecedentes' %}"><i class="fa fa-users"></i> <span>Antecedentes</span></a>
-</li>
-<li {% if opcion_menu == 3 %} class="active" {% endif %}>
-	<a href="{% url 'info_general' %}"><i class="fa fa-check"></i> <span>Información general</span></a>
-</li>
-<li {% if opcion_menu == 4 %} class="active" {% endif %}>
-	<a href="{% url 'info_calendario' %}"><i class="fa fa-2x fa-tasks"></i> <span>Calendario de Selección</span></a>
-</li>
-<li {% if opcion_menu == 5 %} class="active" {% endif %}>
-	<a href="{% url 'info_requisitos' %}"><i class="fa fa-list-ol"></i> <span>Requisitos</span></a>
-</li>
-
-<li {% if opcion_menu == 6 %} class="active" {% endif %}>
-	<a href="{% url 'iniciarInscripcion' %}"><i class="fa fa-pencil-square-o"></i> <span>Formulario Convocatoria</span></a>
-</li>
-
-<li {% if opcion_menu == 8 %} class="active" {% endif %}>
-	<a href="{% url 'info_contactenos' %}"><i class="fa fa-2x fa-question-circle"></i> <span>Contáctenos</span></a>
-</li>
-{% endcomment %}
-
 {% if visible == 9 %}
 <li {% if opcion_menu == 9 %} class="active" {% endif %}>
-	<a href="{% url 'dashboard' %}"><i class="fa fa-2x fa-flag-o"></i> Resultado Convocatoria</a>
+	<a href="{% url 'dashboard' %}"><i class="fa fa-2x fa-flag-o"></i> Resultado Convocatoria1</a>
 </li>
 {% endif %}
-
-{% comment %}
-{# Diseño de DashBoard y Reportes #}
-
-
-<li class="has-sub {% if opcion_menu >= 9 %} active {% endif %}">
-	<a href="javascript:;">
-	    <i class="fa fa-folder-open-o"></i>
-	    <b class="caret pull-right"></b>
-	    <span>Reportes</span>
-	</a>
-	<ul class="sub-menu" {% if opcion_menu == 9 %} class="active" {% endif %}>
-		<li {% if opcion_menu == 9 %} class="active" {% endif %}><a href="{% url 'dashboard' %}">Resultado Convocatoria</a></li>
-		<li {% if opcion_menu == 10 %} class="active" {% endif %}><a href="{% url 'iniciar_DE' %}">Inscripcion de Maestros al Programa de Formación</a></li>
-		<li><a href="javascript:;">Conformación de Grupos</a></li>
-	</ul>
+{% if visible == 10 %}
+<li {% if opcion_menu == 10 %} class="active" {% endif %}>
+	<a href="{% url 'dashboard2' %}"><i class="fa fa-2x fa-flag-o"></i> Resultado Convocatoria 2</a>
 </li>
-{% endcomment %}
+{% endif %}
 
 {% if visible == 12 %}
 <li class="has-sub active " {% if opcion_menu == 'cronograma_' %} class="active" {% endif %}>

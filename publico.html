@@ -71,7 +71,7 @@ Lo de aqui para abajo es anterior, no se usa, pero si en algún momento se neces
 
 {% if visible == 9 %}
 <li {% if opcion_menu == 9 %} class="active" {% endif %}>
-	<a href="{% url 'dashboard' %}"><i class="fa fa-2x fa-flag-o"></i> Resultado Convocatoria</a>
+	<a href="{% url 'dashboard' %}"><i class="fa fa-2x fa-flag-o"></i> Resultado Convocatoria 1</a>
 </li>
 {% endif %}
 
@@ -86,10 +86,10 @@ Lo de aqui para abajo es anterior, no se usa, pero si en algún momento se neces
 	    <span>Reportes</span>
 	</a>
 	<ul class="sub-menu" {% if opcion_menu == 9 %} class="active" {% endif %}>
-		<li {% if opcion_menu == 9 %} class="active" {% endif %}><a href="{% url 'dashboard' %}">Resultado Convocatoria</a></li>
+		<li {% if opcion_menu == 9 %} class="active" {% endif %}><a href="{% url 'dashboard' %}">Resultado Convocatoria 1</a></li>
 		<li {% if opcion_menu == 10 %} class="active" {% endif %}><a href="{% url 'iniciar_DE' %}">Inscripcion de Maestros al Programa de Formación</a></li>
 		<li><a href="javascript:;">Conformación de Grupos</a></li>
-	</ul>
+	</ul>	
 </li>
 {% endcomment %}
 

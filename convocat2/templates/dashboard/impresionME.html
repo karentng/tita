@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="es">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <title>Tit@: Desarrollo y Educaci&oacute;n Digital Para Todos.</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="Proyecto TITA - Formación docente en pedagogía mediada con tecnologías de la información y la comunicación" name="description" />
+    <meta content="Cedesoft" name="author" />
+
+    <link rel="icon" type="image/png" href="{{STATIC_URL}}img/favicon.png">
+
+    <script src="{{STATIC_URL}}plugins/jquery-1.8.2/jquery-1.8.2.min.js"></script>
+    <!-- ================== BEGIN BASE CSS STYLE ================== -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link href="{{STATIC_URL}}plugins/jquery-ui-1.10.4/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
+    <link href="{{STATIC_URL}}plugins/bootstrap-3.1.1/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="{{STATIC_URL}}plugins/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="{{STATIC_URL}}css/animate.min.css" rel="stylesheet" />
+    <link href="{{STATIC_URL}}css/style.css?v=1" rel="stylesheet" />
+    <link href="{{STATIC_URL}}css/style-responsive.min.css" rel="stylesheet" />
+    <style>
+        b.titulo {
+            color:rgb(30,85,146);
+            font-weight:900;
+            font-size:25px;
+            margin-top:20px;
+            text-overflow:ellipsis;
+            white-space: nowrap;
+            width:auto;
+        }
+
+        .in {
+			background-color:white
+		}
+
+		.row-centered {
+			text-align:center;
+		}
+		.col-centered {
+			display:inline-block;
+			float:none;
+			/* reset the text-align */
+			text-align:left;
+			/* inline-block space fix */
+			margin-right:-4px;
+		}
+    </style>
+    <!-- ================== END BASE CSS STYLE ================== -->
+</head>
+<body class="in">
+    <!-- begin #page-container -->
+    <div id="page-container" {# class="fade" #} >
+        <!-- begin #header -->
+        <div id="header" class="header navbar navbar-default navbar-fixed-top">
+            <!-- begin container-fluid -->
+            <div class="container-fluid">
+                <!-- begin mobile sidebar expand / collapse button -->
+                <div class="navbar-header">
+                    <b class="titulo">TIT@ <small>DESARROLLO Y EDUCACIÓN DIGITAL PARA TODOS</small></b>
+                </div>
+                <!-- end mobile sidebar expand / collapse button -->
+            </div>
+            <!-- end container-fluid -->
+        </div>
+        <!-- end #header -->
+        <!-- begin #content -->
+        <div id="content" style="background-color:white">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-1">
+						<div style="margin-top:10px;">
+							<img class="img-responsive" src="{{STATIC_URL}}img/tita-small.png?v=2" alt=""
+								style=" border-radius:10px;"/>
+						</div>
+					</div>
+					<div class="col-md-11" style="background-color:#225894;">
+						<h4 style="color:white;">
+							Informaci&oacute;n del Maestro Estudiante
+							<h5 class="pull-right" style="color:white;">Fecha de generaci&oacute;n: {% now "F j \d\e Y H:i" %}</h5>
+						</h4>
+					</div>
+				</div>
+				<br/>
+				<div class="row">
+					<div class="col-md-12">
+						<h3>Datos Personales</h3><hr/>
+					</div>
+				</div>
+				<div class="row row-centered">
+					<div class="col-md-2 col-sm-6"><h5 class="pull-left">Nombre:</h5></div>
+					<div class="col-md-2 col-sm-6"><p class="pull-left">{{estudiante}}</p></div>
+					<div class="col-md-3 col-sm-6"><h5 class="pull-left">Número de documento de identidad:</h5></div>
+					<div class="col-md-3 col-sm-6"><p class="pull-left">{{estudiante.numero_documento}} </p></div>
+				</div>
+				<div class="row row-centered">
+					<div class="col-md-2 col-sm-6"><h5 class="pull-left">Email personal:</h5></div>
+					<div class="col-md-2 col-sm-6"><p class="pull-left">{{estudiante.email}}</p></div>
+					<div class="col-md-3 col-sm-6"><h5 class="pull-left">Email institucional:</h5></div>
+					<div class="col-md-3 col-sm-6"><p class="pull-left">{{estudiante.email_institucional}}</p></div>
+				</div>
+				<div class="row row-centered">
+					<div class="col-md-2 col-sm-6"><h5 class="pull-left">Municipio de residencia:</h5></div>
+					<div class="col-md-2 col-sm-6"><p class="pull-left">{{estudiante.municipio}}</p></div>
+					<div class="col-md-3 col-sm-6"><h5 class="pull-left ">Dirección:</h5></div>
+					<div class="col-md-3 col-sm-6"><p class="pull-left">{{estudiante.direccion}}</p></div>
+				</div>
+				<div class="row row-centered">
+					<div class="col-md-2 col-sm-6"><h5 class="pull-left">Teléfono fijo:</h5></div>
+					<div class="col-md-2 col-sm-6"><p class="pull-left">{{estudiante.telefono}}</p></div>
+					<div class="col-md-3 col-sm-6"><h5 class="pull-left">Número de celular:</h5></div>
+					<div class="col-md-3 col-sm-6"><p class="pull-left">{{estudiante.celular}}</p></div>
+				</div>
+				<div class="row row-centered">
+					<div class="col-md-2 col-sm-6"><h5 class="pull-left">Genero:</h5></div>
+					<div class="col-md-2 col-sm-6"><p class="pull-left">{{estudiante.get_sexo_display}}</p></div>
+					<div class="col-md-3 col-sm-6"><h5 class="pull-left">Último nivel educativo aprobado:</h5></div>
+					<div class="col-md-3 col-sm-6"><p class="pull-left">{{estudiante.get_nivel_educativo_display}}</p></div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<hr/><h3>Datos Profesionales</h3><hr/>
+					</div>
+				</div>
+				<div class="row row-centered">
+					<div class="col-md-2 col-sm-6"><h5 class="pull-left">Secretaria educacion:</h5></div>
+					<div class="col-md-2 col-sm-6"><p class="pull-left">{{infoLaboral.secretaria_educacion}}</p></div>
+					<div class="col-md-2 col-sm-6"><h5 class="pull-left">Sede:</h5></div>
+					<div class="col-md-3 col-sm-6"><p class="pull-left">{{infoLaboral.get_sede_display}}</p></div>
+				</div>
+				<div class="row row-centered">
+					<div class="col-md-2 col-sm-6"><h5 class="pull-left">Cargo:</h5></div>
+					<div class="col-md-2 col-sm-6"><p class="pull-left">{{infoLaboral.get_cargo_display}}</p></div>
+					<div class="col-md-2 col-sm-6"><h5 class="pull-left">Zona:</h5></div>
+					<div class="col-md-3 col-sm-6"><p class="pull-left">{{infoLaboral.get_zona_display}}</p></div>
+				</div>
+				<div class="row row-centered">
+					<div class="col-md-2 col-sm-6"><h5 class="pull-left">Decreto profesional docente:</h5></div>
+					<div class="col-md-2 col-sm-6"><p class="pull-left">{{infoLaboral.get_decreto_docente_display}}</p></div>
+					<div class="col-md-2 col-sm-6"><h5 class="pull-left">Grados:</h5></div>
+					<div class="col-md-3 col-sm-6">
+						<p class="pull-left">
+							{% for grado in infoLaboral.grados.all %} {{ grado }} {% endfor %}
+						</p>
+					</div>
+				</div>
+				<div class="row row-centered">
+					<div class="col-md-2 col-sm-6"><h5 class="pull-left">Poblacion étnica que atiende</h5></div>
+					<div class="col-md-2 col-sm-6"><p class="pull-left">{{infoLaboral.poblacion_etnica}}</p></div>
+					<div class="col-md-2 col-sm-6"><h5 class="pull-left">Jornada:</h5></div>
+					<div class="col-md-3 col-sm-6"><p class="pull-left">{{infoLaboral.get_jornada_display}}</p></div>
+				</div>
+				<div class="row row-centered">
+					<div class="col-md-2 col-sm-6"><h5 class="pull-left">Tipo de nombramiento</h5></div>
+					<div class="col-md-2 col-sm-6"><p class="pull-left">{{infoLaboral.get_nombramiento_display}}</p></div>
+					<div class="col-md-2 col-sm-6"><h5 class="pull-left">Tipo etnoeducador</h5></div>
+					<div class="col-md-3 col-sm-6"><p class="pull-left">{{infoLaboral.get_tipo_etnoeducador_display}}</p></div>
+				</div>
+				<div class="row row-centered">
+					<div class="col-md-2 col-sm-6"><h5 class="pull-left">Asignaturas:</h5></div>
+					<div class="col-md-7 col-sm-6">
+						<p class="pull-left">
+							{% for asignatura in infoLaboral.asignaturas.all %} {{ asignatura }} {% endfor %}
+						</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<hr/><h3>Formación Académica</h3><hr/>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-2 col-sm-6"><h5>Nivel</h5></div>
+					<div class="col-md-2 col-sm-6"><h5>Título obtenido</h5></div>
+					<div class="col-md-2 col-sm-6"><h5>Institución</h5></div>
+					<div class="col-md-2 col-sm-6"><h5>Estudio relacionado con:</h5></div>
+				</div>
+				{% for formacionAcademica in formacionAcademicaME.all %}
+					<div class="row row-centered">
+						<div class="col-md-2 col-sm-6"><p class="pull-left">{{formacionAcademica.get_nivel_display}}</p></div>
+						<div class="col-md-2 col-sm-6"><p class="pull-left">{{formacionAcademica.titulo}}</p></div>
+						<div class="col-md-2 col-sm-6"><p class="pull-left">{{formacionAcademica.institucion}}</p></div>
+						<div class="col-md-2 col-sm-6">
+							<p>
+								{% if formacionAcademica.relacionado_pedagogia %}<span class="label label-info">Pedagogía</span>{% endif %}
+								{% if formacionAcademica.relacionado_tic %}<span class="label label-info">TIC</span>{% endif %}
+							</p>
+						</div>
+					</div>
+				{% endfor %}
+				<div class="row">
+					<div class="col-md-12">
+						<hr/><h3>Certificaciones en TIC </h3><hr/>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-3 col-sm-6"><h5>Nombre del programa</h5></div>
+					<div class="col-md-3 col-sm-6"><h5>Duración</h5></div>
+					<div class="col-md-3 col-sm-6"><h5>Entidad certificadora</h5></div>
+				</div>
+				{% for certificacion in certificacionTIC.all %}
+					<div class="row row-centered">
+						<div class="col-md-3 col-sm-6"><p class="pull-left">{{certificacion.nombre}}</p></div>
+						<div class="col-md-3 col-sm-6"><p class="pull-left">{{certificacion.get_duracion_display}}</p></div>
+						<div class="col-md-3 col-sm-6"><p class="pull-left">{{certificacion.entidad}}</p></div>
+					</div>
+				{% endfor %}
+			</div>
+			<hr>
+			<img class="img-responsive center-block" src="{{STATIC_URL}}img/footer_3.png?v=2"  style="width:80%; border-radius:10px;" >
+			<h6 class="text-center">Contacto: <a href="mailto:titaedpt@gmail.com">titaedpt@gmail.com</a></h6>
+        </div>
+        <!-- end #content -->
+    </div>
+    <!-- end page container -->
+
+    <!-- ================== BEGIN BASE JS ================== -->
+
+    <script src="{{STATIC_URL}}plugins/jquery-ui-1.10.4/ui/minified/jquery-ui.min.js"></script>
+    <script src="{{STATIC_URL}}plugins/bootstrap-3.1.1/js/bootstrap.min.js"></script>
+    <!--[if lt IE 9]>
+        <script src="{{STATIC_URL}}crossbrowserjs/html5shiv.js"></script>
+        <script src="{{STATIC_URL}}crossbrowserjs/respond.min.js"></script>
+        <script src="{{STATIC_URL}}crossbrowserjs/excanvas.min.js"></script>
+    <![endif]-->
+    <script src="{{STATIC_URL}}plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- ================== END BASE JS ================== -->
+
+    <!-- ================== BEGIN PAGE LEVEL JS ================== -->
+    <script src="{{STATIC_URL}}js/apps.min.js"></script>
+    <!-- ================== END PAGE LEVEL JS ================== -->
+        <!-- Bloque de javascript para las plantillas que heredan -->
+    {% block js %}
+    {% endblock %}
+    <!-- Fin Bloque javascript -->
+    {% block js_ready %}
+    <script>
+        $(document).ready(function() {
+            App.init();
+        });
+        {% comment %}
+        function mensaje(titulo, mensaje){
+            $.gritter.add({
+                title: titulo,
+                text: mensaje,
+                sticky: false,
+                time: ''
+            });
+            return false;
+        }
+        {% endcomment %}
+    </script>
+    {% endblock %}
+</body>
+</html>

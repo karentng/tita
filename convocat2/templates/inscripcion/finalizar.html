@@ -1,0 +1,56 @@
+
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block titulo %} Formulario Aspirante {% endblock %}
+
+{% block menu %}
+    {% include "menus/publico.html" with opcion_menu=6 %}
+{% endblock %}
+
+{% block css %}
+    <link href="{{STATIC_URL}}plugins/bootstrap-wizard/css/bwizard.min.css" rel="stylesheet" />
+    <!--- ñiiipi -->
+    {{form.media}} {# agrega los js y css necesarios para el bootstrap3 datetimepicker y select2 #}
+    <!--- :D -->
+{% endblock %}
+
+
+{% block miga_pan %}
+    <li><a href="{% url 'home' %}">Inicio</a></li>
+    <li class="active">Formulario de Registro</li>
+{% endblock %}
+
+{% block titulo_contenido %}Formulario de Registro de Aspirantes{% endblock %}
+
+{% block titulo_panel %}<i class="fa fa-key"></i> Confirmar Finalizar{% endblock %}
+{% block contenido_panel %}
+<div class="row">
+    <div class="col-md-10 col-md-offset-1"style="font-size:15px">
+        <h4 align="center"><b> Por favor confirme que desea finalizar su inscripción:</b></h4>
+        <br>
+        <p style="text-align: justify"> 
+            Está a punto de finalizar su inscripción. Cuando presione <b>Finalizar Inscripción</b> usted verá un mensaje diciendo que su hoja de vida fue guardada satisfacotriamente y será candidato dentro de la convocatoria y no podrá modificar su hoja de vida.
+            <br><br>
+            Alternativamente puede guardar su inscripción como borrador para completarlo después. Recuerde conservar su número de inscripción: 
+            <b>{{numero_registro}}</b>.
+            <br><br>
+            Tenga en cuenta que mientras no finalice su inscripción, usted no es candidato dentro de la convocatoria.
+        </p>
+        <h5><b>LA CONVOCATORIA CIERRA EL VIERNES 22 DE AGOSTO A LA 1:00 PM.</b></h5>
+        <br>
+        <center>
+            <form method="POST">{% csrf_token %}
+                <a href="{% url 'iniciarInscripcion' %}" class="btn btn-lg btn-warning"><i class="fa fa-file-text"></i> Guardar Borrador</a> 
+            
+            {#<a href="{% url 'home' %}" class="btn btn-lg btn-success"><i class="fa fa-trophy"></i> Finalizar Inscripción</a> #}
+                <button type="submit" name="finalizar" value="finalizar" class="btn btn-lg btn-success"><i class="fa fa-gavel"></i> Finalizar Inscripción</button>
+            </form>
+        </center>
+    </div>
+</div>
+        <br>
+    <a href="{% url 'soportes' %}" class="btn btn-lg btn-default pull-left"><i class="fa fa-angle-left"></i> Anterior</a>
+    
+    <!--a href="{% url 'formacionAcademica' %}" class="btn btn-lg btn-primary pull-right">Siguiente <i class="fa fa-angle-right"></i></a-->
+{% endblock %}

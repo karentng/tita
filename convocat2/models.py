@@ -285,9 +285,9 @@ class ConceptoPorActividad(models.Model):
     def __unicode__(self):
         return self.actividad.nombre + ' - '  + self.concepto.nombre
 
-    def get_grupos(self):
-        return Grupo.objects.filter(concepto_por_actividad=self, grupo_padre=None, activo=True).order_by('id')
-
+    #def get_grupos(self):
+    #    return Grupo.objects.filter(concepto_por_actividad=self, grupo_padre=None, activo=True).order_by('id')
+"""
 class EstadoDeAvance(models.Model):
     usuario = models.ForeignKey(User)
     fecha = models.DateField(verbose_name=u'fecha')
@@ -359,3 +359,4 @@ class VariablePorAula(models.Model):
     computadores_docentes = models.IntegerField(default = 0, null=False, blank=False, verbose_name=u'número de computadores para docentes')
     video_proyectores = models.IntegerField(default = 0, null=False, blank=False, verbose_name=u'número de video proyectores')
     access_point = models.IntegerField(default = 0, null=False, blank=False, verbose_name=u'número de access point')
+"""

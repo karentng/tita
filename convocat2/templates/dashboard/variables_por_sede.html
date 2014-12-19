@@ -1,0 +1,59 @@
+{% load bootstrap3 %}
+<div class="modal fade" id="panelAdicionarVariablePorSede">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4>Adicionar Variable por Sede</h4>
+            </div>
+            <div class="modal-body">
+                <form id="formGuardarVariablesPorSede" class="form-horizontal" method="post" action={% url 'tableroControlGuardarVariablesPorSede' %}>
+                    {% csrf_token %}
+                    {% bootstrap_form formVariablesPorSede layout="horizontal" %}
+                    <button class="btn btn-sm btn-primary pull-right" type="submit">Guardar</button>
+                </form>
+                <br/><br/>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-inverse" id="inscritos">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                </div>
+                <h4 class="panel-title">Variables por Sede</h4>
+            </div>
+            <div class="panel-body">
+                {% if usuario_puede_editar %}
+                    <div class="row">
+                        <a href="#panelAdicionarVariablePorSede" class="btn btn-success" data-toggle="modal">Adicionar variable por sede</a>
+                    </div><br/>
+                {% endif %}
+                <div class="table-responsive">
+                    <table id="tabla-variables-por-sede" class="table table-striped table-bordered" width="100%">
+                        <thead>
+                            <tr role="row">
+                                <th>Sede</th>
+                                <th>Número de switches</th>
+                                <th>Número de ups</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for variablePorSede in variablesPorSede %}
+                                <tr class="odd gradeX" role="row">
+                                    <td>{{variablePorSede.get_sede_display}}</td>
+                                    <td>{{variablePorSede.numero_switch}}</td>
+                                    <td>{{variablePorSede.numero_ups}}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

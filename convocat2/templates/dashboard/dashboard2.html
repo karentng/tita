@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+	Tit@ - Cuadro de Control
+{% endblock %}
+
+{% block menu %}
+	{% include "menus/publico.html" with opcion_menu=10 %}
+{% endblock %}
+
+{% block css %}
+<link href="{{STATIC_URL}}plugins/DataTables-1.9.4/css/data-table.css" rel="stylesheet" />
+{% endblock %}
+
+{% block js %}
+<script src="{{STATIC_URL}}plugins/DataTables-1.9.4/js/jquery.dataTables.js"></script>
+<script src="{{STATIC_URL}}plugins/DataTables-1.9.4/js/data-table.js"></script>
+
+<script src="{{STATIC_URL}}plugins/flot/jquery.flot.min.js"></script>
+<script src="{{STATIC_URL}}plugins/flot/jquery.flot.pie.min.js"></script>
+<script src="{{STATIC_URL}}plugins/flot/jquery.flot.categories.js"></script>
+<script type="text/javascript">
+
+    $('#data-table2').dataTable( {
+        "sDom": "<'row'<'col-md-6 col-sm-6'l><'col-md-6 col-sm-6'f>r>t<'row'<'col-md-6 col-sm-6'i><'col-md-6 col-sm-6'p>>",
+        "sPaginationType": "bootstrap",
+        "oLanguage": {
+            "sLengthMenu": "_MENU_ registros por página"
+        }
+    });
+    $('#data-table3').dataTable( {
+        "sDom": "<'row'<'col-md-6 col-sm-6'l><'col-md-6 col-sm-6'f>r>t<'row'<'col-md-6 col-sm-6'i><'col-md-6 col-sm-6'p>>",
+        "sPaginationType": "bootstrap",
+        "oLanguage": {
+            "sLengthMenu": "_MENU_ registros por página"
+        }
+    });
+
+	var purple = '#727cb6';
+
+
+    if ($('#bar-chart').length !== 0) {
+    	var municipios = (("{{municipios}}").replace(/&(l|g|quo)t;/g, function(a,b){
+                return {
+                    l   : '<',
+                    g   : '>',
+                    quo : '"'
+                }[b];
+            }));
+
+		municipios = JSON.parse( municipios );
+		//console.log(municipios);
+		var data = [];
+		for (i in municipios){
+        	var aux = municipios[i];
+        	data[i] = [aux.nombre, aux.cantidad]
+        }
+        //var data = [ ["January", 10], ["February", 8], ["March", 4], ["April", 13], ["May", 17], ["June", 9] ];
+        $.plot("#bar-chart", [ {data: data, color: purple} ], {
+            series: {
+                bars: {
+                    show: true,
+                    barWidth: 0.4,
+                    align: 'center',
+                    fill: true,
+                    fillColor: purple,
+                    zero: true
+                }
+            },
+            xaxis: {
+                mode: "categories",
+                tickColor: '#ddd',
+				tickLength: 0
+            },
+            grid: {
+                borderWidth: 0
+            }
+        });
+    }
+
+    if ($('#aprobados-chart').length !== 0) {
+    	var municipios = (("{{municipiosA}}").replace(/&(l|g|quo)t;/g, function(a,b){
+                return {
+                    l   : '<',
+                    g   : '>',
+                    quo : '"'
+                }[b];
+            }));
+
+		municipios = JSON.parse(municipios);
+		//console.log(municipios);
+		var data = [];
+		for (i in municipios){
+        	var aux = municipios[i];
+        	data[i] = [aux.nombre, aux.cantidad]
+        }
+        //var data = [ ["January", 10], ["February", 8], ["March", 4], ["April", 13], ["May", 17], ["June", 9] ];
+        $.plot("#aprobados-chart", [ {data: data, color: purple} ], {
+            series: {
+                bars: {
+                    show: true,
+                    barWidth: 0.4,
+                    align: 'center',
+                    fill: true,
+                    fillColor: purple,
+                    zero: true
+                }
+            },
+            xaxis: {
+                mode: "categories",
+                tickColor: '#ddd',
+				tickLength: 0
+            },
+            grid: {
+                borderWidth: 0
+            }
+        });
+    }
+
+    function mostrar(num){
+    	var paneles = ["#inscritos", "#aprobados", "#rechazados", "#mejores"];
+    	for(i in paneles){
+    		$(paneles[i]).hide();
+    	}
+    	$(paneles[num]).show();
+    }
+</script>
+{% endblock %}
+
+{% block miga_pan %}
+	<li><a href="javascript:;">Cuadro de Control</a></li>
+
+{% endblock %}
+
+{% block titulo_contenido %}
+	Resultados Convocatoria a Formadores Etapa Presencial y Virtual
+{% endblock %}
+
+{% block contenido %}
+    {%include "dashboard/resultados_convocatoria_2.html" %}
+{% endblock %}

@@ -115,8 +115,8 @@ class AspiranteAdmin(admin.ModelAdmin):
 admin.site.register(Aspirante, AspiranteAdmin)
 
 admin.site.register(Actividad)
-admin.site.register(Grupo)
-admin.site.register(Archivo)
-admin.site.register(EstadoDeAvance)
-admin.site.register(Concepto)
-admin.site.register(ConceptoPorActividad)
+#admin.site.register(Grupo)
+#admin.site.register(Archivo)
+#admin.site.register(EstadoDeAvance)
+#admin.site.register(Concepto)
+#admin.site.register(ConceptoPorActividad)
