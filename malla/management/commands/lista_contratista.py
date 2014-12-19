@@ -4,13 +4,21 @@ from django.template import Template, Context
 import smtplib
 from malla.models import Requerimiento, Contratista, ContratistaInfoContacto, Lista
 import csv
+from datetime import datetime
 
 class Command(BaseCommand):
-    def handle(self, *args, **options):
+    def handle(self, fi, ff, *args, **options):
+        
+        fecha_inicial = fi
+        fecha_final = ff
+        
+        fecha_inicial = datetime.strptime(fecha_inicial, "%Y-%m-%d")
+        fecha_final = datetime.strptime(fecha_final, "%Y-%m-%d")
+
         archivo = open("ReporteListaContratistas.csv","w") 
         writer = csv.writer(archivo, delimiter=';')      
 
-        requerimientos = Requerimiento.objects.all()
+        requerimientos = Requerimiento.objects.filter(fecha_eje__range=[fecha_inicial,fecha_final])
 
         string = ""
         arreglo = []
