@@ -141,3 +141,7 @@ class MonitorForm(forms.ModelForm):
             'cedula' : MyFileInput(),
             'rut' : MyFileInput(),
         }
+
+class FiltroReporte(forms.Form):
+    fecha_inicial = forms.DateField(widget=MyDateWidget())
+    fecha_final = forms.DateField(widget=MyDateWidget())

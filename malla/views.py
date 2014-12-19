@@ -274,10 +274,24 @@ def reporte_lista(request, limit=100):
     if grupo == None:
         return redirect('home')
 
-    lista_list = Lista.objects.all()    
+    lista_list = Lista.objects.all() 
+    form = FiltroReporte() 
+
+    if request.method == 'POST':
+        form = FiltroReporte(request.POST)
+        if form.is_valid():
+            fi = form.cleaned_data['fecha_inicial']
+            ff = form.cleaned_data['fecha_final']
+
+            response = redirect('lista_reporte_contratista')
+            response['Location'] += "?fi="+str(fi)+'&ff='+str(ff)
+            return response
+        else:
+            return redirect('reporte_lista')    
+     
     
     return render(request, 'reportelista.html', {'lista_list': lista_list, 'user_group': user_group(request),
-        'opcion_menu': 5,})
+        'opcion_menu': 5, 'form':form})
 
 def lista_contratista(request, limit=100):
     grupo = user_group(request)
@@ -377,8 +391,13 @@ def listar_reclamaciones_contratista(request):
 
 def lista_reporte_contratista(request):
     # descomentar  linea 380 y 381 (2 de abajo) para que genere el archivo y luego lo descargue. Hacer que si ya existe, lo elimine antes.
+    
+    if request.method == 'GET' and 'fi' in request.GET and 'ff' in request.GET:
+        fi = request.GET.get('fi')
+        ff = request.GET.get('ff')
+
     c = Command()
-    c.handle()
+    c.handle(fi,ff)
 
     archivo = open('ReporteListaContratistas.csv', "r") 
     archivo = File(archivo) 
@@ -386,3 +405,4 @@ def lista_reporte_contratista(request):
     response = HttpResponse(archivo, content_type='application/vnd.ms-excel')
     response['Content-Disposition'] = 'attachment; filename="ReporteListaContratistas.csv"'
     return response
+
