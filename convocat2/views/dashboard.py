@@ -2,8 +2,8 @@ from django.shortcuts import redirect, render, render_to_response, get_list_or_4
 from django.core import serializers
 from django.core.paginator import Paginator
 from django.http import HttpResponse, HttpRequest, HttpResponseRedirect, QueryDict
-from convocat.models import *
-from convocat.forms import *
+from convocat2.models import *
+from convocat2.forms import *
 from django.db.models import Count, Q
 from campus.models import Estudiante, Cursos, Clases, SoporteClases
 from estudiante.models import InfoLaboral, FormacionAcademicaME, CertificacionTIC
@@ -12,7 +12,7 @@ from campus.views import user_group
 
 import json, datetime
 
-def retornar_datos_reporte_convocatoria_1():
+def retornar_datos_reporte_convocatoria_2():
     mejores = Aspirante.objects.order_by('-puntuacion_hv')
     if len(mejores) > 60:
         mejores = mejores[:60]
@@ -86,7 +86,7 @@ def dashboard(request):
     if grupo == None:
         return redirect('home')
 
-    datos_convocatoria_1 = retornar_datos_reporte_convocatoria_1()
+    datos_convocatoria_1 = retornar_datos_reporte_convocatoria_2()
     datos_convocatoria_1['user_group'] = user_group(request)
 
     return render(request, 'dashboard/dashboard.html', datos_convocatoria_1)
@@ -214,41 +214,6 @@ def validar_grupo_coordinador_secretaria(request):
     else:
         return False
 
-def resumen_proyecto(request):
-    resumen_proyecto_all = ResumenProyecto.objects.filter().order_by('-fecha')
-
-    if len(resumen_proyecto_all) > 0:
-        resumen_proyecto = resumen_proyecto_all.latest('id')
-        nuevo_resumen_proyecto = resumen_proyecto.__dict__.copy()
-    else:
-        resumen_proyecto = ResumenProyecto()
-        nuevo_resumen_proyecto = ResumenProyecto().__dict__.copy()
-
-    nuevo_resumen_proyecto['fecha'] = datetime.datetime.now()
-
-    return render(request, 'dashboard/resumen_proyecto.html', {
-        'form_editable' : False,
-        'resumen_proyecto' : resumen_proyecto,
-        'nuevo_resumen_proyecto' : nuevo_resumen_proyecto,
-        'resumen_proyecto_all' : resumen_proyecto_all,
-        'resumenProyectoForm' : ResumenProyectoForm(),
-        'opcion_menu' : 23,
-        'user_group': user_group(request),
-    })
-
-def guardarResumenProyecto(request):
-    if validar_grupo_coordinador_secretaria(request) == False:
-        return redirect('home')
-
-    form = ResumenProyectoForm(request.POST)
-    if form.is_valid():
-        resumenProyecto = form.save(commit=False)
-        resumenProyecto.usuario = request.user
-        resumenProyecto.save()
-        return redirect('resumen_proyecto')
-    else:
-        return redirect('home')
-
 def tablero_control(request, id_actividad):
     if validar_grupo_coordinador_secretaria(request) == False:
         return redirect('home')
@@ -273,17 +238,15 @@ def tablero_control(request, id_actividad):
 
     usuario_puede_editar = ((grupo_de_usuario == 'Coordinador' and int(id_actividad) < 14) or (grupo_de_usuario == 'Secretaria' and int(id_actividad) > 13))
 
-    estudiantesMulti = Estudiante.objects.all()
-    aspirantesMulti = Aspirante.objects.all()
+    estudiantes = Estudiante.objects.all()
+    aspirantes = Aspirante.objects.all()
     variablesPorSede = VariablePorSede.objects.all()
     variablesPorAula = VariablePorAula.objects.all()
-    estudiantes = listaMaestrosEstudiantesInscritos()
 
     datos_tablero_control = {
         'actividades' : actividades,
         'estudiantes' : estudiantes,
-        'estudiantesMulti' : estudiantesMulti,
-        'aspirantesMulti' : aspirantesMulti,
+        'aspirantes' : aspirantes,
         'variablesPorSede' : variablesPorSede,
         'variablesPorAula' : variablesPorAula,
         'actividad_seleccionada' : actividad_seleccionada,
@@ -297,7 +260,7 @@ def tablero_control(request, id_actividad):
         'user_group': user_group(request),
     }
 
-    datos_tablero_control.update(retornar_datos_reporte_convocatoria_1())
+    datos_tablero_control.update(retornar_datos_reporte_convocatoria_2())
     datos_tablero_control['opcion_menu'] = 13
 
     return render(request, 'dashboard/tablero_control.html', datos_tablero_control)

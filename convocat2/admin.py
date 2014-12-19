@@ -1,7 +1,8 @@
+# Register your models here.
 #encoding:utf-8
 from collections import OrderedDict
 from django.contrib import admin
-from convocat.models import *
+from convocat2.models import *
 from django.core.exceptions import ObjectDoesNotExist
 # Register your models here.
 
@@ -33,12 +34,6 @@ class ExperienciaEnsenanzaInline(admin.TabularInline):
 class IdiomaInline(admin.TabularInline):
     model = Idioma
     get_readonly_fields = readonly
-
-"""
-class ExperienciaOtraAdmin(admin.TabularInline):
-    model = ExperienciaOtra
-    get_readonly_fields = readonly
-"""
 
 class ConocimientoInline(admin.StackedInline):
     model = ConocimientosEspecificos
