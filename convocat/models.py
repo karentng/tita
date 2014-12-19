@@ -397,3 +397,18 @@ class ResumenProyecto(models.Model):
     total_sedes_adecuadas_ejecucion = models.FloatField(verbose_name='total de sedes adecuadas ejecucion')
     total_sedes_equipadas_ejecucion = models.FloatField(verbose_name='total de sedes equipadas ejecucion')
     total_licencias_adquiridas_ejecucion = models.FloatField(verbose_name='total de licencias adquiridas ejecucion')
+
+def crear_ruta_acta_seguimiento(instance, filename):
+    randomstr = 7*99251
+    return "acta_seguimiento/%s/%s-%s"%(instance.usuario_id, randomstr, filename.encode('ascii','ignore'))
+
+class ActaDeSeguimiento(models.Model):
+    usuario = models.ForeignKey(User)
+    fecha = models.DateField(default = datetime.datetime.now(),verbose_name='fecha')
+    nombre = models.CharField(max_length=255, verbose_name='nombre')
+    ruta = models.FileField(upload_to=crear_ruta_acta_seguimiento, null=False, blank=False, verbose_name=u'Acta')
+    descripcion = models.CharField(max_length=255, verbose_name='descripcion', null=True, blank=True,)
+    activo = models.BooleanField(default=True,)
+
+    def __unicode__(self):
+        return self.nombre
