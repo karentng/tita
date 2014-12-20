@@ -141,8 +141,8 @@ class CursoForm(forms.ModelForm):
 
             for est in estudiantes:
                 ids.append(est['estudiante'])
-            self.fields['estudiantes'].queryset = Estudiante.objects.filter(id__in=ids)
-            #self.fields['estudiantes'].queryset = Estudiante.objects.filter(id__in=ids).exclude(id__in=estu) 
+            #self.fields['estudiantes'].queryset = Estudiante.objects.filter(id__in=ids)
+            self.fields['estudiantes'].queryset = Estudiante.objects.filter(id__in=ids).exclude(id__in=estu) 
     class Meta:
         model = Cursos
         fields = ('descripcion','institucion','formador1','formador2', 'estudiantes',)

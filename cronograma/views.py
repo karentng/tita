@@ -1066,11 +1066,18 @@ def curso(request):
     else :
         form = CursoForm(sede=sede, jornada=jornada)
 
+    ids_estudiantes = InfoLaboral.objects.filter(sede__in=sede, jornada=jornada).values('estudiante')
+    estudiantes = []
+    for i in ids_estudiantes:
+        est = Estudiante.objects.get(id=i['estudiante'])
+        estudiantes.append({'cc':est.numero_documento, 'nombre':est.nombre_completo()})
+
     return render(request, 'curso.html', {
         'form': form,
         'user_group': user_group(request),
         'opcion_menu': 5,
-        'infos': infos
+        'infos': infos,
+        'estudiantes': json.dumps(estudiantes)
     })
 
 def formador(request):
