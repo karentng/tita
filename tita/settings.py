@@ -59,6 +59,7 @@ INSTALLED_APPS = (
     'survey',
     'cronograma',
     'malla',
+    'bilinguismo',
 )
 
 MIDDLEWARE_CLASSES = (
