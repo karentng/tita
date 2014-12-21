@@ -436,8 +436,6 @@ def diplomado(request):
                         eventos.append(x[i])
     elif grupo == "Coordinador":
         if request.method == 'GET' and 'sede' in request.GET and 'grupo' in request.GET:
-            print "................."
-            print ""
             sede = request.GET.get('sede')
             grupo = request.GET.get('grupo')
             
@@ -452,8 +450,6 @@ def diplomado(request):
                 x = Clases.objects.filter(curso = c)
                 eventos = list(merge(eventos, x))
         else:
-            print "................."
-            print "B"
             eventos = Clases.objects.all()
 
     if request.method == 'POST':
