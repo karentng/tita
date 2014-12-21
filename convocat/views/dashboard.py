@@ -297,8 +297,7 @@ def tablero_control(request, id_actividad):
 
     usuario_puede_editar = ((grupo_de_usuario == 'Coordinador' and int(id_actividad) < 14) or (grupo_de_usuario == 'Secretaria' and int(id_actividad) > 13))
 
-    #variable = something if condition else something_else
-    estudiantesMulti = Estudiante.objects.all() if id_actividad == '4' else []
+    estudiantesMulti = students = Estudiante.objects.filter(acta_compromiso=True).select_related('estudiante.InfoLaboral__estudiante').select_related('Cursos__estudiantes') if id_actividad == '4' else []
     aspirantesMulti = Aspirante.objects.all() if id_actividad == '1' else []
     variablesPorSede = VariablePorSede.objects.all() if id_actividad == '15' else []
     variablesPorAula = VariablePorAula.objects.all() if id_actividad == '15' else []
