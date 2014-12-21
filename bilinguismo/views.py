@@ -118,7 +118,7 @@ def formacionAcademicaB(request):
 
     estudios = FormacionAcademicaBilinguismo.objects.filter(persona=persona)
 
-    numero_registro = request.session['clave_estudiante']
+    numero_registro = request.session['bilinguismo']
 
     return render(request, 'inscripcion/formacionAcademicaB.html', {
         'form': form,
@@ -155,7 +155,7 @@ def certificacionB(request):
 
     certificaciones = CertificacionBilinguismo.objects.filter(persona=persona)
 
-    numero_registro = request.session['clave_estudiante']
+    numero_registro = request.session['bilinguismo']
     return render(request, 'inscripcion/certificacionesB.html', {
         'form': form,
         'certificaciones': certificaciones,
