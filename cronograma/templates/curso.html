@@ -25,10 +25,30 @@
             $("#id_estudiantes").attr('height', '10px');
             $("#id_estudiantes").attr('overflow-y', 'scroll');
         });
-
     </script>
 
     {% endif %}
+
+    <script type="text/javascript">
+        $( document ).ready(function() {
+            var estudiantes = (("{{estudiantes}}").replace(/&(l|g|quo)t;/g, function(a,b){
+                return {
+                    l   : '<',
+                    g   : '>',
+                    quo : '"'
+                }[b];
+            }));
+            estudiantes = JSON.parse(estudiantes)
+            checks = $(".checkbox");
+            for(var i = 0; i < estudiantes.length; i++){
+                for(var j = 0; j < checks.length; j++){
+                    checks[j].innerHTML = checks[j].innerHTML.replace(estudiantes[i].nombre, estudiantes[i].nombre+"("+estudiantes[i].cc+")")
+                }
+
+            }
+
+        });
+    </script>
 {% endblock %}
 
 {% block miga_pan %}

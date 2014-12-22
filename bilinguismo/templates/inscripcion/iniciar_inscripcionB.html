@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block titulo %} Formulario Bilingüismo {% endblock %}
+
+{% block css %}
+    <link href="{{STATIC_URL}}plugins/bootstrap-wizard/css/bwizard.min.css" rel="stylesheet" />
+    <!--- ñiiipi -->
+    {{form.media}} {# agrega los js y css necesarios para el bootstrap3 datetimepicker y select2 #}
+    <!--- :D -->
+{% endblock %}
+
+
+{% block miga_pan %}
+    <li><a href="{% url 'home' %}">Inicio</a></li>
+    <li class="active">Formulario Bilingüismo</li>
+{% endblock %}
+
+{% block titulo_contenido %}
+	<label style="color:#1d5491">Proceso de inscripción al Programa de Bilingüismo.</label>
+{% endblock %}
+
+{% block titulo_panel %} {% endblock %}
+
+
+{% block contenido %}
+
+<div class="well well-lg text-center ">
+    {% comment %}<h4>La convocatoria ha cerrado.</h4>{% endcomment %}
+
+	<h4>Para ser diligenciado por los docentes oficiales de las Instituciones Educativas que participan del proyecto Tit@ Desarrollo y Educación Digital para Todos</h4>
+
+	<br>
+    <a href="{% url 'bilinguismo_inscripcionB' %}" class="btn btn-lg btn-primary">Iniciar Inscripción</a>
+
+    <br><br>
+
+    <h6>(Al iniciar la inscripción se aceptará automáticamente la politica de tratamiento de datos personales y los términos de privacidad del proyecto)</h6>
+
+    <b>Si ya está inscrito y desea revisar su inscripción ingrese su número de registro aquí: </b>
+
+    <br><br>
+    <form class="form-inline" method="post">{% csrf_token %}
+         {% bootstrap_form form %}<br>
+        <button class="btn btn-md btn-success" style="margin-top:7px" type="submit"><i class="fa fa-play-circle"></i> Continuar</button>
+    </form>
+    <h6 class="text-danger text-center"><b>{{mensaje}}</b></h6>
+
+    <a class="pull-left" href="{{STATIC_URL}}documents/politica_tratamiento_datos_personales.pdf" target="_blank"><b>Política de Tratamiento de Datos Personales</b></a>
+    <br>
+    <a class="pull-left" href="{{STATIC_URL}}documents/terminos_proyecto_tita.pdf" target="_blank"><b>Términos de Privacidad Proyecto Tita</b></a>
+    <br>
+</div>
+
+<br>
+
+{% endblock %}
