@@ -246,6 +246,7 @@ def resumen_proyecto(request):
         nuevo_resumen_proyecto = resumen_proyecto.__dict__.copy()
     else:
         resumen_proyecto = ResumenProyecto()
+        resumen_proyecto.fecha = None
         nuevo_resumen_proyecto = ResumenProyecto().__dict__.copy()
 
     nuevo_resumen_proyecto['fecha'] = datetime.datetime.now()
