@@ -2,7 +2,7 @@
 <li {% if opcion_menu == 1 %} class="active" {% endif %}>
 	<a href="{% url 'home' %}"><i class="fa fa-info"></i> <span>Inicio</span></a>
 </li>
-
+{% if 'encuestas' in request.path %} 
 <li class="has-sub {% if opcion_menu >= 'encuesta_' and opcion_menu < 'encuestz' %} active {% endif %}">
 	<a href="javascript:;">
 		<i class="fa fa-2x fa-dot-circle-o"></i> <span>Encuestas</span>
@@ -20,7 +20,7 @@
 		</li>
 	</ul>
 </li><!--{# url 'reporte_encuesta' #}-->
-
+{% endif %}
 
 {% if visible == 9 %}
 <li {% if opcion_menu == 9 %} class="active" {% endif %}>
