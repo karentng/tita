@@ -25,6 +25,10 @@
     <style type="text/css">
     	.fc-event-inner{
     		overflow-y: scroll;
+    		color:black;
+    	}
+    	.fc-event-inner small{
+    		color:black;
     	}
     </style>
 {% endblock %}
@@ -131,7 +135,7 @@
 				var mediaObject = (event.media) ? event.media : '';
 				var description = (event.description) ? event.description : '';
             element.find(".fc-event-title").after($("<span class=\"fc-event-icons\"></span>").html(mediaObject));
-            element.find(".fc-event-title").append('<small>'+ description +'</small>');
+            element.find(".fc-event-title").append('<label style="width:100px">'+ description +'</label>');
         },
 		editable: false,
 		events: datos
