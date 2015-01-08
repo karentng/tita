@@ -29,6 +29,8 @@ def logged_user(request):
         return redirect('lista_contratista')
     elif grupo == 'Secretaria':
         return redirect('resumen_proyecto')
+    elif grupo == 'Tablero de control publico':
+        return redirect('resumen_proyecto')
 
 # Create your views here.
 

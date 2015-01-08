@@ -3,6 +3,7 @@ from django.core import serializers
 from django.core.paginator import Paginator
 from django.http import HttpResponse, HttpRequest, HttpResponseRedirect, QueryDict
 from convocat.models import *
+from convocat2.models import Aspirante as Aspirante2
 from convocat.forms import *
 from django.db.models import Count, Q
 from campus.models import Estudiante, Cursos, Clases, SoporteClases
@@ -217,11 +218,15 @@ def validar_grupo_coordinador_secretaria(request):
 def acta_seguimiento(request):
     acta_seguimiento_all = ActaDeSeguimiento.objects.filter().order_by('-id')
 
+    grupo_de_usuario = user_group(request)
+    usuario_puede_editar = grupo_de_usuario == 'Coordinador' or grupo_de_usuario == 'Secretaria'
+
     return render(request, 'dashboard/acta_seguimiento.html', {
         'acta_seguimiento_all' : acta_seguimiento_all,
         'actaDeSeguimientoForm' : ActaDeSeguimientoForm(),
         'opcion_menu' : 24,
         'user_group': user_group(request),
+        'usuario_puede_editar' : usuario_puede_editar
     })
 
 def guardarActaSeguimiento(request):
@@ -251,6 +256,9 @@ def resumen_proyecto(request):
 
     nuevo_resumen_proyecto['fecha'] = datetime.datetime.now()
 
+    grupo_de_usuario = user_group(request)
+    usuario_puede_editar = grupo_de_usuario == 'Coordinador' or grupo_de_usuario == 'Secretaria'
+
     return render(request, 'dashboard/resumen_proyecto.html', {
         'form_editable' : False,
         'resumen_proyecto' : resumen_proyecto,
@@ -259,6 +267,7 @@ def resumen_proyecto(request):
         'resumenProyectoForm' : ResumenProyectoForm(),
         'opcion_menu' : 23,
         'user_group': user_group(request),
+        'usuario_puede_editar' : usuario_puede_editar
     })
 
 def guardarResumenProyecto(request):
@@ -298,8 +307,10 @@ def tablero_control(request, id_actividad):
 
     usuario_puede_editar = ((grupo_de_usuario == 'Coordinador' and int(id_actividad) < 14) or (grupo_de_usuario == 'Secretaria' and int(id_actividad) > 13))
 
-    estudiantesMulti = students = Estudiante.objects.filter(acta_compromiso=True).select_related('estudiante.InfoLaboral__estudiante').select_related('Cursos__estudiantes') if id_actividad == '4' else []
+    estudiantesMulti = Estudiante.objects.filter(acta_compromiso=True).select_related('estudiante.InfoLaboral__estudiante').select_related('Cursos__estudiantes') if id_actividad == '4' else []
+    estudiantesMulti2 =  []
     aspirantesMulti = Aspirante.objects.all() if id_actividad == '1' else []
+    aspirantesMulti2 = Aspirante2.objects.all() if id_actividad == '1' else []
     variablesPorSede = VariablePorSede.objects.all() if id_actividad == '15' else []
     variablesPorAula = VariablePorAula.objects.all() if id_actividad == '15' else []
     estudiantes = listaMaestrosEstudiantesInscritos() if id_actividad == '4' else []
@@ -308,7 +319,9 @@ def tablero_control(request, id_actividad):
         'actividades' : actividades,
         'estudiantes' : estudiantes,
         'estudiantesMulti' : estudiantesMulti,
+        'estudiantesMulti2' : estudiantesMulti2,
         'aspirantesMulti' : aspirantesMulti,
+        'aspirantesMulti2' : aspirantesMulti2,
         'variablesPorSede' : variablesPorSede,
         'variablesPorAula' : variablesPorAula,
         'actividad_seleccionada' : actividad_seleccionada,

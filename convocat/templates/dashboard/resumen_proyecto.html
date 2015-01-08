@@ -87,7 +87,9 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-6">
-                            <a href="#panelAdicionarAvance" class="btn btn-success" data-toggle="modal">Adicionar avance</a>
+                            {% if usuario_puede_editar %}
+                                <a href="#panelAdicionarAvance" class="btn btn-success" data-toggle="modal">Adicionar avance</a>
+                            {% endif %}
                         </div>
                         <div class="col-md-6">
                             <a href="#panelTodosAvances" class="btn btn-info pull-right" data-toggle="modal">Ver todos los avances</a>

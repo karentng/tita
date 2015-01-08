@@ -65,7 +65,9 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-6">
-                            <a href="#panelAdicionarActa" class="btn btn-success" data-toggle="modal">Adicionar acta</a>
+                            {% if usuario_puede_editar %}
+                                <a href="#panelAdicionarActa" class="btn btn-success" data-toggle="modal">Adicionar acta</a>
+                            {% endif %}
                         </div>
                     </div>
                     <br/>
