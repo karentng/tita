@@ -179,3 +179,51 @@ def finalizarB(request, tipo):
         persona.finalizada = True
         persona.save()
     return redirect("bilinguismo_inicio")
+
+def listaBilinguismo():
+    estudiantes = []
+    cont = 1
+    students = Bilinguismo.objects.filter(finalizada=True).select_related('bilinguismo.InfoLaboralBilinguismo__persona')
+    c = 0
+    for estudiante in students:
+        jornada = ""
+        institucion = ""
+        try:
+            il = InfoLaboralBilinguismo.objects.get(persona=estudiante)
+            try:
+                jornada = il.get_jornada_display
+            except Exception:
+                jornada = "---"
+            try:
+                institucion = il.get_institucion_display
+            except Exception:
+                institucion = "---"
+        except Exception:
+            jornada = "---"
+            institucion = "---"
+
+        estudiantes.append(
+            {"id": estudiante.id,
+            "item": cont,
+            "nombre": estudiante,
+            "cedula": estudiante.numero_documento,
+            "jornada": jornada,
+            "institucion": institucion,
+            "celular": estudiante.celular,
+            }
+        )
+        cont = cont + 1
+    return estudiantes
+
+def reporte(request):
+    grupo = user_group(request)
+    if grupo == None:
+        return redirect('home')
+
+    personas = listaBilinguismo()
+
+    return render(request, 'reportes/registrados.html', {
+        'personas': personas,
+        'user_group': user_group(request),
+        'opcion_menu': 10
+    })

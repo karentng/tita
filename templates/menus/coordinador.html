@@ -85,3 +85,15 @@
         </li>
     </ul>
 </li>
+
+<li class="has-sub {% if opcion_menu == 10 %} active {% endif %}">
+    <a href="javascript:;">
+        <i class="fa fa-2x fa-cloud"></i> <span>Bilingüismo</span>
+        <b class="caret pull-right"></b>
+    </a>
+    <ul class="sub-menu">
+        <li class="{% if opcion_menu == 10 %} active {% endif %}">
+            <a href="{% url 'reporteBilinguismo' %}"><i class="fa fa-child"></i><i class="fa fa-female"></i> Reporte Inscritos</a>
+        </li>
+    </ul>
+</li>
