@@ -39,5 +39,5 @@ urlpatterns += patterns('',
     url(r'^campus/', include('campus.urls')),
     url('', include('cronograma.urls')),
     url('', include('malla.urls')),
-    url(r'^bilinguismo/', include('bilinguismo.urls')),
+    url('', include('bilinguismo.urls')),
 )
