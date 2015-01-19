@@ -120,7 +120,7 @@
                         <tr>
                             <tbody>
                             <td >
-                                {{estudiante.nombre1}} {{estudiante.apellido1}}                     
+                            {{forloop.counter}} {{estudiante.nombre1}} {{estudiante.apellido1}}                     
                             </td>
                             <td >
                                 {{estudiante.numero_documento}}                
@@ -132,6 +132,7 @@
                             {%endif%}
                         </tbody>
                         </tr> 
+
                     {%endfor%}
                     </table>
 
