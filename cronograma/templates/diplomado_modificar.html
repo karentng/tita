@@ -61,12 +61,15 @@
 
         <br><br><br>
 
-        Ver soporte: 
+        Ver soporte: {%if urlboolean = True%}
         
         <a target="_blank" href="/media/{{url}}" >Descargar Soporte de la Clase</a>
-    </center>
+    
+        {%endif%}
+        {%if urlboolean = False%} No se han subido soportes aún.
+        {%endif%}
+        </center>
         <br><br>
-
 
          
         <button name = "boton" class="btn btn-lg btn-warning pull-right" type="submit" value ="0">Modificar <i class="fa fa-angle-right"></i></button>         

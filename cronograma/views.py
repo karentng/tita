@@ -785,7 +785,10 @@ def diplomado_modificar(request):
         url = SoporteClases.objects.get(clase = curso)
     except:
         url = "#"
-    #print str(url.archivo)+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+
+    urlboolean = True
+    if url.archivo == "":
+        urlboolean = False
     
     if request.method == 'POST':
 
@@ -815,7 +818,7 @@ def diplomado_modificar(request):
     return render(request, 'diplomado_modificar.html', {
         'form': form, 
         'user_group': user_group(request),
-        'opcion_menu': 3, 'curso': var, 'url':url.archivo,
+        'opcion_menu': 3, 'curso': var, 'url':url.archivo, 'urlboolean':urlboolean
     })
 
 def acompanamiento_modificar(request):
