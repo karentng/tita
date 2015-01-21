@@ -95,7 +95,8 @@ def dashboard(request):
 def listaMaestrosEstudiantesInscritos():
     estudiantes = []
     cont = 1
-    students = Estudiante.objects.filter(acta_compromiso=True).select_related('estudiante.InfoLaboral__estudiante').select_related('Cursos__estudiantes')
+    #students = Estudiante.objects.filter(acta_compromiso=True).select_related('estudiante.InfoLaboral__estudiante').select_related('Cursos__estudiantes')
+    students = Estudiante.objects.all().select_related('estudiante.InfoLaboral__estudiante').select_related('Cursos__estudiantes')
     c = 0
     for estudiante in students:
         jornada = ""
