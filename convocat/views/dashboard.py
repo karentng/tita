@@ -219,7 +219,7 @@ def acta_seguimiento(request):
     acta_seguimiento_all = ActaDeSeguimiento.objects.filter(activo=True).order_by('-id')
 
     grupo_de_usuario = user_group(request)
-    usuario_puede_editar = grupo_de_usuario == 'Secretaria'
+    usuario_puede_editar = grupo_de_usuario == 'Secretaria' or 'Coordinador'
 
     return render(request, 'dashboard/acta_seguimiento.html', {
         'acta_seguimiento_all' : acta_seguimiento_all,
