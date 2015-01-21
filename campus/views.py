@@ -31,6 +31,9 @@ def logged_user(request):
         return redirect('resumen_proyecto')
     elif grupo == 'Tablero de control publico':
         return redirect('resumen_proyecto')
+    elif grupo.startswith( 'Editar_Actividad' ):
+        grupo_edicion_actividad = grupo.split('_');
+        return redirect('tablero_control/' + grupo_edicion_actividad[2])
 
 # Create your views here.
 

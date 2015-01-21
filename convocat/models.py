@@ -412,3 +412,9 @@ class ActaDeSeguimiento(models.Model):
 
     def __unicode__(self):
         return self.nombre
+
+class HistoricoActaDeSeguimiento(models.Model):
+    usuario = models.ForeignKey(User)
+    fecha = models.DateField(default = datetime.datetime.now(),verbose_name='fecha')
+    actaDeSeguimiento = models.ForeignKey(ActaDeSeguimiento)
+    observacion = models.CharField(max_length=255, verbose_name='observacion', null=False, blank=False,)

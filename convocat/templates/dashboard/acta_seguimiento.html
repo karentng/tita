@@ -19,9 +19,18 @@
 
 {% block js_ready %}
     <script>
+
+        function confirmacionBorrarActaSeguimiento(id_acta) {
+            $('#confirmacionBorrarActaSeguimiento').modal({ backdrop: 'static', keyboard: false }).one('click', '#borrarActaSeguimientoButton', function (e) {
+                $("#formBorrarActaSeguimiento").attr("action", "{% url 'actaSeguimientoEliminarActaSeguimiento' '' %}" + id_acta);
+                $("#formBorrarActaSeguimiento").submit();
+            });
+        }
+
         $(document).ready(function() {
             App.init();
             $("#id_ruta").attr("required", "required");
+            $("#id_observacion").attr("required", "required");
         });
     </script>
 {% endblock %}
@@ -35,6 +44,30 @@
 {% endblock %}
 
 {% block contenido %}
+    <div class="modal fade" id="confirmacionBorrarActaSeguimiento">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Eliminar Acta de Seguimiento</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="formBorrarActaSeguimiento" class="form-horizontal" method="post" action="" data-parsley-validate="true" novalidate="">
+                        {% csrf_token %}
+                        <h5>Realmente desea borrar el acta de seguimiento?</h5>
+                        <div class="form-group">
+                            <label for="id_observacion" class="col-md-2 control-label ui-sortable">Observación</label>
+                            <div class="col-md-4 ui-sortable">
+                                <input type="text" title="" placeholder="Observación" name="observacion" maxlength="255" id="id_observacion" class="form-control" required="required">
+                            </div>
+                        </div>
+                        <button type="button" type="submit" class="btn btn-primary pull-right" id="borrarActaSeguimientoButton">Borrar</button>
+                    </form>
+                </div>
+                <br/><br/>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="panelAdicionarActa">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -78,6 +111,9 @@
                                     <th>Fecha de subida</th>
                                     <th>Acta</th>
                                     <th>Descripci&oacute;n</th>
+                                    {% if usuario_puede_editar %}
+                                        <th>Eliminar</th>
+                                    {% endif %}
                                 </tr>
                             </thead>
                             <tbody>
@@ -88,6 +124,12 @@
                                             <span><i class="fa fa-file-o"></i> {{acta_seguimiento.nombre}}</span>
                                         </a></td>
                                         <td>{{acta_seguimiento.descripcion}}</td>
+                                        {% if usuario_puede_editar %}
+                                            <td>
+                                                <a class="btn text-danger" title="Eliminar" onclick="confirmacionBorrarActaSeguimiento('{{acta_seguimiento.id}}')">
+                                                <i class="fa fa-trash-o"></i></a>
+                                            </td>
+                                        {% endif %}
                                     </tr>
                                 {% endfor %}
                             </tbody>

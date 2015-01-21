@@ -90,7 +90,11 @@
             });
 
             var tablas_super_poderosa_1 = $('#tabla-super-poderosa-1').dataTable( {
-                "paging": true, 'bScrollCollapse':true, "sPaginationType": "bootstrap", "oLanguage": { "sLengthMenu": "_MENU_ registros por página" }
+                "paging": true,
+                'bScrollCollapse':true,
+                "sPaginationType": "bootstrap",
+                "oLanguage": { "sLengthMenu": "_MENU_ registros por página" }/*,
+                "aoColumnDefs": [{ "bVisible": false, "aTargets": [0, 1] }]*/
             } );
 
             $('a.toggle-vis-1').on( 'click', function (e) {
@@ -102,7 +106,7 @@
 
             $('#tabla-super-poderosa-1 thead th').each( function () {
                 var title = $('#tabla-super-poderosa-1 thead th').eq( $(this).index() ).text();
-                $(this).html( '<label class="control-label"><b>'+title+'</b></label><input type="text" width="100" placeholder="" />' ).on( 'keyup change', function (e) {
+                $(this).html( '<label class="control-label"><b>'+title+'</b></label><br/><input type="text" style="width:120px" placeholder="" />' ).on( 'keyup change', function (e) {
                     tablas_super_poderosa_1.fnFilter(e.target.value, $(this).index());
                     tablas_super_poderosa_1.fnDraw();
                 } );
@@ -121,7 +125,7 @@
 
             $('#tabla-super-poderosa-2 thead th').each( function () {
                 var title = $('#tabla-super-poderosa-2 thead th').eq( $(this).index() ).text();
-                $(this).html( '<label class="control-label"><b>'+title+'</b></label><input type="text" width="100" placeholder="" />' ).on( 'keyup change', function (e) {
+                $(this).html( '<label class="control-label"><b>'+title+'</b></label><br/><input type="text" style="width:120px" placeholder="" />' ).on( 'keyup change', function (e) {
                     tablas_super_poderosa_2.fnFilter(e.target.value, $(this).index());
                     tablas_super_poderosa_2.fnDraw();
                 } );
@@ -140,7 +144,7 @@
 
             $('#tabla-super-poderosa-3 thead th').each( function () {
                 var title = $('#tabla-super-poderosa-3 thead th').eq( $(this).index() ).text();
-                $(this).html( '<label class="control-label"><b>'+title+'</b></label><input type="text" width="100" placeholder="" />' ).on( 'keyup change', function (e) {
+                $(this).html( '<label class="control-label"><b>'+title+'</b></label><br/><input type="text" style="width:120px" placeholder="" />' ).on( 'keyup change', function (e) {
                     tablas_super_poderosa_3.fnFilter(e.target.value, $(this).index());
                     tablas_super_poderosa_3.fnDraw();
                 } );
@@ -159,11 +163,31 @@
 
             $('#tabla-super-poderosa-4 thead th').each( function () {
                 var title = $('#tabla-super-poderosa-4 thead th').eq( $(this).index() ).text();
-                $(this).html( '<label class="control-label"><b>'+title+'</b></label><input type="text" width="100" placeholder="" />' ).on( 'keyup change', function (e) {
+                $(this).html( '<label class="control-label"><b>'+title+'</b></label><br/><input type="text" style="width:120" placeholder="" />' ).on( 'keyup change', function (e) {
                     tablas_super_poderosa_4.fnFilter(e.target.value, $(this).index());
                     tablas_super_poderosa_4.fnDraw();
                 } );
             } );
+
+            for(var i=0; i<24; i++) {
+                if(tablas_super_poderosa_1.length>0) {
+                    tablas_super_poderosa_1.fnSetColumnVis(i, false);
+                }
+
+                if(tablas_super_poderosa_2.length>0) {
+                    tablas_super_poderosa_2.fnSetColumnVis(i, false);
+                }
+
+                if(i<23) {
+                    if(tablas_super_poderosa_3.length>0) {
+                        tablas_super_poderosa_3.fnSetColumnVis(i, false);
+                    }
+
+                    if(tablas_super_poderosa_4.length>0) {
+                        tablas_super_poderosa_4.fnSetColumnVis(i, false);
+                    }
+                }
+            }
 
             $('#pleaseWaitDialog').on('shown.bs.modal', function () {
                 var progress = setInterval(function() {
@@ -344,7 +368,7 @@
                         <div class="form-group"><input type="text" value="{{estado_de_avance.ejecucion_financiera}}%" style="width:130px" class="form-control"></div>
                         <div class="form-group"><input type="text" value="{% if estado_de_avance.observacion != None %}{{estado_de_avance.observacion}}{% else %}{% endif %}" style="width:140px" class="form-control"></div>
                     </form>
-                    {% if usuario_puede_editar %}
+                    {% if user_group = 'Secretaria' or usuario_puede_editar_actividad%}
                         <h6>Ingresar nuevo estado de avance</h6>
                         <form class="form-inline" action={% url 'tableroControlGuardarEstadoDeAvance' %} method="POST">
                             {% csrf_token %}

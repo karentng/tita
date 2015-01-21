@@ -210,16 +210,16 @@ def actividades(request, id_actividad):
 
 def validar_grupo_coordinador_secretaria(request):
     grupo = user_group(request)
-    if grupo == 'Coordinador' or grupo == 'Secretaria' or grupo == 'Tablero de control publico':
+    if grupo == 'Coordinador' or grupo == 'Secretaria' or grupo == 'Tablero de control publico' or grupo.startswith( 'Editar_Actividad' ):
         return True
     else:
         return False
 
 def acta_seguimiento(request):
-    acta_seguimiento_all = ActaDeSeguimiento.objects.filter().order_by('-id')
+    acta_seguimiento_all = ActaDeSeguimiento.objects.filter(activo=True).order_by('-id')
 
     grupo_de_usuario = user_group(request)
-    usuario_puede_editar = grupo_de_usuario == 'Coordinador' or grupo_de_usuario == 'Secretaria'
+    usuario_puede_editar = grupo_de_usuario == 'Secretaria'
 
     return render(request, 'dashboard/acta_seguimiento.html', {
         'acta_seguimiento_all' : acta_seguimiento_all,
@@ -243,6 +243,23 @@ def guardarActaSeguimiento(request):
     else:
         return redirect('home')
 
+def eliminarActaSeguimiento(request, id_acta):
+    if validar_grupo_coordinador_secretaria(request) == False:
+        return redirect('home')
+
+    actaDeSeguimiento = ActaDeSeguimiento.objects.get(id=id_acta)
+    actaDeSeguimiento.activo = False
+    actaDeSeguimiento.save()
+
+    historicoActaDeSeguimiento = HistoricoActaDeSeguimiento()
+    historicoActaDeSeguimiento.usuario = request.user
+    historicoActaDeSeguimiento.fecha = datetime.datetime.now()
+    historicoActaDeSeguimiento.actaDeSeguimiento = actaDeSeguimiento
+    historicoActaDeSeguimiento.observacion = request.POST.get("observacion")
+    historicoActaDeSeguimiento.save()
+
+    return redirect('acta_seguimiento')
+
 def resumen_proyecto(request):
     resumen_proyecto_all = ResumenProyecto.objects.filter().order_by('-fecha')
 
@@ -257,7 +274,7 @@ def resumen_proyecto(request):
     nuevo_resumen_proyecto['fecha'] = datetime.datetime.now()
 
     grupo_de_usuario = user_group(request)
-    usuario_puede_editar = grupo_de_usuario == 'Coordinador' or grupo_de_usuario == 'Secretaria'
+    usuario_puede_editar = grupo_de_usuario == 'Secretaria'
 
     return render(request, 'dashboard/resumen_proyecto.html', {
         'form_editable' : False,
@@ -305,10 +322,12 @@ def tablero_control(request, id_actividad):
 
     grupo_de_usuario = user_group(request)
 
-    usuario_puede_editar = ((grupo_de_usuario == 'Coordinador' and int(id_actividad) < 14) or (grupo_de_usuario == 'Secretaria' and int(id_actividad) > 13))
+    usuario_puede_editar_actividad = grupo_de_usuario.startswith('Editar_Actividad') and grupo_de_usuario.split('_')[2] == id_actividad
+
+    usuario_puede_editar = ((grupo_de_usuario == 'Coordinador' and int(id_actividad) < 14) or (grupo_de_usuario == 'Secretaria') or usuario_puede_editar_actividad)
 
     estudiantesMulti = Estudiante.objects.filter(acta_compromiso=True).select_related('estudiante.InfoLaboral__estudiante').select_related('Cursos__estudiantes') if id_actividad == '4' else []
-    estudiantesMulti2 =  []
+    estudiantesMulti2 = []
     aspirantesMulti = Aspirante.objects.all() if id_actividad == '1' else []
     aspirantesMulti2 = Aspirante2.objects.all() if id_actividad == '1' else []
     variablesPorSede = VariablePorSede.objects.all() if id_actividad == '15' else []
@@ -333,6 +352,7 @@ def tablero_control(request, id_actividad):
         'formVariablesPorSede' : VariablePorSedeForm(),
         'usuario_puede_editar': usuario_puede_editar,
         'user_group': user_group(request),
+        'usuario_puede_editar_actividad': usuario_puede_editar_actividad
     }
 
     datos_tablero_control.update(retornar_datos_reporte_convocatoria_1())

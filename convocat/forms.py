@@ -211,4 +211,4 @@ class ResumenProyectoForm(forms.ModelForm):
 class ActaDeSeguimientoForm(forms.ModelForm):
     class Meta:
         model = ActaDeSeguimiento
-        exclude = ('fecha','usuario','activo')
+        exclude = ('fecha','usuario','activo', 'observacion_borrado')
