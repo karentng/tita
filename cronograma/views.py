@@ -785,7 +785,10 @@ def diplomado_modificar(request):
         url = SoporteClases.objects.get(clase = curso)
     except:
         url = "#"
-    #print str(url.archivo)+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+
+    urlboolean = True
+    if url.archivo == "":
+        urlboolean = False
     
     if request.method == 'POST':
 
@@ -815,7 +818,7 @@ def diplomado_modificar(request):
     return render(request, 'diplomado_modificar.html', {
         'form': form, 
         'user_group': user_group(request),
-        'opcion_menu': 3, 'curso': var, 'url':url.archivo,
+        'opcion_menu': 3, 'curso': var, 'url':url.archivo, 'urlboolean':urlboolean
     })
 
 def acompanamiento_modificar(request):
@@ -1122,8 +1125,10 @@ def lista_estudiantes(request, id):
 
     estudiante_list = curso.estudiantes.all()
     
+    
     return render(request, 'lista_estudiantes.html', {'estudiante_list': estudiante_list,  'user_group': user_group(request),
-        'opcion_menu': 5, 'curso':cursonombre, 'clase':clasenombre, 'clase_fecha':clasefecha, 'formador1':formador1,'formador2':formador2, 'institucion':institucion},
+        'opcion_menu': 5, 'curso':cursonombre, 'clase':clasenombre, 'clase_fecha':clasefecha, 
+        'formador1':formador1,'formador2':formador2, 'institucion':institucion,},
         )
 
 def lista_acompanamiento(request, id):
@@ -1142,8 +1147,10 @@ def lista_acompanamiento(request, id):
     formador2 = curso.formador2
     institucion = curso.institucion
     
+    
     return render(request, 'lista_estudiantes.html', {'estudiante_list': estudiante_list,  'user_group': user_group(request),
-        'opcion_menu': 5, 'curso':cursonombre, 'institucion':institucion, 'clase':clasenombre, 'clase_fecha':clasefecha, 'formador1':formador1,'formador2':formador2},
+        'opcion_menu': 5, 'curso':cursonombre, 'institucion':institucion, 'clase':clasenombre, 'clase_fecha':clasefecha,
+        'formador1':formador1,'formador2':formador2, },
         )
 
 def detalle_curso(request, id):
@@ -1214,9 +1221,10 @@ def reporte_conformacion_curso(request, id):
     institucion = curso.institucion
 
     estudiante_list = curso.estudiantes.all()
+    count =0
     
     return render(request, 'lista_estudiantes.html', {'estudiante_list': estudiante_list,  'user_group': user_group(request),
-        'opcion_menu': 5, 'curso':cursonombre, 'formador1':formador1,'formador2':formador2, 'institucion':institucion},
+        'opcion_menu': 5, 'curso':cursonombre, 'formador1':formador1,'formador2':formador2, 'institucion':institucion,},
         )
 
 def detalle_formador(request, id):
