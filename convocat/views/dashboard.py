@@ -226,14 +226,36 @@ def acta_seguimiento(request):
         'actaDeSeguimientoForm' : ActaDeSeguimientoForm(),
         'opcion_menu' : 24,
         'user_group': user_group(request),
-        'usuario_puede_editar' : usuario_puede_editar
+        'usuario_puede_editar' : usuario_puede_editar,
+        'form_edit': None,
+        'id_acta': None
     })
 
-def guardarActaSeguimiento(request):
+def editarActaSeguimiento(request, id_acta):
+    acta_seguimiento = ActaDeSeguimiento.objects.get(id=id_acta);
+
+    form_edit = ActaDeSeguimientoForm(instance=acta_seguimiento)
+
+    return render(request, 'dashboard/acta_seguimiento.html', {
+        'acta_seguimiento_all' : None,
+        'actaDeSeguimientoForm' : None,
+        'opcion_menu' : 24,
+        'user_group': user_group(request),
+        'usuario_puede_editar' : None,
+        'form_edit': form_edit,
+        'id_acta':id_acta
+    })
+
+def guardarActaSeguimiento(request, id_acta):
     if validar_grupo_coordinador_secretaria(request) == False:
         return redirect('home')
 
-    form = ActaDeSeguimientoForm(request.POST, request.FILES)
+    if id_acta:
+        acta_seguimiento = ActaDeSeguimiento.objects.get(id=id_acta);
+        form = ActaDeSeguimientoForm(request.POST, request.FILES, instance=acta_seguimiento)
+    else:
+        form = ActaDeSeguimientoForm(request.POST, request.FILES)
+
     print(form.errors)
     if form.is_valid():
         actaSeguimiento = form.save(commit=False)

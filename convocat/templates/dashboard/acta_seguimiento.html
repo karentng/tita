@@ -29,7 +29,10 @@
 
         $(document).ready(function() {
             App.init();
-            $("#id_ruta").attr("required", "required");
+            {% if form_edit != None %}
+            {% else %}
+                $("#id_ruta").attr("required", "required");
+            {% endif %}
             $("#id_observacion").attr("required", "required");
         });
     </script>
@@ -44,6 +47,30 @@
 {% endblock %}
 
 {% block contenido %}
+    {% if form_edit != None %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary" id="inscritos">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Editar Acta de Reunión de Seguimiento</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <form enctype="multipart/form-data" method="POST" action="{% url 'actaSeguimientoGuardarActaSeguimiento' id_acta %}" class="form-horizontal">
+                            {% csrf_token %}
+                            {% bootstrap_form form_edit layout="horizontal" %}
+                            <div class="form-group">
+                                <div class="col-md-12 col-md-offset-5 ui-sortable">
+                                    <button title="Guardar" type="submit" class="btn btn-sm btn-primary">Guardar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
     <div class="modal fade" id="confirmacionBorrarActaSeguimiento">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -76,7 +103,7 @@
                     <h4>Adicionar acta de reuni&oacute;n de seguimiento</h4>
                 </div>
                 <div class="modal-body">
-                    <form enctype="multipart/form-data" method="POST" action="{% url 'actaSeguimientoGuardarActaSeguimiento' %}" class="form-horizontal">
+                    <form enctype="multipart/form-data" method="POST" action="{% url 'actaSeguimientoGuardarActaSeguimiento' '' %}" class="form-horizontal">
                         {% csrf_token %}
                         {% bootstrap_form actaDeSeguimientoForm layout="horizontal" %}
                         <div class="form-group">
@@ -112,6 +139,7 @@
                                     <th>Acta</th>
                                     <th>Descripci&oacute;n</th>
                                     {% if usuario_puede_editar %}
+                                        <th>Editar</th>
                                         <th>Eliminar</th>
                                     {% endif %}
                                 </tr>
@@ -126,6 +154,10 @@
                                         <td>{{acta_seguimiento.descripcion}}</td>
                                         {% if usuario_puede_editar %}
                                             <td>
+                                                <a class="btn text-primary" title="Editar" href="{% url 'actaSeguimientoEditarActaSeguimiento' acta_seguimiento.id %}">
+                                                <i class="fa fa-edit"></i></a>
+                                            </td>
+                                            <td>
                                                 <a class="btn text-danger" title="Eliminar" onclick="confirmacionBorrarActaSeguimiento('{{acta_seguimiento.id}}')">
                                                 <i class="fa fa-trash-o"></i></a>
                                             </td>
@@ -139,5 +171,6 @@
             </div>
         </div>
     </div>
+    {% endif %}
     <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
 {% endblock %}
