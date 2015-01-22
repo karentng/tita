@@ -53,6 +53,23 @@
     {#<div id="page-loader" class="fade in"><span class="spinner"></span></div>#}
     <!-- end #page-loader -->
 
+    <div class="modal fade" id="pleaseWaitDialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Cargando...</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="progress">
+                        <div class="progress-bar bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- begin #page-container -->
     <div id="page-container" {# class="fade" #} >
         {% block pagina_blanca %}
@@ -227,6 +244,25 @@
     <!-- Bloque de javascript para las plantillas que heredan -->
     <script type="text/javascript">
         base = "{{STATIC_URL}}";
+    </script>
+    <script>
+        function mostrarBarraDeCarga() {
+            $('#pleaseWaitDialog').on('shown.bs.modal', function () {
+                var progress = setInterval(function() {
+                    var $bar = $('.bar');
+
+                    if ($bar.width()==500) {
+                        $bar.width(0);
+                    } else {
+                        $bar.width($bar.width()+50);
+                    }
+
+                    $bar.text($bar.width()/5 + "%");
+                }, 1000);
+            });
+
+            $('#pleaseWaitDialog').modal({ backdrop: 'static', keyboard: false });
+        }
     </script>
     {% block js %}
     {% endblock %}

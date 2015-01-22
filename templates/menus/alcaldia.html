@@ -1,6 +1,7 @@
 <li {% if opcion_menu == 1 %} class="active" {% endif %}>
+<li {% if opcion_menu == 1 %} class="active" {% endif %}>
     <a href="{% url 'home' %}"><i class="fa fa-info"></i> <span>Inicio</span></a>
 </li>
 <li {% if opcion_menu == 13 %} class="active" {% endif %}>
-        <a href="{% url 'tablero_control' '' %}"><i class="fa fa-cogs"></i> <span>Tablero de Control</span></a>
+        <a href="{% url 'tablero_control' '' %}" onclick="mostrarBarraDeCarga();"><i class="fa fa-cogs"></i> <span>Tablero de Control</span></a>
 </li>

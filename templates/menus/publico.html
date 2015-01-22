@@ -24,12 +24,12 @@
 
 {% if visible == 9 %}
 <li {% if opcion_menu == 9 %} class="active" {% endif %}>
-	<a href="{% url 'dashboard' %}"><i class="fa fa-2x fa-flag-o"></i> Resultado Convocatoria1</a>
+	<a href="{% url 'dashboard' %}" onclick="mostrarBarraDeCarga();"><i class="fa fa-2x fa-flag-o"></i> Resultado Convocatoria1</a>
 </li>
 {% endif %}
 {% if visible == 10 %}
 <li {% if opcion_menu == 10 %} class="active" {% endif %}>
-	<a href="{% url 'dashboard2' %}"><i class="fa fa-2x fa-flag-o"></i> Resultado Convocatoria 2</a>
+	<a href="{% url 'dashboard2' %}" onclick="mostrarBarraDeCarga();"><i class="fa fa-2x fa-flag-o"></i> Resultado Convocatoria 2</a>
 </li>
 {% endif %}
 
@@ -53,12 +53,12 @@
 
 {% if visible == 13 %}
 <li {% if opcion_menu == 13 %} class="active" {% endif %}>
-        <a href="{% url 'tablero_control' %}"><i class="fa fa-cogs"></i> <span>Tablero de Control</span></a>
+        <a href="{% url 'tablero_control' %}" onclick="mostrarBarraDeCarga();"><i class="fa fa-cogs"></i> <span>Tablero de Control</span></a>
 </li>
 {% endif %}
 
 {% if visible == 14 %}
 <li {% if opcion_menu == 14 %} class="active" {% endif %}>
-        <a href="{% url 'reporteME' %}"><i class="fa fa-users"></i> <span>Resultados Inscripción Maestros Estudiantes</span></a>
+        <a href="{% url 'reporteME' %}" onclick="mostrarBarraDeCarga();"><i class="fa fa-users" ></i> <span>Resultados Inscripción Maestros Estudiantes</span></a>
 </li>
 {% endif %}

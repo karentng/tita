@@ -2,13 +2,13 @@
     <a href="{% url 'home' %}"><i class="fa fa-info"></i> <span>Inicio</span></a>
 </li>
 <li {% if opcion_menu == 23 %} class="active" {% endif %}>
-    <a href="{% url 'resumen_proyecto' %}"><i class="fa fa-book"></i> <span>Resumen del Proyecto</span></a>
+    <a href="{% url 'resumen_proyecto' %}" onclick="mostrarBarraDeCarga();"><i class="fa fa-book"></i> <span>Resumen del Proyecto</span></a>
 </li>
 <li {% if opcion_menu == 13 %} class="active" {% endif %}>
-    <a href="{% url 'tablero_control' '' %}"><i class="fa fa-th"></i> <span>Tablero de Control</span></a>
+    <a href="{% url 'tablero_control' '' %}" onclick="mostrarBarraDeCarga();"><i class="fa fa-th"></i> <span>Tablero de Control</span></a>
 </li>
 <li {% if opcion_menu == 24 %} class="active" {% endif %}>
-    <a href="{% url 'acta_seguimiento' %}"><i class="fa fa-file-text"></i> <span>Actas de Reuniones de Seguimiento</span></a>
+    <a href="{% url 'acta_seguimiento' %}" onclick="mostrarBarraDeCarga();"><i class="fa fa-file-text"></i> <span>Actas de Reuniones de Seguimiento</span></a>
 </li>
 
 
@@ -42,14 +42,14 @@
     <ul class="sub-menu">
         {# Reporte Aspirantes Convocatoria 1 #}
         <li {% if opcion_menu == 1 %} class="active" {% endif %}>
-            <a href="{% url 'dashboard' %}"><i class="fa fa-2x fa-flag-o"></i> <span>Resultado Convocatoria 1</span></a>
+            <a href="{% url 'dashboard' %}" onclick="mostrarBarraDeCarga();"><i class="fa fa-2x fa-flag-o"></i> <span>Resultado Convocatoria 1</span></a>
         </li>
         <li {% if opcion_menu == 0 %} class="active" {% endif %}>
-            <a href="{% url 'iniciar_DE' %}"><i class="fa fa fa-university"></i> Inscripción ME</a>
+            <a href="{% url 'iniciar_DE' %}" onclick="mostrarBarraDeCarga();"><i class="fa fa fa-university"></i> Inscripción ME</a>
         </li>
         {# Reporte ME #}
         <li {% if opcion_menu == 2 %} class="active" {% endif %}>
-            <a href="{% url 'reporteME' %}"><i class="fa fa-users"></i> <span>Resultados Inscripción Maestros Estudiantes</span></a>
+            <a href="{% url 'reporteME' %}" onclick="mostrarBarraDeCarga();"><i class="fa fa-users"></i> <span>Resultados Inscripción Maestros Estudiantes</span></a>
         </li>
     </ul>
 </li>
@@ -63,7 +63,7 @@
             <a href="http://convocatoria2.titaedpt.com.co/inscripcion/iniciar-inscripcion"><i class="fa fa fa-university"></i> Convocatoria Docentes2</a>
         </li>
         <li {% if opcion_menu == 6 %} class="active" {% endif %}>
-            <a href="{% url 'dashboard2' %}"><i class="fa fa-2x fa-flag-o"></i> <span>Resultado Convocatoria 2</span></a>
+            <a href="{% url 'dashboard2' %}" onclick="mostrarBarraDeCarga();"><i class="fa fa-2x fa-flag-o"></i> <span>Resultado Convocatoria 2</span></a>
         </li>
     </ul>
 </li>
@@ -93,7 +93,7 @@
     </a>
     <ul class="sub-menu">
         <li class="{% if opcion_menu == 10 %} active {% endif %}">
-            <a href="{% url 'reporteBilinguismo' %}"><i class="fa fa-child"></i><i class="fa fa-female"></i> Reporte Inscritos</a>
+            <a href="{% url 'reporteBilinguismo' %}" onclick="mostrarBarraDeCarga();"><i class="fa fa-child"></i><i class="fa fa-female"></i> Reporte Inscritos</a>
         </li>
     </ul>
 </li>
