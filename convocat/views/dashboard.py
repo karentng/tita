@@ -174,7 +174,7 @@ def impresionME(request, id_estudiante):
     try :
         estudiante = Estudiante.objects.get(id=id_estudiante)
         infoLaboral = InfoLaboral.objects.filter(estudiante=estudiante)
-        print(infoLaboral)
+
         if len(infoLaboral) > 0:
             infoLaboral = infoLaboral[0]
         certificacionTIC = CertificacionTIC.objects.filter(estudiante=estudiante)
@@ -197,11 +197,8 @@ def actividades(request, id_actividad):
     actividad = Actividad.objects.get(id=id_actividad)
     concepto = Concepto.objects.get(id=1)
     request.session['actividad_tablero_control']=id_actividad
-    print(actividad)
-    print(concepto)
 
     concepto_por_actividad = ConceptoPorActividad.objects.get(actividad=actividad, concepto=concepto)
-    print(concepto_por_actividad)
 
     return render(request, 'dashboard/actividades.html', {
         'concepto_por_actividad' : concepto_por_actividad,
@@ -258,7 +255,6 @@ def guardarActaSeguimiento(request, id_acta):
     else:
         form = ActaDeSeguimientoForm(request.POST, request.FILES)
 
-    print(form.errors)
     if form.is_valid():
         actaSeguimiento = form.save(commit=False)
         actaSeguimiento.usuario = request.user
@@ -426,8 +422,8 @@ def guardarEstadoDeAvance(request):
         return redirect('home')
 
     actividad = Actividad.objects.get(id=request.session['actividad_tablero_control'])
-    print(actividad)
     form = EstadoDeAvanceForm(request.POST)
+
     if form.is_valid():
         estado_de_avance = form.save(commit=False)
         estado_de_avance.actividad = actividad
