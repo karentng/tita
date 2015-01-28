@@ -348,8 +348,8 @@ def tablero_control(request, id_actividad):
 
     usuario_puede_editar = ((grupo_de_usuario == 'Coordinador' and int(id_actividad) < 14) or (grupo_de_usuario == 'Secretaria') or usuario_puede_editar_actividad)
 
-    estudiantesMulti = Estudiante.objects.filter(acta_compromiso=True).select_related('estudiante.InfoLaboral__estudiante').select_related('Cursos__estudiantes') if id_actividad == '4' else []
-    estudiantesMulti2 = []
+    estudiantesMulti = Estudiante.objects.filter(acta_compromiso=True, cohorte=1).select_related('estudiante.InfoLaboral__estudiante').select_related('Cursos__estudiantes') if id_actividad == '4' else []
+    estudiantesMulti2 = Estudiante.objects.filter(acta_compromiso=True, cohorte=2).select_related('estudiante.InfoLaboral__estudiante').select_related('Cursos__estudiantes') if id_actividad == '4' else []
     aspirantesMulti = Aspirante.objects.all() if id_actividad == '1' else []
     aspirantesMulti2 = Aspirante2.objects.all() if id_actividad == '1' else []
     variablesPorSede = VariablePorSede.objects.all() if id_actividad == '15' else []
@@ -488,9 +488,9 @@ def obtenerGruposPorConceptoActividad(request, id_concepto_por_actividad):
 
     return HttpResponse(' '.join(out))
 
-def descarga_convocatoria_xls(request):
+def descarga_convocatoria_xls(request, convocatoria):
     response = HttpResponse(mimetype='application/ms-excel')
-    response['Content-Disposition'] = 'attachment; filename=convocatoria.xls'
+    response['Content-Disposition'] = 'attachment; filename=convocatoria_' + convocatoria + '.xls'
     wb = xlwt.Workbook(encoding='utf-8')
     ws = wb.add_sheet("Hoja1")
 
@@ -532,7 +532,9 @@ def descarga_convocatoria_xls(request):
     font_style = xlwt.XFStyle()
     font_style.alignment.wrap = 1
 
-    for obj in Aspirante.objects.all():
+    maestros_aspirantes = Aspirante.objects.all() if convocatoria == '1' else Aspirante2.objects.all()
+
+    for obj in maestros_aspirantes:
         row_num += 1
 
         conocimientosEspecificos = ConocimientosEspecificos.objects.filter(aspirante=obj)
@@ -572,9 +574,9 @@ def descarga_convocatoria_xls(request):
     wb.save(response)
     return response
 
-def descarga_cohorte_xls(request):
+def descarga_cohorte_xls(request, cohorte):
     response = HttpResponse(mimetype='application/ms-excel')
-    response['Content-Disposition'] = 'attachment; filename=cohorte.xls'
+    response['Content-Disposition'] = 'attachment; filename=cohorte_' + cohorte + '.xls'
     wb = xlwt.Workbook(encoding='utf-8')
     ws = wb.add_sheet("Hoja1")
 
@@ -615,7 +617,9 @@ def descarga_cohorte_xls(request):
     font_style = xlwt.XFStyle()
     font_style.alignment.wrap = 1
 
-    for obj in Estudiante.objects.filter(acta_compromiso=True).select_related('estudiante.InfoLaboral__estudiante').select_related('Cursos__estudiantes'):
+    maestros_estudiantes = Estudiante.objects.filter(acta_compromiso=True, cohorte=1).select_related('estudiante.InfoLaboral__estudiante').select_related('Cursos__estudiantes') if cohorte == '1' else Estudiante.objects.filter(acta_compromiso=True, cohorte=2).select_related('estudiante.InfoLaboral__estudiante').select_related('Cursos__estudiantes')
+
+    for obj in maestros_estudiantes:
         row_num += 1
 
         infoLaboral = InfoLaboral.objects.filter(estudiante=obj)

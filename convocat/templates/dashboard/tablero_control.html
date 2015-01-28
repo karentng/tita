@@ -392,22 +392,22 @@
                 {% for concepto_por_actividad in actividad_seleccionada.get_conceptos_por_actividad %}
                     <div class="tab-pane fade" id="tab-{{concepto_por_actividad.id}}">
                         {% if concepto_por_actividad.id == 1 %}
-                            {%with idTablaMulti="1" template_name="dashboard/multireporte_resultado_convocatoria.html" %}
+                            {%with idTablaMulti="1" convocatoria="1" template_name="dashboard/multireporte_resultado_convocatoria.html" %}
                                 {%include template_name%}
                             {%endwith%}
                         {% else %}
                             {% if concepto_por_actividad.id == 49 %}
-                                {%with aspirantesMulti=aspirantesMulti2 idTablaMulti="2" template_name="dashboard/multireporte_resultado_convocatoria.html" %}
+                                {%with aspirantesMulti=aspirantesMulti2 idTablaMulti="2" convocatoria="2" template_name="dashboard/multireporte_resultado_convocatoria.html" %}
                                     {%include template_name%}
                                 {%endwith%}
                             {% else %}
                                 {% if concepto_por_actividad.id == 9 %}
-                                    {%with idTablaMulti="3" template_name="dashboard/multireporte_maestro_estudiante.html" %}
+                                    {%with idTablaMulti="3" cohorte="1" template_name="dashboard/multireporte_maestro_estudiante.html" %}
                                         {%include template_name%}
                                     {%endwith%}
                                 {% else %}
                                     {% if concepto_por_actividad.id == 50 %}
-                                        {%with estudiantesMulti=estudiantesMulti2 idTablaMulti="4" template_name="dashboard/multireporte_maestro_estudiante.html" %}
+                                        {%with estudiantesMulti=estudiantesMulti2 idTablaMulti="4" cohorte="2" template_name="dashboard/multireporte_maestro_estudiante.html" %}
                                             {%include template_name%}
                                         {%endwith%}
                                     {% else %}
