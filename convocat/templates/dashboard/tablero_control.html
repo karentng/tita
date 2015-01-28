@@ -111,23 +111,6 @@
                 } );
             } );
 
-            $("#export").click(function (e) {
-                var myTableSettings = tablas_super_poderosa_1.dataTableSettings[0];
-
-                console.log(tablas_super_poderosa_1.oAjaxData);
-
-                /*$.ajax({
-                    url: "GenerateCsv",
-                    type: "POST",
-                    data: myTableSettings.oAjaxData,
-                    success: function (data) {
-                        document.location.href = 'DownloadCsv';
-                    }
-                    error: function () {}
-                });*/
-            });
-
-
             var tablas_super_poderosa_2 = $('#tabla-super-poderosa-2').dataTable( {
                 "paging": true, 'bScrollCollapse':true, "sPaginationType": "bootstrap", "oLanguage": { "sLengthMenu": "_MENU_ registros por página" }
             } );
