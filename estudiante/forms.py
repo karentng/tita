@@ -32,7 +32,7 @@ class InfoLaboralForm(forms.ModelForm):
             else:
                 if sede[0] == 46:
                     final = True
-        print cohorte2
+        
         self.fields['sede'].choices = cohorte2
 
     class Meta:
