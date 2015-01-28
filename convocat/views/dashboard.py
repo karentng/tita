@@ -93,11 +93,11 @@ def dashboard(request):
 
     return render(request, 'dashboard/dashboard.html', datos_convocatoria_1)
 
-def listaMaestrosEstudiantesInscritos():
+def listaMaestrosEstudiantesInscritos(cohorte):
     estudiantes = []
     cont = 1
     #students = Estudiante.objects.filter(acta_compromiso=True).select_related('estudiante.InfoLaboral__estudiante').select_related('Cursos__estudiantes')
-    students = Estudiante.objects.all().select_related('estudiante.InfoLaboral__estudiante').select_related('Cursos__estudiantes')
+    students = Estudiante.objects.filter(cohorte=cohorte).select_related('estudiante.InfoLaboral__estudiante').select_related('Cursos__estudiantes')
     c = 0
     for estudiante in students:
         jornada = ""
@@ -144,18 +144,17 @@ def listaMaestrosEstudiantesInscritos():
         cont = cont + 1
     return estudiantes
 
-def reporteME(request):
+def reporteME(request, cohorte):
     grupo = user_group(request)
     if grupo == None:
         return redirect('home')
-    estudiantes = listaMaestrosEstudiantesInscritos()
-    print "------------------"
-    print type(user_group(request))
-
+    estudiantes = listaMaestrosEstudiantesInscritos(cohorte)
+    
     return render(request, 'dashboard/reporteME.html', {
         'estudiantes': estudiantes,
         'user_group': user_group(request),
-        'opcion_menu': 2
+        'opcion_menu': 2,
+        'cohorte': cohorte
     })
 
 def obtener_estudiante(valor):
@@ -357,7 +356,7 @@ def tablero_control(request, id_actividad):
     aspirantesMulti2 = Aspirante2.objects.all() if id_actividad == '1' else []
     variablesPorSede = VariablePorSede.objects.all() if id_actividad == '15' else []
     variablesPorAula = VariablePorAula.objects.all() if id_actividad == '15' else []
-    estudiantes = listaMaestrosEstudiantesInscritos() if id_actividad == '4' else []
+    estudiantes = listaMaestrosEstudiantesInscritos(1) if id_actividad == '4' else []
 
     datos_tablero_control = {
         'actividades' : actividades,
