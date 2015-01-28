@@ -981,12 +981,13 @@ def prev_add_curso(request):
         if form.is_valid():
             jornada = form.cleaned_data['jornadas']
             sds = form.cleaned_data['sedes']
+            cohorte = form.cleaned_data['cohorte']
             sedes = "?sedes="
             for sede in sds:
                 sedes+=sede+","
             sedes = sedes[:-1]
             response = redirect('add_curso')
-            response['Location'] += sedes+'&jornada='+jornada
+            response['Location'] += sedes+'&jornada='+jornada+'&cohorte='+cohorte
             return response
             #return redirect('gestion_cursos', sede, jornada)
     else :
@@ -1003,6 +1004,7 @@ def curso(request):
 
     sedes = request.GET.get('sedes')
     jornada = request.GET.get('jornada')
+    cohorte = request.GET.get('cohorte')
     sede = sedes.split(',');
 
     if not sede or not jornada:
@@ -1016,7 +1018,7 @@ def curso(request):
         return redirect('home')
 
     if request.method == 'POST':
-        form = CursoForm(request.POST, sede=sede, jornada=jornada)
+        form = CursoForm(request.POST, sede=sede, jornada=jornada, cohorte=cohorte)
         if form.is_valid():
             objeto = form.save()
             
@@ -1025,7 +1027,7 @@ def curso(request):
             return response'''
             return redirect('gestion_cursos')
     else :
-        form = CursoForm(sede=sede, jornada=jornada)
+        form = CursoForm(sede=sede, jornada=jornada, cohorte=cohorte)
 
     ids_estudiantes = InfoLaboral.objects.filter(sede__in=sede, jornada=jornada).values('estudiante')
     estudiantes = []

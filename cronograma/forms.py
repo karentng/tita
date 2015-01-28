@@ -129,6 +129,7 @@ class CursoForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         jornada = kwargs.pop('jornada', None)
         sede = kwargs.pop('sede', None)
+        cohorte = kwargs.pop('cohorte', None)
         super(CursoForm, self).__init__(*args, **kwargs)
         #self.fields['formador1'].queryset = self.fields['formador1'].queryset.exclude( Q(formador1 = Cursos.objects.all()) | Q( formador2 =  Cursos.objects.all()))
         #self.fields['formador2'].queryset = self.fields['formador2'].queryset.exclude( Q(formador1 = Cursos.objects.all()) | Q( formador2 =  Cursos.objects.all()))
@@ -137,12 +138,17 @@ class CursoForm(forms.ModelForm):
             estudiantes = InfoLaboral.objects.filter(sede__in=sede, jornada=jornada).values('estudiante')
             ids = []
 
-            estu = Cursos.objects.values('estudiantes')
+            estuds = Cursos.objects.values('estudiantes')
 
             for est in estudiantes:
                 ids.append(est['estudiante'])
+
+            estu = []
+            for est in estu:
+                estu.append(est['estudiante'])
+            
             #self.fields['estudiantes'].queryset = Estudiante.objects.filter(id__in=ids)
-            self.fields['estudiantes'].queryset = Estudiante.objects.filter(id__in=ids).exclude(id__in=estu) 
+            self.fields['estudiantes'].queryset = Estudiante.objects.filter(id__in=ids, cohorte=cohorte).exclude(id__in=estu) 
     class Meta:
         model = Cursos
         fields = ('descripcion','institucion','formador1','formador2', 'estudiantes',)
@@ -168,6 +174,7 @@ class FormadorForm(forms.ModelForm):
 class EstudiantesCurso(forms.Form):
     sedes = forms.MultipleChoiceField(widget=Select2MultipleWidget(), choices=SEDES)
     jornadas = forms.ChoiceField(widget=forms.Select(), choices=JORNADAS)
+    cohorte = forms.ChoiceField(choices=((1, 1), (2, 2),))
 
 class FiltroCronograma(forms.Form):
     #sedes = forms.MultipleChoiceField(widget=Select2MultipleWidget(), choices=SEDES)
