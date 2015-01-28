@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.shortcuts import redirect, render, render_to_response, get_list_or_404, get_object_or_404
 from django.core import serializers
 from django.core.paginator import Paginator
@@ -498,7 +500,7 @@ def descarga_convocatoria_xls(request, convocatoria):
 
     columns = [
         (u"Nombres y Apellidos", 4000),
-        (u"Cedula", 4000),
+        (u"Cédula", 4000),
         (u"Genero", 4000),
         (u"Nacionalidad", 4000),
         (u"Fecha de Nacimiento", 4000),
