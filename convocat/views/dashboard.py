@@ -10,7 +10,7 @@ from convocat.forms import *
 from django.db.models import Count, Q
 from campus.models import Estudiante, Cursos, Clases, SoporteClases
 from estudiante.models import InfoLaboral, FormacionAcademicaME, CertificacionTIC
-from campus.views import user_group
+from campus.views import user_group, user_groups
 
 import json, datetime, xlwt
 
@@ -345,8 +345,9 @@ def tablero_control(request, id_actividad):
     nuevo_estado_de_avance['fecha'] = datetime.datetime.now()
 
     grupo_de_usuario = user_group(request)
+    grupos_de_usuario = user_groups(request)
 
-    usuario_puede_editar_actividad = grupo_de_usuario.startswith('Editar_Actividad') and grupo_de_usuario.split('_')[2] == id_actividad
+    usuario_puede_editar_actividad = 'Editar_Actividad_' + id_actividad in grupos_de_usuario
 
     usuario_puede_editar = ((grupo_de_usuario == 'Coordinador' and int(id_actividad) < 14) or (grupo_de_usuario == 'Secretaria') or usuario_puede_editar_actividad)
 

@@ -14,6 +14,18 @@ def user_group(request):
     else:
         return None
 
+def user_groups(request):
+    if request.user.is_authenticated():
+        grupos = request.user.groups.all()
+        grupos_usuario = []
+
+        for grupo in grupos:
+            grupos_usuario.append(grupo.name)
+
+        return grupos_usuario
+    else:
+        return None
+
 ''' Función que me envia a la página correspondiente de acuerdo al perfil de la persona logueada '''
 def logged_user(request):
     grupo = user_group(request)
