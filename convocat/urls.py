@@ -28,6 +28,8 @@ urlpatterns = patterns('convocat.views.inscripcion',
 )
 
 urlpatterns += patterns('convocat.views.dashboard',
+    url(r'^descarga_convocatoria_xls$', 'descarga_convocatoria_xls', name="descarga_convocatoria_xls"),
+    url(r'^descarga_cohorte_xls$', 'descarga_cohorte_xls', name="descarga_cohorte_xls"),
     url(r'^resultados$',      'dashboard', name="dashboard"),
     url(r'^resultadosME$',      'reporteME', name="reporteME"),
     url(r'^impresionME/(\d+)$',      'impresionME', name="impresionME"),

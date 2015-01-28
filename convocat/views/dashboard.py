@@ -10,8 +10,7 @@ from campus.models import Estudiante, Cursos, Clases, SoporteClases
 from estudiante.models import InfoLaboral, FormacionAcademicaME, CertificacionTIC
 from campus.views import user_group
 
-
-import json, datetime
+import json, datetime, xlwt
 
 def retornar_datos_reporte_convocatoria_1():
     mejores = Aspirante.objects.order_by('-puntuacion_hv')
@@ -489,3 +488,176 @@ def obtenerGruposPorConceptoActividad(request, id_concepto_por_actividad):
 
     return HttpResponse(' '.join(out))
 
+def descarga_convocatoria_xls(request):
+    response = HttpResponse(mimetype='application/ms-excel')
+    response['Content-Disposition'] = 'attachment; filename=convocatoria.xls'
+    wb = xlwt.Workbook(encoding='utf-8')
+    ws = wb.add_sheet("Hoja1")
+
+    row_num = 0
+
+    columns = [
+        (u"Nombres y Apellidos", 4000),
+        (u"Cedula", 4000),
+        (u"Genero", 4000),
+        (u"Nacionalidad", 4000),
+        (u"Fecha de Nacimiento", 4000),
+        (u"Municipio de Nacimiento", 4000),
+        (u"Direccion", 4000),
+        (u"Municipio", 4000),
+        (u"Telefono", 4000),
+        (u"Celular", 4000),
+        (u"Email", 4000),
+        (u"Aceptado", 4000),
+        (u"Institucion Actual", 4000),
+        (u"Municipio Institucion", 4000),
+        (u"Jornada", 4000),
+        (u"Conocimiento y manejo de herramientas ofimaticas", 4000),
+        (u"Conocimiento y manejo de herramientas  Web 2", 4000),
+        (u"Conocimiento herramientas de edicion multimedia", 4000),
+        (u"Experiencia en desarrollo de contenidos educativos digitales", 4000),
+        (u"Experiencia en desarrollo de libros de texto digital", 4000),
+        (u"Experiencia en procesos de e-learning", 4000),
+        (u"Experiencia en gestion de proyectos educativos TIC", 4000),
+        (u"Experiencia en desarrollo de elementos de evaluacion de competencias", 4000),
+    ]
+
+    font_style = xlwt.XFStyle()
+    font_style.font.bold = True
+
+    for col_num in xrange(len(columns)):
+        ws.write(row_num, col_num, columns[col_num][0], font_style)
+        ws.col(col_num).width = columns[col_num][1]
+
+    font_style = xlwt.XFStyle()
+    font_style.alignment.wrap = 1
+
+    for obj in Aspirante.objects.all():
+        row_num += 1
+
+        conocimientosEspecificos = ConocimientosEspecificos.objects.filter(aspirante=obj)
+
+        if(conocimientosEspecificos.count() > 0):
+            conocimientosEspecificos = conocimientosEspecificos.latest('id')
+
+        row = [
+            obj.nombreCompleto().upper(),
+            obj.numero_documento,
+            obj.get_sexo_display(),
+            obj.nacionalidad.capitalize(),
+            obj.fecha_nacimiento,
+            obj.municipio_nacimiento.nombre if obj.municipio_nacimiento != None else '-',
+            obj.direccion,
+            obj.municipio.nombre  if obj.municipio != None else '-',
+            obj.telefono,
+            obj.celular,
+            obj.email,
+            'SI' if obj.puntuacion_final == 100 else 'NO',
+            obj.institucion_actual,
+            obj.municipio_institucion.nombre if obj.municipio_institucion != None else '-',
+            obj.get_jornada_display(),
+            conocimientosEspecificos.get_conocimiento1_display() if hasattr(conocimientosEspecificos, 'get_conocimiento1_display') else '-',
+            conocimientosEspecificos.get_conocimiento2_display() if hasattr(conocimientosEspecificos, 'get_conocimiento2_display') else '-',
+            conocimientosEspecificos.get_conocimiento3_display() if hasattr(conocimientosEspecificos, 'get_conocimiento3_display') else '-',
+            conocimientosEspecificos.get_conocimiento4_display() if hasattr(conocimientosEspecificos, 'get_conocimiento4_display') else '-',
+            conocimientosEspecificos.get_conocimiento5_display() if hasattr(conocimientosEspecificos, 'get_conocimiento5_display') else '-',
+            conocimientosEspecificos.get_conocimiento6_display() if hasattr(conocimientosEspecificos, 'get_conocimiento6_display') else '-',
+            conocimientosEspecificos.get_conocimiento7_display() if hasattr(conocimientosEspecificos, 'get_conocimiento7_display') else '-',
+            conocimientosEspecificos.get_conocimiento8_display() if hasattr(conocimientosEspecificos, 'get_conocimiento8_display') else '-',
+
+        ]
+        for col_num in xrange(len(row)):
+            ws.write(row_num, col_num, row[col_num], font_style)
+
+    wb.save(response)
+    return response
+
+def descarga_cohorte_xls(request):
+    response = HttpResponse(mimetype='application/ms-excel')
+    response['Content-Disposition'] = 'attachment; filename=cohorte.xls'
+    wb = xlwt.Workbook(encoding='utf-8')
+    ws = wb.add_sheet("Hoja1")
+
+    row_num = 0
+
+    columns = [
+        (u"Nombres y Apellidos", 4000),
+        (u"Cedula", 4000),
+        (u"Institucion Educativa", 4000),
+        (u"Jornada", 4000),
+        (u"Genero", 4000),
+        (u"Email", 4000),
+        (u"Email institucional", 4000),
+        (u"Municipio de residencia", 4000),
+        (u"Direccion", 4000),
+        (u"Telefono fijo", 4000),
+        (u"Numero de celular", 4000),
+        (u"Ultimo nivel educativo aprobado", 4000),
+        (u"Secretaria educacion", 4000),
+        (u"Sede", 4000),
+        (u"Cargo", 4000),
+        (u"Zona", 4000),
+        (u"Decreto profesional docente", 4000),
+        (u"Grados", 4000),
+        (u"Poblacion etnica que atiende", 4000),
+        (u"Tipo de nombramiento", 4000),
+        (u"Tipo etnoeducador", 4000),
+        (u"Asignaturas", 4000),
+    ]
+
+    font_style = xlwt.XFStyle()
+    font_style.font.bold = True
+
+    for col_num in xrange(len(columns)):
+        ws.write(row_num, col_num, columns[col_num][0], font_style)
+        ws.col(col_num).width = columns[col_num][1]
+
+    font_style = xlwt.XFStyle()
+    font_style.alignment.wrap = 1
+
+    for obj in Estudiante.objects.filter(acta_compromiso=True).select_related('estudiante.InfoLaboral__estudiante').select_related('Cursos__estudiantes'):
+        row_num += 1
+
+        infoLaboral = InfoLaboral.objects.filter(estudiante=obj)
+        grados = ''
+        asignaturas = ''
+
+        if(infoLaboral.count() > 0):
+            infoLaboral = infoLaboral.latest('id')
+
+
+        for grado in infoLaboral.grados.all():
+            grados += grado.nombre + '. '
+
+        for asignatura in infoLaboral.asignaturas.all():
+            asignaturas += asignatura.nombre + '. '
+
+        row = [
+            obj.nombre_completo().upper(),
+            obj.numero_documento,
+            infoLaboral.get_sede_display(),
+            infoLaboral.get_jornada_display(),
+            obj.get_sexo_display(),
+            obj.email,
+            obj.email_institucional,
+            obj.municipio.nombre,
+            obj.direccion,
+            obj.telefono,
+            obj.celular,
+            obj.get_nivel_educativo_display(),
+            infoLaboral.secretaria_educacion.nombre,
+            infoLaboral.get_sede_display(),
+            infoLaboral.get_cargo_display(),
+            infoLaboral.get_zona_display(),
+            infoLaboral.get_decreto_docente_display(),
+            grados,
+            infoLaboral.poblacion_etnica,
+            infoLaboral.get_nombramiento_display(),
+            infoLaboral.get_tipo_etnoeducador_display(),
+            asignaturas
+        ]
+        for col_num in xrange(len(row)):
+            ws.write(row_num, col_num, row[col_num], font_style)
+
+    wb.save(response)
+    return response

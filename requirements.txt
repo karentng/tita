@@ -6,3 +6,4 @@ psycopg2==2.5.3
 https://github.com/applegrew/django-select2/archive/master.zip
 python-dateutil==2.2
 django-datetime-widget
+xlwt

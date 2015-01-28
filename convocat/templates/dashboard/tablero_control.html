@@ -9,11 +9,13 @@
     {{estado_avance_form.media}}
     <link href="{{STATIC_URL}}css/file-tree.css" rel="stylesheet" />
     <link href="{{STATIC_URL}}plugins/DataTables-1.9.4/css/data-table.css" rel="stylesheet" />
+    <link href="{{STATIC_URL}}js/datatables/TableTools.css" rel="stylesheet" />
 {% endblock %}
 
 {% block js %}
     <script src="{{STATIC_URL}}plugins/DataTables-1.9.4/js/jquery.dataTables.js"></script>
     <script src="{{STATIC_URL}}plugins/DataTables-1.9.4/js/data-table.js"></script>
+    <script src="{{STATIC_URL}}js/datatables/TableTools.min.js"></script>
     <script src="{{STATIC_URL}}plugins/parsley/dist/parsley.min.js"></script>
 {% endblock %}
 
@@ -89,7 +91,7 @@
                 "paging": true,
                 'bScrollCollapse':true,
                 "sPaginationType": "bootstrap",
-                "oLanguage": { "sLengthMenu": "_MENU_ registros por página" }/*,
+                "oLanguage": { "sLengthMenu": "_MENU_ registros por página" },/*,
                 "aoColumnDefs": [{ "bVisible": false, "aTargets": [0, 1] }]*/
             } );
 
