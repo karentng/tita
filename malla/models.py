@@ -23,7 +23,7 @@ class Monitor(models.Model):
     apellidos = models.CharField( max_length=255, verbose_name='apellidos')
     celularppal = models.BigIntegerField(verbose_name=u'no. celular')
     email = models.EmailField()
-    direccion = models.TextField(blank=True, null=True)
+    direccion = models.CharField(max_length=1255, blank=True, null=True)
     d10 = models.FileField(upload_to=crear_ruta_archivo_monitor, blank=True, null=True, help_text='Adjunte la certificación del: DE-10')
     tabulado = models.FileField(upload_to=crear_ruta_archivo_monitor, blank=True, null=True, help_text='Adjunte la certificación del: Tabulado')
     recibo = models.FileField(upload_to=crear_ruta_archivo_monitor, blank=True, null=True, help_text='Adjunte la certificación del: Recibo de Pago')
