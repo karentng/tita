@@ -152,8 +152,36 @@ class Cursos(models.Model):
         ('Principal YUMBO-IE CEAT GENERAL PIERO MARIOTTI - SEDE JOHN F. KENNEDY', 'Principal YUMBO-IE CEAT GENERAL PIERO MARIOTTI - SEDE JOHN F. KENNEDY'),
         ('Principal YUMBO-IE MANUEL MARIA SANCHEZ - SEDE PRINCIPAL', 'Principal YUMBO-IE MANUEL MARÍA SÁNCHEZ - SEDE PRINCIPAL'),
         ('Principal YUMBO-IE ROSA ZARATE DE PENA - SEDE PRINCIPAL', 'Principal YUMBO-IE ROSA ZÁRATE DE PEÑA - SEDE PRINCIPAL'),
-        ('Principal VIJES', 'Principal VIJES')
+        ('Principal VIJES', 'Principal VIJES'),
+        #nuevas instituciones
+        ('LIBARDO MADRID VALDERRAMA','LIBARDO MADRID VALDERRAMA'),        
+        ('MONTEBELLO', 'MONTEBELLO'),        
+        ('MONSEÑOR RAMON ARCILA','MONSEÑOR RAMON ARCILA'),        
+        ('JOSE MANUEL SAAVEDRA GALINDO','JOSE MANUEL SAAVEDRA GALINDO'),           
+        ('PEDRO ANTONIO MOLINA','PEDRO ANTONIO MOLINA'),           
+        ('MULTIPROPOSITO','MULTIPROPOSITO'),          
+        ('ISAIAS GAMBOA','ISAIAS GAMBOA'),           
+        ('ALFONSO LOPEZ PUMAREJO','ALFONSO LOPEZ PUMAREJO'),          
+        ('IE JUAN PABLO II','IE JUAN PABLO II'),          
+        ('CRISTOBAL COLON','CRISTOBAL COLON'),     
+         #('MARICE SINISTERRA','MARICE SINISTERRA'),
+         #la cumbre
+        ('Principal LA CUMBRE - IE MARIA AUXILIADORA - SEDE PRINCIPAL', 'Principal LA CUMBRE - IE MARIA AUXILIADORA - SEDE PRINCIPAL'),
+        ('Principal LA CUMBRE - IE SIMÓN BOLIVAR CABECERA MUNICIPAL - SEDE PRINCIPAL', 'Principal LA CUMBRE - IE SIMÓN BOLIVAR CABECERA MUNICIPAL - SEDE PRINCIPAL'),
+        #dagua
+        ('Principal DAGUA - INSTITUCIÓN EDUCATIVA DEL DAGUA - SEDE Principal', 'Principal DAGUA - INSTITUCIÓN EDUCATIVA DEL DAGUA - SEDE Principal'),
+        ('Principal DAGUA - IE EL QUEREMAL - SEDE PRINCIPAL', 'Principal DAGUA - IE EL QUEREMAL - SEDE PRINCIPAL'),
+        ('Principal DAGUA - IE BORRERO AYERBE - SEDE PRINCIPAL', 'Principal DAGUA - IE BORRERO AYERBE - SEDE PRINCIPAL'),
+        ('Principal DAGUA - IE SANTA TERESITA DEL NIÑO JESUS - SEDE PRINCIPAL', 'Principal DAGUA - IE SANTA TERESITA DEL NIÑO JESUS - SEDE PRINCIPAL'),
+        #yumbo
+        ('Principal YUMBO-IE JOSÉ ANTONIO GALÁN - SEDE PRINCIPAL', 'Principal YUMBO-IE JOSÉ ANTONIO GALÁN - SEDE PRINCIPAL'),
+        ('Principal YUMBO-IE ALBERTO MENDOZA MAYOR - SEDE LICEO COMERCIAL', 'Principal YUMBO-IE ALBERTO MENDOZA MAYOR - SEDE LICEO COMERCIAL'),
+        ('Principal YUMBO-IE ANTONIA SANTOS - SEDE ELIAS QUINTERO', 'Principal YUMBO-IE ANTONIA SANTOS - SEDE ELIAS QUINTERO'),
+        ('Principal YUMBO-IE JUAN XXIII - SEDE PRINCIPAL', 'Principal YUMBO-IE JUAN XXIII - SEDE PRINCIPAL'),
+        ('Principal YUMBO-IE POLICARPA SALAVARRIETA - SEDE PRINCIPAL', 'Principal YUMBO-IE POLICARPA SALAVARRIETA - SEDE PRINCIPAL'),
+       
     )
+
     descripcion = models.CharField(max_length=255, verbose_name=u'Nombre')
     institucion = models.CharField(choices=SEDES, max_length=200, verbose_name="institución")
     formador1 = models.ForeignKey(Formador, related_name="formador1",verbose_name="formador no. 1")
