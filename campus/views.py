@@ -29,6 +29,7 @@ def user_groups(request):
 ''' Función que me envia a la página correspondiente de acuerdo al perfil de la persona logueada '''
 def logged_user(request):
     grupo = user_group(request)
+    print grupo
     if grupo == None:
         return redirect('home')
     elif grupo == 'Coordinador':
@@ -46,6 +47,9 @@ def logged_user(request):
     elif grupo.startswith( 'Editar_Actividad' ):
         grupo_edicion_actividad = grupo.split('_');
         return redirect('tablero_control/' + grupo_edicion_actividad[2])
+    elif grupo.startswith( 'Lectura_Actividad' ):
+        grupo_lectura_actividad = grupo.split('_');
+        return redirect('tablero_control/' + grupo_lectura_actividad[2])
 
 # Create your views here.
 

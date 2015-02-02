@@ -319,22 +319,24 @@
     <div class="row" align="center">
         <div class="col-xs-12">
             {% for actividad in actividades %}
-                <a href="{% url 'tablero_control' actividad.id %}" class="btn btn-{% if actividad.id == actividad_seleccionada.id %}success{% else %}inverse{% endif %}" onclick="mostrarBarraDeCArga();"
-                    style="margin-bottom:5px" data-toggle="tooltip" data-placement="bottom" title="{{actividad.nombre}} - {{actividad.descripcion}}">
-                    <small>Actividad</small><br/>
-                    <span class="fa-stack fa-1x ">
-                        <i class="fa fa-circle fa-stack-2x"></i>
-                        <i class="fa fa-inverse fa-stack-1x text-{% if actividad.id == actividad_seleccionada.id %}success{% else %}inverse{% endif %}"><small>{{forloop.counter}}</small></i>
-                    </span>
-                    <br>
-                    <small>
-                        {% if actividad.get_ultimo_estado_de_avance %}
-                            {{actividad.get_ultimo_estado_de_avance.avance_actual}}%
-                        {% else %}
-                            0.0%
-                        {% endif %}
-                    </small><br/>
-                </a>
+                {%  if user_group == 'Coordinador' or user_group == 'Secretaria' or user_group == 'Tablero de control publico' or actividad.id|slugify in actividades_permitidas %}
+                    <a href="{% url 'tablero_control' actividad.id %}" class="btn btn-{% if actividad.id == actividad_seleccionada.id %}success{% else %}inverse{% endif %}" onclick="mostrarBarraDeCArga();"
+                        style="margin-bottom:5px" data-toggle="tooltip" data-placement="bottom" title="{{actividad.nombre}} - {{actividad.descripcion}}">
+                        <small>Actividad</small><br/>
+                        <span class="fa-stack fa-1x ">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-inverse fa-stack-1x text-{% if actividad.id == actividad_seleccionada.id %}success{% else %}inverse{% endif %}"><small>{{forloop.counter}}</small></i>
+                        </span>
+                        <br>
+                        <small>
+                            {% if actividad.get_ultimo_estado_de_avance %}
+                                {{actividad.get_ultimo_estado_de_avance.avance_actual}}%
+                            {% else %}
+                                0.0%
+                            {% endif %}
+                        </small><br/>
+                    </a>
+                {% endif %}
             {% endfor %}
         </div>
     </div>
@@ -367,7 +369,7 @@
                         <div class="form-group"><input type="text" value="{{estado_de_avance.ejecucion_financiera}}%" style="width:130px" class="form-control"></div>
                         <div class="form-group"><input type="text" value="{% if estado_de_avance.observacion != None %}{{estado_de_avance.observacion}}{% else %}{% endif %}" style="width:140px" class="form-control"></div>
                     </form>
-                    {% if user_group = 'Secretaria' or usuario_puede_editar_actividad%}
+                    {% if user_group = 'Secretaria' %}
                         <h6>Ingresar nuevo estado de avance</h6>
                         <form class="form-inline" action={% url 'tableroControlGuardarEstadoDeAvance' %} method="POST">
                             {% csrf_token %}

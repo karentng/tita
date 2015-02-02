@@ -149,7 +149,7 @@ def reporteME(request, cohorte):
     if grupo == None:
         return redirect('home')
     estudiantes = listaMaestrosEstudiantesInscritos(cohorte)
-    
+
     return render(request, 'dashboard/reporteME.html', {
         'estudiantes': estudiantes,
         'user_group': user_group(request),
@@ -208,7 +208,7 @@ def actividades(request, id_actividad):
 
 def validar_grupo_coordinador_secretaria(request):
     grupo = user_group(request)
-    if grupo == 'Coordinador' or grupo == 'Secretaria' or grupo == 'Tablero de control publico' or grupo.startswith( 'Editar_Actividad' ):
+    if grupo == 'Coordinador' or grupo == 'Secretaria' or grupo == 'Tablero de control publico' or grupo.startswith( 'Editar_Actividad' ) or grupo.startswith( 'Lectura_Actividad' ):
         return True
     else:
         return False
@@ -341,6 +341,14 @@ def tablero_control(request, id_actividad):
 
     grupo_de_usuario = user_group(request)
     grupos_de_usuario = user_groups(request)
+    actividades_permitidas = []
+
+    for grupo in grupos_de_usuario:
+        if grupo.startswith( 'Editar_Actividad' ) or grupo.startswith( 'Lectura_Actividad' ):
+            grupo_acceso_actividad = grupo.split('_');
+            actividades_permitidas.append(grupo_acceso_actividad[2])
+
+    print actividades_permitidas
 
     usuario_puede_editar_actividad = 'Editar_Actividad_' + id_actividad in grupos_de_usuario
 
@@ -355,6 +363,7 @@ def tablero_control(request, id_actividad):
     estudiantes = listaMaestrosEstudiantesInscritos(1) if id_actividad == '4' else []
 
     datos_tablero_control = {
+        'actividades_permitidas' : actividades_permitidas,
         'actividades' : actividades,
         'estudiantes' : estudiantes,
         'estudiantesMulti' : estudiantesMulti,
