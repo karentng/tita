@@ -99,6 +99,7 @@ def areasConocimiento(request):
     })
 
 def requerimiento(request, id=None):
+
     grupo = user_group(request)
     if grupo == None:
         return redirect('home')
@@ -124,6 +125,10 @@ def requerimiento(request, id=None):
     })
 
 def listar_requerimientos(request):
+    grupo = user_group(request)
+    if grupo == None:
+        return redirect('home')
+
     requerimientos = Requerimiento.objects.all()
     return render(request, 'listar_requerimientos.html', {
         'requerimientos': requerimientos,
@@ -342,6 +347,9 @@ def monitor(request, id=None):
     })
 
 def listar_monitores(request):
+    grupo = user_group(request)
+    if grupo == None:
+        return redirect('home')
     monitores = Monitor.objects.all()
     return render(request, 'listar_monitores.html', {
         'monitores': monitores,
@@ -355,6 +363,9 @@ def eliminar_monitor(request, id):
     return redirect('listar_monitores')
 
 def listar_contratistas(request):
+    grupo = user_group(request)
+    if grupo == None:
+        return redirect('home')
     contratistas = Contratista.objects.all()
     return render(request, 'listar_contratistas.html', {
         'contratistas': contratistas,
@@ -372,6 +383,9 @@ def eliminar_contratista(request, id):
     return redirect('listar_contratistas')
 
 def listar_reclamaciones(request):
+    grupo = user_group(request)
+    if grupo == None:
+        return redirect('home')
     contratistas = Reclamacion.objects.all()
 
     return render(request, 'listar_reclamaciones.html', {
@@ -381,6 +395,9 @@ def listar_reclamaciones(request):
     })
 
 def listar_reclamaciones_contratista(request):
+    grupo = user_group(request)
+    if grupo == None:
+        return redirect('home')
 
     numero_documento = request.user.username
     contratista = Contratista.objects.get(numero_documento=numero_documento)
@@ -397,7 +414,10 @@ def listar_reclamaciones_contratista(request):
 
 def lista_reporte_contratista(request):
     # descomentar  linea 380 y 381 (2 de abajo) para que genere el archivo y luego lo descargue. Hacer que si ya existe, lo elimine antes.
-    
+    grupo = user_group(request)
+    if grupo == None:
+        return redirect('home')
+
     if request.method == 'GET' and 'fi' in request.GET and 'ff' in request.GET:
         fi = request.GET.get('fi')
         ff = request.GET.get('ff')
@@ -413,6 +433,10 @@ def lista_reporte_contratista(request):
     return response
 
 def detalles_contratista(request, id_contratista):
+    grupo = user_group(request)
+    if grupo == None:
+        return redirect('home')
+        
     contratista = Contratista.objects.get(id=id_contratista)
 
     formcontratista = InformacionBasicaForm(instance=contratista)
