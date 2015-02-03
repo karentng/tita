@@ -103,7 +103,7 @@ def listaMaestrosEstudiantesInscritos(cohorte):
     estudiantes = []
     cont = 1
     #students = Estudiante.objects.filter(acta_compromiso=True).select_related('estudiante.InfoLaboral__estudiante').select_related('Cursos__estudiantes')
-    students = Estudiante.objects.filter(cohorte=cohorte).select_related('estudiante.InfoLaboral__estudiante').select_related('Cursos__estudiantes')
+    students = Estudiante.objects.filter(cohorte=cohorte, acta_compromiso=True).select_related('estudiante.InfoLaboral__estudiante').select_related('Cursos__estudiantes')
     c = 0
     for estudiante in students:
         jornada = ""
@@ -124,7 +124,7 @@ def listaMaestrosEstudiantesInscritos(cohorte):
 
         try:
 
-            curso = Cursos.objects.get(estudiantes=estudiante)
+            curso = Cursos.objects.filter(estudiantes=estudiante)
             clases = Clases.objects.filter(asistentes=estudiante, curso=curso)
             horas = 0
 
