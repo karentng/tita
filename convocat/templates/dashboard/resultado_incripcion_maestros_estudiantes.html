@@ -18,7 +18,10 @@
                                 <th>Institución Educativa</th>
                                 <th>Jornada</th>
                                 <th>Curso</th>
-                                <th>Horas Asistidas</th>
+                                <th>Sesiones Programadas</th>
+                                <th>Sesiones Subidas con Soporte</th>
+                                <th>Horas Asistidas con Soporte</th>
+                                <th>Horas Asistidas sin Soporte</th>
                                 <th>Datos ME</th>
                             </tr>
                         </thead>
@@ -31,7 +34,11 @@
                                 <td>{{estudiante.institucion}}</td>
                                 <td>{{estudiante.jornada}}</td>
                                 <td>{{estudiante.curso.descripcion}}</td>
-                                <td>{{estudiante.horas}}</td>
+
+                                <td>{{estudiante.sesionesProgramadas}}</td>
+                                <td>{{estudiante.sesionesConSoporte}}</td>
+                                <td>{{estudiante.horasAsistidasConSoporte}}</td>
+                                <td>{{estudiante.horasAsistidasSinSoporte}}</td>
                                 <td>
                                     <a href="{% url 'impresionME' estudiante.id %}" target="_blank"><button class="btn btn-primary">Detalles</button></a>
                                 </td>

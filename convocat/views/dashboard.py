@@ -93,6 +93,12 @@ def dashboard(request):
 
     return render(request, 'dashboard/dashboard.html', datos_convocatoria_1)
 
+def buscarEstudiante(lista, estudiante):
+    for i in lista:
+        if i == estudiante:
+            return True
+    return False
+
 def listaMaestrosEstudiantesInscritos(cohorte):
     estudiantes = []
     cont = 1
@@ -117,18 +123,36 @@ def listaMaestrosEstudiantesInscritos(cohorte):
             institucion = "---"
 
         try:
+
             curso = Cursos.objects.get(estudiantes=estudiante)
             clases = Clases.objects.filter(asistentes=estudiante, curso=curso)
             horas = 0
+
+            sesionesProgramadas = clases.count()
+            sesionesConSoporte = 0
+            horasAsistidasConSoporte = 0
+            horasAsistidasSinSoporte = 0
+
             for clase in clases:
+                asistioAClase = buscarEstudiante(clase.asistentes.all(), estudiante)
+
                 try:
                     SoporteClases.objects.get(clase=clase)
+                    sesionesConSoporte += 1
                     horas = horas + 5
+                    if asistioAClase == True: # Asistio a la clase
+                        horasAsistidasConSoporte += 5 # Son horas
                 except Exception:
-                    1
+                    if asistioAClase == True: # Asistio a la clase
+                        horasAsistidasSinSoporte += 5 # Son horas
+                    
         except Exception:
             curso = "---"
             horas = "---"
+            sesionesProgramadas = "---"
+            sesionesConSoporte = "---"
+            horasAsistidasConSoporte = "---"
+            horasAsistidasSinSoporte = "---"
 
         estudiantes.append(
             {"id": estudiante.id,
@@ -138,7 +162,12 @@ def listaMaestrosEstudiantesInscritos(cohorte):
             "jornada": jornada,
             "institucion": institucion,
             "curso": curso,
-            "horas": horas
+            "horas": horas,
+
+            "sesionesProgramadas": sesionesProgramadas,
+            "sesionesConSoporte": sesionesConSoporte,
+            "horasAsistidasConSoporte": horasAsistidasConSoporte,
+            "horasAsistidasSinSoporte": horasAsistidasSinSoporte,
             }
         )
         cont = cont + 1
