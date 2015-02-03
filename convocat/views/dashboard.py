@@ -178,7 +178,17 @@ def listaMaestrosEstudiantesInscritos(cohorte):
         cont = cont + 1
     return estudiantes
 
-def reporteME(request, cohorte):
+def reporteME(request, cohorte=None):
+    valor = request.session.get('cohorte_me')
+    if valor:
+        cohorte = valor
+        del request.session['cohorte_me']
+    elif cohorte:
+        request.session['cohorte_me'] = cohorte
+        return redirect('reporteME')
+    else:
+        cohorte = 1 # valor por defecto
+
     grupo = user_group(request)
     if grupo == None:
         return redirect('home')

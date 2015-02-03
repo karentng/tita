@@ -29,6 +29,7 @@ urlpatterns = patterns('convocat.views.inscripcion',
 
 urlpatterns += patterns('convocat.views.dashboard',
     url(r'^resultados$',      'dashboard', name="dashboard"),
+    url(r'^resultadosME$',      'reporteME', name="reporteME"),
     url(r'^resultadosME/(\d+)$',      'reporteME', name="reporteME"),
     url(r'^impresionME/(\d+)$',      'impresionME', name="impresionME"),
     url(r'^descarga_convocatoria_xls/(\d+)$', 'descarga_convocatoria_xls', name="descarga_convocatoria_xls"),
