@@ -154,6 +154,11 @@ def listaMaestrosEstudiantesInscritos(cohorte):
             horasAsistidasConSoporte = "---"
             horasAsistidasSinSoporte = "---"
 
+        try:
+            curso = curso[0].descripcion
+        except Exception:
+            curso = "---"
+
         estudiantes.append(
             {"id": estudiante.id,
             "item": cont,
