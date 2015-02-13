@@ -11,6 +11,30 @@ from datetime import datetime
 from campus.views import user_group
 import json
 
+def cohorte1(request):
+    estudiante = estudiante_sesion(request)
+    print "aspirante actual=", estudiante
+    if request.method == 'POST':
+        form = EstudianteForm(request.POST, instance=estudiante)
+        if form.is_valid():
+            objeto = form.save()
+            objeto.nombre1 = objeto.nombre1.upper()
+            objeto.nombre2 = objeto.nombre2.upper()
+            objeto.apellido1 = objeto.apellido1.upper()
+            objeto.apellido2 = objeto.apellido2.upper()
+            objeto.direccion = objeto.direccion.upper()
+            objeto.cohorte = 1
+            objeto.save()
+            clave = objeto.numero_inscripcion()
+            request.session['clave_estudiante'] = clave
+            print "clave=",clave
+            return redirect('laborales_DE')
+    else :
+        form = EstudianteForm(instance=estudiante)
+    return render(request, 'inscripcion/datosEstudiante.html', {
+        'form': form,
+    })
+
 def iniciar(request):
     if 'clave_estudiante' in request.session:
         del request.session['clave_estudiante']

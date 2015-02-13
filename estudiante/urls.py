@@ -16,4 +16,5 @@ urlpatterns = patterns('estudiante.views',
     url(r'^estudiante/finalizar/(\d+)$',      'finalizar', name="finalizar_DE"),
     url(r'^estudiante/numeroInscripcionEstudiante/(\d+)$',      'numeroInscripcionEstudiante', name="numeroInscripcionEstudiante"),
     
+    url(r'^estudiante/cohorte1$',      'cohorte1', name="me_cohorte1"),
 )
