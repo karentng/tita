@@ -392,14 +392,15 @@ def tablero_control(request, id_actividad):
             grupo_acceso_actividad = grupo.split('_');
             actividades_permitidas.append(grupo_acceso_actividad[2])
 
-    print actividades_permitidas
-
     usuario_puede_editar_actividad = 'Editar_Actividad_' + id_actividad in grupos_de_usuario
 
     usuario_puede_editar = ((grupo_de_usuario == 'Coordinador' and int(id_actividad) < 14) or (grupo_de_usuario == 'Secretaria') or usuario_puede_editar_actividad)
 
-    estudiantesMulti = Estudiante.objects.filter(acta_compromiso=True, cohorte=1).select_related('estudiante.InfoLaboral__estudiante').select_related('Cursos__estudiantes') if id_actividad == '4' else []
-    estudiantesMulti2 = Estudiante.objects.filter(acta_compromiso=True, cohorte=2).select_related('estudiante.InfoLaboral__estudiante').select_related('Cursos__estudiantes') if id_actividad == '4' else []
+    #estudiantesMulti = Estudiante.objects.filter(acta_compromiso=True, cohorte=1).select_related('estudiante.InfoLaboral__estudiante').select_related('Cursos__estudiantes') if id_actividad == '4' else []
+    estudiantesMulti = InfoLaboral.objects.filter(estudiante__acta_compromiso=True, estudiante__cohorte=1).prefetch_related('estudiante').prefetch_related('grados').prefetch_related('asignaturas').prefetch_related('secretaria_educacion') if id_actividad == '4' else []
+
+    #estudiantesMulti2 = Estudiante.objects.filter(acta_compromiso=True, cohorte=2).select_related('estudiante.InfoLaboral__estudiante').select_related('Cursos__estudiantes') if id_actividad == '4' else []
+    estudiantesMulti2 = InfoLaboral.objects.filter(estudiante__acta_compromiso=True, estudiante__cohorte=2).prefetch_related('estudiante').prefetch_related('grados').prefetch_related('asignaturas').prefetch_related('secretaria_educacion') if id_actividad == '4' else []
     aspirantesMulti = Aspirante.objects.all() if id_actividad == '1' else []
     aspirantesMulti2 = Aspirante2.objects.all() if id_actividad == '1' else []
     variablesPorSede = VariablePorSede.objects.all() if id_actividad == '15' else []
@@ -668,47 +669,43 @@ def descarga_cohorte_xls(request, cohorte):
     font_style = xlwt.XFStyle()
     font_style.alignment.wrap = 1
 
-    maestros_estudiantes = Estudiante.objects.filter(acta_compromiso=True, cohorte=1).select_related('estudiante.InfoLaboral__estudiante').select_related('Cursos__estudiantes') if cohorte == '1' else Estudiante.objects.filter(acta_compromiso=True, cohorte=2).select_related('estudiante.InfoLaboral__estudiante').select_related('Cursos__estudiantes')
+    #maestros_estudiantes = Estudiante.objects.filter(acta_compromiso=True, cohorte=1).select_related('estudiante.InfoLaboral__estudiante').select_related('Cursos__estudiantes') if cohorte == '1' else Estudiante.objects.filter(acta_compromiso=True, cohorte=2).select_related('estudiante.InfoLaboral__estudiante').select_related('Cursos__estudiantes')
+    maestros_estudiantes = InfoLaboral.objects.filter(estudiante__acta_compromiso=True, estudiante__cohorte=int(cohorte)).prefetch_related('estudiante').prefetch_related('grados').prefetch_related('asignaturas').prefetch_related('secretaria_educacion')
 
     for obj in maestros_estudiantes:
         row_num += 1
 
-        infoLaboral = InfoLaboral.objects.filter(estudiante=obj)
         grados = ''
         asignaturas = ''
 
-        if(infoLaboral.count() > 0):
-            infoLaboral = infoLaboral.latest('id')
-
-
-        for grado in infoLaboral.grados.all():
+        for grado in obj.grados.all():
             grados += grado.nombre + '. '
 
-        for asignatura in infoLaboral.asignaturas.all():
+        for asignatura in obj.asignaturas.all():
             asignaturas += asignatura.nombre + '. '
 
         row = [
-            obj.nombre_completo().upper(),
-            obj.numero_documento,
-            infoLaboral.get_sede_display(),
-            infoLaboral.get_jornada_display(),
-            obj.get_sexo_display(),
-            obj.email,
-            obj.email_institucional,
-            obj.municipio.nombre,
-            obj.direccion,
-            obj.telefono,
-            obj.celular,
-            obj.get_nivel_educativo_display(),
-            infoLaboral.secretaria_educacion.nombre,
-            infoLaboral.get_sede_display(),
-            infoLaboral.get_cargo_display(),
-            infoLaboral.get_zona_display(),
-            infoLaboral.get_decreto_docente_display(),
+            obj.estudiante.nombre_completo().upper(),
+            obj.estudiante.numero_documento,
+            obj.get_sede_display(),
+            obj.get_jornada_display(),
+            obj.estudiante.get_sexo_display(),
+            obj.estudiante.email,
+            obj.estudiante.email_institucional,
+            obj.estudiante.municipio.nombre,
+            obj.estudiante.direccion,
+            obj.estudiante.telefono,
+            obj.estudiante.celular,
+            obj.estudiante.get_nivel_educativo_display(),
+            obj.secretaria_educacion.nombre,
+            obj.get_sede_display(),
+            obj.get_cargo_display(),
+            obj.get_zona_display(),
+            obj.get_decreto_docente_display(),
             grados,
-            infoLaboral.poblacion_etnica,
-            infoLaboral.get_nombramiento_display(),
-            infoLaboral.get_tipo_etnoeducador_display(),
+            obj.poblacion_etnica,
+            obj.get_nombramiento_display(),
+            obj.get_tipo_etnoeducador_display(),
             asignaturas
         ]
         for col_num in xrange(len(row)):

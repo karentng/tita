@@ -92,36 +92,39 @@
                             </tr>
                         </tfoot>
                         <tbody>
-                            {% for estudiante in estudiantesMulti %}
+                            {% for obj in estudiantesMulti %}
                                 <tr class="odd gradeX" role="row">
                                     <td>{{forloop.counter}}</td>
-                                    <td>{{estudiante}}</td>
-                                    <td>{{estudiante.numero_documento}}</td>
-                                    {% with infoLaboral=estudiante.infoLaboral %}
-                                        <td>{{infoLaboral.get_sede_display}}</td>
-                                        <td>{{infoLaboral.get_jornada_display}}</td>
-                                        <td>{{estudiante.get_sexo_display}}</td>
-                                        <td>{{estudiante.email}}</td>
-                                        <td>{{estudiante.email_institucional}}</td>
-                                        <td>{{estudiante.municipio}}</td>
-                                        <td>{{estudiante.direccion}}</td>
-                                        <td>{{estudiante.telefono}}</td>
-                                        <td>{{estudiante.celular}}</td>
-                                        <td>{{estudiante.get_nivel_educativo_display}}</td>
-                                        <td>{{infoLaboral.secretaria_educacion}}</td>
-                                        <td>{{infoLaboral.get_sede_display}}</td>
-                                        <td>{{infoLaboral.get_cargo_display}}</td>
-                                        <td>{{infoLaboral.get_zona_display}}</td>
-                                        <td>{{infoLaboral.get_decreto_docente_display}}</td>
-                                        <td>{% for grado in infoLaboral.grados.all %} {{ grado }} {% endfor %}</td>
-                                        <td>{{infoLaboral.poblacion_etnica}}</td>
-                                        <td>{{infoLaboral.get_nombramiento_display}}</td>
-                                        <td>{{infoLaboral.get_tipo_etnoeducador_display}}</td>
-                                        <td>{% for asignatura in infoLaboral.asignaturas.all %}
-                                                {{ asignatura }}
-                                            {% endfor %}
-                                        </td>
-                                    {% endwith %}
+                                    <td>{{obj.estudiante.nombre_completo}}</td>
+                                    <td>{{obj.estudiante.numero_documento}}</td>
+                                    <td>{{obj.get_sede_display}}</td>
+                                    <td>{{obj.get_jornada_display}}</td>
+                                    <td>{{obj.estudiante.get_sexo_display}}</td>
+                                    <td>{{obj.estudiante.email}}</td>
+                                    <td>{{obj.estudiante.email_institucional}}</td>
+                                    <td>{{obj.estudiante.municipio.nombre}}</td>
+                                    <td>{{obj.estudiante.direccion}}</td>
+                                    <td>{{obj.estudiante.telefono}}</td>
+                                    <td>{{obj.estudiante.celular}}</td>
+                                    <td>{{obj.estudiante.get_nivel_educativo_display}}</td>
+                                    <td>{{obj.secretaria_educacion.nombre}}</td>
+                                    <td>{{obj.get_sede_display}}</td>
+                                    <td>{{obj.get_cargo_display}}</td>
+                                    <td>{{obj.get_zona_display}}</td>
+                                    <td>{{obj.get_decreto_docente_display}}</td>
+                                    <td>
+                                        {% for grado in obj.grados.all %} 
+                                            {{grado}}. 
+                                        {% endfor %}
+                                    </td>
+                                    <td>{{obj.poblacion_etnica}}</td>
+                                    <td>{{obj.get_nombramiento_display}}</td>
+                                    <td>{{obj.get_tipo_etnoeducador_display}}</td>
+                                    <td>
+                                        {% for asignatura in obj.asignaturas.all %}
+                                            {{asignatura}}
+                                        {% endfor %}
+                                    </td>
                                 </tr>
                             {% endfor %}
                         </tbody>
