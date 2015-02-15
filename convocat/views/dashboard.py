@@ -121,17 +121,8 @@ def listaMaestrosEstudiantesInscritos(cohorte):
                     sesionesConSoporte += 1
                     horasAsistidasConSoporte += 5 # Son horas
                 except Exception:
-<<<<<<< HEAD
                     horasAsistidasSinSoporte += 5 # Son horas
-                    
-        except Exception as e:
-            print e
-=======
-                    if asistioAClase == True: # Asistio a la clase
-                        horasAsistidasSinSoporte += 5 # Son horas
-
-        except Exception:
->>>>>>> dc85734efe538433738650b9836aaf800fdb79cb
+        except Exception :
             curso = "---"
             horas = "---"
             sesionesProgramadas = "---"
