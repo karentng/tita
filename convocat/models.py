@@ -71,8 +71,8 @@ class Aspirante(models.Model):
     def nombreCompleto(self):
         return (u"%s %s %s %s"%(self.nombre1,self.nombre2 or '', self.apellido1,self.apellido2)).strip() or "-"
 
-    def conocimientosEspecificos(self):
-        return ConocimientosEspecificos.objects.filter(aspirante=self).latest('id')
+    #def conocimientosEspecificos(self):
+    #    return ConocimientosEspecificos.objects.filter(aspirante=self).latest('id')
 
     def calcular_puntaje(self):
         def maximo_puntaje(objetos):
