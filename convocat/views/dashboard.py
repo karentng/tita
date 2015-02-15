@@ -101,52 +101,30 @@ def buscarEstudiante(lista, estudiante):
 
 def listaMaestrosEstudiantesInscritos(cohorte):
     estudiantes = []
-    cont = 1
-    #students = Estudiante.objects.filter(acta_compromiso=True).select_related('estudiante.InfoLaboral__estudiante').select_related('Cursos__estudiantes')
-    students = Estudiante.objects.filter(cohorte=cohorte, acta_compromiso=True).select_related('estudiante.InfoLaboral__estudiante').select_related('Cursos__estudiantes')
-    c = 0
-    for estudiante in students:
-        jornada = ""
-        institucion = ""
+    estudiantesMulti = InfoLaboral.objects.filter(estudiante__acta_compromiso=True, estudiante__cohorte=cohorte).prefetch_related('estudiante')
+    for i in estudiantesMulti:
+        estudiante = i.estudiante
         try:
-            il = InfoLaboral.objects.get(estudiante=estudiante)
-            try:
-                jornada = il.get_jornada_display
-            except Exception:
-                jornada = "---"
-            try:
-                institucion = il.get_sede_display
-            except Exception:
-                institucion = "---"
-        except Exception:
-            jornada = "---"
-            institucion = "---"
-
-        try:
-
             curso = Cursos.objects.filter(estudiantes=estudiante)
-            clases = Clases.objects.filter(asistentes=estudiante, curso=curso)
-            horas = 0
+            clasesTotalesCurso = Clases.objects.filter(curso=curso)
+            clases = clasesTotalesCurso.filter(asistentes=estudiante)
 
-            sesionesProgramadas = clases.count()
+            horas = clasesTotalesCurso.count() * 5
+            sesionesProgramadas = clasesTotalesCurso.count()
             sesionesConSoporte = 0
             horasAsistidasConSoporte = 0
             horasAsistidasSinSoporte = 0
 
             for clase in clases:
-                asistioAClase = buscarEstudiante(clase.asistentes.all(), estudiante)
-
                 try:
                     SoporteClases.objects.get(clase=clase)
                     sesionesConSoporte += 1
-                    horas = horas + 5
-                    if asistioAClase == True: # Asistio a la clase
-                        horasAsistidasConSoporte += 5 # Son horas
+                    horasAsistidasConSoporte += 5 # Son horas
                 except Exception:
-                    if asistioAClase == True: # Asistio a la clase
-                        horasAsistidasSinSoporte += 5 # Son horas
+                    horasAsistidasSinSoporte += 5 # Son horas
                     
-        except Exception:
+        except Exception as e:
+            print e
             curso = "---"
             horas = "---"
             sesionesProgramadas = "---"
@@ -160,22 +138,15 @@ def listaMaestrosEstudiantesInscritos(cohorte):
             curso = "---"
 
         estudiantes.append(
-            {"id": estudiante.id,
-            "item": cont,
-            "nombre": estudiante,
-            "cedula": estudiante.numero_documento,
-            "jornada": jornada,
-            "institucion": institucion,
+            {"datos": i,
             "curso": curso,
             "horas": horas,
-
             "sesionesProgramadas": sesionesProgramadas,
             "sesionesConSoporte": sesionesConSoporte,
             "horasAsistidasConSoporte": horasAsistidasConSoporte,
             "horasAsistidasSinSoporte": horasAsistidasSinSoporte,
             }
         )
-        cont = cont + 1
     return estudiantes
 
 def reporteME(request, cohorte=None):
