@@ -145,7 +145,7 @@ def listaMaestrosEstudiantesInscritos(cohorte):
                 except Exception:
                     if asistioAClase == True: # Asistio a la clase
                         horasAsistidasSinSoporte += 5 # Son horas
-                    
+
         except Exception:
             curso = "---"
             horas = "---"
@@ -401,8 +401,10 @@ def tablero_control(request, id_actividad):
 
     #estudiantesMulti2 = Estudiante.objects.filter(acta_compromiso=True, cohorte=2).select_related('estudiante.InfoLaboral__estudiante').select_related('Cursos__estudiantes') if id_actividad == '4' else []
     estudiantesMulti2 = InfoLaboral.objects.filter(estudiante__acta_compromiso=True, estudiante__cohorte=2).prefetch_related('estudiante').prefetch_related('grados').prefetch_related('asignaturas').prefetch_related('secretaria_educacion') if id_actividad == '4' else []
-    aspirantesMulti = Aspirante.objects.all() if id_actividad == '1' else []
-    aspirantesMulti2 = Aspirante2.objects.all() if id_actividad == '1' else []
+    #aspirantesMulti = Aspirante.objects.all() if id_actividad == '1' else []
+    aspirantesMulti = Aspirante.objects.select_related('ConocimientosEspecificos').prefetch_related('conocimientosespecificos').prefetch_related('municipio_nacimiento').prefetch_related('municipio') if id_actividad == '1' else []
+    #aspirantesMulti2 = Aspirante2.objects.all() if id_actividad == '1' else []
+    aspirantesMulti2 = Aspirante2.objects.select_related('ConocimientosEspecificos').prefetch_related('conocimientosespecificos').prefetch_related('municipio_nacimiento').prefetch_related('municipio') if id_actividad == '1' else []
     variablesPorSede = VariablePorSede.objects.all() if id_actividad == '15' else []
     variablesPorAula = VariablePorAula.objects.all() if id_actividad == '15' else []
     estudiantes = listaMaestrosEstudiantesInscritos(1) if id_actividad == '4' else []
@@ -584,15 +586,10 @@ def descarga_convocatoria_xls(request, convocatoria):
     font_style = xlwt.XFStyle()
     font_style.alignment.wrap = 1
 
-    maestros_aspirantes = Aspirante.objects.all() if convocatoria == '1' else Aspirante2.objects.all()
+    maestros_aspirantes = Aspirante.objects.select_related('ConocimientosEspecificos').prefetch_related('conocimientosespecificos').prefetch_related('municipio_nacimiento').prefetch_related('municipio')
 
     for obj in maestros_aspirantes:
         row_num += 1
-
-        conocimientosEspecificos = ConocimientosEspecificos.objects.filter(aspirante=obj)
-
-        if(conocimientosEspecificos.count() > 0):
-            conocimientosEspecificos = conocimientosEspecificos.latest('id')
 
         row = [
             obj.nombreCompleto().upper(),
@@ -610,14 +607,15 @@ def descarga_convocatoria_xls(request, convocatoria):
             obj.institucion_actual,
             obj.municipio_institucion.nombre if obj.municipio_institucion != None else '-',
             obj.get_jornada_display(),
-            conocimientosEspecificos.get_conocimiento1_display() if hasattr(conocimientosEspecificos, 'get_conocimiento1_display') else '-',
-            conocimientosEspecificos.get_conocimiento2_display() if hasattr(conocimientosEspecificos, 'get_conocimiento2_display') else '-',
-            conocimientosEspecificos.get_conocimiento3_display() if hasattr(conocimientosEspecificos, 'get_conocimiento3_display') else '-',
-            conocimientosEspecificos.get_conocimiento4_display() if hasattr(conocimientosEspecificos, 'get_conocimiento4_display') else '-',
-            conocimientosEspecificos.get_conocimiento5_display() if hasattr(conocimientosEspecificos, 'get_conocimiento5_display') else '-',
-            conocimientosEspecificos.get_conocimiento6_display() if hasattr(conocimientosEspecificos, 'get_conocimiento6_display') else '-',
-            conocimientosEspecificos.get_conocimiento7_display() if hasattr(conocimientosEspecificos, 'get_conocimiento7_display') else '-',
-            conocimientosEspecificos.get_conocimiento8_display() if hasattr(conocimientosEspecificos, 'get_conocimiento8_display') else '-',
+            obj.conocimientosespecificos.get_conocimiento1_display() if hasattr(obj, 'conocimientosespecificos') else '-',
+            obj.conocimientosespecificos.get_conocimiento2_display() if hasattr(obj, 'conocimientosespecificos') else '-',
+            obj.conocimientosespecificos.get_conocimiento2_display() if hasattr(obj, 'conocimientosespecificos') else '-',
+            obj.conocimientosespecificos.get_conocimiento3_display() if hasattr(obj, 'conocimientosespecificos') else '-',
+            obj.conocimientosespecificos.get_conocimiento4_display() if hasattr(obj, 'conocimientosespecificos') else '-',
+            obj.conocimientosespecificos.get_conocimiento5_display() if hasattr(obj, 'conocimientosespecificos') else '-',
+            obj.conocimientosespecificos.get_conocimiento6_display() if hasattr(obj, 'conocimientosespecificos') else '-',
+            obj.conocimientosespecificos.get_conocimiento7_display() if hasattr(obj, 'conocimientosespecificos') else '-',
+            obj.conocimientosespecificos.get_conocimiento8_display() if hasattr(obj, 'conocimientosespecificos') else '-',
 
         ]
         for col_num in xrange(len(row)):

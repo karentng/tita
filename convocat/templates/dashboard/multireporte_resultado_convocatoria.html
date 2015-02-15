@@ -90,16 +90,14 @@
                                     <td>{{aspirante.institucion_actual}}</td>
                                     <td>{{aspirante.municipio_institucion}}</td>
                                     <td>{{aspirante.get_jornada_display}}</td>
-                                    {% with conocimientosEspecificos=aspirante.conocimientosEspecificos %}
-                                        <td>{{conocimientosEspecificos.get_conocimiento1_display}}</td>
-                                        <td>{{conocimientosEspecificos.get_conocimiento2_display}}</td>
-                                        <td>{{conocimientosEspecificos.get_conocimiento3_display}}</td>
-                                        <td>{{conocimientosEspecificos.get_conocimiento4_display}}</td>
-                                        <td>{{conocimientosEspecificos.get_conocimiento5_display}}</td>
-                                        <td>{{conocimientosEspecificos.get_conocimiento6_display}}</td>
-                                        <td>{{conocimientosEspecificos.get_conocimiento7_display}}</td>
-                                        <td>{{conocimientosEspecificos.get_conocimiento8_display}}</td>
-                                    {% endwith %}
+                                    <td>{{aspirante.conocimientosespecificos.get_conocimiento1_display}}</td>
+                                    <td>{{aspirante.conocimientosespecificos.get_conocimiento2_display}}</td>
+                                    <td>{{aspirante.conocimientosespecificos.get_conocimiento3_display}}</td>
+                                    <td>{{aspirante.conocimientosespecificos.get_conocimiento4_display}}</td>
+                                    <td>{{aspirante.conocimientosespecificos.get_conocimiento5_display}}</td>
+                                    <td>{{aspirante.conocimientosespecificos.get_conocimiento6_display}}</td>
+                                    <td>{{aspirante.conocimientosespecificos.get_conocimiento7_display}}</td>
+                                    <td>{{aspirante.conocimientosespecificos.get_conocimiento8_display}}</td>
                                 </tr>
                             {% endfor %}
                         </tbody>
