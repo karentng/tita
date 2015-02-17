@@ -9,7 +9,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         archivo = open("InscritosBilinguismo.csv","w") 
         writer = csv.writer(archivo, delimiter=';')
-        writer.writerow(["Nombre Completo", u"Cédula".encode('latin-1'), u"Género".encode('latin-1'),
+        writer.writerow(["Terminado", "Nombre Completo", u"Cédula".encode('latin-1'), u"Género".encode('latin-1'),
             u"Correo Personal".encode('latin-1'), "Correo Institucional", "Municipio",
             u"Teléfono Fijo".encode('latin-1'), "Celular", u"Dirección".encode('latin-1'), "Nivel Educativo",
             "Sede", "Cargo", "Zona", "Jornada", "Asignaturas",
@@ -63,7 +63,12 @@ class Command(BaseCommand):
             num_doc = aspirante.numero_documento
             municipio = Municipio.objects.get(id=aspirante.municipio_id)
 
-            arreglo = [nombre, num_doc, aspirante.sexo, aspirante.email, aspirante.email_institucional,
+            if aspirante.finalizada == True:
+                finalizado = "SI"
+            else:
+                finalizado = "NO"
+
+            arreglo = [finalizado, nombre, num_doc, aspirante.sexo, aspirante.email, aspirante.email_institucional,
             municipio.nombre.encode('latin-1'), aspirante.telefono, aspirante.celular,
             aspirante.direccion.encode('latin-1'), aspirante.get_nivel_educativo_display().encode('latin-1'),
             sede, cargo, zona, jornada, asignaturas, grados, decreto_docente,
