@@ -41,7 +41,6 @@ class Command(BaseCommand):
                 else:
                     decreto_docente+= " - "+"D.L 1278 de 2002"
             except Exception as e:
-                print e
                 sede = "---"
                 cargo = "---"
                 zona = "---"
