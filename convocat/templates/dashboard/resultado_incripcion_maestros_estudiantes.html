@@ -28,19 +28,18 @@
                         <tbody>
                             {% for estudiante in estudiantes %}
                             <tr class="odd gradeX">
-                                <td>{{estudiante.item}}</td>
-                                <td>{{estudiante.nombre}}</td>
-                                <td>{{estudiante.cedula}}</td>
-                                <td>{{estudiante.institucion}}</td>
-                                <td>{{estudiante.jornada}}</td>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{estudiante.datos.estudiante}}</td>
+                                <td>{{estudiante.datos.estudiante.numero_documento}}</td>
+                                <td>{{estudiante.datos.get_sede_display}}</td>
+                                <td>{{estudiante.datos.get_jornada_display}}</td>
                                 <td>{{estudiante.curso}}</td>
-
                                 <td>{{estudiante.sesionesProgramadas}}</td>
                                 <td>{{estudiante.sesionesConSoporte}}</td>
                                 <td>{{estudiante.horasAsistidasConSoporte}}</td>
                                 <td>{{estudiante.horasAsistidasSinSoporte}}</td>
                                 <td>
-                                    <a href="{% url 'impresionME' estudiante.id %}" target="_blank"><button class="btn btn-primary">Detalles</button></a>
+                                    <a href="{% url 'impresionME' estudiante.datos.estudiante.id %}" target="_blank"><button class="btn btn-primary">Detalles</button></a>
                                 </td>
                             </tr>
                             {% endfor %}
