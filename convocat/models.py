@@ -340,7 +340,7 @@ def crear_ruta_archivo_tablero_control(instance, filename):
 class Archivo(models.Model):
     usuario = models.ForeignKey(User)
     nombre = models.CharField(max_length=255, verbose_name='nombre')
-    ruta = models.FileField(upload_to=crear_ruta_archivo_tablero_control, null=False, blank=False, verbose_name=u'Archivo')
+    ruta = models.FileField(upload_to=crear_ruta_archivo_tablero_control, max_length=500, null=False, blank=False, verbose_name=u'Archivo')
     descripcion = models.CharField(max_length=255, verbose_name='descripcion', null=True, blank=True,)
     grupo = models.ForeignKey("Grupo", verbose_name=u'Carpeta')
     activo = models.BooleanField(default=True,)
@@ -409,7 +409,7 @@ class ActaDeSeguimiento(models.Model):
     usuario = models.ForeignKey(User)
     fecha = models.DateField(default = datetime.datetime.now(),verbose_name='fecha')
     nombre = models.CharField(max_length=255, verbose_name='nombre')
-    ruta = models.FileField(upload_to=crear_ruta_acta_seguimiento, null=False, blank=False, verbose_name=u'Acta')
+    ruta = models.FileField(upload_to=crear_ruta_acta_seguimiento, max_length=500, null=False, blank=False, verbose_name=u'Acta')
     descripcion = models.CharField(max_length=255, verbose_name='descripcion', null=True, blank=True,)
     activo = models.BooleanField(default=True,)
 
