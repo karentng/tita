@@ -722,6 +722,7 @@ def diplomado(request):
 
         cursovar = Cursos.objects.get(id=i.curso.id)
         cursos = str(cursovar.descripcion)
+        cohorte = i.curso.cohorte
         
 
         events.append({
@@ -733,7 +734,7 @@ def diplomado(request):
             'hora_inicio': hora_inicio,
             'hora_finalizacion': hora_finalizacion,
             'diasEvento': diasEvento,
-            
+            'cohorte': " (Cohorte "+str(cohorte)+")",
         })
     
     return render(request, 'diplomado.html', {
@@ -1020,7 +1021,10 @@ def curso(request):
     if request.method == 'POST':
         form = CursoForm(request.POST, sede=sede, jornada=jornada, cohorte=cohorte)
         if form.is_valid():
-            objeto = form.save()
+            objeto = form.save(commit=False)
+            objeto.cohorte = 2
+            objeto.save()
+            form.save_m2m()
             
             '''response = redirect('add_curso')
             response['Location'] +="?sedes="+ sedes+'&jornada='+jornada
@@ -1053,6 +1057,7 @@ def formador(request):
         form = FormadorForm(request.POST)
         if form.is_valid():
             objeto = form.save(commit=False)
+            objeto.cohorte = 2
             formador = Formador.objects.filter(usuario=objeto.usuario)
             if not formador:
                 objeto.save()

@@ -131,8 +131,9 @@ class CursoForm(forms.ModelForm):
         sede = kwargs.pop('sede', None)
         cohorte = kwargs.pop('cohorte', None)
         super(CursoForm, self).__init__(*args, **kwargs)
-        #self.fields['formador1'].queryset = self.fields['formador1'].queryset.exclude( Q(formador1 = Cursos.objects.all()) | Q( formador2 =  Cursos.objects.all()))
-        #self.fields['formador2'].queryset = self.fields['formador2'].queryset.exclude( Q(formador1 = Cursos.objects.all()) | Q( formador2 =  Cursos.objects.all()))
+        # Formadores solamente de la cohorte 2
+        self.fields['formador1'].queryset = self.fields['formador1'].queryset.filter(cohorte=cohorte)
+        self.fields['formador2'].queryset = self.fields['formador2'].queryset.filter(cohorte=cohorte)
         #self.fields['estudiantes'].queryset = self.fields['estudiantes'].queryset.exclude(estudiantes = Cursos.objects.all())
         if sede and jornada :
             estudiantes = InfoLaboral.objects.filter(sede__in=sede, jornada=jornada).values('estudiante')

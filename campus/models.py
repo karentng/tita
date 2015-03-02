@@ -60,6 +60,7 @@ class Formador(models.Model):
     tutor = models.CharField( max_length=255, choices=TUTORES, verbose_name='Mentor')
     #aspirante = models.ForeignKey(Aspirante, verbose_name='aspirante', null=True, blank=True)
     usuario = models.ForeignKey(User)
+    cohorte = models.IntegerField(default=1)
 
     def __unicode__(self):
         return (u"%s %s"%(self.nombre1,self.apellido1))
@@ -179,18 +180,16 @@ class Cursos(models.Model):
         ('Principal YUMBO-IE ANTONIA SANTOS - SEDE ELIAS QUINTERO', 'Principal YUMBO-IE ANTONIA SANTOS - SEDE ELIAS QUINTERO'),
         ('Principal YUMBO-IE JUAN XXIII - SEDE PRINCIPAL', 'Principal YUMBO-IE JUAN XXIII - SEDE PRINCIPAL'),
         ('Principal YUMBO-IE POLICARPA SALAVARRIETA - SEDE PRINCIPAL', 'Principal YUMBO-IE POLICARPA SALAVARRIETA - SEDE PRINCIPAL'),
-       
     )
-
     descripcion = models.CharField(max_length=255, verbose_name=u'Nombre')
     institucion = models.CharField(choices=SEDES, max_length=200, verbose_name="institución")
     formador1 = models.ForeignKey(Formador, related_name="formador1",verbose_name="formador no. 1")
     formador2 = models.ForeignKey(Formador, related_name="formador2",verbose_name="formador no. 2", blank=True, null=True)
     estudiantes = models.ManyToManyField(Estudiante, blank=True, verbose_name='Estudiantes')
+    cohorte = models.IntegerField(default=1)
 
     def __unicode__(self):
         return (u"%s - %s y %s"%(self.descripcion,self.formador1, self.formador2))
-
 
 class Curso(models.Model):
     descripcion = models.CharField(max_length=255, verbose_name=u'Nombre')

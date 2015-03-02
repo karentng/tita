@@ -72,7 +72,12 @@
                             </td>
                             <td >
                                 {{ curso.formador1 }} <br>
-                                {{ curso.formador2 }}
+
+                                {% if curso.formador2 %}
+                                    {{ curso.formador2 }}
+                                {% else %}
+                                    No definido
+                                {% endif %}
                             </td>
                             <td >
                                

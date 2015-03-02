@@ -54,6 +54,9 @@
                                 Apellido
                             </td>
                             <td class="info">
+                                Cohorte
+                            </td>
+                            <td class="info">
                                 -
                             </td>
                            
@@ -68,7 +71,9 @@
                             <td >
                                 {{ formador.apellido1 }} {{ formador.apellido2 }}
                             </td>
-                            
+                            <td>
+                                {{formador.cohorte}}
+                            </td>
                             <td >
                                
                                 <a href= "{% url 'detalle_formador' formador.id  %}"  >Ver detalles</a>
