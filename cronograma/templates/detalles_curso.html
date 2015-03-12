@@ -52,7 +52,11 @@
         {% bootstrap_field form.formador1 layout="horizontal" %}
         {% bootstrap_field form.formador2 layout="horizontal" %}
         <div style="width:auto;height:200px;overflow-y:scroll;overflow-x:hidden; margin-bottom:10px">
-            {% bootstrap_field form.estudiantes layout="horizontal" %}
+            {% if cohorte != 3 %}
+                {% bootstrap_field form.estudiantes layout="horizontal" %}
+            {% else %}
+                {% bootstrap_field form.estudiantes_bilinguismo layout="horizontal" %}
+            {% endif %}
         </div>
         <br>
         <center>

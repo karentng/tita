@@ -1022,7 +1022,10 @@ def curso(request):
         form = CursoForm(request.POST, sede=sede, jornada=jornada, cohorte=cohorte)
         if form.is_valid():
             objeto = form.save(commit=False)
-            objeto.cohorte = 2
+            if cohorte == '3':
+                objeto.cohorte = 3
+            else:
+                objeto.cohorte = 2
             objeto.save()
             form.save_m2m()
             
@@ -1041,6 +1044,7 @@ def curso(request):
 
     return render(request, 'curso.html', {
         'form': form,
+        'cohorte': cohorte,
         'user_group': user_group(request),
         'opcion_menu': 5,
         'infos': infos,
@@ -1135,7 +1139,7 @@ def lista_estudiantes(request, id):
     
     return render(request, 'lista_estudiantes.html', {'estudiante_list': estudiante_list,  'user_group': user_group(request),
         'opcion_menu': 5, 'curso':cursonombre, 'clase':clasenombre, 'clase_fecha':clasefecha, 
-        'formador1':formador1,'formador2':formador2, 'institucion':institucion,},
+        'formador1':formador1,'formador2':formador2, 'institucion':institucion, 'cursoTotal': curso},
         )
 
 def lista_acompanamiento(request, id):
@@ -1204,12 +1208,14 @@ def detalle_curso(request, id):
             return redirect('gestion_cursos')
     else:
         form = CursoMForm(instance=curso)
-
+    print "------------"
+    print curso.cohorte
     return render(request, 'detalles_curso.html', {
         'form': form, 
         'user_group': user_group(request),
         'opcion_menu': 5,
         'curso':curso.id,
+        'cohorte': curso.cohorte,
     })
 
 def reporte_conformacion_curso(request, id):

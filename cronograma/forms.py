@@ -132,35 +132,46 @@ class CursoForm(forms.ModelForm):
         cohorte = kwargs.pop('cohorte', None)
         super(CursoForm, self).__init__(*args, **kwargs)
         # Formadores solamente de la cohorte 2
-        self.fields['formador1'].queryset = self.fields['formador1'].queryset.filter(cohorte=cohorte)
-        self.fields['formador2'].queryset = self.fields['formador2'].queryset.filter(cohorte=cohorte)
-        #self.fields['estudiantes'].queryset = self.fields['estudiantes'].queryset.exclude(estudiantes = Cursos.objects.all())
-        if sede and jornada :
-            estudiantes = InfoLaboral.objects.filter(sede__in=sede, jornada=jornada).values('estudiante')
-            ids = []
+        if cohorte == '3':
+            self.fields['estudiantes_bilinguismo'].queryset = self.fields['estudiantes_bilinguismo'].queryset.filter(finalizada=True)
+            del self.fields['estudiantes']
+        else:
+            del self.fields['estudiantes_bilinguismo']
+            self.fields['formador1'].queryset = self.fields['formador1'].queryset.filter(cohorte=cohorte)
+            self.fields['formador2'].queryset = self.fields['formador2'].queryset.filter(cohorte=cohorte)
+            #self.fields['estudiantes'].queryset = self.fields['estudiantes'].queryset.exclude(estudiantes = Cursos.objects.all())
+            if sede and jornada :
+                estudiantes = InfoLaboral.objects.filter(sede__in=sede, jornada=jornada).values('estudiante')
+                ids = []
 
-            estuds = Cursos.objects.values('estudiantes')
+                estuds = Cursos.objects.values('estudiantes')
 
-            for est in estudiantes:
-                ids.append(est['estudiante'])
+                for est in estudiantes:
+                    ids.append(est['estudiante'])
 
-            estu = []
-            for est in estu:
-                estu.append(est['estudiante'])
-            
-            #self.fields['estudiantes'].queryset = Estudiante.objects.filter(id__in=ids)
-            self.fields['estudiantes'].queryset = Estudiante.objects.filter(id__in=ids, cohorte=cohorte).exclude(id__in=estu) 
+                estu = []
+                for est in estu:
+                    estu.append(est['estudiante'])
+                
+                #self.fields['estudiantes'].queryset = Estudiante.objects.filter(id__in=ids)
+                self.fields['estudiantes'].queryset = Estudiante.objects.filter(id__in=ids, cohorte=cohorte).exclude(id__in=estu) 
     class Meta:
         model = Cursos
-        fields = ('descripcion','institucion','formador1','formador2', 'estudiantes',)
-        widgets = {'estudiantes': forms.CheckboxSelectMultiple()}
+        fields = ('descripcion','institucion','formador1','formador2', 'estudiantes', 'estudiantes_bilinguismo')
+        widgets = {
+            'estudiantes': forms.CheckboxSelectMultiple(),
+            'estudiantes_bilinguismo': forms.CheckboxSelectMultiple(),
+        }
 
 class CursoMForm(forms.ModelForm):
     
     class Meta:
         model = Cursos
-        fields = ('descripcion','institucion','formador1','formador2', 'estudiantes',)
-        widgets = {'estudiantes': forms.CheckboxSelectMultiple()}            
+        fields = ('descripcion','institucion','formador1','formador2', 'estudiantes', 'estudiantes_bilinguismo')
+        widgets = {
+            'estudiantes': forms.CheckboxSelectMultiple(),
+            'estudiantes_bilinguismo': forms.CheckboxSelectMultiple(),
+        }
 
 class FormadorForm(forms.ModelForm):
 
@@ -175,7 +186,7 @@ class FormadorForm(forms.ModelForm):
 class EstudiantesCurso(forms.Form):
     sedes = forms.MultipleChoiceField(widget=Select2MultipleWidget(), choices=SEDES)
     jornadas = forms.ChoiceField(widget=forms.Select(), choices=JORNADAS)
-    cohorte = forms.ChoiceField(choices=((1, 1), (2, 2),))
+    cohorte = forms.ChoiceField(choices=((1, "Cohorte 1"), (2, "Cohorte 2"), (3, "Bilingüismo"),), label="Opciones")
 
 class FiltroCronograma(forms.Form):
     #sedes = forms.MultipleChoiceField(widget=Select2MultipleWidget(), choices=SEDES)

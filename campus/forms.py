@@ -14,14 +14,23 @@ class AsistenciaForm(forms.ModelForm):
         super(AsistenciaForm, self).__init__(*args, **kwargs)
         #asistentes = forms.ModelMultipleChoiceField(initial=True, widget=forms.CheckboxSelectMultiple())
         laclase = self.instance
-        self.fields['asistentes'].queryset = laclase.curso.estudiantes.all()    
+
+        if laclase.curso.cohorte != 3:
+            self.fields['asistentes'].queryset = laclase.curso.estudiantes.all()
+            del self.fields['asistentes_bilinguismo']
+        else:
+            self.fields['asistentes_bilinguismo'].queryset = laclase.curso.estudiantes_bilinguismo.all()
+            del self.fields['asistentes']
 
     class Meta:
         model = Clases
-        fields = ('asistentes','observacion')
+        fields = ('asistentes', 'asistentes_bilinguismo', 'observacion')
         #ModelMultipleChoiceField(Numbers.objects.all(), required=True, widget=forms.CheckboxSelectMultiple(), label='Select No')
-        widgets = {'asistentes': forms.CheckboxSelectMultiple(attrs={"checked":""}),
-                   'observacion': forms.Textarea(attrs={'rows': 4})}
+        widgets = {
+            'asistentes': forms.CheckboxSelectMultiple(attrs={"checked":""}),
+            'asistentes_bilinguismo': forms.CheckboxSelectMultiple(attrs={"checked":""}),
+            'observacion': forms.Textarea(attrs={'rows': 4}),
+        }
 
     
 
@@ -84,11 +93,11 @@ class ActividadAsistenciaForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         idCurso = kwargs.pop('idCurso')
         super(ActividadAsistenciaForm, self).__init__(*args, **kwargs)
-        self.fields['estudiantes'].queryset = idCurso.estudiantes.all()
+        self.fields['estudiantes'].queryset = idCurso.estudiantes.all()   
 
     class Meta:
         model = Actividad
         fields = ('estudiantes',)
         widgets = {
-            'estudiantes': forms.CheckboxSelectMultiple()
+            'estudiantes': forms.CheckboxSelectMultiple(),
         }

@@ -116,24 +116,45 @@
                         </tr>
                         </thead>          
 
-                    {%for estudiante in estudiante_list%}
-                        <tr>
-                            <tbody>
-                            <td >
-                            {{forloop.counter}} {{estudiante.nombre1}} {{estudiante.apellido1}}                     
-                            </td>
-                            <td >
-                                {{estudiante.numero_documento}}                
-                            </td>
-                            {% if user_group == "Formador" %}
-                            <td >
-                                                     
-                            </td>
-                            {%endif%}
-                        </tbody>
-                        </tr> 
+                    {% if cursoTotal.cohorte != 3 %}
+                        {%for estudiante in estudiante_list%}
+                            <tr>
+                                <tbody>
+                                <td >
+                                {{forloop.counter}} {{estudiante.nombre1}} {{estudiante.apellido1}}                     
+                                </td>
+                                <td >
+                                    {{estudiante.numero_documento}}                
+                                </td>
+                                {% if user_group == "Formador" %}
+                                <td >
+                                                         
+                                </td>
+                                {%endif%}
+                            </tbody>
+                            </tr> 
 
-                    {%endfor%}
+                        {%endfor%}
+                    {% else %}
+                        {%for estudiante in cursoTotal.estudiantes_bilinguismo.all %}
+                        <tr>
+                                <tbody>
+                                <td >
+                                {{forloop.counter}} {{estudiante.nombre1}} {{estudiante.apellido1}}                     
+                                </td>
+                                <td >
+                                    {{estudiante.numero_documento}}                
+                                </td>
+                                {% if user_group == "Formador" %}
+                                <td >
+                                                         
+                                </td>
+                                {%endif%}
+                            </tbody>
+                            </tr> 
+
+                        {%endfor%}
+                    {% endif %}
                     </table>
 
 

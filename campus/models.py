@@ -4,6 +4,7 @@ from django.db import models
 from convocat.models import Municipio, Aspirante
 from django.contrib.auth.models import User
 from estudiante.models import Cargo, Grado, Asignatura, SecretariaEducacion, CertificacionTIC, InfoLaboral
+from bilinguismo.models import Bilinguismo
 
 """" esto se esta usando en algun lado???
 GRADOS = (
@@ -186,6 +187,7 @@ class Cursos(models.Model):
     formador1 = models.ForeignKey(Formador, related_name="formador1",verbose_name="formador no. 1")
     formador2 = models.ForeignKey(Formador, related_name="formador2",verbose_name="formador no. 2", blank=True, null=True)
     estudiantes = models.ManyToManyField(Estudiante, blank=True, verbose_name='Estudiantes')
+    estudiantes_bilinguismo = models.ManyToManyField(Bilinguismo, blank=True, verbose_name='Estudiantes de Bilinguismo')
     cohorte = models.IntegerField(default=1)
 
     def __unicode__(self):
@@ -334,6 +336,7 @@ class Clases(models.Model):
     duracion = models.PositiveIntegerField(help_text='Seleccione el numero de horas (ej: 1)')
     curso = models.ForeignKey(Cursos)
     asistentes = models.ManyToManyField(Estudiante, verbose_name='Seleccione las personas que asistieron a la clase')
+    asistentes_bilinguismo = models.ManyToManyField(Bilinguismo, blank=True, verbose_name='Asistentes de Bilinguismo')
     descripcion = models.CharField( max_length=1000, null=True, blank=True, verbose_name="descripción")
     estado = models.BooleanField(default=True)
     observacion = models.CharField( max_length=1500, null=True, blank=True, verbose_name="observaciones")
