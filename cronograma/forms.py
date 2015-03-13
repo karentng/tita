@@ -134,9 +134,13 @@ class CursoForm(forms.ModelForm):
         # Formadores solamente de la cohorte 2
         if cohorte == '3':
             self.fields['estudiantes_bilinguismo'].queryset = self.fields['estudiantes_bilinguismo'].queryset.filter(finalizada=True)
+            self.fields['institucion'].choices = self.fields['institucion'].choices[-4:]
+
             del self.fields['estudiantes']
         else:
             del self.fields['estudiantes_bilinguismo']
+            self.fields['institucion'].choices = self.fields['institucion'].choices[:-5]
+
             self.fields['formador1'].queryset = self.fields['formador1'].queryset.filter(cohorte=cohorte)
             self.fields['formador2'].queryset = self.fields['formador2'].queryset.filter(cohorte=cohorte)
             #self.fields['estudiantes'].queryset = self.fields['estudiantes'].queryset.exclude(estudiantes = Cursos.objects.all())

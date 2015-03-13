@@ -393,8 +393,11 @@ def cronograma(request):
 
 
 def menor10(val):
-    if val < 10:
-        return "0"+str(val)
+    if val < 100:
+        if val < 10:
+            return "00"+str(val)
+        else:
+            return "0"+str(val)
     return str(val)
 
 def diplomado(request):
@@ -1088,9 +1091,10 @@ def reporte_cursos(request, limit=100):
     curso_list = Cursos.objects.all() 
     
     for i in curso_list:
-        numero_curso = i.descripcion[6:] 
-        numero_curso = menor10(int(numero_curso))
-        i.descripcion = i.descripcion[:6]+numero_curso
+        descripcion = i.descripcion.split(" ")
+        #numero_curso = i.descripcion[6:]
+        #numero_curso = menor10(int(numero_curso))
+        i.descripcion = descripcion[0]+" "+menor10(int(descripcion[1])) #i.descripcion[:6]+numero_curso
         i.save()
 
     curso_list = Cursos.objects.all().order_by('descripcion') 

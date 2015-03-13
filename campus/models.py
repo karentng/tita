@@ -181,6 +181,13 @@ class Cursos(models.Model):
         ('Principal YUMBO-IE ANTONIA SANTOS - SEDE ELIAS QUINTERO', 'Principal YUMBO-IE ANTONIA SANTOS - SEDE ELIAS QUINTERO'),
         ('Principal YUMBO-IE JUAN XXIII - SEDE PRINCIPAL', 'Principal YUMBO-IE JUAN XXIII - SEDE PRINCIPAL'),
         ('Principal YUMBO-IE POLICARPA SALAVARRIETA - SEDE PRINCIPAL', 'Principal YUMBO-IE POLICARPA SALAVARRIETA - SEDE PRINCIPAL'),
+
+        ### BILINGUISMO
+        ("IETI comuna 17", "IETI comuna 17"),
+        ("INEM Jorge Isaacs", "INEM Jorge Isaacs"),
+        ("Liceo Departamental", "Liceo Departamental"),
+        ("Normal Farallones de Cali", "Normal Farallones de Cali"),
+        ("Celmira Bueno de Orejuela", "Celmira Bueno de Orejuela"),
     )
     descripcion = models.CharField(max_length=255, verbose_name=u'Nombre')
     institucion = models.CharField(choices=SEDES, max_length=200, verbose_name="institución")
