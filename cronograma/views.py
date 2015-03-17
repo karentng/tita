@@ -1240,9 +1240,16 @@ def reporte_conformacion_curso(request, id):
     estudiante_list = curso.estudiantes.all()
     count =0
     
-    return render(request, 'lista_estudiantes.html', {'estudiante_list': estudiante_list,  'user_group': user_group(request),
-        'opcion_menu': 5, 'curso':cursonombre, 'formador1':formador1,'formador2':formador2, 'institucion':institucion,},
-        )
+    return render(request, 'lista_estudiantes.html', {
+        'estudiante_list': estudiante_list,
+        'user_group': user_group(request),
+        'opcion_menu': 5,
+        'curso':cursonombre,
+        'formador1':formador1,
+        'formador2':formador2,
+        'institucion':institucion,
+        'cursoTotal':curso,
+        })
 
 def detalle_formador(request, id):
 
