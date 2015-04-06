@@ -181,7 +181,8 @@ class Cursos(models.Model):
         ('Principal YUMBO-IE ANTONIA SANTOS - SEDE ELIAS QUINTERO', 'Principal YUMBO-IE ANTONIA SANTOS - SEDE ELIAS QUINTERO'),
         ('Principal YUMBO-IE JUAN XXIII - SEDE PRINCIPAL', 'Principal YUMBO-IE JUAN XXIII - SEDE PRINCIPAL'),
         ('Principal YUMBO-IE POLICARPA SALAVARRIETA - SEDE PRINCIPAL', 'Principal YUMBO-IE POLICARPA SALAVARRIETA - SEDE PRINCIPAL'),
-
+        ('Principal IE DIEZ DE MAYO', 'Principal IE DIEZ DE MAYO'),
+        ('Principal IE ALVARO ECHEVERRY PEREA', 'Principal IE ALVARO ECHEVERRY PEREA'),
         ### BILINGUISMO
         ("IETI comuna 17", "IETI comuna 17"),
         ("INEM Jorge Isaacs", "INEM Jorge Isaacs"),
