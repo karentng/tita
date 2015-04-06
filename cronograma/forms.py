@@ -134,7 +134,7 @@ class CursoForm(forms.ModelForm):
         # Formadores solamente de la cohorte 2
         if cohorte == '3':
             self.fields['estudiantes_bilinguismo'].queryset = self.fields['estudiantes_bilinguismo'].queryset.filter(finalizada=True)
-            self.fields['institucion'].choices = self.fields['institucion'].choices[-4:]
+            self.fields['institucion'].choices = self.fields['institucion'].choices[-5:]
 
             del self.fields['estudiantes']
         else:
