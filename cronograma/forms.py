@@ -168,7 +168,15 @@ class CursoForm(forms.ModelForm):
         }
 
 class CursoMForm(forms.ModelForm):
-    
+    def __init__(self, *args, **kwargs):
+        cohorte = kwargs.pop('cohorte', None)
+        super(CursoMForm, self).__init__(*args, **kwargs)
+        # Formadores solamente de la cohorte 2
+        if cohorte == 3:
+            self.fields['estudiantes_bilinguismo'].queryset = self.fields['estudiantes_bilinguismo'].queryset.filter(finalizada=True)
+            self.fields['institucion'].choices = self.fields['institucion'].choices[-5:]
+        else:
+            self.fields['institucion'].choices = self.fields['institucion'].choices[:-5]
     class Meta:
         model = Cursos
         fields = ('descripcion','institucion','formador1','formador2', 'estudiantes', 'estudiantes_bilinguismo')
