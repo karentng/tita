@@ -165,7 +165,7 @@ class Cursos(models.Model):
         ('ISAIAS GAMBOA','ISAIAS GAMBOA'),           
         ('ALFONSO LOPEZ PUMAREJO','ALFONSO LOPEZ PUMAREJO'),          
         ('IE JUAN PABLO II','IE JUAN PABLO II'),          
-        ('CRISTOBAL COLON','CRISTOBAL COLON'),     
+        ('CRISTOBAL COLON','CRISTOBAL COLON'),
          #('MARICE SINISTERRA','MARICE SINISTERRA'),
          #la cumbre
         ('Principal LA CUMBRE - IE MARIA AUXILIADORA - SEDE PRINCIPAL', 'Principal LA CUMBRE - IE MARIA AUXILIADORA - SEDE PRINCIPAL'),
@@ -183,6 +183,7 @@ class Cursos(models.Model):
         ('Principal YUMBO-IE POLICARPA SALAVARRIETA - SEDE PRINCIPAL', 'Principal YUMBO-IE POLICARPA SALAVARRIETA - SEDE PRINCIPAL'),
         ('Principal IE DIEZ DE MAYO', 'Principal IE DIEZ DE MAYO'),
         ('Principal IE ALVARO ECHEVERRY PEREA', 'Principal IE ALVARO ECHEVERRY PEREA'),
+        ('IE CIUDADELA DESEPAZ','IE CIUDADELA DESEPAZ'),
         ### BILINGUISMO
         ("IETI comuna 17", "IETI comuna 17"),
         ("INEM Jorge Isaacs", "INEM Jorge Isaacs"),
