@@ -158,7 +158,7 @@ class Cursos(models.Model):
         #nuevas instituciones
         ('LIBARDO MADRID VALDERRAMA','LIBARDO MADRID VALDERRAMA'),        
         ('MONTEBELLO', 'MONTEBELLO'),        
-        ('MONSEÑOR RAMON ARCILA','MONSEÑOR RAMON ARCILA'),        
+        ('MONSENOR RAMON ARCILA','MONSEÑOR RAMON ARCILA'),        
         ('JOSE MANUEL SAAVEDRA GALINDO','JOSE MANUEL SAAVEDRA GALINDO'),           
         ('PEDRO ANTONIO MOLINA','PEDRO ANTONIO MOLINA'),           
         ('MULTIPROPOSITO','MULTIPROPOSITO'),          
