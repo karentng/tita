@@ -1265,14 +1265,14 @@ def detalle_formador(request, id):
         
         if get == "0":
 
-            form = FormadorForm(request.POST, instance=curso)
+            form = FormadorModificacionForm(request.POST, instance=curso)
             if form.is_valid():
                 objeto = form.save()
                 objeto.save()
                 return redirect('gestion_formador')
 
         if get == "2":
-            form = FormadorForm(instance=curso)
+            form = FormadorModificacionForm(instance=curso)
 
         if get == "1":
             formador = Formador.objects.get(id=id)
@@ -1280,7 +1280,7 @@ def detalle_formador(request, id):
             formador.delete()
             return redirect('gestion_cursos')
     else:
-        form = FormadorForm(instance=curso)
+        form = FormadorModificacionForm(instance=curso)
 
     return render(request, 'detalles_formador.html', {
         'form': form, 

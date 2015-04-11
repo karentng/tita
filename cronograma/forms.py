@@ -141,8 +141,10 @@ class CursoForm(forms.ModelForm):
             del self.fields['estudiantes_bilinguismo']
             self.fields['institucion'].choices = self.fields['institucion'].choices[:-5]
 
-            self.fields['formador1'].queryset = self.fields['formador1'].queryset.filter(cohorte=cohorte)
-            self.fields['formador2'].queryset = self.fields['formador2'].queryset.filter(cohorte=cohorte)
+            # QUITAR FILTRO DE COHORTES DE FORMADORES AL CREAR EL CURSO
+            #self.fields['formador1'].queryset = self.fields['formador1'].queryset.filter(cohorte=cohorte)
+            #self.fields['formador2'].queryset = self.fields['formador2'].queryset.filter(cohorte=cohorte)
+
             #self.fields['estudiantes'].queryset = self.fields['estudiantes'].queryset.exclude(estudiantes = Cursos.objects.all())
             if sede and jornada :
                 estudiantes = InfoLaboral.objects.filter(sede__in=sede, jornada=jornada).values('estudiante')
@@ -194,6 +196,11 @@ class FormadorForm(forms.ModelForm):
     class Meta:
         model = Formador
         fields = ('nombre1','apellido1','jornada','tutor','usuario',)
+
+class FormadorModificacionForm(forms.ModelForm):
+    class Meta:
+        model = Formador
+        fields = ('nombre1','apellido1','jornada','tutor',)
 
 class EstudiantesCurso(forms.Form):
     sedes = forms.MultipleChoiceField(widget=Select2MultipleWidget(), choices=SEDES)
