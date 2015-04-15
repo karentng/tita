@@ -1184,8 +1184,7 @@ def detalle_curso(request, id):
         #print "!!!!!!!!!!!!!!!!"+str(get)
         
         if get == "0":
-
-            form = CursoMForm(request.POST, instance=curso)
+            form = CursoMForm(request.POST, instance=curso, cohorte=curso.cohorte)
             if form.is_valid():
                 objeto = form.save()
                 '''
@@ -1204,16 +1203,15 @@ def detalle_curso(request, id):
                 return redirect('gestion_cursos')
 
         if get == "2":
-            form = CursoMForm(instance=curso)
+            form = CursoMForm(instance=curso, cohorte=curso.cohorte)
 
         if get == "1":
             curso = Cursos.objects.get(id=id)
             curso.delete()
             return redirect('gestion_cursos')
     else:
-        form = CursoMForm(instance=curso)
-    print "------------"
-    print curso.cohorte
+        form = CursoMForm(instance=curso, cohorte=curso.cohorte)
+    
     return render(request, 'detalles_curso.html', {
         'form': form, 
         'user_group': user_group(request),
@@ -1267,14 +1265,14 @@ def detalle_formador(request, id):
         
         if get == "0":
 
-            form = FormadorForm(request.POST, instance=curso)
+            form = FormadorModificacionForm(request.POST, instance=curso)
             if form.is_valid():
                 objeto = form.save()
                 objeto.save()
                 return redirect('gestion_formador')
 
         if get == "2":
-            form = FormadorForm(instance=curso)
+            form = FormadorModificacionForm(instance=curso)
 
         if get == "1":
             formador = Formador.objects.get(id=id)
@@ -1282,7 +1280,7 @@ def detalle_formador(request, id):
             formador.delete()
             return redirect('gestion_cursos')
     else:
-        form = FormadorForm(instance=curso)
+        form = FormadorModificacionForm(instance=curso)
 
     return render(request, 'detalles_formador.html', {
         'form': form, 

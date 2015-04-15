@@ -134,15 +134,17 @@ class CursoForm(forms.ModelForm):
         # Formadores solamente de la cohorte 2
         if cohorte == '3':
             self.fields['estudiantes_bilinguismo'].queryset = self.fields['estudiantes_bilinguismo'].queryset.filter(finalizada=True)
-            self.fields['institucion'].choices = self.fields['institucion'].choices[-4:]
+            self.fields['institucion'].choices = self.fields['institucion'].choices[-5:]
 
             del self.fields['estudiantes']
         else:
             del self.fields['estudiantes_bilinguismo']
             self.fields['institucion'].choices = self.fields['institucion'].choices[:-5]
 
-            self.fields['formador1'].queryset = self.fields['formador1'].queryset.filter(cohorte=cohorte)
-            self.fields['formador2'].queryset = self.fields['formador2'].queryset.filter(cohorte=cohorte)
+            # QUITAR FILTRO DE COHORTES DE FORMADORES AL CREAR EL CURSO
+            #self.fields['formador1'].queryset = self.fields['formador1'].queryset.filter(cohorte=cohorte)
+            #self.fields['formador2'].queryset = self.fields['formador2'].queryset.filter(cohorte=cohorte)
+
             #self.fields['estudiantes'].queryset = self.fields['estudiantes'].queryset.exclude(estudiantes = Cursos.objects.all())
             if sede and jornada :
                 estudiantes = InfoLaboral.objects.filter(sede__in=sede, jornada=jornada).values('estudiante')
@@ -168,7 +170,15 @@ class CursoForm(forms.ModelForm):
         }
 
 class CursoMForm(forms.ModelForm):
-    
+    def __init__(self, *args, **kwargs):
+        cohorte = kwargs.pop('cohorte', None)
+        super(CursoMForm, self).__init__(*args, **kwargs)
+        # Formadores solamente de la cohorte 2
+        if cohorte == 3:
+            self.fields['estudiantes_bilinguismo'].queryset = self.fields['estudiantes_bilinguismo'].queryset.filter(finalizada=True)
+            self.fields['institucion'].choices = self.fields['institucion'].choices[-5:]
+        else:
+            self.fields['institucion'].choices = self.fields['institucion'].choices[:-5]
     class Meta:
         model = Cursos
         fields = ('descripcion','institucion','formador1','formador2', 'estudiantes', 'estudiantes_bilinguismo')
@@ -186,6 +196,11 @@ class FormadorForm(forms.ModelForm):
     class Meta:
         model = Formador
         fields = ('nombre1','apellido1','jornada','tutor','usuario',)
+
+class FormadorModificacionForm(forms.ModelForm):
+    class Meta:
+        model = Formador
+        fields = ('nombre1','apellido1','jornada','tutor',)
 
 class EstudiantesCurso(forms.Form):
     sedes = forms.MultipleChoiceField(widget=Select2MultipleWidget(), choices=SEDES)
