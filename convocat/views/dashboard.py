@@ -101,11 +101,16 @@ def buscarEstudiante(lista, estudiante):
 
 def listaMaestrosEstudiantesInscritos(cohorte):
     estudiantes = []
-    estudiantesMulti = InfoLaboral.objects.filter(estudiante__acta_compromiso=True, estudiante__cohorte=cohorte).prefetch_related('estudiante')
+    estudiantesMulti = InfoLaboral.objects.filter(estudiante__cohorte=cohorte).prefetch_related('estudiante')
+    print "________________"
     for i in estudiantesMulti:
+        print "-------------------------------"
         estudiante = i.estudiante
         try:
-            curso = Cursos.objects.filter(estudiantes=estudiante)
+            print "curso"
+            curso = Cursos.objects.get(estudiantes=estudiante)
+            print curso.descripcion
+            
             clasesTotalesCurso = Clases.objects.filter(curso=curso)
             clases = clasesTotalesCurso.filter(asistentes=estudiante)
 
@@ -116,24 +121,22 @@ def listaMaestrosEstudiantesInscritos(cohorte):
             horasAsistidasSinSoporte = 0
 
             for clase in clases:
+                sesionesConSoporte += 1
+                horasAsistidasConSoporte += 5 # Son horas
                 try:
-                    SoporteClases.objects.get(clase=clase)
-                    sesionesConSoporte += 1
-                    horasAsistidasConSoporte += 5 # Son horas
+                    soporte = SoporteClases.objects.get(clase=clase)
+                    if soporte.archivo == '':
+                        horasAsistidasSinSoporte += 5 # Son horas
                 except Exception:
                     horasAsistidasSinSoporte += 5 # Son horas
         except Exception :
+            continue
             curso = "---"
             horas = "---"
             sesionesProgramadas = "---"
             sesionesConSoporte = "---"
             horasAsistidasConSoporte = "---"
             horasAsistidasSinSoporte = "---"
-
-        try:
-            curso = curso[0].descripcion
-        except Exception:
-            curso = "---"
 
         estudiantes.append(
             {"datos": i,
@@ -145,6 +148,7 @@ def listaMaestrosEstudiantesInscritos(cohorte):
             "horasAsistidasSinSoporte": horasAsistidasSinSoporte,
             }
         )
+        
     return estudiantes
 
 def reporteME(request, cohorte=None):

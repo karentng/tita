@@ -208,6 +208,7 @@ class EstudiantesCurso(forms.Form):
     cohorte = forms.ChoiceField(choices=((1, "Cohorte 1"), (2, "Cohorte 2"), (3, "Bilingüismo"),), label="Opciones")
 
 class FiltroCronograma(forms.Form):
+    '''
     #sedes = forms.MultipleChoiceField(widget=Select2MultipleWidget(), choices=SEDES)
     SEDES = (
         ('INEM JORGE ISAACS','INEM JORGE ISAACS'),
@@ -230,4 +231,5 @@ class FiltroCronograma(forms.Form):
         ('Principal VIJES', 'Principal VIJES')
     )
     sedes = forms.ChoiceField(widget=Select(), choices=SEDES)
+    '''
     grupos = forms.ChoiceField(choices=(('0', 'Todos'),)+tuple((str(x.id), x) for x in Cursos.objects.all().order_by('descripcion')))

@@ -97,9 +97,9 @@ else:    # Configuracion desarrollo:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'tita',
-            'USER': 'tita',
-            'PASSWORD': 'tita',
+            'NAME': 'titadb',
+            'USER': 'titausr',
+            'PASSWORD': 'titausr',
             'HOST': '',
         }
     }
@@ -127,7 +127,7 @@ SHORT_DATETIME_FORMAT = 'Y-m-d'
 
 # Plantillas de la aplicacion
 TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR,'templates')
+    os.path.join(BASE_DIR,'templates'),
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (

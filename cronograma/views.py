@@ -438,16 +438,19 @@ def diplomado(request):
                     for i in range(0,len(x)):
                         eventos.append(x[i])
     elif grupo == "Coordinador":
-        if request.method == 'GET' and 'sede' in request.GET and 'grupo' in request.GET:
-            sede = request.GET.get('sede')
+        #if request.method == 'GET' and 'sede' in request.GET and 'grupo' in request.GET:
+        if request.GET and 'grupo' in request.GET:
+            #sede = request.GET.get('sede')
             grupo = request.GET.get('grupo')
             
             eventos = []
 
             if grupo == '0':
-                curso = Cursos.objects.filter(institucion=sede)
+                #curso = Cursos.objects.filter(institucion=sede)
+                curso = Cursos.objects.all()
             else:
-                curso = Cursos.objects.filter(institucion=sede, id=grupo)
+                #curso = Cursos.objects.filter(institucion=sede, id=grupo)
+                curso = Cursos.objects.filter(id=grupo)
 
             for c in curso:
                 x = Clases.objects.filter(curso = c)
@@ -752,11 +755,12 @@ def filtro_diplomado(request):
     if request.method == 'POST':
         form = FiltroCronograma(request.POST)
         if form.is_valid():
-            sede = form.cleaned_data['sedes']
+            #sede = form.cleaned_data['sedes']
             grupo = form.cleaned_data['grupos']
 
             response = redirect('cronograma_diplomado')
-            response['Location'] += "?sede="+sede+'&grupo='+grupo
+            #response['Location'] += "?sede="+sede+'&grupo='+grupo
+            response['Location'] += "?grupo="+grupo
             return response
         else:
             return redirect('cronograma_diplomado')    
