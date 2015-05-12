@@ -102,14 +102,10 @@ def buscarEstudiante(lista, estudiante):
 def listaMaestrosEstudiantesInscritos(cohorte):
     estudiantes = []
     estudiantesMulti = InfoLaboral.objects.filter(estudiante__cohorte=cohorte).prefetch_related('estudiante')
-    print "________________"
     for i in estudiantesMulti:
-        print "-------------------------------"
         estudiante = i.estudiante
         try:
-            print "curso"
             curso = Cursos.objects.get(estudiantes=estudiante)
-            print curso.descripcion
             
             clasesTotalesCurso = Clases.objects.filter(curso=curso)
             clases = clasesTotalesCurso.filter(asistentes=estudiante)
@@ -370,10 +366,29 @@ def tablero_control(request, id_actividad):
     usuario_puede_editar = ((grupo_de_usuario == 'Coordinador' and int(id_actividad) < 14) or (grupo_de_usuario == 'Secretaria') or usuario_puede_editar_actividad)
 
     #estudiantesMulti = Estudiante.objects.filter(acta_compromiso=True, cohorte=1).select_related('estudiante.InfoLaboral__estudiante').select_related('Cursos__estudiantes') if id_actividad == '4' else []
-    estudiantesMulti = InfoLaboral.objects.filter(estudiante__acta_compromiso=True, estudiante__cohorte=1).prefetch_related('estudiante').prefetch_related('grados').prefetch_related('asignaturas').prefetch_related('secretaria_educacion') if id_actividad == '4' else []
+    aux = InfoLaboral.objects.filter(estudiante__acta_compromiso=True, estudiante__cohorte=1).prefetch_related('estudiante').prefetch_related('grados').prefetch_related('asignaturas').prefetch_related('secretaria_educacion') if id_actividad == '4' else []
+    estudiantesMulti = []
+    for i in aux:
+        try:
+            curso = Cursos.objects.get(estudiantes=i.estudiante).descripcion
+        except Exception:
+            curso = "No tiene"
+        
+        estudiantesMulti.append([i, curso])
+        
 
     #estudiantesMulti2 = Estudiante.objects.filter(acta_compromiso=True, cohorte=2).select_related('estudiante.InfoLaboral__estudiante').select_related('Cursos__estudiantes') if id_actividad == '4' else []
-    estudiantesMulti2 = InfoLaboral.objects.filter(estudiante__acta_compromiso=True, estudiante__cohorte=2).prefetch_related('estudiante').prefetch_related('grados').prefetch_related('asignaturas').prefetch_related('secretaria_educacion') if id_actividad == '4' else []
+    aux = InfoLaboral.objects.filter(estudiante__acta_compromiso=True, estudiante__cohorte=2).prefetch_related('estudiante').prefetch_related('grados').prefetch_related('asignaturas').prefetch_related('secretaria_educacion') if id_actividad == '4' else []
+    estudiantesMulti2 = []
+    for i in aux:
+        try:
+            curso = Cursos.objects.get(estudiantes=i.estudiante).descripcion
+        except Exception:
+            curso = "No tiene"
+        
+        estudiantesMulti2.append([i, curso])
+
+
     #aspirantesMulti = Aspirante.objects.all() if id_actividad == '1' else []
     aspirantesMulti = Aspirante.objects.select_related('ConocimientosEspecificos').prefetch_related('conocimientosespecificos').prefetch_related('municipio_nacimiento').prefetch_related('municipio') if id_actividad == '1' else []
     #aspirantesMulti2 = Aspirante2.objects.all() if id_actividad == '1' else []
