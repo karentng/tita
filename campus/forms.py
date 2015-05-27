@@ -15,7 +15,7 @@ class AsistenciaForm(forms.ModelForm):
         #asistentes = forms.ModelMultipleChoiceField(initial=True, widget=forms.CheckboxSelectMultiple())
         laclase = self.instance
 
-        if laclase.curso.cohorte != 3:
+        if laclase.curso.cohorte != 3 and laclase.curso.cohorte != 4:
             self.fields['asistentes'].queryset = laclase.curso.estudiantes.all()
             del self.fields['asistentes_bilinguismo']
         else:

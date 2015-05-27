@@ -89,14 +89,17 @@
     </ul>
 </li>
 
-<li class="has-sub {% if opcion_menu == 10 %} active {% endif %}">
+<li class="has-sub {% if opcion_menu == 11 or opcion_menu == 12 %} active {% endif %}">
     <a href="javascript:;">
         <i class="fa fa-2x fa-cloud"></i> <span>Bilingüismo</span>
         <b class="caret pull-right"></b>
     </a>
     <ul class="sub-menu">
-        <li class="{% if opcion_menu == 10 %} active {% endif %}">
-            <a href="{% url 'reporteBilinguismo' %}" onclick="mostrarBarraDeCarga();"><i class="fa fa-child"></i><i class="fa fa-female"></i> Reporte Inscritos</a>
+        <li class="{% if opcion_menu == 11 %} active {% endif %}">
+            <a href="{% url 'reporteBilinguismo' 1 %}" onclick="mostrarBarraDeCarga();"><i class="fa fa-child"></i><i class="fa fa-female"></i> Reporte Inscritos Cohorte 1</a>
+        </li>
+        <li class="{% if opcion_menu == 12 %} active {% endif %}">
+            <a href="{% url 'reporteBilinguismo' 2 %}" onclick="mostrarBarraDeCarga();"><i class="fa fa-child"></i><i class="fa fa-female"></i> Reporte Inscritos Cohorte 2</a>
         </li>
     </ul>
 </li>

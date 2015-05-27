@@ -30,6 +30,7 @@ class Bilinguismo(models.Model):
     direccion = models.CharField(verbose_name="dirección *", max_length=100)
     nivel_educativo = models.IntegerField(choices=NIVEL_EDUCATIVO, verbose_name="último nivel educativo aprobado *")
     finalizada = models.BooleanField(default=False)
+    cohorte = models.IntegerField(default=1)
 
     def __unicode__(self):
         return (u"%s %s %s %s"%(self.nombre1,self.nombre2 or '', self.apellido1, self.apellido2 or '')).strip() or "-"

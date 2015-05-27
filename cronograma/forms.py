@@ -132,8 +132,12 @@ class CursoForm(forms.ModelForm):
         cohorte = kwargs.pop('cohorte', None)
         super(CursoForm, self).__init__(*args, **kwargs)
         # Formadores solamente de la cohorte 2
-        if cohorte == '3':
-            self.fields['estudiantes_bilinguismo'].queryset = self.fields['estudiantes_bilinguismo'].queryset.filter(finalizada=True)
+        if cohorte == '3' or cohorte == '4':
+            if cohorte == '3':
+                cohorte = 1
+            else:
+                cohorte = 2
+            self.fields['estudiantes_bilinguismo'].queryset = self.fields['estudiantes_bilinguismo'].queryset.filter(finalizada=True, cohorte=cohorte)
             self.fields['institucion'].choices = self.fields['institucion'].choices[-5:]
 
             del self.fields['estudiantes']
@@ -174,8 +178,18 @@ class CursoMForm(forms.ModelForm):
         cohorte = kwargs.pop('cohorte', None)
         super(CursoMForm, self).__init__(*args, **kwargs)
         # Formadores solamente de la cohorte 2
-        if cohorte == 3:
-            self.fields['estudiantes_bilinguismo'].queryset = self.fields['estudiantes_bilinguismo'].queryset.filter(finalizada=True)
+        if cohorte == 3 or cohorte == 4:
+            print ("cohorte")
+            print ("----------")
+            print ("----------")
+            print ("----------")
+            print ("----------")
+            print (cohorte)
+            if cohorte == 3:
+                cohorte = 1
+            else:
+                cohorte = 2
+            self.fields['estudiantes_bilinguismo'].queryset = self.fields['estudiantes_bilinguismo'].queryset.filter(finalizada=True, cohorte=cohorte)
             self.fields['institucion'].choices = self.fields['institucion'].choices[-5:]
         else:
             self.fields['institucion'].choices = self.fields['institucion'].choices[:-5]
@@ -205,7 +219,7 @@ class FormadorModificacionForm(forms.ModelForm):
 class EstudiantesCurso(forms.Form):
     sedes = forms.MultipleChoiceField(widget=Select2MultipleWidget(), choices=SEDES)
     jornadas = forms.ChoiceField(widget=forms.Select(), choices=JORNADAS)
-    cohorte = forms.ChoiceField(choices=((1, "Cohorte 1"), (2, "Cohorte 2"), (3, "Bilingüismo"),), label="Opciones")
+    cohorte = forms.ChoiceField(choices=((1, "Cohorte 1"), (2, "Cohorte 2"), (3, "Bilingüismo Cohorte 1"), (4, "Bilingüismo Cohorte 2")), label="Opciones")
 
 class FiltroCronograma(forms.Form):
     '''

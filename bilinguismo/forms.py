@@ -7,7 +7,7 @@ class BilinguismoForm(forms.ModelForm):
     municipio = MunicipioChoice(label = u"Municipio de residencia")
     class Meta:
         model = Bilinguismo
-        exclude = ('inscripcion_finalizada', 'finalizada')
+        exclude = ('inscripcion_finalizada', 'finalizada', 'cohorte')
 
 class InfoLaboralBilinguismoForm(forms.ModelForm):
     class Meta:

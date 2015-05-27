@@ -16,6 +16,7 @@ urlpatterns = patterns('bilinguismo.views',
 	# Eliminar Certificacion Bilinguismo
 	url(r'bilinguismo/eliminarCertificacionB/(\d+)$',      'eliminarCertificacionB', name="eliminarCertificacionB"),
     #Resultados de Bilinguismo
-    url(r'reporte$',      'reporte', name="reporteBilinguismo"),
+    url(r'bilinguismo/reporte$',      'reporte', name="reporteBilinguismo"),
+    url(r'bilinguismo/reporte/(\d+)$',      'reporte', name="reporteBilinguismo"),
     #url(r'impresion/(\d+)$',      'impresion', name="impresionBilinguismo"),
 )

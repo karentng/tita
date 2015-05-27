@@ -1031,6 +1031,8 @@ def curso(request):
             objeto = form.save(commit=False)
             if cohorte == '3':
                 objeto.cohorte = 3
+            elif cohorte == '4':
+                objeto.cohorte = 4
             else:
                 objeto.cohorte = 2
             objeto.save()

@@ -64,6 +64,7 @@ def inscripcionB(request):
             objeto.apellido1 = objeto.apellido1.upper()
             objeto.apellido2 = objeto.apellido2.upper()
             objeto.direccion = objeto.direccion.upper()
+            objeto.cohorte = 2
             objeto.save()
             clave = objeto.numero_inscripcion()
             request.session['bilinguismo'] = clave
@@ -180,10 +181,10 @@ def finalizarB(request, tipo):
         persona.save()
     return redirect("bilinguismo_inicio")
 
-def listaBilinguismo():
+def listaBilinguismo(cohorte):
     estudiantes = []
     cont = 1
-    students = Bilinguismo.objects.filter(finalizada=True).select_related('bilinguismo.InfoLaboralBilinguismo__persona')
+    students = Bilinguismo.objects.filter(finalizada=True, cohorte=cohorte).select_related('bilinguismo.InfoLaboralBilinguismo__persona')
     c = 0
     for estudiante in students:
         jornada = ""
@@ -215,15 +216,15 @@ def listaBilinguismo():
         cont = cont + 1
     return estudiantes
 
-def reporte(request):
+def reporte(request, cohorte=2):
     grupo = user_group(request)
     if grupo == None:
         return redirect('home')
 
-    personas = listaBilinguismo()
+    personas = listaBilinguismo(cohorte)
 
     return render(request, 'reportes/registrados.html', {
         'personas': personas,
         'user_group': user_group(request),
-        'opcion_menu': 10
+        'opcion_menu': 10+int(cohorte),
     })

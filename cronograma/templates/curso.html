@@ -84,7 +84,7 @@
         {% bootstrap_field form.formador1 layout="horizontal" %}
         {% bootstrap_field form.formador2 layout="horizontal" %}
         
-        {% if cohorte != '3' %}
+        {% if cohorte != '3' and cohorte != '4' %}
         <div style="width:auto;height:200px;overflow-y:scroll;overflow-x:hidden; margin-bottom:10px">
             {% bootstrap_field form.estudiantes layout="horizontal" %}
         </div>
