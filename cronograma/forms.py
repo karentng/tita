@@ -135,15 +135,16 @@ class CursoForm(forms.ModelForm):
         if cohorte == '3' or cohorte == '4':
             if cohorte == '3':
                 cohorte = 1
+                self.fields['institucion'].choices = self.fields['institucion'].choices[43:48]
             else:
                 cohorte = 2
+                self.fields['institucion'].choices = self.fields['institucion'].choices[48:]
             self.fields['estudiantes_bilinguismo'].queryset = self.fields['estudiantes_bilinguismo'].queryset.filter(finalizada=True, cohorte=cohorte)
-            self.fields['institucion'].choices = self.fields['institucion'].choices[-5:]
 
             del self.fields['estudiantes']
         else:
             del self.fields['estudiantes_bilinguismo']
-            self.fields['institucion'].choices = self.fields['institucion'].choices[:-5]
+            self.fields['institucion'].choices = self.fields['institucion'].choices[:43]
 
             # QUITAR FILTRO DE COHORTES DE FORMADORES AL CREAR EL CURSO
             #self.fields['formador1'].queryset = self.fields['formador1'].queryset.filter(cohorte=cohorte)
@@ -178,21 +179,18 @@ class CursoMForm(forms.ModelForm):
         cohorte = kwargs.pop('cohorte', None)
         super(CursoMForm, self).__init__(*args, **kwargs)
         # Formadores solamente de la cohorte 2
+        print (cohorte)
         if cohorte == 3 or cohorte == 4:
-            print ("cohorte")
-            print ("----------")
-            print ("----------")
-            print ("----------")
-            print ("----------")
-            print (cohorte)
             if cohorte == 3:
                 cohorte = 1
+                self.fields['institucion'].choices = self.fields['institucion'].choices[43:48]
             else:
                 cohorte = 2
+                self.fields['institucion'].choices = self.fields['institucion'].choices[48:]
             self.fields['estudiantes_bilinguismo'].queryset = self.fields['estudiantes_bilinguismo'].queryset.filter(finalizada=True, cohorte=cohorte)
-            self.fields['institucion'].choices = self.fields['institucion'].choices[-5:]
         else:
-            self.fields['institucion'].choices = self.fields['institucion'].choices[:-5]
+            self.fields['institucion'].choices = self.fields['institucion'].choices[:43]
+            
     class Meta:
         model = Cursos
         fields = ('descripcion','institucion','formador1','formador2', 'estudiantes', 'estudiantes_bilinguismo')
