@@ -249,6 +249,7 @@ class Cursos(models.Model):
             ('Principal YUMBO-IE MANUEL MARIA SANCHEZ - SEDE PRINCIPAL', 'Principal YUMBO-IE MANUEL MARÍA SÁNCHEZ - SEDE PRINCIPAL'),
             ('Principal YUMBO-IE ROSA ZARATE DE PENA - SEDE PRINCIPAL', 'Principal YUMBO-IE ROSA ZÁRATE DE PEÑA - SEDE PRINCIPAL'),
             ('Principal VIJES', 'Principal VIJES'),
+            ('Otra IE Oficial', 'Otra IE Oficial'),
 
     )
     descripcion = models.CharField(max_length=255, verbose_name=u'Nombre')

@@ -116,6 +116,7 @@ class InfoLaboralBilinguismo(models.Model):
             (49, 'Principal YUMBO-IE MANUEL MARÍA SÁNCHEZ - SEDE PRINCIPAL'),
             (50, 'Principal YUMBO-IE ROSA ZÁRATE DE PEÑA - SEDE PRINCIPAL'),
             (51, 'Principal VIJES'),
+            (52, 'Otra IE Oficial'),
     )
 
     GRADO_ESCALAFON = (
