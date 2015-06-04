@@ -21,7 +21,6 @@
     <script type="text/javascript">
         $( document ).ready(function() {
             function etnoeducador(){
-                $("#id_tipo_etnoeducador")
                 val = $("#id_tipo_etnoeducador").val();
                 if(val < 2){
                     $('#id_poblacion_etnica').prop('readonly', true);
@@ -31,9 +30,24 @@
                 }
             }
             etnoeducador();
-            
+
             $("#id_tipo_etnoeducador").on('change', function(){
                 etnoeducador();
+            })
+
+            function institucion(){
+                val = $("#id_institucion").val();
+                if(val < 52){
+                    $('#id_otra_institucion').prop('readonly', true);
+                    $('#id_otra_institucion').val('');
+                }else{
+                    $('#id_otra_institucion').prop('readonly', false);
+                }
+            }
+            institucion();
+            
+            $("#id_institucion").on('change', function(){
+                institucion();
             })
         });
     </script>

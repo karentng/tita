@@ -176,10 +176,15 @@ def finalizarB(request, tipo):
     persona = bilinguismo_sesion(request)
     if not persona : return redirect('bilinguismo_inicio')
 
+    del request.session['bilinguismo']
+
     if tipo == "1": # finalizar por completo
         persona.finalizada = True
         persona.save()
-    return redirect("bilinguismo_inicio")
+
+    return render(request, 'inscripcion/finalizarB.html', {
+        'tipo': tipo,
+    })
 
 def listaBilinguismo(cohorte):
     estudiantes = []

@@ -14,6 +14,7 @@ class InfoLaboralBilinguismoForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(InfoLaboralBilinguismoForm, self).__init__(*args, **kwargs)
         self.fields['institucion'].choices = self.fields['institucion'].choices[6:]
+        self.fields['horario'].choices = self.fields['horario'].choices[:-1]
     class Meta:
         model = InfoLaboralBilinguismo
         exclude = ('persona',)

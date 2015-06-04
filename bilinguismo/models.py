@@ -151,10 +151,20 @@ class InfoLaboralBilinguismo(models.Model):
             (14,  '14')))
     )
 
+    HORARIOS = (
+        (1, "Martes y jueves de 8 a 11 am"),
+        (2, "Martes y jueves de 2 a 5 pm"),
+        (3, "Miércoles de 1:00 pm a 7:00 pm (Nota: este horario se abre sólo si se reúne el cupo mínimo en su institución)"),
+        (4, "Sábados de 7:00 am a 1:00 pm"),
+        (5, "No definido")
+    )
+
 
     persona = models.ForeignKey(Bilinguismo)
 
-    institucion = models.IntegerField(choices=INSTITUCIONES, max_length=1)
+    institucion = models.IntegerField(choices=INSTITUCIONES, max_length=1, verbose_name="institución")
+    otra_institucion = models.CharField(max_length=255, verbose_name="otra institución", blank=True, null=True)
+    horario = models.IntegerField(choices=HORARIOS, verbose_name="Elija el horario que más le convenga para cursar el Diplomado", default=5) 
     cargo = models.IntegerField(choices=[(1, 'Docente'), (2, 'Rector'), (3, 'Coordinador'), (4, 'Otro')], verbose_name="cargo")
     zona = models.CharField( choices=[('R','Rural'), ('U', 'Urbana')], max_length=1, verbose_name='zona')
     jornada = models.CharField(choices=JORNADAS, max_length=1)
