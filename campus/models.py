@@ -492,10 +492,3 @@ def crear_ruta_archivo2(instance, filename):
 class SoporteAcompanamiento(models.Model):
     acompanamiento = models.ForeignKey(AcompanamientoInSitus, primary_key=True)
     archivo = models.FileField(upload_to=crear_ruta_archivo2)
-
-
-
-
-
-
-

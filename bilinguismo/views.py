@@ -186,6 +186,84 @@ def finalizarB(request, tipo):
         'tipo': tipo,
     })
 
+
+from campus.models import *
+def listaBilinguismo(cohorte):
+    estudiantes = []
+    estudiantesMulti = Bilinguismo.objects.filter(finalizada=True, cohorte=cohorte).select_related('bilinguismo.InfoLaboralBilinguismo__persona')
+    
+    for estudiante in estudiantesMulti:
+
+        jornada = ""
+        institucion = ""
+        try:
+            il = InfoLaboralBilinguismo.objects.get(persona=estudiante)
+            try:
+                jornada = il.get_jornada_display
+            except Exception:
+                jornada = "---"
+            try:
+                institucion = il.get_institucion_display
+            except Exception:
+                institucion = "---"
+        except Exception:
+            jornada = "---"
+            institucion = "---"
+
+
+        try:
+            curso = Cursos.objects.get(estudiantes_bilinguismo=estudiante)
+            print curso
+            
+            clasesTotalesCurso = Clases.objects.filter(curso=curso)
+            clases = clasesTotalesCurso.filter(asistentes_bilinguismo=estudiante)
+
+            horas = clasesTotalesCurso.count() * 5
+            sesionesProgramadas = clasesTotalesCurso.count()
+            sesionesConSoporte = 0
+            horasAsistidasConSoporte = 0
+            horasAsistidasSinSoporte = 0
+
+            for clase in clases:
+                sesionesConSoporte += 1
+                horasAsistidasConSoporte += 5 # Son horas
+                try:
+                    soporte = SoporteClases.objects.get(clase=clase)
+                    if soporte.archivo == '':
+                        horasAsistidasSinSoporte += 5 # Son horas
+                except Exception:
+                    horasAsistidasSinSoporte += 5 # Son horas
+        except Exception:
+            
+            curso = "---"
+            horas = 0
+            sesionesProgramadas = 0
+            sesionesConSoporte = 0
+            horasAsistidasConSoporte = 0
+            horasAsistidasSinSoporte = 0
+
+        estudiantes.append(
+            {
+                "id": estudiante.id,
+                "estudiante": estudiante,
+                "cedula": estudiante.numero_documento,
+                "jornada": jornada,
+                "institucion": institucion,
+                "celular":  estudiante.celular,
+                #nuevo
+                "curso": curso,
+                "horas": horas,
+                "sesionesProgramadas": sesionesProgramadas,
+                "sesionesConSoporte": sesionesConSoporte,
+                "horasAsistidasConSoporte": horasAsistidasConSoporte,
+                "horasAsistidasSinSoporte": horasAsistidasSinSoporte,
+            }
+        )
+    return estudiantes
+
+
+
+'''
 def listaBilinguismo(cohorte):
     estudiantes = []
     cont = 1
@@ -209,17 +287,18 @@ def listaBilinguismo(cohorte):
             institucion = "---"
 
         estudiantes.append(
-            {"id": estudiante.id,
-            "item": cont,
-            "nombre": estudiante,
-            "cedula": estudiante.numero_documento,
-            "jornada": jornada,
-            "institucion": institucion,
-            "celular": estudiante.celular,
+            {
+                "id": estudiante.id,
+                "nombre": estudiante,
+                "cedula": estudiante.numero_documento,
+                "jornada": jornada,
+                "institucion": institucion,
+                "celular": estudiante.celular,
             }
         )
         cont = cont + 1
     return estudiantes
+'''
 
 def reporte(request, cohorte=2):
     grupo = user_group(request)
