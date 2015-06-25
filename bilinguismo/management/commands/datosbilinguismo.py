@@ -16,7 +16,7 @@ class Command(BaseCommand):
             "Grados", "Decreto Docente", "Nombramiento", "Tipo Etnoeducador",
             u"Formación Académica".encode('latin-1'), "Certificaciones Bilinguismo"])
 
-        personas = Bilinguismo.objects.all()
+        personas = Bilinguismo.objects.filter(cohorte=2)
         for aspirante in personas:
             try:
                 infoLaboral = InfoLaboralBilinguismo.objects.get(persona=aspirante)
