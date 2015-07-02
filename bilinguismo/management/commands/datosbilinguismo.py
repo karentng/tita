@@ -12,7 +12,7 @@ class Command(BaseCommand):
         writer.writerow(["Terminado", "Nombre Completo", u"Cédula".encode('latin-1'), u"Género".encode('latin-1'),
             u"Correo Personal".encode('latin-1'), "Correo Institucional", "Municipio",
             u"Teléfono Fijo".encode('latin-1'), "Celular", u"Dirección".encode('latin-1'), "Nivel Educativo",
-            "Sede", "Cargo", "Zona", "Jornada", "Asignaturas",
+            "Sede", "Otra Sede", "Horario seleccionado", "Cargo", "Zona", "Jornada", "Asignaturas",
             "Grados", "Decreto Docente", "Nombramiento", "Tipo Etnoeducador",
             u"Formación Académica".encode('latin-1'), "Certificaciones Bilinguismo"])
 
@@ -20,6 +20,9 @@ class Command(BaseCommand):
         for aspirante in personas:
             try:
                 infoLaboral = InfoLaboralBilinguismo.objects.get(persona=aspirante)
+                horario = infoLaboral.get_horario_display().encode('latin-1')
+                otra_institucion = infoLaboral.otra_institucion.encode('latin-1')
+
                 sede = infoLaboral.get_institucion_display().encode('latin-1')
                 cargo = infoLaboral.get_cargo_display().encode('latin-1')
                 zona = infoLaboral.get_zona_display().encode('latin-1')
@@ -47,6 +50,8 @@ class Command(BaseCommand):
                 jornada = "---"
                 asignaturas = "---"
                 grados = "---"
+                horario = "---"
+                otra_institucion = "---"
                 decreto_docente = "---"
 
             formacion = FormacionAcademicaBilinguismo.objects.filter(persona=aspirante)
@@ -71,7 +76,7 @@ class Command(BaseCommand):
             arreglo = [finalizado, nombre, num_doc, aspirante.sexo, aspirante.email, aspirante.email_institucional,
             municipio.nombre.encode('latin-1'), aspirante.telefono, aspirante.celular,
             aspirante.direccion.encode('latin-1'), aspirante.get_nivel_educativo_display().encode('latin-1'),
-            sede, cargo, zona, jornada, asignaturas, grados, decreto_docente,
+            sede, otra_institucion, horario, cargo, zona, jornada, asignaturas, grados, decreto_docente,
             infoLaboral.get_nombramiento_display().encode('latin-1'),
             infoLaboral.get_tipo_etnoeducador_display().encode('latin-1'), formaciones, certificaciones]
             writer.writerow(arreglo)
