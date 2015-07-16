@@ -50,5 +50,8 @@ urlpatterns += patterns('convocat.views.dashboard',
     url(r'^tablero_control/eliminarGrupo/(\d*)$', 'eliminarGrupo', name="tableroControlEliminarGrupo"),
     url(r'^tablero_control/eliminarArchivo/(\d*)$', 'eliminarArchivo', name="tableroControlEliminarArchivo"),
     url(r'^obtenerGruposPorConceptoActividad/(\d*)$', 'obtenerGruposPorConceptoActividad', name="tableroControlObtenerGruposPorConceptoActividad"),
+
+
+    url(r'^tablero_control/editarArchivo/(\d*)$', 'editarArchivo', name="tableroControlEditarArchivo"),
 )
 

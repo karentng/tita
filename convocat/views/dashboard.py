@@ -500,6 +500,17 @@ def eliminarArchivo(request, id_archivo):
 
     return HttpResponseRedirect( '../' + str(request.session['actividad_tablero_control']))
 
+def editarArchivo(request, id_archivo):
+    if validar_grupo_coordinador_secretaria(request) == False:
+        return redirect('home')
+
+    if request.method == 'POST':
+        archivo = Archivo.objects.get(id=id_archivo)        
+        form = ArchivoEditarForm(request.POST, instance=archivo)
+        if form.is_valid():
+            form.save()            
+    return HttpResponseRedirect( '../' + str(request.session['actividad_tablero_control']))
+
 def guardarGrupo(request, id_concepto_por_actividad):
     if validar_grupo_coordinador_secretaria(request) == False:
         return redirect('home')

@@ -1,9 +1,11 @@
+{% load bootstrap3 %}
 <li>
     <span><i class="fa fa-folder-open-o"></i> {{grupo.nombre}}</span>
         {% if grupo.get_grupos|length == 0 and grupo.get_archivos|length == 0 %}
             {% if usuario_puede_editar %}
                 <a class="btn text-danger" title="Eliminar" onclick="confirmacionBorrarGrupo('{{grupo.id}}')">
-                <i class="fa fa-trash-o"></i></a>
+                    <i class="fa fa-trash-o"></i>
+                </a>
             {% endif %}
         {% endif %}
     <ul>
@@ -14,13 +16,38 @@
         {% endfor %}
     </ul>
     <ul>
-        {% for archivo in grupo.get_archivos %}
+        {% for archivo in grupo.get_archivos2 %}
             <li>
-                <a href="{{STATIC_URL}}../media/{{archivo.ruta}}" target="_blank">
-                    <span><i class="fa fa-file-o"></i>  {{archivo.nombre}} &ndash; {{archivo.descripcion}}</span>
+                <a href="{{STATIC_URL}}../media/{{archivo.0.ruta}}" target="_blank">
+                    <span><i class="fa fa-file-o"></i>  {{archivo.0.nombre}} &ndash; {{archivo.0.descripcion}}</span>
                     {% if usuario_puede_editar %}
-                        <a class="btn text-danger" title="Eliminar" onclick="confirmacionBorrarArchivo('{{archivo.id}}')">
+                        <a class="btn text-danger" title="Eliminar" onclick="confirmacionBorrarArchivo('{{archivo.0.id}}')">
                         <i class="fa fa-trash-o"></i></a>
+
+
+
+                        <a class="btn text-danger" title="Editar" href="#modal-desactivate-{{archivo.0.id}}" data-toggle="modal">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        <div class="modal fade" id="modal-desactivate-{{archivo.0.id}}">
+                            <div class="modal-dialog">
+                                <form class="form-vertical" enctype="multipart/form-data" method="post" action="{% url 'tableroControlEditarArchivo' archivo.0.id %}">{% csrf_token %}
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                            <h4 class="modal-title">Modificar Nombre:</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            {% bootstrap_form archivo.1 layout="vertical" %}
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancelar</a>
+                                            <button class="btn btn-sm btn-warning" type="submit">Aceptar</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>                        
                     {% endif %}
                 </a>
             </li>

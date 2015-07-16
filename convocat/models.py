@@ -313,6 +313,27 @@ class EstadoDeAvance(models.Model):
     def __unicode__(self):
         return str(self.fecha) + ' - ' + str(self.meta) + ' - ' + str(self.avance_actual)
 
+def crear_ruta_archivo_tablero_control(instance, filename):
+    randomstr = 7*99251
+    return "archivos_actividades/%s/%s-%s"%(instance.usuario_id, randomstr, filename.encode('ascii','ignore'))
+
+class Archivo(models.Model):
+    usuario = models.ForeignKey(User)
+    nombre = models.CharField(max_length=255, verbose_name='nombre')
+    ruta = models.FileField(upload_to=crear_ruta_archivo_tablero_control, max_length=500, null=False, blank=False, verbose_name=u'Archivo')
+    descripcion = models.CharField(max_length=255, verbose_name='descripcion', null=True, blank=True,)
+    grupo = models.ForeignKey("Grupo", verbose_name=u'Carpeta')
+    activo = models.BooleanField(default=True,)
+
+    def __unicode__(self):
+        return self.nombre
+
+from django import forms
+class ArchivoEditarForm(forms.ModelForm):
+    class Meta:
+        model = Archivo
+        fields = ('nombre',)
+
 class Grupo(models.Model):
     usuario = models.ForeignKey(User)
     nombre = models.CharField(max_length=255, verbose_name='nombre')
@@ -333,20 +354,12 @@ class Grupo(models.Model):
     def get_archivos(self):
         return Archivo.objects.filter(grupo=self, activo=True).order_by('id')
 
-def crear_ruta_archivo_tablero_control(instance, filename):
-    randomstr = 7*99251
-    return "archivos_actividades/%s/%s-%s"%(instance.usuario_id, randomstr, filename.encode('ascii','ignore'))
-
-class Archivo(models.Model):
-    usuario = models.ForeignKey(User)
-    nombre = models.CharField(max_length=255, verbose_name='nombre')
-    ruta = models.FileField(upload_to=crear_ruta_archivo_tablero_control, max_length=500, null=False, blank=False, verbose_name=u'Archivo')
-    descripcion = models.CharField(max_length=255, verbose_name='descripcion', null=True, blank=True,)
-    grupo = models.ForeignKey("Grupo", verbose_name=u'Carpeta')
-    activo = models.BooleanField(default=True,)
-
-    def __unicode__(self):
-        return self.nombre
+    def get_archivos2(self):
+        datos = []
+        archivos = Archivo.objects.filter(grupo=self, activo=True).order_by('id')
+        for i in archivos:
+            datos.append([i, ArchivoEditarForm(instance=i)])
+        return datos
 
 class HistoricoDeArchivo(models.Model):
     usuario = models.ForeignKey(User)
