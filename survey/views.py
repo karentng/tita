@@ -24,21 +24,25 @@ def codigo_encuesta(request):
     print(request)
     codigo = codigo_encuesta_session(request)
     if codigo:
-        return redirect('encuesta_nuevo_estudiante')
+        #return redirect('encuesta_nuevo_estudiante')
+        pass
     mensaje = ""
     if request.method == 'POST':
         form = CodigoEncuestaForm(request.POST)
         if form.is_valid():
             clave = form.cleaned_data['registro']
-            if clave == '98765234567': # clave de acceso
-                request.session['codigo_encuesta']=clave
-                return redirect('encuesta_nuevo_estudiante')
-            if clave == '98765234566': # clave de acceso
-                request.session['codigo_encuesta']=clave
-                return redirect('encuesta_nuevo_padre')
-            if clave == '98765234565': # clave de acceso
-                request.session['codigo_encuesta']=clave
-                return redirect('encuesta_nuevo_maestro')
+            if clave == '98765234567': # Estudiante
+                #request.session['codigo_encuesta']=clave
+                #return redirect('encuesta_nuevo_estudiante')
+                return HttpResponseRedirect('https://es.surveymonkey.com/r/encuesta-estudiantes')
+            if clave == '98765234566': # Padres
+                #request.session['codigo_encuesta']=clave
+                #return redirect('encuesta_nuevo_padre')
+                return HttpResponseRedirect('https://es.surveymonkey.com/r/encuesta-padre')
+            if clave == '98765234565': # Docentes
+                #request.session['codigo_encuesta']=clave
+                #return redirect('encuesta_nuevo_maestro')
+                return HttpResponseRedirect('https://es.surveymonkey.com/r/encuesta-docente')
             else :
                 mensaje = "Código inválido"
     else:
