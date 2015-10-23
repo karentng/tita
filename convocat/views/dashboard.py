@@ -654,6 +654,7 @@ def descarga_cohorte_xls(request, cohorte):
         (u"Tipo de nombramiento", 4000),
         (u"Tipo etnoeducador", 4000),
         (u"Asignaturas", 4000),
+        (u"Grupo", 4000),
     ]
 
     font_style = xlwt.XFStyle()
@@ -681,6 +682,11 @@ def descarga_cohorte_xls(request, cohorte):
         for asignatura in obj.asignaturas.all():
             asignaturas += asignatura.nombre + '. '
 
+        try:
+            curso = Cursos.objects.get(estudiantes=obj.estudiante).descripcion
+        except Exception:
+            curso = ''
+
         row = [
             obj.estudiante.nombre_completo().upper(),
             obj.estudiante.numero_documento,
@@ -703,7 +709,8 @@ def descarga_cohorte_xls(request, cohorte):
             obj.poblacion_etnica,
             obj.get_nombramiento_display(),
             obj.get_tipo_etnoeducador_display(),
-            asignaturas
+            asignaturas,
+            curso
         ]
         for col_num in xrange(len(row)):
             ws.write(row_num, col_num, row[col_num], font_style)
