@@ -17,6 +17,11 @@ class EstudianteForm(forms.ModelForm):
         model = Estudiante
         fields = ('numero_documento', 'nombre1', 'nombre2', 'apellido1', 'apellido2', 'sexo', 'email', 'email_institucional', 'municipio','telefono', 'celular', 'direccion', 'nivel_educativo' )
 
+class EstudianteCertificacionForm(forms.ModelForm):
+    class Meta:
+        model = Estudiante
+        fields = ('tipo_certificado', 'observacion_certificado',)
+
 def obtenerSEDES():
     return SEDES
 

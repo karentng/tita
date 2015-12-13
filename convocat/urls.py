@@ -29,6 +29,7 @@ urlpatterns = patterns('convocat.views.inscripcion',
 
 urlpatterns += patterns('convocat.views.dashboard',
     url(r'^resultados$',      'dashboard', name="dashboard"),
+    url(r'^modificar-tipo-certificado/(\d+)/(\d+)$',      'modificar_tipo_certificado', name="modificar_tipo_certificado"),
     url(r'^resultadosME$',      'reporteME', name="reporteME"),
     url(r'^resultadosME/(\d+)$',      'reporteME', name="reporteME"),
     url(r'^impresionME/(\d+)$',      'impresionME', name="impresionME"),

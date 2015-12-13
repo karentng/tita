@@ -100,6 +100,8 @@ def buscarEstudiante(lista, estudiante):
     return False
 
 def listaMaestrosEstudiantesInscritos(cohorte):
+    from estudiante.forms import EstudianteCertificacionForm
+
     estudiantes = []
     estudiantesMulti = InfoLaboral.objects.filter(estudiante__cohorte=cohorte).prefetch_related('estudiante')
     for i in estudiantesMulti:
@@ -142,10 +144,27 @@ def listaMaestrosEstudiantesInscritos(cohorte):
             "sesionesConSoporte": sesionesConSoporte,
             "horasAsistidasConSoporte": horasAsistidasConSoporte,
             "horasAsistidasSinSoporte": horasAsistidasSinSoporte,
+            "estudiante": estudiante,
+            "formEstudiante": EstudianteCertificacionForm(instance=estudiante),
             }
         )
         
     return estudiantes
+
+def modificar_tipo_certificado(request, id_estudiante, cohorte):
+    from estudiante.forms import EstudianteCertificacionForm
+
+    try:
+        estudiante = Estudiante.objects.get(id=id_estudiante)
+    except Exception:
+        return redirect('reporteME', cohorte)
+
+    if request.method == 'POST':
+        form = EstudianteCertificacionForm(request.POST, instance=estudiante)
+        if form.is_valid():
+            form.save()
+
+    return redirect('reporteME', cohorte)
 
 def reporteME(request, cohorte=None):
     valor = request.session.get('cohorte_me')

@@ -99,6 +99,13 @@ class Estudiante(models.Model):
         (8, 'Postgrado en otras áreas')
     )
 
+    TIPOS_CERTIFICADOS = (
+        (1, "Asistió y Aprobó"),
+        (2, "Asistió"),
+        (3, "Retirado"),
+        (4, "No Definido"),
+    )
+
     numero_documento = models.BigIntegerField(unique=True, verbose_name='número de documento de identidad *')
     #municipio_documento = models.ForeignKey(Municipio, verbose_name='municipio de expedición')
     nombre1 = models.CharField( max_length=255, verbose_name='primer nombre *')
@@ -119,6 +126,9 @@ class Estudiante(models.Model):
 
     aprobo = models.NullBooleanField()
     cohorte = models.IntegerField(default=2) #cambiar de acuerdo al cohorte que se este realizando
+
+    tipo_certificado = models.IntegerField(choices=TIPOS_CERTIFICADOS, default=4)
+    observacion_certificado = models.TextField(blank=True, null=True)
 
     def __unicode__(self):
         return (u"%s %s %s %s"%(self.nombre1,self.nombre2 or '', self.apellido1, self.apellido2 or '')).strip() or "-"
