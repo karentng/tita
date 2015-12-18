@@ -435,7 +435,8 @@ def tablero_control(request, id_actividad):
         'formVariablesPorSede' : VariablePorSedeForm(),
         'usuario_puede_editar': usuario_puede_editar,
         'user_group': user_group(request),
-        'usuario_puede_editar_actividad': usuario_puede_editar_actividad
+        'usuario_puede_editar_actividad': usuario_puede_editar_actividad,
+        'cohorte': 1,
     }
 
     datos_tablero_control.update(retornar_datos_reporte_convocatoria_1())
