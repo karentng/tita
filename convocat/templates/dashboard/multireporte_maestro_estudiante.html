@@ -35,6 +35,8 @@
                     <a class="toggle-vis-{{idTablaMulti}}" data-column="21">Tipo etnoeducador</a> |
                     <a class="toggle-vis-{{idTablaMulti}}" data-column="22">Asignaturas</a> |
                     <a class="toggle-vis-{{idTablaMulti}}" data-column="23">Grupo</a>
+                    <a class="toggle-vis-{{idTablaMulti}}" data-column="24">Tipo de Certificado</a>
+                    <a class="toggle-vis-{{idTablaMulti}}" data-column="25">Observación de Certificado</a>
                 </div><br/>
                 <div class="table-responsive" style="overflow-y:auto; overflow-x:auto;">
                     <table id="tabla-super-poderosa-{{idTablaMulti}}" class="table table-striped table-bordered" width="100%">
@@ -64,6 +66,8 @@
                                 <th>Tipo etnoeducador</th>
                                 <th>Asignaturas</th>
                                 <th>Grupo</th>
+                                <th>Tipo de Certificado</th>
+                                <th>Observación de Certificado</th>
                             </tr>
                         </thead>
                         <tfoot>
@@ -92,6 +96,8 @@
                                 <th>Tipo etnoeducador</th>
                                 <th>Asignaturas</th>
                                 <th>Grupo</th>
+                                <th>Tipo de Certificado</th>
+                                <th>Observación de Certificado</th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -131,6 +137,8 @@
                                     <td>
                                         {{obj.1}}
                                     </td>
+                                    <td>{{obj.0.estudiante.get_tipo_certificado_display}}</td>
+                                    <td>{{obj.0.estudiante.observacion_certificado}}</td>
                                 </tr>
                             {% endfor %}
                         </tbody>

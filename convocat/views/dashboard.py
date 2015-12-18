@@ -675,6 +675,8 @@ def descarga_cohorte_xls(request, cohorte):
         (u"Tipo etnoeducador", 4000),
         (u"Asignaturas", 4000),
         (u"Grupo", 4000),
+        (u"Tipo de Certificado", 4000),
+        (u"Observación de Certificado", 4000),
     ]
 
     font_style = xlwt.XFStyle()
@@ -730,7 +732,9 @@ def descarga_cohorte_xls(request, cohorte):
             obj.get_nombramiento_display(),
             obj.get_tipo_etnoeducador_display(),
             asignaturas,
-            curso
+            curso,
+            obj.estudiante.get_tipo_certificado_display(),
+            obj.estudiante.observacion_certificado,
         ]
         for col_num in xrange(len(row)):
             ws.write(row_num, col_num, row[col_num], font_style)
